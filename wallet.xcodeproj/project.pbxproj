@@ -16,6 +16,8 @@
 		83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83111B301DA4110C006B058D /* LaunchScreen.storyboard */; };
 		83111B3D1DA4110C006B058D /* walletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83111B3C1DA4110C006B058D /* walletTests.swift */; };
 		83111B481DA4110C006B058D /* walletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83111B471DA4110C006B058D /* walletUITests.swift */; };
+		83111B771DA414EB006B058D /* JSONLD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; };
+		83111B781DA414EB006B058D /* JSONLD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3C76BE5A1F12F238FF4D797 /* libPods-walletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9B42333AB2B91FF357E4AC /* libPods-walletTests.a */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,20 @@
 			remoteInfo = wallet;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		83111B791DA414EC006B058D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				83111B781DA414EB006B058D /* JSONLD.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0BFA0E93CC8871979D4682EB /* Pods-walletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-walletTests/Pods-walletTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -60,6 +76,7 @@
 		83111B561DA41417006B058D /* wallet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wallet-Bridging-Header.h"; sourceTree = "<group>"; };
 		83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "walletTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "walletUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		83111B761DA414EB006B058D /* JSONLD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONLD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E87B7828FD21351E1F3E3FA3 /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EF423C7BE596FD32E92A8C68 /* Pods-wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83111B771DA414EB006B058D /* JSONLD.framework in Frameworks */,
 				7E7BD4D74BAA978A05F5C3FF /* libPods-wallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,6 +182,7 @@
 		A653FD3709C0B4FB37E36B2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83111B761DA414EB006B058D /* JSONLD.framework */,
 				49006DF4C911D8FD07B89878 /* libPods-wallet.a */,
 				2D9B42333AB2B91FF357E4AC /* libPods-walletTests.a */,
 				0C13D522FC4674A0FCC82DCF /* libPods-walletUITests.a */,
@@ -184,6 +203,7 @@
 				83111B221DA4110C006B058D /* Resources */,
 				006B5852D595A9A01201CAA3 /* [CP] Embed Pods Frameworks */,
 				F65C77CEA313DD3106C499D5 /* [CP] Copy Pods Resources */,
+				83111B791DA414EC006B058D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

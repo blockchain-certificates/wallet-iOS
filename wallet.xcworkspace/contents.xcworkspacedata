@@ -5,6 +5,9 @@
       location = "group:wallet.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Pods/../External/cert-wallet/cert-wallet.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

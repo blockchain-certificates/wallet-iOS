@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import JSONLD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Required to set up the javascript environment for the 
+        self.window?.addSubview(JSONLD.shared.webView)
         return true
     }
 
