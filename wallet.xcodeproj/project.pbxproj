@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		02428331792622E8965F5E8F /* libPods-walletUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C13D522FC4674A0FCC82DCF /* libPods-walletUITests.a */; };
 		7E7BD4D74BAA978A05F5C3FF /* libPods-wallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49006DF4C911D8FD07B89878 /* libPods-wallet.a */; };
+		830AB9EC1DA6BC4B00185E19 /* BlockchainCertificates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EB1DA6BC4B00185E19 /* BlockchainCertificates.framework */; };
+		830AB9ED1DA6BC4B00185E19 /* BlockchainCertificates.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EB1DA6BC4B00185E19 /* BlockchainCertificates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		830AB9EF1DA6BC4B00185E19 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */; };
+		830AB9F01DA6BC4B00185E19 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83111B281DA4110C006B058D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83111B271DA4110C006B058D /* AppDelegate.swift */; };
 		83111B2A1DA4110C006B058D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83111B291DA4110C006B058D /* ViewController.swift */; };
 		83111B2D1DA4110C006B058D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83111B2B1DA4110C006B058D /* Main.storyboard */; };
@@ -45,6 +49,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				830AB9ED1DA6BC4B00185E19 /* BlockchainCertificates.framework in Embed Frameworks */,
+				830AB9F01DA6BC4B00185E19 /* CommonCrypto.framework in Embed Frameworks */,
 				83111B781DA414EB006B058D /* JSONLD.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -60,6 +66,8 @@
 		4462F4E7913EB1DC9F17B6CB /* Pods-walletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walletTests/Pods-walletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		49006DF4C911D8FD07B89878 /* libPods-wallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BFC6072764E5C955CF2FB31 /* Pods-walletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests.release.xcconfig"; sourceTree = "<group>"; };
+		830AB9EB1DA6BC4B00185E19 /* BlockchainCertificates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BlockchainCertificates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83111B241DA4110C006B058D /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83111B271DA4110C006B058D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83111B291DA4110C006B058D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +94,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				830AB9EF1DA6BC4B00185E19 /* CommonCrypto.framework in Frameworks */,
 				83111B771DA414EB006B058D /* JSONLD.framework in Frameworks */,
+				830AB9EC1DA6BC4B00185E19 /* BlockchainCertificates.framework in Frameworks */,
 				7E7BD4D74BAA978A05F5C3FF /* libPods-wallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +192,8 @@
 		A653FD3709C0B4FB37E36B2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				830AB9EB1DA6BC4B00185E19 /* BlockchainCertificates.framework */,
+				830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */,
 				83111B761DA414EB006B058D /* JSONLD.framework */,
 				49006DF4C911D8FD07B89878 /* libPods-wallet.a */,
 				2D9B42333AB2B91FF357E4AC /* libPods-walletTests.a */,
