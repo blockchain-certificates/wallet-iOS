@@ -23,6 +23,7 @@
 		83111B781DA414EB006B058D /* JSONLD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
 		8318FC531DAD5AFA006A8FD5 /* IssuerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC521DAD5AFA006A8FD5 /* IssuerTableViewController.swift */; };
+		8318FC551DAD774C006A8FD5 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC541DAD774C006A8FD5 /* CertificateViewController.swift */; };
 		E3C76BE5A1F12F238FF4D797 /* libPods-walletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9B42333AB2B91FF357E4AC /* libPods-walletTests.a */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		83111B761DA414EB006B058D /* JSONLD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONLD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC521DAD5AFA006A8FD5 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
+		8318FC541DAD774C006A8FD5 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		E87B7828FD21351E1F3E3FA3 /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EF423C7BE596FD32E92A8C68 /* Pods-wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,6 +169,7 @@
 				83111B331DA4110C006B058D /* Info.plist */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
 				8318FC521DAD5AFA006A8FD5 /* IssuerTableViewController.swift */,
+				8318FC541DAD774C006A8FD5 /* CertificateViewController.swift */,
 				83111B561DA41417006B058D /* wallet-Bridging-Header.h */,
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
 				83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */,
@@ -493,6 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8318FC551DAD774C006A8FD5 /* CertificateViewController.swift in Sources */,
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,
 				8318FC531DAD5AFA006A8FD5 /* IssuerTableViewController.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,

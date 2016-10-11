@@ -9,6 +9,7 @@
 import UIKit
 
 private let prototypeCellReuseIdentifier = "PrototypeImageTableViewCell"
+private let segueToCertificate = "ShowCertificateViewController"
 
 class IssuerTableViewController: UITableViewController {
 
@@ -20,8 +21,6 @@ class IssuerTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: prototypeCellReuseIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +45,9 @@ class IssuerTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: prototypeCellReuseIdentifier, for: indexPath)
 
         // Configure the cell...
-        cell.backgroundView = UIImageView(image: #imageLiteral(resourceName: "issuer-description"))
+        let fakeImage = UIImageView(image: #imageLiteral(resourceName: "issuer-description"))
+
+        cell.backgroundView = fakeImage
 
         return cell
     }
@@ -54,6 +55,14 @@ class IssuerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 223
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == segueToCertificate {
+//            print("Yes, segue")
+//        } else {
+//            print("Don't do it!")
+//        }
+//    }
 
     /*
     // Override to support conditional editing of the table view.

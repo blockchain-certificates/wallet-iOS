@@ -53,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PrototypeImageTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="prototypeImageTableViewCell" id="gec-se-HgY">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PrototypeImageTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PrototypeImageTableViewCell" id="gec-se-HgY">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gec-se-HgY" id="FN9-UA-Dif">
@@ -75,15 +75,15 @@
             </objects>
             <point key="canvasLocation" x="2642" y="134"/>
         </scene>
-        <!--View Controller-->
+        <!--Certificate View Controller-->
         <scene sceneID="bmO-0k-v1h">
             <objects>
-                <viewController id="iWb-Ge-8k8" sceneMemberID="viewController">
+                <viewController id="iWb-Ge-8k8" customClass="CertificateViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gWW-dX-d52"/>
                         <viewControllerLayoutGuide type="bottom" id="8iz-re-kCb"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Jh6-Xg-b2Z">
+                    <view key="view" contentMode="scaleToFill" id="Jh6-Xg-b2Z" customClass="cert">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
