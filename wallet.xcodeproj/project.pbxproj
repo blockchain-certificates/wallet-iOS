@@ -213,9 +213,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		83111B231DA4110C006B058D /* wallet */ = {
+		83111B231DA4110C006B058D /* certificates */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 83111B4C1DA4110C006B058D /* Build configuration list for PBXNativeTarget "wallet" */;
+			buildConfigurationList = 83111B4C1DA4110C006B058D /* Build configuration list for PBXNativeTarget "certificates" */;
 			buildPhases = (
 				C4F92AA0A7F6B12082D77826 /* [CP] Check Pods Manifest.lock */,
 				83111B201DA4110C006B058D /* Sources */,
@@ -229,7 +229,7 @@
 			);
 			dependencies = (
 			);
-			name = wallet;
+			name = certificates;
 			productName = wallet;
 			productReference = 83111B241DA4110C006B058D /* wallet.app */;
 			productType = "com.apple.product-type.application";
@@ -329,7 +329,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				83111B231DA4110C006B058D /* wallet */,
+				83111B231DA4110C006B058D /* certificates */,
 				83111B371DA4110C006B058D /* walletTests */,
 				83111B421DA4110C006B058D /* walletUITests */,
 			);
@@ -534,12 +534,12 @@
 /* Begin PBXTargetDependency section */
 		83111B3A1DA4110C006B058D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 83111B231DA4110C006B058D /* wallet */;
+			target = 83111B231DA4110C006B058D /* certificates */;
 			targetProxy = 83111B391DA4110C006B058D /* PBXContainerItemProxy */;
 		};
 		83111B451DA4110C006B058D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 83111B231DA4110C006B058D /* wallet */;
+			target = 83111B231DA4110C006B058D /* certificates */;
 			targetProxy = 83111B441DA4110C006B058D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -778,7 +778,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83111B4C1DA4110C006B058D /* Build configuration list for PBXNativeTarget "wallet" */ = {
+		83111B4C1DA4110C006B058D /* Build configuration list for PBXNativeTarget "certificates" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83111B4D1DA4110C006B058D /* Debug */,
