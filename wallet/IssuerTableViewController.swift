@@ -32,7 +32,7 @@ class IssuerTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,15 +45,23 @@ class IssuerTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: prototypeCellReuseIdentifier, for: indexPath)
 
         // Configure the cell...
-        let fakeImage = UIImageView(image: #imageLiteral(resourceName: "issuer-description"))
-
+        let fakeImage : UIImageView!
+        if indexPath.section == 0 {
+            fakeImage = UIImageView(image: #imageLiteral(resourceName: "issuer-description"))
+        } else {
+            fakeImage = UIImageView(image: #imageLiteral(resourceName: "certTableCell"))
+        }
         cell.backgroundView = fakeImage
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 223
+        if indexPath.section == 0 {
+            return 223
+        } else {
+            return 87
+        }
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
