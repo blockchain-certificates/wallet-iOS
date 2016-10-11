@@ -70,7 +70,7 @@
 		7BFC6072764E5C955CF2FB31 /* Pods-walletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests.release.xcconfig"; sourceTree = "<group>"; };
 		830AB9EB1DA6BC4B00185E19 /* BlockchainCertificates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BlockchainCertificates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		83111B241DA4110C006B058D /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83111B241DA4110C006B058D /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = wallet.app; path = certificates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83111B271DA4110C006B058D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83111B2C1DA4110C006B058D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		83111B2E1DA4110C006B058D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
