@@ -9,6 +9,7 @@
 import UIKit
 
 private let reuseIdentifier = "Cell"
+private let segueToViewIssuer = "ShowIssuerDetail"
 
 class IssuerCollectionViewController: UICollectionViewController {
 
@@ -20,6 +21,7 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView?.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -29,15 +31,18 @@ class IssuerCollectionViewController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        if segue.identifier == segueToViewIssuer {
+            print("Going to the right one...")
+        } else {
+            print("Nope")
+        }
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -90,5 +95,11 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     }
     */
+}
 
+extension IssuerCollectionViewController { //  : UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: segueToViewIssuer, sender: nil)
+    }
 }
