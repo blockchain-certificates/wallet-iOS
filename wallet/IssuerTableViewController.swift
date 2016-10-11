@@ -48,8 +48,10 @@ class IssuerTableViewController: UITableViewController {
         let fakeImage : UIImageView!
         if indexPath.section == 0 {
             fakeImage = UIImageView(image: #imageLiteral(resourceName: "issuer-description"))
+            cell.selectionStyle = .none
         } else {
             fakeImage = UIImageView(image: #imageLiteral(resourceName: "certTableCell"))
+            cell.selectionStyle = .default
         }
         cell.backgroundView = fakeImage
 
@@ -61,6 +63,23 @@ class IssuerTableViewController: UITableViewController {
             return 223
         } else {
             return 87
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Certificates"
+        }
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            tableView.deselectRow(at: indexPath, animated: false)
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let vc = storyboard.instantiateViewController(withIdentifier: "PrototypeCertificateViewController")
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

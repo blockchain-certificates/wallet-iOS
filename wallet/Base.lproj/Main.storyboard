@@ -60,9 +60,6 @@
                                     <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="iWb-Ge-8k8" kind="show" action="showDetailViewController:sender:" id="AOX-D8-wMs"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -75,23 +72,29 @@
             </objects>
             <point key="canvasLocation" x="2642" y="134"/>
         </scene>
-        <!--Certificate View Controller-->
+        <!--Certificate-->
         <scene sceneID="bmO-0k-v1h">
             <objects>
-                <viewController id="iWb-Ge-8k8" customClass="CertificateViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrototypeCertificateViewController" title="Certificate" id="iWb-Ge-8k8" customClass="CertificateViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gWW-dX-d52"/>
                         <viewControllerLayoutGuide type="bottom" id="8iz-re-kCb"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Jh6-Xg-b2Z" customClass="cert">
+                    <view key="view" contentMode="scaleToFill" id="Jh6-Xg-b2Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="certificate" translatesAutoresizingMaskIntoConstraints="NO" id="ggG-PO-CIr">
+                                <frame key="frameInset" minY="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tM6-Xu-mhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3410" y="134"/>
+            <point key="canvasLocation" x="3408.8000000000002" y="133.5832083958021"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MBh-1k-KdA">
@@ -110,4 +113,7 @@
             <point key="canvasLocation" x="810" y="135"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="certificate" width="750" height="1072"/>
+    </resources>
 </document>
