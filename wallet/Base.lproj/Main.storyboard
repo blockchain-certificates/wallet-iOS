@@ -38,16 +38,16 @@
                             <outlet property="delegate" destination="NJ9-PO-4VH" id="Xu9-lB-Zex"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Issuers" id="3aE-tM-Qbn"/>
+                    <navigationItem key="navigationItem" id="3aE-tM-Qbn"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggd-Bd-Ygr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1825" y="134"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Issuer-->
         <scene sceneID="ZyP-HI-BJe">
             <objects>
-                <tableViewController id="MeH-cb-jur" sceneMemberID="viewController">
+                <tableViewController title="Issuer" id="MeH-cb-jur" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0eH-pb-9nY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
