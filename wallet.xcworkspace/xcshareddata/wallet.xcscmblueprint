@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FAFFC86FAD963F6A7BE837F6E46D7E39D593C9A7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "DA485FE23D100833F5090D6ED35D0E68BB03D9F1" : 9223372036854775807,
+    "FAFFC86FAD963F6A7BE837F6E46D7E39D593C9A7" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "32322729-8629-4FAC-9A67-26266AB1E431",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "DA485FE23D100833F5090D6ED35D0E68BB03D9F1" : "wallet\/External\/cert-wallet\/",
+    "FAFFC86FAD963F6A7BE837F6E46D7E39D593C9A7" : "wallet\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "wallet",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "wallet.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:blockchain-certificates\/cert-wallet.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DA485FE23D100833F5090D6ED35D0E68BB03D9F1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:learningmachine\/wallet.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FAFFC86FAD963F6A7BE837F6E46D7E39D593C9A7"
+    }
+  ]
+}
