@@ -44,7 +44,11 @@
                                 <action selector="accountTapped:" destination="NJ9-PO-4VH" id="BXj-SU-4Z9"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZtD-iw-q88"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZtD-iw-q88">
+                            <connections>
+                                <action selector="addIssuerTapped:" destination="NJ9-PO-4VH" id="Rfx-J1-2Xx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggd-Bd-Ygr" userLabel="First Responder" sceneMemberID="firstResponder"/>

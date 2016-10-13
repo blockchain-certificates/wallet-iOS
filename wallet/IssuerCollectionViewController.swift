@@ -46,6 +46,11 @@ class IssuerCollectionViewController: UICollectionViewController {
         present(controller, animated: true, completion: nil)
     }
     
+    @IBAction func addIssuerTapped(_ sender: UIBarButtonItem) {
+        let controller = AddIssuerViewController()
+        present(controller, animated: true, completion: nil)
+    }
+    
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections

@@ -26,6 +26,8 @@
 		8318FC551DAD774C006A8FD5 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC541DAD774C006A8FD5 /* CertificateViewController.swift */; };
 		83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */; };
 		83A6EDD11DAFF7D600ABFB47 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */; };
+		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
+		83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */; };
 		E3C76BE5A1F12F238FF4D797 /* libPods-walletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9B42333AB2B91FF357E4AC /* libPods-walletTests.a */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +96,8 @@
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
 		83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
+		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
+		83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddIssuerViewController.xib; sourceTree = "<group>"; };
 		E87B7828FD21351E1F3E3FA3 /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EF423C7BE596FD32E92A8C68 /* Pods-wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet/Pods-wallet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +181,8 @@
 				8318FC521DAD5AFA006A8FD5 /* IssuerTableViewController.swift */,
 				83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */,
 				83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */,
+				83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */,
+				83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */,
 				8318FC541DAD774C006A8FD5 /* CertificateViewController.swift */,
 				83111B561DA41417006B058D /* wallet-Bridging-Header.h */,
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
@@ -351,6 +357,7 @@
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
 				83A6EDD11DAFF7D600ABFB47 /* AccountViewController.xib in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
+				83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +525,7 @@
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,
 				8318FC531DAD5AFA006A8FD5 /* IssuerTableViewController.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
+				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
