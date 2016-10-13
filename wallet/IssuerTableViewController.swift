@@ -77,9 +77,10 @@ class IssuerTableViewController: UITableViewController {
         if indexPath.section == 0 {
             tableView.deselectRow(at: indexPath, animated: false)
         } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let vc = storyboard.instantiateViewController(withIdentifier: "PrototypeCertificateViewController")
-            self.navigationController?.pushViewController(vc, animated: true)
+            let controller = CertificateViewController()
+//            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "PrototypeCertificateViewController")
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
     

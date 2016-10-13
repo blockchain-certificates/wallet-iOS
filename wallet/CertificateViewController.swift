@@ -2,7 +2,7 @@
 //  CertificateViewController.swift
 //  wallet
 //
-//  Created by Chris Downie on 10/11/16.
+//  Created by Chris Downie on 10/13/16.
 //  Copyright © 2016 Learning Machine, Inc. All rights reserved.
 //
 
