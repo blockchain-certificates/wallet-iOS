@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateViewController" customModule="certificates" customModuleProvider="target">
             <connections>
+                <outlet property="toolbar" destination="t1f-kp-ARu" id="AWf-Ik-nHH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,6 +21,25 @@
                     <frame key="frameInset" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1f-kp-ARu">
+                    <frame key="frameInset" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <items>
+                        <barButtonItem systemItem="action" id="ZCJ-X0-pIW">
+                            <connections>
+                                <action selector="shareTapped:" destination="-1" id="z6B-DJ-kHe"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="0hU-4C-Rsx"/>
+                        <barButtonItem title="Verify" id="Jl2-eC-Dxd">
+                            <connections>
+                                <action selector="verifyTapped:" destination="-1" id="5U1-wJ-aRe"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ofp-6K-IP1"/>
+                        <barButtonItem title="Info" id="0QU-NR-x6b"/>
+                    </items>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="39.5" y="53.5"/>
