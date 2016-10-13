@@ -32,7 +32,9 @@ class CertificateViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
-        print("\(#function)")
+        let fakeContent = #imageLiteral(resourceName: "certificate")
+        let shareController = UIActivityViewController(activityItems: [fakeContent], applicationActivities: nil)
+        present(shareController, animated: true, completion: nil)
     }
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
