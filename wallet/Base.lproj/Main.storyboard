@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2338c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DM0-2w-Aba">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2548a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DM0-2w-Aba">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -9,7 +9,7 @@
         <!--Issuers-->
         <scene sceneID="Xgs-yd-LoS">
             <objects>
-                <collectionViewController title="Issuers" id="NJ9-PO-4VH" customClass="IssuerCollectionViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController title="Issuers" id="NJ9-PO-4VH" customClass="IssuerCollectionViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="lZ5-wo-EOb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,7 +38,14 @@
                             <outlet property="delegate" destination="NJ9-PO-4VH" id="Xu9-lB-Zex"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="3aE-tM-Qbn"/>
+                    <navigationItem key="navigationItem" id="3aE-tM-Qbn">
+                        <barButtonItem key="leftBarButtonItem" title="Account" id="Ohh-fW-lxm">
+                            <connections>
+                                <action selector="accountTapped:" destination="NJ9-PO-4VH" id="BXj-SU-4Z9"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZtD-iw-q88"/>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggd-Bd-Ygr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -47,7 +54,7 @@
         <!--Issuer-->
         <scene sceneID="ZyP-HI-BJe">
             <objects>
-                <tableViewController title="Issuer" id="MeH-cb-jur" customClass="IssuerTableViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Issuer" id="MeH-cb-jur" customClass="IssuerTableViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0eH-pb-9nY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -57,7 +64,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gec-se-HgY" id="FN9-UA-Dif">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -75,7 +82,7 @@
         <!--Certificate-->
         <scene sceneID="bmO-0k-v1h">
             <objects>
-                <viewController storyboardIdentifier="PrototypeCertificateViewController" title="Certificate" id="iWb-Ge-8k8" customClass="CertificateViewController" customModule="wallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrototypeCertificateViewController" title="Certificate" id="iWb-Ge-8k8" customClass="CertificateViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gWW-dX-d52"/>
                         <viewControllerLayoutGuide type="bottom" id="8iz-re-kCb"/>

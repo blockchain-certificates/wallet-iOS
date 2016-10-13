@@ -26,11 +26,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Navigation
 //
 //    // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -44,8 +39,14 @@ class IssuerCollectionViewController: UICollectionViewController {
 //        }
 //    }
 
+    // MARK: - Actions
+    
+    @IBAction func accountTapped(_ sender: UIBarButtonItem) {
+        let controller = AccountViewController()
+        present(controller, animated: true, completion: nil)
+    }
+    
     // MARK: UICollectionViewDataSource
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
