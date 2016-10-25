@@ -45,9 +45,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EW6-5Z-5mS">
-                    <frame key="frameInset" minY="20" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EW6-5Z-5mS">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="acb-nn-6ii"/>
+                    </constraints>
                     <items>
                         <navigationItem title="Account" id="17I-gB-jIf">
                             <barButtonItem key="rightBarButtonItem" systemItem="done" id="GRV-4B-445">
@@ -58,13 +59,9 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g9j-D7-UX3">
-                    <frame key="frameInset" minY="64" width="375" height="603"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9j-D7-UX3">
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-Id-1wx">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-Id-1wx" userLabel="ContentView">
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T7G-Ik-AH1">
                                     <frame key="frameInset" minX="8" minY="96" width="359" height="30"/>
@@ -89,11 +86,30 @@
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="300" id="7ib-vW-bEM"/>
+                            </constraints>
                         </view>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="cfx-Id-1wx" firstAttribute="leading" secondItem="g9j-D7-UX3" secondAttribute="leading" id="XNo-PS-hBF"/>
+                        <constraint firstAttribute="bottom" secondItem="cfx-Id-1wx" secondAttribute="bottom" id="fKz-7r-OSm"/>
+                        <constraint firstAttribute="trailing" secondItem="cfx-Id-1wx" secondAttribute="trailing" id="tBF-YB-QYc"/>
+                        <constraint firstItem="cfx-Id-1wx" firstAttribute="top" secondItem="g9j-D7-UX3" secondAttribute="top" id="u22-bu-RE8"/>
+                    </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="g9j-D7-UX3" firstAttribute="top" secondItem="dR4-CS-ivi" secondAttribute="top" constant="64" id="2Qk-0A-Fkv"/>
+                <constraint firstItem="EW6-5Z-5mS" firstAttribute="width" secondItem="dR4-CS-ivi" secondAttribute="width" id="5cp-26-FFj"/>
+                <constraint firstItem="EW6-5Z-5mS" firstAttribute="centerX" secondItem="dR4-CS-ivi" secondAttribute="centerX" id="7lC-lF-y0b"/>
+                <constraint firstItem="g9j-D7-UX3" firstAttribute="bottom" secondItem="dR4-CS-ivi" secondAttribute="bottom" id="AMU-qi-TXJ"/>
+                <constraint firstItem="g9j-D7-UX3" firstAttribute="trailing" secondItem="dR4-CS-ivi" secondAttribute="trailing" id="E33-DN-uog"/>
+                <constraint firstItem="cfx-Id-1wx" firstAttribute="width" secondItem="dR4-CS-ivi" secondAttribute="width" id="NUb-em-hHy"/>
+                <constraint firstItem="EW6-5Z-5mS" firstAttribute="top" secondItem="dR4-CS-ivi" secondAttribute="top" constant="20" id="Qsn-WK-o1i"/>
+                <constraint firstItem="g9j-D7-UX3" firstAttribute="leading" secondItem="dR4-CS-ivi" secondAttribute="leading" id="RYA-R4-ti3"/>
+            </constraints>
             <point key="canvasLocation" x="582.5" y="-78.5"/>
         </view>
     </objects>
