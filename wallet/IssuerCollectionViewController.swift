@@ -24,7 +24,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         self.collectionView?.delegate = self
 
         // Do any additional setup after loading the view.
-        self.navigationController?.navigationBar.barTintColor = Colors.brandColor
+        self.navigationController?.navigationBar.barTintColor = Colors.translucentBrandColor
         self.navigationController?.navigationBar.tintColor = Colors.tintColor
     }
 

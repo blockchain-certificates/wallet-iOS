@@ -9,9 +9,6 @@
 import UIKit
 
 class AccountViewController: UIViewController {
-    private let firstNameKey = "ACCOUNT_FIRST_NAME"
-    private let lastNameKey = "ACCOUNT_LAST_NAME"
-    private let emailKey = "ACCOUNT_EMAIL"
 
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var firstNameField: UITextField!
@@ -22,11 +19,11 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationBar.backgroundColor = Colors.brandColor
+        navigationBar.barTintColor = Colors.translucentBrandColor
         navigationBar.tintColor = Colors.tintColor
-//        navigationBar.titleTextAttributes = [
-//            NSForegroundColorAttributeName: Colors.tintColor
-//        ]
+        navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName: Colors.tintColor
+        ]
         loadAccount()
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,9 +47,9 @@ class AccountViewController: UIViewController {
     */
 
     func loadAccount() {
-        let firstName = UserDefaults.standard.string(forKey: firstNameKey)
-        let lastName = UserDefaults.standard.string(forKey: lastNameKey)
-        let email = UserDefaults.standard.string(forKey: emailKey)
+        let firstName = UserDefaults.standard.string(forKey: UserKeys.firstNameKey)
+        let lastName = UserDefaults.standard.string(forKey: UserKeys.lastNameKey)
+        let email = UserDefaults.standard.string(forKey: UserKeys.emailKey)
         
         firstNameField.text = firstName
         lastNameField.text = lastName
@@ -60,8 +57,8 @@ class AccountViewController: UIViewController {
     }
     
     func saveAccount() {
-        UserDefaults.standard.set(firstNameField.text, forKey: firstNameKey)
-        UserDefaults.standard.set(lastNameField.text, forKey: lastNameKey)
-        UserDefaults.standard.set(emailField.text, forKey: emailKey)
+        UserDefaults.standard.set(firstNameField.text, forKey: UserKeys.firstNameKey)
+        UserDefaults.standard.set(lastNameField.text, forKey: UserKeys.lastNameKey)
+        UserDefaults.standard.set(emailField.text, forKey: UserKeys.emailKey)
     }
 }
