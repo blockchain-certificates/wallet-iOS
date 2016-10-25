@@ -3,13 +3,16 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountViewController" customModule="certificates" customModuleProvider="target">
             <connections>
+                <outlet property="avatarImageView" destination="ycb-vN-ZEe" id="Ckc-fq-7jB"/>
                 <outlet property="emailField" destination="oOh-OZ-bN8" id="Sw8-gE-nue"/>
                 <outlet property="firstNameField" destination="T7G-Ik-AH1" id="ZFy-bF-OW3"/>
+                <outlet property="imageLoadingActivityIndicator" destination="3Yr-QD-ces" id="RyT-iv-TbC"/>
                 <outlet property="lastNameField" destination="fdx-Va-HsF" id="BSy-dz-LgI"/>
                 <outlet property="navigationBar" destination="EW6-5Z-5mS" id="FFA-67-CpQ"/>
                 <outlet property="view" destination="dR4-CS-ivi" id="bJT-f1-Uqh"/>
@@ -45,6 +48,67 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9j-D7-UX3">
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-Id-1wx" userLabel="ContentView">
+                            <subviews>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T7G-Ik-AH1">
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fdx-Va-HsF">
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gravatar" translatesAutoresizingMaskIntoConstraints="NO" id="ycb-vN-ZEe">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="3vK-oZ-prL"/>
+                                        <constraint firstAttribute="width" secondItem="ycb-vN-ZEe" secondAttribute="height" multiplier="1:1" id="eJR-4d-73X"/>
+                                    </constraints>
+                                </imageView>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oOh-OZ-bN8">
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <action selector="emailChanged:" destination="-1" eventType="editingDidEnd" id="F0G-pv-CKb"/>
+                                    </connections>
+                                </textField>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3Yr-QD-ces">
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="3Yr-QD-ces" secondAttribute="height" multiplier="1:1" id="nUu-Rv-pj1"/>
+                                        <constraint firstAttribute="height" constant="37" id="qzd-y1-AwB"/>
+                                    </constraints>
+                                </activityIndicatorView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="3Yr-QD-ces" firstAttribute="centerY" secondItem="ycb-vN-ZEe" secondAttribute="centerY" id="4yy-Tn-VTQ"/>
+                                <constraint firstAttribute="trailing" secondItem="oOh-OZ-bN8" secondAttribute="trailing" constant="8" id="60r-kw-0cz"/>
+                                <constraint firstItem="T7G-Ik-AH1" firstAttribute="top" secondItem="ycb-vN-ZEe" secondAttribute="bottom" constant="8" id="BtF-8z-Vxs"/>
+                                <constraint firstAttribute="trailing" secondItem="T7G-Ik-AH1" secondAttribute="trailing" constant="8" id="Drd-xw-qYu"/>
+                                <constraint firstItem="oOh-OZ-bN8" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="E9c-x7-Abf"/>
+                                <constraint firstAttribute="bottom" secondItem="oOh-OZ-bN8" secondAttribute="bottom" constant="86" id="Jhg-Ox-LhA"/>
+                                <constraint firstItem="3Yr-QD-ces" firstAttribute="centerX" secondItem="ycb-vN-ZEe" secondAttribute="centerX" id="Zuc-vZ-FBF"/>
+                                <constraint firstItem="fdx-Va-HsF" firstAttribute="top" secondItem="T7G-Ik-AH1" secondAttribute="bottom" constant="8" id="kF1-7S-zoi"/>
+                                <constraint firstItem="ycb-vN-ZEe" firstAttribute="top" secondItem="cfx-Id-1wx" secondAttribute="top" id="lh2-BF-48J"/>
+                                <constraint firstItem="oOh-OZ-bN8" firstAttribute="top" secondItem="fdx-Va-HsF" secondAttribute="bottom" constant="8" id="m12-L5-pWC"/>
+                                <constraint firstItem="T7G-Ik-AH1" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="mqN-ng-ZCh"/>
+                                <constraint firstItem="fdx-Va-HsF" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="ruh-pM-wPV"/>
+                                <constraint firstItem="ycb-vN-ZEe" firstAttribute="centerX" secondItem="cfx-Id-1wx" secondAttribute="centerX" id="s6I-7Y-Yzh"/>
+                                <constraint firstAttribute="trailing" secondItem="fdx-Va-HsF" secondAttribute="trailing" constant="8" id="u9F-g4-Dxh"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="cfx-Id-1wx" firstAttribute="leading" secondItem="g9j-D7-UX3" secondAttribute="leading" id="XNo-PS-hBF"/>
+                        <constraint firstAttribute="bottom" secondItem="cfx-Id-1wx" secondAttribute="bottom" id="fKz-7r-OSm"/>
+                        <constraint firstAttribute="trailing" secondItem="cfx-Id-1wx" secondAttribute="trailing" id="tBF-YB-QYc"/>
+                        <constraint firstItem="cfx-Id-1wx" firstAttribute="top" secondItem="g9j-D7-UX3" secondAttribute="top" id="u22-bu-RE8"/>
+                    </constraints>
+                </scrollView>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EW6-5Z-5mS">
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="acb-nn-6ii"/>
@@ -59,45 +123,6 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9j-D7-UX3">
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-Id-1wx" userLabel="ContentView">
-                            <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T7G-Ik-AH1">
-                                    <frame key="frameInset" minX="8" minY="96" width="359" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fdx-Va-HsF">
-                                    <frame key="frameInset" minX="8" minY="134" width="359" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oOh-OZ-bN8">
-                                    <frame key="frameInset" minX="8" minY="172" width="359" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="300" id="7ib-vW-bEM"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="cfx-Id-1wx" firstAttribute="leading" secondItem="g9j-D7-UX3" secondAttribute="leading" id="XNo-PS-hBF"/>
-                        <constraint firstAttribute="bottom" secondItem="cfx-Id-1wx" secondAttribute="bottom" id="fKz-7r-OSm"/>
-                        <constraint firstAttribute="trailing" secondItem="cfx-Id-1wx" secondAttribute="trailing" id="tBF-YB-QYc"/>
-                        <constraint firstItem="cfx-Id-1wx" firstAttribute="top" secondItem="g9j-D7-UX3" secondAttribute="top" id="u22-bu-RE8"/>
-                    </constraints>
-                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -115,5 +140,6 @@
     </objects>
     <resources>
         <image name="account" width="750" height="1296"/>
+        <image name="gravatar" width="722" height="722"/>
     </resources>
 </document>
