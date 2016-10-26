@@ -25,11 +25,11 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationBar.barTintColor = Colors.translucentBrandColor
-        navigationBar.tintColor = Colors.tintColor
-        navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: Colors.tintColor
-        ]
+//        navigationBar.barTintColor = Colors.translucentBrandColor
+//        navigationBar.tintColor = Colors.tintColor
+//        navigationBar.titleTextAttributes = [
+//            NSForegroundColorAttributeName: Colors.tintColor
+//        ]
         loadAccount()
     }
     override func viewWillDisappear(_ animated: Bool) {

@@ -83,17 +83,16 @@
                                     </constraints>
                                 </activityIndicatorView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="3Yr-QD-ces" firstAttribute="centerY" secondItem="ycb-vN-ZEe" secondAttribute="centerY" id="4yy-Tn-VTQ"/>
                                 <constraint firstAttribute="trailing" secondItem="oOh-OZ-bN8" secondAttribute="trailing" constant="8" id="60r-kw-0cz"/>
-                                <constraint firstItem="T7G-Ik-AH1" firstAttribute="top" secondItem="ycb-vN-ZEe" secondAttribute="bottom" constant="8" id="BtF-8z-Vxs"/>
+                                <constraint firstItem="T7G-Ik-AH1" firstAttribute="top" secondItem="ycb-vN-ZEe" secondAttribute="bottom" constant="20" id="BtF-8z-Vxs"/>
                                 <constraint firstAttribute="trailing" secondItem="T7G-Ik-AH1" secondAttribute="trailing" constant="8" id="Drd-xw-qYu"/>
                                 <constraint firstItem="oOh-OZ-bN8" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="E9c-x7-Abf"/>
                                 <constraint firstAttribute="bottom" secondItem="oOh-OZ-bN8" secondAttribute="bottom" constant="86" id="Jhg-Ox-LhA"/>
                                 <constraint firstItem="3Yr-QD-ces" firstAttribute="centerX" secondItem="ycb-vN-ZEe" secondAttribute="centerX" id="Zuc-vZ-FBF"/>
                                 <constraint firstItem="fdx-Va-HsF" firstAttribute="top" secondItem="T7G-Ik-AH1" secondAttribute="bottom" constant="8" id="kF1-7S-zoi"/>
-                                <constraint firstItem="ycb-vN-ZEe" firstAttribute="top" secondItem="cfx-Id-1wx" secondAttribute="top" id="lh2-BF-48J"/>
+                                <constraint firstItem="ycb-vN-ZEe" firstAttribute="top" secondItem="cfx-Id-1wx" secondAttribute="top" constant="20" id="lh2-BF-48J"/>
                                 <constraint firstItem="oOh-OZ-bN8" firstAttribute="top" secondItem="fdx-Va-HsF" secondAttribute="bottom" constant="8" id="m12-L5-pWC"/>
                                 <constraint firstItem="T7G-Ik-AH1" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="mqN-ng-ZCh"/>
                                 <constraint firstItem="fdx-Va-HsF" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="ruh-pM-wPV"/>
@@ -124,7 +123,7 @@
                     </items>
                 </navigationBar>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.23529411759999999" green="0.69019607839999997" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="g9j-D7-UX3" firstAttribute="top" secondItem="dR4-CS-ivi" secondAttribute="top" constant="64" id="2Qk-0A-Fkv"/>
                 <constraint firstItem="EW6-5Z-5mS" firstAttribute="width" secondItem="dR4-CS-ivi" secondAttribute="width" id="5cp-26-FFj"/>

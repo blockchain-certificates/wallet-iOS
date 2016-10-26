@@ -11,6 +11,7 @@ import BlockchainCertificates
 
 class AddIssuerViewController: UIViewController {
     private var inProgressRequest : CommonRequest?
+    var delegate : AddIssuerViewControllerDelegate?
     var firstName : String!
     var lastName : String!
     var email : String!
@@ -48,20 +49,44 @@ class AddIssuerViewController: UIViewController {
                 // TODO: Somehow alert/convey that this isn't a valid issuer.
                 return
             }
-            dump(issuer)
+            self?.delegate?.added(issuer: issuer)
             
-            self?.dismiss(animated: true, completion: nil)
+            guard let givenName = self?.firstName,
+                let familyName = self?.lastName,
+                let identity = self?.email else {
+                    return
+            }
+            
+            let recipient = Recipient(
+                givenName: givenName,
+                familyName: familyName,
+                identity: identity,
+                identityType: "email",
+                isHashed: false,
+                publicAddress: "FAKE_PUBLIC_ADDRESS",
+                revocationAddress: nil)
+            
+            let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer, callback: { (success, errorMessage) in
+                if success {
+                    self?.dismiss(animated: true, completion: nil)
+                } else {
+                    // TODO: Somehow alert/convey that this didn't succeed.
+                }
+                
+                self?.inProgressRequest = nil
+            })
+            introductionRequest.start()
+            self?.inProgressRequest = introductionRequest
         }
         identityRequest.start()
         self.inProgressRequest = identityRequest
-        
-
     }
 
     @IBAction func cancelTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
-
+    
+    
     func fetchAccountData() {
         guard let firstName = UserDefaults.standard.string(forKey: UserKeys.firstNameKey),
             let lastName = UserDefaults.standard.string(forKey: UserKeys.lastNameKey),
@@ -73,14 +98,10 @@ class AddIssuerViewController: UIViewController {
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
-
-//
-//        Recipient(givenName: firstName,
-//                  familyName: lastName,
-//                  identity: email,
-//                  identityType: "email",
-//                  isHashed: false,
-//                  publicAddress: "FAKE",
-//                  revocationAddress: nil)
     }
+}
+
+
+protocol AddIssuerViewControllerDelegate : class {
+    func added(issuer: Issuer)
 }
