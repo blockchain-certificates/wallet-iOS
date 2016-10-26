@@ -50,33 +50,37 @@ class AddIssuerViewController: UIViewController {
                 return
             }
             self?.delegate?.added(issuer: issuer)
+            self?.dismiss(animated: true, completion: nil)
             
-            guard let givenName = self?.firstName,
-                let familyName = self?.lastName,
-                let identity = self?.email else {
-                    return
-            }
-            
-            let recipient = Recipient(
-                givenName: givenName,
-                familyName: familyName,
-                identity: identity,
-                identityType: "email",
-                isHashed: false,
-                publicAddress: "FAKE_PUBLIC_ADDRESS",
-                revocationAddress: nil)
-            
-            let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer, callback: { (success, errorMessage) in
-                if success {
-                    self?.dismiss(animated: true, completion: nil)
-                } else {
-                    // TODO: Somehow alert/convey that this didn't succeed.
-                }
-                
-                self?.inProgressRequest = nil
-            })
-            introductionRequest.start()
-            self?.inProgressRequest = introductionRequest
+            self?.inProgressRequest = nil
+//            
+//            
+//            guard let givenName = self?.firstName,
+//                let familyName = self?.lastName,
+//                let identity = self?.email else {
+//                    return
+//            }
+//            
+//            let recipient = Recipient(
+//                givenName: givenName,
+//                familyName: familyName,
+//                identity: identity,
+//                identityType: "email",
+//                isHashed: false,
+//                publicAddress: Keychain.shared.nextPublicAddress(),
+//                revocationAddress: nil)
+//            
+//            let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer, callback: { (success, errorMessage) in
+//                if success {
+//                    self?.dismiss(animated: true, completion: nil)
+//                } else {
+//                    // TODO: Somehow alert/convey that this didn't succeed.
+//                }
+//                
+//                self?.inProgressRequest = nil
+//            })
+//            introductionRequest.start()
+//            self?.inProgressRequest = introductionRequest
         }
         identityRequest.start()
         self.inProgressRequest = identityRequest
