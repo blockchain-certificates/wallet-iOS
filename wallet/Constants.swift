@@ -18,4 +18,5 @@ enum UserKeys {
     static let firstNameKey = "ACCOUNT_FIRST_NAME"
     static let lastNameKey = "ACCOUNT_LAST_NAME"
     static let emailKey = "ACCOUNT_EMAIL"
+    static let avatarURLKey = "ACCOUNT_AVATAR_URL"
 }

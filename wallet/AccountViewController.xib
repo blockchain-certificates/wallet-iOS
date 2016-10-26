@@ -140,6 +140,6 @@
     </objects>
     <resources>
         <image name="account" width="750" height="1296"/>
-        <image name="gravatar" width="722" height="722"/>
+        <image name="gravatar" width="80" height="80"/>
     </resources>
 </document>

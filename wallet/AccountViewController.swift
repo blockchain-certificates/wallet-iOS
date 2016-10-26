@@ -52,19 +52,9 @@ class AccountViewController: UIViewController {
             return
         }
         
-        imageLoadingActivityIndicator.isHidden = false
-        imageLoadingActivityIndicator.startAnimating()
-
-        let task : URLSessionDataTask = URLSession.shared.dataTask(with: gravatarURL as URL) { (data, _, _) in
-            if let data = data {
-                self.avatarImageView.image = UIImage(data: data)
-            }
-            
-            self.imageLoadingActivityIndicator.stopAnimating()
-            self.imageLoadingActivityIndicator.isHidden = true
-        }
-        task.resume()
-        self.task = task
+        UserDefaults.standard.set(gravatarURL, forKey: UserKeys.avatarURLKey)
+        
+        loadAvatarImage(from: gravatarURL)
     }
     
     /*
@@ -85,12 +75,39 @@ class AccountViewController: UIViewController {
         firstNameField.text = firstName
         lastNameField.text = lastName
         emailField.text = email
+        
+        if let avatarURL = UserDefaults.standard.url(forKey: UserKeys.avatarURLKey) {
+            loadAvatarImage(from: avatarURL)
+        }
+
     }
     
     func saveAccount() {
         UserDefaults.standard.set(firstNameField.text, forKey: UserKeys.firstNameKey)
         UserDefaults.standard.set(lastNameField.text, forKey: UserKeys.lastNameKey)
         UserDefaults.standard.set(emailField.text, forKey: UserKeys.emailKey)
+    }
+    
+    func loadAvatarImage(from url: URL) {
+        OperationQueue.main.addOperation { [weak self] in
+            self?.imageLoadingActivityIndicator.isHidden = false
+            self?.imageLoadingActivityIndicator.startAnimating()
+            
+            let task : URLSessionDataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, _, _) in
+                OperationQueue.main.addOperation {
+                    if let data = data {
+                        self?.avatarImageView.image = UIImage(data: data)
+                    }
+                    
+                    self?.imageLoadingActivityIndicator.stopAnimating()
+                    self?.imageLoadingActivityIndicator.isHidden = true
+                }
+                self?.task = nil
+            }
+            task.resume()
+            self?.task?.cancel()
+            self?.task = task
+        }
     }
     
     private func md5(_ string: String) -> String? {
