@@ -82,19 +82,35 @@
                                         <constraint firstAttribute="height" constant="37" id="qzd-y1-AwB"/>
                                     </constraints>
                                 </activityIndicatorView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51N-Vt-R0Q">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="296" id="6kd-nQ-uE6"/>
+                                    </constraints>
+                                    <string key="text">Your accomplishments are secured by a secure pass phrase. Be sure to write your pass phrase down in a safe place, in case you lose your phone.</string>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cM2-hI-jkf">
+                                    <state key="normal" title="Reveal passphrase"/>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="3Yr-QD-ces" firstAttribute="centerY" secondItem="ycb-vN-ZEe" secondAttribute="centerY" id="4yy-Tn-VTQ"/>
                                 <constraint firstAttribute="trailing" secondItem="oOh-OZ-bN8" secondAttribute="trailing" constant="8" id="60r-kw-0cz"/>
+                                <constraint firstItem="cM2-hI-jkf" firstAttribute="centerX" secondItem="cfx-Id-1wx" secondAttribute="centerX" id="9cA-Fr-IVn"/>
                                 <constraint firstItem="T7G-Ik-AH1" firstAttribute="top" secondItem="ycb-vN-ZEe" secondAttribute="bottom" constant="20" id="BtF-8z-Vxs"/>
                                 <constraint firstAttribute="trailing" secondItem="T7G-Ik-AH1" secondAttribute="trailing" constant="8" id="Drd-xw-qYu"/>
                                 <constraint firstItem="oOh-OZ-bN8" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="E9c-x7-Abf"/>
-                                <constraint firstAttribute="bottom" secondItem="oOh-OZ-bN8" secondAttribute="bottom" constant="86" id="Jhg-Ox-LhA"/>
+                                <constraint firstItem="cM2-hI-jkf" firstAttribute="top" secondItem="51N-Vt-R0Q" secondAttribute="bottom" constant="8" id="EZ7-xb-crI"/>
                                 <constraint firstItem="3Yr-QD-ces" firstAttribute="centerX" secondItem="ycb-vN-ZEe" secondAttribute="centerX" id="Zuc-vZ-FBF"/>
+                                <constraint firstItem="51N-Vt-R0Q" firstAttribute="top" secondItem="oOh-OZ-bN8" secondAttribute="bottom" constant="40" id="kE7-po-mV2"/>
                                 <constraint firstItem="fdx-Va-HsF" firstAttribute="top" secondItem="T7G-Ik-AH1" secondAttribute="bottom" constant="8" id="kF1-7S-zoi"/>
                                 <constraint firstItem="ycb-vN-ZEe" firstAttribute="top" secondItem="cfx-Id-1wx" secondAttribute="top" constant="20" id="lh2-BF-48J"/>
                                 <constraint firstItem="oOh-OZ-bN8" firstAttribute="top" secondItem="fdx-Va-HsF" secondAttribute="bottom" constant="8" id="m12-L5-pWC"/>
                                 <constraint firstItem="T7G-Ik-AH1" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="mqN-ng-ZCh"/>
+                                <constraint firstAttribute="bottom" secondItem="cM2-hI-jkf" secondAttribute="bottom" constant="68.5" id="npE-ms-59Y"/>
+                                <constraint firstItem="51N-Vt-R0Q" firstAttribute="centerX" secondItem="cfx-Id-1wx" secondAttribute="centerX" id="om8-iy-0tz"/>
                                 <constraint firstItem="fdx-Va-HsF" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="ruh-pM-wPV"/>
                                 <constraint firstItem="ycb-vN-ZEe" firstAttribute="centerX" secondItem="cfx-Id-1wx" secondAttribute="centerX" id="s6I-7Y-Yzh"/>
                                 <constraint firstAttribute="trailing" secondItem="fdx-Va-HsF" secondAttribute="trailing" constant="8" id="u9F-g4-Dxh"/>
