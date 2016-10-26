@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import BlockchainCertificates
 
 private let reuseIdentifier = "Cell"
 private let segueToViewIssuer = "ShowIssuerDetail"
 
 class IssuerCollectionViewController: UICollectionViewController {
-
+    // TODO: Should probably be AttributedIssuer, once I make up that model.
+    var issuers = [Issuer]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,19 +31,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         self.navigationController?.navigationBar.tintColor = Colors.tintColor
     }
 
-    // MARK: - Navigation
-//
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using [segue destinationViewController].
-//        // Pass the selected object to the new view controller.
-//        if segue.identifier == segueToViewIssuer {
-//            print("Going to the right one...")
-//        } else {
-//            print("Nope")
-//        }
-//    }
-
     // MARK: - Actions
     
     @IBAction func accountTapped(_ sender: UIBarButtonItem) {
@@ -50,6 +40,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     @IBAction func addIssuerTapped(_ sender: UIBarButtonItem) {
         let controller = AddIssuerViewController()
+        controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
     
@@ -62,7 +53,7 @@ class IssuerCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 1
+        return issuers.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,5 +100,15 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: segueToViewIssuer, sender: nil)
+    }
+}
+
+extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
+    func added(issuer: Issuer) {
+        self.issuers.append(issuer)
+        OperationQueue.main.addOperation {
+            self.collectionView?.reloadData()
+        }
+
     }
 }
