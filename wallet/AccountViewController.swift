@@ -12,7 +12,7 @@ import CommonCrypto
 class AccountViewController: UIViewController {
 
     var task : URLSessionDataTask?
-    
+    let passphraseExplanation = "Your accomplishments are secured by a secure passphrase. Be sure to write your passphrase down in a safe place, in case you lose your phone."
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var imageLoadingActivityIndicator: UIActivityIndicatorView!
     
@@ -21,6 +21,10 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
 
+    @IBOutlet weak var passphraseLabel: UILabel!
+    @IBOutlet weak var toggleShowPassphraseButton: UIButton!
+    private var isShowingPassphrase = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,6 +60,21 @@ class AccountViewController: UIViewController {
         
         loadAvatarImage(from: gravatarURL)
     }
+    
+    @IBAction func toggleShowPassphraseTapped(_ sender: UIButton) {
+        isShowingPassphrase = !isShowingPassphrase
+        if isShowingPassphrase {
+            self.toggleShowPassphraseButton.setTitle("Hide passphrase", for: .normal)
+            self.passphraseLabel.text = Keychain.shared.seedPhrase
+        } else {
+            self.toggleShowPassphraseButton.setTitle("Reveal passphrase", for: .normal)
+            self.passphraseLabel.text = passphraseExplanation
+        }
+    }
+    
+    @IBAction func importPassphraseTapped(_ sender: UIButton) {
+    }
+    
     
     /*
     // MARK: - Navigation

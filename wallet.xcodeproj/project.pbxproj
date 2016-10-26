@@ -23,6 +23,9 @@
 		83111B781DA414EB006B058D /* JSONLD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
 		8318FC531DAD5AFA006A8FD5 /* IssuerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC521DAD5AFA006A8FD5 /* IssuerTableViewController.swift */; };
+		834B94C21DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
+		834B94C31DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
+		834B94C41DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
 		83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */; };
 		83A6EDD11DAFF7D600ABFB47 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
@@ -95,6 +98,7 @@
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC521DAD5AFA006A8FD5 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
+		834B94C11DC1585200543E4F /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keychain.swift; path = "External/cert-wallet/Models/Keychain.swift"; sourceTree = SOURCE_ROOT; };
 		83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				8318FC561DAD958F006A8FD5 /* wallet.entitlements */,
+				834B94C11DC1585200543E4F /* Keychain.swift */,
 				83111B271DA4110C006B058D /* AppDelegate.swift */,
 				83111B2B1DA4110C006B058D /* Main.storyboard */,
 				83111B2E1DA4110C006B058D /* Assets.xcassets */,
@@ -532,6 +537,7 @@
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,
 				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
 				8318FC531DAD5AFA006A8FD5 /* IssuerTableViewController.swift in Sources */,
+				834B94C21DC1585200543E4F /* Keychain.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
 				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
 			);
@@ -542,6 +548,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
+				834B94C31DC1585200543E4F /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83111B481DA4110C006B058D /* walletUITests.swift in Sources */,
+				834B94C41DC1585200543E4F /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

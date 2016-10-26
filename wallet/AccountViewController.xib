@@ -15,6 +15,8 @@
                 <outlet property="imageLoadingActivityIndicator" destination="3Yr-QD-ces" id="RyT-iv-TbC"/>
                 <outlet property="lastNameField" destination="fdx-Va-HsF" id="BSy-dz-LgI"/>
                 <outlet property="navigationBar" destination="EW6-5Z-5mS" id="FFA-67-CpQ"/>
+                <outlet property="passphraseLabel" destination="51N-Vt-R0Q" id="4n2-VQ-lHJ"/>
+                <outlet property="toggleShowPassphraseButton" destination="cM2-hI-jkf" id="kqg-dd-1oC"/>
                 <outlet property="view" destination="dR4-CS-ivi" id="bJT-f1-Uqh"/>
             </connections>
         </placeholder>
@@ -86,13 +88,24 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="296" id="6kd-nQ-uE6"/>
                                     </constraints>
-                                    <string key="text">Your accomplishments are secured by a secure pass phrase. Be sure to write your pass phrase down in a safe place, in case you lose your phone.</string>
+                                    <string key="text">Your accomplishments are secured by a secure passphrase. Be sure to write your passphrase down in a safe place, in case you lose your phone.</string>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cM2-hI-jkf">
                                     <state key="normal" title="Reveal passphrase"/>
+                                    <connections>
+                                        <action selector="toggleShowPassphraseTapped:" destination="-1" eventType="touchUpInside" id="Rbw-Xb-y0a"/>
+                                    </connections>
+                                </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4w-A2-Dsy">
+                                    <state key="normal" title="Import passphrase">
+                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="importPassphraseTapped:" destination="-1" eventType="touchUpInside" id="x80-z0-7ve"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>
@@ -103,17 +116,19 @@
                                 <constraint firstAttribute="trailing" secondItem="T7G-Ik-AH1" secondAttribute="trailing" constant="8" id="Drd-xw-qYu"/>
                                 <constraint firstItem="oOh-OZ-bN8" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="E9c-x7-Abf"/>
                                 <constraint firstItem="cM2-hI-jkf" firstAttribute="top" secondItem="51N-Vt-R0Q" secondAttribute="bottom" constant="8" id="EZ7-xb-crI"/>
+                                <constraint firstItem="L4w-A2-Dsy" firstAttribute="top" secondItem="cM2-hI-jkf" secondAttribute="bottom" id="Jgr-lv-DQW"/>
                                 <constraint firstItem="3Yr-QD-ces" firstAttribute="centerX" secondItem="ycb-vN-ZEe" secondAttribute="centerX" id="Zuc-vZ-FBF"/>
                                 <constraint firstItem="51N-Vt-R0Q" firstAttribute="top" secondItem="oOh-OZ-bN8" secondAttribute="bottom" constant="40" id="kE7-po-mV2"/>
                                 <constraint firstItem="fdx-Va-HsF" firstAttribute="top" secondItem="T7G-Ik-AH1" secondAttribute="bottom" constant="8" id="kF1-7S-zoi"/>
+                                <constraint firstAttribute="bottom" secondItem="L4w-A2-Dsy" secondAttribute="bottom" constant="39" id="lQt-zk-9tj"/>
                                 <constraint firstItem="ycb-vN-ZEe" firstAttribute="top" secondItem="cfx-Id-1wx" secondAttribute="top" constant="20" id="lh2-BF-48J"/>
                                 <constraint firstItem="oOh-OZ-bN8" firstAttribute="top" secondItem="fdx-Va-HsF" secondAttribute="bottom" constant="8" id="m12-L5-pWC"/>
                                 <constraint firstItem="T7G-Ik-AH1" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="mqN-ng-ZCh"/>
-                                <constraint firstAttribute="bottom" secondItem="cM2-hI-jkf" secondAttribute="bottom" constant="68.5" id="npE-ms-59Y"/>
                                 <constraint firstItem="51N-Vt-R0Q" firstAttribute="centerX" secondItem="cfx-Id-1wx" secondAttribute="centerX" id="om8-iy-0tz"/>
                                 <constraint firstItem="fdx-Va-HsF" firstAttribute="leading" secondItem="cfx-Id-1wx" secondAttribute="leading" constant="8" id="ruh-pM-wPV"/>
                                 <constraint firstItem="ycb-vN-ZEe" firstAttribute="centerX" secondItem="cfx-Id-1wx" secondAttribute="centerX" id="s6I-7Y-Yzh"/>
                                 <constraint firstAttribute="trailing" secondItem="fdx-Va-HsF" secondAttribute="trailing" constant="8" id="u9F-g4-Dxh"/>
+                                <constraint firstItem="L4w-A2-Dsy" firstAttribute="centerX" secondItem="cfx-Id-1wx" secondAttribute="centerX" id="zDp-8Y-WuH"/>
                             </constraints>
                         </view>
                     </subviews>
