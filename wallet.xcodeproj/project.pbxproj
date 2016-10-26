@@ -26,6 +26,12 @@
 		834B94C21DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
 		834B94C31DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
 		834B94C41DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
+		834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
+		834B94C81DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
+		834B94C91DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
+		834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
+		834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
+		834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
 		83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */; };
 		83A6EDD11DAFF7D600ABFB47 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
@@ -99,6 +105,8 @@
 		8318FC521DAD5AFA006A8FD5 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
 		834B94C11DC1585200543E4F /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keychain.swift; path = "External/cert-wallet/Models/Keychain.swift"; sourceTree = SOURCE_ROOT; };
+		834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewCell.swift; sourceTree = "<group>"; };
+		834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionViewCell.xib; sourceTree = "<group>"; };
 		83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +195,8 @@
 				83111B301DA4110C006B058D /* LaunchScreen.storyboard */,
 				83111B331DA4110C006B058D /* Info.plist */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
+				834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */,
+				834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */,
 				8318FC521DAD5AFA006A8FD5 /* IssuerTableViewController.swift */,
 				83DC0D931DBA87C300453116 /* Constants.swift */,
 				83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */,
@@ -368,6 +378,7 @@
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
 				83A6EDDB1DAFFD5B00ABFB47 /* CertificateViewController.xib in Resources */,
 				83A6EDD11DAFF7D600ABFB47 /* AccountViewController.xib in Resources */,
+				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
 				83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */,
 			);
@@ -377,6 +388,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +548,7 @@
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
 				83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */,
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,
+				834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
 				8318FC531DAD5AFA006A8FD5 /* IssuerTableViewController.swift in Sources */,
 				834B94C21DC1585200543E4F /* Keychain.swift in Sources */,
@@ -547,6 +561,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				834B94C81DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
 				834B94C31DC1585200543E4F /* Keychain.swift in Sources */,
 			);
@@ -556,6 +571,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				834B94C91DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83111B481DA4110C006B058D /* walletUITests.swift in Sources */,
 				834B94C41DC1585200543E4F /* Keychain.swift in Sources */,
 			);

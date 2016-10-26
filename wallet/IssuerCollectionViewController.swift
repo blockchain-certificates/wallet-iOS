@@ -23,7 +23,10 @@ class IssuerCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
+        self.collectionView?.register(cellNib, forCellWithReuseIdentifier: reuseIdentifier)
+//        self.collectionView!.register(IssuerCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.delegate = self
 
         // Do any additional setup after loading the view.
@@ -57,10 +60,12 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! IssuerCollectionViewCell
+
+        let issuer = issuers[indexPath.item]
+        cell.imageView.image = UIImage(data: issuer.image)
+        cell.titleLabel.text = issuer.name
     
-        // Configure the cell
-        cell.backgroundView = UIImageView(image: #imageLiteral(resourceName: "issuer"))
         return cell
     }
 
