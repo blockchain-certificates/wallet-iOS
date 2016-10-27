@@ -13,6 +13,8 @@ private let reuseIdentifier = "Cell"
 private let segueToViewIssuer = "ShowIssuerDetail"
 
 class IssuerCollectionViewController: UICollectionViewController {
+    private let archiveURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Issuers")
+    
     // TODO: Should probably be AttributedIssuer, once I make up that model.
     var issuers = [Issuer]()
     
@@ -22,16 +24,17 @@ class IssuerCollectionViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-        
+        // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
         self.collectionView?.register(cellNib, forCellWithReuseIdentifier: reuseIdentifier)
-//        self.collectionView!.register(IssuerCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.delegate = self
 
-        // Do any additional setup after loading the view.
+        // Style this bad boy
         self.navigationController?.navigationBar.barTintColor = Colors.translucentBrandColor
         self.navigationController?.navigationBar.tintColor = Colors.tintColor
+        
+        // Load any existing issuers.
+        loadIssuers();
     }
 
     // MARK: - Actions
@@ -99,10 +102,31 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     }
     */
+    
+    func loadIssuers() {
+        let codedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: archiveURL.path) as? [[String: Any]] ?? []
+        issuers = codedIssuers.flatMap({ Issuer(dictionary: $0) })
+            
+        OperationQueue.main.addOperation {
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    func saveIssuers() {
+        let issuersCodingList: [[String : Any]] = issuers.map({ $0.toDictionary() })
+        NSKeyedArchiver.archiveRootObject(issuersCodingList, toFile: archiveURL.path)
+    }
+    
+    func add(issuer: Issuer) {
+        issuers.append(issuer)
+        saveIssuers()
+        OperationQueue.main.addOperation {
+            self.collectionView?.reloadData()
+        }
+    }
 }
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: segueToViewIssuer, sender: nil)
     }
@@ -110,10 +134,6 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
 
 extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
     func added(issuer: Issuer) {
-        self.issuers.append(issuer)
-        OperationQueue.main.addOperation {
-            self.collectionView?.reloadData()
-        }
-
+        self.add(issuer: issuer)
     }
 }
