@@ -128,7 +128,11 @@ class IssuerCollectionViewController: UICollectionViewController {
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: segueToViewIssuer, sender: nil)
+        let selectedIssuer = issuers[indexPath.item]
+        let issuerController = IssuerTableViewController()
+        issuerController.issuer = selectedIssuer
+        
+        self.navigationController?.pushViewController(issuerController, animated: true)
     }
 }
 

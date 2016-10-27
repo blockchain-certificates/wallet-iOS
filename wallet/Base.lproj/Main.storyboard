@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DM0-2w-Aba">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DM0-2w-Aba">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -28,9 +28,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="108" height="145"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </view>
-                                <connections>
-                                    <segue destination="MeH-cb-jur" kind="show" identifier="ShowIssuerDetail" id="g40-m0-sJz"/>
-                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -54,34 +51,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggd-Bd-Ygr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1825" y="134"/>
-        </scene>
-        <!--Issuer-->
-        <scene sceneID="ZyP-HI-BJe">
-            <objects>
-                <tableViewController title="Issuer" id="MeH-cb-jur" customClass="IssuerTableViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0eH-pb-9nY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PrototypeImageTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="PrototypeImageTableViewCell" id="gec-se-HgY">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gec-se-HgY" id="FN9-UA-Dif">
-                                    <frame key="frameInset" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="MeH-cb-jur" id="Uvs-Bt-IVp"/>
-                            <outlet property="delegate" destination="MeH-cb-jur" id="BTh-nX-3To"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a7c-8k-cyJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2642" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MBh-1k-KdA">
