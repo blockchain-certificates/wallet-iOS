@@ -71,14 +71,8 @@ class IssuerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            tableView.deselectRow(at: indexPath, animated: false)
-        } else {
-            let controller = CertificateViewController()
-            //            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            //            let vc = storyboard.instantiateViewController(withIdentifier: "PrototypeCertificateViewController")
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
+        let controller = CertificateViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
