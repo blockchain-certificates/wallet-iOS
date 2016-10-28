@@ -1,14 +1,14 @@
 //
-//  walletUITests.swift
-//  walletUITests
+//  ShowPassphraseTest.swift
+//  wallet
 //
-//  Created by Chris Downie on 10/4/16.
+//  Created by Chris Downie on 10/28/16.
 //  Copyright © 2016 Learning Machine, Inc. All rights reserved.
 //
 
 import XCTest
 
-class walletUITests: XCTestCase {
+class ShowPassphraseTest: XCTestCase {
         
     override func setUp() {
         super.setUp()
@@ -32,6 +32,7 @@ class walletUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
+        XCTAssert(true)
     }
     
 }

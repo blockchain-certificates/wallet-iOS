@@ -44,10 +44,26 @@ class IssuerCollectionViewController: UICollectionViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    @IBAction func addIssuerTapped(_ sender: UIBarButtonItem) {
-        let controller = AddIssuerViewController()
-        controller.delegate = self
-        present(controller, animated: true, completion: nil)
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "Add Issuer", style: .default, handler: { [weak self] _ in
+            let controller = AddIssuerViewController()
+            controller.delegate = self
+            
+            self?.present(controller, animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Import Certificate from File", style: .default, handler: { [weak self] _ in
+            
+            let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
+            controller.delegate = self
+            controller.modalPresentationStyle = .formSheet
+            
+            self?.present(controller, animated: true, completion: nil)
+        }))
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: UICollectionViewDataSource
@@ -124,6 +140,46 @@ class IssuerCollectionViewController: UICollectionViewController {
             self.collectionView?.reloadData()
         }
     }
+    
+    func importCertificate(from data: Data?) {
+        guard let data = data else {
+            let alertController = UIAlertController(title: "Couldn't read file", message: "Something went wrong trying to open the file.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alertController] action in
+                alertController?.dismiss(animated: true, completion: nil)
+                }))
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        guard let certificate = try? CertificateParser.parse(data: data) else {
+            let alertController = UIAlertController(title: "Invalid Certificate", message: "That doesn't appear to be a valid Certificate file.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alertController] action in
+                alertController?.dismiss(animated: true, completion: nil)
+                }))
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        // At this point, data is totally a valid certificate. Let's save that to the documents directory.
+//        let filename = certificate.assertion.uid
+//        let success = save(certificateData: data, withFilename: filename)
+//        let isCertificateInList = certificates.contains(where: { $0.assertion.uid == certificate.assertion.uid })
+//        
+//        if isCertificateInList {
+//            let alertController = UIAlertController(title: "File already imported", message: "You've already imported that file.", preferredStyle: .alert)
+//            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            present(alertController, animated: true, completion: nil)
+//        } else if !success {
+//            let alertController = UIAlertController(title: "Failed to save file", message: "Try importing the file again. ", preferredStyle: .alert)
+//            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            present(alertController, animated: true, completion: nil)
+//        } else {
+//            certificates.append(certificate)
+//            
+//            // Issue #20: We should do an insert animation rather than a full table reload.
+//            // https://github.com/blockchain-certificates/cert-wallet/issues/20
+//            tableView.reloadData()
+//        }
+    }
 }
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
@@ -139,5 +195,13 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
 extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
     func added(issuer: Issuer) {
         self.add(issuer: issuer)
+    }
+}
+
+extension IssuerCollectionViewController : UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        let data = try? Data(contentsOf: url)
+        
+        importCertificate(from: data)
     }
 }

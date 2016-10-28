@@ -43,7 +43,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZtD-iw-q88">
                             <connections>
-                                <action selector="addIssuerTapped:" destination="NJ9-PO-4VH" id="Rfx-J1-2Xx"/>
+                                <action selector="addButtonTapped:" destination="NJ9-PO-4VH" id="yXd-1M-bJa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
