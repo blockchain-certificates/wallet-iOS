@@ -207,7 +207,11 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedIssuer = issuers[indexPath.item]
         let issuerController = IssuerTableViewController()
+        
         issuerController.issuer = selectedIssuer
+        issuerController.certificates = certificates.filter { certificate in
+            return certificate.issuer.id == selectedIssuer.id
+        }
         
         self.navigationController?.pushViewController(issuerController, animated: true)
     }

@@ -17,6 +17,7 @@ class IssuerTableViewController: UITableViewController {
             self.title = issuer?.name
         }
     }
+    public var certificates : [Certificate] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,18 +44,17 @@ class IssuerTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return certificates.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: prototypeCellReuseIdentifier, for: indexPath)
+        let certificate = certificates[indexPath.row]
         
         // Configure the cell...
-        let fakeImage = UIImageView(image: #imageLiteral(resourceName: "certTableCell"))
-        cell.selectionStyle = .default
-        
-        cell.backgroundView = fakeImage
+        cell.textLabel?.text = certificate.title
+        cell.detailTextLabel?.text = certificate.subtitle
         
         return cell
     }
