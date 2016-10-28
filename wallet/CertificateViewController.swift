@@ -8,13 +8,17 @@
 
 import UIKit
 import BlockchainCertificates
+import JSONLD
 
 class CertificateViewController: UIViewController {
     public let certificate: Certificate
+    private let bitcoinManager = CoreBitcoinManager()
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     
     @IBOutlet weak var toolbar: UIToolbar!
-
+    private var inProgressRequest : CommonRequest?
+    
+    
     init(certificate: Certificate) {
         self.certificate = certificate
 
@@ -38,6 +42,9 @@ class CertificateViewController: UIViewController {
         infoButton.addTarget(self, action: #selector(infoTapped(_:)), for: .touchUpInside)
         let infoBarButton = UIBarButtonItem(customView: infoButton)
         self.toolbar.items?.append(infoBarButton)
+        
+        // Disabling key view elements for now
+        infoButton.isEnabled = false
     }
     
     func renderCertificate() {
@@ -56,7 +63,15 @@ class CertificateViewController: UIViewController {
     }
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
-        print("\(#function)")
+        let validationRequest = CertificateValidationRequest(
+            for: certificate,
+            bitcoinManager: bitcoinManager,
+            jsonld: JSONLD.shared) { [weak self] (success, error) in
+            print("Validation complete. Success? \(success). Error? \(error)")
+            self?.inProgressRequest = nil
+        }
+        validationRequest?.start()
+        self.inProgressRequest = validationRequest
     }
     
     func infoTapped(_ button: UIButton) {

@@ -67,6 +67,8 @@ class IssuerCollectionViewController: UICollectionViewController {
             self?.present(controller, animated: true, completion: nil)
         }))
         
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         present(alertController, animated: true, completion: nil)
     }
     
