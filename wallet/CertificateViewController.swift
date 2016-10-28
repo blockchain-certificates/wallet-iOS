@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import BlockchainCertificates
 
 class CertificateViewController: UIViewController {
+    public var certificate: Certificate
+    
     @IBOutlet weak var toolbar: UIToolbar!
 
+    init(certificate: Certificate) {
+        self.certificate = certificate
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.title = "Certificate"
+        self.title = certificate.title
         
         // Remove "Info" button in xib and replace it with information disclosure button
         _ = self.toolbar.items?.popLast()

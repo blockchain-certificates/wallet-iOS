@@ -71,7 +71,8 @@ class IssuerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = CertificateViewController()
+        let selectedCertificate = certificates[indexPath.row]
+        let controller = CertificateViewController(certificate: selectedCertificate)
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
