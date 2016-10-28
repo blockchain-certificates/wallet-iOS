@@ -41,6 +41,7 @@ class CertificateViewController: UIViewController {
     }
     
     func renderCertificate() {
+        renderedCertificateView.certificateIcon.image = UIImage(data:certificate.image)
         renderedCertificateView.nameLabel.text = "\(certificate.recipient.givenName) \(certificate.recipient.familyName)"
         renderedCertificateView.titleLabel.text = certificate.title
         renderedCertificateView.subtitleLabel.text = certificate.subtitle
