@@ -25,7 +25,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jh-Wq-q8h" customClass="RenderedCertificateView" customModule="certificates" customModuleProvider="target">
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="500" id="dSh-el-VBf"/>
+                                        <constraint firstAttribute="height" constant="500" placeholder="YES" id="dSh-el-VBf"/>
                                     </constraints>
                                 </view>
                             </subviews>
