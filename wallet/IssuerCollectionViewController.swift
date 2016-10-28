@@ -13,7 +13,8 @@ private let reuseIdentifier = "Cell"
 private let segueToViewIssuer = "ShowIssuerDetail"
 
 class IssuerCollectionViewController: UICollectionViewController {
-    private let archiveURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Issuers")
+    private let issuersArchiveURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Issuers")
+    private let certificatesDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Certificates", isDirectory: true)
     
     // TODO: Should probably be AttributedIssuer, once I make up that model.
     var issuers = [Issuer]()
@@ -35,8 +36,9 @@ class IssuerCollectionViewController: UICollectionViewController {
         self.navigationController?.navigationBar.tintColor = Colors.tintColor
         
         // Load any existing issuers.
-        loadIssuers()
-        loadCertificates()
+        loadIssuers(shouldReloadCollection: false)
+        loadCertificates(shouldReloadCollection: false)
+        reloadCollectionView()
     }
 
     // MARK: - Actions
@@ -120,18 +122,24 @@ class IssuerCollectionViewController: UICollectionViewController {
     */
     
     // MARK: Issuer handling
-    func loadIssuers() {
-        let codedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: archiveURL.path) as? [[String: Any]] ?? []
-        issuers = codedIssuers.flatMap({ Issuer(dictionary: $0) })
-            
+    func reloadCollectionView() {
         OperationQueue.main.addOperation {
             self.collectionView?.reloadData()
         }
     }
     
+    func loadIssuers(shouldReloadCollection : Bool = true) {
+        let codedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: issuersArchiveURL.path) as? [[String: Any]] ?? []
+        issuers = codedIssuers.flatMap({ Issuer(dictionary: $0) })
+        
+        if shouldReloadCollection {
+            reloadCollectionView()
+        }
+    }
+    
     func saveIssuers() {
         let issuersCodingList: [[String : Any]] = issuers.map({ $0.toDictionary() })
-        NSKeyedArchiver.archiveRootObject(issuersCodingList, toFile: archiveURL.path)
+        NSKeyedArchiver.archiveRootObject(issuersCodingList, toFile: issuersArchiveURL.path)
     }
     
     func add(issuer: Issuer) {
@@ -143,12 +151,41 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     // MARK: Certificate handling
-    func loadCertificates() {
+    func loadCertificates(shouldReloadCollection : Bool = true) {
+        let existingFiles = try? FileManager.default.contentsOfDirectory(at: certificatesDirectory, includingPropertiesForKeys: nil, options: [])
+        let files = existingFiles ?? []
         
+        let loadedCertificates : [Certificate] = files.flatMap { fileURL in
+            guard let data = try? Data(contentsOf: fileURL) else {
+                return nil
+            }
+            return try? CertificateParser.parse(data: data)
+        }
+        
+        loadedCertificates.forEach { certificate in
+            self.add(certificate: certificate)
+        }
+        
+        if shouldReloadCollection {
+            reloadCollectionView()
+        }
     }
     
     func saveCertificates() {
+        // Make sure the `certificatesDirectory` exists by trying to create it every time.
+        try? FileManager.default.createDirectory(at: certificatesDirectory, withIntermediateDirectories: false, attributes: nil)
         
+        for certificate in certificates {
+            let fileURL = certificatesDirectory.appendingPathComponent(certificate.assertion.uid)
+            do {
+                try certificate.file.write(to: fileURL)
+            } catch {
+                print("ERROR: Couldn't save \(certificate.title) to \(fileURL): \(error)")
+                dump(certificate)
+                // TODO: Remove this fatalError call. It's really just in here during development.
+                fatalError()
+            }
+        }
     }
     
     func add(certificate: Certificate) {
