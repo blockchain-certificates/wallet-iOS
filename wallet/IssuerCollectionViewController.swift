@@ -17,6 +17,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     // TODO: Should probably be AttributedIssuer, once I make up that model.
     var issuers = [Issuer]()
+    var certificates = [Certificate]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         self.navigationController?.navigationBar.tintColor = Colors.tintColor
         
         // Load any existing issuers.
-        loadIssuers();
+        loadIssuers()
+        loadCertificates()
     }
 
     // MARK: - Actions
@@ -68,13 +70,11 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return issuers.count
     }
 
@@ -119,6 +119,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     */
     
+    // MARK: Issuer handling
     func loadIssuers() {
         let codedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: archiveURL.path) as? [[String: Any]] ?? []
         issuers = codedIssuers.flatMap({ Issuer(dictionary: $0) })
@@ -141,6 +142,48 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
     }
     
+    // MARK: Certificate handling
+    func loadCertificates() {
+        
+    }
+    
+    func saveCertificates() {
+        
+    }
+    
+    func add(certificate: Certificate) {
+        let isKnownIssuer = issuers.contains(where: { (existingIssuer) -> Bool in
+            return existingIssuer.id == certificate.issuer.id
+        })
+        
+        if !isKnownIssuer {
+            add(issuer: certificate.issuer)
+        }
+        
+        certificates.append(certificate)
+        saveCertificates()
+    }
+}
+
+
+extension IssuerCollectionViewController { //  : UICollectionViewDelegate
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedIssuer = issuers[indexPath.item]
+        let issuerController = IssuerTableViewController()
+        issuerController.issuer = selectedIssuer
+        
+        self.navigationController?.pushViewController(issuerController, animated: true)
+    }
+}
+
+extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
+    func added(issuer: Issuer) {
+        self.add(issuer: issuer)
+    }
+}
+
+// MARK: Functions from the open source.
+extension IssuerCollectionViewController {
     func importCertificate(from data: Data?) {
         guard let data = data else {
             let alertController = UIAlertController(title: "Couldn't read file", message: "Something went wrong trying to open the file.", preferredStyle: .alert)
@@ -160,6 +203,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
         
         // At this point, data is totally a valid certificate. Let's save that to the documents directory.
+        add(certificate: certificate)
+//        
 //        let filename = certificate.assertion.uid
 //        let success = save(certificateData: data, withFilename: filename)
 //        let isCertificateInList = certificates.contains(where: { $0.assertion.uid == certificate.assertion.uid })
@@ -179,22 +224,6 @@ class IssuerCollectionViewController: UICollectionViewController {
 //            // https://github.com/blockchain-certificates/cert-wallet/issues/20
 //            tableView.reloadData()
 //        }
-    }
-}
-
-extension IssuerCollectionViewController { //  : UICollectionViewDelegate
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedIssuer = issuers[indexPath.item]
-        let issuerController = IssuerTableViewController()
-        issuerController.issuer = selectedIssuer
-        
-        self.navigationController?.pushViewController(issuerController, animated: true)
-    }
-}
-
-extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
-    func added(issuer: Issuer) {
-        self.add(issuer: issuer)
     }
 }
 
