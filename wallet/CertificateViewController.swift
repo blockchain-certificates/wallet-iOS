@@ -10,14 +10,15 @@ import UIKit
 import BlockchainCertificates
 
 class CertificateViewController: UIViewController {
-    public var certificate: Certificate
+    public let certificate: Certificate
+    @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     
     @IBOutlet weak var toolbar: UIToolbar!
 
     init(certificate: Certificate) {
         self.certificate = certificate
+
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,6 +30,7 @@ class CertificateViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.title = certificate.title
+        renderCertificate()
         
         // Remove "Info" button in xib and replace it with information disclosure button
         _ = self.toolbar.items?.popLast()
@@ -37,10 +39,12 @@ class CertificateViewController: UIViewController {
         let infoBarButton = UIBarButtonItem(customView: infoButton)
         self.toolbar.items?.append(infoBarButton)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func renderCertificate() {
+        renderedCertificateView.nameLabel.text = "\(certificate.recipient.givenName) \(certificate.recipient.familyName)"
+        renderedCertificateView.titleLabel.text = certificate.title
+        renderedCertificateView.subtitleLabel.text = certificate.subtitle
+        renderedCertificateView.descriptionLabel.text = certificate.description
     }
     
     // MARK: Actions

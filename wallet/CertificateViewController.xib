@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateViewController" customModule="certificates" customModuleProvider="target">
             <connections>
+                <outlet property="renderedCertificateView" destination="0Jh-Wq-q8h" id="aCa-RX-aLX"/>
                 <outlet property="toolbar" destination="t1f-kp-ARu" id="AWf-Ik-nHH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,9 +21,20 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gag-J3-nMn">
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zt0-2q-H1n" userLabel="ContentView">
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jh-Wq-q8h" customClass="RenderedCertificateView" customModule="certificates" customModuleProvider="target">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="500" id="dSh-el-VBf"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="500" id="ykh-UW-DeO"/>
+                                <constraint firstAttribute="bottom" secondItem="0Jh-Wq-q8h" secondAttribute="bottom" id="1PO-uN-l7e"/>
+                                <constraint firstItem="0Jh-Wq-q8h" firstAttribute="leading" secondItem="Zt0-2q-H1n" secondAttribute="leading" id="aa0-Dz-s4w"/>
+                                <constraint firstAttribute="trailing" secondItem="0Jh-Wq-q8h" secondAttribute="trailing" id="lrK-Zz-b8x"/>
+                                <constraint firstItem="0Jh-Wq-q8h" firstAttribute="top" secondItem="Zt0-2q-H1n" secondAttribute="top" id="n2z-UJ-qTK"/>
                             </constraints>
                         </view>
                     </subviews>
