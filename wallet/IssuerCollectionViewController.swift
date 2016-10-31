@@ -167,6 +167,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     // MARK: Certificate handling
     func loadCertificates(shouldReloadCollection : Bool = true) {
+        certificates = []
+        
         let existingFiles = try? FileManager.default.contentsOfDirectory(at: certificatesDirectory, includingPropertiesForKeys: nil, options: [])
         let files = existingFiles ?? []
         
