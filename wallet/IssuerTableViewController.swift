@@ -69,6 +69,47 @@ class IssuerTableViewController: UITableViewController {
         }
         return nil
     }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 {
+            return true
+        }
+        return false
+    }
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (action, indexPath) in
+            let deletedCertificate : Certificate! = self?.certificates.remove(at: indexPath.row)
+            
+            let documentsDirectory = Paths.certificatesDirectory
+            let certificateFilename = deletedCertificate.assertion.uid
+            let filePath = URL(fileURLWithPath: certificateFilename, relativeTo: documentsDirectory)
+            
+            let coordinator = NSFileCoordinator()
+            var coordinationError : NSError?
+            coordinator.coordinate(writingItemAt: filePath, options: [.forDeleting], error: &coordinationError, byAccessor: { (file) in
+                
+                do {
+                    try FileManager.default.removeItem(at: filePath)
+                    tableView.reloadData()
+                } catch {
+                    print(error)
+                    self?.certificates.insert(deletedCertificate, at: indexPath.row)
+                    
+                    let alertController = UIAlertController(title: "Couldn't delete file", message: "Something went wrong deleting that certificate.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self?.present(alertController, animated: true, completion: nil)
+                }
+            })
+            
+            if let error = coordinationError {
+                print("Coordination failed with \(error)")
+            } else {
+                print("Coordinatoin went fine.")
+            }
+            
+        }
+        return [ deleteAction ]
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCertificate = certificates[indexPath.row]

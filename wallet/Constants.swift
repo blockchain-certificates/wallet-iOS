@@ -20,3 +20,8 @@ enum UserKeys {
     static let emailKey = "ACCOUNT_EMAIL"
     static let avatarURLKey = "ACCOUNT_AVATAR_URL"
 }
+
+enum Paths {
+    static let certificatesDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Certificates", isDirectory: true)
+}
+    
