@@ -40,6 +40,13 @@ class IssuerCollectionViewController: UICollectionViewController {
         loadCertificates(shouldReloadCollection: false)
         reloadCollectionView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // TODO: this should be more nuanced. Child view controllers can delete the underlying data. So, for now, just reload all the data.
+        loadIssuers(shouldReloadCollection: false)
+        loadCertificates(shouldReloadCollection: false)
+        reloadCollectionView()
+    }
 
     // MARK: - Actions
     
