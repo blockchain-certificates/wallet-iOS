@@ -21,6 +21,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ptm-11-o0s"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVg-F1-nkq">
+                        <frame key="frameInset" minX="91" minY="8" width="9" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
@@ -34,6 +42,7 @@
             </constraints>
             <size key="customSize" width="117" height="170"/>
             <connections>
+                <outlet property="certificateCountLabel" destination="IVg-F1-nkq" id="1yM-yP-FuT"/>
                 <outlet property="imageView" destination="ptm-11-o0s" id="fcd-pG-QJK"/>
                 <outlet property="titleLabel" destination="ee6-Va-l8w" id="yvq-Gg-6hn"/>
             </connections>
