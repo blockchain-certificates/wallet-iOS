@@ -128,12 +128,12 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func add(issuer: Issuer) {
-        let managedIssuer = ManagedIssuer(issuer: issuer)
-        managedIssuers.append(managedIssuer)
-
-        managedIssuer.getIssuerIdentity() { success in
+        let managedIssuer = ManagedIssuer()
+        managedIssuer.manage(issuer: issuer) { success in
             print("Got identity from raw issuer \(success)")
         }
+        
+        managedIssuers.append(managedIssuer)
     }
     
     func add(managedIssuer: ManagedIssuer) {

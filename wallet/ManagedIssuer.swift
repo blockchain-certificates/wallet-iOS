@@ -11,44 +11,75 @@ import BlockchainCertificates
 
 fileprivate enum CoderKeys {
     static let issuer = "issuer"
+    static let issuerDataConfirmedOn = "issuerDataConfirmedOn"
     static let introducedWithAddress = "introducedWithAddress"
 }
 
 
 class ManagedIssuer : NSObject, NSCoding {
-    var issuer : Issuer?
+    private(set) var issuer : Issuer?
     
-    var isVerified : Bool {
-        get {
-            return issuer != nil
-        }
+    private(set) var issuerDataConfirmedOn: Date?
+    
+    var hasConfirmedIssuerData : Bool {
+        return issuerDataConfirmedOn != nil
     }
     
-    var introducedWithAddress : String?
+    private(set) var introducedWithAddress : String?
+    
     var hasIntroduced : Bool {
-        get {
-            return introducedWithAddress != nil
-        }
+        return introducedWithAddress != nil
     }
     
     private var inProgressRequest : CommonRequest?
 
+    // MARK: - Initialization
     override init() {
         super.init()
     }
     
-    init(issuer: Issuer?, introducedWithAddress: String? = nil) {
+    private init(issuer: Issuer?, issuerDataConfirmedOn: Date? = nil, introducedWithAddress: String? = nil) {
         self.issuer = issuer
+        self.issuerDataConfirmedOn = issuerDataConfirmedOn
         self.introducedWithAddress = introducedWithAddress
         
         super.init()
     }
     
-//
-//    init(issuer: Issuer) {
-//        self.issuer = issuer
-//    }
+    // MARK: NSCoding
+    required convenience init?(coder decoder: NSCoder) {
+        let address = decoder.decodeObject(forKey: CoderKeys.introducedWithAddress) as? String
+        var issuer : Issuer?
+        let hasConfirmed = decoder.decodeObject(forKey: CoderKeys.issuerDataConfirmedOn) as? Date
+        
+        if let issuerDictionary = decoder.decodeObject(forKey: CoderKeys.issuer) as? [String: Any] {
+            issuer = Issuer(dictionary: issuerDictionary)
+        }
+        
+        self.init(issuer: issuer, issuerDataConfirmedOn: hasConfirmed, introducedWithAddress: address)
+    }
+    
+    func encode(with coder: NSCoder) {
+        if let issuer = self.issuer {
+            coder.encode(issuer.toDictionary(), forKey: CoderKeys.issuer)
+        }
+        coder.encode(issuerDataConfirmedOn, forKey: CoderKeys.issuerDataConfirmedOn)
+        coder.encode(introducedWithAddress, forKey: CoderKeys.introducedWithAddress)
+    }
 
+    
+    // MARK: Identification step
+    func manage(issuer: Issuer, completion: @escaping (Bool) -> Void) {
+        guard self.issuer == nil else {
+            print("This manager is called for -- it already has an issuer it's managing.")
+            completion(false)
+            return
+        }
+        
+        self.issuer = issuer
+        getIssuerIdentity(completion: completion)
+    }
+    
     func getIssuerIdentity(completion: @escaping (Bool) -> Void) {
         guard let issuer = self.issuer else {
             completion(false)
@@ -60,11 +91,14 @@ class ManagedIssuer : NSObject, NSCoding {
     
     func getIssuerIdentity(from url: URL, completion: @escaping (Bool) -> Void) {
         let identityRequest = IssuerCreationRequest(id: url) { [weak self] (possibleIssuer) in
+            // TODO: Should we do anything with the
             self?.issuer = possibleIssuer
             let success = possibleIssuer != nil
             
+            
             completion(success)
             self?.inProgressRequest = nil
+            self?.issuerDataConfirmedOn = Date()
         }
         identityRequest.start()
         self.inProgressRequest = identityRequest
@@ -76,24 +110,4 @@ class ManagedIssuer : NSObject, NSCoding {
     public func update() -> Bool {
         return false
     }
-    
-    
-    // NSCoding
-    required convenience init?(coder decoder: NSCoder) {
-        let address = decoder.decodeObject(forKey: CoderKeys.introducedWithAddress) as? String
-        var issuer : Issuer?
-        
-        if let issuerDictionary = decoder.decodeObject(forKey: CoderKeys.issuer) as? [String: Any] {
-            issuer = Issuer(dictionary: issuerDictionary)
-        }
-        
-        self.init(issuer: issuer, introducedWithAddress: address)
     }
-    
-    func encode(with coder: NSCoder) {
-        if let issuer = self.issuer {
-            coder.encode(issuer.toDictionary(), forKey: CoderKeys.issuer)
-        }
-        coder.encode(self.introducedWithAddress, forKey: CoderKeys.introducedWithAddress)
-    }
-}
