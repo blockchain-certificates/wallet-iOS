@@ -21,9 +21,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ptm-11-o0s"/>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVg-F1-nkq">
-                        <frame key="frameInset" minX="91" minY="8" width="9" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVg-F1-nkq">
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -32,9 +30,11 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="IVg-F1-nkq" firstAttribute="top" secondItem="ptm-11-o0s" secondAttribute="top" constant="8" id="6KF-G3-YpY"/>
                 <constraint firstItem="ptm-11-o0s" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="CSG-pf-iKD"/>
                 <constraint firstAttribute="trailing" secondItem="ptm-11-o0s" secondAttribute="trailing" id="MV8-FA-57w"/>
                 <constraint firstAttribute="bottom" secondItem="ee6-Va-l8w" secondAttribute="bottom" id="TaK-aa-EHm"/>
+                <constraint firstItem="IVg-F1-nkq" firstAttribute="trailing" secondItem="ptm-11-o0s" secondAttribute="trailing" constant="-8" id="ZLR-7Q-FQM"/>
                 <constraint firstAttribute="trailing" secondItem="ee6-Va-l8w" secondAttribute="trailing" id="bv7-jF-C85"/>
                 <constraint firstItem="ee6-Va-l8w" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="eQe-0O-iwm"/>
                 <constraint firstItem="ee6-Va-l8w" firstAttribute="top" secondItem="ptm-11-o0s" secondAttribute="bottom" id="gaq-TR-BY3"/>
