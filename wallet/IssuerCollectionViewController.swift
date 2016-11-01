@@ -17,7 +17,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     private let certificatesDirectory = Paths.certificatesDirectory
     
     // TODO: Should probably be AttributedIssuer, once I make up that model.
-    var issuers = [Issuer]()
+    var managedIssuers = [ManagedIssuer]()
     var certificates = [Certificate]()
     
     override func viewDidLoad() {
@@ -48,8 +48,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         reloadCollectionView()
     }
 
-    // MARK: - Actions
     
+    // MARK: - Actions
     @IBAction func accountTapped(_ sender: UIBarButtonItem) {
         let controller = AccountViewController()
         present(controller, animated: true, completion: nil)
@@ -84,15 +84,18 @@ class IssuerCollectionViewController: UICollectionViewController {
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return issuers.count
+        return managedIssuers.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! IssuerCollectionViewCell
 
-        let issuer = issuers[indexPath.item]
+        guard let issuer = managedIssuers[indexPath.item].issuer else {
+            cell.titleLabel.text = "Missing issuer"
+            return cell
+        }
+        
         cell.imageView.image = UIImage(data: issuer.image)
         cell.titleLabel.text = issuer.name
         cell.certificateCount = certificates.reduce(0, { (count, certificate) -> Int in
@@ -104,37 +107,6 @@ class IssuerCollectionViewController: UICollectionViewController {
     
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
     
     // MARK: Issuer handling
     func reloadCollectionView() {
@@ -144,8 +116,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func loadIssuers(shouldReloadCollection : Bool = true) {
-        let codedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: issuersArchiveURL.path) as? [[String: Any]] ?? []
-        issuers = codedIssuers.flatMap({ Issuer(dictionary: $0) })
+        managedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: issuersArchiveURL.path) as? [ManagedIssuer] ?? []
         
         if shouldReloadCollection {
             reloadCollectionView()
@@ -153,12 +124,20 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func saveIssuers() {
-        let issuersCodingList: [[String : Any]] = issuers.map({ $0.toDictionary() })
-        NSKeyedArchiver.archiveRootObject(issuersCodingList, toFile: issuersArchiveURL.path)
+        NSKeyedArchiver.archiveRootObject(managedIssuers, toFile: issuersArchiveURL.path)
     }
     
     func add(issuer: Issuer) {
-        issuers.append(issuer)
+        let managedIssuer = ManagedIssuer(issuer: issuer)
+        managedIssuers.append(managedIssuer)
+
+        managedIssuer.getIssuerIdentity() { success in
+            print("Got identity from raw issuer \(success)")
+        }
+    }
+    
+    func add(managedIssuer: ManagedIssuer) {
+        managedIssuers.append(managedIssuer)
         saveIssuers()
         OperationQueue.main.addOperation {
             self.collectionView?.reloadData()
@@ -206,8 +185,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func add(certificate: Certificate) {
-        let isKnownIssuer = issuers.contains(where: { (existingIssuer) -> Bool in
-            return existingIssuer.id == certificate.issuer.id
+        let isKnownIssuer = managedIssuers.contains(where: { (existingManager) -> Bool in
+            return existingManager.issuer?.id == certificate.issuer.id
         })
         
         if !isKnownIssuer {
@@ -222,7 +201,7 @@ class IssuerCollectionViewController: UICollectionViewController {
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedIssuer = issuers[indexPath.item]
+        let selectedIssuer = managedIssuers[indexPath.item].issuer! // This isn't great.
         let issuerController = IssuerTableViewController()
         
         issuerController.issuer = selectedIssuer
@@ -236,8 +215,10 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
 
 extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
     func added(managedIssuer: ManagedIssuer) {
-        if let issuer = managedIssuer.issuer {
-            self.add(issuer: issuer)
+        if managedIssuer.issuer != nil {
+            self.add(managedIssuer: managedIssuer)
+        } else {
+            print("Something weird -- delegate called with nil issuer. \(#function)")
         }
     }
 }
@@ -294,3 +275,36 @@ extension IssuerCollectionViewController : UIDocumentPickerDelegate {
         importCertificate(from: data)
     }
 }
+
+
+
+// MARK: UICollectionViewDelegate
+
+/*
+ // Uncomment this method to specify if the specified item should be highlighted during tracking
+ override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+ return true
+ }
+ */
+
+/*
+ // Uncomment this method to specify if the specified item should be selected
+ override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+ return true
+ }
+ */
+
+/*
+ // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+ override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+ return false
+ }
+ 
+ override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+ return false
+ }
+ 
+ override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+ 
+ }
+ */
