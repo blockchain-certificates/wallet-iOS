@@ -31,6 +31,24 @@ class ManagedIssuer : NSObject, NSCoding {
     }
     
     private var inProgressRequest : CommonRequest?
+    
+    var status : String {
+        if issuer == nil {
+            return "No Data"
+        }
+        if issuerConfirmedOn == nil {
+            return "Unconfirmed"
+        }
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+
+        let confirmedDate = formatter.string(from: issuerConfirmedOn!)
+        if isIssuerConfirmed {
+            return "✅\(confirmedDate)"
+        } else {
+            return "⛔\(confirmedDate)"
+        }
+    }
 
     // MARK: - Initialization
     override init() {
@@ -39,6 +57,7 @@ class ManagedIssuer : NSObject, NSCoding {
     
     private init(issuer: Issuer?, isIssuerConfirmed: Bool = false, issuerConfirmedOn: Date? = nil, introducedWithAddress: String? = nil) {
         self.issuer = issuer
+        self.isIssuerConfirmed = isIssuerConfirmed
         self.issuerConfirmedOn = issuerConfirmedOn
         self.introducedWithAddress = introducedWithAddress
         
@@ -102,10 +121,11 @@ class ManagedIssuer : NSObject, NSCoding {
             
             let success = possibleIssuer != nil
             
-            completion(success)
             self?.inProgressRequest = nil
             self?.issuerConfirmedOn = Date()
             self?.isIssuerConfirmed = success
+            
+            completion(success)
         }
         identityRequest.start()
         self.inProgressRequest = identityRequest
@@ -117,4 +137,4 @@ class ManagedIssuer : NSObject, NSCoding {
     public func update() -> Bool {
         return false
     }
-    }
+}

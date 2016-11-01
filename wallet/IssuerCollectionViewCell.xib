@@ -27,6 +27,12 @@
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cwG-Z3-vvr" userLabel="Status Label">
+                        <color key="backgroundColor" red="0.23529411759999999" green="0.69019607839999997" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
@@ -36,14 +42,18 @@
                 <constraint firstAttribute="bottom" secondItem="ee6-Va-l8w" secondAttribute="bottom" id="TaK-aa-EHm"/>
                 <constraint firstItem="IVg-F1-nkq" firstAttribute="trailing" secondItem="ptm-11-o0s" secondAttribute="trailing" constant="-8" id="ZLR-7Q-FQM"/>
                 <constraint firstAttribute="trailing" secondItem="ee6-Va-l8w" secondAttribute="trailing" id="bv7-jF-C85"/>
+                <constraint firstItem="cwG-Z3-vvr" firstAttribute="leading" secondItem="ptm-11-o0s" secondAttribute="leading" constant="8" id="eL7-wR-J1c"/>
                 <constraint firstItem="ee6-Va-l8w" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="eQe-0O-iwm"/>
                 <constraint firstItem="ee6-Va-l8w" firstAttribute="top" secondItem="ptm-11-o0s" secondAttribute="bottom" id="gaq-TR-BY3"/>
+                <constraint firstItem="cwG-Z3-vvr" firstAttribute="trailing" secondItem="IVg-F1-nkq" secondAttribute="trailing" id="oog-ZV-Ow8"/>
+                <constraint firstItem="cwG-Z3-vvr" firstAttribute="top" secondItem="IVg-F1-nkq" secondAttribute="bottom" id="xC8-oT-w3z"/>
                 <constraint firstItem="ptm-11-o0s" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xWK-VT-U57"/>
             </constraints>
             <size key="customSize" width="117" height="170"/>
             <connections>
                 <outlet property="certificateCountLabel" destination="IVg-F1-nkq" id="1yM-yP-FuT"/>
                 <outlet property="imageView" destination="ptm-11-o0s" id="fcd-pG-QJK"/>
+                <outlet property="statusLabel" destination="cwG-Z3-vvr" id="wfT-Zn-Sq2"/>
                 <outlet property="titleLabel" destination="ee6-Va-l8w" id="yvq-Gg-6hn"/>
             </connections>
             <point key="canvasLocation" x="67" y="113.5"/>

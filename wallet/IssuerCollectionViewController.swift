@@ -91,7 +91,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! IssuerCollectionViewCell
 
-        guard let issuer = managedIssuers[indexPath.item].issuer else {
+        let managedIssuer = managedIssuers[indexPath.item]
+        guard let issuer = managedIssuer.issuer else {
             cell.titleLabel.text = "Missing issuer"
             return cell
         }
@@ -104,6 +105,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             }
             return count
         })
+        cell.statusLabel.text = managedIssuer.status
     
         return cell
     }
