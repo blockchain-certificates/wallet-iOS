@@ -18,19 +18,15 @@ fileprivate enum CoderKeys {
 
 
 class ManagedIssuer : NSObject, NSCoding {
+    var delegate : ManagedIssuerDelegate?
+    
     private(set) var issuer : Issuer?
-    
     private(set) var issuerConfirmedOn: Date?
-    
-    var isIssuerConfirmed = false
-    
     private(set) var introducedWithAddress : String?
-    
-    var hasIntroduced : Bool {
-        return introducedWithAddress != nil
-    }
+    private(set) var isIssuerConfirmed = false
     
     private var inProgressRequest : CommonRequest?
+    private var hostedIssuer : Issuer?
     
     var status : String {
         if issuer == nil {
@@ -114,27 +110,35 @@ class ManagedIssuer : NSObject, NSCoding {
     
     func getIssuerIdentity(from url: URL, completion: @escaping (Bool) -> Void) {
         let identityRequest = IssuerCreationRequest(id: url) { [weak self] (possibleIssuer) in
-            // If we didn't get issuer data back, let's not overwrite existing issuer data.
-            if possibleIssuer != nil {
+            var success = possibleIssuer != nil
+            
+            self?.hostedIssuer = possibleIssuer
+            
+            if self?.issuer == nil {
                 self?.issuer = possibleIssuer
+            } else if possibleIssuer != nil {
+                // We had an issuer, and we got an issuer. They need to have the same ID to be valid.
+                success = (self?.issuer?.id == possibleIssuer?.id)
             }
             
-            let success = possibleIssuer != nil
+            
             
             self?.inProgressRequest = nil
             self?.issuerConfirmedOn = Date()
             self?.isIssuerConfirmed = success
             
             completion(success)
+            
+            if self != nil {
+                self!.delegate?.updated(managedIssuer: self!)
+            }
         }
         identityRequest.start()
         self.inProgressRequest = identityRequest
     }
-    
-    /// Contacts the Issuer's URL to update the issuer data.
-    ///
-    /// - returns: True iff the underlying issuer model changes.
-    public func update() -> Bool {
-        return false
-    }
+}
+
+
+protocol ManagedIssuerDelegate : class {
+    func updated(managedIssuer: ManagedIssuer)
 }

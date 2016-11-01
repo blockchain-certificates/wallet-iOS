@@ -43,9 +43,9 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // TODO: this should be more nuanced. Child view controllers can delete the underlying data. So, for now, just reload all the data.
-        loadIssuers(shouldReloadCollection: false)
-        loadCertificates(shouldReloadCollection: false)
-        reloadCollectionView()
+//        loadIssuers(shouldReloadCollection: false)
+        loadCertificates()
+//        reloadCollectionView()
     }
 
     
@@ -131,11 +131,13 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     func add(issuer: Issuer) {
         let managedIssuer = ManagedIssuer()
-        managedIssuer.manage(issuer: issuer) { success in
+        managedIssuer.manage(issuer: issuer) { [weak self] success in
+            self?.reloadCollectionView()
+            self?.saveIssuers()
             print("Got identity from raw issuer \(success)")
         }
         
-        managedIssuers.append(managedIssuer)
+        add(managedIssuer: managedIssuer)
     }
     
     func add(managedIssuer: ManagedIssuer) {
