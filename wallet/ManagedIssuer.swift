@@ -11,7 +11,8 @@ import BlockchainCertificates
 
 fileprivate enum CoderKeys {
     static let issuer = "issuer"
-    static let issuerDataConfirmedOn = "issuerDataConfirmedOn"
+    static let isIssuerConfirmed = "isIssuerConfirmed"
+    static let issuerConfirmedOn = "issuerConfirmedOn"
     static let introducedWithAddress = "introducedWithAddress"
 }
 
@@ -19,11 +20,9 @@ fileprivate enum CoderKeys {
 class ManagedIssuer : NSObject, NSCoding {
     private(set) var issuer : Issuer?
     
-    private(set) var issuerDataConfirmedOn: Date?
+    private(set) var issuerConfirmedOn: Date?
     
-    var hasConfirmedIssuerData : Bool {
-        return issuerDataConfirmedOn != nil
-    }
+    var isIssuerConfirmed = false
     
     private(set) var introducedWithAddress : String?
     
@@ -38,9 +37,9 @@ class ManagedIssuer : NSObject, NSCoding {
         super.init()
     }
     
-    private init(issuer: Issuer?, issuerDataConfirmedOn: Date? = nil, introducedWithAddress: String? = nil) {
+    private init(issuer: Issuer?, isIssuerConfirmed: Bool = false, issuerConfirmedOn: Date? = nil, introducedWithAddress: String? = nil) {
         self.issuer = issuer
-        self.issuerDataConfirmedOn = issuerDataConfirmedOn
+        self.issuerConfirmedOn = issuerConfirmedOn
         self.introducedWithAddress = introducedWithAddress
         
         super.init()
@@ -50,20 +49,25 @@ class ManagedIssuer : NSObject, NSCoding {
     required convenience init?(coder decoder: NSCoder) {
         let address = decoder.decodeObject(forKey: CoderKeys.introducedWithAddress) as? String
         var issuer : Issuer?
-        let hasConfirmed = decoder.decodeObject(forKey: CoderKeys.issuerDataConfirmedOn) as? Date
+        let isConfirmed = decoder.decodeBool(forKey: CoderKeys.isIssuerConfirmed)
+        let confirmedDate = decoder.decodeObject(forKey: CoderKeys.issuerConfirmedOn) as? Date
         
         if let issuerDictionary = decoder.decodeObject(forKey: CoderKeys.issuer) as? [String: Any] {
             issuer = Issuer(dictionary: issuerDictionary)
         }
         
-        self.init(issuer: issuer, issuerDataConfirmedOn: hasConfirmed, introducedWithAddress: address)
+        self.init(issuer: issuer,
+                  isIssuerConfirmed: isConfirmed,
+                  issuerConfirmedOn: confirmedDate,
+                  introducedWithAddress: address)
     }
     
     func encode(with coder: NSCoder) {
         if let issuer = self.issuer {
             coder.encode(issuer.toDictionary(), forKey: CoderKeys.issuer)
         }
-        coder.encode(issuerDataConfirmedOn, forKey: CoderKeys.issuerDataConfirmedOn)
+        coder.encode(isIssuerConfirmed, forKey: CoderKeys.isIssuerConfirmed)
+        coder.encode(issuerConfirmedOn, forKey: CoderKeys.issuerConfirmedOn)
         coder.encode(introducedWithAddress, forKey: CoderKeys.introducedWithAddress)
     }
 
@@ -91,14 +95,17 @@ class ManagedIssuer : NSObject, NSCoding {
     
     func getIssuerIdentity(from url: URL, completion: @escaping (Bool) -> Void) {
         let identityRequest = IssuerCreationRequest(id: url) { [weak self] (possibleIssuer) in
-            // TODO: Should we do anything with the
-            self?.issuer = possibleIssuer
-            let success = possibleIssuer != nil
+            // If we didn't get issuer data back, let's not overwrite existing issuer data.
+            if possibleIssuer != nil {
+                self?.issuer = possibleIssuer
+            }
             
+            let success = possibleIssuer != nil
             
             completion(success)
             self?.inProgressRequest = nil
-            self?.issuerDataConfirmedOn = Date()
+            self?.issuerConfirmedOn = Date()
+            self?.isIssuerConfirmed = success
         }
         identityRequest.start()
         self.inProgressRequest = identityRequest
