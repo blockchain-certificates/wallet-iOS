@@ -235,8 +235,10 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
 }
 
 extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
-    func added(issuer: Issuer) {
-        self.add(issuer: issuer)
+    func added(managedIssuer: ManagedIssuer) {
+        if let issuer = managedIssuer.issuer {
+            self.add(issuer: issuer)
+        }
     }
 }
 
