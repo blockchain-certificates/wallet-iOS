@@ -11,6 +11,7 @@ import BlockchainCertificates
 
 fileprivate enum CoderKeys {
     static let issuer = "issuer"
+    static let hostedIssuer = "hostedIssuer"
     static let isIssuerConfirmed = "isIssuerConfirmed"
     static let issuerConfirmedOn = "issuerConfirmedOn"
     static let introducedWithAddress = "introducedWithAddress"
@@ -51,8 +52,13 @@ class ManagedIssuer : NSObject, NSCoding {
         super.init()
     }
     
-    private init(issuer: Issuer?, isIssuerConfirmed: Bool = false, issuerConfirmedOn: Date? = nil, introducedWithAddress: String? = nil) {
+    private init(issuer: Issuer?,
+                 hostedIssuer: Issuer?,
+                 isIssuerConfirmed: Bool = false,
+                 issuerConfirmedOn: Date? = nil,
+                 introducedWithAddress: String? = nil) {
         self.issuer = issuer
+        self.hostedIssuer = hostedIssuer
         self.isIssuerConfirmed = isIssuerConfirmed
         self.issuerConfirmedOn = issuerConfirmedOn
         self.introducedWithAddress = introducedWithAddress
@@ -64,14 +70,19 @@ class ManagedIssuer : NSObject, NSCoding {
     required convenience init?(coder decoder: NSCoder) {
         let address = decoder.decodeObject(forKey: CoderKeys.introducedWithAddress) as? String
         var issuer : Issuer?
+        var hostedIssuer : Issuer?
         let isConfirmed = decoder.decodeBool(forKey: CoderKeys.isIssuerConfirmed)
         let confirmedDate = decoder.decodeObject(forKey: CoderKeys.issuerConfirmedOn) as? Date
         
         if let issuerDictionary = decoder.decodeObject(forKey: CoderKeys.issuer) as? [String: Any] {
             issuer = Issuer(dictionary: issuerDictionary)
         }
+        if let hostedIssuerDictionary = decoder.decodeObject(forKey: CoderKeys.hostedIssuer) as? [String: Any] {
+            hostedIssuer = Issuer(dictionary: hostedIssuerDictionary)
+        }
         
         self.init(issuer: issuer,
+                  hostedIssuer: hostedIssuer,
                   isIssuerConfirmed: isConfirmed,
                   issuerConfirmedOn: confirmedDate,
                   introducedWithAddress: address)
@@ -80,6 +91,9 @@ class ManagedIssuer : NSObject, NSCoding {
     func encode(with coder: NSCoder) {
         if let issuer = self.issuer {
             coder.encode(issuer.toDictionary(), forKey: CoderKeys.issuer)
+        }
+        if let hostedIssuer = self.hostedIssuer {
+            coder.encode(hostedIssuer.toDictionary(), forKey: CoderKeys.hostedIssuer)
         }
         coder.encode(isIssuerConfirmed, forKey: CoderKeys.isIssuerConfirmed)
         coder.encode(issuerConfirmedOn, forKey: CoderKeys.issuerConfirmedOn)
