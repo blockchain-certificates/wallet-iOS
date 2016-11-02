@@ -59,10 +59,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(title: "Add Issuer", style: .default, handler: { [weak self] _ in
-            let controller = AddIssuerViewController()
-            controller.delegate = self
-            
-            self?.present(controller, animated: true, completion: nil)
+            self?.showAddIssuerFlow()
         }))
         
         alertController.addAction(UIAlertAction(title: "Import Certificate from File", style: .default, handler: { [weak self] _ in
@@ -199,6 +196,13 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         certificates.append(certificate)
         saveCertificates()
+    }
+    
+    func showAddIssuerFlow(introductionURL: URL? = nil, nonce : String? = nil) {
+        let controller = AddIssuerViewController()
+        controller.delegate = self
+        
+        present(controller, animated: true, completion: nil)
     }
 }
 

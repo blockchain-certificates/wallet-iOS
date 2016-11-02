@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let url = userActivity.webpageURL {
             
-            importState(from: url)
+            return importState(from: url)
         }
 
         return true
@@ -55,9 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    func importState(from url: URL) {
+    func importState(from url: URL) -> Bool {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            return
+            return false
         }
         
         switch components.path {
@@ -68,8 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             components.queryItems?.forEach { (queryItem) in
                 switch queryItem.name {
                 case "identificationURL":
-                    if let urlString = queryItem.value {
-                        identificationURL = URL(string: urlString)
+                    if let urlString = queryItem.value,
+                        let urlDecodedString = urlString.removingPercentEncoding {
+                        identificationURL = URL(string: urlDecodedString)
                     }
                 case "nonce":
                     nonce = queryItem.value
@@ -80,13 +81,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if identificationURL != nil && nonce != nil {
                 print("got url \(identificationURL!) and nonce \(nonce!)")
+                launchAddIssuer(at: identificationURL!, with: nonce!)
+                return true
             } else {
                 print("Got demo url but didn't have both components")
+                return false
             }
         default:
             print("I don't know about \(components.path)")
+            return false
         }
+    }
+    
+    func launchAddIssuer(at introductionURL: URL, with nonce: String) {
+        let rootController = window?.rootViewController as? UINavigationController
         
+        rootController?.presentedViewController?.dismiss(animated: false, completion: nil)
+        _ = rootController?.popToRootViewController(animated: false)
+        
+        let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
+        
+        issuerCollection?.showAddIssuerFlow(introductionURL: introductionURL, nonce: nonce)
+
     }
 
 }
