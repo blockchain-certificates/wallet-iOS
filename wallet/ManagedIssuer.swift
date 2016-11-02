@@ -134,7 +134,7 @@ class ManagedIssuer : NSObject, NSCoding {
                 // We had an issuer, and we got an issuer. They need to have the same ID to be valid.
                 success = (self?.issuer?.id == possibleIssuer?.id)
             }
-            
+                
             self?.inProgressRequest = nil
             self?.issuerConfirmedOn = Date()
             self?.isIssuerConfirmed = success

@@ -23,9 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        let url = userActivity.webpageURL
-        print("is Browsing? \(userActivity.activityType == NSUserActivityTypeBrowsingWeb)")
-        print("url is \(url)")
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let url = userActivity.webpageURL {
+            
+            importState(from: url)
+        }
+
         return true
     }
 
@@ -51,6 +54,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    
+    func importState(from url: URL) {
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            return
+        }
+        
+        switch components.path {
+        case "/demourl":
+            var identificationURL: URL?
+            var nonce : String?
+            
+            components.queryItems?.forEach { (queryItem) in
+                switch queryItem.name {
+                case "identificationURL":
+                    if let urlString = queryItem.value {
+                        identificationURL = URL(string: urlString)
+                    }
+                case "nonce":
+                    nonce = queryItem.value
+                default:
+                    break;
+                }
+            }
+            
+            if identificationURL != nil && nonce != nil {
+                print("got url \(identificationURL!) and nonce \(nonce!)")
+            } else {
+                print("Got demo url but didn't have both components")
+            }
+        default:
+            print("I don't know about \(components.path)")
+        }
+        
+    }
 
 }
 
