@@ -123,7 +123,7 @@ class ManagedIssuer : NSObject, NSCoding {
     }
     
     func getIssuerIdentity(from url: URL, completion: @escaping (Bool) -> Void) {
-        let identityRequest = IssuerCreationRequest(id: url) { [weak self] (possibleIssuer) in
+        let identityRequest = IssuerIdentificationRequest(id: url) { [weak self] (possibleIssuer) in
             var success = possibleIssuer != nil
             
             self?.hostedIssuer = possibleIssuer
@@ -134,8 +134,6 @@ class ManagedIssuer : NSObject, NSCoding {
                 // We had an issuer, and we got an issuer. They need to have the same ID to be valid.
                 success = (self?.issuer?.id == possibleIssuer?.id)
             }
-            
-            
             
             self?.inProgressRequest = nil
             self?.issuerConfirmedOn = Date()
