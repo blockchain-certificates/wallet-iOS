@@ -23,8 +23,10 @@ class ManagedIssuer : NSObject, NSCoding {
     
     private(set) var issuer : Issuer?
     private(set) var issuerConfirmedOn: Date?
-    private(set) var introducedWithAddress : String?
     private(set) var isIssuerConfirmed = false
+    
+    private(set) var introducedWithAddress : String?
+    private(set) var introducedOn: Date?
     
     private var inProgressRequest : CommonRequest?
     private var hostedIssuer : Issuer?
@@ -147,6 +149,27 @@ class ManagedIssuer : NSObject, NSCoding {
         }
         identityRequest.start()
         self.inProgressRequest = identityRequest
+    }
+    
+    func introduce(recipient: Recipient, with nonce: String, completion: @escaping (Bool) -> Void) {
+        guard let issuer = issuer else {
+            completion(false)
+            return
+        }
+        
+        let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer) { [weak self] (success, error) in
+            if success {
+                self?.introducedWithAddress = recipient.publicAddress
+            } else {
+                self?.introducedWithAddress = nil
+            }
+            self?.introducedOn = Date()
+            self?.inProgressRequest = nil
+            
+            completion(success)
+        }
+        introductionRequest.start()
+        inProgressRequest = introductionRequest
     }
 }
 

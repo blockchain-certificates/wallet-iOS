@@ -16,10 +16,14 @@ class AddIssuerViewController: UIViewController {
     var lastName : String!
     var email : String!
     
+    var identificationURL: URL?
+    var nonce: String?
     
     @IBOutlet weak var issuerURLField: UITextField!
     
-    public init() {
+    init(identificationURL: URL? = nil, nonce: String? = nil) {
+        self.identificationURL = identificationURL
+        self.nonce = nonce
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,15 +48,7 @@ class AddIssuerViewController: UIViewController {
             return
         }
         
-        let managedIssuer = ManagedIssuer()
-        managedIssuer.getIssuerIdentity(from: url) { [weak self] isSuccessful in
-            guard isSuccessful else {
-                // TODO: Somehow alert/convey that this isn't a valid issuer.
-                return
-            }
-            self?.delegate?.added(managedIssuer: managedIssuer)
-            self?.dismiss(animated: true, completion: nil)
-        }
+        identifyAndIntroduceIssuer(at: url)
     }
 
     @IBAction func cancelTapped(_ sender: UIBarButtonItem) {
@@ -71,6 +67,53 @@ class AddIssuerViewController: UIViewController {
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
+    }
+    
+    func autoSubmitIfPossible() {
+        issuerURLField.text = self.identificationURL?.absoluteString
+        
+        // TODO: Show the nonce
+        
+        let areAllFieldsFilled = firstName != nil && lastName != nil && email != nil && identificationURL != nil
+
+        if areAllFieldsFilled {
+            identifyAndIntroduceIssuer(at: identificationURL!)
+        }
+    }
+    
+    func identifyAndIntroduceIssuer(at url: URL) {
+        let targetRecipient = Recipient(givenName: firstName,
+                                        familyName: lastName,
+                                        identity: email,
+                                        identityType: "email",
+                                        isHashed: false,
+                                        publicAddress: Keychain.shared.nextPublicAddress(),
+                                        revocationAddress: nil)
+        
+        let managedIssuer = ManagedIssuer()
+        managedIssuer.getIssuerIdentity(from: url) { [weak self] isSuccessful in
+            guard isSuccessful else {
+                // TODO: Somehow alert/convey that this isn't a valid issuer.
+                return
+            }
+            
+            // At this point, we have an issuer, se we'll definitely be dismissing, even if the introduction step fails.
+            if let nonce = self?.nonce {
+                managedIssuer.introduce(recipient: targetRecipient, with: nonce) { (success) in
+                    self?.notifyAndDismiss(managedIssuer: managedIssuer)
+                }
+            } else {
+                self?.notifyAndDismiss(managedIssuer: managedIssuer)
+            }
+        }
+    }
+    
+    func notifyAndDismiss(managedIssuer: ManagedIssuer) {
+        delegate?.added(managedIssuer: managedIssuer)
+        
+        OperationQueue.main.addOperation { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

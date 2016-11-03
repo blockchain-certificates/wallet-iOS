@@ -198,11 +198,13 @@ class IssuerCollectionViewController: UICollectionViewController {
         saveCertificates()
     }
     
-    func showAddIssuerFlow(introductionURL: URL? = nil, nonce : String? = nil) {
-        let controller = AddIssuerViewController()
+    func showAddIssuerFlow(identificationURL: URL? = nil, nonce : String? = nil) {
+        let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
         controller.delegate = self
         
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true) {
+            controller.autoSubmitIfPossible()
+        }
     }
 }
 

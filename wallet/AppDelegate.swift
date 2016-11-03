@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
         
-        issuerCollection?.showAddIssuerFlow(introductionURL: introductionURL, nonce: nonce)
+        issuerCollection?.showAddIssuerFlow(identificationURL: introductionURL, nonce: nonce)
 
     }
 
