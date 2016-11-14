@@ -103,6 +103,11 @@ class IssuerCollectionViewController: UICollectionViewController {
             return count
         })
         cell.statusLabel.text = managedIssuer.status
+        
+        cell.layer.masksToBounds = false
+        cell.layer.shadowOffset = CGSize(width: 0, height: 3)
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOpacity = 0.25
     
         return cell
     }
