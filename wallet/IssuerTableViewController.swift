@@ -9,10 +9,13 @@
 import UIKit
 import BlockchainCertificates
 
-private let prototypeCellReuseIdentifier = "PrototypeImageTableViewCell"
+private let issuerSummaryCellReuseIdentifier = "IssuerSummaryTableViewCell"
+private let certificateCellReuseIdentifier = "UITableViewCell +certificateCellReuseIdentifier"
 
-fileprivate enum Constants : Int {
-    case CertificatesSection = 0
+fileprivate enum Sections : Int {
+    case issuerSummary = 0
+    case certificates
+    case count
 }
 
 class IssuerTableViewController: UITableViewController {
@@ -31,7 +34,11 @@ class IssuerTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: prototypeCellReuseIdentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: certificateCellReuseIdentifier)
+        tableView.register(UINib(nibName: "IssuerSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: issuerSummaryCellReuseIdentifier)
+        
+        tableView.estimatedRowHeight = 87
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,22 +50,44 @@ class IssuerTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return Sections.count.rawValue
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return certificates.count
+        if section == Sections.issuerSummary.rawValue {
+            return 1
+        } else if section == Sections.certificates.rawValue {
+            return certificates.count
+        }
+        return 0
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: prototypeCellReuseIdentifier, for: indexPath)
-        let certificate = certificates[indexPath.row]
+        var reuseIdentifier = certificateCellReuseIdentifier
+        if indexPath.section == Sections.issuerSummary.rawValue {
+            reuseIdentifier = issuerSummaryCellReuseIdentifier
+        }
         
-        // Configure the cell...
-        cell.textLabel?.text = certificate.title
-        cell.detailTextLabel?.text = certificate.subtitle
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        
+        switch indexPath.section {
+        case Sections.issuerSummary.rawValue:
+            let summaryCell = cell as! IssuerSummaryTableViewCell
+            if let issuer = issuer {
+                summaryCell.issuerImageView.image = UIImage(data:issuer.image)
+            }
+            summaryCell.statusLabel.text = "A-ok over here."
+            summaryCell.actionButton.isHidden = true
+        case Sections.certificates.rawValue:
+            let certificate = certificates[indexPath.row]
+            cell.textLabel?.text = certificate.title
+            cell.detailTextLabel?.text = certificate.subtitle
+            
+        default:
+            break;
+        }
         
         return cell
     }
@@ -68,20 +97,20 @@ class IssuerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == Constants.CertificatesSection.rawValue {
+        if section == Sections.certificates.rawValue {
             return "Certificates"
         }
         return nil
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == Constants.CertificatesSection.rawValue {
+        if indexPath.section == Sections.certificates.rawValue {
             return true
         }
         return false
     }
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        guard indexPath.section == Constants.CertificatesSection.rawValue else {
+        guard indexPath.section == Sections.certificates.rawValue else {
             return nil
         }
         
@@ -120,6 +149,11 @@ class IssuerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == Sections.certificates.rawValue else {
+            tableView.deselectRow(at: indexPath, animated: false)
+            return
+        }
+        
         let selectedCertificate = certificates[indexPath.row]
         let controller = CertificateViewController(certificate: selectedCertificate)
         self.navigationController?.pushViewController(controller, animated: true)
