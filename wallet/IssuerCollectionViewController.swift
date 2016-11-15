@@ -96,6 +96,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         cell.imageView.image = UIImage(data: issuer.image)
         cell.titleLabel.text = issuer.name
+//        cell.certificateCount = 10
         cell.certificateCount = certificates.reduce(0, { (count, certificate) -> Int in
             if certificate.issuer.id == issuer.id {
                 return count + 1
