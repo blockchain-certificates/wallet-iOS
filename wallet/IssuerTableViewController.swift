@@ -11,6 +11,10 @@ import BlockchainCertificates
 
 private let prototypeCellReuseIdentifier = "PrototypeImageTableViewCell"
 
+fileprivate enum Constants : Int {
+    case CertificatesSection = 0
+}
+
 class IssuerTableViewController: UITableViewController {
     public var issuer : Issuer? {
         didSet {
@@ -64,18 +68,22 @@ class IssuerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
+        if section == Constants.CertificatesSection.rawValue {
             return "Certificates"
         }
         return nil
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == 0 {
+        if indexPath.section == Constants.CertificatesSection.rawValue {
             return true
         }
         return false
     }
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        guard indexPath.section == Constants.CertificatesSection.rawValue else {
+            return nil
+        }
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (action, indexPath) in
             let deletedCertificate : Certificate! = self?.certificates.remove(at: indexPath.row)
@@ -104,7 +112,7 @@ class IssuerTableViewController: UITableViewController {
             if let error = coordinationError {
                 print("Coordination failed with \(error)")
             } else {
-                print("Coordinatoin went fine.")
+                print("Coordination went fine.")
             }
             
         }

@@ -22,6 +22,8 @@
 		83111B771DA414EB006B058D /* JSONLD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; };
 		83111B781DA414EB006B058D /* JSONLD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
+		8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */; };
+		8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */; };
 		83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D851DC406600025C055 /* RenderedCertificateView.swift */; };
 		83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83431D861DC406600025C055 /* RenderedCertificateView.xib */; };
 		83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */; };
@@ -108,6 +110,8 @@
 		83111B761DA414EB006B058D /* JSONLD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONLD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
+		8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryTableViewCell.swift; sourceTree = "<group>"; };
+		8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerSummaryTableViewCell.xib; sourceTree = "<group>"; };
 		83431D851DC406600025C055 /* RenderedCertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderedCertificateView.swift; sourceTree = "<group>"; };
 		83431D861DC406600025C055 /* RenderedCertificateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderedCertificateView.xib; sourceTree = "<group>"; };
 		83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreBitcoinManager.swift; path = "External/cert-wallet/Models/CoreBitcoinManager.swift"; sourceTree = SOURCE_ROOT; };
@@ -218,6 +222,8 @@
 				83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */,
 				83A6EDD91DAFFD5B00ABFB47 /* CertificateViewController.xib */,
 				83111B561DA41417006B058D /* wallet-Bridging-Header.h */,
+				8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */,
+				8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */,
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
 				83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */,
 				83F196251DC9077A00590219 /* ManagedIssuer.swift */,
@@ -402,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
+				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
 				83A6EDDB1DAFFD5B00ABFB47 /* CertificateViewController.xib in Resources */,
 				83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */,
@@ -575,6 +582,7 @@
 			files = (
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
 				83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */,
+				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,
 				83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */,
 				83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */,
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,

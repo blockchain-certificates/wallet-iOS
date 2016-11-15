@@ -106,7 +106,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         cell.layer.masksToBounds = false
         cell.layer.shadowOffset = CGSize(width: 0, height: 3)
         cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOpacity = 0.25
+        cell.layer.shadowOpacity = 0.4
+        cell.layer.shadowRadius = 8
     
         return cell
     }

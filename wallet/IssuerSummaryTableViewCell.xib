@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16C41b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="145" id="KGk-i7-Jjw" customClass="IssuerSummaryTableViewCell" customModule="certificates" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jhb-xz-917">
+                        <rect key="frame" x="8" y="8" width="304" height="62"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="50" id="HWm-6O-uVs"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status of this issuer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaK-c2-xac">
+                        <rect key="frame" x="8" y="78" width="304" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ZX-o6-gVF">
+                        <rect key="frame" x="0.0" y="107" width="312" height="30"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="8ZX-o6-gVF" secondAttribute="bottom" id="3lE-B7-VjT"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="Jhb-xz-917" secondAttribute="leading" id="9Sx-F4-cBh"/>
+                    <constraint firstItem="FaK-c2-xac" firstAttribute="top" secondItem="Jhb-xz-917" secondAttribute="bottom" constant="8" id="Nz3-vw-PdH"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="8ZX-o6-gVF" secondAttribute="trailing" id="Uc3-0I-bZn"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="FaK-c2-xac" secondAttribute="leading" id="ZpX-kf-47Q"/>
+                    <constraint firstAttribute="topMargin" secondItem="Jhb-xz-917" secondAttribute="top" id="eLp-7n-ho1"/>
+                    <constraint firstItem="8ZX-o6-gVF" firstAttribute="top" secondItem="FaK-c2-xac" secondAttribute="bottom" constant="8" id="f9g-yW-qDd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Jhb-xz-917" secondAttribute="trailing" id="gOL-tF-eec"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FaK-c2-xac" secondAttribute="trailing" id="hu3-Qm-fjz"/>
+                    <constraint firstItem="8ZX-o6-gVF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="rg4-4y-4zk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="actionButton" destination="8ZX-o6-gVF" id="0GM-2e-ha1"/>
+                <outlet property="issuerImageView" destination="Jhb-xz-917" id="hQC-Uf-SwW"/>
+                <outlet property="statusLabel" destination="FaK-c2-xac" id="sxB-MM-V0y"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="-29.5"/>
+        </tableViewCell>
+    </objects>
+</document>

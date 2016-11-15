@@ -13,10 +13,14 @@ class IssuerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var certificateCountLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.containerView.layer.masksToBounds = true
+        self.containerView.layer.cornerRadius = 5
     }
 
     var certificateCount : Int {
