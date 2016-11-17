@@ -63,12 +63,30 @@ class IssuerCollectionViewController: UICollectionViewController {
         }))
         
         alertController.addAction(UIAlertAction(title: "Import Certificate from File", style: .default, handler: { [weak self] _ in
-            
             let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
             controller.delegate = self
             controller.modalPresentationStyle = .formSheet
             
             self?.present(controller, animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Import Certificate from URL", style: .default, handler: { [weak self] _ in
+            let urlPrompt = UIAlertController(title: nil, message: "What's the URL of the certificate?", preferredStyle: .alert)
+            urlPrompt.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "URL"
+            })
+            
+            urlPrompt.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in
+                guard let urlField = urlPrompt.textFields?.first,
+                    let trimmedText = urlField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
+                    let url = URL(string: trimmedText) else {
+                        return
+                }
+                
+                self?.add(certificateURL: url)
+            }))
+            
+            self?.present(urlPrompt, animated: true, completion: nil)
         }))
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -96,7 +114,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         cell.imageView.image = UIImage(data: issuer.image)
         cell.titleLabel.text = issuer.name
-//        cell.certificateCount = 10
         cell.certificateCount = certificates.reduce(0, { (count, certificate) -> Int in
             if certificate.issuer.id == issuer.id {
                 return count + 1
@@ -202,6 +219,31 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         certificates.append(certificate)
         saveCertificates()
+    }
+    
+    func add(certificateURL: URL) {
+        var components = URLComponents(url: certificateURL, resolvingAgainstBaseURL: false)
+        let formatQueryItem = URLQueryItem(name: "format", value: "json")
+        
+        if components?.queryItems == nil {
+            components?.queryItems = [
+                formatQueryItem
+            ]
+        } else {
+            components?.queryItems?.append(formatQueryItem)
+        }
+        
+        var data: Data? = nil
+        if let dataURL = components?.url {
+            data = try? Data(contentsOf: dataURL)
+        }
+        
+        if let data = data,
+            let certificate = try? CertificateParser.parse(data: data) {
+            add(certificate: certificate)
+        } else {
+            // TODO: Show some alert saying that this URL isn't a valid certifiate url.
+        }
     }
     
     func showAddIssuerFlow(identificationURL: URL? = nil, nonce : String? = nil) {
