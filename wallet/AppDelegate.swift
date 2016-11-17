@@ -87,6 +87,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Got demo url but didn't have both components")
                 return false
             }
+        case "/importCertificate":
+            let urlComponents = components.queryItems?.filter { queryItem -> Bool in
+                return queryItem.name == "certificateURL"
+            }
+            if let urlString = urlComponents?.first?.value,
+                let certificateURL = URL(string: urlString) {
+                launchAddCertificate(at: certificateURL)
+                return true
+            } else {
+                return false
+            }
         default:
             print("I don't know about \(components.path)")
             return false
@@ -102,7 +113,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
         
         issuerCollection?.showAddIssuerFlow(identificationURL: introductionURL, nonce: nonce)
-
+    }
+    
+    func launchAddCertificate(at url: URL) {
+        print("Going to load a certificate from \(url)")
     }
 
 }
