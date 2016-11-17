@@ -78,7 +78,7 @@ class IssuerTableViewController: UITableViewController {
             if let issuer = managedIssuer?.issuer {
                 summaryCell.issuerImageView.image = UIImage(data:issuer.image)
             }
-            summaryCell.statusLabel.text = "A-ok over here."
+            summaryCell.statusLabel.text = managedIssuer?.status
             summaryCell.actionButton.isHidden = true
         case Sections.certificates.rawValue:
             let certificate = certificates[indexPath.row]

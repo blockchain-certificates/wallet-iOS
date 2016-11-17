@@ -39,13 +39,16 @@ class ManagedIssuer : NSObject, NSCoding {
             return "Unconfirmed"
         }
         let formatter = DateFormatter()
+        formatter.dateStyle = .short
         formatter.timeStyle = .short
 
         let confirmedDate = formatter.string(from: issuerConfirmedOn!)
-        if isIssuerConfirmed {
-            return "✅\(confirmedDate)"
+        
+        if introducedOn == nil {
+            return "Confirmed on \(confirmedDate), but not introduced."
         } else {
-            return "⛔\(confirmedDate)"
+            let introducedDate = formatter.string(from: introducedOn!)
+            return "Confirmed \(confirmedDate), Introduced on \(introducedDate)"
         }
     }
 
