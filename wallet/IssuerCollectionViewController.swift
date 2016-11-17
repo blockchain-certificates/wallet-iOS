@@ -241,6 +241,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         if let data = data,
             let certificate = try? CertificateParser.parse(data: data) {
             add(certificate: certificate)
+            reloadCollectionView()
         } else {
             // TODO: Show some alert saying that this URL isn't a valid certifiate url.
         }
