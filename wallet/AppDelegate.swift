@@ -116,7 +116,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func launchAddCertificate(at url: URL) {
-        print("Going to load a certificate from \(url)")
+        let rootController = window?.rootViewController as? UINavigationController
+        
+        rootController?.presentedViewController?.dismiss(animated: false, completion: nil)
+        _ = rootController?.popToRootViewController(animated: false)
+        
+        let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
+        issuerCollection?.add(certificateURL: url)
     }
 
 }
