@@ -19,9 +19,9 @@ fileprivate enum Sections : Int {
 }
 
 class IssuerTableViewController: UITableViewController {
-    public var issuer : Issuer? {
+    public var managedIssuer : ManagedIssuer? {
         didSet {
-            self.title = issuer?.name
+            self.title = managedIssuer?.issuer?.name
         }
     }
     public var certificates : [Certificate] = []
@@ -75,7 +75,7 @@ class IssuerTableViewController: UITableViewController {
         switch indexPath.section {
         case Sections.issuerSummary.rawValue:
             let summaryCell = cell as! IssuerSummaryTableViewCell
-            if let issuer = issuer {
+            if let issuer = managedIssuer?.issuer {
                 summaryCell.issuerImageView.image = UIImage(data:issuer.image)
             }
             summaryCell.statusLabel.text = "A-ok over here."
