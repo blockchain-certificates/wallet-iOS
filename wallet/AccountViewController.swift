@@ -35,6 +35,8 @@ class AccountViewController: UIViewController {
 //            NSForegroundColorAttributeName: Colors.tintColor
 //        ]
         loadAccount()
+        self.title = "Account"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped(_:)))
     }
     override func viewWillDisappear(_ animated: Bool) {
         // 
