@@ -8,6 +8,7 @@
 
 import UIKit
 import CommonCrypto
+import LocalAuthentication
 
 class AccountViewController: UIViewController {
 
@@ -28,13 +29,8 @@ class AccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-//        navigationBar.barTintColor = Colors.translucentBrandColor
-//        navigationBar.tintColor = Colors.tintColor
-//        navigationBar.titleTextAttributes = [
-//            NSForegroundColorAttributeName: Colors.tintColor
-//        ]
         loadAccount()
+        
         self.title = "Account"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped(_:)))
     }
@@ -64,11 +60,12 @@ class AccountViewController: UIViewController {
     }
     
     @IBAction func toggleShowPassphraseTapped(_ sender: UIButton) {
-        isShowingPassphrase = !isShowingPassphrase
         if isShowingPassphrase {
+            isShowingPassphrase = !isShowingPassphrase
             self.toggleShowPassphraseButton.setTitle("Hide passphrase", for: .normal)
             self.passphraseLabel.text = Keychain.shared.seedPhrase
-        } else {
+        } else if doesUserPassAuthentication() {
+            isShowingPassphrase = !isShowingPassphrase
             self.toggleShowPassphraseButton.setTitle("Reveal passphrase", for: .normal)
             self.passphraseLabel.text = passphraseExplanation
         }
@@ -76,7 +73,20 @@ class AccountViewController: UIViewController {
     
     @IBAction func importPassphraseTapped(_ sender: UIButton) {
     }
+
     
+    func doesUserPassAuthentication() -> Bool {
+        let context = LAContext()
+        var error : NSError? = nil
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            return true
+        } else if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            return true
+        } else {
+            return false
+        }
+    }
     
     /*
     // MARK: - Navigation
