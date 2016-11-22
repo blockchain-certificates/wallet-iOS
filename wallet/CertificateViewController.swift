@@ -67,8 +67,23 @@ class CertificateViewController: UIViewController {
             for: certificate,
             bitcoinManager: bitcoinManager,
             jsonld: JSONLD.shared) { [weak self] (success, error) in
-            print("Validation complete. Success? \(success). Error? \(error)")
-            self?.inProgressRequest = nil
+                let title : String!
+                let message : String!
+                if success {
+                    title = "Success"
+                    message = "This is a valid certificate!"
+                } else {
+                    title = "Invalid"
+                    message = "\(error!)"
+                }
+
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                
+                OperationQueue.main.addOperation {
+                    self?.present(alert, animated: true, completion: nil)
+                    self?.inProgressRequest = nil
+                }
         }
         validationRequest?.start()
         self.inProgressRequest = validationRequest

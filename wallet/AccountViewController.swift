@@ -70,24 +70,37 @@ class AccountViewController: UIViewController {
         let prompt = UIAlertController(title: nil, message: "What passphrase would you like to import?", preferredStyle: .alert)
         prompt.addTextField(configurationHandler: nil)
         prompt.addAction(UIAlertAction(title: "Import", style: .destructive, handler: { (action) in
-            if let passphrase = prompt.textFields?.first?.text,
-                Keychain.isValidPassphrase(passphrase) {
-                // This shouldn't throw if we're for-sure passing it a vaild passphrase
-                try! Keychain.updateShared(with: passphrase)
-                
+            var errorMessage : String?
+            
+            let passphrase = prompt.textFields?.first?.text
+            
+            if passphrase == nil || passphrase!.isEmpty {
+                errorMessage = "You can't use an empty passphrase"
+            } else if !Keychain.isValidPassphrase(passphrase!) {
+                errorMessage = "The passphrase you entered isn't valid. Double check that you've entered the passphrase correctly."
+            }
+            
+            if let phrase = passphrase, errorMessage == nil {
+                do {
+                    try Keychain.updateShared(with: phrase)
+                } catch {
+                    errorMessage = "Failed to update your passphrase. Try again?"
+                }
+            }
+            
+            if let message = errorMessage {
                 OperationQueue.main.addOperation {
                     self.isShowingPassphrase = false
-                    self.passphraseLabel.text = "Your passphrase has been updated"
+                    self.passphraseLabel.text = message
                     self.toggleShowPassphraseButton.setTitle("Reveal passphrase", for: .normal)
                 }
             } else {
                 OperationQueue.main.addOperation {
                     self.isShowingPassphrase = false
-                    self.passphraseLabel.text = "Failed to update your passphrase. Try again?"
+                    self.passphraseLabel.text = "Your passphrase has been updated."
                     self.toggleShowPassphraseButton.setTitle("Reveal passphrase", for: .normal)
                 }
             }
-
         }))
         prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
