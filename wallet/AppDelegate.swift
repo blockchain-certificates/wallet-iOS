@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Required to set up the javascript environment for the 
         self.window?.addSubview(JSONLD.shared.webView)
+        
+        // debug:
+        print("File path is \(Paths.certificatesDirectory)")
         return true
     }
     
