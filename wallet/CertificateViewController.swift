@@ -57,9 +57,25 @@ class CertificateViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
-        let fakeContent = #imageLiteral(resourceName: "certificate")
-        let shareController = UIActivityViewController(activityItems: [fakeContent], applicationActivities: nil)
-        present(shareController, animated: true, completion: nil)
+        // Moving the file to a temporary directory. Sharing a file URL seems to be better than sharing the file's contents directly.
+        let filePath = "\(NSTemporaryDirectory())/certificate.json"
+        let url = URL(fileURLWithPath: filePath)
+        do {
+            try certificate.file.write(to: url)
+        } catch {
+            print("Failed to write temporary URL")
+            
+            let errorAlert = UIAlertController(title: "Couldn't share certificate.", message: "Something went wrong preparing that file for sharing. Try again later.", preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(errorAlert, animated: true, completion: nil)
+            return
+        }
+        
+        let items : [Any] = [ url ]
+        
+        let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        
+        self.present(shareController, animated: true, completion: nil)
     }
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
