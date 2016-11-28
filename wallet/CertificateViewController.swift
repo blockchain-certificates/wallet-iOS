@@ -35,16 +35,6 @@ class CertificateViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.title = certificate.title
         renderCertificate()
-        
-        // Remove "Info" button in xib and replace it with information disclosure button
-        _ = self.toolbar.items?.popLast()
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(infoTapped(_:)), for: .touchUpInside)
-        let infoBarButton = UIBarButtonItem(customView: infoButton)
-        self.toolbar.items?.append(infoBarButton)
-        
-        // Disabling key view elements for now
-        infoButton.isEnabled = false
     }
     
     func renderCertificate() {
