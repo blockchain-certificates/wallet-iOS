@@ -34,11 +34,15 @@ class AddIssuerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Add Issuer"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveIssuerTapped(_:)))
+
         // Do any additional setup after loading the view.
         fetchAccountData()
     }
 
-    @IBAction func saveIssuerTapped(_ sender: UIBarButtonItem) {
+    func saveIssuerTapped(_ sender: UIBarButtonItem) {
         guard let urlString = issuerURLField.text else {
             // TODO: Somehow alert/convey the fact that this field is required.
             return
@@ -51,7 +55,7 @@ class AddIssuerViewController: UIViewController {
         identifyAndIntroduceIssuer(at: url)
     }
 
-    @IBAction func cancelTapped(_ sender: UIBarButtonItem) {
+    func cancelTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     

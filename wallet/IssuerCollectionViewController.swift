@@ -253,7 +253,9 @@ class IssuerCollectionViewController: UICollectionViewController {
         let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
         controller.delegate = self
         
-        present(controller, animated: true) {
+        let navigation = UINavigationController(rootViewController: controller)
+        
+        present(navigation, animated: true) {
             controller.autoSubmitIfPossible()
         }
     }
