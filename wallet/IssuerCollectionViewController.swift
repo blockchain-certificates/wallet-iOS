@@ -86,6 +86,8 @@ class IssuerCollectionViewController: UICollectionViewController {
                 self?.add(certificateURL: url)
             }))
             
+            urlPrompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
             self?.present(urlPrompt, animated: true, completion: nil)
         }))
         
@@ -304,26 +306,6 @@ extension IssuerCollectionViewController {
         
         // At this point, data is totally a valid certificate. Let's save that to the documents directory.
         add(certificate: certificate)
-//        
-//        let filename = certificate.assertion.uid
-//        let success = save(certificateData: data, withFilename: filename)
-//        let isCertificateInList = certificates.contains(where: { $0.assertion.uid == certificate.assertion.uid })
-//        
-//        if isCertificateInList {
-//            let alertController = UIAlertController(title: "File already imported", message: "You've already imported that file.", preferredStyle: .alert)
-//            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            present(alertController, animated: true, completion: nil)
-//        } else if !success {
-//            let alertController = UIAlertController(title: "Failed to save file", message: "Try importing the file again. ", preferredStyle: .alert)
-//            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            present(alertController, animated: true, completion: nil)
-//        } else {
-//            certificates.append(certificate)
-//            
-//            // Issue #20: We should do an insert animation rather than a full table reload.
-//            // https://github.com/blockchain-certificates/cert-wallet/issues/20
-//            tableView.reloadData()
-//        }
     }
 }
 
@@ -334,36 +316,3 @@ extension IssuerCollectionViewController : UIDocumentPickerDelegate {
         importCertificate(from: data)
     }
 }
-
-
-
-// MARK: UICollectionViewDelegate
-
-/*
- // Uncomment this method to specify if the specified item should be highlighted during tracking
- override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
- return true
- }
- */
-
-/*
- // Uncomment this method to specify if the specified item should be selected
- override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
- return true
- }
- */
-
-/*
- // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
- override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
- return false
- }
- 
- override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
- return false
- }
- 
- override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
- 
- }
- */
