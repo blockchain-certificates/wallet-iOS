@@ -43,6 +43,16 @@ class CertificateViewController: UIViewController {
         renderedCertificateView.titleLabel.text = certificate.title
         renderedCertificateView.subtitleLabel.text = certificate.subtitle
         renderedCertificateView.descriptionLabel.text = certificate.description
+        renderedCertificateView.sealIcon.image = UIImage(data: certificate.issuer.image)
+        
+        certificate.assertion.signatureImages.forEach { (signatureImage) in
+            guard let image = UIImage(data: signatureImage.image) else {
+                return
+            }
+            renderedCertificateView.addSignature(image: image, title: signatureImage.title)
+        }
+        
+
     }
     
     // MARK: Actions
