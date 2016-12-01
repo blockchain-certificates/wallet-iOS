@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gag-J3-nMn">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zt0-2q-H1n" userLabel="ContentView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
@@ -51,9 +51,8 @@
                         <constraint firstAttribute="trailing" secondItem="Zt0-2q-H1n" secondAttribute="trailing" id="zEW-Ri-lf9"/>
                     </constraints>
                 </scrollView>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1f-kp-ARu">
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1f-kp-ARu">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <items>
                         <barButtonItem systemItem="action" id="ZCJ-X0-pIW">
                             <connections>
@@ -72,8 +71,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Gag-J3-nMn" secondAttribute="bottom" id="0Ay-Db-4fF"/>
+                <constraint firstAttribute="trailing" secondItem="t1f-kp-ARu" secondAttribute="trailing" id="gmG-Ek-wxL"/>
+                <constraint firstItem="t1f-kp-ARu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iXt-8L-94a"/>
+                <constraint firstItem="Gag-J3-nMn" firstAttribute="bottom" secondItem="t1f-kp-ARu" secondAttribute="top" id="ioU-bi-lmK"/>
                 <constraint firstItem="Zt0-2q-H1n" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="jYy-qK-YJe"/>
+                <constraint firstAttribute="bottom" secondItem="t1f-kp-ARu" secondAttribute="bottom" id="l1q-0q-lHf"/>
                 <constraint firstItem="Gag-J3-nMn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="se3-Fw-Oxc"/>
                 <constraint firstItem="Gag-J3-nMn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tML-WG-Ygf"/>
                 <constraint firstAttribute="trailing" secondItem="Gag-J3-nMn" secondAttribute="trailing" id="yR4-O3-fRV"/>
