@@ -25,6 +25,8 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        // Branding
+        loadBrandedBackgroundView()
 
         // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
@@ -41,6 +43,21 @@ class IssuerCollectionViewController: UICollectionViewController {
         reloadCollectionView()
     }
     
+    func loadBrandedBackgroundView() {
+        let view = UIView()
+        let brand = UIImageView(image: #imageLiteral(resourceName: "BrandedBackground"))
+        brand.translatesAutoresizingMaskIntoConstraints = false
+        brand.layer.opacity = 0.2
+        view.addSubview(brand)
+        
+        let constraints = [
+            NSLayoutConstraint(item: brand, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: brand, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)        ]
+        
+        NSLayoutConstraint.activate(constraints)
+        
+        collectionView?.backgroundView = view
+    }
     override func viewWillAppear(_ animated: Bool) {
         // TODO: this should be more nuanced. Child view controllers can delete the underlying data. So, for now, just reload all the data.
 //        loadIssuers(shouldReloadCollection: false)
