@@ -186,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				832AE0101DF8921400A3CA4A /* External */,
-				83431D841DC406600025C055 /* RenderedCertificateView */,
 				83111B261DA4110C006B058D /* wallet */,
 				83111B3B1DA4110C006B058D /* walletTests */,
 				83111B461DA4110C006B058D /* walletUITests */,
@@ -260,6 +259,7 @@
 		832AE0101DF8921400A3CA4A /* External */ = {
 			isa = PBXGroup;
 			children = (
+				83431D841DC406600025C055 /* RenderedCertificateView */,
 				832AE0111DF8921B00A3CA4A /* SkyLabel */,
 			);
 			name = External;
