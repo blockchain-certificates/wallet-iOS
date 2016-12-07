@@ -24,6 +24,9 @@
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
 		8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */; };
 		8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */; };
+		832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */; };
+		832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0131DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift */; };
+		832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */; };
 		83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D851DC406600025C055 /* RenderedCertificateView.swift */; };
 		83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83431D861DC406600025C055 /* RenderedCertificateView.xib */; };
 		83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */; };
@@ -112,6 +115,9 @@
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
 		8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryTableViewCell.swift; sourceTree = "<group>"; };
 		8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerSummaryTableViewCell.xib; sourceTree = "<group>"; };
+		832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextField.swift; path = External/SkyFloatingLabelTextField/Sources/SkyFloatingLabelTextField.swift; sourceTree = "<group>"; };
+		832AE0131DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextFieldWithIcon.swift; path = External/SkyFloatingLabelTextField/Sources/SkyFloatingLabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
+		832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextField+fixCaretPosition.swift"; path = "External/SkyFloatingLabelTextField/Sources/UITextField+fixCaretPosition.swift"; sourceTree = "<group>"; };
 		83431D851DC406600025C055 /* RenderedCertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderedCertificateView.swift; sourceTree = "<group>"; };
 		83431D861DC406600025C055 /* RenderedCertificateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderedCertificateView.xib; sourceTree = "<group>"; };
 		83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreBitcoinManager.swift; path = "External/cert-wallet/Models/CoreBitcoinManager.swift"; sourceTree = SOURCE_ROOT; };
@@ -179,6 +185,7 @@
 		83111B1B1DA4110C006B058D = {
 			isa = PBXGroup;
 			children = (
+				832AE0101DF8921400A3CA4A /* External */,
 				83431D841DC406600025C055 /* RenderedCertificateView */,
 				83111B261DA4110C006B058D /* wallet */,
 				83111B3B1DA4110C006B058D /* walletTests */,
@@ -248,6 +255,24 @@
 				83111B491DA4110C006B058D /* Info.plist */,
 			);
 			path = walletUITests;
+			sourceTree = "<group>";
+		};
+		832AE0101DF8921400A3CA4A /* External */ = {
+			isa = PBXGroup;
+			children = (
+				832AE0111DF8921B00A3CA4A /* SkyLabel */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		832AE0111DF8921B00A3CA4A /* SkyLabel */ = {
+			isa = PBXGroup;
+			children = (
+				832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */,
+				832AE0131DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift */,
+				832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */,
+			);
+			name = SkyLabel;
 			sourceTree = "<group>";
 		};
 		83431D841DC406600025C055 /* RenderedCertificateView */ = {
@@ -581,6 +606,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
+				832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
+				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
 				83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */,
 				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,
 				83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */,
@@ -592,6 +619,7 @@
 				834B94C21DC1585200543E4F /* Keychain.swift in Sources */,
 				83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
+				832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */,
 				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
