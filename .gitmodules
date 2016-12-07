@@ -1,3 +1,6 @@
 [submodule "External/cert-wallet"]
 	path = External/cert-wallet
 	url = git@github.com:blockchain-certificates/cert-wallet.git
+[submodule "External/SkyFloatingLabelTextField"]
+	path = External/SkyFloatingLabelTextField
+	url = git@github.com:Skyscanner/SkyFloatingLabelTextField.git
