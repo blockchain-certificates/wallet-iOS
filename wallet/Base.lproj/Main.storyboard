@@ -13,7 +13,7 @@
         <scene sceneID="Xgs-yd-LoS">
             <objects>
                 <collectionViewController title="Issuers" id="NJ9-PO-4VH" customClass="IssuerCollectionViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="lZ5-wo-EOb">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="lZ5-wo-EOb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,6 +50,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggd-Bd-Ygr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
