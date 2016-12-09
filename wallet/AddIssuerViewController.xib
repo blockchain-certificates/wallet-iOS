@@ -11,7 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddIssuerViewController" customModule="certificates" customModuleProvider="target">
             <connections>
+                <outlet property="emailAddressField" destination="4Dx-1L-SCW" id="xnm-1S-ORN"/>
+                <outlet property="firstNameField" destination="9PU-vw-wem" id="FAx-67-A4J"/>
                 <outlet property="issuerURLField" destination="BRe-TS-6TH" id="kfE-Vv-uFs"/>
+                <outlet property="lastNameField" destination="Lzy-V5-R6p" id="a5P-M3-PfZ"/>
+                <outlet property="nonceField" destination="cTa-9s-aXq" id="hSS-p8-XUy"/>
                 <outlet property="view" destination="HUU-c9-L9F" id="et7-50-x3v"/>
             </connections>
         </placeholder>
@@ -24,7 +28,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kaw-NP-DqR" userLabel="Content">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="512"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="513"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add the URL you were given by your issuer." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Ue-m8l">
                                     <rect key="frame" x="8" y="8" width="359" height="21"/>
@@ -45,25 +49,25 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9PU-vw-wem" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="225" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="225" width="359" height="39.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lzy-V5-R6p" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="272" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="272.5" width="359" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Dx-1L-SCW" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="319" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="319.5" width="359" height="39.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="One-Time Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-9s-aXq" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="366" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="367" width="359" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
