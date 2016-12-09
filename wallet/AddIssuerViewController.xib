@@ -35,42 +35,42 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="454"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add the URL you were given by your issuer." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Ue-m8l">
-                                    <rect key="frame" x="8" y="8" width="359" height="20.5"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <rect key="frame" x="8" y="8" width="359" height="19.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Issuer URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BRe-TS-6TH" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="36.5" width="359" height="39"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Issuer URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BRe-TS-6TH" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="8" y="35.5" width="359" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add information to identify yourself to the issuer." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krB-iU-XOc">
-                                    <rect key="frame" x="8" y="115.5" width="359" height="42.5"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <rect key="frame" x="8" y="114.5" width="359" height="19.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9PU-vw-wem" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="166" width="359" height="39.5"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9PU-vw-wem" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="8" y="142" width="359" height="39.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lzy-V5-R6p" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="213.5" width="359" height="39"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lzy-V5-R6p" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="8" y="197.5" width="359" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Dx-1L-SCW" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="260.5" width="359" height="39.5"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Dx-1L-SCW" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="8" y="252.5" width="359" height="39.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="One-Time Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-9s-aXq" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="One-Time Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-9s-aXq" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
                                     <rect key="frame" x="8" y="308" width="359" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -123,14 +123,14 @@
                                 <constraint firstItem="BRe-TS-6TH" firstAttribute="top" secondItem="SVg-Ue-m8l" secondAttribute="bottom" constant="8" id="N6P-M4-DUM"/>
                                 <constraint firstItem="BRe-TS-6TH" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="R4h-UZ-UuT"/>
                                 <constraint firstItem="krB-iU-XOc" firstAttribute="top" secondItem="BRe-TS-6TH" secondAttribute="bottom" constant="40" id="W6Y-Bo-Gk6"/>
-                                <constraint firstItem="cTa-9s-aXq" firstAttribute="top" secondItem="4Dx-1L-SCW" secondAttribute="bottom" constant="8" id="Z5c-6j-wnu"/>
+                                <constraint firstItem="cTa-9s-aXq" firstAttribute="top" secondItem="4Dx-1L-SCW" secondAttribute="bottom" constant="16" id="Z5c-6j-wnu"/>
                                 <constraint firstItem="SVg-Ue-m8l" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="eWx-t9-w1U"/>
                                 <constraint firstItem="HNX-Io-YbG" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" id="hnG-kk-B6P"/>
                                 <constraint firstItem="HNX-Io-YbG" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" id="oWq-9N-cZQ"/>
                                 <constraint firstAttribute="trailing" secondItem="cTa-9s-aXq" secondAttribute="trailing" constant="8" id="or2-cp-gQi"/>
-                                <constraint firstItem="Lzy-V5-R6p" firstAttribute="top" secondItem="9PU-vw-wem" secondAttribute="bottom" constant="8" id="rnI-my-c5c"/>
+                                <constraint firstItem="Lzy-V5-R6p" firstAttribute="top" secondItem="9PU-vw-wem" secondAttribute="bottom" constant="16" id="rnI-my-c5c"/>
                                 <constraint firstAttribute="trailing" secondItem="9PU-vw-wem" secondAttribute="trailing" constant="8" id="sAy-XS-qh1"/>
-                                <constraint firstItem="4Dx-1L-SCW" firstAttribute="top" secondItem="Lzy-V5-R6p" secondAttribute="bottom" constant="8" id="sV7-Cl-ppV"/>
+                                <constraint firstItem="4Dx-1L-SCW" firstAttribute="top" secondItem="Lzy-V5-R6p" secondAttribute="bottom" constant="16" id="sV7-Cl-ppV"/>
                                 <constraint firstAttribute="trailing" secondItem="SVg-Ue-m8l" secondAttribute="trailing" constant="8" id="st4-i3-oBg"/>
                                 <constraint firstItem="9PU-vw-wem" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="tMd-fT-pH4"/>
                                 <constraint firstItem="Lzy-V5-R6p" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="tki-x5-Zrz"/>
