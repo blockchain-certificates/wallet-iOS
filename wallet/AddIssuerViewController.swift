@@ -41,7 +41,6 @@ class AddIssuerViewController: UIViewController {
     @IBOutlet weak var loadingCancelButton : UIButton!
 
     
-    
     init(identificationURL: URL? = nil, nonce: String? = nil) {
         self.identificationURL = identificationURL
         self.nonce = nonce
@@ -85,6 +84,7 @@ class AddIssuerViewController: UIViewController {
         emailAddressField.text = emailAddress
         nonceField.text = nonce
     }
+    
     func saveDataIntoFields() {
         guard let urlString = issuerURLField.text else {
             // TODO: Somehow alert/convey the fact that this field is required.
@@ -100,6 +100,7 @@ class AddIssuerViewController: UIViewController {
         emailAddress = emailAddressField.text
         nonce = nonceField.text
     }
+    
     func stylize() {
         let fields = [
             issuerURLField,
@@ -178,6 +179,8 @@ class AddIssuerViewController: UIViewController {
     }
     
     @IBAction func cancelLoadingTapped(_ sender: Any) {
+        // TODO: This doesn't actually stop the in-flight request. Beacuse we can't do that yet.
+        isLoading = false
     }
     
     func notifyAndDismiss(managedIssuer: ManagedIssuer) {
