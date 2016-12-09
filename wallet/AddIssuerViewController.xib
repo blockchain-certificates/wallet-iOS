@@ -32,55 +32,55 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kaw-NP-DqR" userLabel="Content">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="454"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="487"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add the URL you were given by your issuer." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Ue-m8l">
-                                    <rect key="frame" x="8" y="8" width="359" height="19.5"/>
+                                    <rect key="frame" x="20" y="20" width="335" height="19.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Issuer URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BRe-TS-6TH" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="35.5" width="359" height="39"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Issuer URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BRe-TS-6TH" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="47.5" width="335" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add information to identify yourself to the issuer." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krB-iU-XOc">
-                                    <rect key="frame" x="8" y="114.5" width="359" height="19.5"/>
+                                    <rect key="frame" x="20" y="126.5" width="335" height="40.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9PU-vw-wem" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="142" width="359" height="39.5"/>
+                                    <rect key="frame" x="20" y="175" width="335" height="39.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lzy-V5-R6p" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="197.5" width="359" height="39"/>
+                                    <rect key="frame" x="20" y="230.5" width="335" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Dx-1L-SCW" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="252.5" width="359" height="39.5"/>
+                                    <rect key="frame" x="20" y="285.5" width="335" height="39.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="One-Time Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-9s-aXq" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="308" width="359" height="39"/>
+                                    <rect key="frame" x="20" y="341" width="335" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HNX-Io-YbG" userLabel="Loading Screen">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="454"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="487"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qp5-m9-zEv">
-                                            <rect key="frame" x="87.5" y="192" width="200" height="70.5"/>
+                                            <rect key="frame" x="87.5" y="208.5" width="200" height="70.5"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xvI-VL-4Wr">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="20"/>
@@ -112,30 +112,30 @@
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="krB-iU-XOc" secondAttribute="trailing" constant="8" id="8qw-mt-xAh"/>
-                                <constraint firstAttribute="trailing" secondItem="BRe-TS-6TH" secondAttribute="trailing" constant="8" id="AaC-Sh-e8B"/>
+                                <constraint firstAttribute="trailing" secondItem="krB-iU-XOc" secondAttribute="trailing" constant="20" id="8qw-mt-xAh"/>
+                                <constraint firstAttribute="trailing" secondItem="BRe-TS-6TH" secondAttribute="trailing" constant="20" id="AaC-Sh-e8B"/>
                                 <constraint firstItem="9PU-vw-wem" firstAttribute="top" secondItem="krB-iU-XOc" secondAttribute="bottom" constant="8" id="BFF-bN-wvf"/>
-                                <constraint firstItem="cTa-9s-aXq" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="BG1-lC-01x"/>
-                                <constraint firstItem="krB-iU-XOc" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="H4S-lq-bUa"/>
-                                <constraint firstAttribute="trailing" secondItem="4Dx-1L-SCW" secondAttribute="trailing" constant="8" id="Hit-eP-Zaj"/>
+                                <constraint firstItem="cTa-9s-aXq" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="BG1-lC-01x"/>
+                                <constraint firstItem="krB-iU-XOc" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="H4S-lq-bUa"/>
+                                <constraint firstAttribute="trailing" secondItem="4Dx-1L-SCW" secondAttribute="trailing" constant="20" id="Hit-eP-Zaj"/>
                                 <constraint firstAttribute="trailing" secondItem="HNX-Io-YbG" secondAttribute="trailing" id="IBP-RX-r8y"/>
-                                <constraint firstItem="SVg-Ue-m8l" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" constant="8" id="JqR-gj-gmu"/>
+                                <constraint firstItem="SVg-Ue-m8l" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" constant="20" id="JqR-gj-gmu"/>
                                 <constraint firstItem="BRe-TS-6TH" firstAttribute="top" secondItem="SVg-Ue-m8l" secondAttribute="bottom" constant="8" id="N6P-M4-DUM"/>
-                                <constraint firstItem="BRe-TS-6TH" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="R4h-UZ-UuT"/>
+                                <constraint firstItem="BRe-TS-6TH" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="R4h-UZ-UuT"/>
                                 <constraint firstItem="krB-iU-XOc" firstAttribute="top" secondItem="BRe-TS-6TH" secondAttribute="bottom" constant="40" id="W6Y-Bo-Gk6"/>
                                 <constraint firstItem="cTa-9s-aXq" firstAttribute="top" secondItem="4Dx-1L-SCW" secondAttribute="bottom" constant="16" id="Z5c-6j-wnu"/>
-                                <constraint firstItem="SVg-Ue-m8l" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="eWx-t9-w1U"/>
+                                <constraint firstItem="SVg-Ue-m8l" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="eWx-t9-w1U"/>
                                 <constraint firstItem="HNX-Io-YbG" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" id="hnG-kk-B6P"/>
                                 <constraint firstItem="HNX-Io-YbG" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" id="oWq-9N-cZQ"/>
-                                <constraint firstAttribute="trailing" secondItem="cTa-9s-aXq" secondAttribute="trailing" constant="8" id="or2-cp-gQi"/>
+                                <constraint firstAttribute="trailing" secondItem="cTa-9s-aXq" secondAttribute="trailing" constant="20" id="or2-cp-gQi"/>
                                 <constraint firstItem="Lzy-V5-R6p" firstAttribute="top" secondItem="9PU-vw-wem" secondAttribute="bottom" constant="16" id="rnI-my-c5c"/>
-                                <constraint firstAttribute="trailing" secondItem="9PU-vw-wem" secondAttribute="trailing" constant="8" id="sAy-XS-qh1"/>
+                                <constraint firstAttribute="trailing" secondItem="9PU-vw-wem" secondAttribute="trailing" constant="20" id="sAy-XS-qh1"/>
                                 <constraint firstItem="4Dx-1L-SCW" firstAttribute="top" secondItem="Lzy-V5-R6p" secondAttribute="bottom" constant="16" id="sV7-Cl-ppV"/>
-                                <constraint firstAttribute="trailing" secondItem="SVg-Ue-m8l" secondAttribute="trailing" constant="8" id="st4-i3-oBg"/>
-                                <constraint firstItem="9PU-vw-wem" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="tMd-fT-pH4"/>
-                                <constraint firstItem="Lzy-V5-R6p" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="tki-x5-Zrz"/>
-                                <constraint firstAttribute="trailing" secondItem="Lzy-V5-R6p" secondAttribute="trailing" constant="8" id="uyu-rU-hG0"/>
-                                <constraint firstItem="4Dx-1L-SCW" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="wxh-l2-m0Q"/>
+                                <constraint firstAttribute="trailing" secondItem="SVg-Ue-m8l" secondAttribute="trailing" constant="20" id="st4-i3-oBg"/>
+                                <constraint firstItem="9PU-vw-wem" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="tMd-fT-pH4"/>
+                                <constraint firstItem="Lzy-V5-R6p" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="tki-x5-Zrz"/>
+                                <constraint firstAttribute="trailing" secondItem="Lzy-V5-R6p" secondAttribute="trailing" constant="20" id="uyu-rU-hG0"/>
+                                <constraint firstItem="4Dx-1L-SCW" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="wxh-l2-m0Q"/>
                                 <constraint firstAttribute="bottom" secondItem="cTa-9s-aXq" secondAttribute="bottom" constant="107" id="xC5-d3-FKP"/>
                                 <constraint firstAttribute="bottom" secondItem="HNX-Io-YbG" secondAttribute="bottom" id="zNw-D6-u7Y"/>
                             </constraints>
