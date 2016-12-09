@@ -34,7 +34,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         self.collectionView?.delegate = self
 
         // Style this bad boy
-        self.navigationController?.navigationBar.barTintColor = Colors.translucentBrandColor
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.barTintColor = Colors.brandColor
         self.navigationController?.navigationBar.tintColor = Colors.tintColor
         
         // Load any existing issuers.

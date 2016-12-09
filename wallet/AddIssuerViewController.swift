@@ -64,7 +64,8 @@ class AddIssuerViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveIssuerTapped(_:)))
         
-        navigationController?.navigationBar.barTintColor = Colors.translucentBrandColor
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = Colors.brandColor
         navigationController?.navigationBar.tintColor = Colors.tintColor
         navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: Colors.tintColor
