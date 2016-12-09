@@ -112,8 +112,7 @@ class AddIssuerViewController: UIViewController {
         fields.forEach { (textField) in
             if let field = textField as? SkyFloatingLabelTextField {
                 field.tintColor = Colors.brandColor
-                field.titleColor = Colors.brandColor
-                field.selectedTitleColor = Colors.translucentBrandColor
+                field.selectedTitleColor = Colors.brandColor
             }
         }
     }
