@@ -15,6 +15,10 @@
                 <outlet property="firstNameField" destination="9PU-vw-wem" id="FAx-67-A4J"/>
                 <outlet property="issuerURLField" destination="BRe-TS-6TH" id="kfE-Vv-uFs"/>
                 <outlet property="lastNameField" destination="Lzy-V5-R6p" id="a5P-M3-PfZ"/>
+                <outlet property="loadingCancelButton" destination="6IN-i8-458" id="bjL-aB-Kpt"/>
+                <outlet property="loadingIndicator" destination="xvI-VL-4Wr" id="5oH-fe-qQi"/>
+                <outlet property="loadingStatusLabel" destination="O3z-un-qnk" id="llp-aL-IkN"/>
+                <outlet property="loadingView" destination="HNX-Io-YbG" id="9et-FK-YhM"/>
                 <outlet property="nonceField" destination="cTa-9s-aXq" id="hSS-p8-XUy"/>
                 <outlet property="view" destination="HUU-c9-L9F" id="et7-50-x3v"/>
             </connections>
@@ -28,50 +32,84 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kaw-NP-DqR" userLabel="Content">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="513"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="512.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add the URL you were given by your issuer." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Ue-m8l">
-                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                    <rect key="frame" x="8" y="8" width="359" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Issuer URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BRe-TS-6TH" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="37" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="36.5" width="359" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add information to identify yourself to the issuer." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krB-iU-XOc">
-                                    <rect key="frame" x="8" y="176" width="359" height="41"/>
+                                    <rect key="frame" x="8" y="175.5" width="359" height="41"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9PU-vw-wem" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="225" width="359" height="39.5"/>
+                                    <rect key="frame" x="8" y="224.5" width="359" height="39.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lzy-V5-R6p" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="272.5" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="272" width="359" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Dx-1L-SCW" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="319.5" width="359" height="39.5"/>
+                                    <rect key="frame" x="8" y="319" width="359" height="39.5"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="One-Time Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-9s-aXq" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="367" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="366.5" width="359" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HNX-Io-YbG" userLabel="Loading Screen">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="512.5"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qp5-m9-zEv">
+                                            <rect key="frame" x="87.5" y="221" width="200" height="70.5"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xvI-VL-4Wr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="20"/>
+                                                </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adding the issuer..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3z-un-qnk">
+                                                    <rect key="frame" x="0.0" y="20" width="200" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="Kn4-ts-r1t"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6IN-i8-458">
+                                                    <rect key="frame" x="0.0" y="40.5" width="200" height="30"/>
+                                                    <state key="normal" title="Cancel"/>
+                                                    <connections>
+                                                        <action selector="cancelLoadingTapped:" destination="-1" eventType="touchUpInside" id="dcJ-9A-wfm"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="Qp5-m9-zEv" firstAttribute="centerY" secondItem="HNX-Io-YbG" secondAttribute="centerY" id="HxV-zB-4Iu"/>
+                                        <constraint firstItem="Qp5-m9-zEv" firstAttribute="centerX" secondItem="HNX-Io-YbG" secondAttribute="centerX" id="o87-PU-S2T"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -81,12 +119,15 @@
                                 <constraint firstItem="cTa-9s-aXq" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="BG1-lC-01x"/>
                                 <constraint firstItem="krB-iU-XOc" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="H4S-lq-bUa"/>
                                 <constraint firstAttribute="trailing" secondItem="4Dx-1L-SCW" secondAttribute="trailing" constant="8" id="Hit-eP-Zaj"/>
+                                <constraint firstAttribute="trailing" secondItem="HNX-Io-YbG" secondAttribute="trailing" id="IBP-RX-r8y"/>
                                 <constraint firstItem="SVg-Ue-m8l" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" constant="8" id="JqR-gj-gmu"/>
                                 <constraint firstItem="BRe-TS-6TH" firstAttribute="top" secondItem="SVg-Ue-m8l" secondAttribute="bottom" constant="8" id="N6P-M4-DUM"/>
                                 <constraint firstItem="BRe-TS-6TH" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="R4h-UZ-UuT"/>
                                 <constraint firstItem="krB-iU-XOc" firstAttribute="top" secondItem="BRe-TS-6TH" secondAttribute="bottom" constant="100" id="W6Y-Bo-Gk6"/>
                                 <constraint firstItem="cTa-9s-aXq" firstAttribute="top" secondItem="4Dx-1L-SCW" secondAttribute="bottom" constant="8" id="Z5c-6j-wnu"/>
                                 <constraint firstItem="SVg-Ue-m8l" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="eWx-t9-w1U"/>
+                                <constraint firstItem="HNX-Io-YbG" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" id="hnG-kk-B6P"/>
+                                <constraint firstItem="HNX-Io-YbG" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" id="oWq-9N-cZQ"/>
                                 <constraint firstAttribute="trailing" secondItem="cTa-9s-aXq" secondAttribute="trailing" constant="8" id="or2-cp-gQi"/>
                                 <constraint firstItem="Lzy-V5-R6p" firstAttribute="top" secondItem="9PU-vw-wem" secondAttribute="bottom" constant="8" id="rnI-my-c5c"/>
                                 <constraint firstAttribute="trailing" secondItem="9PU-vw-wem" secondAttribute="trailing" constant="8" id="sAy-XS-qh1"/>
@@ -97,6 +138,7 @@
                                 <constraint firstAttribute="trailing" secondItem="Lzy-V5-R6p" secondAttribute="trailing" constant="8" id="uyu-rU-hG0"/>
                                 <constraint firstItem="4Dx-1L-SCW" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="wxh-l2-m0Q"/>
                                 <constraint firstAttribute="bottom" secondItem="cTa-9s-aXq" secondAttribute="bottom" constant="107" id="xC5-d3-FKP"/>
+                                <constraint firstAttribute="bottom" secondItem="HNX-Io-YbG" secondAttribute="bottom" id="zNw-D6-u7Y"/>
                             </constraints>
                         </view>
                     </subviews>

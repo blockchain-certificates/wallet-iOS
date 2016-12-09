@@ -26,6 +26,21 @@ class AddIssuerViewController: UIViewController {
     @IBOutlet weak var emailAddressField : UITextField!
     @IBOutlet weak var nonceField : UITextField!
     
+    var isLoading = false {
+        didSet {
+            if loadingView != nil {
+                OperationQueue.main.addOperation { [weak self] in
+                    self?.loadingView.isHidden = !(self?.isLoading)!
+                }
+            }
+        }
+    }
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingStatusLabel : UILabel!
+    @IBOutlet weak var loadingCancelButton : UIButton!
+
+    
     
     init(identificationURL: URL? = nil, nonce: String? = nil) {
         self.identificationURL = identificationURL
@@ -54,7 +69,10 @@ class AddIssuerViewController: UIViewController {
             NSForegroundColorAttributeName: Colors.tintColor
         ]
         
+        loadingView.isHidden = !isLoading
+        
         loadDataIntoFields()
+        stylize()
     }
     
     func loadDataIntoFields() {
@@ -79,6 +97,23 @@ class AddIssuerViewController: UIViewController {
         lastName = lastNameField.text
         emailAddress = emailAddressField.text
         nonce = nonceField.text
+    }
+    func stylize() {
+        let fields = [
+            issuerURLField,
+            firstNameField,
+            lastNameField,
+            emailAddressField,
+            nonceField
+        ]
+        
+        fields.forEach { (textField) in
+            if let field = textField as? SkyFloatingLabelTextField {
+                field.tintColor = Colors.brandColor
+                field.titleColor = Colors.brandColor
+                field.selectedTitleColor = Colors.translucentBrandColor
+            }
+        }
     }
 
     func saveIssuerTapped(_ sender: UIBarButtonItem) {
@@ -121,9 +156,12 @@ class AddIssuerViewController: UIViewController {
                                         revocationAddress: nil)
         
         let managedIssuer = ManagedIssuer()
+        isLoading = true
         managedIssuer.getIssuerIdentity(from: url) { [weak self] isSuccessful in
+            
             guard isSuccessful else {
                 // TODO: Somehow alert/convey that this isn't a valid issuer.
+                self?.isLoading = false
                 return
             }
             
@@ -138,10 +176,14 @@ class AddIssuerViewController: UIViewController {
         }
     }
     
+    @IBAction func cancelLoadingTapped(_ sender: Any) {
+    }
+    
     func notifyAndDismiss(managedIssuer: ManagedIssuer) {
         delegate?.added(managedIssuer: managedIssuer)
         
         OperationQueue.main.addOperation { [weak self] in
+            self?.isLoading = false
             self?.dismiss(animated: true, completion: nil)
         }
     }
