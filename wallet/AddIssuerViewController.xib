@@ -20,35 +20,53 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJT-za-OkO">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJT-za-OkO">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kaw-NP-DqR" userLabel="Content">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="602"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kaw-NP-DqR" userLabel="Content">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="611"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add the URL you were given by your issuer." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Ue-m8l">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add the URL you were given by your issuer." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Ue-m8l">
                                     <rect key="frame" x="8" y="8" width="359" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Issuer URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BRe-TS-6TH">
-                                    <rect key="frame" x="8" y="37" width="359" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Issuer URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BRe-TS-6TH" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="8" y="37" width="359" height="39"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="BRe-TS-6TH" secondAttribute="trailing" constant="8" id="AaC-Sh-e8B"/>
+                                <constraint firstItem="SVg-Ue-m8l" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" constant="8" id="JqR-gj-gmu"/>
+                                <constraint firstItem="BRe-TS-6TH" firstAttribute="top" secondItem="SVg-Ue-m8l" secondAttribute="bottom" constant="8" id="N6P-M4-DUM"/>
+                                <constraint firstItem="BRe-TS-6TH" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="R4h-UZ-UuT"/>
+                                <constraint firstAttribute="bottom" secondItem="BRe-TS-6TH" secondAttribute="bottom" constant="535" id="Wnq-V7-Kmy"/>
+                                <constraint firstItem="SVg-Ue-m8l" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="8" id="eWx-t9-w1U"/>
+                                <constraint firstAttribute="trailing" secondItem="SVg-Ue-m8l" secondAttribute="trailing" constant="8" id="st4-i3-oBg"/>
+                            </constraints>
                         </view>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="Kaw-NP-DqR" firstAttribute="leading" secondItem="BJT-za-OkO" secondAttribute="leading" id="2kU-pi-WXe"/>
+                        <constraint firstItem="Kaw-NP-DqR" firstAttribute="top" secondItem="BJT-za-OkO" secondAttribute="top" id="6jB-Da-rUG"/>
+                        <constraint firstAttribute="trailing" secondItem="Kaw-NP-DqR" secondAttribute="trailing" id="IyS-Ag-VaK"/>
+                        <constraint firstAttribute="bottom" secondItem="Kaw-NP-DqR" secondAttribute="bottom" constant="65" id="aMt-md-5Ck"/>
+                    </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="BJT-za-OkO" secondAttribute="trailing" id="6wp-nv-IYa"/>
+                <constraint firstItem="BJT-za-OkO" firstAttribute="top" secondItem="HUU-c9-L9F" secondAttribute="top" id="C6d-iy-Lhr"/>
+                <constraint firstItem="Kaw-NP-DqR" firstAttribute="width" secondItem="HUU-c9-L9F" secondAttribute="width" id="QJC-MW-7Zo"/>
+                <constraint firstAttribute="bottom" secondItem="BJT-za-OkO" secondAttribute="bottom" id="iSg-XD-lBj"/>
+                <constraint firstItem="BJT-za-OkO" firstAttribute="leading" secondItem="HUU-c9-L9F" secondAttribute="leading" id="k6l-hS-62V"/>
+            </constraints>
             <point key="canvasLocation" x="465.5" y="53.5"/>
         </view>
     </objects>
