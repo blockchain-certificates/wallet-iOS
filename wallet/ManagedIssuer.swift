@@ -160,7 +160,7 @@ class ManagedIssuer : NSObject, NSCoding {
             return
         }
         
-        let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer) { [weak self] (success, error) in
+        let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer, with: ["nonce":nonce]) { [weak self] (success, error) in
             if success {
                 self?.introducedWithAddress = recipient.publicAddress
             } else {

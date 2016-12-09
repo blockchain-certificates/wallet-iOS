@@ -28,16 +28,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-Id-1wx" userLabel="ContentView">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="463"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="437"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looks like we don't have any identifying information for you yet. How would you like to identify yourself to issuers?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKa-aY-8zc">
-                                    <rect key="frame" x="8" y="8" width="359" height="64.5"/>
+                                    <rect key="frame" x="8" y="8" width="359" height="65"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T7G-Ik-AH1" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="92.5" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="93" width="359" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -54,7 +54,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fdx-Va-HsF" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="141.5" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="133" width="359" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -71,7 +71,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oOh-OZ-bN8" customClass="SkyFloatingLabelTextField" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="190.5" width="359" height="39"/>
+                                    <rect key="frame" x="8" y="173" width="359" height="30"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -89,7 +89,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </textField>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51N-Vt-R0Q">
-                                    <rect key="frame" x="37.5" y="269.5" width="300" height="86.5"/>
+                                    <rect key="frame" x="38" y="243" width="300" height="87"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="300" id="6kd-nQ-uE6"/>
                                     </constraints>
@@ -99,14 +99,14 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cM2-hI-jkf">
-                                    <rect key="frame" x="123" y="364" width="129" height="30"/>
+                                    <rect key="frame" x="123" y="338" width="129" height="30"/>
                                     <state key="normal" title="Reveal passphrase"/>
                                     <connections>
                                         <action selector="toggleShowPassphraseTapped:" destination="-1" eventType="touchUpInside" id="Rbw-Xb-y0a"/>
                                     </connections>
                                 </button>
                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4w-A2-Dsy">
-                                    <rect key="frame" x="123" y="394" width="129" height="30"/>
+                                    <rect key="frame" x="123" y="368" width="129" height="30"/>
                                     <state key="normal" title="Import passphrase">
                                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
