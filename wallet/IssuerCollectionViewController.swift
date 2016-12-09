@@ -10,6 +10,7 @@ import UIKit
 import BlockchainCertificates
 
 private let reuseIdentifier = "Cell"
+private let addIssuerReuseIdentifier = "AddIssuerCollectionViewCell"
 private let segueToViewIssuer = "ShowIssuerDetail"
 
 class IssuerCollectionViewController: UICollectionViewController {
@@ -31,6 +32,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
         self.collectionView?.register(cellNib, forCellWithReuseIdentifier: reuseIdentifier)
+        let addNib = UINib(nibName: "AddIssuerCollectionViewCell", bundle: nil)
+        self.collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
         self.collectionView?.delegate = self
 
         // Style this bad boy
@@ -120,34 +123,49 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return managedIssuers.count
+        if section == 0 {
+            return managedIssuers.count
+        } else if section == 1 {
+            return 1
+        }
+        return 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! IssuerCollectionViewCell
-
-        let managedIssuer = managedIssuers[indexPath.item]
-        guard let issuer = managedIssuer.issuer else {
-            cell.titleLabel.text = "Missing issuer"
-            return cell
+        let genericCell : UICollectionViewCell!
+        
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! IssuerCollectionViewCell
+            
+            let managedIssuer = managedIssuers[indexPath.item]
+            guard let issuer = managedIssuer.issuer else {
+                cell.titleLabel.text = "Missing issuer"
+                return cell
+            }
+            
+            cell.imageView.image = UIImage(data: issuer.image)
+            cell.titleLabel.text = issuer.name
+            cell.certificateCount = certificates.reduce(0, { (count, certificate) -> Int in
+                if certificate.issuer.id == issuer.id {
+                    return count + 1
+                }
+                return count
+            })
+            
+            
+            genericCell = cell
+        } else {
+            genericCell = collectionView.dequeueReusableCell(withReuseIdentifier: addIssuerReuseIdentifier, for: indexPath)
         }
         
-        cell.imageView.image = UIImage(data: issuer.image)
-        cell.titleLabel.text = issuer.name
-        cell.certificateCount = certificates.reduce(0, { (count, certificate) -> Int in
-            if certificate.issuer.id == issuer.id {
-                return count + 1
-            }
-            return count
-        })
+        // Common styling
         
-        cell.layer.masksToBounds = false
-        cell.layer.shadowOffset = CGSize(width: 0, height: 3)
-        cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOpacity = 0.4
-        cell.layer.shadowRadius = 8
-    
-        return cell
+        genericCell.layer.masksToBounds = false
+        genericCell.layer.shadowOffset = CGSize(width: 0, height: 3)
+        genericCell.layer.shadowColor = UIColor.black.cgColor
+        genericCell.layer.shadowOpacity = 0.4
+        genericCell.layer.shadowRadius = 8
+        return genericCell
     }
     
     // MARK: Issuer handling
@@ -282,15 +300,19 @@ class IssuerCollectionViewController: UICollectionViewController {
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let managedIssuer = managedIssuers[indexPath.item]
-        let issuerController = IssuerTableViewController()
-        
-        issuerController.managedIssuer = managedIssuer
-        issuerController.certificates = certificates.filter { certificate in
-            return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
+        if indexPath.section == 0 {
+            let managedIssuer = managedIssuers[indexPath.item]
+            let issuerController = IssuerTableViewController()
+            
+            issuerController.managedIssuer = managedIssuer
+            issuerController.certificates = certificates.filter { certificate in
+                return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
+            }
+            
+            self.navigationController?.pushViewController(issuerController, animated: true)
+        } else {
+            showAddIssuerFlow()
         }
-        
-        self.navigationController?.pushViewController(issuerController, animated: true)
     }
 }
 
