@@ -50,6 +50,7 @@
                 <constraint firstAttribute="bottom" secondItem="nI8-05-72h" secondAttribute="bottom" id="nY1-SR-5NS"/>
             </constraints>
             <connections>
+                <outlet property="addLabel" destination="8fV-eY-fed" id="0IO-7v-iic"/>
                 <outlet property="containerView" destination="nI8-05-72h" id="WaE-J0-pCJ"/>
                 <outlet property="dottedLineImageView" destination="FXa-0q-GyZ" id="2vu-8F-rJO"/>
             </connections>

@@ -36,6 +36,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         let addNib = UINib(nibName: "AddIssuerCollectionViewCell", bundle: nil)
         self.collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
         self.collectionView?.delegate = self
+        self.collectionView?.backgroundColor = Colors.baseColor
 
         // Style this bad boy
         self.navigationController?.navigationBar.isTranslucent = false

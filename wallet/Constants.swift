@@ -13,6 +13,9 @@ enum Colors {
     static let translucentBrandColor = #colorLiteral(red: 0.2039215686, green: 0.5882352941, blue: 0.4117647059, alpha: 1)
     static let tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     static let baseColor = UIColor(red:0.97, green:0.97, blue:0.98, alpha:1.0)
+    static let primaryTextColor = UIColor(red:0.31, green:0.35, blue:0.38, alpha:1.0)
+    static let secondaryTextColor = UIColor(red:0.65, green:0.67, blue:0.66, alpha:1.0)
+    static let disabledTextColor = UIColor(red:0.72, green:0.75, blue:0.79, alpha:1.0)
 }
 
 enum UserKeys {

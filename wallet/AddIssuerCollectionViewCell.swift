@@ -12,6 +12,7 @@ class AddIssuerCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var dottedLineImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var addLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,7 +21,8 @@ class AddIssuerCollectionViewCell: UICollectionViewCell {
         containerView.layer.masksToBounds = true
         containerView.layer.cornerRadius = Dimensions.issuerCornerRadius
         
-        dottedLineImageView.tintColor = Colors.brandColor
+        dottedLineImageView.tintColor = Colors.secondaryTextColor
+        addLabel.textColor = Colors.secondaryTextColor
     }
 
 }
