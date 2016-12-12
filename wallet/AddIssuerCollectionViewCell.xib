@@ -18,11 +18,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="108" height="145"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nI8-05-72h">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nI8-05-72h" userLabel="Background">
                         <rect key="frame" x="0.0" y="0.0" width="108" height="145"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ add" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fV-eY-fed">
-                                <rect key="frame" x="31.5" y="62" width="44.5" height="21"/>
+                                <rect key="frame" x="31" y="62" width="45" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -42,6 +42,9 @@
                 <constraint firstItem="nI8-05-72h" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Rrj-GC-aSE"/>
                 <constraint firstAttribute="bottom" secondItem="nI8-05-72h" secondAttribute="bottom" id="nY1-SR-5NS"/>
             </constraints>
+            <connections>
+                <outlet property="containerView" destination="nI8-05-72h" id="WaE-J0-pCJ"/>
+            </connections>
             <point key="canvasLocation" x="34" y="54.5"/>
         </collectionViewCell>
     </objects>

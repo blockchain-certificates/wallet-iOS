@@ -9,8 +9,9 @@
 import UIKit
 import BlockchainCertificates
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "IssuerCollectionViewCell"
 private let addIssuerReuseIdentifier = "AddIssuerCollectionViewCell"
+
 private let segueToViewIssuer = "ShowIssuerDetail"
 
 class IssuerCollectionViewController: UICollectionViewController {
@@ -123,18 +124,18 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return managedIssuers.count
-        } else if section == 1 {
+        if managedIssuers.isEmpty {
             return 1
         }
-        return 0
+        return managedIssuers.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let genericCell : UICollectionViewCell!
-        
-        if indexPath.section == 0 {
+
+        if managedIssuers.isEmpty {
+            genericCell = collectionView.dequeueReusableCell(withReuseIdentifier: addIssuerReuseIdentifier, for: indexPath)
+        } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! IssuerCollectionViewCell
             
             let managedIssuer = managedIssuers[indexPath.item]
@@ -152,19 +153,16 @@ class IssuerCollectionViewController: UICollectionViewController {
                 return count
             })
             
-            
             genericCell = cell
-        } else {
-            genericCell = collectionView.dequeueReusableCell(withReuseIdentifier: addIssuerReuseIdentifier, for: indexPath)
         }
         
         // Common styling
-        
         genericCell.layer.masksToBounds = false
         genericCell.layer.shadowOffset = CGSize(width: 0, height: 3)
         genericCell.layer.shadowColor = UIColor.black.cgColor
         genericCell.layer.shadowOpacity = 0.4
         genericCell.layer.shadowRadius = 8
+        
         return genericCell
     }
     
@@ -300,7 +298,9 @@ class IssuerCollectionViewController: UICollectionViewController {
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        if collectionView.cellForItem(at: indexPath) is AddIssuerCollectionViewCell {
+            showAddIssuerFlow()
+        } else {
             let managedIssuer = managedIssuers[indexPath.item]
             let issuerController = IssuerTableViewController()
             
@@ -310,8 +310,6 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
             }
             
             self.navigationController?.pushViewController(issuerController, animated: true)
-        } else {
-            showAddIssuerFlow()
         }
     }
 }

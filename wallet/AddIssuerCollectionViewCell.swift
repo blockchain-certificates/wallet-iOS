@@ -10,9 +10,14 @@ import UIKit
 
 class AddIssuerCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var containerView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
+        containerView.layer.masksToBounds = true
+        containerView.layer.cornerRadius = 5
     }
 
 }
