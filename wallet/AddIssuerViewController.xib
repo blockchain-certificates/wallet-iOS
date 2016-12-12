@@ -13,7 +13,9 @@
             <connections>
                 <outlet property="emailAddressField" destination="4Dx-1L-SCW" id="xnm-1S-ORN"/>
                 <outlet property="firstNameField" destination="9PU-vw-wem" id="FAx-67-A4J"/>
+                <outlet property="identityInformationLabel" destination="krB-iU-XOc" id="Qiy-jP-R6Y"/>
                 <outlet property="issuerURLField" destination="BRe-TS-6TH" id="kfE-Vv-uFs"/>
+                <outlet property="issuerURLLabel" destination="SVg-Ue-m8l" id="4Me-Hf-uRM"/>
                 <outlet property="lastNameField" destination="Lzy-V5-R6p" id="a5P-M3-PfZ"/>
                 <outlet property="loadingCancelButton" destination="6IN-i8-458" id="bjL-aB-Kpt"/>
                 <outlet property="loadingIndicator" destination="xvI-VL-4Wr" id="5oH-fe-qQi"/>

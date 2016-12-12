@@ -15,7 +15,7 @@ enum Colors {
     static let baseColor = UIColor(red:0.97, green:0.97, blue:0.98, alpha:1.0)
     static let primaryTextColor = UIColor(red:0.31, green:0.35, blue:0.38, alpha:1.0)
     static let secondaryTextColor = UIColor(red:0.65, green:0.67, blue:0.66, alpha:1.0)
-    static let disabledTextColor = UIColor(red:0.72, green:0.75, blue:0.79, alpha:1.0)
+    static let placeholderTextColor = UIColor(red:0.72, green:0.75, blue:0.79, alpha:1.0)
 }
 
 enum UserKeys {
@@ -31,4 +31,9 @@ enum Paths {
     
 enum Dimensions {
     static let issuerCornerRadius : CGFloat = 5
+}
+
+enum Fonts {
+    static let brandFont = UIFont.systemFont(ofSize: 18)
+    static let placeholderFont = UIFont.systemFont(ofSize: 18)
 }

@@ -13,14 +13,17 @@ class AddIssuerViewController: UIViewController {
     private var inProgressRequest : CommonRequest?
     var delegate : AddIssuerViewControllerDelegate?
     
+    
     var identificationURL: URL?
     var firstName : String?
     var lastName : String?
     var emailAddress : String?
     var nonce: String?
     
+    @IBOutlet weak var issuerURLLabel: UILabel!
     @IBOutlet weak var issuerURLField: UITextField!
     
+    @IBOutlet weak var identityInformationLabel : UILabel!
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var emailAddressField : UITextField!
@@ -114,7 +117,25 @@ class AddIssuerViewController: UIViewController {
             if let field = textField as? SkyFloatingLabelTextField {
                 field.tintColor = Colors.brandColor
                 field.selectedTitleColor = Colors.brandColor
+                field.textColor = Colors.primaryTextColor
+                field.font = Fonts.brandFont
+
+
+                field.lineColor = Colors.placeholderTextColor
+                field.selectedLineHeight = 1
+                field.selectedLineColor = Colors.brandColor
+                
+                field.placeholderColor = Colors.placeholderTextColor
+                field.placeholderFont = Fonts.placeholderFont
             }
+        }
+        
+        let labels = [
+            issuerURLLabel,
+            identityInformationLabel
+        ]
+        labels.forEach { (label) in
+            label?.textColor = Colors.primaryTextColor
         }
     }
 
