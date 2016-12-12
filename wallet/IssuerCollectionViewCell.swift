@@ -20,7 +20,7 @@ class IssuerCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         self.containerView.layer.masksToBounds = true
-        self.containerView.layer.cornerRadius = 5
+        self.containerView.layer.cornerRadius = Dimensions.issuerCornerRadius
     }
 
     var certificateCount : Int {

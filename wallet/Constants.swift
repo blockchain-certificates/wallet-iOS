@@ -26,3 +26,6 @@ enum Paths {
     static let certificatesDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Certificates", isDirectory: true)
 }
     
+enum Dimensions {
+    static let issuerCornerRadius : CGFloat = 5
+}

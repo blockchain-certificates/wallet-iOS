@@ -21,6 +21,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nI8-05-72h" userLabel="Background">
                         <rect key="frame" x="0.0" y="0.0" width="108" height="145"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DottedLineBackground" translatesAutoresizingMaskIntoConstraints="NO" id="FXa-0q-GyZ">
+                                <rect key="frame" x="0.0" y="0.0" width="108" height="145"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ add" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fV-eY-fed">
                                 <rect key="frame" x="31" y="62" width="45" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -31,6 +34,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="8fV-eY-fed" firstAttribute="centerX" secondItem="nI8-05-72h" secondAttribute="centerX" id="SoJ-8v-VKK"/>
+                            <constraint firstAttribute="trailing" secondItem="FXa-0q-GyZ" secondAttribute="trailing" id="Teh-eU-wzF"/>
+                            <constraint firstItem="FXa-0q-GyZ" firstAttribute="leading" secondItem="nI8-05-72h" secondAttribute="leading" id="dCT-Jk-oMg"/>
+                            <constraint firstAttribute="bottom" secondItem="FXa-0q-GyZ" secondAttribute="bottom" id="vHv-pb-2BW"/>
+                            <constraint firstItem="FXa-0q-GyZ" firstAttribute="top" secondItem="nI8-05-72h" secondAttribute="top" id="ya7-88-MFf"/>
                             <constraint firstItem="8fV-eY-fed" firstAttribute="centerY" secondItem="nI8-05-72h" secondAttribute="centerY" id="zPe-x9-3US"/>
                         </constraints>
                     </view>
@@ -44,8 +51,12 @@
             </constraints>
             <connections>
                 <outlet property="containerView" destination="nI8-05-72h" id="WaE-J0-pCJ"/>
+                <outlet property="dottedLineImageView" destination="FXa-0q-GyZ" id="2vu-8F-rJO"/>
             </connections>
             <point key="canvasLocation" x="34" y="54.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="DottedLineBackground" width="108" height="145"/>
+    </resources>
 </document>

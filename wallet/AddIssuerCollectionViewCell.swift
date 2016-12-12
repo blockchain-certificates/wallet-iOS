@@ -10,6 +10,7 @@ import UIKit
 
 class AddIssuerCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var dottedLineImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!
     
     override func awakeFromNib() {
@@ -17,7 +18,9 @@ class AddIssuerCollectionViewCell: UICollectionViewCell {
         
         // Initialization code
         containerView.layer.masksToBounds = true
-        containerView.layer.cornerRadius = 5
+        containerView.layer.cornerRadius = Dimensions.issuerCornerRadius
+        
+        dottedLineImageView.tintColor = Colors.brandColor
     }
 
 }
