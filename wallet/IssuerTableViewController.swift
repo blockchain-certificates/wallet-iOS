@@ -39,6 +39,8 @@ class IssuerTableViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func didReceiveMemoryWarning() {

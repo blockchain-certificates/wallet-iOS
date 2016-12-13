@@ -51,6 +51,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         loadCertificates(shouldReloadCollection: false)
         reloadCollectionView()
         title = "Issuers"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     func loadBrandedBackgroundView() {
