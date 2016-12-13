@@ -41,6 +41,7 @@ class IssuerTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,8 +81,10 @@ class IssuerTableViewController: UITableViewController {
             if let issuer = managedIssuer?.issuer {
                 summaryCell.issuerImageView.image = UIImage(data:issuer.image)
             }
-            summaryCell.statusLabel.text = managedIssuer?.status
-            summaryCell.actionButton.isHidden = true
+            summaryCell.preservesSuperviewLayoutMargins = false
+            summaryCell.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+//            summaryCell.statusLabel.text = managedIssuer?.status
+//            summaryCell.actionButton.isHidden = true
         case Sections.certificates.rawValue:
             let certificate = certificates[indexPath.row]
             cell.textLabel?.text = certificate.title

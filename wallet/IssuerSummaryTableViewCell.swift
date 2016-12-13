@@ -10,19 +10,27 @@ import UIKit
 
 class IssuerSummaryTableViewCell: UITableViewCell {
     @IBOutlet weak var issuerImageView: UIImageView!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    var issuerDescription : String? {
+        didSet {
+            updateDescriptionLabel()
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        updateDescriptionLabel()
     }
     
+    func updateDescriptionLabel() {
+        if let description = issuerDescription {
+            descriptionLabel.text = description
+            descriptionLabel.textColor = Colors.primaryTextColor
+        } else {
+            descriptionLabel.text = "No description provided."
+            descriptionLabel.textColor = Colors.placeholderTextColor
+        }
+    }
 }
