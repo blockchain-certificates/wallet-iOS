@@ -42,11 +42,15 @@ class IssuerCollectionViewController: UICollectionViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = Colors.brandColor
         self.navigationController?.navigationBar.tintColor = Colors.tintColor
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName: Colors.tintColor
+        ]
         
         // Load any existing issuers.
         loadIssuers(shouldReloadCollection: false)
         loadCertificates(shouldReloadCollection: false)
         reloadCollectionView()
+        title = "Issuers"
     }
     
     func loadBrandedBackgroundView() {
