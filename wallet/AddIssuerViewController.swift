@@ -213,7 +213,37 @@ class AddIssuerViewController: UIViewController {
         }
     }
 }
+struct ValidationOptions : OptionSet {
+    let rawValue : Int
+    
+    static let required = ValidationOptions(rawValue: 1 << 0)
+    static let url      = ValidationOptions(rawValue: 1 << 1)
+    static let email    = ValidationOptions(rawValue: 1 << 2)
+}
 
+extension AddIssuerViewController : UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let errorMessage : String? = nil
+        
+        switch textField {
+        case issuerURLField:
+            break;
+        case nonceField:
+            break;
+        default:
+            break;
+        }
+        
+        if let field = textField as? SkyFloatingLabelTextField {
+            field.errorMessage = errorMessage
+        }
+        return true
+    }
+    
+    func validate(field : UITextField, options: ValidationOptions) -> String? {
+        return nil
+    }
+}
 
 protocol AddIssuerViewControllerDelegate : class {
     func added(managedIssuer: ManagedIssuer)
