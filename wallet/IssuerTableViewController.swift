@@ -166,13 +166,8 @@ class IssuerTableViewController: UITableViewController {
         
         let selectedCertificate = certificates[indexPath.row]
         let controller = CertificateViewController(certificate: selectedCertificate)
+        controller.delegate = self
         self.navigationController?.pushViewController(controller, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == Sections.certificates.rawValue {
-            cell.separatorInset = UIEdgeInsets(top: -2, left: 0, bottom: 0, right: 0)
-        }
     }
     
     // MARK: Key actions
@@ -192,5 +187,42 @@ class IssuerTableViewController: UITableViewController {
         prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(prompt, animated: true, completion: nil)
+    }
+}
+extension IssuerTableViewController : CertificateViewControllerDelegate {
+    func delete(certificate: Certificate) {
+        let possibleIndex = certificates.index(where: { (cert) -> Bool in
+            return cert.assertion.uid == certificate.assertion.uid
+        })
+        guard let index = possibleIndex else {
+            return
+        }
+        
+        let documentsDirectory = Paths.certificatesDirectory
+        let certificateFilename = certificate.assertion.uid
+        let filePath = URL(fileURLWithPath: certificateFilename, relativeTo: documentsDirectory)
+        
+        let coordinator = NSFileCoordinator()
+        var coordinationError : NSError?
+        coordinator.coordinate(writingItemAt: filePath, options: [.forDeleting], error: &coordinationError, byAccessor: { [weak self] (file) in
+            
+            do {
+                try FileManager.default.removeItem(at: filePath)
+                self?.certificates.remove(at: index)
+                self?.tableView.reloadData()
+            } catch {
+                print(error)
+                
+                let alertController = UIAlertController(title: "Couldn't delete file", message: "Something went wrong deleting that certificate.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alertController, animated: true, completion: nil)
+            }
+        })
+        
+        if let error = coordinationError {
+            print("Coordination failed with \(error)")
+        } else {
+            print("Coordination went fine.")
+        }
     }
 }

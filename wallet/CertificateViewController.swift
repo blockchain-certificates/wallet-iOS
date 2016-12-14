@@ -11,8 +11,12 @@ import BlockchainCertificates
 import JSONLD
 
 class CertificateViewController: UIViewController {
+    var delegate : CertificateViewControllerDelegate?
+    
     public let certificate: Certificate
     private let bitcoinManager = CoreBitcoinManager()
+    
+    
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     
     @IBOutlet weak var toolbar: UIToolbar!
@@ -105,9 +109,19 @@ class CertificateViewController: UIViewController {
         self.inProgressRequest = validationRequest
     }
     
-    func infoTapped(_ button: UIButton) {
-        print("\(#function)")
+    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
+        let certificateToDelete = certificate
+        let prompt = UIAlertController(title: "Be careful", message: "If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", preferredStyle: .alert)
+        prompt.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] (_) in
+            _ = self?.navigationController?.popViewController(animated: true)
+            self?.delegate?.delete(certificate: certificateToDelete)
+        }))
+        prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(prompt, animated: true, completion: nil)
     }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -118,4 +132,8 @@ class CertificateViewController: UIViewController {
     }
     */
 
+}
+
+protocol CertificateViewControllerDelegate : class {
+    func delete(certificate: Certificate)
 }
