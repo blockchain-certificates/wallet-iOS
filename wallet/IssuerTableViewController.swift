@@ -11,6 +11,7 @@ import BlockchainCertificates
 
 private let issuerSummaryCellReuseIdentifier = "IssuerSummaryTableViewCell"
 private let certificateCellReuseIdentifier = "UITableViewCell +certificateCellReuseIdentifier"
+private let noCertificatesCellReuseIdentififer = "NoCertificateTableViewCell"
 
 fileprivate enum Sections : Int {
     case issuerSummary = 0
@@ -36,6 +37,7 @@ class IssuerTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: certificateCellReuseIdentifier)
         tableView.register(UINib(nibName: "IssuerSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: issuerSummaryCellReuseIdentifier)
+        tableView.register(UINib(nibName: "NoCertificatesTableViewCell", bundle: nil), forCellReuseIdentifier: noCertificatesCellReuseIdentififer)
         
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -61,7 +63,7 @@ class IssuerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == Sections.issuerSummary.rawValue {
-            return 1
+            return 2
         } else if section == Sections.certificates.rawValue {
             return certificates.count
         }
@@ -72,19 +74,23 @@ class IssuerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var reuseIdentifier = certificateCellReuseIdentifier
         if indexPath.section == Sections.issuerSummary.rawValue {
-            reuseIdentifier = issuerSummaryCellReuseIdentifier
+            if indexPath.row == 0 {
+                reuseIdentifier = issuerSummaryCellReuseIdentifier
+            } else {
+                reuseIdentifier = noCertificatesCellReuseIdentififer
+            }
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
         switch indexPath.section {
         case Sections.issuerSummary.rawValue:
-            let summaryCell = cell as! IssuerSummaryTableViewCell
-            if let issuer = managedIssuer?.issuer {
-                summaryCell.issuerImageView.image = UIImage(data:issuer.image)
+            if indexPath.row == 0 {
+                let summaryCell = cell as! IssuerSummaryTableViewCell
+                if let issuer = managedIssuer?.issuer {
+                    summaryCell.issuerImageView.image = UIImage(data:issuer.image)
+                }
             }
-            summaryCell.preservesSuperviewLayoutMargins = false
-            summaryCell.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         case Sections.certificates.rawValue:
             let certificate = certificates[indexPath.row]
             cell.textLabel?.text = certificate.title

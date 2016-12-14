@@ -42,6 +42,8 @@
 		834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
 		834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
 		834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
+		83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */; };
+		83802BF51E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */; };
 		83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */; };
 		83A6EDD11DAFF7D600ABFB47 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
@@ -129,6 +131,8 @@
 		834B94C11DC1585200543E4F /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keychain.swift; path = "External/cert-wallet/Models/Keychain.swift"; sourceTree = SOURCE_ROOT; };
 		834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewCell.swift; sourceTree = "<group>"; };
 		834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionViewCell.xib; sourceTree = "<group>"; };
+		83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCertificatesTableViewCell.swift; sourceTree = "<group>"; };
+		83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoCertificatesTableViewCell.xib; sourceTree = "<group>"; };
 		83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
@@ -216,15 +220,12 @@
 				834B94C11DC1585200543E4F /* Keychain.swift */,
 				83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */,
 				83111B271DA4110C006B058D /* AppDelegate.swift */,
+				83802BF61E01BC2B00E54C13 /* Cells */,
 				83111B2B1DA4110C006B058D /* Main.storyboard */,
 				83111B2E1DA4110C006B058D /* Assets.xcassets */,
 				83111B301DA4110C006B058D /* LaunchScreen.storyboard */,
 				83111B331DA4110C006B058D /* Info.plist */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
-				834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */,
-				834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */,
-				83172DEF1DFB71ED00559909 /* AddIssuerCollectionViewCell.swift */,
-				83172DF01DFB71ED00559909 /* AddIssuerCollectionViewCell.xib */,
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
 				83DC0D931DBA87C300453116 /* Constants.swift */,
 				83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */,
@@ -233,8 +234,6 @@
 				83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */,
 				83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */,
 				83A6EDD91DAFFD5B00ABFB47 /* CertificateViewController.xib */,
-				8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */,
-				8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */,
 				83111B561DA41417006B058D /* wallet-Bridging-Header.h */,
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
 				83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */,
@@ -289,6 +288,21 @@
 			);
 			name = RenderedCertificateView;
 			path = "External/cert-wallet/RenderedCertificateView";
+			sourceTree = "<group>";
+		};
+		83802BF61E01BC2B00E54C13 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				83172DEF1DFB71ED00559909 /* AddIssuerCollectionViewCell.swift */,
+				83172DF01DFB71ED00559909 /* AddIssuerCollectionViewCell.xib */,
+				834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */,
+				834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */,
+				8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */,
+				8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */,
+				83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */,
+				83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		A653FD3709C0B4FB37E36B2A /* Frameworks */ = {
@@ -440,6 +454,7 @@
 			files = (
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				83172DF21DFB71ED00559909 /* AddIssuerCollectionViewCell.xib in Resources */,
+				83802BF51E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
 				83A6EDDB1DAFFD5B00ABFB47 /* CertificateViewController.xib in Resources */,
@@ -624,6 +639,7 @@
 				83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */,
 				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
 				83172DF11DFB71ED00559909 /* AddIssuerCollectionViewCell.swift in Sources */,
+				83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */,
 				834B94C21DC1585200543E4F /* Keychain.swift in Sources */,
 				83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
