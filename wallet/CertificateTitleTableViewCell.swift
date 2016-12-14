@@ -9,6 +9,9 @@
 import UIKit
 
 class CertificateTitleTableViewCell: UITableViewCell {
+    let missingSubtitleText = "No subtitle provided"
+    let primaryTextColor = UIColor.black
+    
     public var title : String? {
         didSet {
             if certificateTitleLabel != nil {
@@ -18,9 +21,7 @@ class CertificateTitleTableViewCell: UITableViewCell {
     }
     public var subtitle : String? {
         didSet {
-            if certificateSubtitleLabel != nil {
-                certificateSubtitleLabel.text = subtitle
-            }
+            updateSubtitleLabel()
         }
     }
 
@@ -32,14 +33,20 @@ class CertificateTitleTableViewCell: UITableViewCell {
         // Initialization code
         
         self.accessoryType = .disclosureIndicator
+        
         certificateTitleLabel.text = title
-        certificateSubtitleLabel.text = subtitle
+        certificateTitleLabel.textColor = primaryTextColor
+        
+        updateSubtitleLabel()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func updateSubtitleLabel() {
+        if let subtitle = subtitle {
+            certificateSubtitleLabel.text = subtitle
+            certificateSubtitleLabel.textColor = primaryTextColor
+        } else {
+            certificateSubtitleLabel.text = missingSubtitleText
+            certificateSubtitleLabel.textColor = Colors.placeholderTextColor
+        }
     }
-
 }
