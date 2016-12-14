@@ -39,6 +39,7 @@ class CertificateViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.title = certificate.title
         renderCertificate()
+        stylize()
     }
     
     func renderCertificate() {
@@ -55,8 +56,10 @@ class CertificateViewController: UIViewController {
             }
             renderedCertificateView.addSignature(image: image, title: signatureImage.title)
         }
-        
-
+    }
+    
+    func stylize() {
+        toolbar.tintColor = Colors.brandColor
     }
     
     // MARK: Actions
