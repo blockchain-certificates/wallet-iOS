@@ -40,6 +40,8 @@ class IssuerTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        tableView.separatorColor = UIColor(red:0.87, green:0.88, blue:0.90, alpha:1.0)
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
     }
@@ -83,8 +85,6 @@ class IssuerTableViewController: UITableViewController {
             }
             summaryCell.preservesSuperviewLayoutMargins = false
             summaryCell.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-//            summaryCell.statusLabel.text = managedIssuer?.status
-//            summaryCell.actionButton.isHidden = true
         case Sections.certificates.rawValue:
             let certificate = certificates[indexPath.row]
             cell.textLabel?.text = certificate.title
@@ -160,6 +160,11 @@ class IssuerTableViewController: UITableViewController {
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == Sections.certificates.rawValue {
+            cell.separatorInset = UIEdgeInsets(top: -2, left: 0, bottom: 0, right: 0)
+        }
+    }
     //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     //        if segue.identifier == segueToCertificate {
     //            print("Yes, segue")
