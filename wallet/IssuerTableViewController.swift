@@ -10,7 +10,7 @@ import UIKit
 import BlockchainCertificates
 
 private let issuerSummaryCellReuseIdentifier = "IssuerSummaryTableViewCell"
-private let certificateCellReuseIdentifier = "UITableViewCell +certificateCellReuseIdentifier"
+private let certificateCellReuseIdentifier = "CertificateTitleTableViewCell"
 private let noCertificatesCellReuseIdentififer = "NoCertificateTableViewCell"
 
 fileprivate enum Sections : Int {
@@ -30,14 +30,9 @@ class IssuerTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: certificateCellReuseIdentifier)
         tableView.register(UINib(nibName: "IssuerSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: issuerSummaryCellReuseIdentifier)
         tableView.register(UINib(nibName: "NoCertificatesTableViewCell", bundle: nil), forCellReuseIdentifier: noCertificatesCellReuseIdentififer)
+        tableView.register(UINib(nibName: "CertificateTitleTableViewCell", bundle: nil), forCellReuseIdentifier: certificateCellReuseIdentifier)
         
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -90,10 +85,10 @@ class IssuerTableViewController: UITableViewController {
             if certificates.isEmpty {
                 returnedCell = tableView.dequeueReusableCell(withIdentifier: noCertificatesCellReuseIdentififer)
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier)!
+                let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier) as! CertificateTitleTableViewCell
                 let certificate = certificates[indexPath.row]
-                cell.textLabel?.text = certificate.title
-                cell.detailTextLabel?.text = certificate.subtitle
+                cell.title = certificate.title
+                cell.subtitle = certificate.subtitle
                 
                 returnedCell = cell
             }

@@ -51,6 +51,8 @@
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
 		83A6EDDB1DAFFD5B00ABFB47 /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDD91DAFFD5B00ABFB47 /* CertificateViewController.xib */; };
 		83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */; };
+		83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */; };
+		83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */; };
 		83DC0D941DBA87C300453116 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0D931DBA87C300453116 /* Constants.swift */; };
 		83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F196251DC9077A00590219 /* ManagedIssuer.swift */; };
 		E3C76BE5A1F12F238FF4D797 /* libPods-walletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9B42333AB2B91FF357E4AC /* libPods-walletTests.a */; };
@@ -140,6 +142,8 @@
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		83A6EDD91DAFFD5B00ABFB47 /* CertificateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateViewController.xib; sourceTree = "<group>"; };
 		83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
+		83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTitleTableViewCell.swift; sourceTree = "<group>"; };
+		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
 		83DC0D931DBA87C300453116 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		83F196251DC9077A00590219 /* ManagedIssuer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedIssuer.swift; sourceTree = "<group>"; };
 		E87B7828FD21351E1F3E3FA3 /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -295,6 +299,8 @@
 			children = (
 				83172DEF1DFB71ED00559909 /* AddIssuerCollectionViewCell.swift */,
 				83172DF01DFB71ED00559909 /* AddIssuerCollectionViewCell.xib */,
+				83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */,
+				83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */,
 				834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */,
 				834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */,
 				8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */,
@@ -458,6 +464,7 @@
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
 				83A6EDDB1DAFFD5B00ABFB47 /* CertificateViewController.xib in Resources */,
+				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */,
 				83A6EDD11DAFF7D600ABFB47 /* AccountViewController.xib in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
@@ -630,6 +637,7 @@
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
 				832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
 				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
+				83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */,
 				83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */,
 				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,
 				83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */,
