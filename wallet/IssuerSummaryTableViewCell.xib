@@ -16,12 +16,12 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="229" id="KGk-i7-Jjw" customClass="IssuerSummaryTableViewCell" customModule="certificates" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="229"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="228"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jhb-xz-917">
-                        <rect key="frame" x="8" y="11" width="100" height="100"/>
+                        <rect key="frame" x="16" y="20" width="100" height="100"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Jhb-xz-917" secondAttribute="height" multiplier="1:1" id="84f-RF-qSO"/>
                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="916-YJ-VO8"/>
@@ -29,7 +29,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4V-bc-KBm">
-                        <rect key="frame" x="8" y="119" width="304" height="99"/>
+                        <rect key="frame" x="16" y="128" width="288" height="80.5"/>
                         <string key="text">The mission of TIM is to advance science. Do you know what that could mean for science? That could actually mean advances in the field of science.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
@@ -44,6 +44,7 @@
                     <constraint firstItem="A4V-bc-KBm" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="k22-UC-dF1"/>
                     <constraint firstAttribute="leadingMargin" secondItem="A4V-bc-KBm" secondAttribute="leading" id="yik-r3-SOI"/>
                 </constraints>
+                <edgeInsets key="layoutMargins" top="20" left="16" bottom="20" right="16"/>
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="A4V-bc-KBm" id="gLW-Me-z0D"/>
