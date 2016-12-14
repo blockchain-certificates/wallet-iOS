@@ -36,8 +36,8 @@ class IssuerTableViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedSectionHeaderHeight = 1
-        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+//        tableView.estimatedSectionHeaderHeight = 1
+//        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         
         tableView.tableFooterView = UIView()
         
@@ -104,19 +104,15 @@ class IssuerTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section == Sections.certificates.rawValue else {
-            let view = UIView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            
-            let constraint = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
-            NSLayoutConstraint.activate([ constraint ])
-            
-            return view
+            return nil
         }
         let containerView = UIView()
-        containerView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         
         let label = UILabel()
         label.text = "CERTIFICATES"
+        label.textColor = Colors.primaryTextColor
+        label.font = UIFont.systemFont(ofSize: 11, weight: UIFontWeightThin)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.addSubview(label)
@@ -129,6 +125,12 @@ class IssuerTableViewController: UITableViewController {
         NSLayoutConstraint.activate(constraints)
         
         return containerView
+    }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == Sections.certificates.rawValue {
+            return 20
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
