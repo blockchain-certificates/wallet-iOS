@@ -41,6 +41,7 @@ class IssuerTableViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.tableFooterView = UIView()
         
         tableView.separatorColor = UIColor(red:0.87, green:0.88, blue:0.90, alpha:1.0)
         
@@ -54,53 +55,50 @@ class IssuerTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return Sections.count.rawValue
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if section == Sections.issuerSummary.rawValue {
-            return 2
+            return 1
         } else if section == Sections.certificates.rawValue {
-            return certificates.count
+            if certificates.isEmpty {
+                return 1
+            } else {
+                return certificates.count
+            }
         }
         return 0
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var reuseIdentifier = certificateCellReuseIdentifier
-        if indexPath.section == Sections.issuerSummary.rawValue {
-            if indexPath.row == 0 {
-                reuseIdentifier = issuerSummaryCellReuseIdentifier
-            } else {
-                reuseIdentifier = noCertificatesCellReuseIdentififer
-            }
-        }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let returnedCell : UITableViewCell!
         
         switch indexPath.section {
         case Sections.issuerSummary.rawValue:
-            if indexPath.row == 0 {
-                let summaryCell = cell as! IssuerSummaryTableViewCell
-                if let issuer = managedIssuer?.issuer {
-                    summaryCell.issuerImageView.image = UIImage(data:issuer.image)
-                }
+            let summaryCell = tableView.dequeueReusableCell(withIdentifier: issuerSummaryCellReuseIdentifier) as! IssuerSummaryTableViewCell
+            if let issuer = managedIssuer?.issuer {
+                summaryCell.issuerImageView.image = UIImage(data: issuer.image)
             }
+            returnedCell = summaryCell
         case Sections.certificates.rawValue:
-            let certificate = certificates[indexPath.row]
-            cell.textLabel?.text = certificate.title
-            cell.detailTextLabel?.text = certificate.subtitle
-            
+            if certificates.isEmpty {
+                returnedCell = tableView.dequeueReusableCell(withIdentifier: noCertificatesCellReuseIdentififer)
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier)!
+                let certificate = certificates[indexPath.row]
+                cell.textLabel?.text = certificate.title
+                cell.detailTextLabel?.text = certificate.subtitle
+                
+                returnedCell = cell
+            }
         default:
-            break;
+            returnedCell = UITableViewCell()
         }
         
-        return cell
+        return returnedCell
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -109,12 +107,14 @@ class IssuerTableViewController: UITableViewController {
         }
         return nil
     }
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == Sections.certificates.rawValue {
             return true
         }
         return false
     }
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         guard indexPath.section == Sections.certificates.rawValue else {
@@ -171,57 +171,4 @@ class IssuerTableViewController: UITableViewController {
             cell.separatorInset = UIEdgeInsets(top: -2, left: 0, bottom: 0, right: 0)
         }
     }
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == segueToCertificate {
-    //            print("Yes, segue")
-    //        } else {
-    //            print("Don't do it!")
-    //        }
-    //    }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
