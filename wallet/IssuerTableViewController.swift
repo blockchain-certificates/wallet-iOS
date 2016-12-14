@@ -118,46 +118,6 @@ class IssuerTableViewController: UITableViewController {
         return false
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        guard indexPath.section == Sections.certificates.rawValue else {
-            return nil
-        }
-        
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (action, indexPath) in
-            let deletedCertificate : Certificate! = self?.certificates.remove(at: indexPath.row)
-            
-            let documentsDirectory = Paths.certificatesDirectory
-            let certificateFilename = deletedCertificate.assertion.uid
-            let filePath = URL(fileURLWithPath: certificateFilename, relativeTo: documentsDirectory)
-            
-            let coordinator = NSFileCoordinator()
-            var coordinationError : NSError?
-            coordinator.coordinate(writingItemAt: filePath, options: [.forDeleting], error: &coordinationError, byAccessor: { (file) in
-                
-                do {
-                    try FileManager.default.removeItem(at: filePath)
-                    tableView.reloadData()
-                } catch {
-                    print(error)
-                    self?.certificates.insert(deletedCertificate, at: indexPath.row)
-                    
-                    let alertController = UIAlertController(title: "Couldn't delete file", message: "Something went wrong deleting that certificate.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alertController, animated: true, completion: nil)
-                }
-            })
-            
-            if let error = coordinationError {
-                print("Coordination failed with \(error)")
-            } else {
-                print("Coordination went fine.")
-            }
-            
-        }
-        return [ deleteAction ]
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section == Sections.certificates.rawValue else {
             tableView.deselectRow(at: indexPath, animated: false)
@@ -189,6 +149,7 @@ class IssuerTableViewController: UITableViewController {
         present(prompt, animated: true, completion: nil)
     }
 }
+
 extension IssuerTableViewController : CertificateViewControllerDelegate {
     func delete(certificate: Certificate) {
         let possibleIndex = certificates.index(where: { (cert) -> Bool in
