@@ -47,6 +47,9 @@ class IssuerTableViewController: UITableViewController {
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
+        if certificates.isEmpty {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(confirmDeleteIssuer))
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -170,5 +173,24 @@ class IssuerTableViewController: UITableViewController {
         if indexPath.section == Sections.certificates.rawValue {
             cell.separatorInset = UIEdgeInsets(top: -2, left: 0, bottom: 0, right: 0)
         }
+    }
+    
+    // MARK: Key actions
+    func confirmDeleteIssuer() {
+        guard let issuerToDelete = self.managedIssuer else {
+            return
+        }
+        
+        let prompt = UIAlertController(title: "Are you sure you want to delete this issuer?", message: nil, preferredStyle: .alert)
+        prompt.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+            _ = self?.navigationController?.popToRootViewController(animated: true)
+            if let rootController = self?.navigationController?.topViewController as? IssuerCollectionViewController {
+                rootController.remove(managedIssuer: issuerToDelete)
+            }
+            
+        }))
+        prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(prompt, animated: true, completion: nil)
     }
 }

@@ -210,6 +210,19 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
     }
     
+    func remove(managedIssuer: ManagedIssuer) {
+        guard let index = managedIssuers.index(of: managedIssuer) else {
+            return
+        }
+        
+        managedIssuers.remove(at: index)
+        saveIssuers()
+        
+        OperationQueue.main.addOperation {
+            self.collectionView?.reloadData()
+        }
+    }
+    
     // MARK: Certificate handling
     func loadCertificates(shouldReloadCollection : Bool = true) {
         certificates = []
