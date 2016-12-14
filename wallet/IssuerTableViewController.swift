@@ -36,6 +36,9 @@ class IssuerTableViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 1
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        
         tableView.tableFooterView = UIView()
         
         tableView.separatorColor = UIColor(red:0.87, green:0.88, blue:0.90, alpha:1.0)
@@ -99,11 +102,33 @@ class IssuerTableViewController: UITableViewController {
         return returnedCell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == Sections.certificates.rawValue {
-            return "Certificates"
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard section == Sections.certificates.rawValue else {
+            let view = UIView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            
+            let constraint = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+            NSLayoutConstraint.activate([ constraint ])
+            
+            return view
         }
-        return nil
+        let containerView = UIView()
+        containerView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        
+        let label = UILabel()
+        label.text = "CERTIFICATES"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        containerView.addSubview(label)
+        let constraints = [
+            NSLayoutConstraint(item: label, attribute: .left, relatedBy: .equal, toItem: containerView, attribute: .leftMargin, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: label, attribute: .right, relatedBy: .equal, toItem: containerView, attribute: .rightMargin, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .topMargin, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottomMargin, multiplier: 1, constant: 0),
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
+        return containerView
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
