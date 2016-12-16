@@ -95,7 +95,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return queryItem.name == "certificateURL"
             }
             if let urlString = urlComponents?.first?.value,
-                let certificateURL = URL(string: urlString) {
+                let urlDecodedString = urlString.removingPercentEncoding,
+                let certificateURL = URL(string: urlDecodedString) {
                 launchAddCertificate(at: certificateURL)
                 return true
             } else {
