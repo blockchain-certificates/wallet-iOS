@@ -9,8 +9,17 @@
 import UIKit
 
 class NoContentView: UIView {
-    var title : String? = "Dummy Title"
-    var subtitle : String? = "This is a dummy subtitle below the title."
+    private var title : String?
+    private var subtitle : String?
+
+    init(title: String, subtitle: String) {
+        self.title = title
+        self.subtitle = subtitle
+        
+        super.init(frame: .zero)
+        commonInit()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -28,12 +37,14 @@ class NoContentView: UIView {
         titleLabel.text = title
         titleLabel.textColor = Colors.disabledTextColor
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        titleLabel.textAlignment = .center
         
         let subtitleLabel = UILabel()
         subtitleLabel.text = subtitle
         subtitleLabel.textColor = Colors.disabledTextColor
         subtitleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         subtitleLabel.numberOfLines = 0
+        subtitleLabel.textAlignment = .center
         
         let stack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
         stack.axis = .vertical
@@ -46,7 +57,8 @@ class NoContentView: UIView {
         
         let constraints = [
             NSLayoutConstraint(item: stack, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: stack, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: stack, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: stack, attribute: .width, relatedBy: .lessThanOrEqual, toItem: self, attribute: .width, multiplier: 1, constant: 0)
         ]
         
         NSLayoutConstraint.activate(constraints)
