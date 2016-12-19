@@ -18,6 +18,7 @@ enum Colors {
     static let secondaryTextColor = UIColor(red:0.65, green:0.67, blue:0.66, alpha:1.0)
     static let placeholderTextColor = UIColor(red:0.72, green:0.75, blue:0.79, alpha:1.0)
     static let disabledTextColor = UIColor(red:0.56, green:0.58, blue:0.60, alpha:1.0)
+    static let borderColor = UIColor(red:0.84, green:0.86, blue:0.88, alpha:1.0)
 }
 
 enum UserKeys {

@@ -39,7 +39,7 @@ class IssuerTableViewController: UITableViewController {
         
         tableView.tableFooterView = UIView()
         
-        tableView.separatorColor = UIColor(red:0.87, green:0.88, blue:0.90, alpha:1.0)
+        tableView.separatorColor = Colors.borderColor
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
