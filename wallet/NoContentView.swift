@@ -11,15 +11,6 @@ import UIKit
 class NoContentView: UIView {
     var title : String? = "Dummy Title"
     var subtitle : String? = "This is a dummy subtitle below the title."
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -31,19 +22,24 @@ class NoContentView: UIView {
     }
     
     func commonInit() {
+        backgroundColor = Colors.baseColor
+        
         let titleLabel = UILabel()
         titleLabel.text = title
+        titleLabel.textColor = Colors.disabledTextColor
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         
         let subtitleLabel = UILabel()
         subtitleLabel.text = subtitle
+        subtitleLabel.textColor = Colors.disabledTextColor
         subtitleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        subtitleLabel.numberOfLines = 0
         
         let stack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
         stack.axis = .vertical
         stack.distribution = .equalSpacing
         stack.alignment = .center
-        stack.spacing = 20
+        stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(stack)
