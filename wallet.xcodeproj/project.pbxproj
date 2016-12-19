@@ -22,6 +22,8 @@
 		83111B771DA414EB006B058D /* JSONLD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; };
 		83111B781DA414EB006B058D /* JSONLD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */; };
+		83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */; };
+		83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */; };
 		83172DF11DFB71ED00559909 /* AddIssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83172DEF1DFB71ED00559909 /* AddIssuerCollectionViewCell.swift */; };
 		83172DF21DFB71ED00559909 /* AddIssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83172DF01DFB71ED00559909 /* AddIssuerCollectionViewCell.xib */; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
@@ -119,6 +121,8 @@
 		83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "walletUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		83111B761DA414EB006B058D /* JSONLD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONLD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
+		83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerViewController.swift; sourceTree = "<group>"; };
+		83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryView.swift; sourceTree = "<group>"; };
 		83172DEF1DFB71ED00559909 /* AddIssuerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerCollectionViewCell.swift; sourceTree = "<group>"; };
 		83172DF01DFB71ED00559909 /* AddIssuerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddIssuerCollectionViewCell.xib; sourceTree = "<group>"; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 				83111B331DA4110C006B058D /* Info.plist */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
+				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
+				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
 				83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */,
 				83DC0D931DBA87C300453116 /* Constants.swift */,
 				83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */,
@@ -639,6 +645,7 @@
 			files = (
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
 				832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
+				83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */,
 				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
 				83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */,
 				83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */,
@@ -647,6 +654,7 @@
 				83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */,
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,
 				834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
+				83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */,
 				83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */,
 				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
 				83172DF11DFB71ED00559909 /* AddIssuerCollectionViewCell.swift in Sources */,

@@ -331,7 +331,7 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
             showAddIssuerFlow()
         } else {
             let managedIssuer = managedIssuers[indexPath.item]
-            let issuerController = IssuerTableViewController()
+            let issuerController = IssuerViewController()
             
             issuerController.managedIssuer = managedIssuer
             issuerController.certificates = certificates.filter { certificate in
