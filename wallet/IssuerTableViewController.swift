@@ -14,7 +14,6 @@ private let certificateCellReuseIdentifier = "CertificateTitleTableViewCell"
 private let noCertificatesCellReuseIdentififer = "NoCertificateTableViewCell"
 
 fileprivate enum Sections : Int {
-    case issuerSummary = 0
     case certificates
     case count
 }
@@ -36,8 +35,7 @@ class IssuerTableViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.estimatedSectionHeaderHeight = 1
-//        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.backgroundColor = Colors.baseColor
         
         tableView.tableFooterView = UIView()
         
@@ -50,56 +48,23 @@ class IssuerTableViewController: UITableViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return Sections.count.rawValue
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == Sections.issuerSummary.rawValue {
-            return 1
-        } else if section == Sections.certificates.rawValue {
-            if certificates.isEmpty {
-                return 1
-            } else {
-                return certificates.count
-            }
-        }
-        return 0
+        return certificates.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let returnedCell : UITableViewCell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier) as! CertificateTitleTableViewCell
+        let certificate = certificates[indexPath.row]
+        cell.title = certificate.title
+        cell.subtitle = certificate.subtitle
         
-        switch indexPath.section {
-        case Sections.issuerSummary.rawValue:
-            let summaryCell = tableView.dequeueReusableCell(withIdentifier: issuerSummaryCellReuseIdentifier) as! IssuerSummaryTableViewCell
-            if let issuer = managedIssuer?.issuer {
-                summaryCell.issuerImageView.image = UIImage(data: issuer.image)
-            }
-            returnedCell = summaryCell
-        case Sections.certificates.rawValue:
-            if certificates.isEmpty {
-                returnedCell = tableView.dequeueReusableCell(withIdentifier: noCertificatesCellReuseIdentififer)
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier) as! CertificateTitleTableViewCell
-                let certificate = certificates[indexPath.row]
-                cell.title = certificate.title
-                cell.subtitle = certificate.subtitle
-                
-                returnedCell = cell
-            }
-        default:
-            returnedCell = UITableViewCell()
-        }
-        
-        return returnedCell
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -126,18 +91,12 @@ class IssuerTableViewController: UITableViewController {
         
         return containerView
     }
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == Sections.certificates.rawValue {
             return 20
         }
         return 0
-    }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == Sections.certificates.rawValue {
-            return true
-        }
-        return false
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
