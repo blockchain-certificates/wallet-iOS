@@ -17,12 +17,12 @@ class IssuerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
         let summary = IssuerSummaryView(issuer: managedIssuer!)
         summary.frame = view.frame
         summary.translatesAutoresizingMaskIntoConstraints = false
-//        summary.preservesSuperviewLayoutMargins = true
+        summary.preservesSuperviewLayoutMargins = true
         view.addSubview(summary)
         
 
@@ -34,7 +34,6 @@ class IssuerViewController: UIViewController {
         certificateTableController.willMove(toParentViewController: self)
         
         self.addChildViewController(certificateTableController)
-//        certificateTableController.view.frame = self.view.frame
         certificateTableController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(certificateTableController.view)
         
@@ -53,15 +52,4 @@ class IssuerViewController: UIViewController {
         NSLayoutConstraint.activate(horizontalSummaryConstraints)
         NSLayoutConstraint.activate(horizontalTableConstraints)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -48,6 +48,16 @@ class IssuerTableViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.isScrollEnabled = !certificates.isEmpty
+        
+        if certificates.isEmpty {
+            tableView.backgroundView = NoContentView(title: "Nope", subtitle: "not so good onw is it")
+        } else {
+            tableView.backgroundView = nil
+        }
+    }
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return Sections.count.rawValue
