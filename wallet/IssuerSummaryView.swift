@@ -18,13 +18,6 @@ class IssuerSummaryView: UIView {
     private var iconView : UIImageView!
     private var descriptionLabel : UILabel!
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     convenience init(issuer: ManagedIssuer) {
         self.init(frame: .zero)
         self.issuer = issuer
