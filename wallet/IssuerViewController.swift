@@ -10,7 +10,11 @@ import UIKit
 import BlockchainCertificates
 
 class IssuerViewController: UIViewController {
-    var managedIssuer: ManagedIssuer?
+    var managedIssuer: ManagedIssuer? {
+        didSet {
+            self.title = managedIssuer?.issuer?.name
+        }
+    }
     var certificates = [Certificate]()
     
     private var certificateTableController : IssuerTableViewController!

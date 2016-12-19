@@ -50,9 +50,15 @@ class IssuerTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.isScrollEnabled = !certificates.isEmpty
+        let issuerName = managedIssuer?.issuer?.name ?? "this issuer"
         
         if certificates.isEmpty {
-            tableView.backgroundView = NoContentView(title: "Nope", subtitle: "not so good onw is it")
+            var subtitle = "You don't have any certificates from \(issuerName)."
+            
+            if managedIssuer?.introducedWithAddress != nil {
+                subtitle = "Hang tight! You should see an email with your certificate from \(issuerName) soon."
+            }
+            tableView.backgroundView = NoContentView(title: "No Certificates", subtitle: subtitle)
         } else {
             tableView.backgroundView = nil
         }
@@ -73,6 +79,7 @@ class IssuerTableViewController: UITableViewController {
         let certificate = certificates[indexPath.row]
         cell.title = certificate.title
         cell.subtitle = certificate.subtitle
+        cell.backgroundColor = Colors.baseColor
         
         return cell
     }
@@ -83,19 +90,20 @@ class IssuerTableViewController: UITableViewController {
         }
         let containerView = UIView()
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        containerView.backgroundColor = Colors.baseColor
         
         let label = UILabel()
         label.text = "CERTIFICATES"
         label.textColor = Colors.primaryTextColor
-        label.font = UIFont.systemFont(ofSize: 11, weight: UIFontWeightThin)
+        label.font = UIFont.systemFont(ofSize: 11, weight: UIFontWeightBold)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.addSubview(label)
         let constraints = [
             NSLayoutConstraint(item: label, attribute: .left, relatedBy: .equal, toItem: containerView, attribute: .leftMargin, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: label, attribute: .right, relatedBy: .equal, toItem: containerView, attribute: .rightMargin, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .topMargin, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottomMargin, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .topMargin, multiplier: 1, constant: 16),
+            NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottomMargin, multiplier: 1, constant: 8),
         ]
         NSLayoutConstraint.activate(constraints)
         
@@ -104,7 +112,7 @@ class IssuerTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == Sections.certificates.rawValue {
-            return 20
+            return 40
         }
         return 0
     }
