@@ -28,7 +28,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         // Branding
-        loadBrandedBackgroundView()
+//        loadBrandedBackgroundView()
+        loadEmptyBackgroundView()
 
         // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
@@ -54,6 +55,21 @@ class IssuerCollectionViewController: UICollectionViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
+    func loadEmptyBackgroundView() {
+        let backgroundView = NoContentView()
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints = [
+            NSLayoutConstraint(item: backgroundView, attribute: .left, relatedBy: .equal, toItem: collectionView, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: backgroundView, attribute: .right, relatedBy: .equal, toItem: collectionView, attribute: .right, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: backgroundView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: backgroundView, attribute: .bottom, relatedBy: .equal, toItem: collectionView, attribute: .bottom, multiplier: 1, constant: 0)
+        ]
+
+        collectionView?.backgroundView = backgroundView
+        NSLayoutConstraint.activate(constraints)
+    }
+    
     func loadBrandedBackgroundView() {
         let view = UIView()
         let brand = UIImageView(image: #imageLiteral(resourceName: "BrandedBackground"))
@@ -63,7 +79,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         let constraints = [
             NSLayoutConstraint(item: brand, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: brand, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)        ]
+            NSLayoutConstraint(item: brand, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
+        ]
         
         NSLayoutConstraint.activate(constraints)
         
@@ -130,37 +147,30 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if managedIssuers.isEmpty {
-            return 1
-        }
         return managedIssuers.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let genericCell : UICollectionViewCell!
 
-        if managedIssuers.isEmpty {
-            genericCell = collectionView.dequeueReusableCell(withReuseIdentifier: addIssuerReuseIdentifier, for: indexPath)
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! IssuerCollectionViewCell
-            
-            let managedIssuer = managedIssuers[indexPath.item]
-            guard let issuer = managedIssuer.issuer else {
-                cell.titleLabel.text = "Missing issuer"
-                return cell
-            }
-            
-            cell.imageView.image = UIImage(data: issuer.image)
-            cell.titleLabel.text = issuer.name
-            cell.certificateCount = certificates.reduce(0, { (count, certificate) -> Int in
-                if certificate.issuer.id == issuer.id {
-                    return count + 1
-                }
-                return count
-            })
-            
-            genericCell = cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! IssuerCollectionViewCell
+        
+        let managedIssuer = managedIssuers[indexPath.item]
+        guard let issuer = managedIssuer.issuer else {
+            cell.titleLabel.text = "Missing issuer"
+            return cell
         }
+        
+        cell.imageView.image = UIImage(data: issuer.image)
+        cell.titleLabel.text = issuer.name
+        cell.certificateCount = certificates.reduce(0, { (count, certificate) -> Int in
+            if certificate.issuer.id == issuer.id {
+                return count + 1
+            }
+            return count
+        })
+        
+        genericCell = cell
         
         // Common styling
         genericCell.layer.masksToBounds = false
