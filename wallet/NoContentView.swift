@@ -33,7 +33,7 @@ class NoContentView: UIView {
     func commonInit() {
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         
         let subtitleLabel = UILabel()
         subtitleLabel.text = subtitle
@@ -41,6 +41,11 @@ class NoContentView: UIView {
         
         let stack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
         stack.axis = .vertical
+        stack.distribution = .equalSpacing
+        stack.alignment = .center
+        stack.spacing = 20
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
         addSubview(stack)
         
         let constraints = [
