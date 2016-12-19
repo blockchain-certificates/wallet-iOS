@@ -25,12 +25,6 @@ class IssuerCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        // Branding
-//        loadBrandedBackgroundView()
-        loadEmptyBackgroundView()
-
         // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
         self.collectionView?.register(cellNib, forCellWithReuseIdentifier: reuseIdentifier)
@@ -53,6 +47,16 @@ class IssuerCollectionViewController: UICollectionViewController {
         reloadCollectionView()
         title = "Issuers"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadCertificates()
+        
+        if managedIssuers.isEmpty {
+            loadEmptyBackgroundView()
+        } else {
+            loadBrandedBackgroundView()
+        }
     }
     
     func loadEmptyBackgroundView() {
@@ -89,13 +93,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         collectionView?.backgroundView = view
     }
-    override func viewWillAppear(_ animated: Bool) {
-        // TODO: this should be more nuanced. Child view controllers can delete the underlying data. So, for now, just reload all the data.
-//        loadIssuers(shouldReloadCollection: false)
-        loadCertificates()
-//        reloadCollectionView()
-    }
-
     
     // MARK: - Actions
     @IBAction func accountTapped(_ sender: UIBarButtonItem) {
