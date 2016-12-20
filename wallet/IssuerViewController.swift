@@ -65,10 +65,34 @@ class IssuerViewController: UIViewController {
         NSLayoutConstraint.activate(horizontalTableConstraints)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if certificates.isEmpty {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(confirmDeleteIssuer))
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         if let tableView = certificateTableController.tableView,
             let selectedPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedPath, animated: true)
         }
+    }
+    
+    func confirmDeleteIssuer() {
+        guard let issuerToDelete = self.managedIssuer else {
+            return
+        }
+        
+        let prompt = UIAlertController(title: "Are you sure you want to delete this issuer?", message: nil, preferredStyle: .alert)
+        prompt.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+            _ = self?.navigationController?.popToRootViewController(animated: true)
+            if let rootController = self?.navigationController?.topViewController as? IssuerCollectionViewController {
+                rootController.remove(managedIssuer: issuerToDelete)
+            }
+            
+        }))
+        prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(prompt, animated: true, completion: nil)
     }
 }
