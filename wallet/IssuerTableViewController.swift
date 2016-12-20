@@ -19,6 +19,7 @@ fileprivate enum Sections : Int {
 }
 
 class IssuerTableViewController: UITableViewController {
+    public var delegate : IssuerTableViewControllerDelegate?
     public var managedIssuer : ManagedIssuer? {
         didSet {
             self.title = managedIssuer?.issuer?.name
@@ -124,9 +125,7 @@ class IssuerTableViewController: UITableViewController {
         }
         
         let selectedCertificate = certificates[indexPath.row]
-        let controller = CertificateViewController(certificate: selectedCertificate)
-        controller.delegate = self
-        self.navigationController?.pushViewController(controller, animated: true)
+        delegate?.show(certificate: selectedCertificate)
     }
     
     // MARK: Key actions
@@ -185,4 +184,9 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
             print("Coordination went fine.")
         }
     }
+}
+
+
+protocol IssuerTableViewControllerDelegate : class {
+    func show(certificate: Certificate);
 }

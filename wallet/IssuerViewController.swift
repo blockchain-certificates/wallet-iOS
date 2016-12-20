@@ -17,7 +17,7 @@ class IssuerViewController: UIViewController {
     }
     var certificates = [Certificate]()
     
-    private var certificateTableController : IssuerTableViewController!
+    fileprivate var certificateTableController : IssuerTableViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,7 @@ class IssuerViewController: UIViewController {
         certificateTableController = IssuerTableViewController()
         certificateTableController.managedIssuer = managedIssuer
         certificateTableController.certificates = certificates
+        certificateTableController.delegate = self
         
         certificateTableController.willMove(toParentViewController: self)
         
@@ -94,5 +95,54 @@ class IssuerViewController: UIViewController {
         prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(prompt, animated: true, completion: nil)
+    }
+}
+
+extension IssuerViewController : IssuerTableViewControllerDelegate {
+    func show(certificate: Certificate) {
+        let controller = CertificateViewController(certificate: certificate)
+        controller.delegate = self
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+extension IssuerViewController : CertificateViewControllerDelegate {
+    func delete(certificate: Certificate) {
+        let possibleIndex = certificates.index(where: { (cert) -> Bool in
+            return cert.assertion.uid == certificate.assertion.uid
+        })
+        guard let index = possibleIndex else {
+            return
+        }
+        
+        let documentsDirectory = Paths.certificatesDirectory
+        let certificateFilename = certificate.assertion.uid
+        let filePath = URL(fileURLWithPath: certificateFilename, relativeTo: documentsDirectory)
+        
+        let coordinator = NSFileCoordinator()
+        var coordinationError : NSError?
+        coordinator.coordinate(writingItemAt: filePath, options: [.forDeleting], error: &coordinationError, byAccessor: { [weak self] (file) in
+            
+            do {
+                try FileManager.default.removeItem(at: filePath)
+                if let realSelf = self {
+                    realSelf.certificates.remove(at: index)
+                    realSelf.certificateTableController.certificates = realSelf.certificates
+                    realSelf.certificateTableController.tableView.reloadData()
+                }
+            } catch {
+                print(error)
+                
+                let alertController = UIAlertController(title: "Couldn't delete file", message: "Something went wrong deleting that certificate.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alertController, animated: true, completion: nil)
+            }
+        })
+        
+        if let error = coordinationError {
+            print("Coordination failed with \(error)")
+        } else {
+            print("Coordination went fine.")
+        }
     }
 }
