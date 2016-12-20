@@ -13,12 +13,13 @@ class AddIssuerViewController: UIViewController {
     private var inProgressRequest : CommonRequest?
     var delegate : AddIssuerViewControllerDelegate?
     
-    
     var identificationURL: URL?
     var firstName : String?
     var lastName : String?
     var emailAddress : String?
     var nonce: String?
+    
+    @IBOutlet weak var scrollView : UIScrollView!
     
     @IBOutlet weak var issuerURLLabel: UILabel!
     @IBOutlet weak var issuerURLField: UITextField!
@@ -77,6 +78,10 @@ class AddIssuerViewController: UIViewController {
         
         loadDataIntoFields()
         stylize()
+        
+        // No need to unregister these. Thankfully.
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
     
     func loadDataIntoFields() {
@@ -168,6 +173,22 @@ class AddIssuerViewController: UIViewController {
         }
     }
     
+    func keyboardDidShow(notification: NSNotification) {
+        guard let info = notification.userInfo,
+            let keyboardRect = info[UIKeyboardFrameBeginUserInfoKey] as? CGRect else {
+            return
+        }
+
+        let scrollInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardRect.size.height, right: 0)
+        scrollView.contentInset = scrollInsets
+        scrollView.scrollIndicatorInsets = scrollInsets
+    }
+    
+    func keyboardDidHide(notification: NSNotification) {
+        scrollView.contentInset = .zero
+        scrollView.scrollIndicatorInsets = .zero
+    }
+    
     func identifyAndIntroduceIssuer(at url: URL) {
         let targetRecipient = Recipient(givenName: firstName!,
                                         familyName: lastName!,
@@ -212,6 +233,8 @@ class AddIssuerViewController: UIViewController {
         }
     }
 }
+
+
 struct ValidationOptions : OptionSet {
     let rawValue : Int
     
