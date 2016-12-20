@@ -128,7 +128,7 @@ class IssuerCollectionViewController: UICollectionViewController {
                         return
                 }
                 
-                self?.add(certificateURL: url)
+                _ = self?.add(certificateURL: url)
             }))
             
             urlPrompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -286,7 +286,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         saveCertificates()
     }
     
-    func add(certificateURL: URL) {
+    func add(certificateURL: URL) -> Bool {
         var components = URLComponents(url: certificateURL, resolvingAgainstBaseURL: false)
         let formatQueryItem = URLQueryItem(name: "format", value: "json")
         
@@ -307,9 +307,12 @@ class IssuerCollectionViewController: UICollectionViewController {
             let certificate = try? CertificateParser.parse(data: data) {
             add(certificate: certificate)
             reloadCollectionView()
+            return true
         } else {
             // TODO: Show some alert saying that this URL isn't a valid certifiate url.
         }
+        
+        return false
     }
     
     func showAddIssuerFlow(identificationURL: URL? = nil, nonce : String? = nil) {

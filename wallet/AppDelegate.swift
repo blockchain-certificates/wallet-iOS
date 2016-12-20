@@ -39,8 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // The app is launching with a document
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        launchAddCertificate(at: url)
-        return true
+        return launchAddCertificate(at: url)
     }
     
     func importState(from url: URL) -> Bool {
@@ -82,8 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let urlString = urlComponents?.first?.value,
                 let urlDecodedString = urlString.removingPercentEncoding,
                 let certificateURL = URL(string: urlDecodedString) {
-                launchAddCertificate(at: certificateURL)
-                return true
+                return launchAddCertificate(at: certificateURL)
             } else {
                 return false
             }
@@ -104,14 +102,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         issuerCollection?.showAddIssuerFlow(identificationURL: introductionURL, nonce: nonce)
     }
     
-    func launchAddCertificate(at url: URL) {
+    func launchAddCertificate(at url: URL) -> Bool {
         let rootController = window?.rootViewController as? UINavigationController
         
         rootController?.presentedViewController?.dismiss(animated: false, completion: nil)
         _ = rootController?.popToRootViewController(animated: false)
         
         let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
-        issuerCollection?.add(certificateURL: url)
+        return issuerCollection?.add(certificateURL: url) ?? false
     }
 
 }
