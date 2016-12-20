@@ -22,6 +22,8 @@ class IssuerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         // Summary section
         let summary = IssuerSummaryView(issuer: managedIssuer!)
