@@ -99,12 +99,21 @@ class IssuerTableViewController: UITableViewController {
         label.font = UIFont.systemFont(ofSize: 11, weight: UIFontWeightBold)
         label.translatesAutoresizingMaskIntoConstraints = false
         
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor = Colors.borderColor
+        
         containerView.addSubview(label)
+        containerView.addSubview(separator)
         let constraints = [
             NSLayoutConstraint(item: label, attribute: .left, relatedBy: .equal, toItem: containerView, attribute: .leftMargin, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: label, attribute: .right, relatedBy: .equal, toItem: containerView, attribute: .rightMargin, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .topMargin, multiplier: 1, constant: 16),
-            NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottomMargin, multiplier: 1, constant: 8),
+            NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .topMargin, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: separator, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: separator, attribute: .left, relatedBy: .equal, toItem: containerView, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: separator, attribute: .right, relatedBy: .equal, toItem: containerView, attribute: .right, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: separator, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottomMargin, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: separator, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: 1)
         ]
         NSLayoutConstraint.activate(constraints)
         
@@ -113,7 +122,7 @@ class IssuerTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == Sections.certificates.rawValue {
-            return 40
+            return 25
         }
         return 0
     }

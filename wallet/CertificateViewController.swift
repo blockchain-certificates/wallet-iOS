@@ -120,7 +120,7 @@ class CertificateViewController: UIViewController {
                     self?.progressView.isHidden = true
                 }
         }
-//        validationRequest?.delegate = self
+        validationRequest?.delegate = self
         validationRequest?.start()
         self.inProgressRequest = validationRequest
     }
@@ -152,10 +152,35 @@ class CertificateViewController: UIViewController {
 
 extension CertificateViewController : CertificateValidationRequestDelegate {
     func certificateValidationStateChanged(from: ValidationState, to: ValidationState) {
+        var percentage : Float? = nil
+        
         switch to {
-        default:
-            print(to)
-            break;
+        case .notStarted:
+            percentage = 0.1
+        case .computingLocalHash:
+            percentage = 0.2
+        case .fetchingRemoteHash:
+            percentage = 0.3
+        case .comparingHashes:
+            percentage = 0.4
+        case .checkingIssuerSignature:
+            percentage = 0.5
+        case .checkingRevokedStatus:
+            percentage = 0.6
+        case .success:
+            percentage = 1
+        case .failure:
+            percentage = 1
+        case .checkingReceipt:
+            percentage = 0.7
+        case .checkingMerkleRoot:
+            percentage = 0.8
+        }
+        
+        if percentage != nil {
+            UIView.animate(withDuration: 0.1, animations: { 
+                self.progressView.progress = percentage!
+            })
         }
     }
 }

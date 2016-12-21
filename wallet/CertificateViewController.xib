@@ -53,7 +53,7 @@
                         <constraint firstAttribute="trailing" secondItem="Zt0-2q-H1n" secondAttribute="trailing" id="zEW-Ri-lf9"/>
                     </constraints>
                 </scrollView>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n59-Wb-jff">
+                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n59-Wb-jff">
                     <rect key="frame" x="0.0" y="621" width="375" height="2"/>
                 </progressView>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1f-kp-ARu">
