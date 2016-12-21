@@ -78,20 +78,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func loadBrandedBackgroundView() {
-        let view = UIView()
-        let brand = UIImageView(image: #imageLiteral(resourceName: "BrandedBackground"))
-        brand.translatesAutoresizingMaskIntoConstraints = false
-        brand.layer.opacity = 0.2
-        view.addSubview(brand)
-        
-        let constraints = [
-            NSLayoutConstraint(item: brand, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: brand, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
-        
-        collectionView?.backgroundView = view
+        collectionView?.backgroundView = nil
     }
     
     // MARK: - Actions
@@ -173,11 +160,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         genericCell = cell
         
         // Common styling
-        genericCell.layer.masksToBounds = false
-        genericCell.layer.shadowOffset = CGSize(width: 0, height: 3)
-        genericCell.layer.shadowColor = UIColor.black.cgColor
-        genericCell.layer.shadowOpacity = 0.4
-        genericCell.layer.shadowRadius = 8
+        genericCell.layer.borderColor = Colors.borderColor.cgColor
+        genericCell.layer.borderWidth = 1
         
         return genericCell
     }
