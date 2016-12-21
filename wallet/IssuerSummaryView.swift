@@ -42,7 +42,7 @@ class IssuerSummaryView: UIView {
         iconView.translatesAutoresizingMaskIntoConstraints = false
         
         descriptionLabel = UILabel()
-        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         

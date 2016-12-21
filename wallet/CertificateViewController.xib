@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateViewController" customModule="certificates" customModuleProvider="target">
             <connections>
+                <outlet property="progressView" destination="n59-Wb-jff" id="NFS-vH-HwO"/>
                 <outlet property="renderedCertificateView" destination="0Jh-Wq-q8h" id="aCa-RX-aLX"/>
                 <outlet property="toolbar" destination="t1f-kp-ARu" id="AWf-Ik-nHH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -51,6 +52,9 @@
                         <constraint firstAttribute="trailing" secondItem="Zt0-2q-H1n" secondAttribute="trailing" id="zEW-Ri-lf9"/>
                     </constraints>
                 </scrollView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n59-Wb-jff">
+                    <rect key="frame" x="0.0" y="621" width="375" height="2"/>
+                </progressView>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1f-kp-ARu">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <items>
@@ -76,11 +80,14 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="n59-Wb-jff" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QDG-CX-BHB"/>
+                <constraint firstItem="t1f-kp-ARu" firstAttribute="top" secondItem="n59-Wb-jff" secondAttribute="bottom" id="dVT-2g-VxE"/>
                 <constraint firstAttribute="trailing" secondItem="t1f-kp-ARu" secondAttribute="trailing" id="gmG-Ek-wxL"/>
                 <constraint firstItem="t1f-kp-ARu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iXt-8L-94a"/>
                 <constraint firstItem="Gag-J3-nMn" firstAttribute="bottom" secondItem="t1f-kp-ARu" secondAttribute="top" id="ioU-bi-lmK"/>
                 <constraint firstItem="Zt0-2q-H1n" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="jYy-qK-YJe"/>
                 <constraint firstAttribute="bottom" secondItem="t1f-kp-ARu" secondAttribute="bottom" id="l1q-0q-lHf"/>
+                <constraint firstAttribute="trailing" secondItem="n59-Wb-jff" secondAttribute="trailing" id="sVJ-tD-KuF"/>
                 <constraint firstItem="Gag-J3-nMn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="se3-Fw-Oxc"/>
                 <constraint firstItem="Gag-J3-nMn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tML-WG-Ygf"/>
                 <constraint firstAttribute="trailing" secondItem="Gag-J3-nMn" secondAttribute="trailing" id="yR4-O3-fRV"/>
