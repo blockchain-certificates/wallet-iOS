@@ -27,6 +27,8 @@ class IssuerTableViewController: UITableViewController {
     }
     public var certificates : [Certificate] = []
     
+    private var certificatesHeaderSeparator : UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,7 +103,8 @@ class IssuerTableViewController: UITableViewController {
         
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = Colors.borderColor
+        separator.backgroundColor = .clear
+        certificatesHeaderSeparator = separator
         
         containerView.addSubview(label)
         containerView.addSubview(separator)
@@ -113,7 +116,7 @@ class IssuerTableViewController: UITableViewController {
             NSLayoutConstraint(item: separator, attribute: .left, relatedBy: .equal, toItem: containerView, attribute: .left, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: separator, attribute: .right, relatedBy: .equal, toItem: containerView, attribute: .right, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: separator, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottomMargin, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: separator, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: 1)
+            NSLayoutConstraint(item: separator, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: 0.5)
         ]
         NSLayoutConstraint.activate(constraints)
         
@@ -154,6 +157,14 @@ class IssuerTableViewController: UITableViewController {
         prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(prompt, animated: true, completion: nil)
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0 {
+            certificatesHeaderSeparator?.backgroundColor = .clear
+        } else {
+            certificatesHeaderSeparator?.backgroundColor = Colors.borderColor
+        }
     }
 }
 
