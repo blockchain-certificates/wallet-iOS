@@ -20,6 +20,7 @@ class CertificateViewController: UIViewController {
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     
     @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var verifyButton: UIBarButtonItem!
     @IBOutlet weak var progressView: UIProgressView!
     private var inProgressRequest : CommonRequest?
     
@@ -88,8 +89,11 @@ class CertificateViewController: UIViewController {
     }
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
+        verifyButton.isEnabled = false
+        verifyButton.title = "Verifying..."
         progressView.progress = 0.5
         progressView.isHidden = false
+        
         let validationRequest = CertificateValidationRequest(
             for: certificate,
             bitcoinManager: bitcoinManager,
@@ -110,6 +114,8 @@ class CertificateViewController: UIViewController {
                 OperationQueue.main.addOperation {
                     self?.present(alert, animated: true, completion: nil)
                     self?.inProgressRequest = nil
+                    self?.verifyButton.isEnabled = true
+                    self?.verifyButton.title = "Verify"
                     self?.progressView.progress = 1
                     self?.progressView.isHidden = true
                 }

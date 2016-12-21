@@ -14,6 +14,7 @@
                 <outlet property="progressView" destination="n59-Wb-jff" id="NFS-vH-HwO"/>
                 <outlet property="renderedCertificateView" destination="0Jh-Wq-q8h" id="aCa-RX-aLX"/>
                 <outlet property="toolbar" destination="t1f-kp-ARu" id="AWf-Ik-nHH"/>
+                <outlet property="verifyButton" destination="Jl2-eC-Dxd" id="Me1-3S-TtV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
