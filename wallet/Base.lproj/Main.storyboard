@@ -13,7 +13,7 @@
         <scene sceneID="Xgs-yd-LoS">
             <objects>
                 <collectionViewController title="Issuers" id="NJ9-PO-4VH" customClass="IssuerCollectionViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="lZ5-wo-EOb">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="lZ5-wo-EOb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -39,7 +39,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="3aE-tM-Qbn">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZtD-iw-q88">
+                        <barButtonItem key="rightBarButtonItem" image="AddIcon" id="ZtD-iw-q88">
                             <connections>
                                 <action selector="addButtonTapped:" destination="NJ9-PO-4VH" id="yXd-1M-bJa"/>
                             </connections>
@@ -68,4 +68,7 @@
             <point key="canvasLocation" x="810" y="135"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AddIcon" width="23" height="23"/>
+    </resources>
 </document>
