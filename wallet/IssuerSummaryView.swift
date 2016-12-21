@@ -60,7 +60,7 @@ class IssuerSummaryView: UIView {
             NSLayoutConstraint(item: descriptionLabel, attribute: .left, relatedBy: .equal, toItem: self, attribute: .leftMargin, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: descriptionLabel, attribute: .right, relatedBy: .equal, toItem: self, attribute: .rightMargin, multiplier: 1, constant: 0)
         ]
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-20-[iconView(>=50@750,<=100)]-[descriptionLabel]-20-|", options: .alignAllLeft, metrics: nil, views: views)
+        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-20-[iconView(==50)]-[descriptionLabel]-20-|", options: .alignAllLeft, metrics: nil, views: views)
         
         NSLayoutConstraint.activate(constraints)
         NSLayoutConstraint.activate(verticalConstraints)
