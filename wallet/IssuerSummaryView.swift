@@ -43,6 +43,7 @@ class IssuerSummaryView: UIView {
         
         descriptionLabel = UILabel()
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        descriptionLabel.textColor = Colors.primaryTextColor
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -60,26 +61,18 @@ class IssuerSummaryView: UIView {
             NSLayoutConstraint(item: descriptionLabel, attribute: .left, relatedBy: .equal, toItem: self, attribute: .leftMargin, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: descriptionLabel, attribute: .right, relatedBy: .equal, toItem: self, attribute: .rightMargin, multiplier: 1, constant: 0)
         ]
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-20-[iconView(==50)]-[descriptionLabel]-20-|", options: .alignAllLeft, metrics: nil, views: views)
+        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-20-[iconView(==100)]-[descriptionLabel]-20-|", options: .alignAllLeft, metrics: nil, views: views)
         
         NSLayoutConstraint.activate(constraints)
         NSLayoutConstraint.activate(verticalConstraints)
     }
     
     func updateIssuerData() {
-        guard let issuer = issuer?.issuer else {
+        guard let realIssuer = issuer?.issuer else {
             return
         }
         
-        iconView.image = UIImage(data: issuer.image)
-        
-        let description : String? = nil
-        if let description = description {
-            descriptionLabel.text = description
-            descriptionLabel.textColor = Colors.primaryTextColor
-        } else {
-            descriptionLabel.text = "No description provided."
-            descriptionLabel.textColor = Colors.placeholderTextColor
-        }
+        iconView.image = UIImage(data: realIssuer.image)
+        descriptionLabel.text = issuer?.issuerDescription
     }
 }

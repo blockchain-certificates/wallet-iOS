@@ -20,6 +20,7 @@ fileprivate enum CoderKeys {
 
 class ManagedIssuer : NSObject, NSCoding {
     var delegate : ManagedIssuerDelegate?
+    var issuerDescription : String?
     
     private(set) var issuer : Issuer?
     private(set) var issuerConfirmedOn: Date?
