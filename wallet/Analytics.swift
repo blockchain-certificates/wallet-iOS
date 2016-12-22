@@ -13,20 +13,19 @@ enum AnalyticsEvent {
     case viewed, validated, shared
 }
 enum AnalyticsEnvironment {
-    case debug, auto, staging, production
+    case debug, development, staging, production
 }
 
 class Analytics {
     let environment : AnalyticsEnvironment
-    let privateIdentifier : String
+    var tracker : GAITracker?
     
     init(environment: AnalyticsEnvironment = .production) {
-        privateIdentifier = "TODO"
         self.environment = environment
     }
     
     public static var shared : Analytics {
-        return Analytics()
+        return Analytics(environment: .development)
     }
     
     public func track(event: AnalyticsEvent, certificate: Certificate) {
@@ -43,15 +42,25 @@ class Analytics {
         switch environment {
         case .debug:
             print("Tracking \(actionName) for \(certificate.assertion.uid).")
+        case .development:
+            // Development and Production environments both track with Google Analytics
+            fallthrough
         case .production:
+            guard let tracker = tracker else {
+                print("Google Analytics tracker didn't get set up properly. Unable to track \(actionName) event.")
+                return
+            }
+            
             let eventDictionary = GAIDictionaryBuilder.createEvent(withCategory: certificate.issuer.id.absoluteString,
                                                                    action: actionName,
                                                                    label: certificate.assertion.uid,
                                                                    value: nil)
-            if let tracker = GAI.sharedInstance().defaultTracker,
-                let eventData = eventDictionary?.build() {
-                tracker.send(eventData as [NSObject: AnyObject])
+            guard let eventData = eventDictionary?.build() else {
+                print("Couldn't build an event dictionary for \(actionName) event.")
+                return
             }
+            
+            tracker.send(eventData as [NSObject: AnyObject])
         default:
             print("Tracking for \(environment) environment not implemented yet.")
         }
@@ -63,9 +72,19 @@ class Analytics {
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
-        // Optional: configure GAI options.
         let gai : GAI! = GAI.sharedInstance()
-        gai.trackUncaughtExceptions = true  // report uncaught exceptions
-        gai.logger.logLevel = .verbose  // remove before app release
+
+        // This would be even better as a build-time option instead of a run-time option.
+        var trackingID : String?
+        if environment == .production {
+            trackingID = "UA-89352488-1"
+        } else if environment == .development {
+            trackingID = "UA-89352488-2"
+        }
+        
+        if let trackingID = trackingID {
+            tracker = gai.tracker(withTrackingId: trackingID)
+        }
+        
     }
 }
