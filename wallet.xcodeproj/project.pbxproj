@@ -24,6 +24,9 @@
 		83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */; };
 		83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */; };
 		83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */; };
+		8313818D1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */; };
+		8313818E1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */; };
+		8313818F1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */; };
 		83172DF11DFB71ED00559909 /* AddIssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83172DEF1DFB71ED00559909 /* AddIssuerCollectionViewCell.swift */; };
 		83172DF21DFB71ED00559909 /* AddIssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83172DF01DFB71ED00559909 /* AddIssuerCollectionViewCell.xib */; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
@@ -128,6 +131,7 @@
 		83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
 		83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerViewController.swift; sourceTree = "<group>"; };
 		83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryView.swift; sourceTree = "<group>"; };
+		8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		83172DEF1DFB71ED00559909 /* AddIssuerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerCollectionViewCell.swift; sourceTree = "<group>"; };
 		83172DF01DFB71ED00559909 /* AddIssuerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddIssuerCollectionViewCell.xib; sourceTree = "<group>"; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 		83111B1B1DA4110C006B058D = {
 			isa = PBXGroup;
 			children = (
+				8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */,
 				832AE0101DF8921400A3CA4A /* External */,
 				83111B261DA4110C006B058D /* wallet */,
 				83111B3B1DA4110C006B058D /* walletTests */,
@@ -478,6 +483,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8313818D1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				83172DF21DFB71ED00559909 /* AddIssuerCollectionViewCell.xib in Resources */,
 				83802BF51E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib in Resources */,
@@ -498,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
+				8313818E1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
+				8313818F1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

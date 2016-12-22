@@ -16,18 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        // Required to set up the javascript environment for the 
-        self.window?.addSubview(JSONLD.shared.webView)
-        
-        // debug:
-        print("File path is \(Paths.certificatesDirectory)")
+        setupApplication()
         return true
     }
     
     // The app has launched from a universal link
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        setupApplication()
+        
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let url = userActivity.webpageURL {
             
@@ -39,7 +35,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // The app is launching with a document
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        setupApplication()
         return launchAddCertificate(at: url)
+    }
+    
+    func setupApplication() {
+        self.window?.addSubview(JSONLD.shared.webView)
+        
+        // Need a way to make this more obvious. Referencing the shared singleton
+        Analytics.shared.applicationDidLaunch()
+        
+        // debug:
+        print("File path is \(Paths.certificatesDirectory)")
     }
     
     func importState(from url: URL) -> Bool {

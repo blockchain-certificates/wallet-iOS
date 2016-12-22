@@ -26,25 +26,46 @@ class Analytics {
     }
     
     public static var shared : Analytics {
-        return Analytics(environment: .debug)
+        return Analytics()
     }
     
     public func track(event: AnalyticsEvent, certificate: Certificate) {
-        let eventName : String
+        let actionName : String
         switch event {
         case .viewed:
-            eventName = "viewed"
+            actionName = "viewed"
         case .validated:
-            eventName = "validated"
+            actionName = "validated"
         case .shared:
-            eventName = "shared"
+            actionName = "shared"
         }
         
         switch environment {
         case .debug:
-            print("Tracking \(eventName) for \(certificate.assertion.uid).")
+            print("Tracking \(actionName) for \(certificate.assertion.uid).")
+        case .production:
+            let eventDictionary = GAIDictionaryBuilder.createEvent(withCategory: certificate.issuer.id.absoluteString,
+                                                                   action: actionName,
+                                                                   label: certificate.assertion.uid,
+                                                                   value: nil)
+            if let tracker = GAI.sharedInstance().defaultTracker,
+                let eventData = eventDictionary?.build() {
+                tracker.send(eventData as [NSObject: AnyObject])
+            }
         default:
             print("Tracking for \(environment) environment not implemented yet.")
         }
+    }
+    
+    public func applicationDidLaunch() {
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Optional: configure GAI options.
+        let gai : GAI! = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        gai.logger.logLevel = .verbose  // remove before app release
     }
 }
