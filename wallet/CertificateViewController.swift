@@ -43,6 +43,10 @@ class CertificateViewController: UIViewController {
         renderCertificate()
         stylize()
         
+//        navigationController?.hidesBarsOnSwipe = true
+//        navigationController?.hidesBottomBarWhenPushed = true
+//        navigationController?.setToolbarHidden(false, animated: false)
+        
         Analytics.shared.track(event: .viewed, certificate: certificate)
     }
     
