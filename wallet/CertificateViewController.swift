@@ -42,6 +42,8 @@ class CertificateViewController: UIViewController {
         self.title = certificate.title
         renderCertificate()
         stylize()
+        
+        Analytics.shared.track(event: .viewed, certificate: certificate)
     }
     
     func renderCertificate() {
@@ -84,11 +86,19 @@ class CertificateViewController: UIViewController {
         let items : [Any] = [ url ]
         
         let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        let capturedCertificate = certificate
+        shareController.completionWithItemsHandler = { (activity, completed, _, _) in
+            if completed {
+                Analytics.shared.track(event: .shared, certificate: capturedCertificate)
+            }
+        }
         
         self.present(shareController, animated: true, completion: nil)
     }
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
+        Analytics.shared.track(event: .validated, certificate: certificate)
+        
         verifyButton.isEnabled = false
         verifyButton.title = "Verifying..."
         progressView.progress = 0.5

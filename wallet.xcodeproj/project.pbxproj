@@ -32,6 +32,7 @@
 		832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */; };
 		832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0131DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift */; };
 		832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */; };
+		832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832D7FA31E0C5E1800A523D9 /* Analytics.swift */; };
 		83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D851DC406600025C055 /* RenderedCertificateView.swift */; };
 		83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83431D861DC406600025C055 /* RenderedCertificateView.xib */; };
 		83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */; };
@@ -132,6 +133,7 @@
 		832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextField.swift; path = External/SkyFloatingLabelTextField/Sources/SkyFloatingLabelTextField.swift; sourceTree = "<group>"; };
 		832AE0131DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextFieldWithIcon.swift; path = External/SkyFloatingLabelTextField/Sources/SkyFloatingLabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
 		832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextField+fixCaretPosition.swift"; path = "External/SkyFloatingLabelTextField/Sources/UITextField+fixCaretPosition.swift"; sourceTree = "<group>"; };
+		832D7FA31E0C5E1800A523D9 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		83431D851DC406600025C055 /* RenderedCertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderedCertificateView.swift; sourceTree = "<group>"; };
 		83431D861DC406600025C055 /* RenderedCertificateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderedCertificateView.xib; sourceTree = "<group>"; };
 		83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreBitcoinManager.swift; path = "External/cert-wallet/Models/CoreBitcoinManager.swift"; sourceTree = SOURCE_ROOT; };
@@ -230,6 +232,7 @@
 				834B94C11DC1585200543E4F /* Keychain.swift */,
 				83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */,
 				83111B271DA4110C006B058D /* AppDelegate.swift */,
+				832D7FA31E0C5E1800A523D9 /* Analytics.swift */,
 				83802BF61E01BC2B00E54C13 /* Cells */,
 				83111B2B1DA4110C006B058D /* Main.storyboard */,
 				83111B2E1DA4110C006B058D /* Assets.xcassets */,
@@ -656,6 +659,7 @@
 				834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */,
 				83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */,
+				832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */,
 				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
 				83172DF11DFB71ED00559909 /* AddIssuerCollectionViewCell.swift in Sources */,
 				83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */,
