@@ -46,11 +46,13 @@ class Analytics {
             // Development and Production environments both track with Google Analytics
             fallthrough
         case .production:
+            if tracker == nil {
+                tracker = GAI.sharedInstance().defaultTracker
+            }
             guard let tracker = tracker else {
-                print("Google Analytics tracker didn't get set up properly. Unable to track \(actionName) event.")
+                print("Unable to access the shared tracker to record this \(actionName) event.")
                 return
             }
-            
             let eventDictionary = GAIDictionaryBuilder.createEvent(withCategory: certificate.issuer.id.absoluteString,
                                                                    action: actionName,
                                                                    label: certificate.assertion.uid,
@@ -73,18 +75,21 @@ class Analytics {
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
         let gai : GAI! = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        gai.logger.logLevel = .verbose
+//        tracker = gai.defaultTracker
 
         // This would be even better as a build-time option instead of a run-time option.
-        var trackingID : String?
-        if environment == .production {
-            trackingID = "UA-89352488-1"
-        } else if environment == .development {
-            trackingID = "UA-89352488-2"
-        }
-        
-        if let trackingID = trackingID {
-            tracker = gai.tracker(withTrackingId: trackingID)
-        }
+//        var trackingID : String?
+//        if environment == .production {
+//            trackingID = "UA-89352488-1"
+//        } else if environment == .development {
+//            trackingID = "UA-89352488-2"
+//        }
+//        
+//        if let trackingID = trackingID {
+//            tracker = gai.tracker(withTrackingId: trackingID)
+//        }
         
     }
 }
