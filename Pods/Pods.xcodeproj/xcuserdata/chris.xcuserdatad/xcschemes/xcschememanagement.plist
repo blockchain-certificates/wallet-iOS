@@ -9,12 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ISO8601DateFormatter.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-wallet.xcscheme</key>
+		<key>Pods-certificates.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>8A6F7BA3B3EBE01788C4C70CF8861CAB</key>
+		<key>39C35849B6F0D7D6AFDE54696486045C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB500C24F3965225C41932B0F314780F</key>
+		<key>72E7C1753A804A48A313BC7279AE139A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DF71173E96B4CB724EB9EEF30E49D94F</key>
+		<key>790C678C1E789073CCC1193F413DD322</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F52EAAC1064AAFC417153E52B8C108B2</key>
+		<key>A304F12938B16D7A06DD6F400F2D6BB3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FCB86707CB620B2C47AA34AC1E19C56F</key>
+		<key>CB5172F9C9101CE3839B8E80BD427804</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E1BBB76ADBF2EF4EF2CE5DF6BBC77296</key>
 		<dict>
 			<key>primary</key>
 			<true/>
