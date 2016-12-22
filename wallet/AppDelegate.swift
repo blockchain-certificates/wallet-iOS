@@ -43,6 +43,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func importState(from url: URL) -> Bool {
+        guard let fragment = url.fragment else {
+            return deprecatedImportState(from: url)
+        }
+        
+        var pathComponents = fragment.components(separatedBy: "/")
+        guard pathComponents.count >= 1 else {
+            return false
+        }
+        
+        // For paths that start with /, the first one will be an empty string. So the true command name is the second element in the array.
+        var commandName = pathComponents.removeFirst()
+        if commandName == "" && pathComponents.count >= 1 {
+            commandName = pathComponents.removeFirst()
+        }
+        
+        switch commandName {
+        case "import-certificate":
+            guard pathComponents.count >= 1 else {
+                return false
+            }
+            let encodedCertificateURL = pathComponents.removeFirst()
+            if let decodedCertificateString = encodedCertificateURL.removingPercentEncoding,
+                let certificateURL = URL(string: decodedCertificateString) {
+                print()
+                print(decodedCertificateString)
+                print()
+                return launchAddCertificate(at: certificateURL)
+            } else {
+                return false
+            }
+            
+        case "introduce-recipient":
+            guard pathComponents.count >= 2 else {
+                return false
+            }
+            let encodedIdentificationURL = pathComponents.removeFirst()
+            let nonce = pathComponents.removeFirst()
+            if let decodedIdentificationString = encodedIdentificationURL.removingPercentEncoding,
+                let identificationURL = URL(string: decodedIdentificationString) {
+                launchAddIssuer(at: identificationURL, with: nonce)
+                return true
+            } else {
+                return false
+            }
+
+        default:
+            return false
+        }
+    }
+    
+    func deprecatedImportState(from url:URL) -> Bool {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return false
         }
@@ -89,6 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("I don't know about \(components.path)")
             return false
         }
+
     }
     
     func launchAddIssuer(at introductionURL: URL, with nonce: String) {

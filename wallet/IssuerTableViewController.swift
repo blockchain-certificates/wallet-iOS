@@ -103,7 +103,7 @@ class IssuerTableViewController: UITableViewController {
         
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = .clear
+        separator.backgroundColor = Colors.borderColor
         certificatesHeaderSeparator = separator
         
         containerView.addSubview(label)
@@ -161,7 +161,7 @@ class IssuerTableViewController: UITableViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y <= 0 {
-            certificatesHeaderSeparator?.backgroundColor = .clear
+            certificatesHeaderSeparator?.backgroundColor = Colors.borderColor
         } else {
             certificatesHeaderSeparator?.backgroundColor = Colors.borderColor
         }
