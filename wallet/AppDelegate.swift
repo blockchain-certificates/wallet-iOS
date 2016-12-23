@@ -45,6 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Need a way to make this more obvious. Referencing the shared singleton
         Analytics.shared.applicationDidLaunch()
         
+        UIButton.appearance().tintColor = Colors.brandColor
+        
         // debug:
         print("File path is \(Paths.certificatesDirectory)")
     }
@@ -86,9 +88,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return false
             }
             let encodedIdentificationURL = pathComponents.removeFirst()
-            let nonce = pathComponents.removeFirst()
+            let encodedNonce = pathComponents.removeFirst()
             if let decodedIdentificationString = encodedIdentificationURL.removingPercentEncoding,
-                let identificationURL = URL(string: decodedIdentificationString) {
+                let identificationURL = URL(string: decodedIdentificationString),
+                let nonce = encodedNonce.removingPercentEncoding {
                 launchAddIssuer(at: identificationURL, with: nonce)
                 return true
             } else {

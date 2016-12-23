@@ -14,9 +14,6 @@ class AddIssuerViewController: UIViewController {
     var delegate : AddIssuerViewControllerDelegate?
     
     var identificationURL: URL?
-    var firstName : String?
-    var lastName : String?
-    var emailAddress : String?
     var nonce: String?
     
     @IBOutlet weak var scrollView : UIScrollView!
@@ -25,9 +22,6 @@ class AddIssuerViewController: UIViewController {
     @IBOutlet weak var issuerURLField: UITextField!
     
     @IBOutlet weak var identityInformationLabel : UILabel!
-    @IBOutlet weak var firstNameField: UITextField!
-    @IBOutlet weak var lastNameField: UITextField!
-    @IBOutlet weak var emailAddressField : UITextField!
     @IBOutlet weak var nonceField : UITextField!
     
     var isLoading = false {
@@ -48,9 +42,6 @@ class AddIssuerViewController: UIViewController {
     init(identificationURL: URL? = nil, nonce: String? = nil) {
         self.identificationURL = identificationURL
         self.nonce = nonce
-        firstName = UserDefaults.standard.string(forKey: UserKeys.firstNameKey)
-        lastName = UserDefaults.standard.string(forKey: UserKeys.lastNameKey)
-        emailAddress = UserDefaults.standard.string(forKey: UserKeys.emailKey)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -86,10 +77,6 @@ class AddIssuerViewController: UIViewController {
     
     func loadDataIntoFields() {
         issuerURLField.text = identificationURL?.absoluteString
-        
-        firstNameField.text = firstName
-        lastNameField.text = lastName
-        emailAddressField.text = emailAddress
         nonceField.text = nonce
     }
     
@@ -103,18 +90,12 @@ class AddIssuerViewController: UIViewController {
             return
         }
         identificationURL = url
-        firstName = firstNameField.text
-        lastName = lastNameField.text
-        emailAddress = emailAddressField.text
         nonce = nonceField.text
     }
     
     func stylize() {
         let fields = [
             issuerURLField,
-            firstNameField,
-            lastNameField,
-            emailAddressField,
             nonceField
         ]
         
@@ -149,9 +130,6 @@ class AddIssuerViewController: UIViewController {
         saveDataIntoFields()
         
         guard identificationURL != nil,
-            firstName != nil,
-            lastName != nil,
-            emailAddress != nil,
             nonce != nil else {
                 return
         }
@@ -166,7 +144,7 @@ class AddIssuerViewController: UIViewController {
     func autoSubmitIfPossible() {
         loadDataIntoFields()
         
-        let areAllFieldsFilled = firstName != nil && lastName != nil && emailAddress != nil && identificationURL != nil
+        let areAllFieldsFilled = identificationURL != nil && nonce != nil
 
         if areAllFieldsFilled {
             identifyAndIntroduceIssuer(at: identificationURL!)
@@ -190,9 +168,9 @@ class AddIssuerViewController: UIViewController {
     }
     
     func identifyAndIntroduceIssuer(at url: URL) {
-        let targetRecipient = Recipient(givenName: firstName!,
-                                        familyName: lastName!,
-                                        identity: emailAddress!,
+        let targetRecipient = Recipient(givenName: "",
+                                        familyName: "",
+                                        identity: "",
                                         identityType: "email",
                                         isHashed: false,
                                         publicAddress: Keychain.shared.nextPublicAddress(),
