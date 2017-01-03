@@ -9,7 +9,7 @@
 import Foundation
 
 enum Colors {
-    static let brandColor = UIColor(red:0.34, green:0.69, blue:0.50, alpha:1.0)
+    static let brandColor = #colorLiteral(red: 0.1647058824, green: 0.6980392157, blue: 0.4823529412, alpha: 1)
     static let tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     static let baseColor = UIColor(red:0.97, green:0.97, blue:0.98, alpha:1.0)
     
