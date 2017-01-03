@@ -3,49 +3,59 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "square copy 2-notification@2x.png",
+      "filename" : "LearningMachine-CRM-01-notification@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "square copy 2-notification@3x.png",
+      "filename" : "LearningMachine-CRM-01-notification@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "square copy 2-settings@2x.png",
+      "filename" : "LearningMachine-CRM-01-settings@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "square copy 2-settings@3x.png",
+      "filename" : "LearningMachine-CRM-01-settings@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "square copy 2-spotlight@2x.png",
+      "filename" : "LearningMachine-CRM-01-spotlight@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "square copy 2-spotlight@3x.png",
+      "filename" : "LearningMachine-CRM-01-spotlight@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "square copy 2-iphone-icon@2x.png",
+      "filename" : "LearningMachine-CRM-01-app@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "square copy 2-iphone-icon@3x.png",
+      "filename" : "LearningMachine-CRM-01-app@3x.png",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "car",
+      "size" : "60x60",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "car",
+      "size" : "60x60",
       "scale" : "3x"
     },
     {
