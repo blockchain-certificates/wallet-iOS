@@ -11,6 +11,7 @@ import LocalAuthentication
 
 
 private let cellReuseIdentifier = "UITableViewCell"
+private let labeledCellReuseIdentifier = "LabeledTableViewCell"
 
 enum AuthErrors : Error {
     case noAuthMethodAllowed
@@ -43,6 +44,9 @@ class RevealPassphraseTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         title = "Passphrase"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(LabeledTableViewCell.self, forCellReuseIdentifier: labeledCellReuseIdentifier)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
         
         authenticate()
     }
@@ -60,12 +64,15 @@ class RevealPassphraseTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
+        let cell : UITableViewCell!
         if hasAuthenticated {
-            cell.textLabel?.text = Keychain.shared.seedPhrase
-            cell.selectionStyle = .none
-            cell.textLabel?.textColor = .black
+            let labeledCell = tableView.dequeueReusableCell(withIdentifier: labeledCellReuseIdentifier) as! LabeledTableViewCell
+            labeledCell.titleLabel.text = "Current Passphrase"
+            labeledCell.contentLabel.text = Keychain.shared.seedPhrase
+            
+            cell = labeledCell
         } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
             cell.textLabel?.text = "Show Passphrase"
             cell.selectionStyle = .default
             cell.textLabel?.textColor = Colors.brandColor
