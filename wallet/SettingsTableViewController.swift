@@ -40,6 +40,7 @@ class SettingsTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = cancelBarButton
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.backgroundColor = Colors.baseColor
     }
     
     override func viewWillAppear(_ animated: Bool) {

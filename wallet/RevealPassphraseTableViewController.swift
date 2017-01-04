@@ -47,6 +47,7 @@ class RevealPassphraseTableViewController: UITableViewController {
         tableView.register(LabeledTableViewCell.self, forCellReuseIdentifier: labeledCellReuseIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        tableView.backgroundColor = Colors.baseColor
         
         authenticate()
     }
