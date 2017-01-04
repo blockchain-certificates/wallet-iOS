@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReplacePassphraseViewController" customModule="certificates" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBT-dv-8tB">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMG-VI-1wF" userLabel="Content">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUB-0J-9kL">
+                                    <rect key="frame" x="20" y="20" width="335" height="57.5"/>
+                                    <string key="text">Note that replacing your current passphrase will diavow ownership of any already issued certificates in your posession. If this is what you'd like to do, enter an existing passphrase below.</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zs8-ZN-aSD">
+                                    <rect key="frame" x="0.0" y="97.5" width="375" height="67.5"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JtZ-1H-std" userLabel="Line">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                                            <color key="backgroundColor" red="0.9137254901960784" green="0.92156862745098034" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="0.5" id="pYI-I3-NrZ"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paste Passphrase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWb-zF-sGv">
+                                            <rect key="frame" x="20" y="8" width="335" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.47058823529411764" green="0.50196078431372548" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="something" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TSQ-Dm-fac">
+                                            <rect key="frame" x="20" y="30.5" width="335" height="17"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuS-aI-25L" userLabel="Line">
+                                            <rect key="frame" x="0.0" y="67" width="375" height="0.5"/>
+                                            <color key="backgroundColor" red="0.91372549020000005" green="0.92156862750000001" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="0.5" id="S2q-aB-j1O"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="AuS-aI-25L" firstAttribute="leading" secondItem="Zs8-ZN-aSD" secondAttribute="leading" id="8MG-Uf-yQQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="CWb-zF-sGv" secondAttribute="trailing" constant="20" id="AXR-NG-5uH"/>
+                                        <constraint firstItem="TSQ-Dm-fac" firstAttribute="top" secondItem="CWb-zF-sGv" secondAttribute="bottom" constant="8" id="Bqw-qW-LRY"/>
+                                        <constraint firstItem="TSQ-Dm-fac" firstAttribute="leading" secondItem="Zs8-ZN-aSD" secondAttribute="leading" constant="20" id="CG0-kx-3DZ"/>
+                                        <constraint firstItem="JtZ-1H-std" firstAttribute="top" secondItem="Zs8-ZN-aSD" secondAttribute="top" id="JcT-cJ-GV1"/>
+                                        <constraint firstAttribute="trailing" secondItem="TSQ-Dm-fac" secondAttribute="trailing" constant="20" id="NTY-zR-X5o"/>
+                                        <constraint firstAttribute="trailing" secondItem="AuS-aI-25L" secondAttribute="trailing" id="VNh-Ep-RjA"/>
+                                        <constraint firstItem="JtZ-1H-std" firstAttribute="leading" secondItem="Zs8-ZN-aSD" secondAttribute="leading" id="YvX-Y6-J6I"/>
+                                        <constraint firstAttribute="bottom" secondItem="TSQ-Dm-fac" secondAttribute="bottom" constant="20" id="cSS-ge-8mL"/>
+                                        <constraint firstItem="CWb-zF-sGv" firstAttribute="top" secondItem="Zs8-ZN-aSD" secondAttribute="top" constant="8" id="hwq-jj-39Y"/>
+                                        <constraint firstAttribute="trailing" secondItem="JtZ-1H-std" secondAttribute="trailing" id="iX8-bV-u4G"/>
+                                        <constraint firstAttribute="bottom" secondItem="AuS-aI-25L" secondAttribute="bottom" id="tHc-YD-ND9"/>
+                                        <constraint firstItem="CWb-zF-sGv" firstAttribute="leading" secondItem="Zs8-ZN-aSD" secondAttribute="leading" constant="20" id="u0g-df-obe"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Zs8-ZN-aSD" secondAttribute="trailing" id="LkE-7Q-sJI"/>
+                                <constraint firstItem="TUB-0J-9kL" firstAttribute="leading" secondItem="gMG-VI-1wF" secondAttribute="leading" constant="20" id="Qk9-IO-Y6Z"/>
+                                <constraint firstItem="TUB-0J-9kL" firstAttribute="top" secondItem="gMG-VI-1wF" secondAttribute="top" constant="20" id="S7Q-im-lft"/>
+                                <constraint firstAttribute="trailing" secondItem="TUB-0J-9kL" secondAttribute="trailing" constant="20" id="ZPV-Hj-muu"/>
+                                <constraint firstAttribute="bottom" secondItem="Zs8-ZN-aSD" secondAttribute="bottom" id="ad3-8F-8gO"/>
+                                <constraint firstItem="Zs8-ZN-aSD" firstAttribute="top" secondItem="TUB-0J-9kL" secondAttribute="bottom" constant="20" id="hVr-DH-rud"/>
+                                <constraint firstItem="Zs8-ZN-aSD" firstAttribute="leading" secondItem="gMG-VI-1wF" secondAttribute="leading" id="jk4-jM-0ay"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="gMG-VI-1wF" firstAttribute="top" secondItem="pBT-dv-8tB" secondAttribute="top" id="A4x-5m-8C1"/>
+                        <constraint firstItem="gMG-VI-1wF" firstAttribute="leading" secondItem="pBT-dv-8tB" secondAttribute="leading" id="WlD-r1-Iia"/>
+                        <constraint firstAttribute="trailing" secondItem="gMG-VI-1wF" secondAttribute="trailing" id="Zil-BE-czc"/>
+                        <constraint firstAttribute="bottom" secondItem="gMG-VI-1wF" secondAttribute="bottom" id="meP-NT-kCy"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pBT-dv-8tB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CCB-IG-c0j"/>
+                <constraint firstAttribute="bottom" secondItem="pBT-dv-8tB" secondAttribute="bottom" id="EVI-Xc-Bkw"/>
+                <constraint firstItem="pBT-dv-8tB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L1Y-Vz-zIW"/>
+                <constraint firstAttribute="trailing" secondItem="pBT-dv-8tB" secondAttribute="trailing" id="QDK-Ho-eQp"/>
+                <constraint firstItem="gMG-VI-1wF" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="sST-db-dm8"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="34.5" y="91.5"/>
+        </view>
+    </objects>
+</document>

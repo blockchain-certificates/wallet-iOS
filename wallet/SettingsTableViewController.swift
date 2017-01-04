@@ -104,6 +104,9 @@ class SettingsTableViewController: UITableViewController {
         if indexPath.row == 0 {
             let controller = RevealPassphraseTableViewController()
             navigationController?.pushViewController(controller, animated: true)
+        } else if indexPath.row == 1 {
+            let controller = ReplacePassphraseViewController()
+            navigationController?.pushViewController(controller, animated: true)
         }
     }
 }
