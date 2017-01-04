@@ -71,6 +71,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
+        cell.accessoryType = .disclosureIndicator
         
         var text : String?
         switch indexPath.row {
