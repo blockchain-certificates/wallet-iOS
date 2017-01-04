@@ -53,6 +53,7 @@ class SettingsTableViewController: UITableViewController {
             tableView.deselectRow(at: selectedPath, animated: true)
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         var barStyle = UIBarStyle.default
         if let oldBarStyle = oldBarStyle {

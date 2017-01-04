@@ -32,7 +32,7 @@ class RevealPassphraseTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        title = "Reveal Passphrase"
+        title = "Passphrase"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
     
@@ -50,7 +50,14 @@ class RevealPassphraseTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
-        cell.textLabel?.text = "You betcha."
+        cell.textLabel?.text = Keychain.shared.seedPhrase
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Information"
+        }
+        return nil
     }
 }
