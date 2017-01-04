@@ -18,6 +18,8 @@ enum AuthErrors : Error {
 }
 
 class RevealPassphraseTableViewController: UITableViewController {
+    private let copySelector : Selector = #selector(copy(_:))
+    
     private var hasAuthenticated = false
     private var specificAuthenticationError : String? = nil
     
@@ -110,6 +112,29 @@ class RevealPassphraseTableViewController: UITableViewController {
         if indexPath.section == 0 && indexPath.row == 0 {
             authenticate()
         }
+    }
+    
+    // Mark: Copy/pasting content
+    override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        guard hasAuthenticated else {
+            return false
+        }
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        guard hasAuthenticated else {
+            return false
+        }
+        return action == copySelector
+    }
+    
+    override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        guard hasAuthenticated && action == copySelector else {
+            return
+        }
+        
+        UIPasteboard.general.string = Keychain.shared.seedPhrase
     }
     
     // MARK: - Actual interaction stuff.
