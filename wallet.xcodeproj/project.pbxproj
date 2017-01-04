@@ -37,6 +37,8 @@
 		832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832D7FA31E0C5E1800A523D9 /* Analytics.swift */; };
 		8337CFCC1E1D65140080E876 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */; };
 		8337CFCD1E1D65140080E876 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */; };
+		8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */; };
+		8337CFD01E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */; };
 		83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D851DC406600025C055 /* RenderedCertificateView.swift */; };
 		83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83431D861DC406600025C055 /* RenderedCertificateView.xib */; };
 		83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */; };
@@ -143,6 +145,7 @@
 		832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextField+fixCaretPosition.swift"; path = "External/SkyFloatingLabelTextField/Sources/UITextField+fixCaretPosition.swift"; sourceTree = "<group>"; };
 		832D7FA31E0C5E1800A523D9 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealPassphraseTableViewController.swift; sourceTree = "<group>"; };
 		83431D851DC406600025C055 /* RenderedCertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderedCertificateView.swift; sourceTree = "<group>"; };
 		83431D861DC406600025C055 /* RenderedCertificateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderedCertificateView.xib; sourceTree = "<group>"; };
 		83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreBitcoinManager.swift; path = "External/cert-wallet/Models/CoreBitcoinManager.swift"; sourceTree = SOURCE_ROOT; };
@@ -249,6 +252,7 @@
 				83111B331DA4110C006B058D /* Info.plist */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
+				8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */,
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
 				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
 				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
@@ -681,6 +685,7 @@
 				83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
 				8337CFCC1E1D65140080E876 /* SettingsTableViewController.swift in Sources */,
+				8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */,
 				83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */,
 				832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */,
 				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
@@ -703,6 +708,7 @@
 			files = (
 				834B94C91DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				8337CFCD1E1D65140080E876 /* SettingsTableViewController.swift in Sources */,
+				8337CFD01E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */,
 				83111B481DA4110C006B058D /* walletUITests.swift in Sources */,
 				8348CD4D1DC3AF920002E9D6 /* ShowPassphraseTest.swift in Sources */,
 				834B94C41DC1585200543E4F /* Keychain.swift in Sources */,

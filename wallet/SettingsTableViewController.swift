@@ -43,6 +43,13 @@ class SettingsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         oldBarStyle = navigationController?.navigationBar.barStyle
         navigationController?.navigationBar.barStyle = .default
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let selectedPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedPath, animated: true)
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         var barStyle = UIBarStyle.default
@@ -86,5 +93,13 @@ class SettingsTableViewController: UITableViewController {
         cell.textLabel?.text = text
         
         return cell
+    }
+    
+    // MARK: - Table view delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let controller = RevealPassphraseTableViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
