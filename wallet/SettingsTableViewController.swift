@@ -10,7 +10,22 @@ import UIKit
 private let cellReuseIdentifier = "UITableViewCell"
 
 class SettingsTableViewController: UITableViewController {
+    private var oldBarStyle : UIBarStyle?
 
+    convenience init() {
+        self.init(style: .grouped)
+    }
+    
+    override init(style: UITableViewStyle) {
+        // ignore input. This view is always the grouped style
+        super.init(style: .grouped)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        return nil
+    }
+    
+    // Mark: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,10 +41,16 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        oldBarStyle = navigationController?.navigationBar.barStyle
         navigationController?.navigationBar.barStyle = .default
     }
     override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.barStyle = .black
+        var barStyle = UIBarStyle.default
+        if let oldBarStyle = oldBarStyle {
+            barStyle = oldBarStyle
+        }
+        
+        navigationController?.navigationBar.barStyle = barStyle
     }
 
     func dismissSettings() {
