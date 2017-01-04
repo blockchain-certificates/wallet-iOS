@@ -39,7 +39,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="3aE-tM-Qbn">
-                        <barButtonItem key="leftBarButtonItem" enabled="NO" image="SettingsIcon" id="fxI-yi-2W3"/>
+                        <barButtonItem key="leftBarButtonItem" image="SettingsIcon" id="fxI-yi-2W3">
+                            <connections>
+                                <action selector="settingsTapped:" destination="NJ9-PO-4VH" id="ECr-c4-jm9"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="AddIcon" id="ZtD-iw-q88">
                             <connections>
                                 <action selector="addButtonTapped:" destination="NJ9-PO-4VH" id="yXd-1M-bJa"/>

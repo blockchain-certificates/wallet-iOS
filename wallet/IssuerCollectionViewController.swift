@@ -40,6 +40,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: Colors.tintColor
         ]
+        navigationController?.navigationBar.barStyle = .blackOpaque
         
         // Load any existing issuers.
         loadIssuers(shouldReloadCollection: false)
@@ -82,8 +83,9 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     // MARK: - Actions
-    @IBAction func accountTapped(_ sender: UIBarButtonItem) {
-        let controller = UINavigationController(rootViewController: AccountViewController())
+    @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
+        let settingsTable = SettingsTableViewController()
+        let controller = UINavigationController(rootViewController: settingsTable)
         present(controller, animated: true, completion: nil)
     }
     
