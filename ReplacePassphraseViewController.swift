@@ -14,12 +14,15 @@ class ReplacePassphraseViewController: UIViewController {
     @IBOutlet weak var passphraseField: UITextView!
     @IBOutlet weak var passphraseLabel: UILabel!
     
+    @IBOutlet weak var errorLabel: UILabel!
+    
     private var replaceButton : UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Replace Passphrase"
+        errorLabel.text = nil
 
         let horizontalSpace : CGFloat = 15
         passphraseField.tintColor = Colors.brandColor
@@ -34,6 +37,7 @@ class ReplacePassphraseViewController: UIViewController {
     
     func saveNewPassphrase() {
         resignFirstResponder()
+        errorLabel.text = nil
         
         guard let requestedPassphrase = passphraseField.text else {
             return
@@ -65,7 +69,7 @@ class ReplacePassphraseViewController: UIViewController {
     }
     
     func failedToSave(_ reason: String) {
-        print(reason)
+        errorLabel.text = reason
     }
     
     func authenticateUser(completionHandler: @escaping (Bool, Error?) -> Void) {
