@@ -10,10 +10,28 @@ import UIKit
 
 class ReplacePassphraseViewController: UIViewController {
 
+    @IBOutlet weak var passphraseField: UITextField!
+    
+    private var replaceButton : UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Replace Passphrase"
+        
         // Do any additional setup after loading the view.
         view.backgroundColor = Colors.baseColor
+        replaceButton = UIBarButtonItem(title: "Replace", style: .done, target: self, action: #selector(saveNewPassphrase))
+        
+        navigationItem.rightBarButtonItem = replaceButton
     }
+    
+    func saveNewPassphrase() {
+        guard let requestedPassphrase = passphraseField.text else {
+            return
+        }
+        
+        print(requestedPassphrase)
+    }
+    
 }
