@@ -18,6 +18,8 @@ class ReplacePassphraseViewController: UIViewController {
         super.viewDidLoad()
 
         title = "Replace Passphrase"
+        passphraseField.tintColor = Colors.brandColor
+        passphraseField.textContainerInset = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
         
         // Do any additional setup after loading the view.
         view.backgroundColor = Colors.baseColor
