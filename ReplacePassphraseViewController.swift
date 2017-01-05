@@ -33,6 +33,8 @@ class ReplacePassphraseViewController: UIViewController {
     }
     
     func saveNewPassphrase() {
+        resignFirstResponder()
+        
         guard let requestedPassphrase = passphraseField.text else {
             return
         }
@@ -57,8 +59,11 @@ class ReplacePassphraseViewController: UIViewController {
     }
     
     func successfulSave() {
-        print("🎉")
+        OperationQueue.main.addOperation {
+            _ = self.navigationController?.popViewController(animated: true)
+        }
     }
+    
     func failedToSave(_ reason: String) {
         print(reason)
     }
