@@ -10,7 +10,7 @@ import UIKit
 
 class ReplacePassphraseViewController: UIViewController {
 
-    @IBOutlet weak var passphraseField: UITextField!
+    @IBOutlet weak var passphraseField: UITextView!
     
     private var replaceButton : UIBarButtonItem!
     
