@@ -45,8 +45,7 @@ class AddIssuerUITests: XCTestCase {
         oneTimeCodeTextField.typeText("skfje")
         
         XCUIApplication().navigationBars["Add Issuer"].buttons["Save"].tap()
-        XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .image).element.tap()
-
+//        XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .image).element.tap()
         
         XCTAssert(true)
     }
