@@ -38,9 +38,7 @@
 		832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */; };
 		832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832D7FA31E0C5E1800A523D9 /* Analytics.swift */; };
 		8337CFCC1E1D65140080E876 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */; };
-		8337CFCD1E1D65140080E876 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */; };
 		8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */; };
-		8337CFD01E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */; };
 		8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */; };
 		83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D851DC406600025C055 /* RenderedCertificateView.swift */; };
 		83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83431D861DC406600025C055 /* RenderedCertificateView.xib */; };
@@ -48,8 +46,6 @@
 		8348CD4D1DC3AF920002E9D6 /* ShowPassphraseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348CD4C1DC3AF920002E9D6 /* ShowPassphraseTest.swift */; };
 		834B94C21DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
 		834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
-		834B94C81DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
-		834B94C91DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
 		834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
 		834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
 		834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
@@ -709,7 +705,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834B94C81DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -718,9 +713,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834B94C91DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
-				8337CFCD1E1D65140080E876 /* SettingsTableViewController.swift in Sources */,
-				8337CFD01E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */,
 				83111B481DA4110C006B058D /* walletUITests.swift in Sources */,
 				8348CD4D1DC3AF920002E9D6 /* ShowPassphraseTest.swift in Sources */,
 			);
