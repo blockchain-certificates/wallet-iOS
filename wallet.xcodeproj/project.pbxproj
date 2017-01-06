@@ -47,8 +47,6 @@
 		83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */; };
 		8348CD4D1DC3AF920002E9D6 /* ShowPassphraseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348CD4C1DC3AF920002E9D6 /* ShowPassphraseTest.swift */; };
 		834B94C21DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
-		834B94C31DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
-		834B94C41DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
 		834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
 		834B94C81DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
 		834B94C91DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
@@ -123,10 +121,10 @@
 		83111B2E1DA4110C006B058D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83111B311DA4110C006B058D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83111B331DA4110C006B058D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		83111B381DA4110C006B058D /* walletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83111B381DA4110C006B058D /* certificatesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = certificatesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83111B3C1DA4110C006B058D /* walletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletTests.swift; sourceTree = "<group>"; };
 		83111B3E1DA4110C006B058D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		83111B431DA4110C006B058D /* walletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83111B431DA4110C006B058D /* certificatesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = certificatesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83111B471DA4110C006B058D /* walletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletUITests.swift; sourceTree = "<group>"; };
 		83111B491DA4110C006B058D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83111B561DA41417006B058D /* wallet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wallet-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -237,8 +235,8 @@
 			isa = PBXGroup;
 			children = (
 				83111B241DA4110C006B058D /* certificates.app */,
-				83111B381DA4110C006B058D /* walletTests.xctest */,
-				83111B431DA4110C006B058D /* walletUITests.xctest */,
+				83111B381DA4110C006B058D /* certificatesTests.xctest */,
+				83111B431DA4110C006B058D /* certificatesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -384,9 +382,9 @@
 			productReference = 83111B241DA4110C006B058D /* certificates.app */;
 			productType = "com.apple.product-type.application";
 		};
-		83111B371DA4110C006B058D /* walletTests */ = {
+		83111B371DA4110C006B058D /* certificatesTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 83111B4F1DA4110C006B058D /* Build configuration list for PBXNativeTarget "walletTests" */;
+			buildConfigurationList = 83111B4F1DA4110C006B058D /* Build configuration list for PBXNativeTarget "certificatesTests" */;
 			buildPhases = (
 				2856E0708F57BE4D4AFEDE2C /* [CP] Check Pods Manifest.lock */,
 				83111B341DA4110C006B058D /* Sources */,
@@ -400,14 +398,14 @@
 			dependencies = (
 				83111B3A1DA4110C006B058D /* PBXTargetDependency */,
 			);
-			name = walletTests;
+			name = certificatesTests;
 			productName = walletTests;
-			productReference = 83111B381DA4110C006B058D /* walletTests.xctest */;
+			productReference = 83111B381DA4110C006B058D /* certificatesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		83111B421DA4110C006B058D /* walletUITests */ = {
+		83111B421DA4110C006B058D /* certificatesUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 83111B521DA4110C006B058D /* Build configuration list for PBXNativeTarget "walletUITests" */;
+			buildConfigurationList = 83111B521DA4110C006B058D /* Build configuration list for PBXNativeTarget "certificatesUITests" */;
 			buildPhases = (
 				957CFF607A31F73EE3F8E59F /* [CP] Check Pods Manifest.lock */,
 				83111B3F1DA4110C006B058D /* Sources */,
@@ -421,9 +419,9 @@
 			dependencies = (
 				83111B451DA4110C006B058D /* PBXTargetDependency */,
 			);
-			name = walletUITests;
+			name = certificatesUITests;
 			productName = walletUITests;
-			productReference = 83111B431DA4110C006B058D /* walletUITests.xctest */;
+			productReference = 83111B431DA4110C006B058D /* certificatesUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -486,8 +484,8 @@
 			projectRoot = "";
 			targets = (
 				83111B231DA4110C006B058D /* certificates */,
-				83111B371DA4110C006B058D /* walletTests */,
-				83111B421DA4110C006B058D /* walletUITests */,
+				83111B371DA4110C006B058D /* certificatesTests */,
+				83111B421DA4110C006B058D /* certificatesUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -713,7 +711,6 @@
 			files = (
 				834B94C81DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
-				834B94C31DC1585200543E4F /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,7 +723,6 @@
 				8337CFD01E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */,
 				83111B481DA4110C006B058D /* walletUITests.swift in Sources */,
 				8348CD4D1DC3AF920002E9D6 /* ShowPassphraseTest.swift in Sources */,
-				834B94C41DC1585200543E4F /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,7 +905,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "wallet/walletTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wallet.app/wallet";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/certificates.app/certificates";
 			};
 			name = Debug;
 		};
@@ -926,7 +922,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "wallet/walletTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/wallet.app/wallet";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/certificates.app/certificates";
 			};
 			name = Release;
 		};
@@ -943,7 +939,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "wallet/walletUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = wallet;
+				TEST_TARGET_NAME = certificates;
 			};
 			name = Debug;
 		};
@@ -959,7 +955,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "wallet/walletUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = wallet;
+				TEST_TARGET_NAME = certificates;
 			};
 			name = Release;
 		};
@@ -984,7 +980,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83111B4F1DA4110C006B058D /* Build configuration list for PBXNativeTarget "walletTests" */ = {
+		83111B4F1DA4110C006B058D /* Build configuration list for PBXNativeTarget "certificatesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83111B501DA4110C006B058D /* Debug */,
@@ -993,7 +989,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83111B521DA4110C006B058D /* Build configuration list for PBXNativeTarget "walletUITests" */ = {
+		83111B521DA4110C006B058D /* Build configuration list for PBXNativeTarget "certificatesUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83111B531DA4110C006B058D /* Debug */,

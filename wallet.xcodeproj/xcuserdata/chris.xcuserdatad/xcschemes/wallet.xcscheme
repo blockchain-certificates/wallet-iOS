@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "83111B371DA4110C006B058D"
-               BuildableName = "walletTests.xctest"
-               BlueprintName = "walletTests"
+               BuildableName = "certificatesTests.xctest"
+               BlueprintName = "certificatesTests"
                ReferencedContainer = "container:wallet.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "83111B421DA4110C006B058D"
-               BuildableName = "walletUITests.xctest"
-               BlueprintName = "walletUITests"
+               BuildableName = "certificatesUITests.xctest"
+               BlueprintName = "certificatesUITests"
                ReferencedContainer = "container:wallet.xcodeproj">
             </BuildableReference>
             <LocationScenarioReference
