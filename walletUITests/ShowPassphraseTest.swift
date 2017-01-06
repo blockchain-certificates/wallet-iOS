@@ -28,11 +28,38 @@ class ShowPassphraseTest: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testWithGoodPassword() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        XCTAssert(true)
+//        let app = XCUIApplication()
+//
+//        app.navigationBars["Issuers"].buttons["SettingsIcon"].tap()
+//        
+//        let tablesQuery = app.tables
+//        tablesQuery.staticTexts["Reveal Passphrase"].tap()
+//        
+//        // Confirm that we're being prompted for a password.
+//        
+//        // In the testing environment, any
+//        app.typeText("rr\n")
+
+//        tablesQuery.tableRows.staticTexts
+        XCTAssertTrue(true)
+        
+//        let app = XCUIApplication()
+//        app.navigationBars["Issuers"].buttons["SettingsIcon"].tap()
+//        app.tables.staticTexts["Reveal Passphrase"].tap()
+//        app.secureTextFields["Passcode field"].tap()
+//        app.typeText("tt\n")
+        
+        
+//        ttablesQuery.staticTexts["ask original ethics net polar attend guess initial crane awful boat budget guard project biology wait wedding armed electric scare end sorry dizzy prison"].tap()
+        
+    }
+    
+    func testWithBadPassword() {
+        XCTAssertTrue(true)
     }
     
 }
