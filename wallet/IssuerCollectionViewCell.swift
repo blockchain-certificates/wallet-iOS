@@ -11,16 +11,30 @@ import UIKit
 class IssuerCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak var certificateCountLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
 
+    var issuerName : String? {
+        didSet {
+            self.accessibilityLabel = issuerName
+            if titleLabel != nil {
+                titleLabel.text = issuerName
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.containerView.layer.masksToBounds = true
         self.containerView.layer.cornerRadius = Dimensions.issuerCornerRadius
+        
+        titleLabel.text = issuerName
+        
+        self.isAccessibilityElement = true
+        self.accessibilityLabel = "Issuer"
+        self.accessibilityTraits |= UIAccessibilityTraitButton
     }
 
     var certificateCount : Int {

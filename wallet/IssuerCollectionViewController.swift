@@ -146,12 +146,12 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         let managedIssuer = managedIssuers[indexPath.item]
         guard let issuer = managedIssuer.issuer else {
-            cell.titleLabel.text = "Missing issuer"
+            cell.issuerName = "Missing issuer"
             return cell
         }
         
         cell.imageView.image = UIImage(data: issuer.image)
-        cell.titleLabel.text = issuer.name
+        cell.issuerName = issuer.name
         cell.certificateCount = certificates.reduce(0, { (count, certificate) -> Int in
             if certificate.issuer.id == issuer.id {
                 return count + 1
