@@ -40,11 +40,17 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="3aE-tM-Qbn">
                         <barButtonItem key="leftBarButtonItem" image="SettingsIcon" id="fxI-yi-2W3">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Settings"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="settingsTapped:" destination="NJ9-PO-4VH" id="ECr-c4-jm9"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="AddIcon" id="ZtD-iw-q88">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Add"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="addButtonTapped:" destination="NJ9-PO-4VH" id="yXd-1M-bJa"/>
                             </connections>
