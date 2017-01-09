@@ -28,26 +28,29 @@ class AddIssuerUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
+    func testAddGameOfThronesIssuer() {
         let app = XCUIApplication()
-        app.navigationBars["Issuers"].buttons["AddIcon"].tap()
-        app.sheets.buttons["Add Issuer"].tap()
+        
+        XCTAssertFalse(app.collectionViews.cells["Game of thrones issuer on testnet"].exists, "Should start without Game of Thrones issuer existing. Otherwise this test is useless.")
 
-        let issuerUrlTextField = app.scrollViews.otherElements.textFields["Issuer URL"]
+        app.navigationBars["Issuers"].buttons["Add"].tap()
+        app.sheets.buttons["Add Issuer"].tap()
+        
+        let elementsQuery = app.scrollViews.otherElements
+        let issuerUrlTextField = elementsQuery.textFields["Issuer URL"]
         issuerUrlTextField.tap()
         issuerUrlTextField.typeText("http://www.blockcerts.org/mockissuer/issuer/got-issuer.json")
         
-        let oneTimeCodeTextField = XCUIApplication().scrollViews.otherElements.textFields["One-Time Code"]
-        oneTimeCodeTextField.tap()
-        oneTimeCodeTextField.typeText("skfje")
+        let oneTimeCode = elementsQuery.textFields["One-Time Code"]
+        oneTimeCode.tap()
+        oneTimeCode.typeText("12345")
         
         XCUIApplication().navigationBars["Add Issuer"].buttons["Save"].tap()
-//        XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .image).element.tap()
+        print(app.collectionViews.cells.count)
         
-        XCTAssert(true)
+        XCTAssert(app.navigationBars["Issuers"].exists, "Should be back on the Issuers screen.")
+        XCTAssert(app.collectionViews.cells["Game of thrones issuer on testnet"].exists, "Now, we should have a Game of Thrones issuer in the top screen.")
+
     }
     
 }
