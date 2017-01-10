@@ -43,7 +43,6 @@
 		83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D851DC406600025C055 /* RenderedCertificateView.swift */; };
 		83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83431D861DC406600025C055 /* RenderedCertificateView.xib */; };
 		83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */; };
-		8348CD4D1DC3AF920002E9D6 /* ShowPassphraseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348CD4C1DC3AF920002E9D6 /* ShowPassphraseTest.swift */; };
 		834B94C21DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
 		834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
 		834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
@@ -150,7 +149,6 @@
 		83431D851DC406600025C055 /* RenderedCertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderedCertificateView.swift; sourceTree = "<group>"; };
 		83431D861DC406600025C055 /* RenderedCertificateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderedCertificateView.xib; sourceTree = "<group>"; };
 		83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreBitcoinManager.swift; path = "External/cert-wallet/Models/CoreBitcoinManager.swift"; sourceTree = SOURCE_ROOT; };
-		8348CD4C1DC3AF920002E9D6 /* ShowPassphraseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPassphraseTest.swift; sourceTree = "<group>"; };
 		834B94C11DC1585200543E4F /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keychain.swift; path = "External/cert-wallet/Models/Keychain.swift"; sourceTree = SOURCE_ROOT; };
 		834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewCell.swift; sourceTree = "<group>"; };
 		834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				83111B471DA4110C006B058D /* walletUITests.swift */,
-				8348CD4C1DC3AF920002E9D6 /* ShowPassphraseTest.swift */,
 				836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */,
 				83111B491DA4110C006B058D /* Info.plist */,
 			);
@@ -717,7 +714,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				83111B481DA4110C006B058D /* walletUITests.swift in Sources */,
-				8348CD4D1DC3AF920002E9D6 /* ShowPassphraseTest.swift in Sources */,
 				836A0AE21E205BB4009FC12F /* AddIssuerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
