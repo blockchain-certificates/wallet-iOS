@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        let commandLineArguments = ProcessInfo.processInfo.arguments
+        if commandLineArguments.contains(Arguments.resetData) {
+            resetData()
+        }
+        
         setupApplication()
         return true
     }
@@ -174,5 +179,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return issuerCollection?.add(certificateURL: url) ?? false
     }
 
+    func resetData() {
+        // Delete all certificates
+        do {
+            for certificateURL in try FileManager.default.contentsOfDirectory(at: Paths.certificatesDirectory, includingPropertiesForKeys: nil, options: []) {
+                try FileManager.default.removeItem(at: certificateURL)
+            }
+        } catch {
+        }
+        
+        // Delete Issuers, Certificates folder, and everything else in documents directory.
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        do {
+            let allFiles = try FileManager.default.contentsOfDirectory(at: documentsDirectory, includingPropertiesForKeys: nil, options: [])
+            for fileURL in allFiles {
+                try FileManager.default.removeItem(at: fileURL)
+            }
+        } catch {
+            
+        }
+
+    }
 }
 
