@@ -200,7 +200,14 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func add(managedIssuer: ManagedIssuer) {
-        managedIssuers.append(managedIssuer)
+        // If we already have this issuer present, then let's remove it from the list and use the existing one to update it.
+        // It's not great -- Really these should be immutable models so I could just test for equality.
+        var otherIssuers = managedIssuers.filter { (existingManagedIssuer) -> Bool in
+            return existingManagedIssuer.issuer != managedIssuer.issuer
+        }
+        otherIssuers.append(managedIssuer)
+        managedIssuers = otherIssuers
+        
         saveIssuers()
         OperationQueue.main.addOperation {
             self.collectionView?.reloadData()
