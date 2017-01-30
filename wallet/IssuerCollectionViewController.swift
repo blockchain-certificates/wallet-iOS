@@ -58,6 +58,26 @@ class IssuerCollectionViewController: UICollectionViewController {
         } else {
             loadBrandedBackgroundView()
         }
+        
+        super.viewWillAppear(animated)
+        
+        animateNavigationBarColors()
+    }
+    
+    func animateNavigationBarColors() {
+        guard let coordinator = self.transitionCoordinator else {
+            return
+        }
+        
+        coordinator.animate(alongsideTransition: { [weak self] (context) in
+            self?.navigationController?.navigationBar.barTintColor = Colors.brandColor
+            self?.navigationController?.navigationBar.tintColor = .white
+            self?.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.white
+            ]
+            
+            self?.navigationController?.navigationBar.barStyle = .black
+        }, completion: nil)
     }
     
     func loadEmptyBackgroundView() {
