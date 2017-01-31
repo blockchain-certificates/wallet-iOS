@@ -72,30 +72,6 @@ class IssuerViewController: UIViewController {
         if certificates.isEmpty {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(confirmDeleteIssuer))
         }
-        
-        
-        super.viewWillAppear(true)
-        
-        animateNavigationBarColors()
-    }
-    
-    override func willMove(toParentViewController parent: UIViewController?) {
-        navigationController?.navigationBar.barTintColor = Colors.brandColor
-        super.willMove(toParentViewController: parent)
-    }
-    func animateNavigationBarColors() {
-        guard let coordinator = self.transitionCoordinator else {
-            return
-        }
-        coordinator.animate(alongsideTransition: { [weak self] (context) in
-            self?.navigationController?.navigationBar.barTintColor = .white
-            self?.navigationController?.navigationBar.tintColor = Colors.brandColor
-            self?.navigationController?.navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName: UIColor.black
-            ]
-            
-            self?.navigationController?.navigationBar.barStyle = .default
-        }, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,9 +79,7 @@ class IssuerViewController: UIViewController {
             let selectedPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedPath, animated: true)
         }
-        super.viewDidAppear(animated)
     }
-    
     
     func confirmDeleteIssuer() {
         guard let issuerToDelete = self.managedIssuer else {
