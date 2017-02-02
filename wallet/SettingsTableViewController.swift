@@ -31,7 +31,7 @@ class SettingsTableViewController: UITableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        title = "Settings"
+        title = NSLocalizedString("Settings", comment: "Settings")
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         navigationController?.navigationBar.tintColor = Colors.brandColor
@@ -87,9 +87,9 @@ class SettingsTableViewController: UITableViewController {
         var text : String?
         switch indexPath.row {
         case 0:
-            text = "Reveal Passphrase"
+            text = NSLocalizedString("Reveal Passphrase", comment: "Reveal Passphrase")
         case 1:
-            text = "Replace Passphrase"
+            text = NSLocalizedString("Replace Passphrase", comment: "Replace Passphrase")
         default:
             text = nil
         }
