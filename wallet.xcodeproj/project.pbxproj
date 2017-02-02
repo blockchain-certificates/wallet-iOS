@@ -46,17 +46,17 @@
 		834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
 		836A0AE21E205BB4009FC12F /* AddIssuerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */; };
 		83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */; };
-		83802BF51E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */; };
 		838DC1111E43EC7900533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1131E43EC7900533AEB /* InfoPlist.strings */; };
 		838DC1161E43EC7A00533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1181E43EC7A00533AEB /* InfoPlist.strings */; };
 		838DC11B1E43EC7A00533AEB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC11D1E43EC7A00533AEB /* Localizable.strings */; };
 		838DC1211E43EC7B00533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1231E43EC7B00533AEB /* InfoPlist.strings */; };
 		838DC1301E43EF1600533AEB /* ReplacePassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */; };
 		838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */; };
+		838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1341E43F0A400533AEB /* NoCertificatesTableViewCell.xib */; };
+		838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */; };
+		838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC13A1E43F0F700533AEB /* CertificateViewController.xib */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
-		83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */; };
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
-		83A6EDDB1DAFFD5B00ABFB47 /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDD91DAFFD5B00ABFB47 /* CertificateViewController.xib */; };
 		83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */; };
 		83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */; };
 		83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */; };
@@ -150,7 +150,6 @@
 		834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionViewCell.xib; sourceTree = "<group>"; };
 		836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerUITests.swift; sourceTree = "<group>"; };
 		83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCertificatesTableViewCell.swift; sourceTree = "<group>"; };
-		83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoCertificatesTableViewCell.xib; sourceTree = "<group>"; };
 		838DC1121E43EC7900533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		838DC1171E43EC7A00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		838DC11C1E43EC7A00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -159,10 +158,11 @@
 		838DC1241E43EC7B00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplacePassphraseViewController.swift; sourceTree = "<group>"; };
 		838DC1321E43EFB900533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ReplacePassphraseViewController.xib; sourceTree = "<group>"; };
+		838DC1351E43F0A400533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NoCertificatesTableViewCell.xib; sourceTree = "<group>"; };
+		838DC1381E43F0D300533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddIssuerViewController.xib; sourceTree = "<group>"; };
+		838DC13B1E43F0F700533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CertificateViewController.xib; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
-		83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddIssuerViewController.xib; sourceTree = "<group>"; };
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
-		83A6EDD91DAFFD5B00ABFB47 /* CertificateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateViewController.xib; sourceTree = "<group>"; };
 		83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
 		83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTitleTableViewCell.swift; sourceTree = "<group>"; };
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
@@ -262,10 +262,10 @@
 				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
 				83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */,
 				83DC0D931DBA87C300453116 /* Constants.swift */,
+				838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */,
 				83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */,
-				83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */,
 				83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */,
-				83A6EDD91DAFFD5B00ABFB47 /* CertificateViewController.xib */,
+				838DC13A1E43F0F700533AEB /* CertificateViewController.xib */,
 				83111B561DA41417006B058D /* wallet-Bridging-Header.h */,
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
 				83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */,
@@ -337,7 +337,7 @@
 				8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */,
 				8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */,
 				83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */,
-				83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */,
+				838DC1341E43F0A400533AEB /* NoCertificatesTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -494,19 +494,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				8313818D1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
+				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
 				838DC1211E43EC7B00533AEB /* InfoPlist.strings in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
-				83802BF51E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
-				83A6EDDB1DAFFD5B00ABFB47 /* CertificateViewController.xib in Resources */,
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */,
+				838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */,
 				838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */,
+				838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */,
 				838DC11B1E43EC7A00533AEB /* Localizable.strings in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
-				83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,6 +792,30 @@
 				838DC1321E43EFB900533AEB /* Base */,
 			);
 			name = ReplacePassphraseViewController.xib;
+			sourceTree = "<group>";
+		};
+		838DC1341E43F0A400533AEB /* NoCertificatesTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838DC1351E43F0A400533AEB /* Base */,
+			);
+			name = NoCertificatesTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838DC1381E43F0D300533AEB /* Base */,
+			);
+			name = AddIssuerViewController.xib;
+			sourceTree = "<group>";
+		};
+		838DC13A1E43F0F700533AEB /* CertificateViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838DC13B1E43F0F700533AEB /* Base */,
+			);
+			name = CertificateViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
