@@ -56,12 +56,13 @@ class IssuerTableViewController: UITableViewController {
         let issuerName = managedIssuer?.issuer?.name ?? "this issuer"
         
         if certificates.isEmpty {
-            var subtitle = "You don't have any certificates from \(issuerName)."
+            var subtitle = String(format: NSLocalizedString("You don't have any certificates from %@", comment: "You don't have any certificates from {Issuer name}"), issuerName);
             
             if managedIssuer?.introducedWithAddress != nil {
-                subtitle = "Hang tight! You should see an email with your certificate from \(issuerName) soon."
+                subtitle = String(format: NSLocalizedString("Hang tight! You should see an email with your certificate from %@ soon.", comment: "Hang tight! You should see an email with your certificate from {Issuer Name} soon."))
             }
-            tableView.backgroundView = NoContentView(title: "No Certificates", subtitle: subtitle)
+            let noCertificatesTitle = NSLocalizedString("No Certificates", comment: "No Certificates, title")
+            tableView.backgroundView = NoContentView(title: noCertificatesTitle, subtitle: subtitle)
         } else {
             tableView.backgroundView = nil
         }
@@ -96,7 +97,7 @@ class IssuerTableViewController: UITableViewController {
         containerView.backgroundColor = Colors.baseColor
         
         let label = UILabel()
-        label.text = "CERTIFICATES"
+        label.text = NSLocalizedString("Certificates", comment: "Certificates").uppercased()
         label.textColor = Colors.primaryTextColor
         label.font = UIFont.systemFont(ofSize: 11, weight: UIFontWeightBold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -146,15 +147,19 @@ class IssuerTableViewController: UITableViewController {
             return
         }
         
-        let prompt = UIAlertController(title: "Are you sure you want to delete this issuer?", message: nil, preferredStyle: .alert)
-        prompt.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+        let deleteConfirmationTitle = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Are you sure you want to delete this issuer?")
+        let deleteAction = NSLocalizedString("Delete", comment: "Delete")
+        let cancelAction = NSLocalizedString("Cancel", comment: "Cancel")
+        
+        let prompt = UIAlertController(title: deleteConfirmationTitle, message: nil, preferredStyle: .alert)
+        prompt.addAction(UIAlertAction(title: deleteAction, style: .destructive, handler: { [weak self] _ in
             _ = self?.navigationController?.popToRootViewController(animated: true)
             if let rootController = self?.navigationController?.topViewController as? IssuerCollectionViewController {
                 rootController.remove(managedIssuer: issuerToDelete)
             }
             
         }))
-        prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        prompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
         
         present(prompt, animated: true, completion: nil)
     }
@@ -192,8 +197,12 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
             } catch {
                 print(error)
                 
-                let alertController = UIAlertController(title: "Couldn't delete file", message: "Something went wrong deleting that certificate.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                let deleteTitle = NSLocalizedString("Couldn't delete file", comment: "Couldn't delete file")
+                let deleteMessage = NSLocalizedString("Something went wrong deleting that certificate.", comment: "Something went wrong deleting that certificate.")
+                let okay = NSLocalizedString("OK", comment: "OK")
+                
+                let alertController = UIAlertController(title: deleteTitle, message: deleteMessage, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
                 self?.present(alertController, animated: true, completion: nil)
             }
         })
