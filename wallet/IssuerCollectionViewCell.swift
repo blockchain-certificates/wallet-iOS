@@ -33,7 +33,7 @@ class IssuerCollectionViewCell: UICollectionViewCell {
         titleLabel.text = issuerName
         
         self.isAccessibilityElement = true
-        self.accessibilityLabel = "Issuer"
+        self.accessibilityLabel = NSLocalizedString("Issuer", comment: "Accessibility label: Issuer collection cell")
         self.accessibilityTraits |= UIAccessibilityTraitButton
     }
 
