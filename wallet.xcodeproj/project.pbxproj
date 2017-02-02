@@ -49,8 +49,6 @@
 		836A0AE21E205BB4009FC12F /* AddIssuerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */; };
 		83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */; };
 		83802BF51E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */; };
-		83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */; };
-		83A6EDD11DAFF7D600ABFB47 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
 		83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */; };
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
@@ -151,8 +149,6 @@
 		836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerUITests.swift; sourceTree = "<group>"; };
 		83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCertificatesTableViewCell.swift; sourceTree = "<group>"; };
 		83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoCertificatesTableViewCell.xib; sourceTree = "<group>"; };
-		83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
 		83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddIssuerViewController.xib; sourceTree = "<group>"; };
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
@@ -256,8 +252,6 @@
 				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
 				83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */,
 				83DC0D931DBA87C300453116 /* Constants.swift */,
-				83A6EDCE1DAFF7D600ABFB47 /* AccountViewController.swift */,
-				83A6EDCF1DAFF7D600ABFB47 /* AccountViewController.xib */,
 				83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */,
 				83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */,
 				83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */,
@@ -494,7 +488,6 @@
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */,
 				831667F61E1DBA3800E70EB6 /* ReplacePassphraseViewController.xib in Resources */,
-				83A6EDD11DAFF7D600ABFB47 /* AccountViewController.xib in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
 				83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */,
@@ -672,7 +665,6 @@
 				83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */,
 				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,
 				8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */,
-				83A6EDD01DAFF7D600ABFB47 /* AccountViewController.swift in Sources */,
 				83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */,
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,
 				834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
