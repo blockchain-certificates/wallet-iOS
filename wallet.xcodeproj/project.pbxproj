@@ -26,8 +26,6 @@
 		8313818D1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */; };
 		8313818E1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */; };
 		8313818F1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */; };
-		831667F51E1DBA3800E70EB6 /* ReplacePassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831667F31E1DBA3800E70EB6 /* ReplacePassphraseViewController.swift */; };
-		831667F61E1DBA3800E70EB6 /* ReplacePassphraseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831667F41E1DBA3800E70EB6 /* ReplacePassphraseViewController.xib */; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
 		8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */; };
 		8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */; };
@@ -53,6 +51,8 @@
 		838DC1161E43EC7A00533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1181E43EC7A00533AEB /* InfoPlist.strings */; };
 		838DC11B1E43EC7A00533AEB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC11D1E43EC7A00533AEB /* Localizable.strings */; };
 		838DC1211E43EC7B00533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1231E43EC7B00533AEB /* InfoPlist.strings */; };
+		838DC1301E43EF1600533AEB /* ReplacePassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */; };
+		838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
 		83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */; };
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
@@ -131,8 +131,6 @@
 		83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerViewController.swift; sourceTree = "<group>"; };
 		83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryView.swift; sourceTree = "<group>"; };
 		8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		831667F31E1DBA3800E70EB6 /* ReplacePassphraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReplacePassphraseViewController.swift; path = ../ReplacePassphraseViewController.swift; sourceTree = "<group>"; };
-		831667F41E1DBA3800E70EB6 /* ReplacePassphraseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReplacePassphraseViewController.xib; path = ../ReplacePassphraseViewController.xib; sourceTree = "<group>"; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
 		8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -159,6 +157,8 @@
 		838DC11E1E43EC7A00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		838DC1221E43EC7B00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		838DC1241E43EC7B00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplacePassphraseViewController.swift; sourceTree = "<group>"; };
+		838DC1321E43EFB900533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ReplacePassphraseViewController.xib; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
 		83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddIssuerViewController.xib; sourceTree = "<group>"; };
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
@@ -248,8 +248,6 @@
 				834B94C11DC1585200543E4F /* Keychain.swift */,
 				83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */,
 				83111B271DA4110C006B058D /* AppDelegate.swift */,
-				831667F31E1DBA3800E70EB6 /* ReplacePassphraseViewController.swift */,
-				831667F41E1DBA3800E70EB6 /* ReplacePassphraseViewController.xib */,
 				832D7FA31E0C5E1800A523D9 /* Analytics.swift */,
 				83802BF61E01BC2B00E54C13 /* Cells */,
 				83111B2B1DA4110C006B058D /* Main.storyboard */,
@@ -272,6 +270,8 @@
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
 				83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */,
 				83F196251DC9077A00590219 /* ManagedIssuer.swift */,
+				838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */,
+				838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -502,7 +502,7 @@
 				83A6EDDB1DAFFD5B00ABFB47 /* CertificateViewController.xib in Resources */,
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */,
-				831667F61E1DBA3800E70EB6 /* ReplacePassphraseViewController.xib in Resources */,
+				838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */,
 				838DC11B1E43EC7A00533AEB /* Localizable.strings in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
@@ -685,9 +685,9 @@
 				8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */,
 				83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */,
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,
+				838DC1301E43EF1600533AEB /* ReplacePassphraseViewController.swift in Sources */,
 				834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */,
-				831667F51E1DBA3800E70EB6 /* ReplacePassphraseViewController.swift in Sources */,
 				83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */,
 				832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */,
 				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
@@ -784,6 +784,14 @@
 				838DC1221E43EC7B00533AEB /* fr */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838DC1321E43EFB900533AEB /* Base */,
+			);
+			name = ReplacePassphraseViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
