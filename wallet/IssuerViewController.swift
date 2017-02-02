@@ -86,15 +86,19 @@ class IssuerViewController: UIViewController {
             return
         }
         
-        let prompt = UIAlertController(title: "Are you sure you want to delete this issuer?", message: nil, preferredStyle: .alert)
-        prompt.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+        let title = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Are you sure you want to delete this issuer?")
+        let delete = NSLocalizedString("Delete", comment: "Delete")
+        let cancel = NSLocalizedString("Cancel", comment: "Cancel")
+        
+        let prompt = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] _ in
             _ = self?.navigationController?.popToRootViewController(animated: true)
             if let rootController = self?.navigationController?.topViewController as? IssuerCollectionViewController {
                 rootController.remove(managedIssuer: issuerToDelete)
             }
             
         }))
-        prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
         
         present(prompt, animated: true, completion: nil)
     }
@@ -134,9 +138,13 @@ extension IssuerViewController : CertificateViewControllerDelegate {
                 }
             } catch {
                 print(error)
+                let title = NSLocalizedString("Couldn't delete file", comment: "Couldn't delete file")
+                let message = NSLocalizedString("Something went wrong deleting that certificate.", comment: "Something went wrong deleting that certificate.")
+                let okay = NSLocalizedString("OK", comment: "OK")
                 
-                let alertController = UIAlertController(title: "Couldn't delete file", message: "Something went wrong deleting that certificate.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
                 self?.present(alertController, animated: true, completion: nil)
             }
         })
