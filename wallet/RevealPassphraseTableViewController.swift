@@ -44,7 +44,7 @@ class RevealPassphraseTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        title = "Passphrase"
+        title = NSLocalizedString("Passphrase", comment: "Passphrase, nav title")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.register(LabeledTableViewCell.self, forCellReuseIdentifier: labeledCellReuseIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -70,13 +70,13 @@ class RevealPassphraseTableViewController: UITableViewController {
         let cell : UITableViewCell!
         if hasAuthenticated {
             let labeledCell = tableView.dequeueReusableCell(withIdentifier: labeledCellReuseIdentifier) as! LabeledTableViewCell
-            labeledCell.titleLabel.text = "Current Passphrase"
+            labeledCell.titleLabel.text = NSLocalizedString("Current Passphrase", comment: "Current Passphrase")
             labeledCell.contentLabel.text = Keychain.shared.seedPhrase
             
             cell = labeledCell
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
-            cell.textLabel?.text = "Show Passphrase"
+            cell.textLabel?.text = NSLocalizedString("Show Passphrase", comment: "Show Passphrase")
             cell.selectionStyle = .default
             cell.textLabel?.textColor = Colors.brandColor
         }
@@ -85,14 +85,14 @@ class RevealPassphraseTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 && hasAuthenticated {
-            return "Information"
+            return NSLocalizedString("Information", comment: "Information, about the passphrase")
         }
         return nil
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 0 && !hasAuthenticated {
-            let genericError = "Please try to authenticate again to see your passphrase."
+            let genericError = NSLocalizedString("Please try to authenticate again to see your passphrase.", comment: "Please try to authenticate again to see your passphrase.")
             
             if let details = specificAuthenticationError {
                 return "\(details)\n\n\(genericError)"
@@ -155,7 +155,7 @@ class RevealPassphraseTableViewController: UITableViewController {
                 
                 switch error {
                 case AuthErrors.noAuthMethodAllowed:
-                    self.specificAuthenticationError = "It looks like local authentication is disabled for this app. Without it, showing your passphrase would be insecure. Please enable local authentication for this app in Settings"
+                    self.specificAuthenticationError = NSLocalizedString("It looks like local authentication is disabled for this app. Without it, showing your passphrase would be insecure. Please enable local authentication for this app in Settings", comment: "It looks like local authentication is disabled for this app. Without it, showing your passphrase would be insecure. Please enable local authentication for this app in Settings")
                 default:
                     self.specificAuthenticationError = nil
                 }
@@ -171,13 +171,14 @@ class RevealPassphraseTableViewController: UITableViewController {
     func authenticateUser(completionHandler: @escaping (Bool, Error?) -> Void) {
         let context = LAContext()
         var error : NSError? = nil
+        let reason = NSLocalizedString("Authenticate to see your secure passphrase.", comment: "Authenticate to see your secure passphrase.")
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Authenticate to see your secure passphrase.", reply: completionHandler)
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason, reply: completionHandler)
         } else if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             context.evaluatePolicy(
                 .deviceOwnerAuthentication,
-                localizedReason: "Authenticate to see your secure passphrase.",
+                localizedReason: reason,
                 reply: completionHandler)
         } else {
             completionHandler(false, AuthErrors.noAuthMethodAllowed)
