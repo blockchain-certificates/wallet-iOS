@@ -61,7 +61,9 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func loadEmptyBackgroundView() {
-        let emptyView = NoContentView(title: "No Issuers", subtitle: "Add your first Issuer by tapping the add button above.")
+        let title = NSLocalizedString("No Issuers", comment: "Empty issuers title")
+        let subtitle = NSLocalizedString("Add your first Issuer by tapping the add button above.", comment: "Empty issuers subtitle")
+        let emptyView = NoContentView(title: title, subtitle: subtitle)
         emptyView.translatesAutoresizingMaskIntoConstraints = false
         
         let constraints = [
@@ -90,13 +92,19 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        let addIssuer = NSLocalizedString("Add Issuer", comment: "Add issuer contextual action")
+        let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Add certificate from file contextual action")
+        let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Add certificate from URL contextual action")
+        let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
+        
+        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        alertController.addAction(UIAlertAction(title: "Add Issuer", style: .default, handler: { [weak self] _ in
+        alertController.addAction(UIAlertAction(title: addIssuer, style: .default, handler: { [weak self] _ in
             self?.showAddIssuerFlow()
         }))
         
-        alertController.addAction(UIAlertAction(title: "Import Certificate from File", style: .default, handler: { [weak self] _ in
+        alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
             let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
             controller.delegate = self
             controller.modalPresentationStyle = .formSheet
@@ -104,13 +112,16 @@ class IssuerCollectionViewController: UICollectionViewController {
             self?.present(controller, animated: true, completion: nil)
         }))
         
-        alertController.addAction(UIAlertAction(title: "Import Certificate from URL", style: .default, handler: { [weak self] _ in
-            let urlPrompt = UIAlertController(title: nil, message: "What's the URL of the certificate?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
+            let certificateURLPrompt = NSLocalizedString("What's the URL of the certificate?", comment: "Certificate URL prompt for import")
+            let importAction = NSLocalizedString("Import", comment: "Import certificate action")
+            
+            let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)
             urlPrompt.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "URL"
+                textField.placeholder = NSLocalizedString("URL", comment: "URL placeholder text")
             })
             
-            urlPrompt.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in
+            urlPrompt.addAction(UIAlertAction(title: importAction, style: .default, handler: { (_) in
                 guard let urlField = urlPrompt.textFields?.first,
                     let trimmedText = urlField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
                     let url = URL(string: trimmedText) else {
@@ -120,12 +131,12 @@ class IssuerCollectionViewController: UICollectionViewController {
                 _ = self?.add(certificateURL: url)
             }))
             
-            urlPrompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            urlPrompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
             
             self?.present(urlPrompt, animated: true, completion: nil)
         }))
         
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
         
         present(alertController, animated: true, completion: nil)
     }
@@ -146,7 +157,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         let managedIssuer = managedIssuers[indexPath.item]
         guard let issuer = managedIssuer.issuer else {
-            cell.issuerName = "Missing issuer"
+            cell.issuerName = NSLocalizedString("Missing issuer", comment: "Error state: missing issuer data in issuer cell")
             return cell
         }
         
@@ -349,17 +360,23 @@ extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
 // MARK: Functions from the open source.
 extension IssuerCollectionViewController {
     func importCertificate(from data: Data?) {
+        let okay = NSLocalizedString("OK", comment: "OK dismiss action")
         guard let data = data else {
-            let alertController = UIAlertController(title: "Couldn't read file", message: "Something went wrong trying to open the file.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alertController] action in
+            let title = NSLocalizedString("Couldn't read file", comment: "Failed to read file on import, title")
+            let message = NSLocalizedString("Something went wrong trying to open the file.", comment: "Failed to read file on import, message")
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: okay, style: .default, handler: { [weak alertController] action in
                 alertController?.dismiss(animated: true, completion: nil)
                 }))
             present(alertController, animated: true, completion: nil)
             return
         }
         guard let certificate = try? CertificateParser.parse(data: data) else {
-            let alertController = UIAlertController(title: "Invalid Certificate", message: "That doesn't appear to be a valid Certificate file.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alertController] action in
+            let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
+            let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
+            
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: okay, style: .default, handler: { [weak alertController] action in
                 alertController?.dismiss(animated: true, completion: nil)
                 }))
             present(alertController, animated: true, completion: nil)
