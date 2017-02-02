@@ -324,19 +324,15 @@ class IssuerCollectionViewController: UICollectionViewController {
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView.cellForItem(at: indexPath) is AddIssuerCollectionViewCell {
-            showAddIssuerFlow()
-        } else {
-            let managedIssuer = managedIssuers[indexPath.item]
-            let issuerController = IssuerViewController()
-            
-            issuerController.managedIssuer = managedIssuer
-            issuerController.certificates = certificates.filter { certificate in
-                return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
-            }
-            
-            self.navigationController?.pushViewController(issuerController, animated: true)
+        let managedIssuer = managedIssuers[indexPath.item]
+        let issuerController = IssuerViewController()
+        
+        issuerController.managedIssuer = managedIssuer
+        issuerController.certificates = certificates.filter { certificate in
+            return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
         }
+        
+        self.navigationController?.pushViewController(issuerController, animated: true)
     }
 }
 

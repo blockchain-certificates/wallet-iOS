@@ -16,7 +16,6 @@ class CertificateViewController: UIViewController {
     public let certificate: Certificate
     private let bitcoinManager = CoreBitcoinManager()
     
-    
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     
     @IBOutlet weak var toolbar: UIToolbar!
@@ -42,10 +41,6 @@ class CertificateViewController: UIViewController {
         self.title = certificate.title
         renderCertificate()
         stylize()
-        
-//        navigationController?.hidesBarsOnSwipe = true
-//        navigationController?.hidesBottomBarWhenPushed = true
-//        navigationController?.setToolbarHidden(false, animated: false)
         
         Analytics.shared.track(event: .viewed, certificate: certificate)
     }
@@ -81,8 +76,12 @@ class CertificateViewController: UIViewController {
         } catch {
             print("Failed to write temporary URL")
             
-            let errorAlert = UIAlertController(title: "Couldn't share certificate.", message: "Something went wrong preparing that file for sharing. Try again later.", preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let title = NSLocalizedString("Couldn't share certificate.", comment: "Certificate failure title.")
+            let message = NSLocalizedString("Something went wrong preparing that file for sharing. Try again later.", comment: "Certificae failure message.")
+            let okay = NSLocalizedString("OK", comment: "Confirm alert")
+            
+            let errorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
             present(errorAlert, animated: true, completion: nil)
             return
         }
@@ -104,7 +103,7 @@ class CertificateViewController: UIViewController {
         Analytics.shared.track(event: .validated, certificate: certificate)
         
         verifyButton.isEnabled = false
-        verifyButton.title = "Verifying..."
+        verifyButton.title = NSLocalizedString("Verifying...", comment: "Verifying a certificate")
         progressView.progress = 0.5
         progressView.isHidden = false
         
@@ -115,21 +114,21 @@ class CertificateViewController: UIViewController {
                 let title : String!
                 let message : String!
                 if success {
-                    title = "Success"
-                    message = "This is a valid certificate!"
+                    title = NSLocalizedString("Success", comment: "Successful certificate validation title")
+                    message = NSLocalizedString("This is a valid certificate!", comment: "Successful certificate validation message")
                 } else {
-                    title = "Invalid"
-                    message = "\(error!)"
+                    title = NSLocalizedString("Invalid", comment: "Failed certificate validation title")
+                    message = NSLocalizedString(error!, comment: "Specific error message for an invalid certificate.")
                 }
 
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm alert"), style: .default, handler: nil))
                 
                 OperationQueue.main.addOperation {
                     self?.present(alert, animated: true, completion: nil)
                     self?.inProgressRequest = nil
                     self?.verifyButton.isEnabled = true
-                    self?.verifyButton.title = "Verify"
+                    self?.verifyButton.title = NSLocalizedString("Verify", comment: "Verify a certificate.")
                     self?.progressView.progress = 1
                     self?.progressView.isHidden = true
                 }
@@ -141,27 +140,20 @@ class CertificateViewController: UIViewController {
     
     @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
         let certificateToDelete = certificate
-        let prompt = UIAlertController(title: "Be careful", message: "If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", preferredStyle: .alert)
-        prompt.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] (_) in
+        let title = NSLocalizedString("Be careful", comment: "Delete cerrtificatre warning title")
+        let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Delete certificate confirmation message")
+        let delete = NSLocalizedString("Delete", comment: "Confirm delete")
+        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
+        
+        let prompt = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] (_) in
             _ = self?.navigationController?.popViewController(animated: true)
             self?.delegate?.delete(certificate: certificateToDelete)
         }))
-        prompt.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
         
         present(prompt, animated: true, completion: nil)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension CertificateViewController : CertificateValidationRequestDelegate {
