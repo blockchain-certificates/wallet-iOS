@@ -46,7 +46,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         loadIssuers(shouldReloadCollection: false)
         loadCertificates(shouldReloadCollection: false)
         reloadCollectionView()
-        title = "Issuers"
+        title = NSLocalizedString("Issuers", comment: "Title in screen of multiple issuers")
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     

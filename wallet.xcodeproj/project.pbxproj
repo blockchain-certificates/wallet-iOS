@@ -49,6 +49,10 @@
 		836A0AE21E205BB4009FC12F /* AddIssuerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */; };
 		83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */; };
 		83802BF51E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */; };
+		838DC1111E43EC7900533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1131E43EC7900533AEB /* InfoPlist.strings */; };
+		838DC1161E43EC7A00533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1181E43EC7A00533AEB /* InfoPlist.strings */; };
+		838DC11B1E43EC7A00533AEB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC11D1E43EC7A00533AEB /* Localizable.strings */; };
+		838DC1211E43EC7B00533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1231E43EC7B00533AEB /* InfoPlist.strings */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
 		83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */; };
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
@@ -149,6 +153,12 @@
 		836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerUITests.swift; sourceTree = "<group>"; };
 		83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCertificatesTableViewCell.swift; sourceTree = "<group>"; };
 		83802BF31E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoCertificatesTableViewCell.xib; sourceTree = "<group>"; };
+		838DC1121E43EC7900533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		838DC1171E43EC7A00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		838DC11C1E43EC7A00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		838DC11E1E43EC7A00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		838DC1221E43EC7B00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		838DC1241E43EC7B00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
 		83A6EDD31DAFFAC200ABFB47 /* AddIssuerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddIssuerViewController.xib; sourceTree = "<group>"; };
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +242,8 @@
 		83111B261DA4110C006B058D /* wallet */ = {
 			isa = PBXGroup;
 			children = (
+				838DC1231E43EC7B00533AEB /* InfoPlist.strings */,
+				838DC11D1E43EC7A00533AEB /* Localizable.strings */,
 				8318FC561DAD958F006A8FD5 /* wallet.entitlements */,
 				834B94C11DC1585200543E4F /* Keychain.swift */,
 				83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */,
@@ -267,6 +279,7 @@
 		83111B3B1DA4110C006B058D /* walletTests */ = {
 			isa = PBXGroup;
 			children = (
+				838DC1131E43EC7900533AEB /* InfoPlist.strings */,
 				83111B3C1DA4110C006B058D /* walletTests.swift */,
 				83111B3E1DA4110C006B058D /* Info.plist */,
 			);
@@ -276,6 +289,7 @@
 		83111B461DA4110C006B058D /* walletUITests */ = {
 			isa = PBXGroup;
 			children = (
+				838DC1181E43EC7A00533AEB /* InfoPlist.strings */,
 				83111B471DA4110C006B058D /* walletUITests.swift */,
 				836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */,
 				83111B491DA4110C006B058D /* Info.plist */,
@@ -480,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8313818D1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
+				838DC1211E43EC7B00533AEB /* InfoPlist.strings in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				83802BF51E01BC1E00E54C13 /* NoCertificatesTableViewCell.xib in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
@@ -488,6 +503,7 @@
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */,
 				831667F61E1DBA3800E70EB6 /* ReplacePassphraseViewController.xib in Resources */,
+				838DC11B1E43EC7A00533AEB /* Localizable.strings in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
 				83A6EDD51DAFFAC200ABFB47 /* AddIssuerViewController.xib in Resources */,
@@ -499,6 +515,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
+				838DC1111E43EC7900533AEB /* InfoPlist.strings in Resources */,
 				8313818E1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
+				838DC1161E43EC7A00533AEB /* InfoPlist.strings in Resources */,
 				8313818F1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,6 +740,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				83111B2C1DA4110C006B058D /* Base */,
+				838DC1241E43EC7B00533AEB /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -730,8 +749,41 @@
 			isa = PBXVariantGroup;
 			children = (
 				83111B311DA4110C006B058D /* Base */,
+				838DC11E1E43EC7A00533AEB /* fr */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		838DC1131E43EC7900533AEB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838DC1121E43EC7900533AEB /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		838DC1181E43EC7A00533AEB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838DC1171E43EC7A00533AEB /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		838DC11D1E43EC7A00533AEB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838DC11C1E43EC7A00533AEB /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		838DC1231E43EC7B00533AEB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				838DC1221E43EC7B00533AEB /* fr */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
