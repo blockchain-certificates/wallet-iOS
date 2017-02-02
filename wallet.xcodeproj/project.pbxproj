@@ -131,6 +131,10 @@
 		83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerViewController.swift; sourceTree = "<group>"; };
 		83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryView.swift; sourceTree = "<group>"; };
 		8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		83141DC61E43F21D00739A95 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/NoCertificatesTableViewCell.strings; sourceTree = "<group>"; };
+		83141DC71E43F21D00739A95 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AddIssuerViewController.strings; sourceTree = "<group>"; };
+		83141DC81E43F21E00739A95 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CertificateViewController.strings; sourceTree = "<group>"; };
+		83141DC91E43F21E00739A95 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ReplacePassphraseViewController.strings; sourceTree = "<group>"; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
 		8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -429,7 +433,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Learning Machine, Inc";
 				TargetAttributes = {
 					83111B231DA4110C006B058D = {
@@ -790,6 +794,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				838DC1321E43EFB900533AEB /* Base */,
+				83141DC91E43F21E00739A95 /* fr */,
 			);
 			name = ReplacePassphraseViewController.xib;
 			sourceTree = "<group>";
@@ -798,6 +803,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				838DC1351E43F0A400533AEB /* Base */,
+				83141DC61E43F21D00739A95 /* fr */,
 			);
 			name = NoCertificatesTableViewCell.xib;
 			sourceTree = "<group>";
@@ -806,6 +812,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				838DC1381E43F0D300533AEB /* Base */,
+				83141DC71E43F21D00739A95 /* fr */,
 			);
 			name = AddIssuerViewController.xib;
 			sourceTree = "<group>";
@@ -814,6 +821,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				838DC13B1E43F0F700533AEB /* Base */,
+				83141DC81E43F21E00739A95 /* fr */,
 			);
 			name = CertificateViewController.xib;
 			sourceTree = "<group>";
@@ -825,6 +833,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -875,6 +884,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

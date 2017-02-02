@@ -68,6 +68,9 @@
 /* Accessibility label: Issuer collection cell */
 "Issuer" = "Îššûûéŕ";
 
+/* Title in screen of multiple issuers */
+"Issuers" = "Îššûûéŕšš";
+
 /* It looks like local authentication is disabled for this app. Without it, showing your passphrase would be insecure. Please enable local authentication for this app in Settings */
 "It looks like local authentication is disabled for this app. Without it, showing your passphrase would be insecure. Please enable local authentication for this app in Settings" = "Îţ ļļôôķķš ļļîķé  ļôççàļ  àûţĥĥéñţţîçààţîôññ îšš ðîîšàƀļļéð  ƒôŕŕ ţĥîîš ààþþ·· Ŵîţţĥôûûţ îîţ، ššĥôŵŵîñĝĝ ýôûûŕ þþàšššþĥŕààšé  ŵôûûļð ƀƀé îîñšééçûŕéé· ÞÞļéààšé ééñàƀƀļé  ļôçààļ ààûţĥĥéñţîîçàţţîôññ ƒôŕŕ ţĥĥîš  àþþ  îñ  Šéţţţîñĝĝš";
 
