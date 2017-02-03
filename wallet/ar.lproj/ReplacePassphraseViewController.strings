@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "Error with your thing"; ObjectID = "6x5-Qx-5Nj"; */
+"6x5-Qx-5Nj.text" = "Error with your thing";
+
+/* Class = "UILabel"; text = "Paste Passphrase"; ObjectID = "CWb-zF-sGv"; */
+"CWb-zF-sGv.text" = "Paste Passphrase";
+
+/* Class = "UILabel"; text = "Note that replacing your current passphrase will diavow ownership of any already issued certificates in your posession. If this is what you'd like to do, enter an existing passphrase below."; ObjectID = "TUB-0J-9kL"; */
+"TUB-0J-9kL.text" = "Note that replacing your current passphrase will diavow ownership of any already issued certificates in your posession. If this is what you'd like to do, enter an existing passphrase below.";
