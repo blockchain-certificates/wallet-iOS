@@ -59,7 +59,7 @@ class IssuerTableViewController: UITableViewController {
             var subtitle = String(format: NSLocalizedString("You don't have any certificates from %@", comment: "You don't have any certificates from {Issuer name}"), issuerName);
             
             if managedIssuer?.introducedWithAddress != nil {
-                subtitle = String(format: NSLocalizedString("Hang tight! You should see an email with your certificate from %@ soon.", comment: "Hang tight! You should see an email with your certificate from {Issuer Name} soon."))
+                subtitle = String(format: NSLocalizedString("Hang tight! You should see an email with your certificate from %@ soon.", comment: "Hang tight! You should see an email with your certificate from {Issuer Name} soon."), issuerName)
             }
             let noCertificatesTitle = NSLocalizedString("No Certificates", comment: "No Certificates, title")
             tableView.backgroundView = NoContentView(title: noCertificatesTitle, subtitle: subtitle)
