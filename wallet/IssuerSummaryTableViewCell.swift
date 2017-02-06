@@ -29,7 +29,7 @@ class IssuerSummaryTableViewCell: UITableViewCell {
             descriptionLabel.text = description
             descriptionLabel.textColor = Colors.primaryTextColor
         } else {
-            descriptionLabel.text = NSLocalizedString("No description provided.", comment: "Missing description text for issuer")
+            descriptionLabel.text = NSLocalizedString("No description provided.", comment: "Missing description text for issuer.")
             descriptionLabel.textColor = Colors.placeholderTextColor
         }
     }

@@ -54,7 +54,7 @@ class AddIssuerViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Colors.baseColor
         
-        title = NSLocalizedString("Add Issuer", comment: "Add Issuer, navigation title")
+        title = NSLocalizedString("Add Issuer", comment: "Navigation title for the 'Add Issuer' form.")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveIssuerTapped(_:)))
         

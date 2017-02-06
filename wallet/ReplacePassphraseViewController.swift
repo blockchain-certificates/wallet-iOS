@@ -78,7 +78,7 @@ class ReplacePassphraseViewController: UIViewController {
     func authenticateUser(completionHandler: @escaping (Bool, Error?) -> Void) {
         let context = LAContext()
         var error : NSError? = nil
-        let reason = NSLocalizedString("Authenticate to see your secure passphrase.", comment: "Authentication explanation for replacing passphrase.")
+        let reason = NSLocalizedString("Authenticate to replace your secure passphrase.", comment: "Explain that we need them to authenticate in order to replace their passphrase.")
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason, reply: completionHandler)
         } else if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {

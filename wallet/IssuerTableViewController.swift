@@ -56,12 +56,12 @@ class IssuerTableViewController: UITableViewController {
         let issuerName = managedIssuer?.issuer?.name ?? "this issuer"
         
         if certificates.isEmpty {
-            var subtitle = String(format: NSLocalizedString("You don't have any certificates from %@", comment: "You don't have any certificates from {Issuer name}"), issuerName);
+            var subtitle = String(format: NSLocalizedString("You don't have any certificates from %@", comment: "Empty certificates description when we haven't been introduced to this issuer. Format arguments: {Issuer name}"), issuerName);
             
             if managedIssuer?.introducedWithAddress != nil {
-                subtitle = String(format: NSLocalizedString("Hang tight! You should see an email with your certificate from %@ soon.", comment: "Hang tight! You should see an email with your certificate from {Issuer Name} soon."), issuerName)
+                subtitle = String(format: NSLocalizedString("Hang tight! You should see an email with your certificate from %@ soon.", comment: "Empty certificates description when we've already been introduced to the issuer. Format arguments: {Issuer Name}"), issuerName)
             }
-            let noCertificatesTitle = NSLocalizedString("No Certificates", comment: "No Certificates, title")
+            let noCertificatesTitle = NSLocalizedString("No Certificates", comment: "Title when we have no certificates for this issuer.")
             tableView.backgroundView = NoContentView(title: noCertificatesTitle, subtitle: subtitle)
         } else {
             tableView.backgroundView = nil
@@ -97,7 +97,7 @@ class IssuerTableViewController: UITableViewController {
         containerView.backgroundColor = Colors.baseColor
         
         let label = UILabel()
-        label.text = NSLocalizedString("Certificates", comment: "Certificates").uppercased()
+        label.text = NSLocalizedString("Certificates", comment: "Section title listing all certificates from this issuer.").uppercased()
         label.textColor = Colors.primaryTextColor
         label.font = UIFont.systemFont(ofSize: 11, weight: UIFontWeightBold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -147,9 +147,9 @@ class IssuerTableViewController: UITableViewController {
             return
         }
         
-        let deleteConfirmationTitle = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Are you sure you want to delete this issuer?")
-        let deleteAction = NSLocalizedString("Delete", comment: "Delete")
-        let cancelAction = NSLocalizedString("Cancel", comment: "Cancel")
+        let deleteConfirmationTitle = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Prompt to confirm delete issuer.")
+        let deleteAction = NSLocalizedString("Delete", comment: "Delete issuer action")
+        let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
         
         let prompt = UIAlertController(title: deleteConfirmationTitle, message: nil, preferredStyle: .alert)
         prompt.addAction(UIAlertAction(title: deleteAction, style: .destructive, handler: { [weak self] _ in
@@ -197,9 +197,9 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
             } catch {
                 print(error)
                 
-                let deleteTitle = NSLocalizedString("Couldn't delete file", comment: "Couldn't delete file")
-                let deleteMessage = NSLocalizedString("Something went wrong deleting that certificate.", comment: "Something went wrong deleting that certificate.")
-                let okay = NSLocalizedString("OK", comment: "OK")
+                let deleteTitle = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
+                let deleteMessage = NSLocalizedString("Something went wrong deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
+                let okay = NSLocalizedString("OK", comment: "Confirm action")
                 
                 let alertController = UIAlertController(title: deleteTitle, message: deleteMessage, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: okay, style: .default, handler: nil))

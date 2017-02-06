@@ -62,7 +62,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     func loadEmptyBackgroundView() {
         let title = NSLocalizedString("No Issuers", comment: "Empty issuers title")
-        let subtitle = NSLocalizedString("Add your first Issuer by tapping the add button above.", comment: "Empty issuers subtitle")
+        let subtitle = NSLocalizedString("Add your first Issuer by tapping the add button above.", comment: "Instructions below the empty issuers title, explaining how to add your first issuer.")
         let emptyView = NoContentView(title: title, subtitle: subtitle)
         emptyView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -92,9 +92,9 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
-        let addIssuer = NSLocalizedString("Add Issuer", comment: "Add issuer contextual action")
-        let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Add certificate from file contextual action")
-        let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Add certificate from URL contextual action")
+        let addIssuer = NSLocalizedString("Add Issuer", comment: "Contextual action. Tapping this brings up the Add Issuer form.")
+        let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
+        let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
         let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
         
         
@@ -113,7 +113,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         }))
         
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
-            let certificateURLPrompt = NSLocalizedString("What's the URL of the certificate?", comment: "Certificate URL prompt for import")
+            let certificateURLPrompt = NSLocalizedString("What's the URL of the certificate?", comment: "Certificate URL prompt for importing a certificate.")
             let importAction = NSLocalizedString("Import", comment: "Import certificate action")
             
             let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)

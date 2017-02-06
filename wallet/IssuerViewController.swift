@@ -86,9 +86,9 @@ class IssuerViewController: UIViewController {
             return
         }
         
-        let title = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Are you sure you want to delete this issuer?")
-        let delete = NSLocalizedString("Delete", comment: "Delete")
-        let cancel = NSLocalizedString("Cancel", comment: "Cancel")
+        let title = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Confirm prompt for deleting an issuer.")
+        let delete = NSLocalizedString("Delete", comment: "Delete issuer action")
+        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
         
         let prompt = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] _ in
@@ -138,9 +138,9 @@ extension IssuerViewController : CertificateViewControllerDelegate {
                 }
             } catch {
                 print(error)
-                let title = NSLocalizedString("Couldn't delete file", comment: "Couldn't delete file")
-                let message = NSLocalizedString("Something went wrong deleting that certificate.", comment: "Something went wrong deleting that certificate.")
-                let okay = NSLocalizedString("OK", comment: "OK")
+                let title = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
+                let message = NSLocalizedString("Something went wrong deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
+                let okay = NSLocalizedString("OK", comment: "Confirm action")
                 
                 
                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

@@ -76,9 +76,9 @@ class CertificateViewController: UIViewController {
         } catch {
             print("Failed to write temporary URL")
             
-            let title = NSLocalizedString("Couldn't share certificate.", comment: "Certificate failure title.")
-            let message = NSLocalizedString("Something went wrong preparing that file for sharing. Try again later.", comment: "Certificae failure message.")
-            let okay = NSLocalizedString("OK", comment: "Confirm alert")
+            let title = NSLocalizedString("Couldn't share certificate.", comment: "Alert title when sharing a certificate fails.")
+            let message = NSLocalizedString("Something went wrong preparing that file for sharing. Try again later.", comment: "Alert message when sharing a certificate fails. Generic error.")
+            let okay = NSLocalizedString("OK", comment: "Confirm action")
             
             let errorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             errorAlert.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
@@ -103,7 +103,7 @@ class CertificateViewController: UIViewController {
         Analytics.shared.track(event: .validated, certificate: certificate)
         
         verifyButton.isEnabled = false
-        verifyButton.title = NSLocalizedString("Verifying...", comment: "Verifying a certificate")
+        verifyButton.title = NSLocalizedString("Verifying...", comment: "Verifying a certificate is currently in progress")
         progressView.progress = 0.5
         progressView.isHidden = false
         
@@ -114,21 +114,21 @@ class CertificateViewController: UIViewController {
                 let title : String!
                 let message : String!
                 if success {
-                    title = NSLocalizedString("Success", comment: "Successful certificate validation title")
-                    message = NSLocalizedString("This is a valid certificate!", comment: "Successful certificate validation message")
+                    title = NSLocalizedString("Success", comment: "Title for a successful certificate validation")
+                    message = NSLocalizedString("This is a valid certificate!", comment: "Message for a successful certificate validation")
                 } else {
-                    title = NSLocalizedString("Invalid", comment: "Failed certificate validation title")
+                    title = NSLocalizedString("Invalid", comment: "Title for a failed certificate validation")
                     message = NSLocalizedString(error!, comment: "Specific error message for an invalid certificate.")
                 }
 
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm alert"), style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .default, handler: nil))
                 
                 OperationQueue.main.addOperation {
                     self?.present(alert, animated: true, completion: nil)
                     self?.inProgressRequest = nil
                     self?.verifyButton.isEnabled = true
-                    self?.verifyButton.title = NSLocalizedString("Verify", comment: "Verify a certificate.")
+                    self?.verifyButton.title = NSLocalizedString("Verify", comment: "Action button. Tap this to verify a certificate.")
                     self?.progressView.progress = 1
                     self?.progressView.isHidden = true
                 }
@@ -140,9 +140,9 @@ class CertificateViewController: UIViewController {
     
     @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
         let certificateToDelete = certificate
-        let title = NSLocalizedString("Be careful", comment: "Delete cerrtificatre warning title")
-        let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Delete certificate confirmation message")
-        let delete = NSLocalizedString("Delete", comment: "Confirm delete")
+        let title = NSLocalizedString("Be careful", comment: "Caution title presented when attempting to delete a certificate.")
+        let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Explanation of the effects of deleting a certificate.")
+        let delete = NSLocalizedString("Delete", comment: "Confirm delete action")
         let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
         
         let prompt = UIAlertController(title: title, message: message, preferredStyle: .alert)
