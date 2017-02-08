@@ -47,7 +47,7 @@ class ReplacePassphraseViewController: UIViewController {
         }
         
         guard Keychain.isValidPassphrase(requestedPassphrase) else {
-            failedToSave(NSLocalizedString("This isn't a valid passphrase. Check what you entered & try again.", comment: "Invalid replacement passphrase error"))
+            failedToSave(NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
             return
         }
         

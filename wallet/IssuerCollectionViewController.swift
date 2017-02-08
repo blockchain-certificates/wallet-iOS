@@ -157,7 +157,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         let managedIssuer = managedIssuers[indexPath.item]
         guard let issuer = managedIssuer.issuer else {
-            cell.issuerName = NSLocalizedString("Missing issuer", comment: "Error state: missing issuer data in issuer cell")
+            cell.issuerName = NSLocalizedString("Missing Issuer", comment: "Error state: missing issuer data in issuer cell")
             return cell
         }
         
@@ -362,8 +362,8 @@ extension IssuerCollectionViewController {
     func importCertificate(from data: Data?) {
         let okay = NSLocalizedString("OK", comment: "OK dismiss action")
         guard let data = data else {
-            let title = NSLocalizedString("Couldn't read file", comment: "Failed to read file on import, title")
-            let message = NSLocalizedString("Something went wrong trying to open the file.", comment: "Failed to read file on import, message")
+            let title = NSLocalizedString("Couldn't read file", comment: "Title for an error message displayed when we can't read a certificate file the user tried to import.")
+            let message = NSLocalizedString("Something went wrong when trying to open the file.", comment: "A longer explanation of the error message displayed when we can't read a certificate file the user tried to import.")
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: okay, style: .default, handler: { [weak alertController] action in
                 alertController?.dismiss(animated: true, completion: nil)

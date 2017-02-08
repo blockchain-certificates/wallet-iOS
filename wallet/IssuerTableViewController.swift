@@ -56,7 +56,7 @@ class IssuerTableViewController: UITableViewController {
         let issuerName = managedIssuer?.issuer?.name ?? "this issuer"
         
         if certificates.isEmpty {
-            var subtitle = String(format: NSLocalizedString("You don't have any certificates from %@", comment: "Empty certificates description when we haven't been introduced to this issuer. Format arguments: {Issuer name}"), issuerName);
+            var subtitle = String(format: NSLocalizedString("You don't have any certificates from %@.", comment: "Empty certificates description when we haven't been introduced to this issuer. Format arguments: {Issuer name}"), issuerName);
             
             if managedIssuer?.introducedWithAddress != nil {
                 subtitle = String(format: NSLocalizedString("Hang tight! You should see an email with your certificate from %@ soon.", comment: "Empty certificates description when we've already been introduced to the issuer. Format arguments: {Issuer Name}"), issuerName)
@@ -198,7 +198,7 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
                 print(error)
                 
                 let deleteTitle = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
-                let deleteMessage = NSLocalizedString("Something went wrong deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
+                let deleteMessage = NSLocalizedString("Something went wrong when deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
                 let okay = NSLocalizedString("OK", comment: "Confirm action")
                 
                 let alertController = UIAlertController(title: deleteTitle, message: deleteMessage, preferredStyle: .alert)

@@ -155,7 +155,7 @@ class RevealPassphraseTableViewController: UITableViewController {
                 
                 switch error {
                 case AuthErrors.noAuthMethodAllowed:
-                    self.specificAuthenticationError = NSLocalizedString("It looks like local authentication is disabled for this app. Without it, showing your passphrase would be insecure. Please enable local authentication for this app in Settings", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
+                    self.specificAuthenticationError = NSLocalizedString("It looks like local authentication is disabled for this app. Without it, showing your passphrase is insecure. Please enable local authentication for this app in Settings.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
                 default:
                     self.specificAuthenticationError = nil
                 }

@@ -139,7 +139,7 @@ extension IssuerViewController : CertificateViewControllerDelegate {
             } catch {
                 print(error)
                 let title = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
-                let message = NSLocalizedString("Something went wrong deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
+                let message = NSLocalizedString("Something went wrong when deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
                 let okay = NSLocalizedString("OK", comment: "Confirm action")
                 
                 
