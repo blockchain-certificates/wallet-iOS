@@ -46,10 +46,6 @@
 		834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
 		836A0AE21E205BB4009FC12F /* AddIssuerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */; };
 		83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */; };
-		838DC1111E43EC7900533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1131E43EC7900533AEB /* InfoPlist.strings */; };
-		838DC1161E43EC7A00533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1181E43EC7A00533AEB /* InfoPlist.strings */; };
-		838DC11B1E43EC7A00533AEB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC11D1E43EC7A00533AEB /* Localizable.strings */; };
-		838DC1211E43EC7B00533AEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1231E43EC7B00533AEB /* InfoPlist.strings */; };
 		838DC1301E43EF1600533AEB /* ReplacePassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */; };
 		838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */; };
 		838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1341E43F0A400533AEB /* NoCertificatesTableViewCell.xib */; };
@@ -131,10 +127,6 @@
 		83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerViewController.swift; sourceTree = "<group>"; };
 		83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryView.swift; sourceTree = "<group>"; };
 		8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		83141DC61E43F21D00739A95 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/NoCertificatesTableViewCell.strings; sourceTree = "<group>"; };
-		83141DC71E43F21D00739A95 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AddIssuerViewController.strings; sourceTree = "<group>"; };
-		83141DC81E43F21E00739A95 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CertificateViewController.strings; sourceTree = "<group>"; };
-		83141DC91E43F21E00739A95 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ReplacePassphraseViewController.strings; sourceTree = "<group>"; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
 		8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -152,24 +144,8 @@
 		834B94C11DC1585200543E4F /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keychain.swift; path = "External/cert-wallet/Models/Keychain.swift"; sourceTree = SOURCE_ROOT; };
 		834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewCell.swift; sourceTree = "<group>"; };
 		834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionViewCell.xib; sourceTree = "<group>"; };
-		834BE4841E4532F2004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/NoCertificatesTableViewCell.strings; sourceTree = "<group>"; };
-		834BE4851E4532F2004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
-		834BE4861E4532F2004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		834BE4871E4532F3004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AddIssuerViewController.strings; sourceTree = "<group>"; };
-		834BE4881E4532F3004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/CertificateViewController.strings; sourceTree = "<group>"; };
-		834BE4891E4532F3004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ReplacePassphraseViewController.strings; sourceTree = "<group>"; };
-		834BE48A1E4532F3004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		834BE48B1E4532F3004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
-		834BE48C1E4532F3004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		834BE48D1E4532F3004A056F /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerUITests.swift; sourceTree = "<group>"; };
 		83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCertificatesTableViewCell.swift; sourceTree = "<group>"; };
-		838DC1121E43EC7900533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		838DC1171E43EC7A00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		838DC11C1E43EC7A00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		838DC11E1E43EC7A00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		838DC1221E43EC7B00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		838DC1241E43EC7B00533AEB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplacePassphraseViewController.swift; sourceTree = "<group>"; };
 		838DC1321E43EFB900533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ReplacePassphraseViewController.xib; sourceTree = "<group>"; };
 		838DC1351E43F0A400533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NoCertificatesTableViewCell.xib; sourceTree = "<group>"; };
@@ -256,8 +232,6 @@
 		83111B261DA4110C006B058D /* wallet */ = {
 			isa = PBXGroup;
 			children = (
-				838DC1231E43EC7B00533AEB /* InfoPlist.strings */,
-				838DC11D1E43EC7A00533AEB /* Localizable.strings */,
 				8318FC561DAD958F006A8FD5 /* wallet.entitlements */,
 				834B94C11DC1585200543E4F /* Keychain.swift */,
 				83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */,
@@ -293,7 +267,6 @@
 		83111B3B1DA4110C006B058D /* walletTests */ = {
 			isa = PBXGroup;
 			children = (
-				838DC1131E43EC7900533AEB /* InfoPlist.strings */,
 				83111B3C1DA4110C006B058D /* walletTests.swift */,
 				83111B3E1DA4110C006B058D /* Info.plist */,
 			);
@@ -303,7 +276,6 @@
 		83111B461DA4110C006B058D /* walletUITests */ = {
 			isa = PBXGroup;
 			children = (
-				838DC1181E43EC7A00533AEB /* InfoPlist.strings */,
 				83111B471DA4110C006B058D /* walletUITests.swift */,
 				836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */,
 				83111B491DA4110C006B058D /* Info.plist */,
@@ -489,7 +461,6 @@
 			knownRegions = (
 				en,
 				Base,
-				ar,
 			);
 			mainGroup = 83111B1B1DA4110C006B058D;
 			productRefGroup = 83111B251DA4110C006B058D /* Products */;
@@ -510,7 +481,6 @@
 			files = (
 				8313818D1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
-				838DC1211E43EC7B00533AEB /* InfoPlist.strings in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
@@ -519,7 +489,6 @@
 				838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */,
 				838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */,
 				838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */,
-				838DC11B1E43EC7A00533AEB /* Localizable.strings in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
 			);
@@ -530,7 +499,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
-				838DC1111E43EC7900533AEB /* InfoPlist.strings in Resources */,
 				8313818E1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,7 +508,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
-				838DC1161E43EC7A00533AEB /* InfoPlist.strings in Resources */,
 				8313818F1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -755,8 +722,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				83111B2C1DA4110C006B058D /* Base */,
-				838DC1241E43EC7B00533AEB /* fr */,
-				834BE4851E4532F2004A056F /* ar */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -765,54 +730,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				83111B311DA4110C006B058D /* Base */,
-				838DC11E1E43EC7A00533AEB /* fr */,
-				834BE4861E4532F2004A056F /* ar */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		838DC1131E43EC7900533AEB /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				838DC1121E43EC7900533AEB /* fr */,
-				834BE48C1E4532F3004A056F /* ar */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		838DC1181E43EC7A00533AEB /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				838DC1171E43EC7A00533AEB /* fr */,
-				834BE48D1E4532F3004A056F /* ar */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		838DC11D1E43EC7A00533AEB /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				838DC11C1E43EC7A00533AEB /* fr */,
-				834BE48B1E4532F3004A056F /* ar */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		838DC1231E43EC7B00533AEB /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				838DC1221E43EC7B00533AEB /* fr */,
-				834BE48A1E4532F3004A056F /* ar */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				838DC1321E43EFB900533AEB /* Base */,
-				83141DC91E43F21E00739A95 /* fr */,
-				834BE4891E4532F3004A056F /* ar */,
 			);
 			name = ReplacePassphraseViewController.xib;
 			sourceTree = "<group>";
@@ -821,8 +746,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				838DC1351E43F0A400533AEB /* Base */,
-				83141DC61E43F21D00739A95 /* fr */,
-				834BE4841E4532F2004A056F /* ar */,
 			);
 			name = NoCertificatesTableViewCell.xib;
 			sourceTree = "<group>";
@@ -831,8 +754,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				838DC1381E43F0D300533AEB /* Base */,
-				83141DC71E43F21D00739A95 /* fr */,
-				834BE4871E4532F3004A056F /* ar */,
 			);
 			name = AddIssuerViewController.xib;
 			sourceTree = "<group>";
@@ -841,8 +762,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				838DC13B1E43F0F700533AEB /* Base */,
-				83141DC81E43F21E00739A95 /* fr */,
-				834BE4881E4532F3004A056F /* ar */,
 			);
 			name = CertificateViewController.xib;
 			sourceTree = "<group>";
