@@ -163,24 +163,26 @@ extension CertificateViewController : CertificateValidationRequestDelegate {
         switch to {
         case .notStarted:
             percentage = 0.1
-        case .computingLocalHash:
+        case .assertingChain:
             percentage = 0.2
-        case .fetchingRemoteHash:
+        case .computingLocalHash:
             percentage = 0.3
-        case .comparingHashes:
+        case .fetchingRemoteHash:
             percentage = 0.4
-        case .checkingIssuerSignature:
+        case .comparingHashes:
             percentage = 0.5
-        case .checkingRevokedStatus:
+        case .checkingIssuerSignature:
             percentage = 0.6
+        case .checkingRevokedStatus:
+            percentage = 0.7
         case .success:
             percentage = 1
         case .failure:
             percentage = 1
         case .checkingReceipt:
-            percentage = 0.7
-        case .checkingMerkleRoot:
             percentage = 0.8
+        case .checkingMerkleRoot:
+            percentage = 0.9
         }
         
         if percentage != nil {
