@@ -46,12 +46,12 @@ class CertificateViewController: UIViewController {
     }
     
     func renderCertificate() {
-        renderedCertificateView.certificateIcon.image = UIImage(data:certificate.image)
+        renderedCertificateView.certificateIcon.image = UIImage(data:certificate.issuer.image)
         renderedCertificateView.nameLabel.text = "\(certificate.recipient.givenName) \(certificate.recipient.familyName)"
         renderedCertificateView.titleLabel.text = certificate.title
         renderedCertificateView.subtitleLabel.text = certificate.subtitle
         renderedCertificateView.descriptionLabel.text = certificate.description
-        renderedCertificateView.sealIcon.image = UIImage(data: certificate.issuer.image)
+        renderedCertificateView.sealIcon.image = UIImage(data: certificate.image)
         
         certificate.assertion.signatureImages.forEach { (signatureImage) in
             guard let image = UIImage(data: signatureImage.image) else {
