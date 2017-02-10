@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,29 +12,29 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="IssuerCollectionViewCell" customModule="certificates" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="124"/>
+            <rect key="frame" x="0.0" y="0.0" width="196" height="226"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="100" height="124"/>
+                <rect key="frame" x="0.0" y="0.0" width="196" height="226"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EkE-fS-ids" userLabel="Background">
-                        <rect key="frame" x="0.0" y="0.0" width="100" height="124"/>
+                        <rect key="frame" x="0.0" y="0.0" width="196" height="226"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ptm-11-o0s">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="196" height="191.5"/>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVg-F1-nkq">
-                                <rect key="frame" x="83" y="8" width="8.5" height="17"/>
+                                <rect key="frame" x="179" y="8" width="8.5" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Learning Machine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ee6-Va-l8w">
-                                <rect key="frame" x="8" y="102" width="84" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Learning Machine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee6-Va-l8w">
+                                <rect key="frame" x="8" y="201.5" width="180" height="14.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -43,9 +43,9 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="IVg-F1-nkq" secondAttribute="trailing" constant="8" id="FGp-is-b3W"/>
                             <constraint firstAttribute="trailing" secondItem="ee6-Va-l8w" secondAttribute="trailing" constant="8" id="LHh-bo-1ha"/>
-                            <constraint firstAttribute="bottom" secondItem="ee6-Va-l8w" secondAttribute="bottom" constant="5" id="Nnu-gO-uLo"/>
+                            <constraint firstAttribute="bottom" secondItem="ee6-Va-l8w" secondAttribute="bottom" constant="10" id="Nnu-gO-uLo"/>
                             <constraint firstAttribute="trailing" secondItem="ptm-11-o0s" secondAttribute="trailing" id="Okb-vf-Q9l"/>
-                            <constraint firstItem="ee6-Va-l8w" firstAttribute="top" secondItem="ptm-11-o0s" secondAttribute="bottom" constant="2" id="Qbt-4T-de3"/>
+                            <constraint firstItem="ee6-Va-l8w" firstAttribute="top" secondItem="ptm-11-o0s" secondAttribute="bottom" constant="10" id="Qbt-4T-de3"/>
                             <constraint firstItem="ptm-11-o0s" firstAttribute="leading" secondItem="EkE-fS-ids" secondAttribute="leading" id="Y0s-Ix-bho"/>
                             <constraint firstItem="IVg-F1-nkq" firstAttribute="top" secondItem="EkE-fS-ids" secondAttribute="top" constant="8" id="eg7-J5-cGt"/>
                             <constraint firstItem="ee6-Va-l8w" firstAttribute="leading" secondItem="EkE-fS-ids" secondAttribute="leading" constant="8" id="m7Q-0u-qqw"/>
@@ -60,14 +60,14 @@
                 <constraint firstItem="EkE-fS-ids" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" id="vxT-0w-uvy"/>
                 <constraint firstItem="EkE-fS-ids" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" id="y9d-jt-fWQ"/>
             </constraints>
-            <size key="customSize" width="117" height="170"/>
+            <size key="customSize" width="213" height="272"/>
             <connections>
                 <outlet property="certificateCountLabel" destination="IVg-F1-nkq" id="1yM-yP-FuT"/>
                 <outlet property="containerView" destination="EkE-fS-ids" id="LMT-EU-c8o"/>
                 <outlet property="imageView" destination="ptm-11-o0s" id="fcd-pG-QJK"/>
                 <outlet property="titleLabel" destination="ee6-Va-l8w" id="yvq-Gg-6hn"/>
             </connections>
-            <point key="canvasLocation" x="67" y="113.5"/>
+            <point key="canvasLocation" x="115" y="164"/>
         </collectionViewCell>
     </objects>
 </document>
