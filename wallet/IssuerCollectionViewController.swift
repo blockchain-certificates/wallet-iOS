@@ -32,6 +32,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         self.collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
         self.collectionView?.delegate = self
         self.collectionView?.backgroundColor = Colors.baseColor
+        
+        adjustCellSize()
 
         // Style this bad boy
         self.navigationController?.navigationBar.isTranslucent = false
@@ -82,6 +84,23 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     func loadBrandedBackgroundView() {
         collectionView?.backgroundView = nil
+    }
+    
+    func adjustCellSize() {
+        // Constants
+        let spacing : CGFloat = 8
+        let textHeight : CGFloat = 35
+        
+        guard let targetWidth = self.collectionView?.bounds.width else {
+            return
+        }
+
+        // figure out best size.
+        let newWidth = (targetWidth - (3 * spacing)) / 2
+        let newHeight = newWidth + textHeight
+        
+        let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: newWidth, height: newHeight)
     }
     
     // MARK: - Actions
@@ -238,6 +257,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
     }
     
+
     // MARK: Certificate handling
     func loadCertificates(shouldReloadCollection : Bool = true) {
         certificates = []

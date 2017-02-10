@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         setupApplication()
+        launchApplication()
         return true
     }
     
@@ -54,6 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // debug:
         print("File path is \(Paths.certificatesDirectory)")
+    }
+    
+    func launchApplication() {
+//        let targetWidth = self.window?.bounds.width;
+//        var layoutForWidth = UICollectionViewLayout()
+//        layoutForWidth.
+//        let issuerCollection = IssuerCollectionViewController(collectionViewLayout: <#T##UICollectionViewLayout#>)
+//        let navigation = UINavigationController(rootViewController: <#T##UIViewController#>)
     }
     
     func importState(from url: URL) -> Bool {
