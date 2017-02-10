@@ -174,7 +174,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         // Common styling
         genericCell.layer.borderColor = Colors.borderColor.cgColor
-        genericCell.layer.borderWidth = 1
+        genericCell.layer.borderWidth = 0.5
         genericCell.layer.cornerRadius = 3
         
         return genericCell
