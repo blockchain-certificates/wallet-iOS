@@ -7,15 +7,33 @@
 //
 
 import UIKit
+import WebKit
 
 class PrivacyViewController: UIViewController {
+    var webView : WKWebView!
+    
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         title = NSLocalizedString("Privacy Policy", comment: "Title for the screen with our privacy policy on it.")
-        view.backgroundColor = .blue
+
+        let privacyURL = URL(string: "http://www.learningmachine.com/privacy.html")!
+        let request = URLRequest(url: privacyURL)
+        
+        webView.load(request)
     }
 
+}
+
+
+extension PrivacyViewController : WKUIDelegate {
+    
 }
