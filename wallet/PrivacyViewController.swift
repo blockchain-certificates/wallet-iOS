@@ -15,7 +15,6 @@ class PrivacyViewController: UIViewController {
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
         view = webView
     }
 
@@ -25,15 +24,10 @@ class PrivacyViewController: UIViewController {
         // Do any additional setup after loading the view.
         title = NSLocalizedString("Privacy Policy", comment: "Title for the screen with our privacy policy on it.")
 
-        let privacyURL = URL(string: "http://www.learningmachine.com/privacy.html")!
+        let privacyURL = URL(string: "http://www.learningmachine.com/mobile-privacy.html")!
         let request = URLRequest(url: privacyURL)
         
         webView.load(request)
     }
 
-}
-
-
-extension PrivacyViewController : WKUIDelegate {
-    
 }
