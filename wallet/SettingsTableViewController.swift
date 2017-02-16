@@ -69,15 +69,17 @@ class SettingsTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 2
+        if section == 0 {
+            return 2
+        } else if section == 1 {
+            return 1
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,11 +87,13 @@ class SettingsTableViewController: UITableViewController {
         cell.accessoryType = .disclosureIndicator
         
         var text : String?
-        switch indexPath.row {
-        case 0:
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
             text = NSLocalizedString("Reveal Passphrase", comment: "Action item in settings screen.")
-        case 1:
+        case (0, 1):
             text = NSLocalizedString("Replace Passphrase", comment: "Action item in settings screen.")
+        case (1, 0):
+            text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
         default:
             text = nil
         }
@@ -101,11 +105,20 @@ class SettingsTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            let controller = RevealPassphraseTableViewController()
-            navigationController?.pushViewController(controller, animated: true)
-        } else if indexPath.row == 1 {
-            let controller = ReplacePassphraseViewController()
+        var controller : UIViewController?
+        
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            controller = RevealPassphraseTableViewController()
+        case (0, 1):
+            controller = ReplacePassphraseViewController()
+        case (1, 0):
+            print("Nothing here yet")
+        default:
+            controller = nil
+        }
+        
+        if let controller = controller {
             navigationController?.pushViewController(controller, animated: true)
         }
     }
