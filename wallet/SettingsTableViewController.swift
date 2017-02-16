@@ -113,7 +113,7 @@ class SettingsTableViewController: UITableViewController {
         case (0, 1):
             controller = ReplacePassphraseViewController()
         case (1, 0):
-            print("Nothing here yet")
+            controller = PrivacyViewController()
         default:
             controller = nil
         }
