@@ -54,13 +54,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIButton.appearance().tintColor = Colors.brandColor
         
+        UserDefaults.standard.register(defaults: [sampleCertificateResetKey : true])
+        
         // Reset state if needed
-        if UserDefaults.standard.bool(forKey: sampleCertificateResetKey) {
-            print("Reloading the sample certificate...\n\n")
-            UserDefaults.standard.set(false, forKey: sampleCertificateResetKey)
-        }
+        resetSampleCertificateIfNeeded()
     }
     
+    func resetSampleCertificateIfNeeded() {
+        guard UserDefaults.standard.bool(forKey: sampleCertificateResetKey) else {
+            return
+        }
+        defer {
+            UserDefaults.standard.set(false, forKey: sampleCertificateResetKey)
+        }
+        
+        guard let sampleCertURL = Bundle.main.url(forResource: "SampleCertificate.json", withExtension: nil) else {
+            print("Unable to load the sample certificate.")
+            return
+        }
+
+        _ = launchAddCertificate(at: sampleCertURL)
+    }
+
     func launchApplication() {
 //        let targetWidth = self.window?.bounds.width;
 //        var layoutForWidth = UICollectionViewLayout()
