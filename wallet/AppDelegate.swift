@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupApplication()
         launchApplication()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(resetSampleCertificateIfNeeded), name:UserDefaults.didChangeNotification, object: nil)
+        
         return true
     }
     
