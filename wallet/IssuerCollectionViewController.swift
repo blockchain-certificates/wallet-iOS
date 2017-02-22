@@ -54,7 +54,10 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         loadCertificates()
-        
+        loadBackgroundView()
+    }
+    
+    func loadBackgroundView() {
         if managedIssuers.isEmpty {
             loadEmptyBackgroundView()
         } else {
@@ -203,6 +206,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     func reloadCollectionView() {
         OperationQueue.main.addOperation {
             self.collectionView?.reloadData()
+            self.loadBackgroundView()
         }
     }
     
