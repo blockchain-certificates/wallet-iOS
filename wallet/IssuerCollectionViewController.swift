@@ -66,6 +66,10 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func loadEmptyBackgroundView() {
+        guard collectionView?.backgroundView == nil else {
+            // We know the backgroundView is either this emptyState or nil. So this saves us from re-loading the same background view if it's already loaded.
+            return
+        }
         let title = NSLocalizedString("No Issuers", comment: "Empty issuers title")
         let subtitle = NSLocalizedString("Add your first Issuer by tapping the add button above.", comment: "Instructions below the empty issuers title, explaining how to add your first issuer.")
         let emptyView = NoContentView(title: title, subtitle: subtitle)
