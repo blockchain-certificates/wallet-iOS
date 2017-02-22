@@ -9,6 +9,8 @@
 import UIKit
 import JSONLD
 
+private let sampleCertificateResetKey = "resetSampleCertificate"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -47,14 +49,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupApplication() {
         self.window?.addSubview(JSONLD.shared.webView)
-        
         // Need a way to make this more obvious. Referencing the shared singleton
         Analytics.shared.applicationDidLaunch()
         
         UIButton.appearance().tintColor = Colors.brandColor
         
-        // debug:
-        print("File path is \(Paths.certificatesDirectory)")
+        // Reset state if needed
+        if UserDefaults.standard.bool(forKey: sampleCertificateResetKey) {
+            print("Reloading the sample certificate...\n\n")
+            UserDefaults.standard.set(false, forKey: sampleCertificateResetKey)
+        }
     }
     
     func launchApplication() {
