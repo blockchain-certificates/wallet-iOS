@@ -98,9 +98,11 @@ class IssuerCollectionViewController: UICollectionViewController {
         let spacing : CGFloat = 8
         let textHeight : CGFloat = 35
         
-        guard let targetWidth = self.collectionView?.bounds.width else {
+        guard let deviceWidth = self.collectionView?.bounds.width,
+            let deviceHeight = self.collectionView?.bounds.height else {
             return
         }
+        let targetWidth = min(deviceWidth, deviceHeight)
 
         // figure out best size.
         let newWidth = (targetWidth - (3 * spacing)) / 2
