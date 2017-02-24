@@ -8,6 +8,14 @@
 	<array>
 		<dict>
 			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Build Number</string>
+			<key>Key</key>
+			<string>buildNumber</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
 			<string>Reset Sample Certificate</string>

@@ -10,6 +10,7 @@ import UIKit
 import JSONLD
 
 private let sampleCertificateResetKey = "resetSampleCertificate"
+private let buildNumberKey = "buildNumber"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -57,7 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIButton.appearance().tintColor = Colors.brandColor
         
-        UserDefaults.standard.register(defaults: [sampleCertificateResetKey : true])
+        
+        
+        UserDefaults.standard.register(defaults: [
+            sampleCertificateResetKey : true
+        ])
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+        UserDefaults.standard.set("Build \(buildNumber)", forKey: buildNumberKey)
+        print(buildNumber)
         
         // Reset state if needed
         resetSampleCertificateIfNeeded()
