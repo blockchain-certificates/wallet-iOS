@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         UserDefaults.standard.register(defaults: [
-            sampleCertificateResetKey : true
+            sampleCertificateResetKey : false
         ])
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
         UserDefaults.standard.set("Build \(buildNumber)", forKey: buildNumberKey)
