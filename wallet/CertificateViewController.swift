@@ -102,6 +102,20 @@ class CertificateViewController: UIViewController {
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
         Analytics.shared.track(event: .validated, certificate: certificate)
         
+        // Check for the Sample Certificate
+        guard certificate.assertion.uid != "sample-certificate" else {
+            let alert = UIAlertController(
+                title: NSLocalizedString("Sample Certificate", comment: "Title for our specific warning about validating a sample certificate"),
+                message: NSLocalizedString("This is a sample certificate that cannot be verified. Real certificates will perform a live validation process.", comment: "Explanation for why you can't validate the sample certificate."),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .default, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
         verifyButton.isEnabled = false
         verifyButton.title = NSLocalizedString("Verifying...", comment: "Verifying a certificate is currently in progress")
         progressView.progress = 0.5
