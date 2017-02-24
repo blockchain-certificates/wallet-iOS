@@ -14,6 +14,16 @@
 			<key>Key</key>
 			<string>buildNumber</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Reset Sample Certificate</string>
+			<key>Key</key>
+			<string>resetSampleCertificate</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
 	</array>
 </dict>
 </plist>
