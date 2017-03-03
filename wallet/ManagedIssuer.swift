@@ -30,6 +30,7 @@ enum ManagedIssuerError {
     case invalidState(reason: String)
     case untrustworthyIssuer(reason: String)
     case abortedIdentificationStep
+    case abortedIntroductionStep
     case issuerInvalid(reason: InvalidIssuerReason, scope: InvalidIssuerScope)
     case serverError(code: Int)
 
@@ -176,29 +177,62 @@ class ManagedIssuer : NSObject, NSCoding {
         inProgressRequest = identityRequest
     }
     
-    func introduce(recipient: Recipient, with nonce: String, completion: @escaping (Bool) -> Void) {
+    func introduce(recipient: Recipient, with nonce: String, completion: @escaping (ManagedIssuerError?) -> Void) {
         guard let issuer = issuer else {
-            completion(false)
+            completion(.invalidState(reason: "Can't introduce until we have a valid Issuer."))
             return
         }
         
         self.nonce = nonce
         let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer) { [weak self] (error) in
-            let success =  (error == nil)
-            if success {
-                self?.introducedWithAddress = recipient.publicAddress
-            } else {
-                self?.introducedWithAddress = nil
-            }
             self?.introducedOn = Date()
             self?.inProgressRequest = nil
             
-            completion(success)
+            var reportError : ManagedIssuerError? = nil
+            
+            if let error = error {
+                self?.introducedWithAddress = nil
+                
+                switch (error) {
+                case .aborted:
+                    reportError = .abortedIntroductionStep
+                case .issuerMissingIntroductionURL:
+                    reportError = .issuerInvalid(reason: .missing, scope: .property(named: "introductionURL"))
+                case .cannotSerializePostData:
+                    reportError = .issuerInvalid(reason: .invalid, scope: .json)
+                case .errorResponseFromServer(let response):
+                    reportError = .serverError(code: response.statusCode)
+                case .genericErrorFromServer:
+                    fallthrough
+                default:
+                    reportError = .genericError
+                }
+            } else {
+                self?.introducedWithAddress = recipient.publicAddress
+            }
+            
+            // Call the completion handler & delegate
+            completion(reportError)
+            
+            if self != nil {
+                self!.delegate?.updated(managedIssuer: self!)
+            }
         }
         introductionRequest.delegate = self
         inProgressRequest?.abort()
         introductionRequest.start()
         inProgressRequest = introductionRequest
+    }
+}
+
+extension ManagedIssuer : IssuerIntroductionRequestDelegate {
+    func postData(for issuer: Issuer, from recipient: Recipient) -> [String : Any] {
+        guard let nonce = self.nonce else {
+            return [:]
+        }
+        return [
+            "nonce": nonce
+        ]
     }
 }
 
@@ -226,16 +260,6 @@ extension ManagedIssuer {
     }
 }
 
-extension ManagedIssuer : IssuerIntroductionRequestDelegate {
-    func postData(for issuer: Issuer, from recipient: Recipient) -> [String : Any] {
-        guard let nonce = self.nonce else {
-            return [:]
-        }
-        return [
-            "nonce": nonce
-        ]
-    }
-}
 
 
 protocol ManagedIssuerDelegate : class {
