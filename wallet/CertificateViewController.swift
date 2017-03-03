@@ -68,35 +68,25 @@ class CertificateViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
-        // Moving the file to a temporary directory. Sharing a file URL seems to be better than sharing the file's contents directly.
-        let filePath = "\(NSTemporaryDirectory())/certificate.json"
-        let url = URL(fileURLWithPath: filePath)
-        do {
-            try certificate.file.write(to: url)
-        } catch {
-            print("Failed to write temporary URL")
-            
-            let title = NSLocalizedString("Couldn't share certificate.", comment: "Alert title when sharing a certificate fails.")
-            let message = NSLocalizedString("Something went wrong preparing that file for sharing. Try again later.", comment: "Alert message when sharing a certificate fails. Generic error.")
-            let okay = NSLocalizedString("OK", comment: "Confirm action")
-            
-            let errorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
-            present(errorAlert, animated: true, completion: nil)
+        guard certificate.id != nil else {
+            shareCertificateFile()
             return
         }
         
-        let items : [Any] = [ url ]
-        
-        let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        let capturedCertificate = certificate
-        shareController.completionWithItemsHandler = { (activity, completed, _, _) in
-            if completed {
-                Analytics.shared.track(event: .shared, certificate: capturedCertificate)
-            }
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let shareFileAction = UIAlertAction(title: NSLocalizedString("Share Certificate File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
+            self?.shareCertificateFile()
         }
+        let shareURLAction = UIAlertAction(title: NSLocalizedString("Share Certificate URL", comment: "Actoin to share the certificate's hosting URL, presented in an action sheet."), style: .default) { [weak self] _ in
+            self?.shareCertificateURL()
+        }
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the action sheet."), style: .cancel, handler: nil)
         
-        self.present(shareController, animated: true, completion: nil)
+        alertController.addAction(shareURLAction)
+        alertController.addAction(shareFileAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
@@ -167,6 +157,57 @@ class CertificateViewController: UIViewController {
         prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
         
         present(prompt, animated: true, completion: nil)
+    }
+    
+    // Share actions
+    func shareCertificateFile() {
+        // Moving the file to a temporary directory.
+        let filePath = "\(NSTemporaryDirectory())/certificate.json"
+        let url = URL(fileURLWithPath: filePath)
+        do {
+            try certificate.file.write(to: url)
+        } catch {
+            print("Failed to write temporary URL")
+            
+            let title = NSLocalizedString("Couldn't share certificate.", comment: "Alert title when sharing a certificate fails.")
+            let message = NSLocalizedString("Something went wrong preparing that file for sharing. Try again later.", comment: "Alert message when sharing a certificate fails. Generic error.")
+            let okay = NSLocalizedString("OK", comment: "Confirm action")
+            
+            let errorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
+            present(errorAlert, animated: true, completion: nil)
+            return
+        }
+        
+        let items : [Any] = [ url ]
+        
+        let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        let capturedCertificate = certificate
+        shareController.completionWithItemsHandler = { (activity, completed, _, _) in
+            if completed {
+                Analytics.shared.track(event: .shared, certificate: capturedCertificate)
+            }
+        }
+        
+        self.present(shareController, animated: true, completion: nil)
+    }
+    
+    func shareCertificateURL() {
+        guard let url = certificate.id else {
+            return
+        }
+
+        let items : [Any] = [ url ]
+        
+        let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        let capturedCertificate = certificate
+        shareController.completionWithItemsHandler = { (activity, completed, _, _) in
+            if completed {
+                Analytics.shared.track(event: .shared, certificate: capturedCertificate)
+            }
+        }
+        
+        self.present(shareController, animated: true, completion: nil)
     }
 }
 
