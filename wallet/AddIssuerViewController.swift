@@ -178,17 +178,39 @@ class AddIssuerViewController: UIViewController {
         
         let managedIssuer = ManagedIssuer()
         isLoading = true
-        managedIssuer.getIssuerIdentity(from: url) { [weak self] isSuccessful in
-            
-            guard isSuccessful else {
-                // TODO: Somehow alert/convey that this isn't a valid issuer.
+        managedIssuer.getIssuerIdentity(from: url) { [weak self] identifyError in
+            guard identifyError == nil else {
                 self?.isLoading = false
+                
+                var failureReason = NSLocalizedString("Something went wrong adding this issuer. Try again later.", comment: "Generic error for failure to add an issuer")
+                
+                switch(identifyError!) {
+                case .invalidState(let reason):
+                    // This is a developer error, so write it to the log so we can see it later.
+                    print("Invalid ManagedIssuer state: \(reason)")
+                    failureReason = NSLocalizedString("The app is in an invalid state. Please quit the app & relaunch. Then try again.", comment: "Invalid state error message when adding an issuer.")
+                case .untrustworthyIssuer:
+                    failureReason = NSLocalizedString("This issuer appears to have been tampered with. Please contact the issuer.", comment: "Error message when the issuer's data doesn't match the URL it's hosted at.")
+                case .abortedIntroductionStep:
+                    failureReason = NSLocalizedString("The request was aborted. Please try again.", comment: "Error message when an identification request is aborted")
+                case .serverError(let code):
+                    print("Identification server error: \(code)")
+                    failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
+                case .issuerInvalid: //(reason: <#T##InvalidIssuerReason#>, scope: <#T##InvalidIssuerScope#>):
+                    fallthrough
+                default: break
+                }
+                
+                let alertController = UIAlertController(title: "Add Issuer Failed", message: failureReason, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .cancel, handler: nil))
+                
+                // TODO: present controller
                 return
             }
             
             // At this point, we have an issuer, se we'll definitely be dismissing, even if the introduction step fails.
             if let nonce = self?.nonce {
-                managedIssuer.introduce(recipient: targetRecipient, with: nonce) { (success) in
+                managedIssuer.introduce(recipient: targetRecipient, with: nonce) { introductionError in
                     self?.notifyAndDismiss(managedIssuer: managedIssuer)
                 }
             } else {
