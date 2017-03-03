@@ -17,6 +17,23 @@ fileprivate enum CoderKeys {
     static let introducedWithAddress = "introducedWithAddress"
 }
 
+enum InvalidIssuerReason {
+    case missing, invalid
+}
+
+enum InvalidIssuerScope {
+    case response, json, property(named: String)
+}
+
+enum ManagedIssuerError {
+    case genericError
+    case invalidState(reason: String)
+    case untrustworthyIssuer(reason: String)
+    case abortedIdentificationStep
+    case issuerInvalid(reason: InvalidIssuerReason, scope: InvalidIssuerScope)
+    case serverError(code: Int)
+
+}
 
 class ManagedIssuer : NSObject, NSCoding {
     var delegate : ManagedIssuerDelegate?
@@ -32,26 +49,7 @@ class ManagedIssuer : NSObject, NSCoding {
     private var inProgressRequest : CommonRequest?
     private var hostedIssuer : Issuer?
     
-    var status : String {
-        if issuer == nil {
-            return "No Data"
-        }
-        if issuerConfirmedOn == nil {
-            return "Unconfirmed"
-        }
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-
-        let confirmedDate = formatter.string(from: issuerConfirmedOn!)
-        
-        if introducedOn == nil {
-            return "Confirmed on \(confirmedDate), but not introduced."
-        } else {
-            let introducedDate = formatter.string(from: introducedOn!)
-            return "Confirmed \(confirmedDate), Introduced on \(introducedDate)"
-        }
-    }
+    fileprivate var nonce : String?
 
     // MARK: - Initialization
     override init() {
@@ -81,10 +79,10 @@ class ManagedIssuer : NSObject, NSCoding {
         let confirmedDate = decoder.decodeObject(forKey: CoderKeys.issuerConfirmedOn) as? Date
         
         if let issuerDictionary = decoder.decodeObject(forKey: CoderKeys.issuer) as? [String: Any] {
-            issuer = Issuer(dictionary: issuerDictionary)
+            issuer = try? Issuer(dictionary: issuerDictionary)
         }
         if let hostedIssuerDictionary = decoder.decodeObject(forKey: CoderKeys.hostedIssuer) as? [String: Any] {
-            hostedIssuer = Issuer(dictionary: hostedIssuerDictionary)
+            hostedIssuer = try? Issuer(dictionary: hostedIssuerDictionary)
         }
         
         self.init(issuer: issuer,
@@ -108,10 +106,9 @@ class ManagedIssuer : NSObject, NSCoding {
 
     
     // MARK: Identification step
-    func manage(issuer: Issuer, completion: @escaping (Bool) -> Void) {
+    func manage(issuer: Issuer, completion: @escaping (ManagedIssuerError?) -> Void) {
         guard self.issuer == nil else {
-            print("This manager is called for -- it already has an issuer it's managing.")
-            completion(false)
+            completion(.invalidState(reason: "This manager is called for -- it already has an issuer it's managing."))
             return
         }
         
@@ -119,40 +116,64 @@ class ManagedIssuer : NSObject, NSCoding {
         getIssuerIdentity(completion: completion)
     }
     
-    func getIssuerIdentity(completion: @escaping (Bool) -> Void) {
+    func getIssuerIdentity(completion: @escaping (ManagedIssuerError?) -> Void) {
         guard let issuer = self.issuer else {
-            completion(false)
+            completion(.invalidState(reason: "Can't call \(#function) when Issuer isn't set. Use manage(issuer:completion:) instead."))
             return
         }
         
         getIssuerIdentity(from: issuer.id, completion: completion)
     }
     
-    func getIssuerIdentity(from url: URL, completion: @escaping (Bool) -> Void) {
-        let identityRequest = IssuerIdentificationRequest(id: url) { [weak self] (possibleIssuer) in
-            var success = possibleIssuer != nil
+    func getIssuerIdentity(from url: URL, completion: @escaping (ManagedIssuerError?) -> Void) {
+        let identityRequest = IssuerIdentificationRequest(id: url) { [weak self] (possibleIssuer, error) in
+            var returnError : ManagedIssuerError? = nil
             
+            self?.inProgressRequest = nil
+            self?.issuerConfirmedOn = Date()
             self?.hostedIssuer = possibleIssuer
+            self?.isIssuerConfirmed = (error == nil)
             
             if self?.issuer == nil {
                 self?.issuer = possibleIssuer
-            } else if possibleIssuer != nil {
-                // We had an issuer, and we got an issuer. They need to have the same ID to be valid.
-                success = (self?.issuer?.id == possibleIssuer?.id)
+            } else if possibleIssuer != nil && self?.issuer?.id != possibleIssuer?.id {
+                returnError = .untrustworthyIssuer(reason:"The issuer we're managing has a different ID in the issuer's JSON. This means the issuer's hosting JSON has changed ownership.")
             }
-                
-            self?.inProgressRequest = nil
-            self?.issuerConfirmedOn = Date()
-            self?.isIssuerConfirmed = success
             
-            completion(success)
+            if let error = error {
+                self?.isIssuerConfirmed = false
+                
+                switch (error) {
+                case .aborted:
+                    returnError = .abortedIdentificationStep
+                case .missingJSONData:
+                    returnError = .issuerInvalid(reason: .missing, scope: .json)
+                case .jsonSerializationFailure:
+                    returnError = .issuerInvalid(reason: .invalid, scope: .json)
+                case .issuerMissing(let property):
+                    returnError = .issuerInvalid(reason: .missing, scope: .property(named: property))
+                case .issuerInvalid(let property):
+                    returnError = .issuerInvalid(reason: .invalid, scope: .property(named: property))
+                case .httpFailure(let status, _):
+                    returnError = .serverError(code: status)
+                    
+                case .unknownResponse:
+                    fallthrough
+                default:
+                    returnError = .genericError
+                }
+            }
+
+            // Call the completion handler, and the delegate as the last thing we do.
+            completion(returnError)
             
             if self != nil {
                 self!.delegate?.updated(managedIssuer: self!)
             }
         }
+        inProgressRequest?.abort()
         identityRequest.start()
-        self.inProgressRequest = identityRequest
+        inProgressRequest = identityRequest
     }
     
     func introduce(recipient: Recipient, with nonce: String, completion: @escaping (Bool) -> Void) {
@@ -161,7 +182,9 @@ class ManagedIssuer : NSObject, NSCoding {
             return
         }
         
-        let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer, with: ["nonce":nonce]) { [weak self] (success, error) in
+        self.nonce = nonce
+        let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer) { [weak self] (error) in
+            let success =  (error == nil)
             if success {
                 self?.introducedWithAddress = recipient.publicAddress
             } else {
@@ -172,8 +195,45 @@ class ManagedIssuer : NSObject, NSCoding {
             
             completion(success)
         }
+        introductionRequest.delegate = self
+        inProgressRequest?.abort()
         introductionRequest.start()
         inProgressRequest = introductionRequest
+    }
+}
+
+// Debug properties
+extension ManagedIssuer {
+    override var debugDescription : String {
+        if issuer == nil {
+            return "No Data"
+        }
+        if issuerConfirmedOn == nil {
+            return "Unconfirmed"
+        }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        
+        let confirmedDate = formatter.string(from: issuerConfirmedOn!)
+        
+        if introducedOn == nil {
+            return "Confirmed on \(confirmedDate), but not introduced."
+        } else {
+            let introducedDate = formatter.string(from: introducedOn!)
+            return "Confirmed \(confirmedDate), Introduced on \(introducedDate)"
+        }
+    }
+}
+
+extension ManagedIssuer : IssuerIntroductionRequestDelegate {
+    func postData(for issuer: Issuer, from recipient: Recipient) -> [String : Any] {
+        guard let nonce = self.nonce else {
+            return [:]
+        }
+        return [
+            "nonce": nonce
+        ]
     }
 }
 
