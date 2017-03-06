@@ -42,3 +42,7 @@ enum Fonts {
     static let brandFont = UIFont.systemFont(ofSize: 18)
     static let placeholderFont = UIFont.systemFont(ofSize: 18)
 }
+
+enum Identifiers {
+    static let sampleCertificateUID = "sample-certificate"
+}

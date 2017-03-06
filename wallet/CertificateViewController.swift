@@ -18,6 +18,7 @@ class CertificateViewController: UIViewController {
     
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var verifyButton: UIBarButtonItem!
     @IBOutlet weak var progressView: UIProgressView!
@@ -37,8 +38,10 @@ class CertificateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         self.title = certificate.title
+        
+        shareButton.isEnabled = (certificate.assertion.uid != Identifiers.sampleCertificateUID)
+        
         renderCertificate()
         stylize()
         
@@ -90,7 +93,7 @@ class CertificateViewController: UIViewController {
         Analytics.shared.track(event: .validated, certificate: certificate)
         
         // Check for the Sample Certificate
-        guard certificate.assertion.uid != "sample-certificate" else {
+        guard certificate.assertion.uid != Identifiers.sampleCertificateUID else {
             let alert = UIAlertController(
                 title: NSLocalizedString("Sample Certificate", comment: "Title for our specific warning about validating a sample certificate"),
                 message: NSLocalizedString("This is a sample certificate that cannot be verified. Real certificates will perform a live validation process.", comment: "Explanation for why you can't validate the sample certificate."),
