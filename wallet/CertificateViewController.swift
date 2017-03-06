@@ -68,10 +68,7 @@ class CertificateViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
-        guard certificate.id != nil else {
-            shareCertificateFile()
-            return
-        }
+        // TODO: Guard against sample cert
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let shareFileAction = UIAlertAction(title: NSLocalizedString("Share Certificate File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
@@ -193,10 +190,7 @@ class CertificateViewController: UIViewController {
     }
     
     func shareCertificateURL() {
-        guard let url = certificate.id else {
-            return
-        }
-
+        let url = certificate.assertion.id
         let items : [Any] = [ url ]
         
         let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
