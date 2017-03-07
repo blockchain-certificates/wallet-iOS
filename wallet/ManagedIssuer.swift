@@ -40,7 +40,7 @@ class ManagedIssuer : NSObject, NSCoding {
     var delegate : ManagedIssuerDelegate?
     var issuerDescription : String?
     
-    private(set) var issuer : Issuer?
+    
     private(set) var issuerConfirmedOn: Date?
     private(set) var isIssuerConfirmed = false
     
@@ -48,7 +48,24 @@ class ManagedIssuer : NSObject, NSCoding {
     private(set) var introducedOn: Date?
     
     private var inProgressRequest : CommonRequest?
+    
+    // `issuer` is the publicly visible issuer instance. It's always up to date with what's on the server
+    // `hostedIssuer` is the issuer data reported at the issuer's id
+    // `sourceIssuer` is the issuer data
+    public var issuer : Issuer? {
+        if let sourceIssuer = sourceIssuer {
+            if let hostedIssuer = hostedIssuer, hostedIssuer.id == sourceIssuer.id {
+                return hostedIssuer
+            } else {
+                return sourceIssuer
+            }
+        } else {
+            return hostedIssuer
+        }
+    }
+    
     private var hostedIssuer : Issuer?
+    private var sourceIssuer : Issuer?
     
     fileprivate var nonce : String?
 
@@ -62,7 +79,7 @@ class ManagedIssuer : NSObject, NSCoding {
                  isIssuerConfirmed: Bool = false,
                  issuerConfirmedOn: Date? = nil,
                  introducedWithAddress: String? = nil) {
-        self.issuer = issuer
+        self.sourceIssuer = issuer
         self.hostedIssuer = hostedIssuer
         self.isIssuerConfirmed = isIssuerConfirmed
         self.issuerConfirmedOn = issuerConfirmedOn
@@ -104,7 +121,7 @@ class ManagedIssuer : NSObject, NSCoding {
         coder.encode(issuerConfirmedOn, forKey: CoderKeys.issuerConfirmedOn)
         coder.encode(introducedWithAddress, forKey: CoderKeys.introducedWithAddress)
     }
-
+    
     
     // MARK: Identification step
     func manage(issuer: Issuer, completion: @escaping (ManagedIssuerError?) -> Void) {
@@ -113,7 +130,8 @@ class ManagedIssuer : NSObject, NSCoding {
             return
         }
         
-        self.issuer = issuer
+        self.sourceIssuer = issuer
+        
         getIssuerIdentity(completion: completion)
     }
     
@@ -135,12 +153,8 @@ class ManagedIssuer : NSObject, NSCoding {
             self?.hostedIssuer = possibleIssuer
             self?.isIssuerConfirmed = (error == nil)
             
-            if self?.issuer == nil {
-                self?.issuer = possibleIssuer
-            } else if possibleIssuer != nil && self?.issuer?.id != possibleIssuer?.id {
+            if possibleIssuer != nil && self?.issuer?.id != possibleIssuer?.id {
                 returnError = .untrustworthyIssuer(reason:"The issuer we're managing has a different ID in the issuer's JSON. This means the issuer's hosting JSON has changed ownership.")
-            } else {
-                self?.issuer = possibleIssuer
             }
             
             if let error = error {

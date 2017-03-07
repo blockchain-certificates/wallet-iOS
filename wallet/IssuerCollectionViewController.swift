@@ -404,10 +404,10 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
  
 extension IssuerCollectionViewController : ManagedIssuerDelegate {
     func updated(managedIssuer: ManagedIssuer) {
-        guard let index = self.managedIssuers.index(where: { (existingIssuer) -> Bool in
-            existingIssuer.issuer?.id == managedIssuer.issuer?.id
-        }) else { return }
-        
+//        guard let index = self.managedIssuers.index(where: { (existingIssuer) -> Bool in
+//            existingIssuer.issuer?.id == managedIssuer.issuer?.id
+//        }) else { return }
+//        
         collectionView?.reloadData()
         
 //        let itemsIndexPath = IndexPath(item: index, section: 0)
