@@ -240,6 +240,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func add(managedIssuer: ManagedIssuer) {
+        managedIssuer.delegate = self
+        
         // If we already have this issuer present, then let's remove it from the list and use the existing one to update it.
         // It's not great -- Really these should be immutable models so I could just test for equality.
         var otherIssuers = managedIssuers.filter { (existingManagedIssuer) -> Bool in
@@ -399,7 +401,23 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
         _ = navigateTo(issuer: managedIssuer)
     }
 }
-
+ 
+extension IssuerCollectionViewController : ManagedIssuerDelegate {
+    func updated(managedIssuer: ManagedIssuer) {
+        guard let index = self.managedIssuers.index(where: { (existingIssuer) -> Bool in
+            existingIssuer.issuer?.id == managedIssuer.issuer?.id
+        }) else { return }
+        
+        collectionView?.reloadData()
+        
+//        let itemsIndexPath = IndexPath(item: index, section: 0)
+//        collectionView?.reloadItems(at: [ itemsIndexPath ])
+    }
+}
+ 
+ 
+ 
+ 
 extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
     func added(managedIssuer: ManagedIssuer) {
         if managedIssuer.issuer != nil {
@@ -448,3 +466,5 @@ extension IssuerCollectionViewController : UIDocumentPickerDelegate {
         importCertificate(from: data)
     }
 }
+ 
+ 

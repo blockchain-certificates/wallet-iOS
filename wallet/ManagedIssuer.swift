@@ -139,6 +139,8 @@ class ManagedIssuer : NSObject, NSCoding {
                 self?.issuer = possibleIssuer
             } else if possibleIssuer != nil && self?.issuer?.id != possibleIssuer?.id {
                 returnError = .untrustworthyIssuer(reason:"The issuer we're managing has a different ID in the issuer's JSON. This means the issuer's hosting JSON has changed ownership.")
+            } else {
+                self?.issuer = possibleIssuer
             }
             
             if let error = error {
