@@ -88,16 +88,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func launchApplication() {
-//        let targetWidth = self.window?.bounds.width;
-//        var layoutForWidth = UICollectionViewLayout()
-//        layoutForWidth.
-//        let issuerCollection = IssuerCollectionViewController(collectionViewLayout: <#T##UICollectionViewLayout#>)
-//        let navigation = UINavigationController(rootViewController: <#T##UIViewController#>)
     }
     
     func importState(from url: URL) -> Bool {
         guard let fragment = url.fragment else {
-            return deprecatedImportState(from: url)
+            return false
         }
         
         var pathComponents = fragment.components(separatedBy: "/")
@@ -146,57 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
     }
-    
-    func deprecatedImportState(from url:URL) -> Bool {
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            return false
-        }
         
-        switch components.path {
-        case "/demourl":
-            var identificationURL: URL?
-            var nonce : String?
-            
-            components.queryItems?.forEach { (queryItem) in
-                switch queryItem.name {
-                case "identificationURL":
-                    if let urlString = queryItem.value,
-                        let urlDecodedString = urlString.removingPercentEncoding {
-                        identificationURL = URL(string: urlDecodedString)
-                    }
-                case "nonce":
-                    nonce = queryItem.value
-                default:
-                    break;
-                }
-            }
-            
-            if identificationURL != nil && nonce != nil {
-                print("got url \(identificationURL!) and nonce \(nonce!)")
-                launchAddIssuer(at: identificationURL!, with: nonce!)
-                return true
-            } else {
-                print("Got demo url but didn't have both components")
-                return false
-            }
-        case "/importCertificate":
-            let urlComponents = components.queryItems?.filter { queryItem -> Bool in
-                return queryItem.name == "certificateURL"
-            }
-            if let urlString = urlComponents?.first?.value,
-                let urlDecodedString = urlString.removingPercentEncoding,
-                let certificateURL = URL(string: urlDecodedString) {
-                return launchAddCertificate(at: certificateURL)
-            } else {
-                return false
-            }
-        default:
-            print("I don't know about \(components.path)")
-            return false
-        }
-
-    }
-    
     func launchAddIssuer(at introductionURL: URL, with nonce: String) {
         let rootController = window?.rootViewController as? UINavigationController
         
