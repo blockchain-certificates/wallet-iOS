@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // The app is launching with a document
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         setupApplication()
-        return launchAddCertificate(at: url)
+        return launchAddCertificate(at: url, showCertificate: true)
     }
     
     func setupApplication() {
@@ -117,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print()
                 print(decodedCertificateString)
                 print()
-                return launchAddCertificate(at: certificateURL)
+                return launchAddCertificate(at: certificateURL, showCertificate: true)
             } else {
                 return false
             }
@@ -141,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
     }
-        
+    
     func launchAddIssuer(at introductionURL: URL, with nonce: String) {
         let rootController = window?.rootViewController as? UINavigationController
         
@@ -153,14 +153,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         issuerCollection?.showAddIssuerFlow(identificationURL: introductionURL, nonce: nonce)
     }
     
-    func launchAddCertificate(at url: URL) -> Bool {
+    func launchAddCertificate(at url: URL, showCertificate: Bool = false) -> Bool {
         let rootController = window?.rootViewController as? UINavigationController
         
         rootController?.presentedViewController?.dismiss(animated: false, completion: nil)
         _ = rootController?.popToRootViewController(animated: false)
         
         let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
-        return issuerCollection?.add(certificateURL: url) ?? false
+        return issuerCollection?.add(certificateURL: url, silently: !showCertificate) ?? false
     }
 
     func resetData() {

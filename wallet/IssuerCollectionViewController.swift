@@ -321,7 +321,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         saveCertificates()
     }
     
-    func add(certificateURL: URL) -> Bool {
+    func add(certificateURL: URL, silently: Bool = false) -> Bool {
         var components = URLComponents(url: certificateURL, resolvingAgainstBaseURL: false)
         let formatQueryItem = URLQueryItem(name: "format", value: "json")
         
@@ -342,12 +342,41 @@ class IssuerCollectionViewController: UICollectionViewController {
             let certificate = try? CertificateParser.parse(data: data) {
             add(certificate: certificate)
             reloadCollectionView()
+            
+            if !silently {
+                navigateTo(certificate: certificate)
+            }
+            
             return true
         } else {
-            // TODO: Show some alert saying that this URL isn't a valid certifiate url.
+            // TODO: Alert with the parser-appropriate error.
         }
         
         return false
+    }
+    
+    func navigateTo(issuer managedIssuer: ManagedIssuer) -> IssuerViewController {
+        let issuerController = IssuerViewController()
+        
+        issuerController.managedIssuer = managedIssuer
+        issuerController.certificates = certificates.filter { certificate in
+            return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
+        }
+        
+        self.navigationController?.pushViewController(issuerController, animated: true)
+        
+        return issuerController
+    }
+    
+    func navigateTo(certificate: Certificate) {
+        guard let managedIssuer = managedIssuers.filter({ (possibleIssuer) -> Bool in
+            return possibleIssuer.issuer?.id == certificate.issuer.id
+        }).first else {
+            return
+        }
+        
+        let issuerController = navigateTo(issuer: managedIssuer)
+        issuerController.navigateTo(certificate: certificate)
     }
     
     func showAddIssuerFlow(identificationURL: URL? = nil, nonce : String? = nil) {
@@ -366,14 +395,8 @@ class IssuerCollectionViewController: UICollectionViewController {
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let managedIssuer = managedIssuers[indexPath.item]
-        let issuerController = IssuerViewController()
         
-        issuerController.managedIssuer = managedIssuer
-        issuerController.certificates = certificates.filter { certificate in
-            return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
-        }
-        
-        self.navigationController?.pushViewController(issuerController, animated: true)
+        _ = navigateTo(issuer: managedIssuer)
     }
 }
 
