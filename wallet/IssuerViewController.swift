@@ -103,12 +103,12 @@ class IssuerViewController: UIViewController {
         present(prompt, animated: true, completion: nil)
     }
     
-    func navigateTo(certificate: Certificate) {
+    func navigateTo(certificate: Certificate, animated: Bool = true) {
         let controller = CertificateViewController(certificate: certificate)
         controller.delegate = self
 
         OperationQueue.main.addOperation {
-            self.navigationController?.pushViewController(controller, animated: true)
+            self.navigationController?.pushViewController(controller, animated: animated)
         }
     }
 }

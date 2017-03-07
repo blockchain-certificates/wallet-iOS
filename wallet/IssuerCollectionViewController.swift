@@ -321,7 +321,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         saveCertificates()
     }
     
-    func add(certificateURL: URL, silently: Bool = false) -> Bool {
+    func add(certificateURL: URL, silently: Bool = false, animated: Bool = true) -> Bool {
         var components = URLComponents(url: certificateURL, resolvingAgainstBaseURL: false)
         let formatQueryItem = URLQueryItem(name: "format", value: "json")
         
@@ -344,7 +344,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             reloadCollectionView()
             
             if !silently {
-                navigateTo(certificate: certificate)
+                navigateTo(certificate: certificate, animated: animated)
             }
             
             return true
@@ -355,7 +355,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         return false
     }
     
-    func navigateTo(issuer managedIssuer: ManagedIssuer) -> IssuerViewController {
+    func navigateTo(issuer managedIssuer: ManagedIssuer, animated: Bool = true) -> IssuerViewController {
         let issuerController = IssuerViewController()
         
         issuerController.managedIssuer = managedIssuer
@@ -363,20 +363,20 @@ class IssuerCollectionViewController: UICollectionViewController {
             return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
         }
         
-        self.navigationController?.pushViewController(issuerController, animated: true)
+        self.navigationController?.pushViewController(issuerController, animated: animated)
         
         return issuerController
     }
     
-    func navigateTo(certificate: Certificate) {
+    func navigateTo(certificate: Certificate, animated: Bool = true) {
         guard let managedIssuer = managedIssuers.filter({ (possibleIssuer) -> Bool in
             return possibleIssuer.issuer?.id == certificate.issuer.id
         }).first else {
             return
         }
         
-        let issuerController = navigateTo(issuer: managedIssuer)
-        issuerController.navigateTo(certificate: certificate)
+        let issuerController = navigateTo(issuer: managedIssuer, animated: animated)
+        issuerController.navigateTo(certificate: certificate, animated: animated)
     }
     
     func showAddIssuerFlow(identificationURL: URL? = nil, nonce : String? = nil) {
