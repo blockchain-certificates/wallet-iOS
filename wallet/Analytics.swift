@@ -17,6 +17,7 @@ enum AnalyticsEnvironment {
 }
 
 class Analytics {
+    var tasks : [URLSessionDataTask] = []
     let environment : AnalyticsEnvironment
     var tracker : GAITracker?
     
@@ -46,6 +47,7 @@ class Analytics {
             // Development and Production environments both track with Google Analytics
             fallthrough
         case .production:
+            // Tracking with Google Analytics
             if tracker == nil {
                 tracker = GAI.sharedInstance().defaultTracker
             }
@@ -63,6 +65,41 @@ class Analytics {
             }
             
             tracker.send(eventData as [NSObject: AnyObject])
+            
+            // Tracking with custom analytics
+            let payload : [String : Any] = [
+                "key": certificate.assertion.id.absoluteString,
+                "action": actionName,
+                "metadata" : [
+                    "application": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown",
+                    "platform": "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
+                ]
+            ]
+            
+            var uploadRequest = URLRequest(url: URL(string: "https://certificates.learningmachine.com/api/event/certificate")!)
+            uploadRequest.httpMethod = "POST"
+            uploadRequest.httpBody = try? JSONSerialization.data(withJSONObject: payload, options: [])
+            
+
+            let uploadTask : URLSessionDataTask = URLSession.shared.dataTask(with: uploadRequest as URLRequest) { (data :Data?, response : URLResponse?, error : Error?) in
+                print("Got analytics response back:")
+                print("Data")
+                dump(data)
+                print("Response")
+                dump(response)
+                print("Error")
+                dump(error)
+                let index = self.tasks.index(where: { (task) -> Bool in
+                    return task.originalRequest == uploadRequest
+                })
+                if index != nil {
+                    self.tasks.remove(at: index!)
+                }
+            }
+            
+            tasks.append(uploadTask)
+
+//            URLSession.shared.uploadTask(with: <#T##URLRequest#>, from: <#T##Data?#>, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
         default:
             print("Tracking for \(environment) environment not implemented yet.")
         }
@@ -92,4 +129,6 @@ class Analytics {
 //        }
         
     }
+    
+    
 }
