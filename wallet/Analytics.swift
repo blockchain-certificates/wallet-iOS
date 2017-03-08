@@ -17,7 +17,7 @@ enum AnalyticsEnvironment {
 }
 
 class Analytics {
-    var tasks : [URLSessionDataTask] = []
+    var tasks = [URLRequest : URLSessionDataTask]()
     let environment : AnalyticsEnvironment
     var tracker : GAITracker?
     
@@ -97,22 +97,17 @@ class Analytics {
         uploadRequest.setValue("application/json", forHTTPHeaderField: "Accepts")
         
         
-        let uploadTask : URLSessionDataTask = URLSession.shared.dataTask(with: uploadRequest as URLRequest) { (data, response, error) in
-            print("Got analytics response back:")
-            print("Data")
-            dump(data)
-            print("Response")
-            dump(response)
-            print("Error")
-            dump(error)
-            let index = self.tasks.index(where: { (task) -> Bool in
-                return task.originalRequest == uploadRequest
-            })
-            if index != nil {
-                self.tasks.remove(at: index!)
+        let uploadTask : URLSessionDataTask = URLSession.shared.dataTask(with: uploadRequest as URLRequest) { [weak self] (data, response, error) in
+            guard error != nil else {
+                print("Got an error trying to report \(action) event for \(certificate.assertion.id)")
+                dump(error!)
+                dump(response)
+                return
             }
+            
+            _ = self?.tasks.removeValue(forKey: uploadRequest)
         }
-        tasks.append(uploadTask)
+        tasks[uploadRequest] = uploadTask
         uploadTask.resume()
     }
     
