@@ -96,8 +96,8 @@ class Analytics {
                     self.tasks.remove(at: index!)
                 }
             }
-            
             tasks.append(uploadTask)
+            uploadTask.resume()
 
 //            URLSession.shared.uploadTask(with: <#T##URLRequest#>, from: <#T##Data?#>, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
         default:
