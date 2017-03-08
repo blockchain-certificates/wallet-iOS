@@ -79,6 +79,8 @@ class Analytics {
             var uploadRequest = URLRequest(url: URL(string: "https://certificates.learningmachine.com/api/event/certificate")!)
             uploadRequest.httpMethod = "POST"
             uploadRequest.httpBody = try? JSONSerialization.data(withJSONObject: payload, options: [])
+            uploadRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            uploadRequest.setValue("application/json", forHTTPHeaderField: "Accepts")
             
 
             let uploadTask : URLSessionDataTask = URLSession.shared.dataTask(with: uploadRequest as URLRequest) { (data :Data?, response : URLResponse?, error : Error?) in
@@ -103,8 +105,16 @@ class Analytics {
         default:
             print("Tracking for \(environment) environment not implemented yet.")
         }
+        
     }
     
+    func reportToGoogle(action: String, for certificate: Certificate) {
+        
+    }
+    
+    func reportToLearningMachine(action: String, for certificate: Certificate) {
+        
+    }
     public func applicationDidLaunch() {
         // Configure tracker from GoogleService-Info.plist.
         var configureError:NSError?
