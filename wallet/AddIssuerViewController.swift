@@ -196,15 +196,17 @@ class AddIssuerViewController: UIViewController {
                 case .serverError(let code):
                     print("Identification server error: \(code)")
                     failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
-                case .issuerInvalid: //(reason: <#T##InvalidIssuerReason#>, scope: <#T##InvalidIssuerScope#>):
-                    fallthrough
+                case .issuerInvalid(_, scope: .json):
+                    failureReason = NSLocalizedString("We couldn't understand this Issuer's response. Please contact the Issuer.", comment: "Error message displayed when we see missing or invalid JSON in the response.")
+                case .issuerInvalid(reason: .missing, scope: .property(let named)):
+                    failureReason = String.init(format: NSLocalizedString("Issuer responded, but didn't include the \"%@\" property", comment: "Format string for an issuer response with a missing property. Variable is the property name that's missing."), named)
+                case .issuerInvalid(reason: .invalid, scope: .property(let named)):
+                    failureReason = String.init(format: NSLocalizedString("Issuer responded, but it contained an invalid property named \"%@\"", comment: "Format string for an issuer response with an invalid property. Variable is the property name that's invalid."), named)
                 default: break
                 }
                 
-                let alertController = UIAlertController(title: "Add Issuer Failed", message: failureReason, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .cancel, handler: nil))
-                
-                // TODO: present controller
+                self?.showAddIssuerError(message: failureReason)
+
                 return
             }
             
@@ -230,6 +232,17 @@ class AddIssuerViewController: UIViewController {
         OperationQueue.main.addOperation { [weak self] in
             self?.isLoading = false
             self?.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func showAddIssuerError(message: String) {
+        let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .cancel, handler: nil))
+        
+        OperationQueue.main.addOperation {
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }

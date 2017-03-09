@@ -22,7 +22,7 @@ enum InvalidIssuerReason {
 }
 
 enum InvalidIssuerScope {
-    case response, json, property(named: String)
+    case json, property(named: String)
 }
 
 enum ManagedIssuerError {

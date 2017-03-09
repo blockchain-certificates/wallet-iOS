@@ -96,7 +96,6 @@ class Analytics {
         uploadRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         uploadRequest.setValue("application/json", forHTTPHeaderField: "Accepts")
         
-        
         let uploadTask : URLSessionDataTask = URLSession.shared.dataTask(with: uploadRequest as URLRequest) { [weak self] (data, response, error) in
             guard error != nil else {
                 print("Got an error trying to report \(action) event for \(certificate.assertion.id)")
