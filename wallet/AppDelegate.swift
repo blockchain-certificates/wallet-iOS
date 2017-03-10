@@ -57,8 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Analytics.shared.applicationDidLaunch()
         
         UIButton.appearance().tintColor = Colors.brandColor
-        
-        
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Colors.brandColor
         
         UserDefaults.standard.register(defaults: [
             sampleCertificateResetKey : true
