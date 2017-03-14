@@ -30,8 +30,28 @@ class Analytics {
     }
     
     public func track(event: AnalyticsEvent, certificate: Certificate) {
+        switch environment {
+        case .debug:
+            print("Tracking \(certificate.assertion.uid).")
+        case .development:
+            // Development and Production environments both track as if in Production
+            fallthrough
+        case .production:
+            // Tracking with Google Analytics
+            reportToGoogle(action: event, for: certificate)
+            
+            // Tracking with custom analytics
+            reportToLearningMachine(action: event, for: certificate)
+
+        default:
+            print("Tracking for \(environment) environment not implemented yet.")
+        }
+        
+    }
+    
+    func reportToGoogle(action: AnalyticsEvent, for certificate: Certificate) {
         let actionName : String
-        switch event {
+        switch action {
         case .viewed:
             actionName = "viewed"
         case .validated:
@@ -40,26 +60,6 @@ class Analytics {
             actionName = "shared"
         }
         
-        switch environment {
-        case .debug:
-            print("Tracking \(actionName) for \(certificate.assertion.uid).")
-        case .development:
-            // Development and Production environments both track as if in Production
-            fallthrough
-        case .production:
-            // Tracking with Google Analytics
-            reportToGoogle(action: actionName, for: certificate)
-            
-            // Tracking with custom analytics
-            reportToLearningMachine(action: actionName, for: certificate)
-
-        default:
-            print("Tracking for \(environment) environment not implemented yet.")
-        }
-        
-    }
-    
-    func reportToGoogle(action: String, for certificate: Certificate) {
         if tracker == nil {
             tracker = GAI.sharedInstance().defaultTracker
         }
@@ -69,7 +69,7 @@ class Analytics {
         }
 
         let eventDictionary = GAIDictionaryBuilder.createEvent(withCategory: certificate.issuer.id.absoluteString,
-                                                               action: action,
+                                                               action: actionName,
                                                                label: certificate.assertion.uid,
                                                                value: nil)
         guard let eventData = eventDictionary?.build() else {
@@ -80,10 +80,20 @@ class Analytics {
         tracker.send(eventData as [NSObject: AnyObject])
     }
     
-    func reportToLearningMachine(action: String, for certificate: Certificate) {
+    func reportToLearningMachine(action: AnalyticsEvent, for certificate: Certificate) {
+        let actionName : String
+        switch action {
+        case .viewed:
+            actionName = "viewed"
+        case .validated:
+            actionName = "verified"
+        case .shared:
+            actionName = "shared"
+        }
+        
         let payload : [String : Any] = [
             "key": certificate.assertion.uid, //certificate.assertion.id.absoluteString,
-            "action": action,
+            "action": actionName,
             "metadata" : [
                 "application": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown",
                 "platform": "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
