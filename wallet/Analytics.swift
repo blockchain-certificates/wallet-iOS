@@ -82,7 +82,7 @@ class Analytics {
     
     func reportToLearningMachine(action: String, for certificate: Certificate) {
         let payload : [String : Any] = [
-            "key": certificate.assertion.id.absoluteString,
+            "key": certificate.assertion.uid, //certificate.assertion.id.absoluteString,
             "action": action,
             "metadata" : [
                 "application": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown",
