@@ -19,7 +19,6 @@ enum AnalyticsEnvironment {
 class Analytics {
     var tasks = [URLRequest : URLSessionDataTask]()
     let environment : AnalyticsEnvironment
-    var tracker : GAITracker?
     
     init(environment: AnalyticsEnvironment = .production) {
         self.environment = environment
@@ -37,9 +36,6 @@ class Analytics {
             // Development and Production environments both track as if in Production
             fallthrough
         case .production:
-            // Tracking with Google Analytics
-            reportToGoogle(action: event, for: certificate)
-            
             // Tracking with custom analytics
             reportToLearningMachine(action: event, for: certificate)
 
@@ -48,38 +44,7 @@ class Analytics {
         }
         
     }
-    
-    func reportToGoogle(action: AnalyticsEvent, for certificate: Certificate) {
-        let actionName : String
-        switch action {
-        case .viewed:
-            actionName = "viewed"
-        case .validated:
-            actionName = "validated"
-        case .shared:
-            actionName = "shared"
-        }
-        
-        if tracker == nil {
-            tracker = GAI.sharedInstance().defaultTracker
-        }
-        guard let tracker = tracker else {
-            print("Unable to access the shared tracker to record this \(action) event.")
-            return
-        }
 
-        let eventDictionary = GAIDictionaryBuilder.createEvent(withCategory: certificate.issuer.id.absoluteString,
-                                                               action: actionName,
-                                                               label: certificate.assertion.uid,
-                                                               value: nil)
-        guard let eventData = eventDictionary?.build() else {
-            print("Couldn't build an event dictionary for \(action) event.")
-            return
-        }
-        
-        tracker.send(eventData as [NSObject: AnyObject])
-    }
-    
     func reportToLearningMachine(action: AnalyticsEvent, for certificate: Certificate) {
         let actionName : String
         switch action {
@@ -118,16 +83,5 @@ class Analytics {
         }
         tasks[uploadRequest] = uploadTask
         uploadTask.resume()
-    }
-    
-    public func applicationDidLaunch() {
-        // Configure tracker from GoogleService-Info.plist.
-        var configureError:NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")
-        
-        let gai : GAI! = GAI.sharedInstance()
-        gai.trackUncaughtExceptions = true  // report uncaught exceptions
-        gai.logger.logLevel = .verbose
     }
 }

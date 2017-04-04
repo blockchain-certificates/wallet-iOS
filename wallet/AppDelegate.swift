@@ -53,9 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupApplication() {
         self.window?.addSubview(JSONLD.shared.webView)
-        // Need a way to make this more obvious. Referencing the shared singleton
-        Analytics.shared.applicationDidLaunch()
-        
+
         UIButton.appearance().tintColor = Colors.brandColor
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = Colors.brandColor
         
