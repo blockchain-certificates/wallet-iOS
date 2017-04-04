@@ -124,7 +124,7 @@ class Analytics {
         // Configure tracker from GoogleService-Info.plist.
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")
         
         let gai : GAI! = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true  // report uncaught exceptions

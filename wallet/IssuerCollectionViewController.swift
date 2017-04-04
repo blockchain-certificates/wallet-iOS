@@ -233,7 +233,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         managedIssuer.manage(issuer: issuer) { [weak self] success in
             self?.reloadCollectionView()
             self?.saveIssuers()
-            print("Got identity from raw issuer \(success)")
+            print("Got identity from raw issuer \(String(describing: success))")
         }
         
         add(managedIssuer: managedIssuer)
