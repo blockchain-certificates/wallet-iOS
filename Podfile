@@ -7,14 +7,13 @@ target 'certificates' do
 
   # Pods for wallet
   pod 'CoreBitcoin', :podspec => 'https://raw.github.com/oleganza/CoreBitcoin/master/CoreBitcoin.podspec', :inhibit_warnings => true
-  pod 'Google/Analytics'
 
-  target 'walletTests' do
+  target 'certificatesTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'walletUITests' do
+  target 'certificatesUITests' do
     inherit! :search_paths
     # Pods for testing
   end

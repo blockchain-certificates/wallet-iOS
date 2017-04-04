@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02428331792622E8965F5E8F /* libPods-walletUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C13D522FC4674A0FCC82DCF /* libPods-walletUITests.a */; };
+		6360BE865570CCDF5C814E4E /* libPods-certificatesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */; };
 		830AB9EC1DA6BC4B00185E19 /* BlockchainCertificates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EB1DA6BC4B00185E19 /* BlockchainCertificates.framework */; };
 		830AB9ED1DA6BC4B00185E19 /* BlockchainCertificates.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EB1DA6BC4B00185E19 /* BlockchainCertificates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		830AB9EF1DA6BC4B00185E19 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */; };
@@ -23,9 +23,6 @@
 		83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */; };
 		83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */; };
 		83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */; };
-		8313818D1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */; };
-		8313818E1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */; };
-		8313818F1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
 		8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */; };
 		8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */; };
@@ -62,7 +59,7 @@
 		83DC0D941DBA87C300453116 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0D931DBA87C300453116 /* Constants.swift */; };
 		83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F196251DC9077A00590219 /* ManagedIssuer.swift */; };
 		ABC6BB21B68837562003AED2 /* libPods-certificates.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F8F788045077CB0389D73 /* libPods-certificates.a */; };
-		E3C76BE5A1F12F238FF4D797 /* libPods-walletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9B42333AB2B91FF357E4AC /* libPods-walletTests.a */; };
+		E6369342122392D1986F253C /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,14 +96,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		006F6E9BF51BA616EAD3BDC3 /* Pods-certificatesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificatesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-certificatesTests/Pods-certificatesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		06EE858C3746A1D1413048DB /* Pods-certificatesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificatesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		0BFA0E93CC8871979D4682EB /* Pods-walletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-walletTests/Pods-walletTests.release.xcconfig"; sourceTree = "<group>"; };
-		0C13D522FC4674A0FCC82DCF /* libPods-walletUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-walletUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18ED839C370360E8561D2E36 /* Pods-certificates.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificates.debug.xcconfig"; path = "Pods/Target Support Files/Pods-certificates/Pods-certificates.debug.xcconfig"; sourceTree = "<group>"; };
 		1E8F8F788045077CB0389D73 /* libPods-certificates.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificates.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D9B42333AB2B91FF357E4AC /* libPods-walletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-walletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4462F4E7913EB1DC9F17B6CB /* Pods-walletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walletTests/Pods-walletTests.debug.xcconfig"; sourceTree = "<group>"; };
-		49006DF4C911D8FD07B89878 /* libPods-wallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C15AEB86836CEA4E704911A /* Pods-certificatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificatesTests/Pods-certificatesTests.release.xcconfig"; sourceTree = "<group>"; };
+		4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AB11E45F387B18A58FCF2A4 /* Pods-certificates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificates.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificates/Pods-certificates.release.xcconfig"; sourceTree = "<group>"; };
+		7A35288CE0EE9C6B8329C464 /* Pods-certificatesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificatesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7BFC6072764E5C955CF2FB31 /* Pods-walletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests.release.xcconfig"; sourceTree = "<group>"; };
 		830AB9EB1DA6BC4B00185E19 /* BlockchainCertificates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BlockchainCertificates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +127,6 @@
 		83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
 		83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerViewController.swift; sourceTree = "<group>"; };
 		83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryView.swift; sourceTree = "<group>"; };
-		8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
 		8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -164,6 +161,7 @@
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
 		83DC0D931DBA87C300453116 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		83F196251DC9077A00590219 /* ManagedIssuer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedIssuer.swift; sourceTree = "<group>"; };
+		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E87B7828FD21351E1F3E3FA3 /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,7 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3C76BE5A1F12F238FF4D797 /* libPods-walletTests.a in Frameworks */,
+				6360BE865570CCDF5C814E4E /* libPods-certificatesTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02428331792622E8965F5E8F /* libPods-walletUITests.a in Frameworks */,
+				E6369342122392D1986F253C /* libPods-certificatesUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,12 +199,12 @@
 		6899B0CCC0FB539D95CDACB7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4462F4E7913EB1DC9F17B6CB /* Pods-walletTests.debug.xcconfig */,
-				0BFA0E93CC8871979D4682EB /* Pods-walletTests.release.xcconfig */,
-				E87B7828FD21351E1F3E3FA3 /* Pods-walletUITests.debug.xcconfig */,
-				7BFC6072764E5C955CF2FB31 /* Pods-walletUITests.release.xcconfig */,
 				18ED839C370360E8561D2E36 /* Pods-certificates.debug.xcconfig */,
 				5AB11E45F387B18A58FCF2A4 /* Pods-certificates.release.xcconfig */,
+				006F6E9BF51BA616EAD3BDC3 /* Pods-certificatesTests.debug.xcconfig */,
+				3C15AEB86836CEA4E704911A /* Pods-certificatesTests.release.xcconfig */,
+				06EE858C3746A1D1413048DB /* Pods-certificatesUITests.debug.xcconfig */,
+				7A35288CE0EE9C6B8329C464 /* Pods-certificatesUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -215,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				836031C41E5E513A005B2D2E /* Settings.bundle */,
-				8313818C1E0C76E300D61ECB /* GoogleService-Info.plist */,
 				836031C11E5E5064005B2D2E /* Assets */,
 				832AE0101DF8921400A3CA4A /* External */,
 				83111B261DA4110C006B058D /* wallet */,
@@ -352,10 +349,9 @@
 				830AB9EB1DA6BC4B00185E19 /* BlockchainCertificates.framework */,
 				830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */,
 				83111B761DA414EB006B058D /* JSONLD.framework */,
-				49006DF4C911D8FD07B89878 /* libPods-wallet.a */,
-				2D9B42333AB2B91FF357E4AC /* libPods-walletTests.a */,
-				0C13D522FC4674A0FCC82DCF /* libPods-walletUITests.a */,
 				1E8F8F788045077CB0389D73 /* libPods-certificates.a */,
+				C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */,
+				4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -497,7 +493,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8313818D1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
@@ -519,7 +514,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
-				8313818E1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +522,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				834B94CC1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
-				8313818F1E0C76E300D61ECB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,7 +555,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		0BB09ADEF5FA9DAE711D9B64 /* [CP] Copy Pods Resources */ = {
@@ -577,7 +570,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-walletTests/Pods-walletTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesTests/Pods-certificatesTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2856E0708F57BE4D4AFEDE2C /* [CP] Check Pods Manifest.lock */ = {
@@ -607,7 +600,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-walletUITests/Pods-walletUITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		957CFF607A31F73EE3F8E59F /* [CP] Check Pods Manifest.lock */ = {
@@ -637,7 +630,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-walletTests/Pods-walletTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesTests/Pods-certificatesTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C4F92AA0A7F6B12082D77826 /* [CP] Check Pods Manifest.lock */ = {
@@ -924,7 +917,7 @@
 		};
 		83111B501DA4110C006B058D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4462F4E7913EB1DC9F17B6CB /* Pods-walletTests.debug.xcconfig */;
+			baseConfigurationReference = 006F6E9BF51BA616EAD3BDC3 /* Pods-certificatesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -942,7 +935,7 @@
 		};
 		83111B511DA4110C006B058D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BFA0E93CC8871979D4682EB /* Pods-walletTests.release.xcconfig */;
+			baseConfigurationReference = 3C15AEB86836CEA4E704911A /* Pods-certificatesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -959,7 +952,7 @@
 		};
 		83111B531DA4110C006B058D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E87B7828FD21351E1F3E3FA3 /* Pods-walletUITests.debug.xcconfig */;
+			baseConfigurationReference = 06EE858C3746A1D1413048DB /* Pods-certificatesUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
@@ -976,7 +969,7 @@
 		};
 		83111B541DA4110C006B058D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7BFC6072764E5C955CF2FB31 /* Pods-walletUITests.release.xcconfig */;
+			baseConfigurationReference = 7A35288CE0EE9C6B8329C464 /* Pods-certificatesUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
