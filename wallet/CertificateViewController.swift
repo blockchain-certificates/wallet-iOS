@@ -165,7 +165,9 @@ class CertificateViewController: UIViewController {
     }
     
     func moreInfoTapped() {
-        print("\(#function)")
+        let controller = CertificateMetadataViewController(certificate: certificate)
+        let navController = UINavigationController(rootViewController: controller);
+        present(navController, animated: true, completion: nil)
     }
     
     // Share actions
