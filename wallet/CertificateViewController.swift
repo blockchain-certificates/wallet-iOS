@@ -39,6 +39,11 @@ class CertificateViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = certificate.title
+        let infoButton = UIButton(type: .infoDark)
+        infoButton.tintColor = .white
+        infoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
         
         shareButton.isEnabled = (certificate.assertion.uid != Identifiers.sampleCertificateUID)
         
@@ -157,6 +162,10 @@ class CertificateViewController: UIViewController {
         prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
         
         present(prompt, animated: true, completion: nil)
+    }
+    
+    func moreInfoTapped() {
+        print("\(#function)")
     }
     
     // Share actions
