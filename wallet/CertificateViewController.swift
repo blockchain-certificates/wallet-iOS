@@ -39,11 +39,12 @@ class CertificateViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = certificate.title
-        let infoButton = UIButton(type: .infoDark)
-        infoButton.tintColor = .white
-        infoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
+        _ = toolbar.items?.popLast()
+        toolbar.items?.append(UIBarButtonItem(customView: infoButton))
+        
         
         shareButton.isEnabled = (certificate.assertion.uid != Identifiers.sampleCertificateUID)
         

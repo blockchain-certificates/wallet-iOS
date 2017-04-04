@@ -59,9 +59,11 @@ class CertificateMetadataViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = .white
         self.title = certificate.title
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissSelf))
+        
+        let dismissButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissSelf))
+        self.navigationController?.navigationBar.tintColor = Colors.brandColor
+        navigationItem.leftBarButtonItem = dismissButton
     }
 
     func dismissSelf() {
