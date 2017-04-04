@@ -11,15 +11,19 @@ import BlockchainCertificates
 
 private let BasicCellReuseIdentifier = "UITableViewCell"
 
+enum Section : Int {
+    case information = 0, deleteCertificate
+    case count
+}
+
 class CertificateMetadataViewController: UIViewController {
+    public var delegate : CertificateViewControllerDelegate?
     private let certificate : Certificate
-//    private let tableController : UITableViewController!
     private var tableView : UITableView!
 
     init(certificate: Certificate) {
         self.certificate = certificate
         tableView = nil
-//        tableController = UITableViewController(style: .grouped)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,6 +41,7 @@ class CertificateMetadataViewController: UIViewController {
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: BasicCellReuseIdentifier);
         tableView.dataSource = self
+        tableView.delegate = self
         
         let constraints = [
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -62,15 +67,53 @@ class CertificateMetadataViewController: UIViewController {
     func dismissSelf() {
         dismiss(animated: true, completion: nil)
     }
+    
+    func promptForCertificateDeletion() {
+        let certificateToDelete = certificate
+        let title = NSLocalizedString("Be careful", comment: "Caution title presented when attempting to delete a certificate.")
+        let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Explanation of the effects of deleting a certificate.")
+        let delete = NSLocalizedString("Delete", comment: "Confirm delete action")
+        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
+        
+        let prompt = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] (_) in
+            self?.delegate?.delete(certificate: certificateToDelete)
+            self?.dismissSelf();
+        }))
+        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: { [weak self] (_) in
+            if let selectedPath = self?.tableView.indexPathForSelectedRow {
+                self?.tableView.deselectRow(at: selectedPath, animated: true)
+            }
+        }))
+        
+        present(prompt, animated: true, completion: nil)
+    }
+    
 }
 
 extension CertificateMetadataViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return Section.count.rawValue
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch Section(rawValue:section) {
+        case .some(.information):
+            return 0
+        case .some(.deleteCertificate):
+            return 1
+        case nil:
+            fallthrough
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == Section.information.rawValue {
+            return "Information"
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,5 +122,22 @@ extension CertificateMetadataViewController : UITableViewDataSource {
         cell.textLabel?.text = "Delete Certificate"
         
         return cell;
+    }
+    
+}
+
+extension CertificateMetadataViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let section = Section(rawValue: indexPath.section) else {
+            tableView.deselectRow(at: indexPath, animated: false)
+            return
+        }
+
+        switch section {
+        case .deleteCertificate:
+            promptForCertificateDeletion();
+        default:
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }

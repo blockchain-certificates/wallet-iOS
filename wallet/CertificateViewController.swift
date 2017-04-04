@@ -166,6 +166,7 @@ class CertificateViewController: UIViewController {
     
     func moreInfoTapped() {
         let controller = CertificateMetadataViewController(certificate: certificate)
+        controller.delegate = self
         let navController = UINavigationController(rootViewController: controller);
         present(navController, animated: true, completion: nil)
     }
@@ -258,4 +259,11 @@ extension CertificateViewController : CertificateValidationRequestDelegate {
 
 protocol CertificateViewControllerDelegate : class {
     func delete(certificate: Certificate)
+}
+
+extension CertificateViewController : CertificateViewControllerDelegate {
+    func delete(certificate: Certificate) {
+        navigationController?.popViewController(animated: true)
+        delegate?.delete(certificate: certificate)
+    }
 }
