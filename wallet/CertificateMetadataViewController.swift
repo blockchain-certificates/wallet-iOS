@@ -9,16 +9,26 @@
 import UIKit
 import BlockchainCertificates
 
-private let BasicCellReuseIdentifier = "UITableViewCell"
-
+private let InformationCellReuseIdentifier = "UITableViewCell - master/detail"
+private let DeleteCellReuseIdentifier = "UITableViewCell"
 enum Section : Int {
     case information = 0, deleteCertificate
     case count
 }
 
+class InformationTableViewCell : UITableViewCell {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class CertificateMetadataViewController: UIViewController {
     public var delegate : CertificateViewControllerDelegate?
-    private let certificate : Certificate
+    fileprivate let certificate : Certificate
     private var tableView : UITableView!
 
     init(certificate: Certificate) {
@@ -39,7 +49,8 @@ class CertificateMetadataViewController: UIViewController {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: BasicCellReuseIdentifier);
+        tableView.register(InformationTableViewCell.self, forCellReuseIdentifier: InformationCellReuseIdentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: DeleteCellReuseIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -101,10 +112,10 @@ extension CertificateMetadataViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue:section) {
         case .some(.information):
-            return 0
+            return certificate.metadata.visibleMetadata.count
         case .some(.deleteCertificate):
             return 1
-        case nil:
+        case .none:
             fallthrough
         default:
             return 0
@@ -119,9 +130,23 @@ extension CertificateMetadataViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: BasicCellReuseIdentifier)!
+        var identifier = InformationCellReuseIdentifier
+        if (indexPath.section == Section.deleteCertificate.rawValue) {
+            identifier = DeleteCellReuseIdentifier
+        }
         
-        cell.textLabel?.text = "Delete Certificate"
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier)!
+        
+        switch indexPath.section {
+        case Section.information.rawValue:
+            let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
+            cell.textLabel?.text = metadatum.label
+            cell.detailTextLabel?.text = metadatum.value
+        case Section.deleteCertificate.rawValue:
+            cell.textLabel?.text = "Delete Certificate"
+        default:
+            cell.textLabel?.text = ""
+        }
         
         return cell;
     }
