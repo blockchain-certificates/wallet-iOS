@@ -21,6 +21,12 @@ private let DeleteCellReuseIdentifier = "DeleteTableViewCell"
 class InformationTableViewCell : UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        
+        textLabel?.textColor = Colors.secondaryTextColor
+        textLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+        
+        detailTextLabel?.textColor = Colors.primaryTextColor
+        detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .body)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -157,6 +163,7 @@ extension CertificateMetadataViewController : UITableViewDataSource {
             let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
             cell.textLabel?.text = metadatum.label
             cell.detailTextLabel?.text = metadatum.value
+            cell.selectionStyle = .none
         case Section.deleteCertificate.rawValue:
             cell.textLabel?.text = "Delete Certificate"
         default:
@@ -169,6 +176,7 @@ extension CertificateMetadataViewController : UITableViewDataSource {
 }
 
 extension CertificateMetadataViewController : UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let section = Section(rawValue: indexPath.section) else {
             tableView.deselectRow(at: indexPath, animated: false)
