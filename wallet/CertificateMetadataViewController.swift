@@ -9,12 +9,14 @@
 import UIKit
 import BlockchainCertificates
 
-private let InformationCellReuseIdentifier = "UITableViewCell - master/detail"
-private let DeleteCellReuseIdentifier = "UITableViewCell"
 enum Section : Int {
     case information = 0, deleteCertificate
     case count
 }
+
+// Mark: - Custom UITableViewCells
+private let InformationCellReuseIdentifier = "InformationTableViewCell"
+private let DeleteCellReuseIdentifier = "DeleteTableViewCell"
 
 class InformationTableViewCell : UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -23,6 +25,19 @@ class InformationTableViewCell : UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class DeleteTableViewCell : UITableViewCell {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier);
+        
+        textLabel?.textAlignment = .center
+        textLabel?.textColor = .red
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented");
     }
 }
 
@@ -50,7 +65,7 @@ class CertificateMetadataViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         tableView.register(InformationTableViewCell.self, forCellReuseIdentifier: InformationCellReuseIdentifier)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: DeleteCellReuseIdentifier)
+        tableView.register(DeleteTableViewCell.self, forCellReuseIdentifier: DeleteCellReuseIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
         
