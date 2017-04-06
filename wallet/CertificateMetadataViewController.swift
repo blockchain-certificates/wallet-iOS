@@ -15,6 +15,7 @@ enum Section : Int {
 }
 
 // Mark: - Custom UITableViewCells
+private let MissingInformationCellReuseIdentifier = "MissingInformationTableViewCell"
 private let InformationCellReuseIdentifier = "InformationTableViewCell"
 private let DeleteCellReuseIdentifier = "DeleteTableViewCell"
 
@@ -40,10 +41,25 @@ class DeleteTableViewCell : UITableViewCell {
         
         textLabel?.textAlignment = .center
         textLabel?.textColor = .red
+        textLabel?.text = NSLocalizedString("Delete Certificate", comment: "Action to delete a certificate in the metadata view.")
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented");
+    }
+}
+
+class MissingInformationTableViewCell : UITableViewCell {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        textLabel?.text = NSLocalizedString("No additional information", comment: "Informational message about this certificate not having any metadata.")
+        textLabel?.textColor = Colors.disabledTextColor
+        selectionStyle = .none
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -72,6 +88,8 @@ class CertificateMetadataViewController: UIViewController {
 
         tableView.register(InformationTableViewCell.self, forCellReuseIdentifier: InformationCellReuseIdentifier)
         tableView.register(DeleteTableViewCell.self, forCellReuseIdentifier: DeleteCellReuseIdentifier)
+        tableView.register(MissingInformationTableViewCell.self, forCellReuseIdentifier: MissingInformationCellReuseIdentifier)
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -133,6 +151,10 @@ extension CertificateMetadataViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue:section) {
         case .some(.information):
+            if certificate.metadata.visibleMetadata.isEmpty {
+                // We'll still have a cell explaining why there's no metadata
+                return 1
+            }
             return certificate.metadata.visibleMetadata.count
         case .some(.deleteCertificate):
             return 1
@@ -145,28 +167,35 @@ extension CertificateMetadataViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == Section.information.rawValue {
-            return "Information"
+            return NSLocalizedString("Information", comment: "Title for the metadata view, showing additional information on a certificate")
         }
         return nil
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Choose which cell to use
         var identifier = InformationCellReuseIdentifier
         if (indexPath.section == Section.deleteCertificate.rawValue) {
             identifier = DeleteCellReuseIdentifier
+        } else if (indexPath.section == Section.information.rawValue && certificate.metadata.visibleMetadata.isEmpty) {
+            identifier = MissingInformationCellReuseIdentifier
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier)!
         
+        // Load it up with data
         switch indexPath.section {
         case Section.information.rawValue:
-            let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
-            cell.textLabel?.text = metadatum.label
-            cell.detailTextLabel?.text = metadatum.value
-            cell.selectionStyle = .none
+            if !certificate.metadata.visibleMetadata.isEmpty {
+                let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
+                cell.textLabel?.text = metadatum.label
+                cell.detailTextLabel?.text = metadatum.value
+                cell.selectionStyle = .none
+            }
         case Section.deleteCertificate.rawValue:
-            cell.textLabel?.text = "Delete Certificate"
+            break
         default:
+            // TODO: Is there a better way of failing here?
             cell.textLabel?.text = ""
         }
         
