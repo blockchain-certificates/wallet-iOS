@@ -34,13 +34,13 @@ class SettingsTableViewController: UITableViewController {
         title = NSLocalizedString("Settings", comment: "Title of the Settings screen.")
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        navigationController?.navigationBar.tintColor = Colors.brandColor
+        navigationController?.navigationBar.tintColor = .brandColor
         
         let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
         navigationItem.leftBarButtonItem = cancelBarButton
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        tableView.backgroundColor = Colors.baseColor
+        tableView.backgroundColor = .baseColor
     }
     
     override func viewWillAppear(_ animated: Bool) {

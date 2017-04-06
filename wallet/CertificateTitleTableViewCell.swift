@@ -46,7 +46,7 @@ class CertificateTitleTableViewCell: UITableViewCell {
             certificateSubtitleLabel.textColor = primaryTextColor
         } else {
             certificateSubtitleLabel.text = missingSubtitleText
-            certificateSubtitleLabel.textColor = Colors.placeholderTextColor
+            certificateSubtitleLabel.textColor = .placeholderTextColor
         }
     }
 }

@@ -35,7 +35,7 @@ class IssuerViewController: UIViewController {
         // Separator
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = Colors.borderColor
+        separator.backgroundColor = .borderColor
         view.addSubview(separator)
         
         certificateTableController = IssuerTableViewController()

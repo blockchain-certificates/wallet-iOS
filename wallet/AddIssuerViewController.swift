@@ -52,17 +52,17 @@ class AddIssuerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Colors.baseColor
+        view.backgroundColor = .baseColor
         
         title = NSLocalizedString("Add Issuer", comment: "Navigation title for the 'Add Issuer' form.")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveIssuerTapped(_:)))
         
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = Colors.brandColor
-        navigationController?.navigationBar.tintColor = Colors.tintColor
+        navigationController?.navigationBar.barTintColor = .brandColor
+        navigationController?.navigationBar.tintColor = .tintColor
         navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: Colors.tintColor
+            NSForegroundColorAttributeName: UIColor.tintColor
         ]
         
         loadingView.isHidden = !isLoading
@@ -101,16 +101,16 @@ class AddIssuerViewController: UIViewController {
         
         fields.forEach { (textField) in
             if let field = textField as? SkyFloatingLabelTextField {
-                field.tintColor = Colors.brandColor
-                field.selectedTitleColor = Colors.primaryTextColor
-                field.textColor = Colors.primaryTextColor
+                field.tintColor = .brandColor
+                field.selectedTitleColor = .primaryTextColor
+                field.textColor = .primaryTextColor
                 field.font = Fonts.brandFont
 
-                field.lineColor = Colors.placeholderTextColor
+                field.lineColor = .placeholderTextColor
                 field.selectedLineHeight = 1
-                field.selectedLineColor = Colors.brandColor
+                field.selectedLineColor = .brandColor
                 
-                field.placeholderColor = Colors.placeholderTextColor
+                field.placeholderColor = .placeholderTextColor
                 field.placeholderFont = Fonts.placeholderFont
             }
         }
@@ -120,7 +120,7 @@ class AddIssuerViewController: UIViewController {
             identityInformationLabel
         ]
         labels.forEach { (label) in
-            label?.textColor = Colors.primaryTextColor
+            label?.textColor = .primaryTextColor
         }
     }
 

@@ -38,11 +38,11 @@ class IssuerTableViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.backgroundColor = Colors.baseColor
+        tableView.backgroundColor = .baseColor
         
         tableView.tableFooterView = UIView()
         
-        tableView.separatorColor = Colors.borderColor
+        tableView.separatorColor = .borderColor
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
@@ -83,7 +83,7 @@ class IssuerTableViewController: UITableViewController {
         let certificate = certificates[indexPath.row]
         cell.title = certificate.title
         cell.subtitle = certificate.subtitle
-        cell.backgroundColor = Colors.baseColor
+        cell.backgroundColor = .baseColor
         
         return cell
     }
@@ -94,17 +94,17 @@ class IssuerTableViewController: UITableViewController {
         }
         let containerView = UIView()
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        containerView.backgroundColor = Colors.baseColor
+        containerView.backgroundColor = .baseColor
         
         let label = UILabel()
         label.text = NSLocalizedString("Certificates", comment: "Section title listing all certificates from this issuer.").uppercased()
-        label.textColor = Colors.primaryTextColor
+        label.textColor = .primaryTextColor
         label.font = UIFont.systemFont(ofSize: 11, weight: UIFontWeightBold)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = Colors.baseColor
+        separator.backgroundColor = .baseColor
         certificatesHeaderSeparator = separator
         
         containerView.addSubview(label)
@@ -166,9 +166,9 @@ class IssuerTableViewController: UITableViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y <= 0 {
-            certificatesHeaderSeparator?.backgroundColor = Colors.baseColor
+            certificatesHeaderSeparator?.backgroundColor = .baseColor
         } else {
-            certificatesHeaderSeparator?.backgroundColor = Colors.borderColor
+            certificatesHeaderSeparator?.backgroundColor = .borderColor
         }
     }
 }

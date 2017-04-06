@@ -23,10 +23,10 @@ class InformationTableViewCell : UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
-        textLabel?.textColor = Colors.secondaryTextColor
+        textLabel?.textColor = .secondaryTextColor
         textLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
         
-        detailTextLabel?.textColor = Colors.primaryTextColor
+        detailTextLabel?.textColor = .primaryTextColor
         detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .body)
     }
     
@@ -54,7 +54,7 @@ class MissingInformationTableViewCell : UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         textLabel?.text = NSLocalizedString("No additional information", comment: "Informational message about this certificate not having any metadata.")
-        textLabel?.textColor = Colors.disabledTextColor
+        textLabel?.textColor = .disabledTextColor
         selectionStyle = .none
     }
     
@@ -112,7 +112,7 @@ class CertificateMetadataViewController: UIViewController {
         self.title = certificate.title
         
         let dismissButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissSelf))
-        self.navigationController?.navigationBar.tintColor = Colors.brandColor
+        self.navigationController?.navigationBar.tintColor = .brandColor
         navigationItem.leftBarButtonItem = dismissButton
     }
 

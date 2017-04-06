@@ -25,11 +25,11 @@ class ReplacePassphraseViewController: UIViewController {
         errorLabel.text = nil
 
         let horizontalSpace : CGFloat = 15
-        passphraseField.tintColor = Colors.brandColor
+        passphraseField.tintColor = .brandColor
         passphraseField.textContainerInset = UIEdgeInsets(top: 4, left: horizontalSpace, bottom: 20, right: horizontalSpace)
         
         // Do any additional setup after loading the view.
-        view.backgroundColor = Colors.baseColor
+        view.backgroundColor = .baseColor
         replaceButton = UIBarButtonItem(title: NSLocalizedString("Replace", comment: "Replace passphrase action button"),
                                         style: .done,
                                         target: self,

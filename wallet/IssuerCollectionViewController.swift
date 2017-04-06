@@ -31,16 +31,16 @@ class IssuerCollectionViewController: UICollectionViewController {
         let addNib = UINib(nibName: "AddIssuerCollectionViewCell", bundle: nil)
         self.collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
         self.collectionView?.delegate = self
-        self.collectionView?.backgroundColor = Colors.baseColor
+        self.collectionView?.backgroundColor = .baseColor
         
         adjustCellSize()
 
         // Style this bad boy
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.barTintColor = Colors.brandColor
-        self.navigationController?.navigationBar.tintColor = Colors.tintColor
+        self.navigationController?.navigationBar.barTintColor = .brandColor
+        self.navigationController?.navigationBar.tintColor = .tintColor
         navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: Colors.tintColor
+            NSForegroundColorAttributeName: UIColor.tintColor
         ]
         navigationController?.navigationBar.barStyle = .blackOpaque
         
@@ -201,7 +201,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         genericCell = cell
         
         // Common styling
-        genericCell.layer.borderColor = Colors.borderColor.cgColor
+        genericCell.layer.borderColor = UIColor.borderColor.cgColor
         genericCell.layer.borderWidth = 0.5
         genericCell.layer.cornerRadius = 3
         

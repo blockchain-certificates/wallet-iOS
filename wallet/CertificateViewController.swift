@@ -71,8 +71,8 @@ class CertificateViewController: UIViewController {
     }
     
     func stylize() {
-        toolbar.tintColor = Colors.brandColor
-        progressView.tintColor = Colors.brandColor
+        toolbar.tintColor = .brandColor
+        progressView.tintColor = .brandColor
     }
     
     // MARK: Actions
