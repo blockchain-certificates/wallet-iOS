@@ -85,6 +85,7 @@ class CertificateMetadataViewController: UIViewController {
         let tableView : UITableView = UITableView(frame: .zero, style: .grouped);
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .baseColor
 
         tableView.register(InformationTableViewCell.self, forCellReuseIdentifier: InformationCellReuseIdentifier)
         tableView.register(DeleteTableViewCell.self, forCellReuseIdentifier: DeleteCellReuseIdentifier)
