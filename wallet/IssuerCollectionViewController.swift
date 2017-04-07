@@ -341,7 +341,14 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
         
         guard data != nil, let certificate = try? CertificateParser.parse(data: data!) else {
-            // TODO: Alert with parser-appropriate error.
+            let title = NSLocalizedString("Invalid Certificate", comment: "Title for an alert when importing an invalid certificate")
+            let message = NSLocalizedString("That file doesn't appear to be a valid certificate.", comment: "Message in an alert when importing an invalid certificate")
+            
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .default, handler: nil))
+            
+            present(alertController, animated: true, completion: nil)
+
             return false
         }
         
