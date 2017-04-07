@@ -340,21 +340,41 @@ class IssuerCollectionViewController: UICollectionViewController {
             data = try? Data(contentsOf: dataURL)
         }
         
-        if let data = data,
-            let certificate = try? CertificateParser.parse(data: data) {
-            add(certificate: certificate)
-            reloadCollectionView()
-            
-            if !silently {
-                navigateTo(certificate: certificate, animated: animated)
-            }
-            
-            return true
-        } else {
-            // TODO: Alert with the parser-appropriate error.
+        guard data != nil, let certificate = try? CertificateParser.parse(data: data!) else {
+            // TODO: Alert with parser-appropriate error.
+            return false
         }
         
-        return false
+        let assertionUid = certificate.assertion.uid;
+        guard !certificates.contains(where: { $0.assertion.uid == assertionUid }) else {
+            if !silently {
+                let title = NSLocalizedString("File already imported", comment: "Alert title when you re-import an existing certificate")
+                let message = NSLocalizedString("You've already imported that file. Want to view it?", comment: "Longer explanation about importing an existing file.")
+                
+                let viewAction = UIAlertAction(title: NSLocalizedString("View", comment: "Action prompt to view the imported certificate"), style: .default, handler: { [weak self] _ in
+                    if let certificate = self?.certificates.first(where: { $0.assertion.uid == assertionUid }) {
+                        self?.navigateTo(certificate: certificate, animated: true)
+                    }
+                })
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Dismiss action"), style: .cancel, handler: nil)
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alertController.addAction(cancelAction)
+                alertController.addAction(viewAction)
+
+                present(alertController, animated: true, completion: nil)
+            }
+            return true
+        }
+        
+        add(certificate: certificate)
+        reloadCollectionView()
+        
+        if !silently {
+            navigateTo(certificate: certificate, animated: animated)
+        }
+        
+        return true
     }
     
     func navigateTo(issuer managedIssuer: ManagedIssuer, animated: Bool = true) -> IssuerViewController {
