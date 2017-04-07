@@ -20,7 +20,8 @@
                                 "jobTitle": "Secretary",
                                 }],
             "type": "Assertion",
-            "uid": "sample-certificate"
+            "uid": "sample-certificate",
+            "metadataJson": "{\"displayOrder\":[\"certificate.Issuer\",\"certificate.Recipient\",\"certificate.Date Issued\",\"certificate.Description\"],\"certificate\":{\"Issuer\":\"Sample Issuers\",\"Recipient\":\"Recipient Name\",\"Date Issued\":\"mm/dd/yyyy\",\"Description\":\"Any type of information an be added as metadata for enrichment of understanding.\"}}"
         },
         "certificate": {
             "language": "en-US",
