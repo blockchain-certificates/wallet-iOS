@@ -21,7 +21,7 @@
                                 }],
             "type": "Assertion",
             "uid": "sample-certificate",
-            "metadataJson": "{\"displayOrder\":[\"certificate.Issuer\",\"certificate.Recipient\",\"certificate.Date Issued\",\"certificate.Metadata\"],\"certificate\":{\"Issuer\":\"Sample Issuers\",\"Recipient\":\"Recipient Name\",\"Date Issued\":\"mm/dd/yyyy\",\"Metadata\":\"Description...\"}}"
+            "metadataJson": "{\"displayOrder\":[\"certificate.Issuer\",\"certificate.Recipient\",\"certificate.Date Issued\",\"certificate.Metadata\"],\"certificate\":{\"Issuer\":\"Issuer Name\",\"Recipient\":\"Recipient Name\",\"Date Issued\":\"mm/dd/yyyy\",\"Metadata\":\"Description...\"}}"
         },
         "certificate": {
             "language": "en-US",
