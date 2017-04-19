@@ -52,8 +52,14 @@ class InformationTableViewCell : UITableViewCell {
     }
     
     func updateSelectabilityIfNeeded() {
-        // TODO
+        if let isTruncated = detailTextLabel?.isTruncated(), isTruncated {
+            selectionStyle = .default
+            accessoryType = .disclosureIndicator
+            return
+        }
+        
         selectionStyle = .none
+        accessoryType = .none
     }
 }
 
@@ -215,10 +221,6 @@ extension CertificateMetadataViewController : UITableViewDataSource {
                 let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
                 cell.textLabel?.text = metadatum.label
                 cell.detailTextLabel?.text = metadatum.value
-                
-                if let infoCell = cell as? InformationTableViewCell {
-                    infoCell.updateSelectabilityIfNeeded()
-                }
             }
         case Section.deleteCertificate.rawValue:
             break
@@ -245,6 +247,12 @@ extension CertificateMetadataViewController : UITableViewDelegate {
             promptForCertificateDeletion();
         default:
             tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let infoCell = cell as? InformationTableViewCell {
+            infoCell.updateSelectabilityIfNeeded()
         }
     }
 }
