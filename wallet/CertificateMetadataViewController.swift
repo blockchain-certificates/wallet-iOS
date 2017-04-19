@@ -20,30 +20,24 @@ private let InformationCellReuseIdentifier = "InformationTableViewCell"
 private let DeleteCellReuseIdentifier = "DeleteTableViewCell"
 
 class InformationTableViewCell : UITableViewCell {
-    public let titleLabel: UILabel
-    public let valueLabel: UILabel
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        titleLabel = UILabel()
-        valueLabel = UILabel()
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        guard let textLabel = self.textLabel, let detailTextLabel = detailTextLabel else {
+            return
+        }
+        textLabel.textColor = .secondaryTextColor
+        textLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.textColor = .secondaryTextColor
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        valueLabel.textColor = .primaryTextColor
-        valueLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        valueLabel.numberOfLines = 2
-        valueLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(valueLabel)
+        detailTextLabel.textColor = .primaryTextColor
+        detailTextLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        detailTextLabel.numberOfLines = 2
+        detailTextLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let views = [
-            "titleLabel": titleLabel,
-            "valueLabel": valueLabel
+            "titleLabel": textLabel,
+            "valueLabel": detailTextLabel
         ]
         var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[titleLabel][valueLabel]-|", options: .alignAllLeading, metrics: nil, views: views)
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-[titleLabel]-|", options: .alignAllLeading, metrics: nil, views: views))
@@ -55,6 +49,11 @@ class InformationTableViewCell : UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateSelectabilityIfNeeded() {
+        // TODO
+        selectionStyle = .none
     }
 }
 
@@ -214,11 +213,12 @@ extension CertificateMetadataViewController : UITableViewDataSource {
         case Section.information.rawValue:
             if !certificate.metadata.visibleMetadata.isEmpty {
                 let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
+                cell.textLabel?.text = metadatum.label
+                cell.detailTextLabel?.text = metadatum.value
+                
                 if let infoCell = cell as? InformationTableViewCell {
-                    infoCell.titleLabel.text = metadatum.label
-                    infoCell.valueLabel.text = metadatum.value
+                    infoCell.updateSelectabilityIfNeeded()
                 }
-                cell.selectionStyle = .none
             }
         case Section.deleteCertificate.rawValue:
             break
