@@ -31,6 +31,14 @@ class InformationTableViewCell : UITableViewCell {
             }
         }
     }
+    public var metadatum : Metadatum? {
+        didSet {
+            if let datum = metadatum {
+                textLabel?.text = datum.label
+                detailTextLabel?.text = datum.value
+            }
+        }
+    }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -65,6 +73,10 @@ class InformationTableViewCell : UITableViewCell {
     
     func updateSelectabilityIfNeeded() {
         if let isTruncated = detailTextLabel?.isTruncated(), isTruncated {
+            isTappable = true
+            return
+        }
+        if let datum = metadatum, datum.type == .uri {
             isTappable = true
             return
         }
@@ -228,8 +240,9 @@ extension CertificateMetadataViewController : UITableViewDataSource {
         case Section.information.rawValue:
             if !certificate.metadata.visibleMetadata.isEmpty {
                 let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
-                cell.textLabel?.text = metadatum.label
-                cell.detailTextLabel?.text = metadatum.value
+                if let infoCell = cell as? InformationTableViewCell {
+                    infoCell.metadatum = metadatum
+                }
             }
         case Section.deleteCertificate.rawValue:
             break
