@@ -276,7 +276,7 @@ extension CertificateMetadataViewController : UITableViewDelegate {
                         }
                     }
                 } else {
-                    let detailView = CertificateMetadataDetailViewController()
+                    let detailView = MetadatumViewController()
                     detailView.metadatum = metadatum
                     self.navigationController?.pushViewController(detailView, animated: true)
                 }
@@ -298,24 +298,45 @@ extension CertificateMetadataViewController : UITableViewDelegate {
 }
 
 // Mark: - Certificate MetadataDetailViewController
-class CertificateMetadataDetailViewController : UIViewController {
+class MetadatumViewController : UIViewController {
     var metadatum : Metadatum? {
         didSet {
-            if let label = metadatum?.label {
-                title = label
-            }
+            title = metadatum?.label
+            valueLabel?.text = metadatum?.value
         }
     }
     
+    private var valueLabel : UILabel?
+    
     override func loadView() {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .red
+        scrollView.backgroundColor = .baseColor
         
-//        let contentView = UIView()
-//        let valueLabel = UILabel()
+        let contentView = UIView()
+        let valueLabel = UILabel()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        valueLabel.translatesAutoresizingMaskIntoConstraints = false
+        valueLabel.numberOfLines = 0
         
+        scrollView.addSubview(contentView)
+        contentView.addSubview(valueLabel)
+        
+        let views = [
+            "contentView": contentView,
+            "valueLabel": valueLabel
+        ]
+        
+        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[valueLabel]-|", options: .alignAllCenterX, metrics: nil, views: views)
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-[valueLabel]-|", options: .alignAllCenterY, metrics: nil, views: views))
+        constraints.append(NSLayoutConstraint(item: contentView, attribute: .width, relatedBy: .equal, toItem: scrollView, attribute: .width, multiplier: 1, constant: 0))
+        NSLayoutConstraint.activate(constraints)
         
         view = scrollView
+        self.valueLabel = valueLabel
+    }
+    
+    override func viewDidLoad() {
+        valueLabel?.text = metadatum?.value
     }
     
 }
