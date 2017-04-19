@@ -276,7 +276,9 @@ extension CertificateMetadataViewController : UITableViewDelegate {
                         }
                     }
                 } else {
-                    print("TODO: Display view controller with \(metadatum.value)")
+                    let detailView = CertificateMetadataDetailViewController()
+                    detailView.metadatum = metadatum
+                    self.navigationController?.pushViewController(detailView, animated: true)
                 }
             } else {
                 tableView.deselectRow(at: indexPath, animated: true)
@@ -293,4 +295,27 @@ extension CertificateMetadataViewController : UITableViewDelegate {
             infoCell.updateSelectabilityIfNeeded()
         }
     }
+}
+
+// Mark: - Certificate MetadataDetailViewController
+class CertificateMetadataDetailViewController : UIViewController {
+    var metadatum : Metadatum? {
+        didSet {
+            if let label = metadatum?.label {
+                title = label
+            }
+        }
+    }
+    
+    override func loadView() {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .red
+        
+//        let contentView = UIView()
+//        let valueLabel = UILabel()
+        
+        
+        view = scrollView
+    }
+    
 }
