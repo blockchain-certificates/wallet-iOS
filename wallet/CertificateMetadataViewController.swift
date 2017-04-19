@@ -270,7 +270,11 @@ extension CertificateMetadataViewController : UITableViewDelegate {
                 infoCell.isTappable {
                 let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
                 if metadatum.type == .uri {
-                    print("TODO: Show safari with \(metadatum.value)")
+                    UIApplication.shared.open(URL(string:metadatum.value)!, options: [:]) { success in
+                        OperationQueue.main.addOperation {
+                            tableView.deselectRow(at: indexPath, animated: true)
+                        }
+                    }
                 } else {
                     print("TODO: Display view controller with \(metadatum.value)")
                 }
