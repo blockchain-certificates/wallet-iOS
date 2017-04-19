@@ -20,6 +20,18 @@ private let InformationCellReuseIdentifier = "InformationTableViewCell"
 private let DeleteCellReuseIdentifier = "DeleteTableViewCell"
 
 class InformationTableViewCell : UITableViewCell {
+    public var isTappable = false {
+        didSet {
+            if isTappable {
+                selectionStyle = .default
+                accessoryType = .disclosureIndicator
+            } else {
+                selectionStyle = .none
+                accessoryType = .none
+            }
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
@@ -53,13 +65,10 @@ class InformationTableViewCell : UITableViewCell {
     
     func updateSelectabilityIfNeeded() {
         if let isTruncated = detailTextLabel?.isTruncated(), isTruncated {
-            selectionStyle = .default
-            accessoryType = .disclosureIndicator
+            isTappable = true
             return
         }
-        
-        selectionStyle = .none
-        accessoryType = .none
+        isTappable = false
     }
 }
 
@@ -243,6 +252,18 @@ extension CertificateMetadataViewController : UITableViewDelegate {
         }
 
         switch section {
+        case .information:
+            if let infoCell = tableView.cellForRow(at: indexPath) as? InformationTableViewCell,
+                infoCell.isTappable {
+                let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
+                if metadatum.type == .uri {
+                    print("TODO: Show safari with \(metadatum.value)")
+                } else {
+                    print("TODO: Display view controller with \(metadatum.value)")
+                }
+            } else {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
         case .deleteCertificate:
             promptForCertificateDeletion();
         default:
