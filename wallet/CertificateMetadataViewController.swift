@@ -20,14 +20,37 @@ private let InformationCellReuseIdentifier = "InformationTableViewCell"
 private let DeleteCellReuseIdentifier = "DeleteTableViewCell"
 
 class InformationTableViewCell : UITableViewCell {
+    public let titleLabel: UILabel
+    public let valueLabel: UILabel
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        titleLabel = UILabel()
+        valueLabel = UILabel()
         
-        textLabel?.textColor = .secondaryTextColor
-        textLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
-        detailTextLabel?.textColor = .primaryTextColor
-        detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        titleLabel.textColor = .secondaryTextColor
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        valueLabel.textColor = .primaryTextColor
+        valueLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        valueLabel.numberOfLines = 2
+        valueLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(valueLabel)
+        
+        let views = [
+            "titleLabel": titleLabel,
+            "valueLabel": valueLabel
+        ]
+        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[titleLabel][valueLabel]-|", options: .alignAllLeading, metrics: nil, views: views)
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-[titleLabel]-|", options: .alignAllLeading, metrics: nil, views: views))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-[valueLabel]-|", options: .alignAllLeading, metrics: nil, views: views))
+        
+        NSLayoutConstraint.activate(constraints)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -93,6 +116,8 @@ class CertificateMetadataViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 80
         
         let constraints = [
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -189,8 +214,10 @@ extension CertificateMetadataViewController : UITableViewDataSource {
         case Section.information.rawValue:
             if !certificate.metadata.visibleMetadata.isEmpty {
                 let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
-                cell.textLabel?.text = metadatum.label
-                cell.detailTextLabel?.text = metadatum.value
+                if let infoCell = cell as? InformationTableViewCell {
+                    infoCell.titleLabel.text = metadatum.label
+                    infoCell.valueLabel.text = metadatum.value
+                }
                 cell.selectionStyle = .none
             }
         case Section.deleteCertificate.rawValue:
