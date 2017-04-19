@@ -167,6 +167,12 @@ class CertificateMetadataViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .brandColor
         navigationItem.leftBarButtonItem = dismissButton
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let path = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: path, animated: true)
+        }
+    }
 
     func dismissSelf() {
         dismiss(animated: true, completion: nil)
