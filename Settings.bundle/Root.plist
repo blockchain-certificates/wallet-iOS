@@ -8,17 +8,25 @@
 	<array>
 		<dict>
 			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
+			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Build Number</string>
+			<string>Enforce strong ownership</string>
 			<key>Key</key>
-			<string>buildNumber</string>
+			<string>enforceStrongOwnership</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Reset options</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Reset Sample Certificate</string>
+			<string>Restore Sample Certificate</string>
 			<key>Key</key>
 			<string>resetSampleCertificate</string>
 			<key>DefaultValue</key>

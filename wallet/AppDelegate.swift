@@ -10,7 +10,7 @@ import UIKit
 import JSONLD
 
 private let sampleCertificateResetKey = "resetSampleCertificate"
-private let buildNumberKey = "buildNumber"
+private let enforceStrongOwnershipKey = "enforceStrongOwnership"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,9 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         setupApplication()
-        launchApplication()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(resetSampleCertificateIfNeeded), name:UserDefaults.didChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(settingsDidChange), name:UserDefaults.didChangeNotification, object: nil)
         
         return true
     }
@@ -60,12 +59,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: [
             sampleCertificateResetKey : true
         ])
-        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
-        UserDefaults.standard.set("Build \(buildNumber)", forKey: buildNumberKey)
-        print(buildNumber)
         
         // Reset state if needed
         resetSampleCertificateIfNeeded()
+    }
+    
+    func settingsDidChange() {
+        resetSampleCertificateIfNeeded()
+        enforceStrongOwnershipIfNeeded()
     }
     
     func resetSampleCertificateIfNeeded() {
@@ -83,9 +84,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         _ = launchAddCertificate(at: sampleCertURL)
     }
-
-    func launchApplication() {
+    
+    func enforceStrongOwnershipIfNeeded() {
+        guard UserDefaults.standard.bool(forKey: enforceStrongOwnershipKey) else {
+            return
+        }
+        
+        let issuerCollection = popToIssuerCollection()
+        issuerCollection?.reloadCollectionView()
     }
+
     
     func importState(from url: URL) -> Bool {
         guard let fragment = url.fragment else {
@@ -140,24 +148,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func launchAddIssuer(at introductionURL: URL, with nonce: String) {
-        let rootController = window?.rootViewController as? UINavigationController
-        
-        rootController?.presentedViewController?.dismiss(animated: false, completion: nil)
-        _ = rootController?.popToRootViewController(animated: false)
-        
-        let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
+        let issuerCollection = popToIssuerCollection()
         
         issuerCollection?.showAddIssuerFlow(identificationURL: introductionURL, nonce: nonce)
     }
     
     func launchAddCertificate(at url: URL, showCertificate: Bool = false, animated: Bool = true) -> Bool {
+        let issuerCollection = popToIssuerCollection()
+        return issuerCollection?.add(certificateURL: url, silently: !showCertificate, animated: animated) ?? false
+    }
+    
+    func popToIssuerCollection() -> IssuerCollectionViewController? {
         let rootController = window?.rootViewController as? UINavigationController
         
         rootController?.presentedViewController?.dismiss(animated: false, completion: nil)
         _ = rootController?.popToRootViewController(animated: false)
         
-        let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
-        return issuerCollection?.add(certificateURL: url, silently: !showCertificate, animated: animated) ?? false
+        return rootController?.viewControllers.first as? IssuerCollectionViewController
     }
 
     func resetData() {
