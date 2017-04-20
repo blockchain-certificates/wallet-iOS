@@ -335,6 +335,7 @@ class MetadatumViewController : UIViewController {
         var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[valueLabel]-|", options: .alignAllCenterX, metrics: nil, views: views)
         constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-[valueLabel]-|", options: .alignAllCenterY, metrics: nil, views: views))
         constraints.append(NSLayoutConstraint(item: contentView, attribute: .width, relatedBy: .equal, toItem: scrollView, attribute: .width, multiplier: 1, constant: 0))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[contentView]|", options: .alignAllCenterX, metrics: nil, views: views))
         NSLayoutConstraint.activate(constraints)
         
         view = scrollView
