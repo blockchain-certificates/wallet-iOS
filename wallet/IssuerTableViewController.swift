@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import BlockchainCertificates
+import Blockcerts
 
 private let issuerSummaryCellReuseIdentifier = "IssuerSummaryTableViewCell"
 private let certificateCellReuseIdentifier = "CertificateTitleTableViewCell"

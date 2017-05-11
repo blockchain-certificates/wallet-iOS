@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import BlockchainCertificates
+import Blockcerts
 
 private let reuseIdentifier = "IssuerCollectionViewCell"
 private let addIssuerReuseIdentifier = "AddIssuerCollectionViewCell"

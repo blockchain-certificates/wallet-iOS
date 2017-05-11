@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import BlockchainCertificates
+import Blockcerts
 
 fileprivate enum CoderKeys {
     static let issuer = "issuer"

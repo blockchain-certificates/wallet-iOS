@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import BlockchainCertificates
+import Blockcerts
 
 enum AnalyticsEvent {
     case viewed, validated, shared

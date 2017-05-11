@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import BlockchainCertificates
+import Blockcerts
 
 class IssuerViewController: UIViewController {
     var managedIssuer: ManagedIssuer? {

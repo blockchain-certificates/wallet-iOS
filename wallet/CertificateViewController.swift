@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import BlockchainCertificates
+import Blockcerts
 import JSONLD
 
 class CertificateViewController: UIViewController {
@@ -246,6 +246,8 @@ extension CertificateViewController : CertificateValidationRequestDelegate {
             percentage = 1
         case .checkingReceipt:
             percentage = 0.8
+        case .checkingAuthenticity:
+            percentage = 0.85
         case .checkingMerkleRoot:
             percentage = 0.9
         }

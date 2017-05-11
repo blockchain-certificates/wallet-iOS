@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import BlockchainCertificates
+import Blockcerts
 
 class AddIssuerViewController: UIViewController {
     private var inProgressRequest : CommonRequest?

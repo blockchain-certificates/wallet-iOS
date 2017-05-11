@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import BlockchainCertificates
+import Blockcerts
 
 enum Section : Int {
     case information = 0, deleteCertificate
