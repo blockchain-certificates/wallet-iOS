@@ -892,10 +892,7 @@
 				CODE_SIGN_ENTITLEMENTS = wallet/wallet.entitlements;
 				CURRENT_PROJECT_VERSION = 63;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/External/cert-wallet/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = wallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.learningmachine.wallet;
@@ -915,10 +912,7 @@
 				CODE_SIGN_ENTITLEMENTS = wallet/wallet.entitlements;
 				CURRENT_PROJECT_VERSION = 63;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/External/cert-wallet/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = wallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.learningmachine.wallet;
