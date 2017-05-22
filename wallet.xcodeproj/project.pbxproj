@@ -22,6 +22,8 @@
 		83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */; };
 		83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
+		831EDC0F1ED3A20E004F135B /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDC0D1ED3A20E004F135B /* RenderedCertificateView.swift */; };
+		831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831EDC0E1ED3A20E004F135B /* RenderedCertificateView.xib */; };
 		8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */; };
 		8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */; };
 		832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */; };
@@ -32,8 +34,6 @@
 		8337CFCC1E1D65140080E876 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */; };
 		8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */; };
 		8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */; };
-		83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D851DC406600025C055 /* RenderedCertificateView.swift */; };
-		83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83431D861DC406600025C055 /* RenderedCertificateView.xib */; };
 		83431D8A1DC40DEF0025C055 /* CoreBitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */; };
 		834B94C21DC1585200543E4F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C11DC1585200543E4F /* Keychain.swift */; };
 		834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
@@ -129,6 +129,8 @@
 		83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryView.swift; sourceTree = "<group>"; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
+		831EDC0D1ED3A20E004F135B /* RenderedCertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderedCertificateView.swift; sourceTree = "<group>"; };
+		831EDC0E1ED3A20E004F135B /* RenderedCertificateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderedCertificateView.xib; sourceTree = "<group>"; };
 		8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryTableViewCell.swift; sourceTree = "<group>"; };
 		8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerSummaryTableViewCell.xib; sourceTree = "<group>"; };
 		832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextField.swift; path = External/SkyFloatingLabelTextField/Sources/SkyFloatingLabelTextField.swift; sourceTree = "<group>"; };
@@ -139,8 +141,6 @@
 		8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealPassphraseTableViewController.swift; sourceTree = "<group>"; };
 		8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledTableViewCell.swift; sourceTree = "<group>"; };
-		83431D851DC406600025C055 /* RenderedCertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderedCertificateView.swift; sourceTree = "<group>"; };
-		83431D861DC406600025C055 /* RenderedCertificateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderedCertificateView.xib; sourceTree = "<group>"; };
 		83431D891DC40DEF0025C055 /* CoreBitcoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreBitcoinManager.swift; path = "External/cert-wallet/Models/CoreBitcoinManager.swift"; sourceTree = SOURCE_ROOT; };
 		834B94C11DC1585200543E4F /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keychain.swift; path = "External/cert-wallet/Models/Keychain.swift"; sourceTree = SOURCE_ROOT; };
 		834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -272,6 +272,8 @@
 				838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */,
 				838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */,
 				83FF5DE91ECBAC7A0063397C /* CertificateView.swift */,
+				831EDC0D1ED3A20E004F135B /* RenderedCertificateView.swift */,
+				831EDC0E1ED3A20E004F135B /* RenderedCertificateView.xib */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -298,7 +300,6 @@
 		832AE0101DF8921400A3CA4A /* External */ = {
 			isa = PBXGroup;
 			children = (
-				83431D841DC406600025C055 /* RenderedCertificateView */,
 				832AE0111DF8921B00A3CA4A /* SkyLabel */,
 			);
 			name = External;
@@ -312,16 +313,6 @@
 				832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */,
 			);
 			name = SkyLabel;
-			sourceTree = "<group>";
-		};
-		83431D841DC406600025C055 /* RenderedCertificateView */ = {
-			isa = PBXGroup;
-			children = (
-				83431D851DC406600025C055 /* RenderedCertificateView.swift */,
-				83431D861DC406600025C055 /* RenderedCertificateView.xib */,
-			);
-			name = RenderedCertificateView;
-			path = "External/cert-wallet/RenderedCertificateView";
 			sourceTree = "<group>";
 		};
 		836031C11E5E5064005B2D2E /* Assets */ = {
@@ -500,12 +491,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
+				831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				836031C51E5E513A005B2D2E /* Settings.bundle in Resources */,
-				83431D881DC406600025C055 /* RenderedCertificateView.xib in Resources */,
 				838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */,
 				838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */,
 				838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */,
@@ -696,8 +687,8 @@
 				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
 				83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */,
 				834B94C21DC1585200543E4F /* Keychain.swift in Sources */,
-				83431D871DC406600025C055 /* RenderedCertificateView.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
+				831EDC0F1ED3A20E004F135B /* RenderedCertificateView.swift in Sources */,
 				8337CFCC1E1D65140080E876 /* SettingsTableViewController.swift in Sources */,
 				8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */,
 				83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */,
