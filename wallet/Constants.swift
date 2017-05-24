@@ -11,7 +11,7 @@ import Foundation
 extension UIColor {
     static let brandColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     static let tintColor = #colorLiteral(red: 0.4588235294, green: 0.4588235294, blue: 0.4588235294, alpha: 1)
-    static let titleColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+    static let titleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     static let baseColor = UIColor(red:0.97, green:0.97, blue:0.98, alpha:1.0)
     
     static let primaryTextColor = UIColor(red:0.31, green:0.35, blue:0.38, alpha:1.0)

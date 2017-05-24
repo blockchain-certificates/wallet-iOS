@@ -33,8 +33,7 @@ class SettingsTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
         title = NSLocalizedString("Settings", comment: "Title of the Settings screen.")
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        navigationController?.navigationBar.tintColor = .brandColor
+        navigationController?.navigationBar.tintColor = .tintColor
         
         let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
         navigationItem.leftBarButtonItem = cancelBarButton
@@ -46,7 +45,6 @@ class SettingsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         oldBarStyle = navigationController?.navigationBar.barStyle
         navigationController?.navigationBar.barStyle = .default
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {

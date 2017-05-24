@@ -40,7 +40,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         self.navigationController?.navigationBar.barTintColor = .brandColor
         self.navigationController?.navigationBar.tintColor = .tintColor
         navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.tintColor
+            NSForegroundColorAttributeName: UIColor.titleColor
         ]
         navigationController?.navigationBar.barStyle = .blackOpaque
         
