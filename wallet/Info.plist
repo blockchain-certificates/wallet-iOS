@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Certificates</string>
+	<string>Blockcerts</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

@@ -61,7 +61,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         if managedIssuers.isEmpty {
             loadEmptyBackgroundView()
         } else {
-            loadBrandedBackgroundView()
+            collectionView?.backgroundView = nil
         }
     }
     
@@ -87,10 +87,6 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         collectionView?.backgroundView = backgroundView
         NSLayoutConstraint.activate(constraints)
-    }
-    
-    func loadBrandedBackgroundView() {
-        collectionView?.backgroundView = nil
     }
     
     func adjustCellSize() {
