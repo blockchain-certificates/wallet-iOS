@@ -10,7 +10,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F5BE78D1-73BF-408D-9045-EFA3B991DD3A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "DA485FE23D100833F5090D6ED35D0E68BB03D9F1" : "wallet\/External\/cert-wallet\/",
+    "DA485FE23D100833F5090D6ED35D0E68BB03D9F1" : "wallet\/External\/BlockcertsFramework-iOS\/",
     "0A6ABDC6CA328287BFB146B63A1A03921C1E2924" : "wallet\/External\/SkyFloatingLabelTextField\/",
     "FAFFC86FAD963F6A7BE837F6E46D7E39D593C9A7" : "wallet\/"
   },

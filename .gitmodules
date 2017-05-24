@@ -4,3 +4,6 @@
 [submodule "External/SkyFloatingLabelTextField"]
 	path = External/SkyFloatingLabelTextField
 	url = git@github.com:Skyscanner/SkyFloatingLabelTextField.git
+[submodule "External/BlockcertsFramework-iOS"]
+	path = External/BlockcertsFramework-iOS
+	url = git@github.com:blockchain-certificates/BlockcertsFramework-iOS.git

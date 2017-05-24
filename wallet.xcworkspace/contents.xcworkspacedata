@@ -5,7 +5,7 @@
       location = "group:wallet.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:External/cert-wallet/cert-wallet.xcodeproj">
+      location = "group:External/BlockcertsFramework-iOS/cert-wallet.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
