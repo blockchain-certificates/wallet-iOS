@@ -53,8 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupApplication() {
         self.window?.addSubview(JSONLD.shared.webView)
 
-        UIButton.appearance().tintColor = .brandColor
-        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .brandColor
+        UIButton.appearance().tintColor = .tintColor
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .tintColor
         
         UserDefaults.standard.register(defaults: [
             sampleCertificateResetKey : true
