@@ -61,9 +61,6 @@ class AddIssuerViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .brandColor
         navigationController?.navigationBar.tintColor = .tintColor
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.tintColor
-        ]
         
         loadingView.isHidden = !isLoading
         
@@ -101,14 +98,14 @@ class AddIssuerViewController: UIViewController {
         
         fields.forEach { (textField) in
             if let field = textField as? SkyFloatingLabelTextField {
-                field.tintColor = .brandColor
+                field.tintColor = .tintColor
                 field.selectedTitleColor = .primaryTextColor
                 field.textColor = .primaryTextColor
                 field.font = Fonts.brandFont
 
                 field.lineColor = .placeholderTextColor
                 field.selectedLineHeight = 1
-                field.selectedLineColor = .brandColor
+                field.selectedLineColor = .tintColor
                 
                 field.placeholderColor = .placeholderTextColor
                 field.placeholderFont = Fonts.placeholderFont
