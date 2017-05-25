@@ -242,7 +242,7 @@ class ManagedIssuer : NSObject, NSCoding {
 }
 
 extension ManagedIssuer : IssuerIntroductionRequestDelegate {
-    func postData(for issuer: Issuer, from recipient: Recipient) -> [String : Any] {
+    func introductionData(for issuer: Issuer, from recipient: Recipient) -> [String : Any] {
         guard let nonce = self.nonce else {
             return [:]
         }
