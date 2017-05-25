@@ -60,7 +60,6 @@ class AddIssuerViewController: UIViewController {
         
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .brandColor
-        navigationController?.navigationBar.tintColor = .tintColor
         
         loadingView.isHidden = !isLoading
         

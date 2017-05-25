@@ -33,7 +33,7 @@ class SettingsTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
         title = NSLocalizedString("Settings", comment: "Title of the Settings screen.")
 
-        navigationController?.navigationBar.tintColor = .tintColor
+        navigationController?.navigationBar.barTintColor = .brandColor
         
         let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
         navigationItem.leftBarButtonItem = cancelBarButton
