@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 import Blockcerts
 
 class AddIssuerViewController: UIViewController {
@@ -208,6 +209,7 @@ class AddIssuerViewController: UIViewController {
             
             // At this point, we have an issuer, se we'll definitely be dismissing, even if the introduction step fails.
             if let nonce = self?.nonce {
+                managedIssuer.delegate = self
                 managedIssuer.introduce(recipient: targetRecipient, with: nonce) { introductionError in
                     self?.notifyAndDismiss(managedIssuer: managedIssuer)
                 }
@@ -240,6 +242,20 @@ class AddIssuerViewController: UIViewController {
         OperationQueue.main.addOperation {
             self.present(alertController, animated: true, completion: nil)
         }
+    }
+}
+
+extension AddIssuerViewController : ManagedIssuerDelegate {
+    func present(webView: WKWebView) throws {
+        let webController = UIViewController()
+        webController.view.addSubview(webView)
+        
+        let navigationController = UINavigationController(rootViewController: webController)
+        present(navigationController, animated: true, completion: nil)
+    }
+    
+    func dismiss(webView: WKWebView) {
+        presentedViewController?.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import Blockcerts
+import WebKit
 
 fileprivate enum CoderKeys {
     static let issuer = "issuer"
@@ -250,6 +251,14 @@ extension ManagedIssuer : IssuerIntroductionRequestDelegate {
             "nonce": nonce
         ]
     }
+    
+    func present(webView: WKWebView) throws {
+        try delegate?.present(webView: webView)
+    }
+    
+    func dismiss(webView: WKWebView) {
+        delegate?.dismiss(webView: webView)
+    }
 }
 
 // Debug properties
@@ -280,4 +289,15 @@ extension ManagedIssuer {
 
 protocol ManagedIssuerDelegate : class {
     func updated(managedIssuer: ManagedIssuer)
+    
+    func present(webView: WKWebView) throws
+    func dismiss(webView: WKWebView)
+}
+
+extension ManagedIssuerDelegate {
+    func updated(managedIssuer: ManagedIssuer) {}
+    func present(webView: WKWebView) throws {
+        throw IssuerIntroductionRequestError.introductionMethodNotSupported
+    }
+    func dismiss(webView: WKWebView) {}
 }
