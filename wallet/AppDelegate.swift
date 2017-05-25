@@ -56,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIButton.appearance().tintColor = .tintColor
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .titleColor
         UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = .titleColor
+        UINavigationBar.appearance().tintColor = .tintColor
         
         UserDefaults.standard.register(defaults: [
             sampleCertificateResetKey : true

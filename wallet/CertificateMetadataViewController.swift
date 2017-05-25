@@ -164,7 +164,6 @@ class CertificateMetadataViewController: UIViewController {
         self.title = certificate.title
         
         let dismissButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissSelf))
-        self.navigationController?.navigationBar.tintColor = .brandColor
         navigationItem.leftBarButtonItem = dismissButton
     }
     
