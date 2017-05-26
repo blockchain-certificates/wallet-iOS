@@ -240,6 +240,10 @@ class ManagedIssuer : NSObject, NSCoding {
         introductionRequest.start()
         inProgressRequest = introductionRequest
     }
+    
+    func abortRequests() {
+        inProgressRequest?.abort()
+    }
 }
 
 extension ManagedIssuer : IssuerIntroductionRequestDelegate {

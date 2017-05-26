@@ -16,6 +16,7 @@ class AddIssuerViewController: UIViewController {
     
     var identificationURL: URL?
     var nonce: String?
+    var managedIssuer: ManagedIssuer?
     
     @IBOutlet weak var scrollView : UIScrollView!
     
@@ -174,6 +175,7 @@ class AddIssuerViewController: UIViewController {
                                         revocationAddress: nil)
         
         let managedIssuer = ManagedIssuer()
+        self.managedIssuer = managedIssuer
         isLoading = true
         managedIssuer.getIssuerIdentity(from: url) { [weak self] identifyError in
             guard identifyError == nil else {
@@ -250,12 +252,29 @@ extension AddIssuerViewController : ManagedIssuerDelegate {
         let webController = UIViewController()
         webController.view.addSubview(webView)
         
+        let views = [ "webView": webView ]
+        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[webView]|", options: .alignAllCenterX, metrics: nil, views: views)
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: .alignAllCenterY, metrics: nil, views: views))
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate(constraints)
+        
         let navigationController = UINavigationController(rootViewController: webController)
-        present(navigationController, animated: true, completion: nil)
+        navigationController.title = "Issuer Login"
+        navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelWebLogin))
+        
+        OperationQueue.main.addOperation { [weak self] in
+            self?.present(navigationController, animated: true, completion: nil)
+        }
     }
     
     func dismiss(webView: WKWebView) {
-        presentedViewController?.dismiss(animated: true, completion: nil)
+        OperationQueue.main.addOperation { [weak self] in
+            self?.presentedViewController?.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func cancelWebLogin() {
+        managedIssuer?.abortRequests()
     }
 }
 
