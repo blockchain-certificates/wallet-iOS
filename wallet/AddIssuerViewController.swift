@@ -251,6 +251,8 @@ extension AddIssuerViewController : ManagedIssuerDelegate {
     func present(webView: WKWebView) throws {
         let webController = UIViewController()
         webController.view.addSubview(webView)
+        webController.title = "Issuer Login"
+        webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelWebLogin))
         
         let views = [ "webView": webView ]
         var constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[webView]|", options: .alignAllCenterX, metrics: nil, views: views)
@@ -259,8 +261,6 @@ extension AddIssuerViewController : ManagedIssuerDelegate {
         NSLayoutConstraint.activate(constraints)
         
         let navigationController = UINavigationController(rootViewController: webController)
-        navigationController.title = "Issuer Login"
-        navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelWebLogin))
         
         OperationQueue.main.addOperation { [weak self] in
             self?.present(navigationController, animated: true, completion: nil)
