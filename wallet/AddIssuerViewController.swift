@@ -249,21 +249,21 @@ class AddIssuerViewController: UIViewController {
 
 extension AddIssuerViewController : ManagedIssuerDelegate {
     func present(webView: WKWebView) throws {
-        let webController = UIViewController()
-        webController.view.addSubview(webView)
-        webController.title = "Issuer Login"
-        webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelWebLogin))
+        OperationQueue.main.addOperation { // [weak self] in
+            let webController = UIViewController()
+            webController.view.addSubview(webView)
+            webController.title = "Issuer Login"
+            webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.cancelWebLogin))
+            
+            let views = [ "webView": webView ]
+            var constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[webView]|", options: .alignAllCenterX, metrics: nil, views: views)
+            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: .alignAllCenterY, metrics: nil, views: views))
+            webView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate(constraints)
+            
+            let navigationController = UINavigationController(rootViewController: webController)
         
-        let views = [ "webView": webView ]
-        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[webView]|", options: .alignAllCenterX, metrics: nil, views: views)
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: .alignAllCenterY, metrics: nil, views: views))
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate(constraints)
-        
-        let navigationController = UINavigationController(rootViewController: webController)
-        
-        OperationQueue.main.addOperation { [weak self] in
-            self?.present(navigationController, animated: true, completion: nil)
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
