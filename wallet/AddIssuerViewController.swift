@@ -248,21 +248,27 @@ class AddIssuerViewController: UIViewController {
 }
 
 extension AddIssuerViewController : ManagedIssuerDelegate {
-    func present(webView: WKWebView) throws {
-        OperationQueue.main.addOperation { // [weak self] in
-            let webController = UIViewController()
-            webController.view.addSubview(webView)
-            webController.title = "Issuer Login"
-            webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.cancelWebLogin))
-            
-            let views = [ "webView": webView ]
-            var constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[webView]|", options: .alignAllCenterX, metrics: nil, views: views)
-            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: .alignAllCenterY, metrics: nil, views: views))
-            webView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate(constraints)
-            
-            let navigationController = UINavigationController(rootViewController: webController)
+    func presentWebView(at url: URL, with navigationDelegate: WKNavigationDelegate) throws {
+//    func present(webView: WKWebView) throws {
+        let webController = WebLoginViewController(requesting: url, navigationDelegate: navigationDelegate) { [weak self] in
+            self?.cancelWebLogin()
+        }
+        let navigationController = UINavigationController(rootViewController: webController)
         
+        OperationQueue.main.addOperation { // [weak self] in
+//            let webController = UIViewController()
+//            webController.view.addSubview(webView)
+//            webController.title = "Issuer Login"
+//            webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.cancelWebLogin))
+//            
+//            let views = [ "webView": webView ]
+//            var constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[webView]|", options: .alignAllCenterX, metrics: nil, views: views)
+//            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: .alignAllCenterY, metrics: nil, views: views))
+//            webView.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint.activate(constraints)
+//            
+//            let navigationController = UINavigationController(rootViewController: webController)
+//        
             self.present(navigationController, animated: true, completion: nil)
         }
     }

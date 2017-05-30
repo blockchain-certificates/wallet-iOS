@@ -256,12 +256,12 @@ extension ManagedIssuer : IssuerIntroductionRequestDelegate {
         ]
     }
     
-    func present(webView: WKWebView) throws {
-        try delegate?.present(webView: webView)
+    func presentWebView(at url:URL, with navigationDelegate:WKNavigationDelegate) throws {
+        try delegate?.presentWebView(at: url, with: navigationDelegate)
     }
     
-    func dismiss(webView: WKWebView) {
-        delegate?.dismiss(webView: webView)
+    func dismissWebView() {
+        delegate?.dismissWebView()
     }
 }
 
@@ -294,14 +294,15 @@ extension ManagedIssuer {
 protocol ManagedIssuerDelegate : class {
     func updated(managedIssuer: ManagedIssuer)
     
-    func present(webView: WKWebView) throws
-    func dismiss(webView: WKWebView)
+    func presentWebView(at url:URL, with navigationDelegate:WKNavigationDelegate) throws
+    func dismissWebView()
+
 }
 
 extension ManagedIssuerDelegate {
     func updated(managedIssuer: ManagedIssuer) {}
-    func present(webView: WKWebView) throws {
+    func presentWebView(at url:URL, with navigationDelegate:WKNavigationDelegate) throws {
         throw IssuerIntroductionRequestError.introductionMethodNotSupported
     }
-    func dismiss(webView: WKWebView) {}
+    func dismissWebView() {}
 }
