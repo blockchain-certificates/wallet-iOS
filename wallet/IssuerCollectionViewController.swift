@@ -50,6 +50,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         reloadCollectionView()
         title = NSLocalizedString("Issuers", comment: "Title in screen of multiple issuers")
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        loadOnboardingIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +89,10 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         collectionView?.backgroundView = backgroundView
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    func loadOnboardingIfNeeded() {
+        present(OnboardingViewController(), animated: false, completion: nil)
     }
     
     func adjustCellSize() {
