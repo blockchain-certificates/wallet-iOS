@@ -64,6 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Reset state if needed
         resetSampleCertificateIfNeeded()
+        
+        launchWithOnboardingIfNeeded()
     }
     
     func settingsDidChange() {
@@ -147,6 +149,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         default:
             return false
         }
+    }
+    
+    func launchWithOnboardingIfNeeded() {
+        // TODO: Check if we've set the passphrase yet.
+        let issuerCollection = popToIssuerCollection()
+        issuerCollection?.present(OnboardingViewController(), animated: false, completion: nil)
     }
     
     func launchAddIssuer(at introductionURL: URL, with nonce: String) {
