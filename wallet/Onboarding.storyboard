@@ -40,50 +40,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="P1Y-Eh-MCV">
-                                <rect key="frame" x="177" y="120" width="60" height="60"/>
-                                <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="P1Y-Eh-MCV" secondAttribute="height" multiplier="1:1" id="E5K-kM-b5a"/>
-                                    <constraint firstAttribute="width" constant="60" id="qOe-1u-wRG"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="JsX-0j-wia">
-                                <rect key="frame" x="77.333333333333314" y="280" width="260" height="82"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eck-mh-ddL">
+                                <rect key="frame" x="20" y="20" width="374" height="716"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZc-fm-2Xg" customClass="RectangularButton" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="30"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Tb-lO-4aR">
+                                        <rect key="frame" x="186" y="0.0" width="2" height="0.0"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="260" id="ymh-4f-7FU"/>
+                                            <constraint firstAttribute="width" constant="2" id="1v5-h8-Cre"/>
+                                            <constraint firstAttribute="height" id="Ife-SI-LF8"/>
                                         </constraints>
-                                        <state key="normal" title="NEW ACCOUNT"/>
-                                        <connections>
-                                            <segue destination="T7K-XY-0w3" kind="show" id="Tet-lw-V6V">
-                                                <nil key="action"/>
-                                            </segue>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yoe-JI-WBE" customClass="SecondaryRectangularButton" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="52" width="260" height="30"/>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="P1Y-Eh-MCV">
+                                        <rect key="frame" x="157" y="191.33333333333331" width="60" height="59.999999999999972"/>
+                                        <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="260" id="xXz-5O-NK5"/>
+                                            <constraint firstAttribute="width" secondItem="P1Y-Eh-MCV" secondAttribute="height" multiplier="1:1" id="E5K-kM-b5a"/>
+                                            <constraint firstAttribute="width" constant="60" id="qOe-1u-wRG"/>
                                         </constraints>
-                                        <state key="normal" title="I ALREADY HAVE ONE"/>
-                                        <connections>
-                                            <segue destination="Q4i-dA-vR4" kind="show" id="9lu-9X-rFs">
-                                                <nil key="action"/>
-                                            </segue>
-                                        </connections>
-                                    </button>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="JsX-0j-wia">
+                                        <rect key="frame" x="57" y="442.66666666666663" width="260" height="81.999999999999886"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZc-fm-2Xg" customClass="RectangularButton" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="260" id="ymh-4f-7FU"/>
+                                                </constraints>
+                                                <state key="normal" title="NEW ACCOUNT"/>
+                                                <connections>
+                                                    <segue destination="T7K-XY-0w3" kind="show" id="Tet-lw-V6V">
+                                                        <nil key="action"/>
+                                                    </segue>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yoe-JI-WBE" customClass="SecondaryRectangularButton" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="51.999999999999943" width="260" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="260" id="xXz-5O-NK5"/>
+                                                </constraints>
+                                                <state key="normal" title="I ALREADY HAVE ONE"/>
+                                                <connections>
+                                                    <segue destination="Q4i-dA-vR4" kind="show" id="9lu-9X-rFs">
+                                                        <nil key="action"/>
+                                                    </segue>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykJ-8k-Xcg">
+                                        <rect key="frame" x="186" y="716" width="2" height="0.0"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="2" id="I5N-Jb-Ohf"/>
+                                            <constraint firstAttribute="height" id="OTi-sB-brp"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="JsX-0j-wia" firstAttribute="top" secondItem="P1Y-Eh-MCV" secondAttribute="bottom" constant="100" id="Ac8-4k-qyG"/>
-                            <constraint firstItem="P1Y-Eh-MCV" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="Nfj-Xa-JnC"/>
-                            <constraint firstItem="P1Y-Eh-MCV" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" constant="100" id="Qg4-j4-YUd"/>
-                            <constraint firstItem="JsX-0j-wia" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="sxq-xb-fFG"/>
+                            <constraint firstItem="eck-mh-ddL" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" id="MOY-B6-nvb"/>
+                            <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="eck-mh-ddL" secondAttribute="bottom" id="QSz-8a-ijp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eck-mh-ddL" secondAttribute="trailing" id="TVO-sN-JbJ"/>
+                            <constraint firstItem="eck-mh-ddL" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="vAe-Et-AWc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ima-vz-6aP"/>
