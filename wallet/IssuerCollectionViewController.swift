@@ -92,7 +92,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func loadOnboardingIfNeeded() {
-        present(OnboardingViewController(), animated: false, completion: nil)
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
+        present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
     }
     
     func adjustCellSize() {

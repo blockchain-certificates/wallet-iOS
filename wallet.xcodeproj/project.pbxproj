@@ -54,6 +54,7 @@
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
 		83ACB76E1EDE30B700A1149E /* OldOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACB76D1EDE30B700A1149E /* OldOnboardingViewController.swift */; };
+		83ACB7701EDE556500A1149E /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83ACB76F1EDE556500A1149E /* Onboarding.storyboard */; };
 		83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */; };
 		83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */; };
 		83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */; };
@@ -161,6 +162,7 @@
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		83ACB76D1EDE30B700A1149E /* OldOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldOnboardingViewController.swift; sourceTree = "<group>"; };
+		83ACB76F1EDE556500A1149E /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
 		83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTitleTableViewCell.swift; sourceTree = "<group>"; };
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
 				8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */,
 				83ACB76D1EDE30B700A1149E /* OldOnboardingViewController.swift */,
+				83ACB76F1EDE556500A1149E /* Onboarding.storyboard */,
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
 				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
 				832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */,
@@ -507,6 +510,7 @@
 				838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */,
 				838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
+				83ACB7701EDE556500A1149E /* Onboarding.storyboard in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
 				836031C31E5E5064005B2D2E /* SampleCertificate.json in Resources */,
 			);
