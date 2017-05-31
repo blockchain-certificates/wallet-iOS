@@ -10,7 +10,7 @@ import UIKit
 
 class LandingScreenViewController : UIViewController {
     override func viewDidLoad() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
+//        navigationController?.setNavigationBarHidden(true, animated: false)
         title = ""
         
         // Remove the drop shadow
@@ -19,7 +19,7 @@ class LandingScreenViewController : UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
+//        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }
 
@@ -30,7 +30,7 @@ class RestoreAccountViewController: UIViewController {
         title = ""
     }
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: true)
+//        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     @IBAction func doneTapped() {
