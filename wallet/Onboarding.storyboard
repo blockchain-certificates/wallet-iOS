@@ -143,7 +143,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you ever lose your phone, you will need this passphrase to recover your records." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cd7-q0-Wpt">
                                         <rect key="frame" x="0.0" y="40.333333333333343" width="331.33333333333337" height="40.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -200,7 +200,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sAh-A1-WlM" userLabel="Content">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="634.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="593.33333333333337"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CircleCheck" translatesAutoresizingMaskIntoConstraints="NO" id="mi2-JU-bLm">
                                                 <rect key="frame" x="131" y="24" width="152" height="152"/>
@@ -225,13 +225,13 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write this down as a backup" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pe4-xm-tPq">
                                                         <rect key="frame" x="0.0" y="40.333333333333314" width="215.33333333333337" height="20.333333333333371"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hod-Mr-h9t">
-                                                <rect key="frame" x="0.0" y="331" width="414" height="145.33333333333331"/>
+                                                <rect key="frame" x="0.0" y="280.66666666666674" width="414" height="145.33333333333331"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiQ-9N-vY5">
                                                         <rect key="frame" x="16" y="32" width="382" height="81.333333333333314"/>
@@ -250,7 +250,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWP-34-mj0" customClass="RectangularButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="77" y="507.33333333333337" width="260" height="30"/>
+                                                <rect key="frame" x="77" y="466" width="260" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="260" id="8cb-zQ-1c6"/>
                                                 </constraints>
@@ -262,7 +262,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="mi2-JU-bLm" firstAttribute="centerX" secondItem="0Pd-zQ-rAM" secondAttribute="centerX" id="8ns-0k-iuD"/>
-                                            <constraint firstItem="bWP-34-mj0" firstAttribute="top" secondItem="Hod-Mr-h9t" secondAttribute="bottom" constant="31.333333333333314" id="9CM-I4-vI8"/>
+                                            <constraint firstItem="bWP-34-mj0" firstAttribute="top" secondItem="Hod-Mr-h9t" secondAttribute="bottom" constant="40" id="9CM-I4-vI8"/>
                                             <constraint firstItem="0Pd-zQ-rAM" firstAttribute="centerX" secondItem="sAh-A1-WlM" secondAttribute="centerX" id="HHM-cw-90b"/>
                                             <constraint firstItem="mi2-JU-bLm" firstAttribute="centerY" secondItem="0Pd-zQ-rAM" secondAttribute="centerY" id="K8F-Qy-i9r"/>
                                             <constraint firstItem="bWP-34-mj0" firstAttribute="centerX" secondItem="sAh-A1-WlM" secondAttribute="centerX" id="NX8-VK-wpU"/>
@@ -272,10 +272,11 @@
                                             <constraint firstAttribute="trailing" secondItem="Hod-Mr-h9t" secondAttribute="trailing" id="rYz-Ry-lnD"/>
                                             <constraint firstItem="bH3-iX-9fw" firstAttribute="top" secondItem="0Pd-zQ-rAM" secondAttribute="bottom" constant="70" id="ru9-rU-5uB"/>
                                             <constraint firstItem="bH3-iX-9fw" firstAttribute="centerX" secondItem="sAh-A1-WlM" secondAttribute="centerX" id="uJp-dg-5F7"/>
-                                            <constraint firstItem="Hod-Mr-h9t" firstAttribute="top" secondItem="bH3-iX-9fw" secondAttribute="bottom" constant="70" id="uRO-zC-kL2"/>
+                                            <constraint firstItem="Hod-Mr-h9t" firstAttribute="top" secondItem="bH3-iX-9fw" secondAttribute="bottom" constant="20" id="uRO-zC-kL2"/>
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="sAh-A1-WlM" secondAttribute="bottom" id="dGm-vh-UPW"/>
                                     <constraint firstItem="sAh-A1-WlM" firstAttribute="top" secondItem="ESZ-jD-BJC" secondAttribute="top" id="dxo-RZ-n23"/>
@@ -284,7 +285,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ESZ-jD-BJC" firstAttribute="top" secondItem="Rqo-X0-BWZ" secondAttribute="bottom" id="EJV-4H-YVg"/>
                             <constraint firstAttribute="trailing" secondItem="ESZ-jD-BJC" secondAttribute="trailing" id="N9x-Oi-lOG"/>
