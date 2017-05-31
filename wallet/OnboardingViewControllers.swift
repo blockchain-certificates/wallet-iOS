@@ -52,3 +52,24 @@ class GeneratedPassphraseViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 }
+
+
+@IBDesignable
+class RectangularButton : UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    func commonInit() {
+        backgroundColor = .white
+        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 0.5
+        contentEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+    }
+}
