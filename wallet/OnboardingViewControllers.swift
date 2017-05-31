@@ -9,28 +9,25 @@
 import UIKit
 
 class LandingScreenViewController : UIViewController {
+    @IBOutlet weak var logoImageView: UIImageView!
     override func viewDidLoad() {
-//        navigationController?.setNavigationBarHidden(true, animated: false)
         title = ""
         
         // Remove the drop shadow
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
     }
 }
 
 class RestoreAccountViewController: UIViewController {
     @IBOutlet weak var passphraseTextField: UITextField!
+    @IBOutlet weak var logoImageView: UIImageView!
     
     override func viewDidLoad() {
         title = ""
-    }
-    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.setNavigationBarHidden(false, animated: true)
+        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
     }
     
     @IBAction func doneTapped() {
@@ -68,8 +65,10 @@ extension RestoreAccountViewController : UITextFieldDelegate {
 }
 
 class PrenupViewController: UIViewController {
+    @IBOutlet weak var logoImageView: GreyTintImageView!
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
+        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
     }
     override func viewDidLoad() {
         title = ""
@@ -85,9 +84,7 @@ class GeneratedPassphraseViewController: UIViewController {
         title = ""
         generatePassphrase()
         
-//        logoImageView.image = logoImageView.image?.withRenderingMode(.alwaysTemplate)
-//        logoImageView.tintColor = .green
-        logoImageView.tintColor = UIColor(red:0.00, green:0.54, blue:0.48, alpha:1.0)//.green //#colorLiteral(red: 0.1647058824, green: 0.6980392157, blue: 0.4823529412, alpha: 1)
+        logoImageView.tintColor = UIColor(red:0.00, green:0.54, blue:0.48, alpha:1.0)
     }
     
     override func viewWillAppear(_ animated: Bool) {

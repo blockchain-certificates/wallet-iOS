@@ -103,6 +103,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="ima-vz-6aP"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="logoImageView" destination="P1Y-Eh-MCV" id="w0q-6L-EC3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L3k-Hb-e4L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -173,6 +176,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="bQl-QP-8rb"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="logoImageView" destination="qdm-4b-3tu" id="3ae-nH-5UQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CqJ-tU-RMw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -369,6 +375,7 @@
                     <navigationItem key="navigationItem" id="pqF-S3-scO"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="logoImageView" destination="Pnx-cr-tB7" id="cvf-q6-pGF"/>
                         <outlet property="passphraseTextField" destination="34j-GV-Pq0" id="ToL-18-L0S"/>
                     </connections>
                 </viewController>
