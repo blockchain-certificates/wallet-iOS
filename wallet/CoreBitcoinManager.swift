@@ -1,6 +1,6 @@
 //
 //  CoreBitcoinManager.swift
-//  cert-wallet
+//  wallet
 //
 //  Created by Chris Downie on 10/7/16.
 //  Copyright © 2016 Digital Certificates Project. All rights reserved.

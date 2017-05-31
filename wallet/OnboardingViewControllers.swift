@@ -41,9 +41,15 @@ class PrenupViewController: UIViewController {
 }
 
 class GeneratedPassphraseViewController: UIViewController {
+    @IBOutlet weak var passphraseLabel: UILabel!
+    var attempts = 5
+    
     override func viewDidLoad() {
         title = ""
+        
+        generatePassphrase()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
@@ -51,6 +57,25 @@ class GeneratedPassphraseViewController: UIViewController {
     @IBAction func doneTapped() {
         dismiss(animated: true, completion: nil)
     }
+    
+    func generatePassphrase() {
+        let passphrase = Keychain.generateSeedPhrase()
+
+        do {
+            try Keychain.updateShared(with: passphrase)
+            passphraseLabel.text = passphrase
+        } catch {
+            attempts -= 1
+            
+            if attempts < 0 {
+                fatalError("Couldn't generate a passphrase after failing 5 times.")
+            } else {
+                generatePassphrase()
+            }
+        }
+
+    }
+    
 }
 
 

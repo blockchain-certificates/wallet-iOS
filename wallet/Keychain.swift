@@ -1,6 +1,6 @@
 //
 //  Keychain.swift
-//  cert-wallet
+//  wallet
 //
 //  Created by Chris Downie on 8/9/16.
 //  Copyright © 2016 Digital Certificates Project.

@@ -240,6 +240,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="F2z-U4-vBf"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="passphraseLabel" destination="BiQ-9N-vY5" id="0Ex-VG-jgF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VwS-Vf-e41" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
