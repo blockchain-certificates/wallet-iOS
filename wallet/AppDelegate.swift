@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = .tintColor
         
         UserDefaults.standard.register(defaults: [
-            sampleCertificateResetKey : true
+            sampleCertificateResetKey : false
         ])
         
         // Reset state if needed

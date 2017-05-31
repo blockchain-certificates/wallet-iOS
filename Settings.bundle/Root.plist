@@ -30,7 +30,7 @@
 			<key>Key</key>
 			<string>resetSampleCertificate</string>
 			<key>DefaultValue</key>
-			<true/>
+			<false/>
 		</dict>
 	</array>
 </dict>
