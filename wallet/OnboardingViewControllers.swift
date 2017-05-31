@@ -12,6 +12,10 @@ class LandingScreenViewController : UIViewController {
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         title = ""
+        
+        // Remove the drop shadow
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,6 +115,7 @@ class GeneratedPassphraseViewController: UIViewController {
 }
 
 
+// MARK: - CUstom UI elements
 @IBDesignable
 class RectangularButton : UIButton {
     required init?(coder aDecoder: NSCoder) {
@@ -146,5 +151,21 @@ class SecondaryRectangularButton : RectangularButton {
     override func commonInit() {
         super.commonInit()
         backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
+    }
+}
+
+@IBDesignable
+class TitleLabel: UILabel {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    func commonInit() {
+        self.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightMedium)
     }
 }
