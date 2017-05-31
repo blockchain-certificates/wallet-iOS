@@ -22,12 +22,15 @@ class LandingScreenViewController : UIViewController {
 }
 
 class RestoreAccountViewController: UIViewController {
-    @IBOutlet weak var passphraseTextField: UITextField!
     @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var passphraseTextView: UITextView!
     
     override func viewDidLoad() {
         title = ""
+        let sideInsets : CGFloat = 16
+        let vertInsets : CGFloat = 32
         logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
+        passphraseTextView.textContainerInset = UIEdgeInsets(top: vertInsets, left: sideInsets, bottom: vertInsets, right: sideInsets)
     }
     
     @IBAction func doneTapped() {
@@ -35,7 +38,7 @@ class RestoreAccountViewController: UIViewController {
     }
     
     func savePassphrase() {
-        guard let passphrase = passphraseTextField.text else {
+        guard let passphrase = passphraseTextView.text else {
             return
         }
         

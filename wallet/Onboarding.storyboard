@@ -200,7 +200,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sAh-A1-WlM" userLabel="Content">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="593.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="593.66666666666663"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CircleCheck" translatesAutoresizingMaskIntoConstraints="NO" id="mi2-JU-bLm">
                                                 <rect key="frame" x="131" y="24" width="152" height="152"/>
@@ -320,8 +320,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="as5-jI-RFc">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yc1-fW-1sL" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="556"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yc1-fW-1sL" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="7.9999999999999716" width="414" height="497.33333333333326"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Pnx-cr-tB7">
                                                 <rect key="frame" x="177" y="70" width="60" height="60"/>
@@ -338,25 +338,26 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlA-mJ-hwx">
-                                                <rect key="frame" x="0.0" y="240.66666666666669" width="414" height="81.000000000000057"/>
+                                                <rect key="frame" x="0.0" y="240.66666666666669" width="414" height="166.66666666666669"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Passphrase" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="34j-GV-Pq0">
-                                                        <rect key="frame" x="16" y="32.000000000000028" width="382" height="17"/>
-                                                        <nil key="textColor"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kdZ-pl-IIN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="166.66666666666666"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" spellCheckingType="yes" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                                    </textField>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="34j-GV-Pq0" firstAttribute="leading" secondItem="XlA-mJ-hwx" secondAttribute="leading" constant="16" id="JX1-bE-q1z"/>
-                                                    <constraint firstAttribute="trailing" secondItem="34j-GV-Pq0" secondAttribute="trailing" constant="16" id="LJD-ya-dkR"/>
-                                                    <constraint firstAttribute="bottom" secondItem="34j-GV-Pq0" secondAttribute="bottom" constant="32" id="OMk-QY-uEa"/>
-                                                    <constraint firstItem="34j-GV-Pq0" firstAttribute="top" secondItem="XlA-mJ-hwx" secondAttribute="top" constant="32" id="sxI-VB-HUE"/>
+                                                    <constraint firstItem="kdZ-pl-IIN" firstAttribute="leading" secondItem="XlA-mJ-hwx" secondAttribute="leading" id="Qom-rQ-gXc"/>
+                                                    <constraint firstAttribute="bottom" secondItem="kdZ-pl-IIN" secondAttribute="bottom" id="eNe-GV-u37"/>
+                                                    <constraint firstAttribute="trailing" secondItem="kdZ-pl-IIN" secondAttribute="trailing" id="jmY-vK-Hxb"/>
+                                                    <constraint firstItem="kdZ-pl-IIN" firstAttribute="top" secondItem="XlA-mJ-hwx" secondAttribute="top" id="zOZ-Xb-lBb"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POx-yA-N0o" customClass="RectangularButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="77" y="361.66666666666669" width="260" height="30"/>
+                                                <rect key="frame" x="77" y="447.33333333333331" width="260" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="260" id="Ylv-Pw-469"/>
                                                 </constraints>
@@ -401,7 +402,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="logoImageView" destination="Pnx-cr-tB7" id="cvf-q6-pGF"/>
-                        <outlet property="passphraseTextField" destination="34j-GV-Pq0" id="ToL-18-L0S"/>
+                        <outlet property="passphraseTextView" destination="kdZ-pl-IIN" id="Ms3-VO-7rW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBm-rD-Pcp" userLabel="First Responder" sceneMemberID="firstResponder"/>
