@@ -95,7 +95,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         let actionButton = RectangularButton(type: .custom)
         actionButton.setTitle(actionButtonText, for: .normal)
-        actionButton.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
+        actionButton.addTarget(self, action: #selector(addIssuerButtonTapped), for: .touchUpInside)
 
         
         let stackView = UIStackView(arrangedSubviews: [titleView, messageView, actionButton])
@@ -151,7 +151,11 @@ class IssuerCollectionViewController: UICollectionViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+    func addIssuerButtonTapped() {
+        showAddIssuerFlow()
+    }
+    
+    func addButtonTapped(_ sender: UIBarButtonItem) {
         let addIssuer = NSLocalizedString("Add Issuer", comment: "Contextual action. Tapping this brings up the Add Issuer form.")
         let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
         let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
@@ -161,7 +165,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(title: addIssuer, style: .default, handler: { [weak self] _ in
-            self?.showAddIssuerFlow()
+            self?.addIssuerButtonTapped()
         }))
         
         alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
