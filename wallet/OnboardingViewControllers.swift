@@ -31,6 +31,7 @@ class RestoreAccountViewController: UIViewController {
         let vertInsets : CGFloat = 32
         logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
         passphraseTextView.textContainerInset = UIEdgeInsets(top: vertInsets, left: sideInsets, bottom: vertInsets, right: sideInsets)
+        passphraseTextView.delegate = self
     }
     
     @IBAction func doneTapped() {
@@ -61,9 +62,14 @@ class RestoreAccountViewController: UIViewController {
         present(controller, animated: true, completion: nil)
     }
 }
-extension RestoreAccountViewController : UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        savePassphrase()
+extension RestoreAccountViewController : UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            savePassphrase()
+            return false
+        }
+        return true
     }
 }
 
