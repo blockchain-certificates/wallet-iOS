@@ -89,7 +89,6 @@ class SettingsTableViewController: UITableViewController {
         case (0, 0):
             text = NSLocalizedString("Reveal Passphrase", comment: "Action item in settings screen.")
         case (0, 1):
-//            text = NSLocalizedString("Replace Passphrase", comment: "Action item in settings screen.")
             text = "Self Destruct"
         case (1, 0):
             text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
@@ -110,7 +109,6 @@ class SettingsTableViewController: UITableViewController {
         case (0, 0):
             controller = RevealPassphraseTableViewController()
         case (0, 1):
-//            controller = ReplacePassphraseViewController()
             Keychain.destroyShared()
             fatalError()
         case (1, 0):
