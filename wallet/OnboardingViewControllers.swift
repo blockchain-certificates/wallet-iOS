@@ -84,6 +84,10 @@ class GeneratedPassphraseViewController: UIViewController {
     override func viewDidLoad() {
         title = ""
         generatePassphrase()
+        
+//        logoImageView.image = logoImageView.image?.withRenderingMode(.alwaysTemplate)
+//        logoImageView.tintColor = .green
+        logoImageView.tintColor = UIColor(red:0.00, green:0.54, blue:0.48, alpha:1.0)//.green //#colorLiteral(red: 0.1647058824, green: 0.6980392157, blue: 0.4823529412, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,7 +115,6 @@ class GeneratedPassphraseViewController: UIViewController {
         }
 
     }
-    
 }
 
 
@@ -167,5 +170,36 @@ class TitleLabel: UILabel {
     
     func commonInit() {
         self.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightMedium)
+    }
+}
+
+@IBDesignable
+class GreenTintImageView: UIImageView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        updateTint()
+    }
+    override init(image: UIImage?) {
+        super.init(image: image)
+        updateTint()
+    }
+    override init(image: UIImage?, highlightedImage: UIImage?) {
+        super.init(image: image, highlightedImage: highlightedImage)
+        updateTint()
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        updateTint()
+    }
+    
+    func updateTint() {
+        tintColor = #colorLiteral(red: 0.1647058824, green: 0.6980392157, blue: 0.4823529412, alpha: 1)
+    }
+}
+
+@IBDesignable
+class GreyTintImageView: UIImageView {
+    func updateTint() {
+        tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     }
 }
