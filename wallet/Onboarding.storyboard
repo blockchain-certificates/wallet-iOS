@@ -317,60 +317,84 @@
                         <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Pnx-cr-tB7">
-                                <rect key="frame" x="177" y="40" width="60" height="60"/>
-                                <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="huR-CT-04u"/>
-                                    <constraint firstAttribute="width" secondItem="Pnx-cr-tB7" secondAttribute="height" multiplier="1:1" id="mcF-0W-BNl"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASTE YOUR PASSPHRASE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fu-ad-3pP" customClass="TitleLabel" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="100.66666666666669" y="171" width="212.66666666666663" height="20.666666666666657"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POx-yA-N0o" customClass="RectangularButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="77" y="412.66666666666669" width="260" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="260" id="Ylv-Pw-469"/>
-                                </constraints>
-                                <state key="normal" title="DONE"/>
-                                <connections>
-                                    <action selector="doneTapped" destination="Q4i-dA-vR4" eventType="touchUpInside" id="geD-qR-o0b"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlA-mJ-hwx">
-                                <rect key="frame" x="0.0" y="258.33333333333331" width="414" height="24"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="as5-jI-RFc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Passphrase" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="34j-GV-Pq0">
-                                        <rect key="frame" x="8" y="7" width="398" height="17"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" spellCheckingType="yes" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                    </textField>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yc1-fW-1sL" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="556"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Pnx-cr-tB7">
+                                                <rect key="frame" x="177" y="70" width="60" height="60"/>
+                                                <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="huR-CT-04u"/>
+                                                    <constraint firstAttribute="width" secondItem="Pnx-cr-tB7" secondAttribute="height" multiplier="1:1" id="mcF-0W-BNl"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASTE YOUR PASSPHRASE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fu-ad-3pP" customClass="TitleLabel" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="100.66666666666669" y="200" width="212.66666666666663" height="20.666666666666657"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlA-mJ-hwx">
+                                                <rect key="frame" x="0.0" y="240.66666666666669" width="414" height="81.000000000000057"/>
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Passphrase" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="34j-GV-Pq0">
+                                                        <rect key="frame" x="16" y="32.000000000000028" width="382" height="17"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" spellCheckingType="yes" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="34j-GV-Pq0" firstAttribute="leading" secondItem="XlA-mJ-hwx" secondAttribute="leading" constant="16" id="JX1-bE-q1z"/>
+                                                    <constraint firstAttribute="trailing" secondItem="34j-GV-Pq0" secondAttribute="trailing" constant="16" id="LJD-ya-dkR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="34j-GV-Pq0" secondAttribute="bottom" constant="32" id="OMk-QY-uEa"/>
+                                                    <constraint firstItem="34j-GV-Pq0" firstAttribute="top" secondItem="XlA-mJ-hwx" secondAttribute="top" constant="32" id="sxI-VB-HUE"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POx-yA-N0o" customClass="RectangularButton" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="77" y="361.66666666666669" width="260" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="260" id="Ylv-Pw-469"/>
+                                                </constraints>
+                                                <state key="normal" title="DONE"/>
+                                                <connections>
+                                                    <action selector="doneTapped" destination="Q4i-dA-vR4" eventType="touchUpInside" id="geD-qR-o0b"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="POx-yA-N0o" secondAttribute="bottom" constant="20" id="7OO-Tn-O2G"/>
+                                            <constraint firstItem="POx-yA-N0o" firstAttribute="centerX" secondItem="Yc1-fW-1sL" secondAttribute="centerX" id="B05-OA-bpA"/>
+                                            <constraint firstItem="6fu-ad-3pP" firstAttribute="top" secondItem="Pnx-cr-tB7" secondAttribute="bottom" constant="70" id="EA2-hk-93n"/>
+                                            <constraint firstItem="Pnx-cr-tB7" firstAttribute="top" secondItem="Yc1-fW-1sL" secondAttribute="top" constant="70" id="RzZ-5w-b5z"/>
+                                            <constraint firstItem="6fu-ad-3pP" firstAttribute="centerX" secondItem="Yc1-fW-1sL" secondAttribute="centerX" id="cNX-dN-1Rf"/>
+                                            <constraint firstAttribute="trailing" secondItem="XlA-mJ-hwx" secondAttribute="trailing" id="gOd-O1-DOy"/>
+                                            <constraint firstItem="POx-yA-N0o" firstAttribute="top" secondItem="XlA-mJ-hwx" secondAttribute="bottom" constant="40" id="kvX-cT-e9B"/>
+                                            <constraint firstItem="XlA-mJ-hwx" firstAttribute="top" secondItem="6fu-ad-3pP" secondAttribute="bottom" constant="20" id="p1k-EP-d0f"/>
+                                            <constraint firstItem="Pnx-cr-tB7" firstAttribute="centerX" secondItem="Yc1-fW-1sL" secondAttribute="centerX" id="t0p-iR-Eoh"/>
+                                            <constraint firstItem="XlA-mJ-hwx" firstAttribute="leading" secondItem="Yc1-fW-1sL" secondAttribute="leading" id="umP-4R-dCT"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="34j-GV-Pq0" firstAttribute="leading" secondItem="XlA-mJ-hwx" secondAttribute="leading" constant="8" id="JX1-bE-q1z"/>
-                                    <constraint firstAttribute="trailing" secondItem="34j-GV-Pq0" secondAttribute="trailing" constant="8" id="LJD-ya-dkR"/>
-                                    <constraint firstAttribute="bottom" secondItem="34j-GV-Pq0" secondAttribute="bottom" id="OMk-QY-uEa"/>
-                                    <constraint firstItem="34j-GV-Pq0" firstAttribute="top" secondItem="XlA-mJ-hwx" secondAttribute="top" constant="7" id="sxI-VB-HUE"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Yc1-fW-1sL" secondAttribute="bottom" id="R2B-wd-uiZ"/>
+                                    <constraint firstItem="Yc1-fW-1sL" firstAttribute="leading" secondItem="as5-jI-RFc" secondAttribute="leading" id="bT4-0Y-Rtj"/>
+                                    <constraint firstItem="Yc1-fW-1sL" firstAttribute="top" secondItem="as5-jI-RFc" secondAttribute="topMargin" id="cdk-2B-KXk"/>
+                                    <constraint firstAttribute="trailing" secondItem="Yc1-fW-1sL" secondAttribute="trailing" id="yFt-bI-xEW"/>
                                 </constraints>
-                            </view>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="XlA-mJ-hwx" firstAttribute="top" secondItem="6fu-ad-3pP" secondAttribute="bottom" constant="66.5" id="5LY-0M-81U"/>
-                            <constraint firstItem="POx-yA-N0o" firstAttribute="centerX" secondItem="LGP-vL-WUP" secondAttribute="centerX" id="ABR-xq-qGW"/>
-                            <constraint firstItem="Pnx-cr-tB7" firstAttribute="top" secondItem="xiR-Fo-4Ee" secondAttribute="bottom" constant="40" id="Lbp-oE-uTI"/>
-                            <constraint firstItem="Pnx-cr-tB7" firstAttribute="centerX" secondItem="LGP-vL-WUP" secondAttribute="centerX" id="OI0-vO-4oX"/>
-                            <constraint firstItem="6fu-ad-3pP" firstAttribute="top" secondItem="Pnx-cr-tB7" secondAttribute="bottom" constant="71" id="QVK-PG-Fzi"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="XlA-mJ-hwx" secondAttribute="trailing" constant="-20" id="dHQ-Yo-Cdr"/>
-                            <constraint firstItem="6fu-ad-3pP" firstAttribute="centerX" secondItem="LGP-vL-WUP" secondAttribute="centerX" id="h4c-9g-ZrY"/>
-                            <constraint firstItem="XlA-mJ-hwx" firstAttribute="leading" secondItem="LGP-vL-WUP" secondAttribute="leadingMargin" constant="-20" id="s4U-e2-Llb"/>
-                            <constraint firstItem="POx-yA-N0o" firstAttribute="top" secondItem="XlA-mJ-hwx" secondAttribute="bottom" constant="130.5" id="sAJ-yf-CNF"/>
+                            <constraint firstItem="as5-jI-RFc" firstAttribute="leading" secondItem="LGP-vL-WUP" secondAttribute="leading" id="5EX-iQ-dzj"/>
+                            <constraint firstAttribute="trailing" secondItem="as5-jI-RFc" secondAttribute="trailing" id="G3l-fw-nuV"/>
+                            <constraint firstItem="njn-ap-9X1" firstAttribute="top" secondItem="as5-jI-RFc" secondAttribute="bottom" id="fnx-R8-9yP"/>
+                            <constraint firstItem="Yc1-fW-1sL" firstAttribute="width" secondItem="LGP-vL-WUP" secondAttribute="width" id="mig-jp-nxs"/>
+                            <constraint firstItem="as5-jI-RFc" firstAttribute="top" secondItem="xiR-Fo-4Ee" secondAttribute="bottom" id="qGb-BX-oYu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pqF-S3-scO"/>
