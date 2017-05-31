@@ -144,6 +144,10 @@ extension Keychain {
         return (mnemonic != nil)
     }
     
+    public static func hasPassphrase() -> Bool {
+        return loadSeedPhrase() != nil
+    }
+    
     @discardableResult static func destroyShared() -> Bool {
         // Delete the seed phrase
         let query = [

@@ -25,6 +25,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Sua-0o-4Xo">
                                 <rect key="frame" x="409.5" y="580.5" width="205" height="205"/>
+                                <color key="tintColor" red="0.3294117647" green="0.3294117647" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Sua-0o-4Xo" secondAttribute="height" multiplier="1:1" id="HGN-Ok-9xJ"/>
                                 </constraints>
@@ -44,6 +45,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="200" height="210"/>
+        <image name="Logo" width="58" height="61"/>
     </resources>
 </document>
