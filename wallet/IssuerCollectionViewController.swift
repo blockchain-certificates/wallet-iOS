@@ -95,6 +95,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         let actionButton = RectangularButton(type: .custom)
         actionButton.setTitle(actionButtonText, for: .normal)
+        actionButton.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
 
         
         let stackView = UIStackView(arrangedSubviews: [titleView, messageView, actionButton])
