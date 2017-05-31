@@ -48,7 +48,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         loadIssuers(shouldReloadCollection: false)
         loadCertificates(shouldReloadCollection: false)
         reloadCollectionView()
-        title = NSLocalizedString("Issuers", comment: "Title in screen of multiple issuers")
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         loadOnboardingIfNeeded()
@@ -62,7 +62,13 @@ class IssuerCollectionViewController: UICollectionViewController {
     func loadBackgroundView() {
         if managedIssuers.isEmpty {
             loadEmptyBackgroundView()
+            title = nil
+            navigationItem.rightBarButtonItem = nil
         } else {
+            title = NSLocalizedString("Issuers", comment: "Title in screen of multiple issuers")
+            if navigationItem.rightBarButtonItem == nil {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addButtonTapped(_:)))
+            }
             collectionView?.backgroundView = nil
         }
     }
@@ -72,20 +78,40 @@ class IssuerCollectionViewController: UICollectionViewController {
             // We know the backgroundView is either this emptyState or nil. So this saves us from re-loading the same background view if it's already loaded.
             return
         }
-        let title = NSLocalizedString("No Issuers", comment: "Empty issuers title")
-        let subtitle = NSLocalizedString("Add your first Issuer by tapping the add button above.", comment: "Instructions below the empty issuers title, explaining how to add your first issuer.")
-        let emptyView = NoContentView(title: title, subtitle: subtitle)
-        emptyView.translatesAutoresizingMaskIntoConstraints = false
+        let title = NSLocalizedString("YOU ARE READY!", comment: "Title for empty issuers view. Very encouraging.")
+        let message = NSLocalizedString("Issuers will send you email with a link to add them. This will send a special code that represents you. If you already have their information, continue.", comment: "Long explainer about what you have to do to wait with the app.")
+        let actionButtonText = NSLocalizedString("ADD ISSUER", comment: "Action button for adding an issuer")
         
+        let titleView = TitleLabel(frame: .zero)
+        titleView.text = title
+        titleView.textAlignment = .center
+
+        let messageView = UILabel(frame: .zero)
+        messageView.text = message
+        messageView.numberOfLines = 0
+        messageView.textAlignment = .center
+        messageView.font = UIFont.systemFont(ofSize: 14)
+        messageView.textColor = UIColor(red:0.11, green:0.11, blue:0.11, alpha:1.0)
+        
+        let actionButton = RectangularButton(type: .custom)
+        actionButton.setTitle(actionButtonText, for: .normal)
+
+        
+        let stackView = UIStackView(arrangedSubviews: [titleView, messageView, actionButton])
+        stackView.axis = .vertical
+        stackView.spacing = 30
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let sidePadding : CGFloat = 40
+        let verticalPadding : CGFloat = 44
         let constraints = [
-            NSLayoutConstraint(item: emptyView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: emptyView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: emptyView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: emptyView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: stackView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: sidePadding),
+            NSLayoutConstraint(item: stackView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -sidePadding),
+            NSLayoutConstraint(item: stackView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: verticalPadding)
         ]
         
         let backgroundView = UIView()
-        backgroundView.addSubview(emptyView)
+        backgroundView.addSubview(stackView)
 
         collectionView?.backgroundView = backgroundView
         NSLayoutConstraint.activate(constraints)
