@@ -32,6 +32,9 @@ class RestoreAccountViewController: UIViewController {
 }
 
 class PrenupViewController: UIViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     override func viewDidLoad() {
         title = ""
     }
