@@ -191,10 +191,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ESZ-jD-BJC">
-                                <rect key="frame" x="20" y="20" width="374" height="716"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sAh-A1-WlM" userLabel="Content">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="526"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="634.33333333333337"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CircleCheck" translatesAutoresizingMaskIntoConstraints="NO" id="mi2-JU-bLm">
                                                 <rect key="frame" x="131" y="24" width="152" height="152"/>
@@ -225,10 +225,11 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hod-Mr-h9t">
-                                                <rect key="frame" x="0.0" y="331" width="414" height="37"/>
+                                                <rect key="frame" x="0.0" y="331" width="414" height="145.33333333333331"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiQ-9N-vY5">
-                                                        <rect key="frame" x="8" y="8" width="390" height="20.333333333333314"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiQ-9N-vY5">
+                                                        <rect key="frame" x="16" y="32" width="382" height="81.333333333333314"/>
+                                                        <string key="text">Buster's in what we like to call a light to no coma. In layman's terms, it might be considered a very heavy nap. But where did the lighter fluid come from?</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -237,13 +238,13 @@
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="BiQ-9N-vY5" secondAttribute="trailing" constant="16" id="0Ru-NN-8Zt"/>
-                                                    <constraint firstItem="BiQ-9N-vY5" firstAttribute="leading" secondItem="Hod-Mr-h9t" secondAttribute="leading" constant="8" id="56v-6p-rtD"/>
-                                                    <constraint firstItem="BiQ-9N-vY5" firstAttribute="top" secondItem="Hod-Mr-h9t" secondAttribute="top" constant="8" id="bnb-wc-aqN"/>
-                                                    <constraint firstAttribute="bottom" secondItem="BiQ-9N-vY5" secondAttribute="bottom" constant="8" id="kOE-fd-Yh7"/>
+                                                    <constraint firstItem="BiQ-9N-vY5" firstAttribute="leading" secondItem="Hod-Mr-h9t" secondAttribute="leading" constant="16" id="56v-6p-rtD"/>
+                                                    <constraint firstItem="BiQ-9N-vY5" firstAttribute="top" secondItem="Hod-Mr-h9t" secondAttribute="top" constant="32" id="bnb-wc-aqN"/>
+                                                    <constraint firstAttribute="bottom" secondItem="BiQ-9N-vY5" secondAttribute="bottom" constant="32" id="kOE-fd-Yh7"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWP-34-mj0" customClass="RectangularButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="77" y="399" width="260" height="30"/>
+                                                <rect key="frame" x="77" y="507.33333333333337" width="260" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="260" id="8cb-zQ-1c6"/>
                                                 </constraints>
@@ -253,7 +254,6 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="mi2-JU-bLm" firstAttribute="centerX" secondItem="0Pd-zQ-rAM" secondAttribute="centerX" id="8ns-0k-iuD"/>
                                             <constraint firstItem="bWP-34-mj0" firstAttribute="top" secondItem="Hod-Mr-h9t" secondAttribute="bottom" constant="31.333333333333314" id="9CM-I4-vI8"/>
@@ -281,8 +281,8 @@
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ESZ-jD-BJC" firstAttribute="top" secondItem="Rqo-X0-BWZ" secondAttribute="bottom" id="EJV-4H-YVg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ESZ-jD-BJC" secondAttribute="trailing" id="N9x-Oi-lOG"/>
-                            <constraint firstItem="ESZ-jD-BJC" firstAttribute="leading" secondItem="Cco-k4-4iq" secondAttribute="leadingMargin" id="WR5-fd-S8c"/>
+                            <constraint firstAttribute="trailing" secondItem="ESZ-jD-BJC" secondAttribute="trailing" id="N9x-Oi-lOG"/>
+                            <constraint firstItem="ESZ-jD-BJC" firstAttribute="leading" secondItem="Cco-k4-4iq" secondAttribute="leading" id="WR5-fd-S8c"/>
                             <constraint firstItem="sAh-A1-WlM" firstAttribute="width" secondItem="Cco-k4-4iq" secondAttribute="width" id="cmR-o7-QJR"/>
                             <constraint firstItem="Llc-VK-2dh" firstAttribute="top" secondItem="ESZ-jD-BJC" secondAttribute="bottom" id="tsw-66-hHq"/>
                         </constraints>
