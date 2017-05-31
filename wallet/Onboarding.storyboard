@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="822" y="850"/>
         </scene>
-        <!--View Controller-->
+        <!--Landing Screen View Controller-->
         <scene sceneID="i6h-4D-YvS">
             <objects>
-                <viewController id="C6e-aU-jG4" sceneMemberID="viewController">
+                <viewController id="C6e-aU-jG4" customClass="LandingScreenViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VKn-4x-CYk"/>
                         <viewControllerLayoutGuide type="bottom" id="mOR-uu-ojF"/>
@@ -85,10 +85,10 @@
             </objects>
             <point key="canvasLocation" x="1825" y="850"/>
         </scene>
-        <!--View Controller-->
+        <!--Prenup View Controller-->
         <scene sceneID="35f-qu-Nzo">
             <objects>
-                <viewController id="T7K-XY-0w3" sceneMemberID="viewController">
+                <viewController id="T7K-XY-0w3" customClass="PrenupViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fTF-sV-48q"/>
                         <viewControllerLayoutGuide type="bottom" id="TkE-ae-Q2Z"/>
@@ -146,10 +146,10 @@
             </objects>
             <point key="canvasLocation" x="2702" y="717"/>
         </scene>
-        <!--View Controller-->
+        <!--Generated Passphrase View Controller-->
         <scene sceneID="SBV-SO-GK6">
             <objects>
-                <viewController id="pBd-jD-deD" sceneMemberID="viewController">
+                <viewController id="pBd-jD-deD" customClass="GeneratedPassphraseViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rqo-X0-BWZ"/>
                         <viewControllerLayoutGuide type="bottom" id="Llc-VK-2dh"/>
@@ -203,6 +203,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWP-34-mj0">
                                 <rect key="frame" x="166" y="522" width="42" height="30"/>
                                 <state key="normal" title="DONE"/>
+                                <connections>
+                                    <action selector="doneTapped" destination="pBd-jD-deD" eventType="touchUpInside" id="iAv-w2-sYv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -225,10 +228,10 @@
             </objects>
             <point key="canvasLocation" x="3484" y="715.59220389805103"/>
         </scene>
-        <!--View Controller-->
+        <!--Restore Account View Controller-->
         <scene sceneID="Mrb-Ce-rIh">
             <objects>
-                <viewController id="Q4i-dA-vR4" sceneMemberID="viewController">
+                <viewController id="Q4i-dA-vR4" customClass="RestoreAccountViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xiR-Fo-4Ee"/>
                         <viewControllerLayoutGuide type="bottom" id="njn-ap-9X1"/>
@@ -251,8 +254,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POx-yA-N0o">
-                                <rect key="frame" x="114" y="489" width="147" height="30"/>
-                                <state key="normal" title="Generate Passphrase"/>
+                                <rect key="frame" x="167" y="489" width="42" height="30"/>
+                                <state key="normal" title="DONE"/>
+                                <connections>
+                                    <action selector="doneTapped" destination="Q4i-dA-vR4" eventType="touchUpInside" id="geD-qR-o0b"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlA-mJ-hwx">
                                 <rect key="frame" x="0.0" y="322" width="375" height="36.5"/>

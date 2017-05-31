@@ -53,7 +53,7 @@
 		838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC13A1E43F0F700533AEB /* CertificateViewController.xib */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
-		83ACB76E1EDE30B700A1149E /* OldOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACB76D1EDE30B700A1149E /* OldOnboardingViewController.swift */; };
+		83ACB76E1EDE30B700A1149E /* OnboardingViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */; };
 		83ACB7701EDE556500A1149E /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83ACB76F1EDE556500A1149E /* Onboarding.storyboard */; };
 		83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */; };
 		83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */; };
@@ -161,7 +161,7 @@
 		838DC13B1E43F0F700533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CertificateViewController.xib; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
-		83ACB76D1EDE30B700A1149E /* OldOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldOnboardingViewController.swift; sourceTree = "<group>"; };
+		83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllers.swift; sourceTree = "<group>"; };
 		83ACB76F1EDE556500A1149E /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
 		83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
 				8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */,
-				83ACB76D1EDE30B700A1149E /* OldOnboardingViewController.swift */,
+				83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */,
 				83ACB76F1EDE556500A1149E /* Onboarding.storyboard */,
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
 				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
@@ -700,7 +700,7 @@
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
 				831EDC131ED5F7DA004F135B /* CoreBitcoinManager.swift in Sources */,
 				831EDC0F1ED3A20E004F135B /* RenderedCertificateView.swift in Sources */,
-				83ACB76E1EDE30B700A1149E /* OldOnboardingViewController.swift in Sources */,
+				83ACB76E1EDE30B700A1149E /* OnboardingViewControllers.swift in Sources */,
 				8337CFCC1E1D65140080E876 /* SettingsTableViewController.swift in Sources */,
 				8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */,
 				83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */,
