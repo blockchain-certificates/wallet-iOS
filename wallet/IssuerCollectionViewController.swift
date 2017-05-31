@@ -92,10 +92,10 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func loadOnboardingIfNeeded() {
-        if !Keychain.hasPassphrase() {
+//        if !Keychain.hasPassphrase() {
             let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
             present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
-        }
+//        }
     }
     
     func adjustCellSize() {
