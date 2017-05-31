@@ -20,14 +20,46 @@ class LandingScreenViewController : UIViewController {
 }
 
 class RestoreAccountViewController: UIViewController {
+    @IBOutlet weak var passphraseTextField: UITextField!
+    
     override func viewDidLoad() {
         title = ""
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    
     @IBAction func doneTapped() {
-        dismiss(animated: true, completion: nil)
+        savePassphrase()
+    }
+    
+    func savePassphrase() {
+        guard let passphrase = passphraseTextField.text else {
+            return
+        }
+        
+        guard Keychain.isValidPassphrase(passphrase) else {
+            failedPassphrase(error: NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
+            return
+        }
+        do {
+            try Keychain.updateShared(with: passphrase)
+            dismiss(animated: true, completion: nil)
+        } catch {
+            failedPassphrase(error: NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
+        }
+    }
+    
+    func failedPassphrase(error : String) {
+        let title = NSLocalizedString("Invalid passphrase", comment: "Title when trying to use an invalid passphrase as your passphrase")
+        let controller = UIAlertController(title: title, message: error, preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "confirm action"), style: .cancel, handler: nil))
+        present(controller, animated: true, completion: nil)
+    }
+}
+extension RestoreAccountViewController : UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        savePassphrase()
     }
 }
 
