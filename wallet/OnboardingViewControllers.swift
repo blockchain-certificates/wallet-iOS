@@ -74,11 +74,11 @@ class PrenupViewController: UIViewController {
 
 class GeneratedPassphraseViewController: UIViewController {
     @IBOutlet weak var passphraseLabel: UILabel!
+    @IBOutlet weak var logoImageView: UIImageView!
     var attempts = 5
     
     override func viewDidLoad() {
         title = ""
-        
         generatePassphrase()
     }
     
@@ -124,9 +124,27 @@ class RectangularButton : UIButton {
     }
     
     func commonInit() {
+        let edgeInsets : CGFloat = 20
+        
         backgroundColor = .white
         layer.borderColor = UIColor.black.cgColor
         layer.borderWidth = 0.5
-        contentEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        contentEdgeInsets = UIEdgeInsets(top: edgeInsets, left: edgeInsets, bottom: edgeInsets, right: edgeInsets)
+        tintColor = .black
+        titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        
+        setTitleColor(.black, for: .normal)
+        setTitleColor(.black, for: .selected)
+        setTitleColor(.black, for: .highlighted)
+        setTitleColor(.black, for: .focused)
+        setTitleShadowColor(.red, for: .highlighted)
+    }
+}
+
+@IBDesignable
+class SecondaryRectangularButton : RectangularButton {
+    override func commonInit() {
+        super.commonInit()
+        backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
     }
 }
