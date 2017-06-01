@@ -57,12 +57,10 @@ class Analytics {
         }
         
         let payload : [String : Any] = [
-            "key": certificate.assertion.uid, //certificate.assertion.id.absoluteString,
+            "key": certificate.id,
             "action": actionName,
-            "metadata" : [
-                "application": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown",
-                "platform": "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
-            ]
+            "application": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown",
+            "platform": "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
         ]
         
         var uploadRequest = URLRequest(url: URL(string: "https://certificates.learningmachine.com/api/event/certificate")!)
