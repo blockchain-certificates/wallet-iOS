@@ -13,7 +13,7 @@ enum AnalyticsEvent {
     case viewed, validated, shared
 }
 enum AnalyticsEnvironment {
-    case debug, development, staging, production
+    case debug, production
 }
 
 class Analytics {
@@ -24,28 +24,18 @@ class Analytics {
         self.environment = environment
     }
     
-    public static var shared : Analytics {
-        return Analytics(environment: .development)
-    }
-    
     public func track(event: AnalyticsEvent, certificate: Certificate) {
         switch environment {
         case .debug:
             print("Tracking \(certificate.assertion.uid).")
-        case .development:
-            // Development and Production environments both track as if in Production
-            fallthrough
         case .production:
             // Tracking with custom analytics
-            reportToLearningMachine(action: event, for: certificate)
-
-        default:
-            print("Tracking for \(environment) environment not implemented yet.")
+            report(action: event, for: certificate)
         }
         
     }
 
-    func reportToLearningMachine(action: AnalyticsEvent, for certificate: Certificate) {
+    func report(action: AnalyticsEvent, for certificate: Certificate) {
         let actionName : String
         switch action {
         case .viewed:
@@ -56,14 +46,43 @@ class Analytics {
             actionName = "shared"
         }
         
+        let downloadIssuerTask : URLSessionDataTask = URLSession.shared.dataTask(with: certificate.issuer.id) { [weak self] (issuerData, response, error) in
+            guard error == nil else {
+                print("Got an error requesting data from \(certificate.issuer.id)")
+                return
+            }
+            guard let issuerData = issuerData,
+                let parsedJSON = try? JSONSerialization.jsonObject(with: issuerData, options: []),
+                let json = parsedJSON as? [String: Any] else {
+                print("GET \(certificate.issuer.id) did not respond with JSON data.")
+                    return
+            }
+            
+            let issuer: Issuer!
+            do {
+                issuer = try Issuer(dictionary: json)
+            } catch {
+                print("Couldn't parse JSON as an issuer from \(certificate.issuer.id)")
+                return
+            }
+            
+            if let analyticsURL = issuer.analyticsURL {
+                self?.submitReport(actionName: actionName, for: certificate, to: analyticsURL)
+            }
+        }
+        downloadIssuerTask.resume()
+        
+    }
+    
+    func submitReport(actionName action: String, for certificate: Certificate, to url: URL) {
         let payload : [String : Any] = [
             "key": certificate.id,
-            "action": actionName,
+            "action": action,
             "application": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown",
             "platform": "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
         ]
         
-        var uploadRequest = URLRequest(url: URL(string: "https://certificates.learningmachine.com/api/event/certificate")!)
+        var uploadRequest = URLRequest(url: url)
         uploadRequest.httpMethod = "POST"
         uploadRequest.httpBody = try? JSONSerialization.data(withJSONObject: payload, options: [])
         uploadRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")

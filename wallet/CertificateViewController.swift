@@ -24,6 +24,8 @@ class CertificateViewController: UIViewController {
     @IBOutlet weak var progressView: UIProgressView!
     private var inProgressRequest : CommonRequest?
     
+    private let analytics = Analytics()
+    
     
     init(certificate: Certificate) {
         self.certificate = certificate
@@ -51,7 +53,7 @@ class CertificateViewController: UIViewController {
         renderedCertificateView.render(certificate: certificate)
         stylize()
         
-        Analytics.shared.track(event: .viewed, certificate: certificate)
+        analytics.track(event: .viewed, certificate: certificate)
     }
     
     func stylize() {
@@ -82,7 +84,7 @@ class CertificateViewController: UIViewController {
     }
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
-        Analytics.shared.track(event: .validated, certificate: certificate)
+        analytics.track(event: .validated, certificate: certificate)
         
         // Check for the Sample Certificate
         guard certificate.assertion.uid != Identifiers.sampleCertificateUID else {
@@ -182,9 +184,9 @@ class CertificateViewController: UIViewController {
         
         let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         let capturedCertificate = certificate
-        shareController.completionWithItemsHandler = { (activity, completed, _, _) in
+        shareController.completionWithItemsHandler = { [weak self] (activity, completed, _, _) in
             if completed {
-                Analytics.shared.track(event: .shared, certificate: capturedCertificate)
+                self?.analytics.track(event: .shared, certificate: capturedCertificate)
             }
         }
         
@@ -199,9 +201,9 @@ class CertificateViewController: UIViewController {
         
         let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         let capturedCertificate = certificate
-        shareController.completionWithItemsHandler = { (activity, completed, _, _) in
+        shareController.completionWithItemsHandler = { [weak self] (activity, completed, _, _) in
             if completed {
-                Analytics.shared.track(event: .shared, certificate: capturedCertificate)
+                self?.analytics.track(event: .shared, certificate: capturedCertificate)
             }
         }
         
