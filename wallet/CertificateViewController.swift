@@ -72,7 +72,9 @@ class CertificateViewController: UIViewController {
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the action sheet."), style: .cancel, handler: nil)
         
-        alertController.addAction(shareURLAction)
+        if certificate.assertion.id != nil {
+            alertController.addAction(shareURLAction)
+        }
         alertController.addAction(shareFileAction)
         alertController.addAction(cancelAction)
         
@@ -190,7 +192,9 @@ class CertificateViewController: UIViewController {
     }
     
     func shareCertificateURL() {
-        let url = certificate.assertion.id
+        guard let url = certificate.assertion.id else {
+            return
+        }
         let items : [Any] = [ url ]
         
         let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)

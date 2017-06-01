@@ -73,7 +73,7 @@ class Analytics {
         
         let uploadTask : URLSessionDataTask = URLSession.shared.dataTask(with: uploadRequest as URLRequest) { [weak self] (data, response, error) in
             guard error == nil else {
-                print("Got an error trying to report \(action) event for \(certificate.assertion.id)")
+                print("Got an error trying to report \(action) event for \(String(describing: certificate.assertion.id))")
                 dump(error!)
                 dump(response)
                 return
