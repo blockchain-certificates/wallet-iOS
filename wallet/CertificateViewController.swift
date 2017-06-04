@@ -74,7 +74,7 @@ class CertificateViewController: UIViewController {
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the action sheet."), style: .cancel, handler: nil)
         
-        if certificate.assertion.id != nil {
+        if certificate.shareUrl != nil {
             alertController.addAction(shareURLAction)
         }
         alertController.addAction(shareFileAction)
