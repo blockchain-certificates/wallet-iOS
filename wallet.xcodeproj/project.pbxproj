@@ -59,6 +59,7 @@
 		83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */; };
 		83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */; };
 		83DC0D941DBA87C300453116 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0D931DBA87C300453116 /* Constants.swift */; };
+		83DFC72B1EE446020061BF00 /* CertificateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DFC72A1EE446020061BF00 /* CertificateManager.swift */; };
 		83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F196251DC9077A00590219 /* ManagedIssuer.swift */; };
 		83FC25141EA7C7220015E49D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC25131EA7C7220015E49D /* Extensions.swift */; };
 		83FF5DE71ECBA4100063397C /* Blockcerts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; };
@@ -167,6 +168,7 @@
 		83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTitleTableViewCell.swift; sourceTree = "<group>"; };
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
 		83DC0D931DBA87C300453116 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		83DFC72A1EE446020061BF00 /* CertificateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateManager.swift; sourceTree = "<group>"; };
 		83F196251DC9077A00590219 /* ManagedIssuer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedIssuer.swift; sourceTree = "<group>"; };
 		83FC25131EA7C7220015E49D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		83FF5DE61ECBA4100063397C /* Blockcerts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Blockcerts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +266,7 @@
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
 				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
 				832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */,
+				83DFC72A1EE446020061BF00 /* CertificateManager.swift */,
 				836031BC1E5651C9005B2D2E /* PrivacyViewController.swift */,
 				83FC25131EA7C7220015E49D /* Extensions.swift */,
 				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
@@ -694,6 +697,7 @@
 				832F2A491E944E1C00A65C3A /* CertificateMetadataViewController.swift in Sources */,
 				8388B8AA1EDE15BF00B28A57 /* WebLoginViewController.swift in Sources */,
 				832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */,
+				83DFC72B1EE446020061BF00 /* CertificateManager.swift in Sources */,
 				836031BD1E5651C9005B2D2E /* PrivacyViewController.swift in Sources */,
 				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
 				83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */,

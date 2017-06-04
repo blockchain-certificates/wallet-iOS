@@ -24,6 +24,7 @@ class IssuerViewController: UIViewController {
         view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addCertificateTapped))
 
         // Summary section
         let summary = IssuerSummaryView(issuer: managedIssuer!)
@@ -69,9 +70,9 @@ class IssuerViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if certificates.isEmpty {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(confirmDeleteIssuer))
-        }
+//        if certificates.isEmpty {
+//            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(confirmDeleteIssuer))
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,27 +82,72 @@ class IssuerViewController: UIViewController {
         }
     }
     
-    func confirmDeleteIssuer() {
-        guard let issuerToDelete = self.managedIssuer else {
-            return
-        }
+    func addCertificateTapped() {
+        let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
+        let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
+        let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
         
-        let title = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Confirm prompt for deleting an issuer.")
-        let delete = NSLocalizedString("Delete", comment: "Delete issuer action")
-        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
         
-        let prompt = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] _ in
-            _ = self?.navigationController?.popToRootViewController(animated: true)
-            if let rootController = self?.navigationController?.topViewController as? IssuerCollectionViewController {
-                rootController.remove(managedIssuer: issuerToDelete)
-            }
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
+            let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
+            controller.delegate = self
+            controller.modalPresentationStyle = .formSheet
             
+            self?.present(controller, animated: true, completion: nil)
         }))
-        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
         
-        present(prompt, animated: true, completion: nil)
+        alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
+            let certificateURLPrompt = NSLocalizedString("What's the URL of the certificate?", comment: "Certificate URL prompt for importing a certificate.")
+            let importAction = NSLocalizedString("Import", comment: "Import certificate action")
+            
+            let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)
+            urlPrompt.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = NSLocalizedString("URL", comment: "URL placeholder text")
+            })
+            
+            urlPrompt.addAction(UIAlertAction(title: importAction, style: .default, handler: { (_) in
+                guard let urlField = urlPrompt.textFields?.first,
+                    let trimmedText = urlField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
+                    let url = URL(string: trimmedText) else {
+                        return
+                }
+                
+                _ = self?.addCertificate(from: url)
+            }))
+            
+            urlPrompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
+            
+            self?.present(urlPrompt, animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
     }
+    
+//    func confirmDeleteIssuer() {
+//        guard let issuerToDelete = self.managedIssuer else {
+//            return
+//        }
+//        
+//        let title = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Confirm prompt for deleting an issuer.")
+//        let delete = NSLocalizedString("Delete", comment: "Delete issuer action")
+//        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
+//        
+//        let prompt = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+//        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] _ in
+//            _ = self?.navigationController?.popToRootViewController(animated: true)
+//            if let rootController = self?.navigationController?.topViewController as? IssuerCollectionViewController {
+//                rootController.remove(managedIssuer: issuerToDelete)
+//            }
+//            
+//        }))
+//        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
+//        
+//        present(prompt, animated: true, completion: nil)
+//    }
     
     func navigateTo(certificate: Certificate, animated: Bool = true) {
         let controller = CertificateViewController(certificate: certificate)
@@ -110,6 +156,53 @@ class IssuerViewController: UIViewController {
         OperationQueue.main.addOperation {
             self.navigationController?.pushViewController(controller, animated: animated)
         }
+    }
+    
+    // Certificate handling
+    func addCertificate(from url: URL) {
+        guard let certificate = CertificateManager().load(certificateAt: url) else {
+            let title = NSLocalizedString("Invalid Certificate", comment: "Title for an alert when importing an invalid certificate")
+            let message = NSLocalizedString("That file doesn't appear to be a valid certificate.", comment: "Message in an alert when importing an invalid certificate")
+            alertError(localizedTitle: title, localizedMessage: message)
+            return
+        }
+        
+        saveCertificateIfOwned(certificate: certificate)
+    }
+    
+    func importCertificate(from data: Data?) {
+        guard let data = data else {
+            let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
+            let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
+            alertError(localizedTitle: title, localizedMessage: message)
+            return
+        }
+        
+        do {
+            let certificate = try CertificateParser.parse(data: data)
+            
+            saveCertificateIfOwned(certificate: certificate)
+        } catch {
+            print("Importing failed with error: \(error)")
+            
+            let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
+            let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
+            alertError(localizedTitle: title, localizedMessage: message)
+            return
+        }
+    }
+    
+    func saveCertificateIfOwned(certificate: Certificate) {
+        print("Saving that certificate, yo")
+    }
+    
+    func alertError(localizedTitle: String, localizedMessage: String) {
+        let okay = NSLocalizedString("OK", comment: "OK dismiss action")
+        
+        let prompt = UIAlertController(title: localizedTitle, message: localizedMessage, preferredStyle: .alert);
+        prompt.addAction(UIAlertAction(title: okay, style: .cancel, handler: nil))
+        
+        present(prompt, animated: true, completion: nil)
     }
 }
 
@@ -163,3 +256,12 @@ extension IssuerViewController : CertificateViewControllerDelegate {
         }
     }
 }
+
+extension IssuerViewController : UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        let data = try? Data(contentsOf: url)
+        
+        importCertificate(from: data)
+    }
+}
+
