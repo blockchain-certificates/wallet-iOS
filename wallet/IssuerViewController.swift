@@ -27,17 +27,17 @@ class IssuerViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addCertificateTapped))
 
         // Summary section
-        let summary = IssuerSummaryView(issuer: managedIssuer!)
-        summary.frame = view.frame
-        summary.translatesAutoresizingMaskIntoConstraints = false
-        summary.preservesSuperviewLayoutMargins = true
-        view.addSubview(summary)
+//        let summary = IssuerSummaryView(issuer: managedIssuer!)
+//        summary.frame = view.frame
+//        summary.translatesAutoresizingMaskIntoConstraints = false
+//        summary.preservesSuperviewLayoutMargins = true
+//        view.addSubview(summary)
         
         // Separator
-        let separator = UIView()
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = .borderColor
-        view.addSubview(separator)
+//        let separator = UIView()
+//        separator.translatesAutoresizingMaskIntoConstraints = false
+//        separator.backgroundColor = .borderColor
+//        view.addSubview(separator)
         
         certificateTableController = IssuerTableViewController()
         certificateTableController.managedIssuer = managedIssuer
@@ -54,18 +54,18 @@ class IssuerViewController: UIViewController {
         
         
         let views : [String : UIView] = [
-            "summary": summary,
-            "separator": separator,
+//            "summary": summary,
+//            "separator": separator,
             "table": certificateTableController.view
         ]
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[summary][separator(==0.5)][table]|", options: .alignAllCenterX, metrics: nil, views: views)
-        let horizontalSummaryConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|[summary]|", options: .alignAllCenterX, metrics: nil, views: views)
-        let horizontalSeparatorConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|[separator]|", options: .alignAllCenterX, metrics: nil, views: views)
+        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[table]|", options: .alignAllCenterX, metrics: nil, views: views)
+//        let horizontalSummaryConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|[summary]|", options: .alignAllCenterX, metrics: nil, views: views)
+//        let horizontalSeparatorConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|[separator]|", options: .alignAllCenterX, metrics: nil, views: views)
         let horizontalTableConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|[table]|", options: .alignAllCenterX, metrics: nil, views: views)
         
         NSLayoutConstraint.activate(verticalConstraints)
-        NSLayoutConstraint.activate(horizontalSummaryConstraints)
-        NSLayoutConstraint.activate(horizontalSeparatorConstraints)
+//        NSLayoutConstraint.activate(horizontalSummaryConstraints)
+//        NSLayoutConstraint.activate(horizontalSeparatorConstraints)
         NSLayoutConstraint.activate(horizontalTableConstraints)
     }
     
