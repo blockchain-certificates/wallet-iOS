@@ -42,7 +42,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.titleColor
         ]
-        navigationController?.navigationBar.barStyle = .blackOpaque
         
         // Load any existing issuers.
         loadIssuers(shouldReloadCollection: false)
