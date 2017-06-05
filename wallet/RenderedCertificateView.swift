@@ -28,6 +28,7 @@ class RenderedCertificateView: UIView {
     @IBOutlet weak var sealIcon: UIImageView!
 
     weak var webView: WKWebView!
+    var webViewHeightConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,6 +54,9 @@ class RenderedCertificateView: UIView {
         
         loadWebView()
     }
+    deinit {
+        webView.removeObserver(self, forKeyPath: "scrollView.contentSize")
+    }
     
     private func loadWebView() {
         let preferences = WKPreferences()
@@ -75,6 +79,10 @@ class RenderedCertificateView: UIView {
         renderer.isHidden = false
         
         webView = renderer
+        webView.addObserver(self, forKeyPath: "scrollView.contentSize", options: .new, context: nil)
+        
+        webViewHeightConstraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: webView.scrollView.contentSize.height)
+
     }
     
     func render(certificate: Certificate) {
@@ -85,8 +93,10 @@ class RenderedCertificateView: UIView {
             
             webView.isHidden = false
             webView.loadHTMLString(wrappedHtml, baseURL: nil)
+            webViewHeightConstraint.isActive = true
         } else {
             webView.isHidden = true
+            webViewHeightConstraint.isActive = false
             
             certificateIcon.image = UIImage(data:certificate.issuer.image)
             nameLabel.text = "\(certificate.recipient.givenName) \(certificate.recipient.familyName)"
@@ -163,5 +173,15 @@ class RenderedCertificateView: UIView {
         NSLayoutConstraint.activate(centerConstraints)
         
         return view
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "scrollView.contentSize" && webView == object as? WKWebView {
+            scrollViewContentHeightChanged()
+        }
+    }
+    
+    func scrollViewContentHeightChanged() {
+        webViewHeightConstraint.constant = webView.scrollView.contentSize.height
     }
 }

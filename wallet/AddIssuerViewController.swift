@@ -209,20 +209,24 @@ class AddIssuerViewController: UIViewController {
                 return
             }
             
-            // At this point, we have an issuer, se we'll definitely be dismissing, even if the introduction step fails.
             if let nonce = self?.nonce {
                 managedIssuer.delegate = self
                 managedIssuer.introduce(recipient: targetRecipient, with: nonce) { introductionError in
+                    guard introductionError == nil else {
+                        self?.showAddIssuerError(withManagedIssuerError: introductionError!)
+                        return
+                    }
+                    
                     self?.notifyAndDismiss(managedIssuer: managedIssuer)
                 }
             } else {
-                self?.notifyAndDismiss(managedIssuer: managedIssuer)
+                self?.showAddIssuerError(message: NSLocalizedString("We've encountered an error state when trying to talk to the issuer. Please try again.", comment: "Generic error when we've begun to introduce, but we don't have a nonce."))
             }
         }
     }
     
     @IBAction func cancelLoadingTapped(_ sender: Any) {
-        // TODO: This doesn't actually stop the in-flight request. Beacuse we can't do that yet.
+        managedIssuer?.abortRequests()
         isLoading = false
     }
     
@@ -236,14 +240,54 @@ class AddIssuerViewController: UIViewController {
         }
     }
     
+    func showAddIssuerError(withManagedIssuerError error: ManagedIssuerError) {
+        var failureReason : String?
+        
+        switch error {
+        case .invalidState(let reason):
+            // This is a developer error, so write it to the log so we can see it later.
+            print("Invalid ManagedIssuer state: \(reason)")
+            failureReason = NSLocalizedString("The app is in an invalid state. Please quit the app & relaunch. Then try again.", comment: "Invalid state error message when adding an issuer.")
+        case .untrustworthyIssuer:
+            failureReason = NSLocalizedString("This issuer appears to have been tampered with. Please contact the issuer.", comment: "Error message when the issuer's data doesn't match the URL it's hosted at.")
+        case .abortedIntroductionStep:
+            failureReason = nil //NSLocalizedString("The request was aborted. Please try again.", comment: "Error message when an identification request is aborted")
+        case .serverError(let code):
+            print("Identification server error: \(code)")
+            failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
+        case .issuerInvalid(_, scope: .json):
+            failureReason = NSLocalizedString("We couldn't understand this Issuer's response. Please contact the Issuer.", comment: "Error message displayed when we see missing or invalid JSON in the response.")
+        case .issuerInvalid(reason: .missing, scope: .property(let named)):
+            failureReason = String.init(format: NSLocalizedString("Issuer responded, but didn't include the \"%@\" property", comment: "Format string for an issuer response with a missing property. Variable is the property name that's missing."), named)
+        case .issuerInvalid(reason: .invalid, scope: .property(let named)):
+            failureReason = String.init(format: NSLocalizedString("Issuer responded, but it contained an invalid property named \"%@\"", comment: "Format string for an issuer response with an invalid property. Variable is the property name that's invalid."), named)
+        case .genericError:
+            failureReason = NSLocalizedString("Adding this issuer failed. Please try again", comment: "Generic error when adding an issuer.")
+        default:
+            failureReason = nil
+        }
+        
+        if let message = failureReason {
+            showAddIssuerError(message: message)
+        }
+    }
+    
     func showAddIssuerError(message: String) {
         let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .cancel, handler: nil))
+
+        isLoading = false
         
         OperationQueue.main.addOperation {
-            self.present(alertController, animated: true, completion: nil)
+            if self.presentedViewController != nil {
+                self.presentedViewController?.dismiss(animated: true, completion: { 
+                    self.present(alertController, animated: true, completion: nil)
+                })
+            } else {
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
 }
@@ -260,7 +304,7 @@ extension AddIssuerViewController : ManagedIssuerDelegate {
         }
     }
     
-    func dismiss(webView: WKWebView) {
+    func dismissWebView() {
         OperationQueue.main.addOperation { [weak self] in
             self?.presentedViewController?.dismiss(animated: true, completion: nil)
         }

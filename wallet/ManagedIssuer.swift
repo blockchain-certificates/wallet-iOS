@@ -243,6 +243,7 @@ class ManagedIssuer : NSObject, NSCoding {
     
     func abortRequests() {
         inProgressRequest?.abort()
+        dismissWebView()
     }
 }
 
