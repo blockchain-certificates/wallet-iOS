@@ -15,7 +15,7 @@ private let addIssuerReuseIdentifier = "AddIssuerCollectionViewCell"
 private let segueToViewIssuer = "ShowIssuerDetail"
 
 class IssuerCollectionViewController: UICollectionViewController {
-    private let issuersArchiveURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Issuers")
+    private let issuersArchiveURL = Paths.issuersArchiveURL
     private let certificatesDirectory = Paths.certificatesDirectory
     
     // TODO: Should probably be AttributedIssuer, once I make up that model.
@@ -54,8 +54,10 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadCertificates()
+        loadIssuers(shouldReloadCollection: false)
+        loadCertificates(shouldReloadCollection: false)
         loadBackgroundView()
+        reloadCollectionView()
     }
     
     func loadBackgroundView() {

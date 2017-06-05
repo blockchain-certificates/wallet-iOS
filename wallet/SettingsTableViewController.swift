@@ -100,7 +100,7 @@ class SettingsTableViewController: UITableViewController {
         case (2, 0):
             text = "Destroy passphrase & crash"
         case (2, 1):
-            text = "Delete all issuers"
+            text = "Delete all issuers & certificates"
         case (2, 2):
             text = "Destroy all data & crash"
         default:
@@ -132,12 +132,13 @@ class SettingsTableViewController: UITableViewController {
             Keychain.destroyShared()
             fatalError()
         case (2, 1):
-            // delete all issuers
+            deleteIssuersAndCertificates()
             tableView.deselectRow(at: indexPath, animated: true)
             break;
         case (2, 2):
-            // delete all issuers, then destroy data.
-            tableView.deselectRow(at: indexPath, animated: true)
+            deleteIssuersAndCertificates()
+            Keychain.destroyShared()
+            fatalError()
             break;
         default:
             controller = nil
@@ -146,5 +147,17 @@ class SettingsTableViewController: UITableViewController {
         if let controller = controller {
             navigationController?.pushViewController(controller, animated: true)
         }
+    }
+    
+    func deleteIssuersAndCertificates() {
+        do {
+            let filePaths = try FileManager.default.contentsOfDirectory(atPath: Paths.certificatesDirectory.path)
+            for filePath in filePaths {
+                try FileManager.default.removeItem(at: Paths.certificatesDirectory.appendingPathComponent(filePath))
+            }
+        } catch {
+            print("Could not clear temp folder: \(error)")
+        }
+        NSKeyedArchiver.archiveRootObject([], toFile: Paths.issuersArchiveURL.path)
     }
 }
