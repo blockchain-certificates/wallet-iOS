@@ -69,7 +69,7 @@ class CertificateViewController: UIViewController {
         let shareFileAction = UIAlertAction(title: NSLocalizedString("Share Certificate File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
             self?.shareCertificateFile()
         }
-        let shareURLAction = UIAlertAction(title: NSLocalizedString("Share Certificate URL", comment: "Actoin to share the certificate's hosting URL, presented in an action sheet."), style: .default) { [weak self] _ in
+        let shareURLAction = UIAlertAction(title: NSLocalizedString("Share Certificate URL", comment: "Action to share the certificate's hosting URL, presented in an action sheet."), style: .default) { [weak self] _ in
             self?.shareCertificateURL()
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the action sheet."), style: .cancel, handler: nil)

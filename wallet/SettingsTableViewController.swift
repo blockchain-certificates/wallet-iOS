@@ -9,6 +9,8 @@
 import UIKit
 private let cellReuseIdentifier = "UITableViewCell"
 
+private let isDebugBuild = true
+
 class SettingsTableViewController: UITableViewController {
     private var oldBarStyle : UIBarStyle?
 
@@ -68,14 +70,19 @@ class SettingsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
+        if isDebugBuild {
+            return 3
+        }
         return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 2
+            return 1
         } else if section == 1 {
             return 1
+        } else if isDebugBuild && section == 2 {
+            return 3
         }
         return 0
     }
@@ -88,10 +95,14 @@ class SettingsTableViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             text = NSLocalizedString("Reveal Passphrase", comment: "Action item in settings screen.")
-        case (0, 1):
-            text = "Self Destruct"
         case (1, 0):
             text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
+        case (2, 0):
+            text = "Destroy passphrase & crash"
+        case (2, 1):
+            text = "Delete all issuers"
+        case (2, 2):
+            text = "Destroy all data & crash"
         default:
             text = nil
         }
@@ -101,6 +112,13 @@ class SettingsTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if isDebugBuild && section == 2 {
+            return "Debug Actions"
+        }
+        return nil
+    }
+    
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var controller : UIViewController?
@@ -108,11 +126,19 @@ class SettingsTableViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             controller = RevealPassphraseTableViewController()
-        case (0, 1):
-            Keychain.destroyShared()
-            fatalError()
         case (1, 0):
             controller = PrivacyViewController()
+        case (2, 0):
+            Keychain.destroyShared()
+            fatalError()
+        case (2, 1):
+            // delete all issuers
+            tableView.deselectRow(at: indexPath, animated: true)
+            break;
+        case (2, 2):
+            // delete all issuers, then destroy data.
+            tableView.deselectRow(at: indexPath, animated: true)
+            break;
         default:
             controller = nil
         }
