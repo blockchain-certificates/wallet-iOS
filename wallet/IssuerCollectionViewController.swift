@@ -68,7 +68,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         } else {
             title = NSLocalizedString("Issuers", comment: "Title in screen of multiple issuers")
             if navigationItem.rightBarButtonItem == nil {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addButtonTapped(_:)))
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addIssuerButtonTapped))
             }
             collectionView?.backgroundView = nil
         }
