@@ -9,7 +9,7 @@
 import UIKit
 private let cellReuseIdentifier = "UITableViewCell"
 
-private let isDebugBuild = true
+private let isDebugBuild = false
 
 class SettingsTableViewController: UITableViewController {
     private var oldBarStyle : UIBarStyle?
