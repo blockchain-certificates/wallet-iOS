@@ -16,22 +16,6 @@
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Reset options</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Restore Sample Certificate</string>
-			<key>Key</key>
-			<string>resetSampleCertificate</string>
-			<key>DefaultValue</key>
-			<false/>
-		</dict>
 	</array>
 </dict>
 </plist>
