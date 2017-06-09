@@ -312,6 +312,7 @@ extension AddIssuerViewController : ManagedIssuerDelegate {
     
     func cancelWebLogin() {
         managedIssuer?.abortRequests()
+        isLoading = false
     }
 }
 
