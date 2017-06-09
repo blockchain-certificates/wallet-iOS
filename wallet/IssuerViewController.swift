@@ -193,7 +193,9 @@ class IssuerViewController: UIViewController {
     }
     
     func saveCertificateIfOwned(certificate: Certificate) {
-        print("Saving that certificate, yo")
+        // TODO: Check ownership based on the flag.
+        
+        CertificateManager().save(certificate: certificate)
     }
     
     func alertError(localizedTitle: String, localizedMessage: String) {
