@@ -1,2 +1,2 @@
 # wallet
-Commercial offering of the iOS client for certificate storage &amp; sharing.
+Blockcerts mobile app for iOS to receive and share certificates that are verifiable via the blockchain.
