@@ -222,9 +222,12 @@ extension IssuerViewController : CertificateViewControllerDelegate {
         guard let index = possibleIndex else {
             return
         }
+        guard let certificateFilename = certificate.filename else {
+            print("Something went wrong with generating a filename for \(certificate.id)")
+            return
+        }
         
         let documentsDirectory = Paths.certificatesDirectory
-        let certificateFilename = certificate.assertion.uid
         let filePath = URL(fileURLWithPath: certificateFilename, relativeTo: documentsDirectory)
         
         let coordinator = NSFileCoordinator()

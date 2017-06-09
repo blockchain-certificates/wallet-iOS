@@ -181,10 +181,13 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
         guard let index = possibleIndex else {
             return
         }
+        guard let filename = certificate.filename else {
+            print("Unable to delete \(certificate.title)")
+            return
+        }
         
         let documentsDirectory = Paths.certificatesDirectory
-        let certificateFilename = certificate.assertion.uid
-        let filePath = URL(fileURLWithPath: certificateFilename, relativeTo: documentsDirectory)
+        let filePath = URL(fileURLWithPath: filename, relativeTo: documentsDirectory)
         
         let coordinator = NSFileCoordinator()
         var coordinationError : NSError?

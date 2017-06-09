@@ -335,7 +335,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         try? FileManager.default.createDirectory(at: certificatesDirectory, withIntermediateDirectories: false, attributes: nil)
         
         for certificate in certificates {
-            guard let fileName = certificate.assertion.uid.addingPercentEncoding(withAllowedCharacters: .alphanumerics) else {
+            guard let fileName = certificate.filename else {
                 print("ERROR: Couldn't convert \(certificate.title) to character encoding.")
                 continue
             }

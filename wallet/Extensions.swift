@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Blockcerts
 
 extension UILabel {
     
@@ -23,5 +24,11 @@ extension UILabel {
             context: nil).size
         
         return (size.height > self.bounds.size.height)
+    }
+}
+
+extension Certificate {
+    var filename : String? {
+        return id.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
     }
 }

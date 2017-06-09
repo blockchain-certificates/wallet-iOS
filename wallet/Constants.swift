@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Blockcerts
 
 extension UIColor {
     static let brandColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -48,3 +49,4 @@ enum Fonts {
 enum Identifiers {
     static let sampleCertificateUID = "sample-certificate"
 }
+
