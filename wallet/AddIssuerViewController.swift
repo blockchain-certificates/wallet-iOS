@@ -166,6 +166,8 @@ class AddIssuerViewController: UIViewController {
     }
     
     func identifyAndIntroduceIssuer(at url: URL) {
+        cancelWebLogin()
+        
         let targetRecipient = Recipient(givenName: "",
                                         familyName: "",
                                         identity: "",
