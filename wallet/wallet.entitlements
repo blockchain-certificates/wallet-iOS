@@ -9,7 +9,7 @@
 		<string>applinks:auto-certificates.learningmachine.io</string>
 		<string>applinks:certificates.learningmachine.com</string>
 		<string>applinks:stage-certificates.learningmachine.io</string>
-		<string>applinks:*.blockcerts.org</string>
+		<string>applinks:wallet.blockcerts.org</string>
 		<string>applinks:*.blockcertswallet.org</string>
 	</array>
 	<key>com.apple.developer.icloud-container-identifiers</key>
