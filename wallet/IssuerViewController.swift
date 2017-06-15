@@ -26,19 +26,6 @@ class IssuerViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addCertificateTapped))
 
-        // Summary section
-//        let summary = IssuerSummaryView(issuer: managedIssuer!)
-//        summary.frame = view.frame
-//        summary.translatesAutoresizingMaskIntoConstraints = false
-//        summary.preservesSuperviewLayoutMargins = true
-//        view.addSubview(summary)
-        
-        // Separator
-//        let separator = UIView()
-//        separator.translatesAutoresizingMaskIntoConstraints = false
-//        separator.backgroundColor = .borderColor
-//        view.addSubview(separator)
-        
         certificateTableController = IssuerTableViewController()
         certificateTableController.managedIssuer = managedIssuer
         certificateTableController.certificates = certificates
@@ -54,25 +41,13 @@ class IssuerViewController: UIViewController {
         
         
         let views : [String : UIView] = [
-//            "summary": summary,
-//            "separator": separator,
             "table": certificateTableController.view
         ]
         let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[table]|", options: .alignAllCenterX, metrics: nil, views: views)
-//        let horizontalSummaryConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|[summary]|", options: .alignAllCenterX, metrics: nil, views: views)
-//        let horizontalSeparatorConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|[separator]|", options: .alignAllCenterX, metrics: nil, views: views)
         let horizontalTableConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|[table]|", options: .alignAllCenterX, metrics: nil, views: views)
         
         NSLayoutConstraint.activate(verticalConstraints)
-//        NSLayoutConstraint.activate(horizontalSummaryConstraints)
-//        NSLayoutConstraint.activate(horizontalSeparatorConstraints)
         NSLayoutConstraint.activate(horizontalTableConstraints)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-//        if certificates.isEmpty {
-//            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(confirmDeleteIssuer))
-//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -126,28 +101,6 @@ class IssuerViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
-//    func confirmDeleteIssuer() {
-//        guard let issuerToDelete = self.managedIssuer else {
-//            return
-//        }
-//        
-//        let title = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Confirm prompt for deleting an issuer.")
-//        let delete = NSLocalizedString("Delete", comment: "Delete issuer action")
-//        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
-//        
-//        let prompt = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-//        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] _ in
-//            _ = self?.navigationController?.popToRootViewController(animated: true)
-//            if let rootController = self?.navigationController?.topViewController as? IssuerCollectionViewController {
-//                rootController.remove(managedIssuer: issuerToDelete)
-//            }
-//            
-//        }))
-//        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
-//        
-//        present(prompt, animated: true, completion: nil)
-//    }
     
     func navigateTo(certificate: Certificate, animated: Bool = true) {
         let controller = CertificateViewController(certificate: certificate)
