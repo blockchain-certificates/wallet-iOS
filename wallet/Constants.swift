@@ -29,9 +29,6 @@ enum UserKeys {
     static let avatarURLKey = "ACCOUNT_AVATAR_URL"
 }
 
-enum Arguments {
-    static let resetData = "--reset-data"
-}
 enum Paths {
     static let issuersArchiveURL     = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Issuers")
     static let certificatesDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Certificates", isDirectory: true)

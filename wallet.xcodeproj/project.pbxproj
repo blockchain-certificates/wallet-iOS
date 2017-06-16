@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6360BE865570CCDF5C814E4E /* libPods-certificatesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */; };
+		830120321EF44720008EC454 /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830120311EF44720008EC454 /* OnboardingUITests.swift */; };
+		830120351EF4483F008EC454 /* ArgumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830120341EF4483F008EC454 /* ArgumentParser.swift */; };
+		830120371EF44AA7008EC454 /* ArgumentParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830120361EF44AA7008EC454 /* ArgumentParserTests.swift */; };
+		830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830120341EF4483F008EC454 /* ArgumentParser.swift */; };
 		830AB9EF1DA6BC4B00185E19 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */; };
 		830AB9F01DA6BC4B00185E19 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83111B281DA4110C006B058D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83111B271DA4110C006B058D /* AppDelegate.swift */; };
@@ -111,6 +115,9 @@
 		4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AB11E45F387B18A58FCF2A4 /* Pods-certificates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificates.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificates/Pods-certificates.release.xcconfig"; sourceTree = "<group>"; };
 		7A35288CE0EE9C6B8329C464 /* Pods-certificatesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificatesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests.release.xcconfig"; sourceTree = "<group>"; };
+		830120311EF44720008EC454 /* OnboardingUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
+		830120341EF4483F008EC454 /* ArgumentParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgumentParser.swift; path = Utils/ArgumentParser.swift; sourceTree = "<group>"; };
+		830120361EF44AA7008EC454 /* ArgumentParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgumentParserTests.swift; path = Utils/ArgumentParserTests.swift; sourceTree = "<group>"; };
 		830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83111B241DA4110C006B058D /* certificates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = certificates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83111B271DA4110C006B058D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -220,6 +227,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		830120331EF4481B008EC454 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				830120341EF4483F008EC454 /* ArgumentParser.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		83111B1B1DA4110C006B058D = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +266,7 @@
 				8318FC561DAD958F006A8FD5 /* wallet.entitlements */,
 				831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */,
 				831EDC121ED5F7DA004F135B /* Keychain.swift */,
+				830120331EF4481B008EC454 /* Utils */,
 				83111B271DA4110C006B058D /* AppDelegate.swift */,
 				832D7FA31E0C5E1800A523D9 /* Analytics.swift */,
 				83802BF61E01BC2B00E54C13 /* Cells */,
@@ -294,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				83111B3C1DA4110C006B058D /* walletTests.swift */,
+				830120361EF44AA7008EC454 /* ArgumentParserTests.swift */,
 				83111B3E1DA4110C006B058D /* Info.plist */,
 			);
 			path = walletTests;
@@ -304,6 +321,7 @@
 			children = (
 				83111B471DA4110C006B058D /* walletUITests.swift */,
 				836A0AE11E205BB4009FC12F /* AddIssuerUITests.swift */,
+				830120311EF44720008EC454 /* OnboardingUITests.swift */,
 				83111B491DA4110C006B058D /* Info.plist */,
 			);
 			path = walletUITests;
@@ -694,6 +712,7 @@
 				834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */,
 				83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */,
+				830120351EF4483F008EC454 /* ArgumentParser.swift in Sources */,
 				832F2A491E944E1C00A65C3A /* CertificateMetadataViewController.swift in Sources */,
 				8388B8AA1EDE15BF00B28A57 /* WebLoginViewController.swift in Sources */,
 				832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */,
@@ -720,6 +739,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
+				830120371EF44AA7008EC454 /* ArgumentParserTests.swift in Sources */,
+				830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,6 +748,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				830120321EF44720008EC454 /* OnboardingUITests.swift in Sources */,
 				83111B481DA4110C006B058D /* walletUITests.swift in Sources */,
 				836A0AE21E205BB4009FC12F /* AddIssuerUITests.swift in Sources */,
 			);

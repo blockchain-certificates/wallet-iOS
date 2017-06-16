@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let commandLineArguments = ProcessInfo.processInfo.arguments
-        if commandLineArguments.contains(Arguments.resetData) {
+        if commandLineArguments.contains(Arguments.resetData.rawValue) {
             resetData()
         }
         
@@ -162,7 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func popToIssuerCollection() -> IssuerCollectionViewController? {
         let rootController = window?.rootViewController as? UINavigationController
-        
+
         rootController?.presentedViewController?.dismiss(animated: false, completion: nil)
         _ = rootController?.popToRootViewController(animated: false)
         
@@ -191,4 +191,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
 }
-
