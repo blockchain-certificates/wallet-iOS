@@ -122,6 +122,7 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var controller : UIViewController?
+        var configuration : AppConfiguration?
         
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
@@ -129,19 +130,20 @@ class SettingsTableViewController: UITableViewController {
         case (1, 0):
             controller = PrivacyViewController()
         case (2, 0):
-            Keychain.destroyShared()
-            fatalError()
+            configuration = AppConfiguration(shouldDeletePassphrase: true, shouldResetAfterConfiguring: true)
         case (2, 1):
-            deleteIssuersAndCertificates()
+            configuration = AppConfiguration(shouldDeleteIssuersAndCertificates: true)
             tableView.deselectRow(at: indexPath, animated: true)
             break;
         case (2, 2):
-            deleteIssuersAndCertificates()
-            Keychain.destroyShared()
-            fatalError()
+            configuration = AppConfiguration.resetEverything
             break;
         default:
             controller = nil
+        }
+        
+        if let newAppConfig = configuration {
+            ConfigurationManager().configure(with: newAppConfig)
         }
         
         if let controller = controller {

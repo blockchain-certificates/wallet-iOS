@@ -47,13 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupApplication()
         return launchAddCertificate(at: url, showCertificate: true, animated: false)
     }
-    
-    func configureApplication(with configuration: AppConfiguration) {
-        if configuration.shouldDeleteAllData {
-            resetData()
-        }
-    }
-    
+        
     func setupApplication() {
         self.window?.addSubview(JSONLD.shared.webView)
 

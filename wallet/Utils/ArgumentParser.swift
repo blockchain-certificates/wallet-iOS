@@ -9,15 +9,26 @@
 import Foundation
 
 struct AppConfiguration {
-    let shouldDeleteAllData: Bool
+    let shouldDeletePassphrase: Bool
     let shouldDeleteIssuersAndCertificates: Bool
     let shouldDeleteCertificates: Bool
     let shouldResetAfterConfiguring: Bool
     
-    public static let asIs = AppConfiguration(
-        shouldDeleteAllData: false,
-        shouldDeleteIssuersAndCertificates: false,
-        shouldDeleteCertificates: false,
+    init(shouldDeletePassphrase: Bool = false,
+         shouldDeleteIssuersAndCertificates: Bool = false,
+         shouldDeleteCertificates: Bool = false,
+         shouldResetAfterConfiguring: Bool = false) {
+        self.shouldDeletePassphrase = shouldDeletePassphrase
+        self.shouldDeleteIssuersAndCertificates = shouldDeleteIssuersAndCertificates
+        self.shouldDeleteCertificates = shouldDeleteIssuersAndCertificates || shouldDeleteCertificates
+        self.shouldResetAfterConfiguring = shouldResetAfterConfiguring
+    }
+    
+    public static let asIs = AppConfiguration()
+    public static let resetEverything = AppConfiguration(
+        shouldDeletePassphrase: true,
+        shouldDeleteIssuersAndCertificates: true,
+        shouldDeleteCertificates: true,
         shouldResetAfterConfiguring: false
     )
 }
@@ -34,28 +45,34 @@ struct ArgumentParser {
     }
     
     func parse(arguments: [Arguments]) -> AppConfiguration {
-        let shouldDeleteAllData = arguments.contains(Arguments.resetData)
+        var shouldDeletePassphrase = false
+        var shouldDeleteIssuersAndCertificates = false
+        let shouldDeleteCertificates = false
+        let shouldResetAfterConfiguring = false
+        
+        if arguments.contains(Arguments.resetData) {
+            shouldDeletePassphrase = true
+            shouldDeleteIssuersAndCertificates = true
+        }
         
         return AppConfiguration(
-            shouldDeleteAllData: shouldDeleteAllData,
-            shouldDeleteIssuersAndCertificates: false,
-            shouldDeleteCertificates: false,
-            shouldResetAfterConfiguring: false
+            shouldDeletePassphrase: shouldDeletePassphrase,
+            shouldDeleteIssuersAndCertificates: shouldDeleteIssuersAndCertificates,
+            shouldDeleteCertificates: shouldDeleteCertificates,
+            shouldResetAfterConfiguring: shouldResetAfterConfiguring
         )
     }
 }
 
 struct ConfigurationManager {
     func configure(with configuration: AppConfiguration) {
-        if configuration.shouldDeleteAllData {
-            deleteAllData()
+        if configuration.shouldDeletePassphrase {
+            deletePassphrase()
         }
         
         if configuration.shouldDeleteIssuersAndCertificates {
             deleteIssuersAndCertifiates()
-        }
-        
-        if configuration.shouldDeleteCertificates {
+        } else if configuration.shouldDeleteCertificates {
             deleteCertificates()
         }
         
@@ -63,11 +80,6 @@ struct ConfigurationManager {
             // Eventually, this would be great if the app could jsut reset itself. For now, crash to force a reset.
             fatalError("Crash requested by configuration change.")
         }
-    }
-    
-    private func deleteAllData() {
-        deletePassphrase()
-        deleteIssuersAndCertifiates()
     }
     
     private func deletePassphrase() {
