@@ -33,16 +33,16 @@ class OnboardingUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         
-        let app = XCUIApplication()
-        
-        // After the onboarding flow
-        app.navigationBars["Issuers"].buttons["Settings"].tap()
-        
-        let tablesQuery = app.tables
-        tablesQuery.staticTexts["Reveal Passphrase"].tap()
-        app.typeText("s\n")
-        tablesQuery.staticTexts["view virtual ice oven upon material humor vague vessel jacket aim clarify moral gesture canvas wing shoot average charge section issue inmate waste large"].tap()
-        tablesQuery.staticTexts["Current Passphrase"].tap()
+//        let app = XCUIApplication()
+//        
+//        // After the onboarding flow
+//        app.navigationBars["Issuers"].buttons["Settings"].tap()
+//        
+//        let tablesQuery = app.tables
+//        tablesQuery.staticTexts["Reveal Passphrase"].tap()
+//        app.typeText("s\n")
+//        tablesQuery.staticTexts["view virtual ice oven upon material humor vague vessel jacket aim clarify moral gesture canvas wing shoot average charge section issue inmate waste large"].tap()
+//        tablesQuery.staticTexts["Current Passphrase"].tap()
         
     }
     
