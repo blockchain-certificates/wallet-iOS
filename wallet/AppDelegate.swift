@@ -19,10 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let commandLineArguments = ProcessInfo.processInfo.arguments
-        if commandLineArguments.contains(Arguments.resetData.rawValue) {
-            resetData()
-        }
+        let configuration = ArgumentParser().parse(arguments: ProcessInfo.processInfo.arguments)
         
         setupApplication()
         
@@ -48,6 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         setupApplication()
         return launchAddCertificate(at: url, showCertificate: true, animated: false)
+    }
+    
+    func configureApplication(with configuration: AppConfiguration) {
+        if configuration.shouldDeleteAllData {
+            resetData()
+        }
     }
     
     func setupApplication() {

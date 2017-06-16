@@ -12,6 +12,12 @@ struct AppConfiguration {
     let shouldDeleteAllData: Bool
     let shouldDeleteIssuersAndCertificates: Bool
     let shouldDeleteCertificates: Bool
+    
+    public static let asIs = AppConfiguration(
+        shouldDeleteAllData: false,
+        shouldDeleteIssuersAndCertificates: false,
+        shouldDeleteCertificates: false
+    )
 }
 
 enum Arguments : String {
@@ -20,8 +26,13 @@ enum Arguments : String {
 }
 
 struct ArgumentParser {
-    func parse(arguments: [String]) -> AppConfiguration {
-        let shouldDeleteAllData = arguments.contains(Arguments.resetData.rawValue)
+    func parse(arguments stringArguments: [String]) -> AppConfiguration {
+        let arguments = stringArguments.flatMap { return Arguments(rawValue: $0) }
+        return parse(arguments: arguments)
+    }
+    
+    func parse(arguments: [Arguments]) -> AppConfiguration {
+        let shouldDeleteAllData = arguments.contains(Arguments.resetData)
         
         return AppConfiguration(
             shouldDeleteAllData: shouldDeleteAllData,

@@ -12,14 +12,22 @@ class ArgumentParserTests: XCTestCase {
     let parser = ArgumentParser()
     
     func testEmptyArguments() {
-        let config = parser.parse(arguments: [])
+        let config = parser.parse(arguments: [String]())
         XCTAssertFalse(config.shouldDeleteAllData)
         XCTAssertFalse(config.shouldDeleteIssuersAndCertificates)
         XCTAssertFalse(config.shouldDeleteCertificates)
     }
     
-    func testResetArgument() {
+    func testResetArgumentWithString() {
         let config = parser.parse(arguments: [Arguments.resetData.rawValue])
+        
+        XCTAssert(config.shouldDeleteAllData)
+        XCTAssertFalse(config.shouldDeleteIssuersAndCertificates)
+        XCTAssertFalse(config.shouldDeleteCertificates)
+    }
+    
+    func testResetArgument() {
+        let config = parser.parse(arguments: [Arguments.resetData])
         
         XCTAssert(config.shouldDeleteAllData)
         XCTAssertFalse(config.shouldDeleteIssuersAndCertificates)
