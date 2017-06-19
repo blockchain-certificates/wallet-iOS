@@ -13,15 +13,18 @@ struct AppConfiguration {
     let shouldDeleteIssuersAndCertificates: Bool
     let shouldDeleteCertificates: Bool
     let shouldResetAfterConfiguring: Bool
+    let shouldSetPassphraseTo: String?
     
     init(shouldDeletePassphrase: Bool = false,
          shouldDeleteIssuersAndCertificates: Bool = false,
          shouldDeleteCertificates: Bool = false,
-         shouldResetAfterConfiguring: Bool = false) {
+         shouldResetAfterConfiguring: Bool = false,
+         shouldSetPassphraseTo: String? = nil) {
         self.shouldDeletePassphrase = shouldDeletePassphrase
         self.shouldDeleteIssuersAndCertificates = shouldDeleteIssuersAndCertificates
         self.shouldDeleteCertificates = shouldDeleteIssuersAndCertificates || shouldDeleteCertificates
         self.shouldResetAfterConfiguring = shouldResetAfterConfiguring
+        self.shouldSetPassphraseTo = shouldSetPassphraseTo
     }
     
     public static let asIs = AppConfiguration()
@@ -33,33 +36,81 @@ struct AppConfiguration {
     )
 }
 
-enum Arguments : String {
+enum ArgumentLabels : String {
     case resetData = "--reset-data"
     case usePassphrase = "--use-passphrase"
 }
 
+enum Argument {
+    case resetData
+    case using(passphrase: String)
+    
+    static func from(array: [String]) -> [Argument] {
+        var args = [Argument]()
+        var index = 0
+        while index < array.count {
+            switch array[index] {
+            case ArgumentLabels.resetData.rawValue:
+                args.append(.resetData)
+            case ArgumentLabels.usePassphrase.rawValue:
+                index += 1
+                args.append(.using(passphrase: array[index]))
+            default:
+                print("Unknown argument \(array[index]). Ignoring.")
+            }
+            index += 1
+        }
+        
+        return args
+    }
+}
+
+extension Argument : Equatable {
+    public static func ==(lhs: Argument, rhs: Argument) -> Bool {
+        switch (lhs, rhs) {
+        case (.resetData, .resetData):
+            return true
+        case (.using(let left), .using(let right)):
+            return left == right
+        default:
+            return false
+        }
+    }
+}
+
+
 struct ArgumentParser {
     func parse(arguments stringArguments: [String]) -> AppConfiguration {
-        let arguments = stringArguments.flatMap { return Arguments(rawValue: $0) }
+        let arguments = Argument.from(array: stringArguments)
         return parse(arguments: arguments)
     }
     
-    func parse(arguments: [Arguments]) -> AppConfiguration {
+    func parse(arguments: [Argument]) -> AppConfiguration {
         var shouldDeletePassphrase = false
         var shouldDeleteIssuersAndCertificates = false
         let shouldDeleteCertificates = false
         let shouldResetAfterConfiguring = false
-        
-        if arguments.contains(Arguments.resetData) {
-            shouldDeletePassphrase = true
-            shouldDeleteIssuersAndCertificates = true
+        var shouldSetPassphraseTo : String? = nil
+
+        for arg in arguments {
+            if arg == .resetData {
+                shouldDeletePassphrase = true
+                shouldDeleteIssuersAndCertificates = true
+            }
+            if case .using(let passphrase) = arg {
+                shouldSetPassphraseTo = passphrase
+            }
+        }
+        if arguments.contains(Argument.resetData) {
+            
         }
         
         return AppConfiguration(
             shouldDeletePassphrase: shouldDeletePassphrase,
             shouldDeleteIssuersAndCertificates: shouldDeleteIssuersAndCertificates,
             shouldDeleteCertificates: shouldDeleteCertificates,
-            shouldResetAfterConfiguring: shouldResetAfterConfiguring
+            shouldResetAfterConfiguring: shouldResetAfterConfiguring,
+            shouldSetPassphraseTo: shouldSetPassphraseTo
         )
     }
 }
@@ -86,6 +137,9 @@ struct ConfigurationManager {
         Keychain.destroyShared()
     }
     
+    // Why no "deleteIssuers"? If you delete issuers and leave their underlying certificates, the issuers will re-populate
+    // when loading the certificates. If your intention is to delete issuers, then you'd need to delete the underlying
+    // certificates as well.
     private func deleteIssuersAndCertifiates() {
         deleteCertificates()
 

@@ -20,7 +20,7 @@ class ArgumentParserTests: XCTestCase {
     }
     
     func testResetArgumentWithString() {
-        let config = parser.parse(arguments: [Arguments.resetData.rawValue])
+        let config = parser.parse(arguments: [ArgumentLabels.resetData.rawValue])
         
         XCTAssert(config.shouldDeletePassphrase)
         XCTAssert(config.shouldDeleteIssuersAndCertificates)
@@ -28,11 +28,18 @@ class ArgumentParserTests: XCTestCase {
     }
     
     func testResetArgument() {
-        let config = parser.parse(arguments: [Arguments.resetData])
+        let config = parser.parse(arguments: [Argument.resetData])
         
         XCTAssert(config.shouldDeletePassphrase)
         XCTAssert(config.shouldDeleteIssuersAndCertificates)
         XCTAssert(config.shouldDeleteCertificates)
+    }
+    
+    func testUsingPassphraseArgument() {
+        let targetPassphrase = "12345" // same number as my luggage
+        let config = parser.parse(arguments: [ArgumentLabels.usePassphrase.rawValue, targetPassphrase])
+        
+        XCTAssertEqual(config.shouldSetPassphraseTo, targetPassphrase)
     }
 
 }
