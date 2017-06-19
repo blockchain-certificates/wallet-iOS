@@ -116,8 +116,8 @@ struct ArgumentParser {
 }
 
 struct ConfigurationManager {
-    func configure(with configuration: AppConfiguration) {
-        if configuration.shouldDeletePassphrase {
+    func configure(with configuration: AppConfiguration) throws {
+        if configuration.shouldDeletePassphrase || configuration.shouldSetPassphraseTo != nil {
             deletePassphrase()
         }
         
@@ -125,6 +125,10 @@ struct ConfigurationManager {
             deleteIssuersAndCertifiates()
         } else if configuration.shouldDeleteCertificates {
             deleteCertificates()
+        }
+        
+        if let newPassphrase = configuration.shouldSetPassphraseTo {
+            try Keychain.updateShared(with: newPassphrase)
         }
         
         if configuration.shouldResetAfterConfiguring {

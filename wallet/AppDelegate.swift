@@ -20,7 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let configuration = ArgumentParser().parse(arguments: ProcessInfo.processInfo.arguments)
-        ConfigurationManager().configure(with: configuration)
+        do {
+            try ConfigurationManager().configure(with: configuration)
+        } catch KeychainErrors.invalidPassphrase {
+            fatalError("Attempted to launch with invalid passphrase.")
+        } catch {
+            fatalError("Attempted to launch from command line with unknown error: \(error)")
+        }
+
         
         setupApplication()
         

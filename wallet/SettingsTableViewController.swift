@@ -143,7 +143,7 @@ class SettingsTableViewController: UITableViewController {
         }
         
         if let newAppConfig = configuration {
-            ConfigurationManager().configure(with: newAppConfig)
+            try! ConfigurationManager().configure(with: newAppConfig)
         }
         
         if let controller = controller {
