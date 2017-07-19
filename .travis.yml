@@ -1,5 +1,17 @@
 language: objective-c
 osx_image: xcode8
+#
+# We can't use SSH paths for submodules in travis.
+# https://stackoverflow.com/questions/15674064/github-submodule-access-rights-travis-ci
+#
+# Handle git submodules yourself
+git:
+    submodules: false
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
+
 install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 script:
