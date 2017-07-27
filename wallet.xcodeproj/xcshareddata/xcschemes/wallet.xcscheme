@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "83111B421DA4110C006B058D"
+               BlueprintIdentifier = "8360751B1F2A4CD300758C9E"
                BuildableName = "certificatesUITests.xctest"
                BlueprintName = "certificatesUITests"
                ReferencedContainer = "container:wallet.xcodeproj">
