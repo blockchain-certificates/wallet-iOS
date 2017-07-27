@@ -70,6 +70,7 @@
 		83FF5DE81ECBA4100063397C /* Blockcerts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF5DE91ECBAC7A0063397C /* CertificateView.swift */; };
 		ABC6BB21B68837562003AED2 /* libPods-certificates.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F8F788045077CB0389D73 /* libPods-certificates.a */; };
+		D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,9 +430,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 836075231F2A4CD300758C9E /* Build configuration list for PBXNativeTarget "certificatesUITests" */;
 			buildPhases = (
+				4E0FF421B4AAC602A8ADECE2 /* [CP] Check Pods Manifest.lock */,
 				836075181F2A4CD300758C9E /* Sources */,
 				836075191F2A4CD300758C9E /* Frameworks */,
 				8360751A1F2A4CD300758C9E /* Resources */,
+				6BBF86BD3E74082EB2FE92F7 /* [CP] Embed Pods Frameworks */,
+				4BD338FB69DC8B791B60AD67 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -590,6 +595,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4BD338FB69DC8B791B60AD67 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4E0FF421B4AAC602A8ADECE2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6BBF86BD3E74082EB2FE92F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ACDFADC4D19B0BC3A8E63BA3 /* [CP] Embed Pods Frameworks */ = {
@@ -939,6 +989,7 @@
 		};
 		836075241F2A4CD300758C9E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06EE858C3746A1D1413048DB /* Pods-certificatesUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
@@ -954,6 +1005,7 @@
 		};
 		836075251F2A4CD300758C9E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A35288CE0EE9C6B8329C464 /* Pods-certificatesUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
