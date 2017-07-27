@@ -31,21 +31,48 @@ class OnboardingUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testGeneratedPasswordMatchesSettingsPassword() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCTAssertFalse(false)
+    func testGeneratedPassphraseMatchesSettingsPassphrase() {
+        let app = XCUIApplication()
+        app.buttons["NEW ACCOUNT"].tap()
+        app.buttons["GENERATE PASSPHRASE"].tap()
         
-//        let app = XCUIApplication()
-//        
-//        // After the onboarding flow
-//        app.navigationBars["Issuers"].buttons["Settings"].tap()
-//        
-//        let tablesQuery = app.tables
-//        tablesQuery.staticTexts["Reveal Passphrase"].tap()
-//        app.typeText("s\n")
-//        tablesQuery.staticTexts["view virtual ice oven upon material humor vague vessel jacket aim clarify moral gesture canvas wing shoot average charge section issue inmate waste large"].tap()
-//        tablesQuery.staticTexts["Current Passphrase"].tap()
+        // Capture the generated passphrase
+        let generatedPassphrase = app.staticTexts.matching(identifier: "GeneratedPassphrase").element(boundBy: 0).label
+        XCTAssertFalse(generatedPassphrase.isEmpty)
+        
+        app.buttons["DONE"].tap()
+        
+        let settingsButton = app.navigationBars["certificates.IssuerCollectionView"].buttons["Settings"]
+        XCTAssertTrue(settingsButton.exists)
+
+        // TODO: This test can really only be useful when we can compare the generated passphrase with that displayed on the settings page.
+        // We'll be able to pass the touchid check in xcode 9. Just not before then.
+        //        settingsButton.tap()
+        //
+        //        let tablesQuery = app.tables
+        //        tablesQuery.staticTexts["Reveal Passphrase"].tap()
+    }
+    
+    func testSuppliedPassphraseMatchesSettingsPassphrase() {
+        let app = XCUIApplication()
+        app.buttons["I ALREADY HAVE ONE"].tap()
+        
+        let scrollViewsQuery = app.scrollViews
+        let textView = scrollViewsQuery.otherElements.containing(.image, identifier:"Logo").children(matching: .other).element.children(matching: .textView).element
+        textView.tap()
+        textView.typeText("view virtual ice oven upon material humor vague vessel jacket aim clarify moral gesture canvas wing shoot average charge section issue inmate waste large")
+        app.buttons["Done"].tap()
+
+        let settingsButton = app.navigationBars["certificates.IssuerCollectionView"].buttons["Settings"]
+        XCTAssertTrue(settingsButton.exists)
+        
+        
+        // TODO: This test can really only be useful when we can compare the generated passphrase with that displayed on the settings page.
+        // We'll be able to pass the touchid check in xcode 9. Just not before then.
+        //        settingsButton.tap()
+        //
+        //        let tablesQuery = app.tables
+        //        tablesQuery.staticTexts["Reveal Passphrase"].tap()
         
     }
     

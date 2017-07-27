@@ -62,6 +62,7 @@ class RestoreAccountViewController: UIViewController {
         present(controller, animated: true, completion: nil)
     }
 }
+
 extension RestoreAccountViewController : UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
@@ -94,6 +95,7 @@ class GeneratedPassphraseViewController: UIViewController {
         generatePassphrase()
         
         logoImageView.tintColor = UIColor(red:0.00, green:0.54, blue:0.48, alpha:1.0)
+        passphraseLabel.accessibilityIdentifier = "GeneratedPassphrase"
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -56,7 +56,7 @@ enum Argument {
                 index += 1
                 args.append(.using(passphrase: array[index]))
             default:
-                print("Unknown argument \(array[index]). Ignoring.")
+                print("Unknown argument \(array[index]):  Ignoring.")
             }
             index += 1
         }
