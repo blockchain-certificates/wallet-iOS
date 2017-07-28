@@ -15,10 +15,10 @@ install:
 script:
   - set -o pipefail
   - xcodebuild clean build -workspace wallet.xcworkspace -scheme wallet -destination
-    "platform=iOS Simulator,OS=10.0,name=iPhone SE" CODE_SIGNING_REQUIRED=NO | xcpretty
+    "platform=iOS Simulator,OS=10.3,name=iPhone SE" CODE_SIGNING_REQUIRED=NO | xcpretty
     -c || true
   - xcodebuild test        -workspace wallet.xcworkspace -scheme wallet -destination
-    "platform=iOS Simulator,OS=10.0,name=iPhone SE" CODE_SIGNING_REQUIRED=NO | xcpretty
+    "platform=iOS Simulator,OS=10.3,name=iPhone SE" CODE_SIGNING_REQUIRED=NO | xcpretty
     -c
 notifications:
   slack:
