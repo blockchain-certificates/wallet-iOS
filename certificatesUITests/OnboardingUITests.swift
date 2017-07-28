@@ -8,6 +8,8 @@
 
 import XCTest
 
+let testPassphrase = "view virtual ice oven upon material humor vague vessel jacket aim clarify moral gesture canvas wing shoot average charge section issue inmate waste large"
+
 class OnboardingUITests: XCTestCase {
         
     override func setUp() {
@@ -24,11 +26,6 @@ class OnboardingUITests: XCTestCase {
         app.launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
     }
     
     func testGeneratedPassphraseMatchesSettingsPassphrase() {
@@ -60,7 +57,7 @@ class OnboardingUITests: XCTestCase {
         let scrollViewsQuery = app.scrollViews
         let textView = scrollViewsQuery.otherElements.containing(.image, identifier:"Logo").children(matching: .other).element.children(matching: .textView).element
         textView.tap()
-        textView.typeText("view virtual ice oven upon material humor vague vessel jacket aim clarify moral gesture canvas wing shoot average charge section issue inmate waste large")
+        textView.typeText(testPassphrase)
         app.buttons["Done"].tap()
 
         let settingsButton = app.navigationBars["certificates.IssuerCollectionView"].buttons["Settings"]
@@ -73,7 +70,30 @@ class OnboardingUITests: XCTestCase {
         //
         //        let tablesQuery = app.tables
         //        tablesQuery.staticTexts["Reveal Passphrase"].tap()
+    }
+}
+
+class PostOnboardingUITests : XCTestCase {
+    override func setUp() {
+        super.setUp()
+        // In UI tests it is usually best to stop immediately when a failure occurs.
+        continueAfterFailure = false
         
+        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
+        let app = XCUIApplication()
+        app.launchArguments = [ "--reset-data", "--use-passphrase", testPassphrase ]
+        app.launch()
+        
+        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+    }
+    
+    func testLandingOnIssuerScreenIfPassphraseExists() {
+        let app = XCUIApplication()
+        
+        XCTAssertFalse(app.buttons["I ALREADY HAVE ONE"].exists)
+        
+        let settingsButton = app.navigationBars["certificates.IssuerCollectionView"].buttons["Settings"]
+        XCTAssertTrue(settingsButton.exists)
     }
     
 }
