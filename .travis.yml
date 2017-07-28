@@ -14,12 +14,8 @@ install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 script:
   - set -o pipefail
-  - xcodebuild clean build -workspace wallet.xcworkspace -scheme wallet -destination
-    "platform=iOS Simulator,OS=10.3,name=iPhone SE" CODE_SIGNING_REQUIRED=NO | xcpretty
-    -c || true
-  - xcodebuild test        -workspace wallet.xcworkspace -scheme wallet -destination
-    "platform=iOS Simulator,OS=10.3,name=iPhone SE" CODE_SIGNING_REQUIRED=NO | xcpretty
-    -c
+  - xcodebuild clean build -workspace wallet.xcworkspace -scheme wallet -destination "platform=iOS Simulator,OS=10.3.1,name=iPhone SE" CODE_SIGNING_REQUIRED=NO | xcpretty -c || true
+  - xcodebuild test        -workspace wallet.xcworkspace -scheme wallet -destination "platform=iOS Simulator,OS=10.3.1,name=iPhone SE" CODE_SIGNING_REQUIRED=NO | xcpretty -c
 notifications:
   slack:
     secure: lzGzj/TyeypBEXsJ0PsfJ9YTTYW1yys+mdE/tOsPi1uES/wSlgJJ5XM4yVDu9OOvJFhsvpeYrfoR9qmO8H4Q24Z87xzbIiuV3mfl/PnBPTbbYzsU+Lo4Y9ArA9B6HfuOqsV47i3Ue008QQ/0sBdtDCcdH/B4Hcw2K4FerguPriGfrsxgm4RCe0EU2oXCONoUdT7/3fFm0TrWh9gO4Mtrt+WDClf9olQbTTKDhK/1+LhJE/p81ptWdJi+7VUnV7ErvOvyVHHN6gOfZlAKd7rlU4c9AUM2auc6aRLdxJYzvLv0ILiVuGsxeMPlxtNkgRvNOPVEP2T7f+giwcPt8I61N1emWS2qkJZIA8xWRXdDiCIHtKd/Xc4ND9cUAgRX19GS6I32+aijDW8sDRwS9cb57gb1EhGh+mS3MkCX6DG8xo7ci1OCOZANORCphDTKaSgnuK5o1B085TnBXbbdn3/3WB2iOMmgPdYhkKqxYEUKkDamD/EN4tNNhA3HYqUomFLy1Fz8QyvsHr36mqDUk8nwexpu75wMLw3NXhUBiJ7+kGlmxW9gatOg59FkE52vPOW2l8kQmxYg+ZKzCy7Cv/3+keZNtN3dKTO5Jq/S67g6jPL6KY1hsxObX81dYLbDknoxhP10rcGMfmB+jxN01xqhLPbMwwYdkug8nH0SpOExZiM=
