@@ -63,7 +63,7 @@ class Analytics {
                 return
             }
             
-            if let analyticsIssuer = issuer as? IssuerWithAnalytics,
+            if let analyticsIssuer = issuer as? AnalyticsSupport,
                 let analyticsURL = analyticsIssuer.analyticsURL {
                 self?.submitReport(actionName: actionName, for: certificate, to: analyticsURL)
             }
