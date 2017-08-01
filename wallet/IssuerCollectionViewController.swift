@@ -282,7 +282,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         // If we already have this issuer present, then let's remove it from the list and use the existing one to update it.
         // It's not great -- Really these should be immutable models so I could just test for equality.
         var otherIssuers = managedIssuers.filter { (existingManagedIssuer) -> Bool in
-            return existingManagedIssuer.issuer != managedIssuer.issuer
+            return existingManagedIssuer.issuer?.id != managedIssuer.issuer?.id
         }
         otherIssuers.append(managedIssuer)
         managedIssuers = otherIssuers
