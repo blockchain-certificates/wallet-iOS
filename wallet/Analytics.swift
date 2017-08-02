@@ -58,15 +58,13 @@ class Analytics {
                     return
             }
             
-            let issuer: Issuer!
-            do {
-                issuer = try Issuer(dictionary: json)
-            } catch {
+            guard let issuer = IssuerParser.parse(dictionary: json) else {
                 print("Couldn't parse JSON as an issuer from \(certificate.issuer.id)")
                 return
             }
             
-            if let analyticsURL = issuer.analyticsURL {
+            if let analyticsIssuer = issuer as? AnalyticsSupport,
+                let analyticsURL = analyticsIssuer.analyticsURL {
                 self?.submitReport(actionName: actionName, for: certificate, to: analyticsURL)
             }
         }

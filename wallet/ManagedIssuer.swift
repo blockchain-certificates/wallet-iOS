@@ -98,10 +98,10 @@ class ManagedIssuer : NSObject, NSCoding {
         let confirmedDate = decoder.decodeObject(forKey: CoderKeys.issuerConfirmedOn) as? Date
         
         if let issuerDictionary = decoder.decodeObject(forKey: CoderKeys.issuer) as? [String: Any] {
-            issuer = try? Issuer(dictionary: issuerDictionary)
+            issuer = IssuerParser.parse(dictionary: issuerDictionary)
         }
         if let hostedIssuerDictionary = decoder.decodeObject(forKey: CoderKeys.hostedIssuer) as? [String: Any] {
-            hostedIssuer = try? Issuer(dictionary: hostedIssuerDictionary)
+            hostedIssuer = IssuerParser.parse(dictionary: hostedIssuerDictionary)
         }
         
         self.init(issuer: issuer,
