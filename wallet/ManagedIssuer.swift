@@ -10,14 +10,6 @@ import Foundation
 import Blockcerts
 import WebKit
 
-fileprivate enum CoderKeys {
-    static let issuer = "issuer"
-    static let hostedIssuer = "hostedIssuer"
-    static let isIssuerConfirmed = "isIssuerConfirmed"
-    static let issuerConfirmedOn = "issuerConfirmedOn"
-    static let introducedWithAddress = "introducedWithAddress"
-}
-
 enum InvalidIssuerReason {
     case missing, invalid
 }
@@ -37,7 +29,7 @@ enum ManagedIssuerError {
 
 }
 
-class ManagedIssuer : NSObject, NSCoding {
+class ManagedIssuer : NSObject, NSCoding, Decodable {
     var delegate : ManagedIssuerDelegate?
     var issuerDescription : String?
     
@@ -89,18 +81,49 @@ class ManagedIssuer : NSObject, NSCoding {
         super.init()
     }
     
+    // MARK: Codable
+    private enum CodingKeys : String, CodingKey {
+        // These all match their case names, but their raw values are used in NSCoding
+        case issuer = "issuer"
+        case hostedIssuer = "hostedIssuer"
+        case isIssuerConfirmed = "isIssuerConfirmed"
+        case issuerConfirmedOn = "issuerConfirmedOn"
+        case introducedWithAddress = "introducedWithAddress"
+        case introducedOn = "introducedOn"
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let issuerConfirmedOnString = try container.decodeIfPresent(String.self, forKey: .issuerConfirmedOn)
+        issuerConfirmedOn = issuerConfirmedOnString?.toDate()
+        isIssuerConfirmed = (issuerConfirmedOn != nil)
+        introducedWithAddress = try container.decodeIfPresent(String.self, forKey: .introducedWithAddress)
+        let introducedOnString = try container.decodeIfPresent(String.self, forKey: .introducedOn)
+        introducedOn = introducedOnString?.toDate()
+        
+        // TODO: Fix this
+        hostedIssuer = nil
+        sourceIssuer = nil
+        nonce = nil
+    
+        delegate = nil
+        issuerDescription = nil
+        
+    }
+    
     // MARK: NSCoding
     required convenience init?(coder decoder: NSCoder) {
-        let address = decoder.decodeObject(forKey: CoderKeys.introducedWithAddress) as? String
+        let address = decoder.decodeObject(forKey: CodingKeys.introducedWithAddress.rawValue) as? String
         var issuer : Issuer?
         var hostedIssuer : Issuer?
-        let isConfirmed = decoder.decodeBool(forKey: CoderKeys.isIssuerConfirmed)
-        let confirmedDate = decoder.decodeObject(forKey: CoderKeys.issuerConfirmedOn) as? Date
+        let isConfirmed = decoder.decodeBool(forKey: CodingKeys.isIssuerConfirmed.rawValue)
+        let confirmedDate = decoder.decodeObject(forKey: CodingKeys.issuerConfirmedOn.rawValue) as? Date
         
-        if let issuerDictionary = decoder.decodeObject(forKey: CoderKeys.issuer) as? [String: Any] {
+        if let issuerDictionary = decoder.decodeObject(forKey: CodingKeys.issuer.rawValue) as? [String: Any] {
             issuer = IssuerParser.parse(dictionary: issuerDictionary)
         }
-        if let hostedIssuerDictionary = decoder.decodeObject(forKey: CoderKeys.hostedIssuer) as? [String: Any] {
+        if let hostedIssuerDictionary = decoder.decodeObject(forKey: CodingKeys.hostedIssuer.rawValue) as? [String: Any] {
             hostedIssuer = IssuerParser.parse(dictionary: hostedIssuerDictionary)
         }
         
@@ -117,14 +140,14 @@ class ManagedIssuer : NSObject, NSCoding {
     
     func encode(with coder: NSCoder) {
         if let issuer = self.issuer {
-            coder.encode(issuer.toDictionary(), forKey: CoderKeys.issuer)
+            coder.encode(issuer.toDictionary(), forKey: CodingKeys.issuer.rawValue)
         }
         if let hostedIssuer = self.hostedIssuer {
-            coder.encode(hostedIssuer.toDictionary(), forKey: CoderKeys.hostedIssuer)
+            coder.encode(hostedIssuer.toDictionary(), forKey: CodingKeys.hostedIssuer.rawValue)
         }
-        coder.encode(isIssuerConfirmed, forKey: CoderKeys.isIssuerConfirmed)
-        coder.encode(issuerConfirmedOn, forKey: CoderKeys.issuerConfirmedOn)
-        coder.encode(introducedWithAddress, forKey: CoderKeys.introducedWithAddress)
+        coder.encode(isIssuerConfirmed, forKey: CodingKeys.isIssuerConfirmed.rawValue)
+        coder.encode(issuerConfirmedOn, forKey: CodingKeys.issuerConfirmedOn.rawValue)
+        coder.encode(introducedWithAddress, forKey: CodingKeys.introducedWithAddress.rawValue)
     }
     
     

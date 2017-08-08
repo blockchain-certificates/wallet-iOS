@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6360BE865570CCDF5C814E4E /* libPods-certificatesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */; };
 		830120351EF4483F008EC454 /* ArgumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830120341EF4483F008EC454 /* ArgumentParser.swift */; };
-		830120371EF44AA7008EC454 /* ArgumentParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830120361EF44AA7008EC454 /* ArgumentParserTests.swift */; };
 		830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830120341EF4483F008EC454 /* ArgumentParser.swift */; };
 		830AB9EF1DA6BC4B00185E19 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */; };
 		830AB9F01DA6BC4B00185E19 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -55,6 +54,9 @@
 		838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1341E43F0A400533AEB /* NoCertificatesTableViewCell.xib */; };
 		838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */; };
 		838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC13A1E43F0F700533AEB /* CertificateViewController.xib */; };
+		838DE6B91F3A344700185A49 /* ManagedIssuerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6B81F3A344700185A49 /* ManagedIssuerTests.swift */; };
+		838DE6BD1F3A363800185A49 /* managed-issuer.json in Resources */ = {isa = PBXBuildFile; fileRef = 838DE6BC1F3A363800185A49 /* managed-issuer.json */; };
+		838DE6BF1F3A3A1600185A49 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F196251DC9077A00590219 /* ManagedIssuer.swift */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
 		83ACB76E1EDE30B700A1149E /* OnboardingViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */; };
@@ -116,7 +118,6 @@
 		5AB11E45F387B18A58FCF2A4 /* Pods-certificates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificates.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificates/Pods-certificates.release.xcconfig"; sourceTree = "<group>"; };
 		7A35288CE0EE9C6B8329C464 /* Pods-certificatesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificatesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		830120341EF4483F008EC454 /* ArgumentParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgumentParser.swift; path = Utils/ArgumentParser.swift; sourceTree = "<group>"; };
-		830120361EF44AA7008EC454 /* ArgumentParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgumentParserTests.swift; path = Utils/ArgumentParserTests.swift; sourceTree = "<group>"; };
 		830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83111B241DA4110C006B058D /* certificates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = certificates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83111B271DA4110C006B058D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +167,9 @@
 		838DC1351E43F0A400533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NoCertificatesTableViewCell.xib; sourceTree = "<group>"; };
 		838DC1381E43F0D300533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddIssuerViewController.xib; sourceTree = "<group>"; };
 		838DC13B1E43F0F700533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CertificateViewController.xib; sourceTree = "<group>"; };
+		838DE6B81F3A344700185A49 /* ManagedIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedIssuerTests.swift; sourceTree = "<group>"; };
+		838DE6BC1F3A363800185A49 /* managed-issuer.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "managed-issuer.json"; sourceTree = "<group>"; };
+		838DE6BE1F3A36DD00185A49 /* ArgumentParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArgumentParserTests.swift; path = walletTests/Utils/ArgumentParserTests.swift; sourceTree = SOURCE_ROOT; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllers.swift; sourceTree = "<group>"; };
@@ -309,7 +313,9 @@
 			isa = PBXGroup;
 			children = (
 				83111B3C1DA4110C006B058D /* walletTests.swift */,
-				830120361EF44AA7008EC454 /* ArgumentParserTests.swift */,
+				838DE6BB1F3A351D00185A49 /* Resources */,
+				838DE6BA1F3A345A00185A49 /* Utils */,
+				838DE6B81F3A344700185A49 /* ManagedIssuerTests.swift */,
 				83111B3E1DA4110C006B058D /* Info.plist */,
 			);
 			path = walletTests;
@@ -366,6 +372,23 @@
 				838DC1341E43F0A400533AEB /* NoCertificatesTableViewCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		838DE6BA1F3A345A00185A49 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				838DE6BE1F3A36DD00185A49 /* ArgumentParserTests.swift */,
+			);
+			name = Utils;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		838DE6BB1F3A351D00185A49 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				838DE6BC1F3A363800185A49 /* managed-issuer.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		A653FD3709C0B4FB37E36B2A /* Frameworks */ = {
@@ -538,6 +561,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				838DE6BD1F3A363800185A49 /* managed-issuer.json in Resources */,
 				834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,8 +760,9 @@
 			files = (
 				8345E0ED1EF47F98007C1FC5 /* Constants.swift in Sources */,
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
+				838DE6B91F3A344700185A49 /* ManagedIssuerTests.swift in Sources */,
 				8345E0EC1EF47F5D007C1FC5 /* Keychain.swift in Sources */,
-				830120371EF44AA7008EC454 /* ArgumentParserTests.swift in Sources */,
+				838DE6BF1F3A3A1600185A49 /* ManagedIssuer.swift in Sources */,
 				830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
