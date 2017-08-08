@@ -104,6 +104,10 @@ class ManagedIssuer : NSObject, NSCoding {
             hostedIssuer = IssuerParser.parse(dictionary: hostedIssuerDictionary)
         }
         
+        if issuer == nil && hostedIssuer == nil {
+            return nil
+        }
+        
         self.init(issuer: issuer,
                   hostedIssuer: hostedIssuer,
                   isIssuerConfirmed: isConfirmed,
