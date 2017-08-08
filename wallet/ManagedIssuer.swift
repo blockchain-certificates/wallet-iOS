@@ -29,7 +29,7 @@ enum ManagedIssuerError {
 
 }
 
-class ManagedIssuer : NSObject, NSCoding, Decodable {
+class ManagedIssuer : NSObject, NSCoding, Codable {
     var delegate : ManagedIssuerDelegate?
     var issuerDescription : String?
     
@@ -67,7 +67,7 @@ class ManagedIssuer : NSObject, NSCoding, Decodable {
         super.init()
     }
     
-    private init(issuer: Issuer?,
+    init(issuer: Issuer?,
                  hostedIssuer: Issuer?,
                  isIssuerConfirmed: Bool = false,
                  issuerConfirmedOn: Date? = nil,
@@ -103,13 +103,23 @@ class ManagedIssuer : NSObject, NSCoding, Decodable {
         introducedOn = introducedOnString?.toDate()
         
         // TODO: Fix this
-        hostedIssuer = try IssuerParser.decode(from: container, forKey: .hostedIssuer)
-        sourceIssuer = try IssuerParser.decode(from: container, forKey: .sourceIssuer)
+        hostedIssuer = try IssuerParser.decodeIfPresent(from: container, forKey: .hostedIssuer)
+        sourceIssuer = try IssuerParser.decodeIfPresent(from: container, forKey: .sourceIssuer)
         
         nonce = nil
         delegate = nil
         issuerDescription = nil
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
         
+        try container.encodeIfPresent(issuerConfirmedOn?.toString(), forKey: .issuerConfirmedOn)
+        try container.encodeIfPresent(introducedWithAddress, forKey: .introducedWithAddress)
+        try container.encodeIfPresent(introducedOn?.toString(), forKey: .introducedOn)
+        
+        try IssuerParser.encodeIfPresent(hostedIssuer, to: &container, forKey: .hostedIssuer)
+        try IssuerParser.encodeIfPresent(sourceIssuer, to: &container, forKey: .sourceIssuer)
     }
     
     // MARK: NSCoding

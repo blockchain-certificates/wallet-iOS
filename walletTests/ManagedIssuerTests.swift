@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Blockcerts
 
 class ManagedIssuerTests: XCTestCase {
     func testManagedIssuerCodable() {
@@ -30,22 +31,34 @@ class ManagedIssuerTests: XCTestCase {
         }
         
         // Attempt encode
-//        let issuer = IssuerV2Alpha(name: "Name",
-//                                   email: "Email@address.com",
-//                                   image: Data(),
-//                                   id: URL(string: "https://issuer.com/blockcerts")!,
-//                                   url: URL(string: "https://issuer.com")!,
-//                                   revocationURL: URL(string: "https://issuer.com/revoke")!,
-//                                   publicKeys: [KeyRotation(on: Date(timeIntervalSince1970: 0), key: "ISSUER_KEY")],
-//                                   introductionMethod: .basic(introductionURL: URL(string: "https://issuer.com/intro")!),
-//                                   analyticsURL: nil)
-//        let encoder = JSONEncoder()
-//        do {
-//            let data = try encoder.encode(issuer)
-//            let result = try decoder.decode(IssuerV2Alpha.self, from: data)
-//            XCTAssertEqual(issuer, result)
-//        } catch {
-//            XCTFail("Encoding (or decoding after the fact) failed: \(error)")
-//        }
+        let issuer = IssuerV2(name: "Name",
+                              email: "Email@address.com",
+                              image: Data(),
+                              id: URL(string: "https://issuer.com/blockcerts")!,
+                              url: URL(string: "https://issuer.com")!,
+                              revocationURL: URL(string: "https://issuer.com/revoke")!,
+                              publicKeys: [KeyRotation(on: Date(timeIntervalSince1970: 0), key: "ISSUER_KEY")],
+                              introductionMethod: .basic(introductionURL: URL(string: "https://issuer.com/intro")!),
+                              analyticsURL: nil)
+        
+        let managed = ManagedIssuer(issuer: nil,
+                                    hostedIssuer: issuer,
+                                    isIssuerConfirmed: true,
+                                    issuerConfirmedOn: Date(),
+                                    introducedWithAddress: "123 Fake St")
+        
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(managed)
+            let result = try decoder.decode(ManagedIssuer.self, from: data)
+            
+            XCTAssertNotNil(result.issuer)
+            XCTAssertEqual(result.issuer! as! IssuerV2, issuer)
+            XCTAssertEqual(result.isIssuerConfirmed, true)
+            XCTAssertEqual(result.introducedWithAddress, "123 Fake St")
+
+        } catch {
+            XCTFail("Encoding (or decoding after the fact) failed: \(error)")
+        }
     }
 }
