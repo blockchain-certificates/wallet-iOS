@@ -2,7 +2,7 @@
     "confirmedOn": "2017-06-29T14:48:03.814936+00:00",
     "introducedWithAddress": "msBCHdwaQ7N2ypBYupkp6uNxtr9Pg76imj",
     "introducedOn": "2017-06-29T14:48:03.814936+00:00",
-    "sourceIssuer": {
+    "issuer": {
         "url": "https://www.issuer.org",
         "image": "data:image/png;base64,",
         "email": "contact@issuer.org",

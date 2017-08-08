@@ -84,7 +84,7 @@ class ManagedIssuer : NSObject, NSCoding, Decodable {
     // MARK: Codable
     private enum CodingKeys : String, CodingKey {
         // These all match their case names, but their raw values are used in NSCoding
-        case issuer = "issuer"
+        case sourceIssuer = "issuer"
         case hostedIssuer = "hostedIssuer"
         case isIssuerConfirmed = "isIssuerConfirmed"
         case issuerConfirmedOn = "issuerConfirmedOn"
@@ -103,10 +103,10 @@ class ManagedIssuer : NSObject, NSCoding, Decodable {
         introducedOn = introducedOnString?.toDate()
         
         // TODO: Fix this
-        hostedIssuer = nil
-        sourceIssuer = nil
+        hostedIssuer = try IssuerParser.decode(from: container, forKey: .hostedIssuer)
+        sourceIssuer = try IssuerParser.decode(from: container, forKey: .sourceIssuer)
+        
         nonce = nil
-    
         delegate = nil
         issuerDescription = nil
         
@@ -120,7 +120,7 @@ class ManagedIssuer : NSObject, NSCoding, Decodable {
         let isConfirmed = decoder.decodeBool(forKey: CodingKeys.isIssuerConfirmed.rawValue)
         let confirmedDate = decoder.decodeObject(forKey: CodingKeys.issuerConfirmedOn.rawValue) as? Date
         
-        if let issuerDictionary = decoder.decodeObject(forKey: CodingKeys.issuer.rawValue) as? [String: Any] {
+        if let issuerDictionary = decoder.decodeObject(forKey: CodingKeys.sourceIssuer.rawValue) as? [String: Any] {
             issuer = IssuerParser.parse(dictionary: issuerDictionary)
         }
         if let hostedIssuerDictionary = decoder.decodeObject(forKey: CodingKeys.hostedIssuer.rawValue) as? [String: Any] {
@@ -140,7 +140,7 @@ class ManagedIssuer : NSObject, NSCoding, Decodable {
     
     func encode(with coder: NSCoder) {
         if let issuer = self.issuer {
-            coder.encode(issuer.toDictionary(), forKey: CodingKeys.issuer.rawValue)
+            coder.encode(issuer.toDictionary(), forKey: CodingKeys.sourceIssuer.rawValue)
         }
         if let hostedIssuer = self.hostedIssuer {
             coder.encode(hostedIssuer.toDictionary(), forKey: CodingKeys.hostedIssuer.rawValue)
