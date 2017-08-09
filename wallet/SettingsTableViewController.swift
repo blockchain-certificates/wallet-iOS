@@ -160,6 +160,17 @@ class SettingsTableViewController: UITableViewController {
         } catch {
             print("Could not clear temp folder: \(error)")
         }
-        NSKeyedArchiver.archiveRootObject([], toFile: Paths.issuersArchiveURL.path)
+        
+        do {
+            try FileManager.default.removeItem(at: Paths.issuersNSCodingArchiveURL)
+        } catch {
+            print("Could not delete NSCoding-based issuer list: \(error)")
+        }
+        
+        do {
+            try FileManager.default.removeItem(at: Paths.managedIssuersListURL)
+        } catch {
+            print("Could not delete managed issuers list: \(error)")
+        }
     }
 }

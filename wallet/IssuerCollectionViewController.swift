@@ -15,7 +15,8 @@ private let addIssuerReuseIdentifier = "AddIssuerCollectionViewCell"
 private let segueToViewIssuer = "ShowIssuerDetail"
 
 class IssuerCollectionViewController: UICollectionViewController {
-    private let issuersArchiveURL = Paths.issuersArchiveURL
+    private let managedIssuersArchiveURL = Paths.managedIssuersListURL
+    private let issuersArchiveURL = Paths.issuersNSCodingArchiveURL
     private let certificatesDirectory = Paths.certificatesDirectory
     
     // TODO: Should probably be AttributedIssuer, once I make up that model.
@@ -254,7 +255,22 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func loadIssuers(shouldReloadCollection : Bool = true) {
-        managedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: issuersArchiveURL.path) as? [ManagedIssuer] ?? []
+        var loadedIssuers : [ManagedIssuer]? = nil
+        
+        // First, load from the new Codable path. If that fails, then try loading from the old NSCoding path.
+        do {
+            let jsonData = try Data(contentsOf: managedIssuersArchiveURL)
+            
+            let decoder = JSONDecoder()
+            let issuerList = try decoder.decode(ManagedIssuerList.self, from: jsonData)
+            loadedIssuers = issuerList.managedIssuers
+        } catch { }
+        
+        if loadedIssuers == nil {
+            loadedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: issuersArchiveURL.path) as? [ManagedIssuer]
+        }
+        
+        managedIssuers = loadedIssuers ?? []
         
         if shouldReloadCollection {
             reloadCollectionView()
@@ -262,7 +278,17 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func saveIssuers() {
-        NSKeyedArchiver.archiveRootObject(managedIssuers, toFile: issuersArchiveURL.path)
+        let list = ManagedIssuerList(managedIssuers: managedIssuers)
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(list)
+            let success = FileManager.default.createFile(atPath: managedIssuersArchiveURL.path, contents: data, attributes: nil)
+            if !success {
+                print("Something went wrong saving the managed issuers list")
+            }
+        } catch {
+            print("An exception was thrown saving the managed issuers list: \(error)")
+        }
     }
     
     func add(issuer: Issuer) {

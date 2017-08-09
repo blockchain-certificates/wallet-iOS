@@ -56,7 +56,10 @@
 		838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC13A1E43F0F700533AEB /* CertificateViewController.xib */; };
 		838DE6B91F3A344700185A49 /* ManagedIssuerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6B81F3A344700185A49 /* ManagedIssuerTests.swift */; };
 		838DE6BD1F3A363800185A49 /* managed-issuer.json in Resources */ = {isa = PBXBuildFile; fileRef = 838DE6BC1F3A363800185A49 /* managed-issuer.json */; };
-		838DE6BF1F3A3A1600185A49 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F196251DC9077A00590219 /* ManagedIssuer.swift */; };
+		838DE6CA1F3A750300185A49 /* ManagedIssuerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6C91F3A750300185A49 /* ManagedIssuerList.swift */; };
+		838DE6CC1F3A753B00185A49 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6CB1F3A753B00185A49 /* ManagedIssuer.swift */; };
+		838DE6CD1F3A771D00185A49 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6CB1F3A753B00185A49 /* ManagedIssuer.swift */; };
+		838DE6CE1F3A772400185A49 /* ManagedIssuerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6C91F3A750300185A49 /* ManagedIssuerList.swift */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
 		83ACB76E1EDE30B700A1149E /* OnboardingViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */; };
@@ -66,7 +69,6 @@
 		83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */; };
 		83DC0D941DBA87C300453116 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0D931DBA87C300453116 /* Constants.swift */; };
 		83DFC72B1EE446020061BF00 /* CertificateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DFC72A1EE446020061BF00 /* CertificateManager.swift */; };
-		83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F196251DC9077A00590219 /* ManagedIssuer.swift */; };
 		83FC25141EA7C7220015E49D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC25131EA7C7220015E49D /* Extensions.swift */; };
 		83FF5DE71ECBA4100063397C /* Blockcerts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; };
 		83FF5DE81ECBA4100063397C /* Blockcerts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -170,6 +172,8 @@
 		838DE6B81F3A344700185A49 /* ManagedIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedIssuerTests.swift; sourceTree = "<group>"; };
 		838DE6BC1F3A363800185A49 /* managed-issuer.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "managed-issuer.json"; sourceTree = "<group>"; };
 		838DE6BE1F3A36DD00185A49 /* ArgumentParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArgumentParserTests.swift; path = walletTests/Utils/ArgumentParserTests.swift; sourceTree = SOURCE_ROOT; };
+		838DE6C91F3A750300185A49 /* ManagedIssuerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ManagedIssuerList.swift; path = Models/ManagedIssuerList.swift; sourceTree = "<group>"; };
+		838DE6CB1F3A753B00185A49 /* ManagedIssuer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ManagedIssuer.swift; path = Models/ManagedIssuer.swift; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllers.swift; sourceTree = "<group>"; };
@@ -179,7 +183,6 @@
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
 		83DC0D931DBA87C300453116 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		83DFC72A1EE446020061BF00 /* CertificateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateManager.swift; sourceTree = "<group>"; };
-		83F196251DC9077A00590219 /* ManagedIssuer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedIssuer.swift; sourceTree = "<group>"; };
 		83FC25131EA7C7220015E49D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		83FF5DE61ECBA4100063397C /* Blockcerts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Blockcerts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FF5DE91ECBAC7A0063397C /* CertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateView.swift; sourceTree = "<group>"; };
@@ -269,6 +272,7 @@
 				8318FC561DAD958F006A8FD5 /* wallet.entitlements */,
 				831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */,
 				831EDC121ED5F7DA004F135B /* Keychain.swift */,
+				838DE6C81F3A74B400185A49 /* Models */,
 				830120331EF4481B008EC454 /* Utils */,
 				83111B271DA4110C006B058D /* AppDelegate.swift */,
 				832D7FA31E0C5E1800A523D9 /* Analytics.swift */,
@@ -298,7 +302,6 @@
 				83111B561DA41417006B058D /* wallet-Bridging-Header.h */,
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
 				83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */,
-				83F196251DC9077A00590219 /* ManagedIssuer.swift */,
 				8388B8A91EDE15BF00B28A57 /* WebLoginViewController.swift */,
 				838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */,
 				838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */,
@@ -389,6 +392,15 @@
 				838DE6BC1F3A363800185A49 /* managed-issuer.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		838DE6C81F3A74B400185A49 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				838DE6CB1F3A753B00185A49 /* ManagedIssuer.swift */,
+				838DE6C91F3A750300185A49 /* ManagedIssuerList.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		A653FD3709C0B4FB37E36B2A /* Frameworks */ = {
@@ -720,10 +732,10 @@
 			files = (
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
 				832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
+				838DE6CE1F3A772400185A49 /* ManagedIssuerList.swift in Sources */,
 				83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */,
 				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
 				83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */,
-				83F196261DC9077A00590219 /* ManagedIssuer.swift in Sources */,
 				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,
 				831EDC141ED5F7DA004F135B /* Keychain.swift in Sources */,
 				8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */,
@@ -738,6 +750,7 @@
 				832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */,
 				83DFC72B1EE446020061BF00 /* CertificateManager.swift in Sources */,
 				836031BD1E5651C9005B2D2E /* PrivacyViewController.swift in Sources */,
+				838DE6CD1F3A771D00185A49 /* ManagedIssuer.swift in Sources */,
 				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
 				83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
@@ -758,11 +771,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				838DE6CC1F3A753B00185A49 /* ManagedIssuer.swift in Sources */,
 				8345E0ED1EF47F98007C1FC5 /* Constants.swift in Sources */,
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
 				838DE6B91F3A344700185A49 /* ManagedIssuerTests.swift in Sources */,
 				8345E0EC1EF47F5D007C1FC5 /* Keychain.swift in Sources */,
-				838DE6BF1F3A3A1600185A49 /* ManagedIssuer.swift in Sources */,
+				838DE6CA1F3A750300185A49 /* ManagedIssuerList.swift in Sources */,
 				830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
