@@ -32,13 +32,11 @@
 		832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */; };
 		832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0131DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift */; };
 		832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */; };
-		832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832D7FA31E0C5E1800A523D9 /* Analytics.swift */; };
 		832F2A491E944E1C00A65C3A /* CertificateMetadataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */; };
 		8337CFCC1E1D65140080E876 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */; };
 		8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */; };
 		8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */; };
 		8345E0EC1EF47F5D007C1FC5 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDC121ED5F7DA004F135B /* Keychain.swift */; };
-		8345E0ED1EF47F98007C1FC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0D931DBA87C300453116 /* Constants.swift */; };
 		834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */; };
 		834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
 		834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */; };
@@ -60,6 +58,13 @@
 		838DE6CC1F3A753B00185A49 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6CB1F3A753B00185A49 /* ManagedIssuer.swift */; };
 		838DE6CD1F3A771D00185A49 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6CB1F3A753B00185A49 /* ManagedIssuer.swift */; };
 		838DE6CE1F3A772400185A49 /* ManagedIssuerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6C91F3A750300185A49 /* ManagedIssuerList.swift */; };
+		838DE6D21F3B665C00185A49 /* CertificateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6CF1F3B659800185A49 /* CertificateManager.swift */; };
+		838DE6D61F3B680500185A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6D51F3B67F400185A49 /* Constants.swift */; };
+		838DE6D71F3B680600185A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6D51F3B67F400185A49 /* Constants.swift */; };
+		838DE6D81F3B680800185A49 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6D41F3B67F400185A49 /* Extensions.swift */; };
+		838DE6D91F3B680900185A49 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6D41F3B67F400185A49 /* Extensions.swift */; };
+		838DE6DA1F3B684600185A49 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6D31F3B67B300185A49 /* Analytics.swift */; };
+		838DE6DB1F3B684700185A49 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6D31F3B67B300185A49 /* Analytics.swift */; };
 		83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */; };
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
 		83ACB76E1EDE30B700A1149E /* OnboardingViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */; };
@@ -67,9 +72,6 @@
 		83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */; };
 		83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */; };
 		83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */; };
-		83DC0D941DBA87C300453116 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0D931DBA87C300453116 /* Constants.swift */; };
-		83DFC72B1EE446020061BF00 /* CertificateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DFC72A1EE446020061BF00 /* CertificateManager.swift */; };
-		83FC25141EA7C7220015E49D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC25131EA7C7220015E49D /* Extensions.swift */; };
 		83FF5DE71ECBA4100063397C /* Blockcerts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; };
 		83FF5DE81ECBA4100063397C /* Blockcerts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF5DE91ECBAC7A0063397C /* CertificateView.swift */; };
@@ -148,7 +150,6 @@
 		832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextField.swift; path = External/SkyFloatingLabelTextField/Sources/SkyFloatingLabelTextField.swift; sourceTree = "<group>"; };
 		832AE0131DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextFieldWithIcon.swift; path = External/SkyFloatingLabelTextField/Sources/SkyFloatingLabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
 		832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextField+fixCaretPosition.swift"; path = "External/SkyFloatingLabelTextField/Sources/UITextField+fixCaretPosition.swift"; sourceTree = "<group>"; };
-		832D7FA31E0C5E1800A523D9 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateMetadataViewController.swift; sourceTree = "<group>"; };
 		8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealPassphraseTableViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +175,10 @@
 		838DE6BE1F3A36DD00185A49 /* ArgumentParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArgumentParserTests.swift; path = walletTests/Utils/ArgumentParserTests.swift; sourceTree = SOURCE_ROOT; };
 		838DE6C91F3A750300185A49 /* ManagedIssuerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ManagedIssuerList.swift; path = Models/ManagedIssuerList.swift; sourceTree = "<group>"; };
 		838DE6CB1F3A753B00185A49 /* ManagedIssuer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ManagedIssuer.swift; path = Models/ManagedIssuer.swift; sourceTree = "<group>"; };
+		838DE6CF1F3B659800185A49 /* CertificateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CertificateManager.swift; path = Utils/CertificateManager.swift; sourceTree = "<group>"; };
+		838DE6D31F3B67B300185A49 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Analytics.swift; path = Utils/Analytics.swift; sourceTree = "<group>"; };
+		838DE6D41F3B67F400185A49 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Utils/Extensions.swift; sourceTree = "<group>"; };
+		838DE6D51F3B67F400185A49 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Utils/Constants.swift; sourceTree = "<group>"; };
 		83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIssuerViewController.swift; sourceTree = "<group>"; };
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllers.swift; sourceTree = "<group>"; };
@@ -181,9 +186,6 @@
 		83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
 		83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTitleTableViewCell.swift; sourceTree = "<group>"; };
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
-		83DC0D931DBA87C300453116 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		83DFC72A1EE446020061BF00 /* CertificateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateManager.swift; sourceTree = "<group>"; };
-		83FC25131EA7C7220015E49D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		83FF5DE61ECBA4100063397C /* Blockcerts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Blockcerts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FF5DE91ECBAC7A0063397C /* CertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateView.swift; sourceTree = "<group>"; };
 		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,7 +238,11 @@
 		830120331EF4481B008EC454 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				838DE6D31F3B67B300185A49 /* Analytics.swift */,
 				830120341EF4483F008EC454 /* ArgumentParser.swift */,
+				838DE6CF1F3B659800185A49 /* CertificateManager.swift */,
+				838DE6D51F3B67F400185A49 /* Constants.swift */,
+				838DE6D41F3B67F400185A49 /* Extensions.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -275,7 +281,6 @@
 				838DE6C81F3A74B400185A49 /* Models */,
 				830120331EF4481B008EC454 /* Utils */,
 				83111B271DA4110C006B058D /* AppDelegate.swift */,
-				832D7FA31E0C5E1800A523D9 /* Analytics.swift */,
 				83802BF61E01BC2B00E54C13 /* Cells */,
 				83111B2B1DA4110C006B058D /* Main.storyboard */,
 				83111B2E1DA4110C006B058D /* Assets.xcassets */,
@@ -289,12 +294,9 @@
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
 				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
 				832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */,
-				83DFC72A1EE446020061BF00 /* CertificateManager.swift */,
 				836031BC1E5651C9005B2D2E /* PrivacyViewController.swift */,
-				83FC25131EA7C7220015E49D /* Extensions.swift */,
 				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
 				83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */,
-				83DC0D931DBA87C300453116 /* Constants.swift */,
 				838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */,
 				83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */,
 				83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */,
@@ -737,21 +739,21 @@
 				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
 				83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */,
 				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,
+				838DE6D61F3B680500185A49 /* Constants.swift in Sources */,
 				831EDC141ED5F7DA004F135B /* Keychain.swift in Sources */,
 				8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */,
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,
 				838DC1301E43EF1600533AEB /* ReplacePassphraseViewController.swift in Sources */,
 				834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */,
+				838DE6D21F3B665C00185A49 /* CertificateManager.swift in Sources */,
 				83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */,
+				838DE6DA1F3B684600185A49 /* Analytics.swift in Sources */,
 				830120351EF4483F008EC454 /* ArgumentParser.swift in Sources */,
 				832F2A491E944E1C00A65C3A /* CertificateMetadataViewController.swift in Sources */,
 				8388B8AA1EDE15BF00B28A57 /* WebLoginViewController.swift in Sources */,
-				832D7FA41E0C5E1800A523D9 /* Analytics.swift in Sources */,
-				83DFC72B1EE446020061BF00 /* CertificateManager.swift in Sources */,
 				836031BD1E5651C9005B2D2E /* PrivacyViewController.swift in Sources */,
 				838DE6CD1F3A771D00185A49 /* ManagedIssuer.swift in Sources */,
-				83DC0D941DBA87C300453116 /* Constants.swift in Sources */,
 				83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
 				831EDC131ED5F7DA004F135B /* CoreBitcoinManager.swift in Sources */,
@@ -762,7 +764,7 @@
 				83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */,
 				832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */,
 				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
-				83FC25141EA7C7220015E49D /* Extensions.swift in Sources */,
+				838DE6D81F3B680800185A49 /* Extensions.swift in Sources */,
 				83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -772,12 +774,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				838DE6CC1F3A753B00185A49 /* ManagedIssuer.swift in Sources */,
-				8345E0ED1EF47F98007C1FC5 /* Constants.swift in Sources */,
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
 				838DE6B91F3A344700185A49 /* ManagedIssuerTests.swift in Sources */,
+				838DE6D91F3B680900185A49 /* Extensions.swift in Sources */,
 				8345E0EC1EF47F5D007C1FC5 /* Keychain.swift in Sources */,
+				838DE6D71F3B680600185A49 /* Constants.swift in Sources */,
 				838DE6CA1F3A750300185A49 /* ManagedIssuerList.swift in Sources */,
 				830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */,
+				838DE6DB1F3B684700185A49 /* Analytics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
