@@ -255,22 +255,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func loadIssuers(shouldReloadCollection : Bool = true) {
-        var loadedIssuers : [ManagedIssuer]? = nil
-        
-        // First, load from the new Codable path. If that fails, then try loading from the old NSCoding path.
-        do {
-            let jsonData = try Data(contentsOf: managedIssuersArchiveURL)
-            
-            let decoder = JSONDecoder()
-            let issuerList = try decoder.decode(ManagedIssuerList.self, from: jsonData)
-            loadedIssuers = issuerList.managedIssuers
-        } catch { }
-        
-        if loadedIssuers == nil {
-            loadedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: issuersArchiveURL.path) as? [ManagedIssuer]
-        }
-        
-        managedIssuers = loadedIssuers ?? []
+        managedIssuers = ManagedIssuerManager().load()
         
         if shouldReloadCollection {
             reloadCollectionView()
