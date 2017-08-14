@@ -52,7 +52,6 @@
 		838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1341E43F0A400533AEB /* NoCertificatesTableViewCell.xib */; };
 		838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */; };
 		838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838DC13A1E43F0F700533AEB /* CertificateViewController.xib */; };
-		838DE6B91F3A344700185A49 /* ManagedIssuerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6B81F3A344700185A49 /* ManagedIssuerTests.swift */; };
 		838DE6BD1F3A363800185A49 /* managed-issuer.json in Resources */ = {isa = PBXBuildFile; fileRef = 838DE6BC1F3A363800185A49 /* managed-issuer.json */; };
 		838DE6CA1F3A750300185A49 /* ManagedIssuerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6C91F3A750300185A49 /* ManagedIssuerList.swift */; };
 		838DE6CC1F3A753B00185A49 /* ManagedIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6CB1F3A753B00185A49 /* ManagedIssuer.swift */; };
@@ -172,9 +171,7 @@
 		838DC1351E43F0A400533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NoCertificatesTableViewCell.xib; sourceTree = "<group>"; };
 		838DC1381E43F0D300533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddIssuerViewController.xib; sourceTree = "<group>"; };
 		838DC13B1E43F0F700533AEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CertificateViewController.xib; sourceTree = "<group>"; };
-		838DE6B81F3A344700185A49 /* ManagedIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedIssuerTests.swift; sourceTree = "<group>"; };
 		838DE6BC1F3A363800185A49 /* managed-issuer.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "managed-issuer.json"; sourceTree = "<group>"; };
-		838DE6BE1F3A36DD00185A49 /* ArgumentParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArgumentParserTests.swift; path = walletTests/Utils/ArgumentParserTests.swift; sourceTree = SOURCE_ROOT; };
 		838DE6C91F3A750300185A49 /* ManagedIssuerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ManagedIssuerList.swift; path = Models/ManagedIssuerList.swift; sourceTree = "<group>"; };
 		838DE6CB1F3A753B00185A49 /* ManagedIssuer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ManagedIssuer.swift; path = Models/ManagedIssuer.swift; sourceTree = "<group>"; };
 		838DE6CF1F3B659800185A49 /* CertificateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CertificateManager.swift; path = Utils/CertificateManager.swift; sourceTree = "<group>"; };
@@ -186,6 +183,8 @@
 		83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllers.swift; sourceTree = "<group>"; };
 		83ACB76F1EDE556500A1149E /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		83BB5E431F4240F1002CA970 /* ArgumentParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentParserTests.swift; sourceTree = "<group>"; };
+		83BB5E441F4240F1002CA970 /* ManagedIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedIssuerTests.swift; sourceTree = "<group>"; };
 		83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
 		83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTitleTableViewCell.swift; sourceTree = "<group>"; };
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
@@ -322,9 +321,8 @@
 			isa = PBXGroup;
 			children = (
 				83111B3C1DA4110C006B058D /* walletTests.swift */,
+				83BB5E421F4240F1002CA970 /* Utils */,
 				838DE6BB1F3A351D00185A49 /* Resources */,
-				838DE6BA1F3A345A00185A49 /* Utils */,
-				838DE6B81F3A344700185A49 /* ManagedIssuerTests.swift */,
 				83111B3E1DA4110C006B058D /* Info.plist */,
 			);
 			path = walletTests;
@@ -383,15 +381,6 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		838DE6BA1F3A345A00185A49 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				838DE6BE1F3A36DD00185A49 /* ArgumentParserTests.swift */,
-			);
-			name = Utils;
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		838DE6BB1F3A351D00185A49 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,6 +396,15 @@
 				838DE6C91F3A750300185A49 /* ManagedIssuerList.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		83BB5E421F4240F1002CA970 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				83BB5E431F4240F1002CA970 /* ArgumentParserTests.swift */,
+				83BB5E441F4240F1002CA970 /* ManagedIssuerTests.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		A653FD3709C0B4FB37E36B2A /* Frameworks */ = {
@@ -780,7 +778,6 @@
 			files = (
 				838DE6CC1F3A753B00185A49 /* ManagedIssuer.swift in Sources */,
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
-				838DE6B91F3A344700185A49 /* ManagedIssuerTests.swift in Sources */,
 				838DE6D91F3B680900185A49 /* Extensions.swift in Sources */,
 				838DE6E11F3B6D5D00185A49 /* ManagedIssuerManager.swift in Sources */,
 				8345E0EC1EF47F5D007C1FC5 /* Keychain.swift in Sources */,
