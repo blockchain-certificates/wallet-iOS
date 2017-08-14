@@ -70,6 +70,8 @@
 		83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */; };
 		83ACB76E1EDE30B700A1149E /* OnboardingViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */; };
 		83ACB7701EDE556500A1149E /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83ACB76F1EDE556500A1149E /* Onboarding.storyboard */; };
+		83BB5E461F424122002CA970 /* ManagedIssuerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BB5E451F424122002CA970 /* ManagedIssuerManagerTests.swift */; };
+		83BB5E481F424A2F002CA970 /* issuers-codable.json in Resources */ = {isa = PBXBuildFile; fileRef = 83BB5E471F424A2F002CA970 /* issuers-codable.json */; };
 		83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */; };
 		83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */; };
 		83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */; };
@@ -185,6 +187,8 @@
 		83ACB76F1EDE556500A1149E /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		83BB5E431F4240F1002CA970 /* ArgumentParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentParserTests.swift; sourceTree = "<group>"; };
 		83BB5E441F4240F1002CA970 /* ManagedIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedIssuerTests.swift; sourceTree = "<group>"; };
+		83BB5E451F424122002CA970 /* ManagedIssuerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedIssuerManagerTests.swift; sourceTree = "<group>"; };
+		83BB5E471F424A2F002CA970 /* issuers-codable.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "issuers-codable.json"; sourceTree = "<group>"; };
 		83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
 		83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTitleTableViewCell.swift; sourceTree = "<group>"; };
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
@@ -385,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				838DE6BC1F3A363800185A49 /* managed-issuer.json */,
+				83BB5E471F424A2F002CA970 /* issuers-codable.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -403,6 +408,7 @@
 			children = (
 				83BB5E431F4240F1002CA970 /* ArgumentParserTests.swift */,
 				83BB5E441F4240F1002CA970 /* ManagedIssuerTests.swift */,
+				83BB5E451F424122002CA970 /* ManagedIssuerManagerTests.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -577,6 +583,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83BB5E481F424A2F002CA970 /* issuers-codable.json in Resources */,
 				838DE6BD1F3A363800185A49 /* managed-issuer.json in Resources */,
 				834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 			);
@@ -784,6 +791,7 @@
 				838DE6D71F3B680600185A49 /* Constants.swift in Sources */,
 				838DE6CA1F3A750300185A49 /* ManagedIssuerList.swift in Sources */,
 				830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */,
+				83BB5E461F424122002CA970 /* ManagedIssuerManagerTests.swift in Sources */,
 				838DE6DB1F3B684700185A49 /* Analytics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

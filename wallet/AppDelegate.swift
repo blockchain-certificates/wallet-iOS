@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Attempted to launch from command line with unknown error: \(error)")
         }
 
+        print(Paths.managedIssuersListURL)
         
         setupApplication()
         
