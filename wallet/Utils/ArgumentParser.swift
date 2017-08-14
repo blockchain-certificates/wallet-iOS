@@ -150,6 +150,17 @@ struct ConfigurationManager {
             try Keychain.updateShared(with: newPassphrase)
         }
         
+        if let issuerLoadURL = configuration.shouldLoadIssuersFrom {
+            let sideloadManager = ManagedIssuerManager(readFrom: issuerLoadURL,
+                                                       writeTo: Paths.managedIssuersListURL,
+                                                       convertFrom: issuerLoadURL)
+            var issuers = sideloadManager.load()
+            let manager = ManagedIssuerManager()
+            issuers.append(contentsOf: manager.load())
+
+            _ = manager.save(issuers)
+        }
+        
         if configuration.shouldResetAfterConfiguring {
             // Eventually, this would be great if the app could jsut reset itself. For now, crash to force a reset.
             fatalError("Crash requested by configuration change.")
