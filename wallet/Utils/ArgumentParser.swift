@@ -14,17 +14,20 @@ struct AppConfiguration {
     let shouldDeleteCertificates: Bool
     let shouldResetAfterConfiguring: Bool
     let shouldSetPassphraseTo: String?
+    let shouldLoadIssuersFrom: URL?
     
     init(shouldDeletePassphrase: Bool = false,
          shouldDeleteIssuersAndCertificates: Bool = false,
          shouldDeleteCertificates: Bool = false,
          shouldResetAfterConfiguring: Bool = false,
-         shouldSetPassphraseTo: String? = nil) {
+         shouldSetPassphraseTo: String? = nil,
+         shouldLoadIssuersFrom: URL? = nil) {
         self.shouldDeletePassphrase = shouldDeletePassphrase
         self.shouldDeleteIssuersAndCertificates = shouldDeleteIssuersAndCertificates
         self.shouldDeleteCertificates = shouldDeleteIssuersAndCertificates || shouldDeleteCertificates
         self.shouldResetAfterConfiguring = shouldResetAfterConfiguring
         self.shouldSetPassphraseTo = shouldSetPassphraseTo
+        self.shouldLoadIssuersFrom = shouldLoadIssuersFrom
     }
     
     public static let asIs = AppConfiguration()
@@ -39,11 +42,13 @@ struct AppConfiguration {
 enum ArgumentLabels : String {
     case resetData = "--reset-data"
     case usePassphrase = "--use-passphrase"
+    case useIssuerData = "--use-issuer-data"
 }
 
 enum Argument {
     case resetData
     case using(passphrase: String)
+    case usingIssuerData(from: URL)
     
     static func from(array: [String]) -> [Argument] {
         var args = [Argument]()
@@ -55,6 +60,13 @@ enum Argument {
             case ArgumentLabels.usePassphrase.rawValue:
                 index += 1
                 args.append(.using(passphrase: array[index]))
+            case ArgumentLabels.useIssuerData.rawValue:
+                index += 1
+                if let url = URL(string: array[index]) {
+                    args.append(.usingIssuerData(from: url))
+                } else {
+                    print("\(ArgumentLabels.useIssuerData.rawValue) observed, but \(array[index]) isn't a valid URL.")
+                }
             default:
                 print("Unknown argument \(array[index]):  Ignoring.")
             }
@@ -71,6 +83,8 @@ extension Argument : Equatable {
         case (.resetData, .resetData):
             return true
         case (.using(let left), .using(let right)):
+            return left == right
+        case (.usingIssuerData(let left), .usingIssuerData(let right)):
             return left == right
         default:
             return false
@@ -91,6 +105,7 @@ struct ArgumentParser {
         let shouldDeleteCertificates = false
         let shouldResetAfterConfiguring = false
         var shouldSetPassphraseTo : String? = nil
+        var shouldLoadIssuersFrom: URL? = nil
 
         for arg in arguments {
             if arg == .resetData {
@@ -99,6 +114,9 @@ struct ArgumentParser {
             }
             if case .using(let passphrase) = arg {
                 shouldSetPassphraseTo = passphrase
+            }
+            if case .usingIssuerData(let url) = arg {
+                shouldLoadIssuersFrom = url
             }
         }
         if arguments.contains(Argument.resetData) {
@@ -110,7 +128,8 @@ struct ArgumentParser {
             shouldDeleteIssuersAndCertificates: shouldDeleteIssuersAndCertificates,
             shouldDeleteCertificates: shouldDeleteCertificates,
             shouldResetAfterConfiguring: shouldResetAfterConfiguring,
-            shouldSetPassphraseTo: shouldSetPassphraseTo
+            shouldSetPassphraseTo: shouldSetPassphraseTo,
+            shouldLoadIssuersFrom: shouldLoadIssuersFrom
         )
     }
 }

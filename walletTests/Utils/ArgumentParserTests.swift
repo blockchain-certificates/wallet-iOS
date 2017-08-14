@@ -41,5 +41,14 @@ class ArgumentParserTests: XCTestCase {
         
         XCTAssertEqual(config.shouldSetPassphraseTo, targetPassphrase)
     }
+    
+    func testUsingIssuerArgument() {
+        let emptyURL = FileManager.default.temporaryDirectory.appendingPathComponent("empty")
+        let path = emptyURL.path
+        let config = parser.parse(arguments: [ArgumentLabels.useIssuerData.rawValue, path])
+        
+        XCTAssertNotNil(config.shouldLoadIssuersFrom)
+        XCTAssertEqual(config.shouldLoadIssuersFrom, URL(string: path))
+    }
 
 }

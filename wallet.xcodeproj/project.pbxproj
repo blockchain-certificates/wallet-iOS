@@ -10,6 +10,8 @@
 		6360BE865570CCDF5C814E4E /* libPods-certificatesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */; };
 		830120351EF4483F008EC454 /* ArgumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830120341EF4483F008EC454 /* ArgumentParser.swift */; };
 		830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830120341EF4483F008EC454 /* ArgumentParser.swift */; };
+		83071D251F42551600142D82 /* ArgumentParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BB5E431F4240F1002CA970 /* ArgumentParserTests.swift */; };
+		83071D261F42552200142D82 /* ManagedIssuerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BB5E441F4240F1002CA970 /* ManagedIssuerTests.swift */; };
 		830AB9EF1DA6BC4B00185E19 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */; };
 		830AB9F01DA6BC4B00185E19 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83111B281DA4110C006B058D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83111B271DA4110C006B058D /* AppDelegate.swift */; };
@@ -784,6 +786,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				838DE6CC1F3A753B00185A49 /* ManagedIssuer.swift in Sources */,
+				83071D251F42551600142D82 /* ArgumentParserTests.swift in Sources */,
+				83071D261F42552200142D82 /* ManagedIssuerTests.swift in Sources */,
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
 				838DE6D91F3B680900185A49 /* Extensions.swift in Sources */,
 				838DE6E11F3B6D5D00185A49 /* ManagedIssuerManager.swift in Sources */,
