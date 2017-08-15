@@ -486,9 +486,11 @@ extension IssuerCollectionViewController : ManagedIssuerDelegate {
 //        guard let index = self.managedIssuers.index(where: { (existingIssuer) -> Bool in
 //            existingIssuer.issuer?.id == managedIssuer.issuer?.id
 //        }) else { return }
-//        
-        collectionView?.reloadData()
-        
+//
+        OperationQueue.main.addOperation { [weak self] in
+            self?.collectionView?.reloadData()
+        }
+
 //        let itemsIndexPath = IndexPath(item: index, section: 0)
 //        collectionView?.reloadItems(at: [ itemsIndexPath ])
     }
