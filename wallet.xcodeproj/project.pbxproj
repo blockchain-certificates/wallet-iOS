@@ -35,6 +35,8 @@
 		832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0131DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift */; };
 		832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */; };
 		832F2A491E944E1C00A65C3A /* CertificateMetadataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */; };
+		8332F5601F4754C3002534D0 /* Downie-Issuer.json in Resources */ = {isa = PBXBuildFile; fileRef = 8332F55F1F4754C3002534D0 /* Downie-Issuer.json */; };
+		8332F5621F475512002534D0 /* ExistingIssuerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8332F5611F475512002534D0 /* ExistingIssuerTests.swift */; };
 		8337CFCC1E1D65140080E876 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */; };
 		8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */; };
 		8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */; };
@@ -156,6 +158,8 @@
 		832AE0131DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextFieldWithIcon.swift; path = External/SkyFloatingLabelTextField/Sources/SkyFloatingLabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
 		832AE0141DF893A900A3CA4A /* UITextField+fixCaretPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextField+fixCaretPosition.swift"; path = "External/SkyFloatingLabelTextField/Sources/UITextField+fixCaretPosition.swift"; sourceTree = "<group>"; };
 		832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateMetadataViewController.swift; sourceTree = "<group>"; };
+		8332F55F1F4754C3002534D0 /* Downie-Issuer.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Downie-Issuer.json"; sourceTree = "<group>"; };
+		8332F5611F475512002534D0 /* ExistingIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingIssuerTests.swift; sourceTree = "<group>"; };
 		8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealPassphraseTableViewController.swift; sourceTree = "<group>"; };
 		8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledTableViewCell.swift; sourceTree = "<group>"; };
@@ -352,6 +356,14 @@
 			name = SkyLabel;
 			sourceTree = "<group>";
 		};
+		8332F55E1F47549A002534D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8332F55F1F4754C3002534D0 /* Downie-Issuer.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		836031C11E5E5064005B2D2E /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,8 +376,10 @@
 		8360751D1F2A4CD300758C9E /* certificatesUITests */ = {
 			isa = PBXGroup;
 			children = (
+				8332F55E1F47549A002534D0 /* Resources */,
 				8360751E1F2A4CD300758C9E /* certificatesUITests.swift */,
 				836075261F2A4D9800758C9E /* OnboardingUITests.swift */,
+				8332F5611F475512002534D0 /* ExistingIssuerTests.swift */,
 				836075201F2A4CD300758C9E /* Info.plist */,
 			);
 			path = certificatesUITests;
@@ -595,6 +609,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8332F5601F4754C3002534D0 /* Downie-Issuer.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,6 +820,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				836075271F2A4D9800758C9E /* OnboardingUITests.swift in Sources */,
+				8332F5621F475512002534D0 /* ExistingIssuerTests.swift in Sources */,
 				8360751F1F2A4CD300758C9E /* certificatesUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

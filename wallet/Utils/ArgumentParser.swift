@@ -178,7 +178,13 @@ struct ConfigurationManager {
         deleteCertificates()
 
         // Delete issuers
-        NSKeyedArchiver.archiveRootObject([], toFile: Paths.issuersNSCodingArchiveURL.path)
+        do {
+            try FileManager.default.removeItem(at: Paths.issuersNSCodingArchiveURL)
+            try FileManager.default.removeItem(at: Paths.managedIssuersListURL)
+        } catch {
+            print("Something went wrong deleting issuers...\n\(error)")
+            NSKeyedArchiver.archiveRootObject([], toFile: Paths.issuersNSCodingArchiveURL.path)
+        }
     }
     
     private func deleteCertificates() {
