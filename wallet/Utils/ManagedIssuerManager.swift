@@ -28,16 +28,18 @@ struct ManagedIssuerManager {
         var loadedIssuers : [ManagedIssuer]? = nil
         
         // First, load from the new Codable path. If that fails, then try loading from the old NSCoding path.
-        do {
-            let jsonData = try Data(contentsOf: issuerReadURL)
-            
-            let decoder = JSONDecoder()
-            let issuerList = try decoder.decode(ManagedIssuerList.self, from: jsonData)
-            loadedIssuers = issuerList.managedIssuers
-        } catch {
-            if let oldReadURL = backwardsCompatibilityURL {
-                loadedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: oldReadURL.path) as? [ManagedIssuer]
+        if FileManager.default.fileExists(atPath: issuerReadURL.path) {
+            if let jsonData = FileManager.default.contents(atPath: issuerReadURL.path) {
+                let decoder = JSONDecoder()
+                do {
+                    let issuerList = try decoder.decode(ManagedIssuerList.self, from: jsonData)
+                    loadedIssuers = issuerList.managedIssuers
+                } catch {
+                    print("Failed to decode file at \(issuerReadURL)")
+                }
             }
+        } else if let oldReadURL = backwardsCompatibilityURL {
+            loadedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: oldReadURL.path) as? [ManagedIssuer]
         }
         
         return loadedIssuers ?? []
