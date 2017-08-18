@@ -37,6 +37,9 @@
 		832F2A491E944E1C00A65C3A /* CertificateMetadataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */; };
 		8332F5601F4754C3002534D0 /* Downie-Issuer.json in Resources */ = {isa = PBXBuildFile; fileRef = 8332F55F1F4754C3002534D0 /* Downie-Issuer.json */; };
 		8332F5621F475512002534D0 /* ExistingIssuerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8332F5611F475512002534D0 /* ExistingIssuerTests.swift */; };
+		8332F5641F475B7F002534D0 /* CertificateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8332F5631F475B7F002534D0 /* CertificateManagerTests.swift */; };
+		8332F5671F475D72002534D0 /* CertificateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DE6CF1F3B659800185A49 /* CertificateManager.swift */; };
+		8332F5681F475E7F002534D0 /* mainnet.json in Resources */ = {isa = PBXBuildFile; fileRef = 8332F5661F475D30002534D0 /* mainnet.json */; };
 		8337CFCC1E1D65140080E876 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */; };
 		8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */; };
 		8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */; };
@@ -160,6 +163,8 @@
 		832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateMetadataViewController.swift; sourceTree = "<group>"; };
 		8332F55F1F4754C3002534D0 /* Downie-Issuer.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Downie-Issuer.json"; sourceTree = "<group>"; };
 		8332F5611F475512002534D0 /* ExistingIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingIssuerTests.swift; sourceTree = "<group>"; };
+		8332F5631F475B7F002534D0 /* CertificateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateManagerTests.swift; sourceTree = "<group>"; };
+		8332F5661F475D30002534D0 /* mainnet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mainnet.json; sourceTree = "<group>"; };
 		8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealPassphraseTableViewController.swift; sourceTree = "<group>"; };
 		8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledTableViewCell.swift; sourceTree = "<group>"; };
@@ -364,6 +369,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		8332F5651F475D0E002534D0 /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				8332F5661F475D30002534D0 /* mainnet.json */,
+			);
+			path = Certificates;
+			sourceTree = "<group>";
+		};
 		836031C11E5E5064005B2D2E /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +419,7 @@
 			children = (
 				838DE6BC1F3A363800185A49 /* managed-issuer.json */,
 				83BB5E471F424A2F002CA970 /* issuers-codable.json */,
+				8332F5651F475D0E002534D0 /* Certificates */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -423,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				83BB5E431F4240F1002CA970 /* ArgumentParserTests.swift */,
+				8332F5631F475B7F002534D0 /* CertificateManagerTests.swift */,
 				83BB5E441F4240F1002CA970 /* ManagedIssuerTests.swift */,
 				83BB5E451F424122002CA970 /* ManagedIssuerManagerTests.swift */,
 			);
@@ -599,6 +614,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8332F5681F475E7F002534D0 /* mainnet.json in Resources */,
 				83BB5E481F424A2F002CA970 /* issuers-codable.json in Resources */,
 				838DE6BD1F3A363800185A49 /* managed-issuer.json in Resources */,
 				834B94CB1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
@@ -806,12 +822,14 @@
 				83111B3D1DA4110C006B058D /* walletTests.swift in Sources */,
 				838DE6D91F3B680900185A49 /* Extensions.swift in Sources */,
 				838DE6E11F3B6D5D00185A49 /* ManagedIssuerManager.swift in Sources */,
+				8332F5641F475B7F002534D0 /* CertificateManagerTests.swift in Sources */,
 				8345E0EC1EF47F5D007C1FC5 /* Keychain.swift in Sources */,
 				838DE6D71F3B680600185A49 /* Constants.swift in Sources */,
 				838DE6CA1F3A750300185A49 /* ManagedIssuerList.swift in Sources */,
 				830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */,
 				83BB5E461F424122002CA970 /* ManagedIssuerManagerTests.swift in Sources */,
 				838DE6DB1F3B684700185A49 /* Analytics.swift in Sources */,
+				8332F5671F475D72002534D0 /* CertificateManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

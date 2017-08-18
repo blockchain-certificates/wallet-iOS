@@ -10,10 +10,16 @@ import Foundation
 import Blockcerts
 
 struct CertificateManager {
-    let certificatesDirectory = Paths.certificatesDirectory
+    let readDirectory : URL
+    let writeDirectory : URL
+    
+    init(readFrom: URL = Paths.certificatesDirectory, writeTo: URL = Paths.certificatesDirectory) {
+        readDirectory = readFrom
+        writeDirectory = writeTo
+    }
     
     func loadCertificates() -> [Certificate] {
-        let existingFiles = try? FileManager.default.contentsOfDirectory(at: certificatesDirectory, includingPropertiesForKeys: nil, options: [])
+        let existingFiles = try? FileManager.default.contentsOfDirectory(at: readDirectory, includingPropertiesForKeys: nil, options: [])
         let files = existingFiles ?? []
         
         let loadedCertificates : [Certificate] = files.flatMap { fileURL in
@@ -30,14 +36,14 @@ struct CertificateManager {
     
     func save(certificates: [Certificate]) {
         // Make sure the `certificatesDirectory` exists by trying to create it every time.
-        try? FileManager.default.createDirectory(at: certificatesDirectory, withIntermediateDirectories: false, attributes: nil)
+        try? FileManager.default.createDirectory(at: writeDirectory, withIntermediateDirectories: false, attributes: nil)
         
         for certificate in certificates {
             guard let fileName = certificate.filename else {
                 print("ERROR: Couldn't convert \(certificate.title) to character encoding.")
                 continue
             }
-            let fileURL = certificatesDirectory.appendingPathComponent(fileName)
+            let fileURL = writeDirectory.appendingPathComponent(fileName)
             do {
                 try certificate.file.write(to: fileURL)
             } catch {
