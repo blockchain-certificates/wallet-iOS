@@ -243,8 +243,10 @@ extension CertificateViewController : CertificateValidationRequestDelegate {
         }
         
         if percentage != nil {
-            UIView.animate(withDuration: 0.1, animations: { 
-                self.progressView.progress = percentage!
+            UIView.animate(withDuration: 0.1, animations: {
+                OperationQueue.main.addOperation {
+                    self.progressView.progress = percentage!
+                }
             })
         }
     }

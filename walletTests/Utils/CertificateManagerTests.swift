@@ -24,10 +24,11 @@ class CertificateManagerSingleCertificateTests: XCTestCase {
         } catch {
             print("uh oh \(error)")
         }
-        
     }
     
     override func tearDown() {
+        super.tearDown()
+        
         let files = try? FileManager.default.contentsOfDirectory(atPath: readDirectory.path)
         for filename in files ?? [] {
             do {

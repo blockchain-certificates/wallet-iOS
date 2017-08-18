@@ -177,6 +177,15 @@ struct ConfigurationManager {
             _ = manager.save(issuers)
         }
         
+        if let certificateDirectory = configuration.shouldLoadCertificatesFrom {
+            let sideloadManager = CertificateManager(readFrom: certificateDirectory, writeTo: certificateDirectory)
+            var certificates = sideloadManager.loadCertificates()
+            
+            let manager = CertificateManager()
+            certificates.append(contentsOf: manager.loadCertificates())
+            manager.save(certificates: certificates)
+        }
+        
         if configuration.shouldResetAfterConfiguring {
             // Eventually, this would be great if the app could jsut reset itself. For now, crash to force a reset.
             fatalError("Crash requested by configuration change.")
