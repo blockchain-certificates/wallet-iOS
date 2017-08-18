@@ -7,8 +7,9 @@
 //
 
 import XCTest
+import Blockcerts
 
-class CertificateManagerTests: XCTestCase {
+class CertificateManagerSingleCertificateTests: XCTestCase {
     let readDirectory = FileManager.default.temporaryDirectory.appendingPathComponent("single-certificate-test-input")
     
     override func setUp() {
@@ -37,12 +38,29 @@ class CertificateManagerTests: XCTestCase {
         }
     }
     
-    func testSingleCertificateManagement() {
+    func testLoadingSingleCertificate() {
         let tempPath = FileManager.default.temporaryDirectory.appendingPathComponent("test-output")
         let manager = CertificateManager(readFrom: readDirectory, writeTo: tempPath)
         let certificates = manager.loadCertificates()
         
         XCTAssertEqual(certificates.count, 1)
         XCTAssertEqual(certificates.first!.issuer.name, "Main Net Prod Test")
+    }
+    
+    func testSavingSingleCertificate() {
+        let certURL = Bundle(for: type(of: self)).url(forResource: "mainnet", withExtension: "json")!
+        let file = FileManager.default.contents(atPath: certURL.path)!
+        
+        let certificate = try! CertificateParser.parse(data: file)
+        
+        let outputDirectory = FileManager.default.temporaryDirectory.appendingPathComponent("test-output")
+        let manager = CertificateManager(readFrom: outputDirectory, writeTo: outputDirectory)
+        
+        manager.save(certificate: certificate)
+        
+        let fileList = try! FileManager.default.contentsOfDirectory(atPath: outputDirectory.path)
+        
+        XCTAssertEqual(fileList.count, 1)
+        XCTAssertEqual(fileList.first, certificate.filename)
     }
 }
