@@ -10,7 +10,10 @@ import Foundation
 import Security
 import Blockcerts
 
-private var unusedKeyIndexKey = "org.blockcerts.unused-key-index"
+// reserved for backcompat
+private var unusedKeyIndexKeyV1 = "org.blockcerts.unused-key-index"
+private var unusedKeyIndexKey = "org.blockcerts.v2.unused-key-index"
+
 
 public enum KeychainErrors : Error {
     case invalidPassphrase
@@ -42,8 +45,8 @@ class Keychain {
         }
         self.unusedKeyIndex = unusedKeyIndex
         self.mnemonic = mnemonic
-        keychain = BTCKeychain(seed: mnemonic.data)
-        accountKeychain = keychain.derivedKeychain(withPath: "m/44'/0'/0'")
+        keychain = mnemonic.keychain
+        accountKeychain = keychain.derivedKeychain(withPath: "m/44'/0'/0'/0")
     }
     
     func nextPublicAddress() -> String {
