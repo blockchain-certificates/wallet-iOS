@@ -172,7 +172,10 @@ struct ConfigurationManager {
                                                        convertFrom: issuerLoadURL)
             var issuers = sideloadManager.load()
             let manager = ManagedIssuerManager()
-            issuers.append(contentsOf: manager.load())
+            
+            if !configuration.shouldDeleteIssuersAndCertificates {
+                issuers.append(contentsOf: manager.load())
+            }
 
             _ = manager.save(issuers)
         }

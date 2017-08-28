@@ -31,6 +31,7 @@ class ExistingIssuerTests: XCTestCase {
         let app = XCUIApplication()
         let issuerTile = app.collectionViews.cells["Downie Test Org"]
         
+        XCTAssertEqual(app.collectionViews.cells.count, 1)
         XCTAssert(issuerTile.exists)
         
         issuerTile.tap()
@@ -38,5 +39,23 @@ class ExistingIssuerTests: XCTestCase {
         
         XCTAssert(issuerNavigationBar.exists)
     }
+    
+//    func testAddingSecondIssuer() {
+//
+//        let app = XCUIApplication()
+//        app.navigationBars["Issuers"].buttons["AddIcon"].tap()
+//
+//        let elementsQuery = app.scrollViews.otherElements
+//        let issuerUrlTextField = elementsQuery.textFields["Issuer URL"]
+//        issuerUrlTextField.tap()
+//        issuerUrlTextField.typeText("this is the issuer URL")
+//
+//        let oneTimeCodeTextField = elementsQuery.textFields["One-Time Code"]
+//        oneTimeCodeTextField.tap()
+//        oneTimeCodeTextField.tap()
+//        oneTimeCodeTextField.typeText("this is the one-time code")
+//        app.navigationBars["Add Issuer"].buttons["Save"].tap()
+//
+//    }
     
 }
