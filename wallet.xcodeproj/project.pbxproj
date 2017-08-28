@@ -171,6 +171,11 @@
 		8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealPassphraseTableViewController.swift; sourceTree = "<group>"; };
 		8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledTableViewCell.swift; sourceTree = "<group>"; };
 		833E674A1F47925E00773563 /* ExistingCertificateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingCertificateTests.swift; sourceTree = "<group>"; };
+		834A6EC11F54C75E00393A3A /* accepting_issuer_identity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accepting_issuer_identity.json; sourceTree = "<group>"; };
+		834A6EC31F54C75E00393A3A /* accepting_issuer_identity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accepting_issuer_identity.json; sourceTree = "<group>"; };
+		834A6EC41F54C75E00393A3A /* accepting_issuer_introduction.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accepting_issuer_introduction.json; sourceTree = "<group>"; };
+		834A6EC51F54C75E00393A3A /* run.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = run.sh; sourceTree = "<group>"; };
+		834A6EC61F54C75E00393A3A /* wiremock-standalone-2.7.1.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; path = "wiremock-standalone-2.7.1.jar"; sourceTree = "<group>"; };
 		834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewCell.swift; sourceTree = "<group>"; };
 		834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionViewCell.xib; sourceTree = "<group>"; };
 		836031BC1E5651C9005B2D2E /* PrivacyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
@@ -380,6 +385,35 @@
 			path = Certificates;
 			sourceTree = "<group>";
 		};
+		834A6EBF1F54C75E00393A3A /* wiremock */ = {
+			isa = PBXGroup;
+			children = (
+				834A6EC01F54C75E00393A3A /* __files */,
+				834A6EC21F54C75E00393A3A /* mappings */,
+				834A6EC51F54C75E00393A3A /* run.sh */,
+				834A6EC61F54C75E00393A3A /* wiremock-standalone-2.7.1.jar */,
+			);
+			name = wiremock;
+			path = certificatesUITests/wiremock;
+			sourceTree = SOURCE_ROOT;
+		};
+		834A6EC01F54C75E00393A3A /* __files */ = {
+			isa = PBXGroup;
+			children = (
+				834A6EC11F54C75E00393A3A /* accepting_issuer_identity.json */,
+			);
+			path = __files;
+			sourceTree = "<group>";
+		};
+		834A6EC21F54C75E00393A3A /* mappings */ = {
+			isa = PBXGroup;
+			children = (
+				834A6EC31F54C75E00393A3A /* accepting_issuer_identity.json */,
+				834A6EC41F54C75E00393A3A /* accepting_issuer_introduction.json */,
+			);
+			path = mappings;
+			sourceTree = "<group>";
+		};
 		836031C11E5E5064005B2D2E /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				8332F55E1F47549A002534D0 /* Resources */,
+				834A6EBF1F54C75E00393A3A /* wiremock */,
 				8360751E1F2A4CD300758C9E /* certificatesUITests.swift */,
 				836075261F2A4D9800758C9E /* OnboardingUITests.swift */,
 				8332F5611F475512002534D0 /* ExistingIssuerTests.swift */,

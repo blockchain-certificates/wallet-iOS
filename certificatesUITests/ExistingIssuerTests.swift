@@ -40,22 +40,29 @@ class ExistingIssuerTests: XCTestCase {
         XCTAssert(issuerNavigationBar.exists)
     }
     
-//    func testAddingSecondIssuer() {
-//
-//        let app = XCUIApplication()
-//        app.navigationBars["Issuers"].buttons["AddIcon"].tap()
-//
-//        let elementsQuery = app.scrollViews.otherElements
-//        let issuerUrlTextField = elementsQuery.textFields["Issuer URL"]
-//        issuerUrlTextField.tap()
-//        issuerUrlTextField.typeText("this is the issuer URL")
-//
-//        let oneTimeCodeTextField = elementsQuery.textFields["One-Time Code"]
-//        oneTimeCodeTextField.tap()
-//        oneTimeCodeTextField.tap()
-//        oneTimeCodeTextField.typeText("this is the one-time code")
-//        app.navigationBars["Add Issuer"].buttons["Save"].tap()
-//
-//    }
+    func testAddingSecondIssuer() {
+        let app = XCUIApplication()
+        // We start with just one issuer
+        XCTAssertEqual(app.collectionViews.cells.count, 1)
+        XCTAssertFalse(app.collectionViews.cells["Greendale College"].exists)
+        
+        // We add a second
+        app.navigationBars["Issuers"].buttons["AddIcon"].tap()
+
+        let elementsQuery = app.scrollViews.otherElements
+        let issuerUrlTextField = elementsQuery.textFields["Issuer URL"]
+        issuerUrlTextField.tap()
+        issuerUrlTextField.typeText("http://localhost:1234/accepting_issuer.json")
+
+        let oneTimeCodeTextField = elementsQuery.textFields["One-Time Code"]
+        oneTimeCodeTextField.tap()
+        oneTimeCodeTextField.tap()
+        oneTimeCodeTextField.typeText("12345")
+        app.navigationBars["Add Issuer"].buttons["Save"].tap()
+        
+        // We now have 2 issuers, and one of them is Greendale
+        XCTAssertEqual(app.collectionViews.cells.count, 2)
+        XCTAssert(app.collectionViews.cells["Greendale College"].exists)
+    }
     
 }

@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/introduction/always-accepting"
+    },
+    "response": {
+        "status": 200,
+        "body": ""
+    }
+}
