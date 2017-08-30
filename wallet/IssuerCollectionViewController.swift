@@ -466,8 +466,16 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         let navigation = UINavigationController(rootViewController: controller)
 
-        present(navigation, animated: true) {
-            controller.autoSubmitIfPossible()
+        if presentedViewController != nil {
+            presentedViewController?.dismiss(animated: false) { [weak self] in
+                self?.present(navigation, animated: true) {
+                    controller.autoSubmitIfPossible()
+                }
+            }
+        } else {
+            present(navigation, animated: true) {
+                controller.autoSubmitIfPossible()
+            }
         }
     }
 }
