@@ -76,17 +76,12 @@ class WebAuthIssuerTests: XCTestCase {
         app.navigationBars["Add Issuer"].buttons["Save"].tap()
         
         XCTAssert(app.navigationBars["Log In To Issuer"].exists)
-        
-        let title = app.staticTexts["Web Authentication Challenge"]
-        let exists = NSPredicate(format: "exists == 1")
-        expectation(for: exists, evaluatedWith: title, handler: nil)
-        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(app.staticTexts["Web Authentication Challenge"].waitForExistence(timeout: 5))
         
         app.links["No"].tap()
         
         let alert = app.alerts["Add Issuer Failed"]
-        expectation(for: exists, evaluatedWith: alert, handler: nil)
-        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(alert.waitForExistence(timeout: 5))
         
         alert.buttons["OK"].tap()
         
