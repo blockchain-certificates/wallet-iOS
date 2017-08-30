@@ -42,6 +42,31 @@ struct AppConfiguration {
     )
 }
 
+extension AppConfiguration : CustomStringConvertible {
+    var description : String {
+        var result = "This config should...\n"
+        if shouldDeletePassphrase {
+            result += "  ...delete the passphrase\n"
+        }
+        if shouldDeleteIssuersAndCertificates {
+            result += "  ...delete the issuers & certificates\n"
+        }
+        if shouldDeleteCertificates {
+            result += "  ...delete the certificates\n"
+        }
+        if let newPassphrase = shouldSetPassphraseTo {
+            result += "  ...set the passphrase to \(newPassphrase)\n"
+        }
+        if let issuerURL = shouldLoadIssuersFrom {
+            result += "  ...load issuers from \(issuerURL)\n"
+        }
+        if shouldResetAfterConfiguring {
+            result += "  ...and reset after configuring\n"
+        }
+        return result
+    }
+}
+
 enum ArgumentLabels : String {
     case resetData = "--reset-data"
     case usePassphrase = "--use-passphrase"
@@ -152,6 +177,7 @@ struct ArgumentParser {
 
 struct ConfigurationManager {
     func configure(with configuration: AppConfiguration) throws {
+        print(configuration)
         if configuration.shouldDeletePassphrase || configuration.shouldSetPassphraseTo != nil {
             deletePassphrase()
         }
@@ -206,12 +232,20 @@ struct ConfigurationManager {
         deleteCertificates()
 
         // Delete issuers
-        do {
-            try FileManager.default.removeItem(at: Paths.issuersNSCodingArchiveURL)
-            try FileManager.default.removeItem(at: Paths.managedIssuersListURL)
-        } catch {
-            print("Something went wrong deleting issuers...\n\(error)")
-            NSKeyedArchiver.archiveRootObject([], toFile: Paths.issuersNSCodingArchiveURL.path)
+        if FileManager.default.fileExists(atPath: Paths.issuersNSCodingArchiveURL.path) {
+            do {
+                try FileManager.default.removeItem(at: Paths.issuersNSCodingArchiveURL)
+            } catch {
+                print("Failed to delete the old nscoding issuers archive. Error: \(error)")
+            }
+        }
+        
+        if FileManager.default.fileExists(atPath: Paths.managedIssuersListURL.path) {
+            do {
+                try FileManager.default.removeItem(at: Paths.managedIssuersListURL)
+            } catch {
+                print("Something went wrong deleting issuers... Error: \(error)")
+            }
         }
     }
     
