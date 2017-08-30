@@ -1,10 +1,13 @@
 {
     "request": {
         "method": "GET",
-        "url": "/issuer/web-auth/introduction"
+        "urlPath": "/issuer/web-auth/introduction"
     },
     "response": {
         "status": 302,
-        "body": "Location: http://localhost:1234/issuer/web-auth/login-portal"
+        "headers": {
+          "Location": "http://localhost:1234/issuer/web-auth/login-portal"
+        },
+        "body": ""
     }
 }

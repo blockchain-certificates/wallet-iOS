@@ -9,28 +9,52 @@
 import XCTest
 
 class WebAuthIssuerTests: XCTestCase {
-        
     override func setUp() {
         super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
+        
+        //
+        // In these set of tests, we're launching the app
+        //   * With a known passphrase, to avoid onboarding
+        //
+        let app = XCUIApplication()
+        app.launchArguments = [ "--reset-data", "--use-passphrase", testPassphrase]
+        app.launch()
+    }
+    
+    func testAddingWebAuthIssuer() {
+        let app = XCUIApplication()
+        XCTAssertEqual(app.collectionViews.cells.count, 0)
+        XCTAssertFalse(app.collectionViews.cells["Web Auth Issuer"].exists)
+        
+        app.collectionViews.buttons["ADD ISSUER"].tap()
+        
+        let elementsQuery = app.scrollViews.otherElements
+        let issuerUrlTextField = elementsQuery.textFields["Issuer URL"]
+        issuerUrlTextField.tap()
+        issuerUrlTextField.typeText("http://localhost:1234/issuer/web-auth")
+        
+        let oneTimeCodeTextField = elementsQuery.textFields["One-Time Code"]
+        oneTimeCodeTextField.tap()
+        oneTimeCodeTextField.tap()
+        oneTimeCodeTextField.typeText("12345")
+        app.navigationBars["Add Issuer"].buttons["Save"].tap()
+        
+        XCTAssert(app.navigationBars["Log In To Issuer"].exists)
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let title = app.staticTexts["Web Authentication Challenge"]
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: title, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        app.links["Yes"].tap()
+        
+        let nav = app.navigationBars["Issuers"]
+        expectation(for: exists, evaluatedWith: nav, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        XCTAssertEqual(app.collectionViews.cells.count, 1)
+        XCTAssert(app.collectionViews.cells["Web Auth Issuer"].exists)
     }
     
 }
