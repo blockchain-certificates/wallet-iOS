@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "POST",
-        "url": "/introduction/always-accepting"
+        "url": "/issuer/accepting/introduction"
     },
     "response": {
         "status": 200,

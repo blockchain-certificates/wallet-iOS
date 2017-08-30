@@ -52,7 +52,7 @@ class ExistingIssuerTests: XCTestCase {
         let elementsQuery = app.scrollViews.otherElements
         let issuerUrlTextField = elementsQuery.textFields["Issuer URL"]
         issuerUrlTextField.tap()
-        issuerUrlTextField.typeText("http://localhost:1234/accepting_issuer.json")
+        issuerUrlTextField.typeText("http://localhost:1234/issuer/accepting/identity")
 
         let oneTimeCodeTextField = elementsQuery.textFields["One-Time Code"]
         oneTimeCodeTextField.tap()

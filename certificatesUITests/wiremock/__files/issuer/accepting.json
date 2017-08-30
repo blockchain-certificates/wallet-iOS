@@ -10,9 +10,9 @@
 		"id": "ecdsa-koblitz-pubkey:n138AWR4d2srKgw57rWph8wibVSwZt2XDi",
 		"created": "2017-03-10T18:17:48.102+00:00"
 	}],
-	"introductionURL": "http://localhost:1234/introduction/always-accepting",
+	"introductionURL": "http://localhost:1234/issuer/accepting/introduction",
 	"introductionAuthenticationMethod": "none",
-	"introductionSuccessURL": "http://localhost:1234/api/organization/accept-success",
-	"introductionErrorURL": "http://localhost:1234/api/organization/accept-failed",
-	"analyticsURL": "http://localhost:1234/api/event/certificate"
+	"introductionSuccessURL": "http://localhost:1234/issuer/accepting//accept-success",
+	"introductionErrorURL": "http://localhost:1234/issuer/accepting//accept-failed",
+	"analyticsURL": "http://localhost:1234/issuer/accepting/analytics"
 }
