@@ -78,7 +78,34 @@ class WebAuthIssuerTests: XCTestCase {
         // We're going to try to get into a weird state on this one. While we're in the middle of the
         // web-auth prompt, we're going to kick over to Safari and click a deep link.
         //
+        let app = XCUIApplication()
+        let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
         
+        // Launch Safari, go to our test page, and click our universal link.
+        safari.launch()
+        safari.otherElements["URL"].tap()
+        safari.textFields["URL"].typeText("http://localhost:1234/links/web-auth-issuer\n")
+        let webpage = safari.staticTexts["Link for Web Auth Issuer"]
+        XCTAssert(webpage.waitForExistence(timeout: 5))
+        safari.links["Click Here"].tap()
+        
+        // At this point, we should be back in our app.
+        XCTAssert(app.navigationBars["Log In To Issuer"].exists)
+        XCTAssert(app.staticTexts["Web Authentication Challenge"].waitForExistence(timeout: 5))
+        
+        // Just kidding. Let's go back to Safari and click that link again.
+        safari.activate()
+        safari.links["Click Here"].tap()
+        
+        // At this point, we should be back in our app.
+        XCTAssert(app.navigationBars["Log In To Issuer"].waitForExistence(timeout: 5))
+        XCTAssert(app.staticTexts["Web Authentication Challenge"].waitForExistence(timeout: 5))
+        
+        app.links["Yes"].tap()
+        
+        XCTAssert(app.navigationBars["Issuers"].waitForExistence(timeout: 5))
+        XCTAssertEqual(app.collectionViews.cells.count, 1)
+        XCTAssert(app.collectionViews.cells["Web Auth Issuer"].exists)
     }
     
     func testFailingWebAuth() {
