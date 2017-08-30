@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "GET",
-        "url": "/issuer/web-auth/introduction/error"
+        "urlPath": "/issuer/web-auth/introduction/error"
     },
     "response": {
         "status": 200,

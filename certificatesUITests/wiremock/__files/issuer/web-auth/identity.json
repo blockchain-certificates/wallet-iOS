@@ -13,6 +13,6 @@
 	"introductionURL": "http://localhost:1234/issuer/web-auth/introduction",
 	"introductionAuthenticationMethod": "web",
 	"introductionSuccessURL": "http://localhost:1234/issuer/web-auth/introduction/success",
-	"introductionErrorURL": "http://localhost:1234/issuer/web-auth/introduction/failed",
+	"introductionErrorURL": "http://localhost:1234/issuer/web-auth/introduction/error?reason=I%20said%20so",
 	"analyticsURL": "http://localhost:1234/issuer/web-auth/analytics"
 }
