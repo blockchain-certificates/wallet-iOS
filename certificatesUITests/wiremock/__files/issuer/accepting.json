@@ -12,7 +12,7 @@
 	}],
 	"introductionURL": "http://localhost:1234/issuer/accepting/introduction",
 	"introductionAuthenticationMethod": "none",
-	"introductionSuccessURL": "http://localhost:1234/issuer/accepting//accept-success",
-	"introductionErrorURL": "http://localhost:1234/issuer/accepting//accept-failed",
+	"introductionSuccessURL": "http://localhost:1234/issuer/accepting/accept-success",
+	"introductionErrorURL": "http://localhost:1234/issuer/accepting/accept-failed",
 	"analyticsURL": "http://localhost:1234/issuer/accepting/analytics"
 }

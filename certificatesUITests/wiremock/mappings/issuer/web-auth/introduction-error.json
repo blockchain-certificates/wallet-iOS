@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/issuer/web-auth/introduction/error"
+    },
+    "response": {
+        "status": 200,
+        "body": "<html><body><h1>Web Auth Introduction Error</h1></body></html>"
+    }
+}
