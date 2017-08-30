@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/issuer/web-auth"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "web_auth_issuer_identity.json"
+    }
+}

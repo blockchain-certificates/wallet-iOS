@@ -33,7 +33,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cd $WORKSPACE_PATH/../certificatesUITests/wiremock/&#10;pwd &gt; ~/current_directory.txt&#10;&#10;./run.sh &amp;&#10;"
+               scriptText = "cd $WORKSPACE_PATH/../certificatesUITests/wiremock/&#10;&#10;#./run.sh &amp;&#10;"
                shellToInvoke = "/bin/bash">
             </ActionContent>
          </ExecutionAction>

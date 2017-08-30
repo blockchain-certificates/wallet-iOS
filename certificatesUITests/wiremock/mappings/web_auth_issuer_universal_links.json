@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/links/web-auth-issuer"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "web_auth_issuer_universal_links.html"
+    }
+}

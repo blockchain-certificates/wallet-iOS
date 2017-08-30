@@ -54,6 +54,7 @@
 		836031C51E5E513A005B2D2E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 836031C41E5E513A005B2D2E /* Settings.bundle */; };
 		8360751F1F2A4CD300758C9E /* certificatesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8360751E1F2A4CD300758C9E /* certificatesUITests.swift */; };
 		836075271F2A4D9800758C9E /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836075261F2A4D9800758C9E /* OnboardingUITests.swift */; };
+		836B7E411F572C940086932D /* WebAuthIssuerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B7E401F572C940086932D /* WebAuthIssuerTests.swift */; };
 		83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */; };
 		8388B8AA1EDE15BF00B28A57 /* WebLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388B8A91EDE15BF00B28A57 /* WebLoginViewController.swift */; };
 		838DC1301E43EF1600533AEB /* ReplacePassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */; };
@@ -185,6 +186,7 @@
 		8360751E1F2A4CD300758C9E /* certificatesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = certificatesUITests.swift; sourceTree = "<group>"; };
 		836075201F2A4CD300758C9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		836075261F2A4D9800758C9E /* OnboardingUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
+		836B7E401F572C940086932D /* WebAuthIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthIssuerTests.swift; sourceTree = "<group>"; };
 		83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCertificatesTableViewCell.swift; sourceTree = "<group>"; };
 		8388B8A91EDE15BF00B28A57 /* WebLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebLoginViewController.swift; sourceTree = "<group>"; };
 		838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplacePassphraseViewController.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				836075261F2A4D9800758C9E /* OnboardingUITests.swift */,
 				8332F5611F475512002534D0 /* ExistingIssuerTests.swift */,
 				833E674A1F47925E00773563 /* ExistingCertificateTests.swift */,
+				836B7E401F572C940086932D /* WebAuthIssuerTests.swift */,
 				836075201F2A4CD300758C9E /* Info.plist */,
 			);
 			path = certificatesUITests;
@@ -881,6 +884,7 @@
 				8332F5621F475512002534D0 /* ExistingIssuerTests.swift in Sources */,
 				833E674B1F47925E00773563 /* ExistingCertificateTests.swift in Sources */,
 				8360751F1F2A4CD300758C9E /* certificatesUITests.swift in Sources */,
+				836B7E411F572C940086932D /* WebAuthIssuerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
