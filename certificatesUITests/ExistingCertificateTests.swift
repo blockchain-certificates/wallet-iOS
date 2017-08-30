@@ -59,12 +59,6 @@ class ExistingCertificateTests: XCTestCase {
         app.toolbars.buttons["Verify"].tap()
 
         // Now that we've tapped "verify", let's wait until we see the success alert
-        let successAlert = app.alerts["Success"]
-        let exists = NSPredicate(format: "exists == 1")
-        expectation(for: exists, evaluatedWith: successAlert, handler: nil)
-        waitForExpectations(timeout: 5, handler: nil)
-        
-        XCTAssert(app.alerts["Success"].exists)
+        XCTAssert(app.alerts["Success"].waitForExistence(timeout: 5))
     }
-    
 }

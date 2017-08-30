@@ -82,6 +82,7 @@
 		83ACB7701EDE556500A1149E /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83ACB76F1EDE556500A1149E /* Onboarding.storyboard */; };
 		83BB5E461F424122002CA970 /* ManagedIssuerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BB5E451F424122002CA970 /* ManagedIssuerManagerTests.swift */; };
 		83BB5E481F424A2F002CA970 /* issuers-codable.json in Resources */ = {isa = PBXBuildFile; fileRef = 83BB5E471F424A2F002CA970 /* issuers-codable.json */; };
+		83D35B961F577774008CA437 /* Accepting-Issuer.json in Resources */ = {isa = PBXBuildFile; fileRef = 83D35B951F577774008CA437 /* Accepting-Issuer.json */; };
 		83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */; };
 		83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */; };
 		83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */; };
@@ -210,6 +211,7 @@
 		83BB5E441F4240F1002CA970 /* ManagedIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedIssuerTests.swift; sourceTree = "<group>"; };
 		83BB5E451F424122002CA970 /* ManagedIssuerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedIssuerManagerTests.swift; sourceTree = "<group>"; };
 		83BB5E471F424A2F002CA970 /* issuers-codable.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "issuers-codable.json"; sourceTree = "<group>"; };
+		83D35B951F577774008CA437 /* Accepting-Issuer.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Accepting-Issuer.json"; sourceTree = "<group>"; };
 		83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerTableViewController.swift; sourceTree = "<group>"; };
 		83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTitleTableViewCell.swift; sourceTree = "<group>"; };
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				8332F55F1F4754C3002534D0 /* Downie-Issuer.json */,
+				83D35B951F577774008CA437 /* Accepting-Issuer.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83D35B961F577774008CA437 /* Accepting-Issuer.json in Resources */,
 				833E674D1F47928B00773563 /* mainnet.json in Resources */,
 				8332F5601F4754C3002534D0 /* Downie-Issuer.json in Resources */,
 			);

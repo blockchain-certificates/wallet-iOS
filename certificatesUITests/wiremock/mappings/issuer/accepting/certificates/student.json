@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPath": "/issuer/accepting/certificates/student.json"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "issuer/accepting/certificates/student.json"
+    }
+}

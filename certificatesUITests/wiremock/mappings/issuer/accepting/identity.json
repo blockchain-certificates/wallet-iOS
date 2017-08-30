@@ -1,10 +1,10 @@
 {
     "request": {
         "method": "GET",
-        "url": "/issuer/accepting/identity"
+        "url": "/issuer/accepting"
     },
     "response": {
         "status": 200,
-        "bodyFileName": "issuer/accepting.json"
+        "bodyFileName": "issuer/accepting/identity.json"
     }
 }

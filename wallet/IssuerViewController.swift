@@ -121,6 +121,7 @@ class IssuerViewController: UIViewController {
         }
         
         saveCertificateIfOwned(certificate: certificate)
+        
     }
     
     func importCertificate(from data: Data?) {
@@ -148,7 +149,16 @@ class IssuerViewController: UIViewController {
     func saveCertificateIfOwned(certificate: Certificate) {
         // TODO: Check ownership based on the flag.
         
-        CertificateManager().save(certificate: certificate)
+        let manager = CertificateManager()
+        manager.save(certificate: certificate)
+        certificates = manager.loadCertificates()
+        certificateTableController.certificates = certificates
+        
+        navigateTo(certificate: certificate)
+        
+        OperationQueue.main.addOperation { [weak self] in
+            self?.certificateTableController.tableView.reloadData()
+        }
     }
     
     func alertError(localizedTitle: String, localizedMessage: String) {
