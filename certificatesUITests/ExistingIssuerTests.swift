@@ -41,6 +41,10 @@ class ExistingDownieIssuerTests: XCTestCase {
     }
     
     func testAddingSecondIssuer() {
+        print("\n\n\nTestAddingSecondIssuer\n\n\n")
+        defer {
+            print("\n\n\nTestAddingSecondIssuer Complete\n\n\n")
+        }
         let app = XCUIApplication()
         // We start with just one issuer
         XCTAssertEqual(app.collectionViews.cells.count, 1)
