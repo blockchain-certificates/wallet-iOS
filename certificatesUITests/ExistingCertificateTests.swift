@@ -10,7 +10,7 @@ import XCTest
 
 class ExistingCertificateTests: XCTestCase {
     let certificateDirectory = FileManager.default.temporaryDirectory.appendingPathComponent("existing-certificate-tests")
-        
+    
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
@@ -27,8 +27,12 @@ class ExistingCertificateTests: XCTestCase {
         
         let testBundle = Bundle(for: type(of: self))
         let certURL = testBundle.url(forResource: "mainnet", withExtension: "json")!
-        try! FileManager.default.copyItem(at: certURL, to: certificateDirectory.appendingPathComponent("certificate.json"))
-
+        do {
+            try FileManager.default.copyItem(at: certURL, to: certificateDirectory.appendingPathComponent("certificate.json"))
+        } catch {
+            print("Failed to copy demo certificate because \(error)")
+        }
+        
         let app = XCUIApplication()
         app.launchArguments = [ "--reset-data", "--use-passphrase", testPassphrase, "--use-certificates-in-directory", certificateDirectory.path]
         app.launch()
@@ -57,8 +61,9 @@ class ExistingCertificateTests: XCTestCase {
         app.collectionViews.cells["Main Net Prod Test"].tap()
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Cert Alignment 0718"]/*[[".cells.staticTexts[\"Cert Alignment 0718\"]",".staticTexts[\"Cert Alignment 0718\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.toolbars.buttons["Verify"].tap()
-
+        
         // Now that we've tapped "verify", let's wait until we see the success alert
         XCTAssert(app.alerts["Success"].waitForExistence(timeout: 5))
     }
 }
+
