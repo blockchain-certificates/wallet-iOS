@@ -52,7 +52,6 @@
 		836031BD1E5651C9005B2D2E /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836031BC1E5651C9005B2D2E /* PrivacyViewController.swift */; };
 		836031C31E5E5064005B2D2E /* SampleCertificate.json in Resources */ = {isa = PBXBuildFile; fileRef = 836031C21E5E5064005B2D2E /* SampleCertificate.json */; };
 		836031C51E5E513A005B2D2E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 836031C41E5E513A005B2D2E /* Settings.bundle */; };
-		8360751F1F2A4CD300758C9E /* certificatesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8360751E1F2A4CD300758C9E /* certificatesUITests.swift */; };
 		836075271F2A4D9800758C9E /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836075261F2A4D9800758C9E /* OnboardingUITests.swift */; };
 		836B7E411F572C940086932D /* WebAuthIssuerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B7E401F572C940086932D /* WebAuthIssuerTests.swift */; };
 		83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */; };
@@ -184,7 +183,6 @@
 		836031C21E5E5064005B2D2E /* SampleCertificate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleCertificate.json; sourceTree = "<group>"; };
 		836031C41E5E513A005B2D2E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8360751C1F2A4CD300758C9E /* certificatesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = certificatesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8360751E1F2A4CD300758C9E /* certificatesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = certificatesUITests.swift; sourceTree = "<group>"; };
 		836075201F2A4CD300758C9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		836075261F2A4D9800758C9E /* OnboardingUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
 		836B7E401F572C940086932D /* WebAuthIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthIssuerTests.swift; sourceTree = "<group>"; };
@@ -433,7 +431,6 @@
 			children = (
 				8332F55E1F47549A002534D0 /* Resources */,
 				834A6EBF1F54C75E00393A3A /* wiremock */,
-				8360751E1F2A4CD300758C9E /* certificatesUITests.swift */,
 				836075261F2A4D9800758C9E /* OnboardingUITests.swift */,
 				8332F5611F475512002534D0 /* ExistingIssuerTests.swift */,
 				833E674A1F47925E00773563 /* ExistingCertificateTests.swift */,
@@ -887,7 +884,6 @@
 				836075271F2A4D9800758C9E /* OnboardingUITests.swift in Sources */,
 				8332F5621F475512002534D0 /* ExistingIssuerTests.swift in Sources */,
 				833E674B1F47925E00773563 /* ExistingCertificateTests.swift in Sources */,
-				8360751F1F2A4CD300758C9E /* certificatesUITests.swift in Sources */,
 				836B7E411F572C940086932D /* WebAuthIssuerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
