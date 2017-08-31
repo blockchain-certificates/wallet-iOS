@@ -56,7 +56,7 @@ class ExistingDownieIssuerTests: XCTestCase {
         let elementsQuery = app.scrollViews.otherElements
         let issuerUrlTextField = elementsQuery.textFields["Issuer URL"]
         issuerUrlTextField.tap()
-        issuerUrlTextField.typeText("http://localhost:1234/issuer/accepting/identity")
+        issuerUrlTextField.typeText("http://localhost:1234/issuer/accepting")
 
         let oneTimeCodeTextField = elementsQuery.textFields["One-Time Code"]
         oneTimeCodeTextField.tap()
