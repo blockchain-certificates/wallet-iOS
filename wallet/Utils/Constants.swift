@@ -48,3 +48,7 @@ enum Identifiers {
     static let sampleCertificateUID = "sample-certificate"
 }
 
+enum NotificationNames {
+    static let redirectToCertificate =  Notification.Name("RedirectToCertificate")
+}
+

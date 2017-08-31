@@ -111,6 +111,16 @@ class IssuerViewController: UIViewController {
         }
     }
     
+    func redirect(to certificate: Certificate) {
+        let data = [
+            "certificate": certificate
+        ]
+        OperationQueue.main.addOperation {
+            self.navigationController?.popViewController(animated: true)
+            NotificationCenter.default.post(name: NotificationNames.redirectToCertificate, object: self, userInfo: data)
+        }
+    }
+    
     // Certificate handling
     func addCertificate(from url: URL) {
         guard let certificate = CertificateManager().load(certificateAt: url) else {
@@ -121,7 +131,6 @@ class IssuerViewController: UIViewController {
         }
         
         saveCertificateIfOwned(certificate: certificate)
-        
     }
     
     func importCertificate(from data: Data?) {
@@ -154,10 +163,14 @@ class IssuerViewController: UIViewController {
         certificates = manager.loadCertificates()
         certificateTableController.certificates = certificates
         
-        navigateTo(certificate: certificate)
-        
-        OperationQueue.main.addOperation { [weak self] in
-            self?.certificateTableController.tableView.reloadData()
+        if certificate.issuer.id == managedIssuer?.issuer?.id {
+            navigateTo(certificate: certificate)
+            
+            OperationQueue.main.addOperation { [weak self] in
+                self?.certificateTableController.tableView.reloadData()
+            }
+        } else {
+            redirect(to: certificate)
         }
     }
     

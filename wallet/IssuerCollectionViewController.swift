@@ -18,6 +18,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     private let managedIssuersArchiveURL = Paths.managedIssuersListURL
     private let issuersArchiveURL = Paths.issuersNSCodingArchiveURL
     private let certificatesDirectory = Paths.certificatesDirectory
+    private var shouldRedirectToCertificate : Certificate? = nil
 
     // TODO: Should probably be AttributedIssuer, once I make up that model.
     var managedIssuers = [ManagedIssuer]()
@@ -25,6 +26,9 @@ class IssuerCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Register for notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(redirectRequested(notification:)), name: NotificationNames.redirectToCertificate, object: nil)
 
         // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
@@ -59,6 +63,13 @@ class IssuerCollectionViewController: UICollectionViewController {
         loadCertificates(shouldReloadCollection: false)
         loadBackgroundView()
         reloadCollectionView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let certificate = shouldRedirectToCertificate {
+            navigateTo(certificate: certificate)
+            shouldRedirectToCertificate = nil
+        }
     }
 
     func loadBackgroundView() {
@@ -205,6 +216,20 @@ class IssuerCollectionViewController: UICollectionViewController {
         alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
 
         present(alertController, animated: true, completion: nil)
+    }
+    
+    // Mark: Notifications
+    func redirectRequested(notification: Notification) {
+        guard let info = notification.userInfo as? [String: Certificate] else {
+            print("Redirect requested without a certificate. Ignoring.")
+            return
+        }
+        guard let certificate = info["certificate"] else {
+            print("We don't have a certificate in the user info. whoops.")
+            return
+        }
+        
+        shouldRedirectToCertificate = certificate
     }
 
     // MARK: UICollectionViewDataSource
@@ -437,12 +462,17 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func navigateTo(issuer managedIssuer: ManagedIssuer, animated: Bool = true) -> IssuerViewController {
+        if navigationController?.topViewController != self {
+            navigationController?.popToViewController(self, animated: animated)
+        }
+        
         let issuerController = IssuerViewController()
 
         issuerController.managedIssuer = managedIssuer
-        issuerController.certificates = certificates.filter { certificate in
+        let matchingCertificates = certificates.filter { certificate in
             return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
         }
+        issuerController.certificates = matchingCertificates
 
         self.navigationController?.pushViewController(issuerController, animated: animated)
 

@@ -79,7 +79,14 @@ class ExistingDownieIssuerTests: XCTestCase {
         alertsQuery.collectionViews.textFields["URL"].typeText("http://localhost:1234/issuer/accepting/certificates/student.json")
         alertsQuery.buttons["Import"].tap()
         
-//        XCTAssert(app.navigationBars["You're a student"].exists)
+        let certificateNavBar = app.navigationBars["You're a student"]
+        XCTAssert(certificateNavBar.waitForExistence(timeout: 5))
+        
+        // Back button shouldn't be to DownieTestOrg
+        let backButton = certificateNavBar.buttons["Greendale College"]
+        XCTAssert(backButton.exists)
+        backButton.tap()
+        XCTAssert(app.navigationBars["Greendale College"].exists)
     }
 }
 
