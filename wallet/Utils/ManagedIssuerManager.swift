@@ -26,7 +26,6 @@ struct ManagedIssuerManager {
     
     public func load() -> [ManagedIssuer] {
         var loadedIssuers : [ManagedIssuer]? = nil
-        
         // First, load from the new Codable path. If that fails, then try loading from the old NSCoding path.
         if FileManager.default.fileExists(atPath: issuerReadURL.path) {
             if let jsonData = FileManager.default.contents(atPath: issuerReadURL.path) {
@@ -37,10 +36,15 @@ struct ManagedIssuerManager {
                 } catch {
                     print("Failed to decode file at \(issuerReadURL)")
                 }
+            } else {
+                print("MIM had no data at \(issuerReadURL.path)")
             }
         } else if let oldReadURL = backwardsCompatibilityURL {
             loadedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: oldReadURL.path) as? [ManagedIssuer]
+            print("Loading issuers from the old read URL")
         }
+        
+        print("Loaded \(loadedIssuers?.count ?? -1) from disk")
         
         return loadedIssuers ?? []
     }
@@ -48,9 +52,11 @@ struct ManagedIssuerManager {
     public func save(_ managedIssuers: [ManagedIssuer]) -> Bool {
         let list = ManagedIssuerList(managedIssuers: managedIssuers)
         let encoder = JSONEncoder()
+        print("Saving \(managedIssuers.count) managed issuers...")
         do {
             let data = try encoder.encode(list)
             let success = FileManager.default.createFile(atPath: issuerWriteURL.path, contents: data, attributes: nil)
+            print("...it was \(success ? "great" : "a failure")")
             return success
         } catch {
             print("An exception was thrown saving the managed issuers list: \(error)")

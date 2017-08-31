@@ -29,6 +29,8 @@ struct CertificateManager {
             return try? CertificateParser.parse(data: data)
         }
 
+        print("Loaded \(loadedCertificates.count) certificates from \(files.count) files")
+        
         return loadedCertificates
     }
     
@@ -37,7 +39,7 @@ struct CertificateManager {
     func save(certificates: [Certificate]) {
         // Make sure the `certificatesDirectory` exists by trying to create it every time.
         try? FileManager.default.createDirectory(at: writeDirectory, withIntermediateDirectories: false, attributes: nil)
-        
+        print("Saving \(certificates.count) certificates.")
         for certificate in certificates {
             guard let fileName = certificate.filename else {
                 print("ERROR: Couldn't convert \(certificate.title) to character encoding.")
