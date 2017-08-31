@@ -63,7 +63,7 @@ class WebAuthIssuerTests: XCTestCase {
         safari.links["Click Here"].tap()
         
         // At this point, we should be back in our app.
-        XCTAssert(app.navigationBars["Log In To Issuer"].exists)
+        XCTAssert(app.navigationBars["Log In To Issuer"].waitForExistence(timeout: 5))
         XCTAssert(app.staticTexts["Web Authentication Challenge"].waitForExistence(timeout: 5))
         
         app.links["Yes"].tap()
