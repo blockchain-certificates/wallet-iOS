@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/issuer/web-auth/analytics"
+    },
+    "response": {
+        "status": 200,
+        "body": ""
+    }
+}
