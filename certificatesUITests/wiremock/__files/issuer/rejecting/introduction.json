@@ -1,0 +1,5 @@
+{
+	"Code": "BADREQUEST",
+	"Message": "Invalid invitation token",
+	"StackTrace": ""
+}
