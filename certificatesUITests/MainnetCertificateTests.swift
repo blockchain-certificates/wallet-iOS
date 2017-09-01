@@ -75,7 +75,7 @@ class MainnetCertificateTests: XCTestCase {
 }
 
 
-class MainnetCertificate20180829Tests: XCTestCase {
+class MainnetCertificate_2018_08_29_Tests: XCTestCase {
     let certificateDirectory = FileManager.default.temporaryDirectory.appendingPathComponent("existing-certificate-tests")
     
     override func setUp() {
@@ -131,6 +131,66 @@ class MainnetCertificate20180829Tests: XCTestCase {
         
         // Now that we've tapped "verify", let's wait until we see the success alert
         XCTAssert(app.alerts["Success"].waitForExistence(timeout: 5))
+    }
+}
+
+
+class MainnetCertificate_2018_09_01_Tests: XCTestCase {
+    let certificateDirectory = FileManager.default.temporaryDirectory.appendingPathComponent("existing-certificate-tests")
+    
+    override func setUp() {
+        super.setUp()
+        continueAfterFailure = false
+        
+        //
+        // In these set of tests, we're launching the app
+        //   * With a known passphrase, to avoid onboarding
+        //   * With an existing issuer (Downie Test Org)
+        //
+        
+        if !FileManager.default.fileExists(atPath: certificateDirectory.path) {
+            try! FileManager.default.createDirectory(at: certificateDirectory, withIntermediateDirectories: true, attributes: nil)
+        }
+        
+        let testBundle = Bundle(for: type(of: self))
+        let certURL = testBundle.url(forResource: "testnet-2017-09-01", withExtension: "json")!
+        do {
+            try FileManager.default.copyItem(at: certURL, to: certificateDirectory.appendingPathComponent("certificate.json"))
+        } catch {
+            print("Failed to copy demo certificate because \(error)")
+        }
+        
+        let app = XCUIApplication()
+        app.launchArguments = [ "--reset-data", "--use-passphrase", testPassphrase, "--use-certificates-in-directory", certificateDirectory.path]
+        app.launch()
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        
+        let files = try? FileManager.default.contentsOfDirectory(atPath: certificateDirectory.path)
+        for filename in files ?? [] {
+            do {
+                try FileManager.default.removeItem(atPath: certificateDirectory.appendingPathComponent(filename).path)
+            } catch {
+                print("Failed to remove item \(error)")
+            }
+        }
+    }
+    
+    func testDataLoading() {
+        let app = XCUIApplication()
+        XCTAssert(app.collectionViews.cells["August Testnet"].exists)
+    }
+    
+    func testVerificationOfCertificate() {
+        let app = XCUIApplication()
+        app.collectionViews.cells["August Testnet"].tap()
+        app.tables.staticTexts["City Recipient variable 081017"].tap()
+        app.toolbars.buttons["Verify"].tap()
+        
+        // Now that we've tapped "verify", let's wait until we see the success alert
+        XCTAssert(app.alerts["Invalid"].waitForExistence(timeout: 5))
     }
 }
 
