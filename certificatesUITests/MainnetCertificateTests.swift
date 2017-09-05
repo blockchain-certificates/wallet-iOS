@@ -191,6 +191,7 @@ class MainnetCertificate_2018_09_01_Tests: XCTestCase {
         
         // Now that we've tapped "verify", let's wait until we see the success alert
         XCTAssert(app.alerts["Invalid"].waitForExistence(timeout: 5))
+        XCTAssert(app.alerts["Invalid"].staticTexts["This is a testnet certificate. It cannot be validated."].exists)
     }
 }
 
