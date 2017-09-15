@@ -4,4 +4,4 @@
 [submodule "External/BlockcertsFramework-iOS"]
 	path = External/BlockcertsFramework-iOS
 	url = git@github.com:blockchain-certificates/BlockcertsFramework-iOS.git
-	branch = xcode9
+	branch = master
