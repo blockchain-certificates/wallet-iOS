@@ -18,6 +18,7 @@ class DeepLinkOnFreshInstall: XCTestCase {
         app.launch()
     }
     
+    // MARK: - Accepting issuer with add issuer & add certificate links
     func testAddIssuerLinkWithExistingAccount() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -91,8 +92,8 @@ class DeepLinkOnFreshInstall: XCTestCase {
         textView.typeText(testPassphrase)
         app.buttons["Done"].tap()
         
-        // At this point, it should auto-add the issuer. Let's just wait until it shows up
-        XCTAssert(app.collectionViews.cells["Greendale College"].waitForExistence(timeout: 5))
+        // At this point, it should auto-add the certificate. Let's just wait until it shows up.
+        XCTAssert(app.navigationBars["You're a student"].waitForExistence(timeout: 5))
     }
     
     func testAddCertificateLinkWithNewAccount() {
@@ -114,7 +115,8 @@ class DeepLinkOnFreshInstall: XCTestCase {
         app.buttons["GENERATE PASSPHRASE"].tap()
         app.buttons["DONE"].tap()
         
-        // At this point, it should auto-add the issuer. Let's just wait until it shows up
-        XCTAssert(app.collectionViews.cells["Greendale College"].waitForExistence(timeout: 5))
+        // At this point, it should auto-add the certificate. Let's just wait until it shows up.
+        XCTAssert(app.navigationBars["You're a student"].waitForExistence(timeout: 5))
     }
+    
 }

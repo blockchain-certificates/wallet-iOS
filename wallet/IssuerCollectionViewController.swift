@@ -257,11 +257,8 @@ class IssuerCollectionViewController: UICollectionViewController {
             break
         case .addIssuer(let identificationURL, let nonce):
             showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
-        default:
-            print("UH OH. THis isn't handled yet.")
-            break
-//        case .addCertificate(let certificateURL):
-//            _ = add(certificateURL: certificateURL, silently: false, animated: true)
+        case .addCertificate(let certificateURL, let silently, let animated):
+            _ = add(certificateURL: certificateURL, silently: silently, animated: animated)
         }
     }
 
