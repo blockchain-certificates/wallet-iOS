@@ -119,4 +119,55 @@ class DeepLinkOnFreshInstall: XCTestCase {
         XCTAssert(app.navigationBars["You're a student"].waitForExistence(timeout: 5))
     }
     
+    // MARK: - Alternate issuer responses
+    func testAddRejectingIssuerLinkWithNewAccount() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let app = XCUIApplication()
+        let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
+        
+        // Launch Safari, go to our test page, and click our universal link.
+        safari.launch()
+        safari.otherElements["URL"].tap()
+        safari.textFields["URL"].typeText("http://localhost:1234/links/universal-links\n")
+        let webpage = safari.staticTexts["Add Issuer Links"]
+        XCTAssert(webpage.waitForExistence(timeout: 5))
+        safari.links["Add Rejecting Issuer"].tap()
+        
+        XCTAssert(app.buttons["NEW ACCOUNT"].waitForExistence(timeout: 5))
+        app.buttons["NEW ACCOUNT"].tap()
+        app.buttons["GENERATE PASSPHRASE"].tap()
+        app.buttons["DONE"].tap()
+        
+        XCTAssert(app.alerts["Add Issuer Failed"].waitForExistence(timeout: 5))
+    }
+    
+    func testAddWebAuthIssuerLinkWithNewAccount() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let app = XCUIApplication()
+        let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
+        
+        // Launch Safari, go to our test page, and click our universal link.
+        safari.launch()
+        safari.otherElements["URL"].tap()
+        safari.textFields["URL"].typeText("http://localhost:1234/links/universal-links\n")
+        let webpage = safari.staticTexts["Add Issuer Links"]
+        XCTAssert(webpage.waitForExistence(timeout: 5))
+        safari.links["Add WebAuth Issuer"].tap()
+        
+        XCTAssert(app.buttons["NEW ACCOUNT"].waitForExistence(timeout: 5))
+        app.buttons["NEW ACCOUNT"].tap()
+        app.buttons["GENERATE PASSPHRASE"].tap()
+        app.buttons["DONE"].tap()
+        
+
+        XCTAssert(app.navigationBars["Log In To Issuer"].waitForExistence(timeout: 5))
+        XCTAssert(app.staticTexts["Web Authentication Challenge"].waitForExistence(timeout: 5))
+        app.links["Yes"].tap()
+        
+        XCTAssert(app.navigationBars["Issuers"].waitForExistence(timeout: 5))
+        XCTAssertEqual(app.collectionViews.cells.count, 1)
+        XCTAssert(app.collectionViews.cells["Web Auth Issuer"].exists)
+    }
 }
