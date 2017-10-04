@@ -31,6 +31,7 @@
 		831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831EDC0E1ED3A20E004F135B /* RenderedCertificateView.xib */; };
 		831EDC131ED5F7DA004F135B /* CoreBitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */; };
 		831EDC141ED5F7DA004F135B /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDC121ED5F7DA004F135B /* Keychain.swift */; };
+		83229D461F7EBF7100A3E012 /* DeepLinkOnFreshInstall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83229D451F7EBF7100A3E012 /* DeepLinkOnFreshInstall.swift */; };
 		8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */; };
 		8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */; };
 		832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */; };
@@ -163,6 +164,7 @@
 		831EDC0E1ED3A20E004F135B /* RenderedCertificateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderedCertificateView.xib; sourceTree = "<group>"; };
 		831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreBitcoinManager.swift; sourceTree = "<group>"; };
 		831EDC121ED5F7DA004F135B /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		83229D451F7EBF7100A3E012 /* DeepLinkOnFreshInstall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkOnFreshInstall.swift; sourceTree = "<group>"; };
 		8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryTableViewCell.swift; sourceTree = "<group>"; };
 		8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerSummaryTableViewCell.xib; sourceTree = "<group>"; };
 		832AE0121DF893A900A3CA4A /* SkyFloatingLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextField.swift; path = External/SkyFloatingLabelTextField/Sources/SkyFloatingLabelTextField.swift; sourceTree = "<group>"; };
@@ -177,11 +179,6 @@
 		8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealPassphraseTableViewController.swift; sourceTree = "<group>"; };
 		8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledTableViewCell.swift; sourceTree = "<group>"; };
 		833E674A1F47925E00773563 /* MainnetCertificateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainnetCertificateTests.swift; sourceTree = "<group>"; };
-		834A6EC11F54C75E00393A3A /* accepting_issuer_identity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accepting_issuer_identity.json; sourceTree = "<group>"; };
-		834A6EC31F54C75E00393A3A /* accepting_issuer_identity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accepting_issuer_identity.json; sourceTree = "<group>"; };
-		834A6EC41F54C75E00393A3A /* accepting_issuer_introduction.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accepting_issuer_introduction.json; sourceTree = "<group>"; };
-		834A6EC51F54C75E00393A3A /* run.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = run.sh; sourceTree = "<group>"; };
-		834A6EC61F54C75E00393A3A /* wiremock-standalone-2.7.1.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; path = "wiremock-standalone-2.7.1.jar"; sourceTree = "<group>"; };
 		834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewCell.swift; sourceTree = "<group>"; };
 		834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionViewCell.xib; sourceTree = "<group>"; };
 		835226581F588F04006CB559 /* mainnet-2017-08-29.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "mainnet-2017-08-29.json"; sourceTree = "<group>"; };
@@ -396,35 +393,6 @@
 			path = Certificates;
 			sourceTree = "<group>";
 		};
-		834A6EBF1F54C75E00393A3A /* wiremock */ = {
-			isa = PBXGroup;
-			children = (
-				834A6EC01F54C75E00393A3A /* __files */,
-				834A6EC21F54C75E00393A3A /* mappings */,
-				834A6EC51F54C75E00393A3A /* run.sh */,
-				834A6EC61F54C75E00393A3A /* wiremock-standalone-2.7.1.jar */,
-			);
-			name = wiremock;
-			path = certificatesUITests/wiremock;
-			sourceTree = SOURCE_ROOT;
-		};
-		834A6EC01F54C75E00393A3A /* __files */ = {
-			isa = PBXGroup;
-			children = (
-				834A6EC11F54C75E00393A3A /* accepting_issuer_identity.json */,
-			);
-			path = __files;
-			sourceTree = "<group>";
-		};
-		834A6EC21F54C75E00393A3A /* mappings */ = {
-			isa = PBXGroup;
-			children = (
-				834A6EC31F54C75E00393A3A /* accepting_issuer_identity.json */,
-				834A6EC41F54C75E00393A3A /* accepting_issuer_introduction.json */,
-			);
-			path = mappings;
-			sourceTree = "<group>";
-		};
 		836031C11E5E5064005B2D2E /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,11 +406,11 @@
 			isa = PBXGroup;
 			children = (
 				8332F55E1F47549A002534D0 /* Resources */,
-				834A6EBF1F54C75E00393A3A /* wiremock */,
 				836075261F2A4D9800758C9E /* OnboardingUITests.swift */,
 				8332F5611F475512002534D0 /* ExistingIssuerTests.swift */,
 				833E674A1F47925E00773563 /* MainnetCertificateTests.swift */,
 				836B7E401F572C940086932D /* WebAuthIssuerTests.swift */,
+				83229D451F7EBF7100A3E012 /* DeepLinkOnFreshInstall.swift */,
 				836075201F2A4CD300758C9E /* Info.plist */,
 			);
 			path = certificatesUITests;
@@ -896,6 +864,7 @@
 				836075271F2A4D9800758C9E /* OnboardingUITests.swift in Sources */,
 				8332F5621F475512002534D0 /* ExistingIssuerTests.swift in Sources */,
 				833E674B1F47925E00773563 /* MainnetCertificateTests.swift in Sources */,
+				83229D461F7EBF7100A3E012 /* DeepLinkOnFreshInstall.swift in Sources */,
 				836B7E411F572C940086932D /* WebAuthIssuerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/links/universal-links"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "links/universal-links.html"
+    }
+}
