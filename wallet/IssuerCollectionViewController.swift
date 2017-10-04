@@ -1,4 +1,4 @@
- //
+//
 //  IssuerCollectionViewController.swift
 //  wallet
 //
@@ -14,11 +14,24 @@ private let addIssuerReuseIdentifier = "AddIssuerCollectionViewCell"
 
 private let segueToViewIssuer = "ShowIssuerDetail"
 
+public enum AutocompleteRequest {
+    case none
+    case addIssuer(identificationURL: URL, nonce : String)
+    case addCertificate(certificateURL : URL, silently: Bool, animated: Bool)
+}
+ 
 class IssuerCollectionViewController: UICollectionViewController {
     private let managedIssuersArchiveURL = Paths.managedIssuersListURL
     private let issuersArchiveURL = Paths.issuersNSCodingArchiveURL
     private let certificatesDirectory = Paths.certificatesDirectory
     private var shouldRedirectToCertificate : Certificate? = nil
+    public var autocompleteRequest : AutocompleteRequest = .none {
+        didSet {
+            if Keychain.hasPassphrase() {
+                processAutocompleteRequest()
+            }
+        }
+    }
 
     // TODO: Should probably be AttributedIssuer, once I make up that model.
     var managedIssuers = [ManagedIssuer]()
@@ -29,6 +42,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         // Register for notifications
         NotificationCenter.default.addObserver(self, selector: #selector(redirectRequested(notification:)), name: NotificationNames.redirectToCertificate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onboardingCompleted(notification:)), name: NotificationNames.onboardingComplete, object: nil)
 
         // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
@@ -230,6 +244,25 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
         
         shouldRedirectToCertificate = certificate
+    }
+    
+    func onboardingCompleted(notification: Notification) {
+        precondition(Keychain.hasPassphrase(), "OnboardingCompleted notification shouldn't fire until they keychain has a passphrase.")
+        processAutocompleteRequest()
+    }
+    
+    func processAutocompleteRequest() {
+        switch autocompleteRequest {
+        case .none:
+            break
+        case .addIssuer(let identificationURL, let nonce):
+            showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
+        default:
+            print("UH OH. THis isn't handled yet.")
+            break
+//        case .addCertificate(let certificateURL):
+//            _ = add(certificateURL: certificateURL, silently: false, animated: true)
+        }
     }
 
     // MARK: UICollectionViewDataSource

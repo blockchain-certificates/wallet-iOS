@@ -49,7 +49,9 @@ class RestoreAccountViewController: UIViewController {
         }
         do {
             try Keychain.updateShared(with: passphrase)
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: NotificationNames.onboardingComplete, object: nil)
+            })
         } catch {
             failedPassphrase(error: NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
         }
@@ -104,6 +106,9 @@ class GeneratedPassphraseViewController: UIViewController {
     
     @IBAction func doneTapped() {
         dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            NotificationCenter.default.post(name: NotificationNames.onboardingComplete, object: nil)
+        }
     }
     
     func generatePassphrase() {

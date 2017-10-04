@@ -156,9 +156,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func launchAddIssuer(at introductionURL: URL, with nonce: String) {
-        let issuerCollection = popToIssuerCollection()
+        let rootController = window?.rootViewController as? UINavigationController
+        let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
         
-        issuerCollection?.showAddIssuerFlow(identificationURL: introductionURL, nonce: nonce)
+        issuerCollection?.autocompleteRequest = .addIssuer(identificationURL: introductionURL, nonce: nonce)
     }
     
     func launchAddCertificate(at url: URL, showCertificate: Bool = false, animated: Bool = true) -> Bool {
