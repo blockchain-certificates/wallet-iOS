@@ -49,6 +49,7 @@ enum Identifiers {
 }
 
 enum NotificationNames {
-    static let redirectToCertificate =  Notification.Name("RedirectToCertificate")
+    static let redirectToCertificate = Notification.Name("RedirectToCertificate")
+    static let onboardingComplete = Notification.Name("OnboardingComplete")
 }
 
