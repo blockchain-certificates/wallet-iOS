@@ -105,7 +105,6 @@ class GeneratedPassphraseViewController: UIViewController {
     }
     
     @IBAction func doneTapped() {
-        dismiss(animated: true, completion: nil)
         dismiss(animated: true) {
             NotificationCenter.default.post(name: NotificationNames.onboardingComplete, object: nil)
         }
