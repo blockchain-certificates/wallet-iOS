@@ -6,6 +6,7 @@
 //  Copyright © 2017 Learning Machine, Inc. All rights reserved.
 //
 
+import UIKit
 import Foundation
 import Blockcerts
 
