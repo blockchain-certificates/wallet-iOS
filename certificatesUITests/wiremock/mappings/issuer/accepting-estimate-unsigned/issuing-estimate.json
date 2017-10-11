@@ -1,0 +1,15 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPath": "/issuer/accepting-estimate-unsigned/issuing-estimate",
+        "queryParameters": {
+          "key": {
+            "matches": ".*"
+          }
+        }
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "issuer/accepting-estimate-unsigned/issuing-estimate.json"
+    }
+}

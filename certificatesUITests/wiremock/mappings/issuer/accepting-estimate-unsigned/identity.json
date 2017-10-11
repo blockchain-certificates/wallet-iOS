@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/issuer/accepting-estimate-unsigned"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "issuer/accepting-estimate-unsigned/identity.json"
+    }
+}

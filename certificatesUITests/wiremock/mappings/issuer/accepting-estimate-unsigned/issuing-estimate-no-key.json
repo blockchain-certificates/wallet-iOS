@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/issuer/accepting-estimate-unsigned/issuing-estimate"
+    },
+    "response": {
+        "status": 400,
+        "body": "Request is missing 'key' parameter."
+    }
+}

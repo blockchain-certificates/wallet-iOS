@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/issuer/accepting-estimate-unsigned/introduction"
+    },
+    "response": {
+        "status": 200,
+        "body": ""
+    }
+}
