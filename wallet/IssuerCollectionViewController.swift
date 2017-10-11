@@ -256,7 +256,13 @@ class IssuerCollectionViewController: UICollectionViewController {
         case .none:
             break
         case .addIssuer(let identificationURL, let nonce):
-            showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
+            if presentedViewController != nil {
+                presentedViewController?.dismiss(animated: false, completion: {
+                    self.showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
+                })
+            } else {
+                showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
+            }
         case .addCertificate(let certificateURL, let silently, let animated):
             _ = add(certificateURL: certificateURL, silently: silently, animated: animated)
         }
@@ -528,8 +534,10 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         if presentedViewController != nil {
             presentedViewController?.dismiss(animated: false) { [weak self] in
-                self?.present(navigation, animated: true) {
-                    controller.autoSubmitIfPossible()
+                OperationQueue.main.addOperation {
+                    self?.present(navigation, animated: true) {
+                        controller.autoSubmitIfPossible()
+                    }
                 }
             }
         } else {
