@@ -9,7 +9,16 @@
 	"publicKey": [{
 		"id": "ecdsa-koblitz-pubkey:n138AWR4d2srKgw57rWph8wibVSwZt2XDi",
 		"created": "2017-03-10T18:17:48.102+00:00"
-	}],
+	},{
+    "id": "ecdsa-koblitz-pubkey:mfytesbKjjP1XHKiLHM5SuQTZ6Dg1Ee3pu",
+    "created": "2017-05-31T01:08:28.196+00:00"
+  }, {
+    "id": "ecdsa-koblitz-pubkey:174YhicxwUkGFn8e51TMcamNaRSGPch3n4",
+    "created": "2017-06-29T19:18:49.843+00:00"
+  }, {
+    "id": "ecdsa-koblitz-pubkey:1FGiZB7K757EUixGcyeyME6Jp8qQZEiUUk",
+    "created": "2017-06-30T12:44:48.333+00:00"
+  }],
 	"introductionURL": "http://localhost:1234/issuer/web-auth/introduction",
 	"introductionAuthenticationMethod": "web",
 	"introductionSuccessURL": "http://localhost:1234/issuer/web-auth/introduction/success",
