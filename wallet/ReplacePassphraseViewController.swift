@@ -38,7 +38,7 @@ class ReplacePassphraseViewController: UIViewController {
         navigationItem.rightBarButtonItem = replaceButton
     }
     
-    func saveNewPassphrase() {
+    @objc func saveNewPassphrase() {
         resignFirstResponder()
         errorLabel.text = nil
         

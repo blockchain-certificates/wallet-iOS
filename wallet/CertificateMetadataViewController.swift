@@ -173,7 +173,7 @@ class CertificateMetadataViewController: UIViewController {
         }
     }
 
-    func dismissSelf() {
+    @objc func dismissSelf() {
         dismiss(animated: true, completion: nil)
     }
     

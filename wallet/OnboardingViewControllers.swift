@@ -151,7 +151,7 @@ class RectangularButton : UIButton {
         layer.borderWidth = 0.5
         contentEdgeInsets = UIEdgeInsets(top: edgeInsets, left: edgeInsets, bottom: edgeInsets, right: edgeInsets)
         tintColor = .black
-        titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         
         setTitleColor(.black, for: .normal)
         setTitleColor(.black, for: .selected)
@@ -181,7 +181,7 @@ class TitleLabel: UILabel {
     }
     
     func commonInit() {
-        self.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightMedium)
+        self.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
     }
 }
 

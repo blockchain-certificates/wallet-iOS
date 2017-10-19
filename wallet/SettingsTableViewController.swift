@@ -64,7 +64,7 @@ class SettingsTableViewController: UITableViewController {
         navigationController?.navigationBar.barStyle = barStyle
     }
 
-    func dismissSettings() {
+    @objc func dismissSettings() {
         dismiss(animated: true, completion: nil)
     }
 

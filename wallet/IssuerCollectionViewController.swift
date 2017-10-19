@@ -59,7 +59,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         self.navigationController?.navigationBar.barTintColor = .brandColor
         self.navigationController?.navigationBar.tintColor = .tintColor
         navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.titleColor
+            NSAttributedStringKey.foregroundColor: UIColor.titleColor
         ]
 
         // Load any existing issuers.
@@ -178,7 +178,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         present(controller, animated: true, completion: nil)
     }
 
-    func addIssuerButtonTapped() {
+    @objc func addIssuerButtonTapped() {
         showAddIssuerFlow()
     }
 
@@ -233,7 +233,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     // Mark: Notifications
-    func redirectRequested(notification: Notification) {
+    @objc func redirectRequested(notification: Notification) {
         guard let info = notification.userInfo as? [String: Certificate] else {
             print("Redirect requested without a certificate. Ignoring.")
             return
@@ -246,7 +246,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         shouldRedirectToCertificate = certificate
     }
     
-    func onboardingCompleted(notification: Notification) {
+    @objc func onboardingCompleted(notification: Notification) {
         precondition(Keychain.hasPassphrase(), "OnboardingCompleted notification shouldn't fire until they keychain has a passphrase.")
         processAutocompleteRequest()
     }

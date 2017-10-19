@@ -99,7 +99,7 @@ class IssuerTableViewController: UITableViewController {
         let label = UILabel()
         label.text = NSLocalizedString("Certificates", comment: "Section title listing all certificates from this issuer.").uppercased()
         label.textColor = .primaryTextColor
-        label.font = UIFont.systemFont(ofSize: 11, weight: UIFontWeightBold)
+        label.font = UIFont.systemFont(ofSize: 11, weight: UIFont.Weight.bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         let separator = UIView()
@@ -142,7 +142,7 @@ class IssuerTableViewController: UITableViewController {
     }
     
     // MARK: Key actions
-    func confirmDeleteIssuer() {
+    @objc func confirmDeleteIssuer() {
         guard let issuerToDelete = self.managedIssuer else {
             return
         }

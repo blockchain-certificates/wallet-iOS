@@ -57,7 +57,7 @@ class IssuerViewController: UIViewController {
         }
     }
     
-    func addCertificateTapped() {
+    @objc func addCertificateTapped() {
         let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
         let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
         let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
