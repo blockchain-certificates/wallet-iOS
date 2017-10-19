@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         resetSampleCertificateIfNeeded()
     }
     
-    func settingsDidChange() {
+    @objc func settingsDidChange() {
         resetSampleCertificateIfNeeded()
         enforceStrongOwnershipIfNeeded()
     }

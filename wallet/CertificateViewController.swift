@@ -153,7 +153,7 @@ class CertificateViewController: UIViewController {
         present(prompt, animated: true, completion: nil)
     }
     
-    func moreInfoTapped() {
+    @objc func moreInfoTapped() {
         let controller = CertificateMetadataViewController(certificate: certificate)
         controller.delegate = self
         let navController = UINavigationController(rootViewController: controller);

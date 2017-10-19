@@ -122,7 +122,7 @@ class AddIssuerViewController: UIViewController {
         }
     }
 
-    func saveIssuerTapped(_ sender: UIBarButtonItem) {
+    @objc func saveIssuerTapped(_ sender: UIBarButtonItem) {
         // TODO: validation.
         
         saveDataIntoFields()
@@ -135,7 +135,7 @@ class AddIssuerViewController: UIViewController {
         identifyAndIntroduceIssuer(at: identificationURL!)
     }
 
-    func cancelTapped(_ sender: UIBarButtonItem) {
+    @objc func cancelTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -149,7 +149,7 @@ class AddIssuerViewController: UIViewController {
         }
     }
     
-    func keyboardDidShow(notification: NSNotification) {
+    @objc func keyboardDidShow(notification: NSNotification) {
         guard let info = notification.userInfo,
             let keyboardRect = info[UIKeyboardFrameBeginUserInfoKey] as? CGRect else {
             return
@@ -160,7 +160,7 @@ class AddIssuerViewController: UIViewController {
         scrollView.scrollIndicatorInsets = scrollInsets
     }
     
-    func keyboardDidHide(notification: NSNotification) {
+    @objc func keyboardDidHide(notification: NSNotification) {
         scrollView.contentInset = .zero
         scrollView.scrollIndicatorInsets = .zero
     }

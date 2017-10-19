@@ -48,7 +48,7 @@ class WebLoginViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.cancelWebLogin))
     }
     
-    func cancelWebLogin() {
+    @objc func cancelWebLogin() {
         cancelCallback()
     }
 }
