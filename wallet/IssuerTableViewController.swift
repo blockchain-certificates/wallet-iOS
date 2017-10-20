@@ -28,6 +28,12 @@ class IssuerTableViewController: UITableViewController {
     public var certificates : [Certificate] = []
     
     private var certificatesHeaderSeparator : UIView?
+    private var estimateRequest : IssuerIssuingEstimateRequest?
+    private var estimates : [CertificateIssuingEstimate]? {
+        didSet {
+            updateBackgroundView()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,24 +54,63 @@ class IssuerTableViewController: UITableViewController {
         
         if certificates.isEmpty {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(confirmDeleteIssuer))
+            
+            if let issuer = managedIssuer?.issuer as? IssuingEstimateSupport,
+                let key = managedIssuer?.introducedWithAddress {
+                
+                estimateRequest = IssuerIssuingEstimateRequest(from: issuer, with: key) { [weak self] (result) in
+                    switch result {
+                    case .success(estimates: let estimates):
+                        self?.estimates = estimates
+                    case .errored(message: let message):
+                        print("Issuer IssuingEstimate errored with error:\(message)")
+                    case .aborted:
+                        print("Aborted")
+                    }
+                }
+                estimateRequest?.start()
+            }
         }
+    }
+    
+    fileprivate func updateBackgroundView() {
+        guard certificates.isEmpty else {
+            tableView.backgroundView = nil
+            return
+        }
+        let issuerName = managedIssuer?.issuer?.name ?? "this issuer"
+
+
+        let noCertificatesTitle = NSLocalizedString("No Certificates", comment: "Title when we have no certificates for this issuer.")
+        var subtitle = String(format: NSLocalizedString("You don't have any certificates from %@.", comment: "Empty certificates description when we haven't been introduced to this issuer. Format arguments: {Issuer name}"), issuerName);
+        
+        let hasBeenIntroduced = (managedIssuer?.introducedWithAddress != nil)
+        if hasBeenIntroduced {
+            if let estimates = estimates, !estimates.isEmpty {
+                let sortedEstimates = estimates.sorted(by: { (leftEstimate, rightEstimate) -> Bool in
+                    return leftEstimate.willIssueOn < rightEstimate.willIssueOn
+                })
+                let firstEstimate = sortedEstimates.first!
+                
+                let formatter = DateFormatter()
+                formatter.dateStyle = .medium
+                formatter.timeStyle = .none
+
+                let dateString = formatter.string(from: firstEstimate.willIssueOn)
+                
+                subtitle = String(format: NSLocalizedString("You should see your %@ certificate from %@ around %@", comment: "Detailed estimate string for an issuer. 3 arguments: 1st is the title of the certificate, 2nd is the issuer name, 3rd is the date it will be issued on."), arguments: [firstEstimate.title, issuerName, dateString])
+            } else {
+                subtitle = String(format: NSLocalizedString("Hang tight! You should see an email with your certificate from %@ soon.", comment: "Empty certificates description when we've already been introduced to the issuer. Format arguments: {Issuer Name}"), issuerName)
+            }
+        }
+        
+        tableView.backgroundView = NoContentView(title: noCertificatesTitle, subtitle: subtitle)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.isScrollEnabled = !certificates.isEmpty
-        let issuerName = managedIssuer?.issuer?.name ?? "this issuer"
-        
-        if certificates.isEmpty {
-            var subtitle = String(format: NSLocalizedString("You don't have any certificates from %@.", comment: "Empty certificates description when we haven't been introduced to this issuer. Format arguments: {Issuer name}"), issuerName);
-            
-            if managedIssuer?.introducedWithAddress != nil {
-                subtitle = String(format: NSLocalizedString("Hang tight! You should see an email with your certificate from %@ soon.", comment: "Empty certificates description when we've already been introduced to the issuer. Format arguments: {Issuer Name}"), issuerName)
-            }
-            let noCertificatesTitle = NSLocalizedString("No Certificates", comment: "Title when we have no certificates for this issuer.")
-            tableView.backgroundView = NoContentView(title: noCertificatesTitle, subtitle: subtitle)
-        } else {
-            tableView.backgroundView = nil
-        }
+        updateBackgroundView()
     }
     
     // MARK: - Table view data source
