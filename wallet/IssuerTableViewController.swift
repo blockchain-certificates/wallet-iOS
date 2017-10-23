@@ -104,8 +104,9 @@ class IssuerTableViewController: UITableViewController {
             }
         }
         
-        tableView.backgroundView = NoContentView(title: noCertificatesTitle, subtitle: subtitle)
-
+        OperationQueue.main.addOperation { [weak self] in
+            self?.tableView.backgroundView = NoContentView(title: noCertificatesTitle, subtitle: subtitle)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
