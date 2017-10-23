@@ -3,3 +3,8 @@
 
 
 Blockcerts mobile app for iOS to receive and share certificates that are verifiable via the blockchain.
+
+## Contact
+
+Contact us at [the Blockcerts community forum](http://community.blockcerts.org/).
+
