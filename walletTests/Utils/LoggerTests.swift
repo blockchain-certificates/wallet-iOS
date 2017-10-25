@@ -28,22 +28,4 @@ class LoggerTests: XCTestCase {
         XCTAssertNotNil(contents)
         print(contents!)
     }
-    
-//    func testPreflushLogging() {
-//        let file = FileManager.default.temporaryDirectory.appendingPathComponent("test2")
-//        let l = Logger(logFile: file)
-//
-//        l.debug("Debug String")
-//
-//        let absentFileData = FileManager.default.contents(atPath: file.path)
-//        XCTAssertNil(absentFileData)
-//
-//        wai
-//
-//        let fileData = FileManager.default.contents(atPath: file.path)
-//        XCTAssertNotNil(fileData)
-//        let contents = String(data: fileData!, encoding: .utf8)
-//        XCTAssertNotNil(contents)
-//        print(contents!)
-//    }
 }
