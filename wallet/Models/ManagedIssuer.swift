@@ -37,7 +37,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     private(set) var issuerConfirmedOn: Date?
     private(set) var isIssuerConfirmed = false
     
-    private(set) var introducedWithAddress : String?
+    private(set) var introducedWithAddress : BlockchainAddress?
     private(set) var introducedOn: Date?
     
     private var inProgressRequest : CommonRequest?
@@ -71,7 +71,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                  hostedIssuer: Issuer?,
                  isIssuerConfirmed: Bool = false,
                  issuerConfirmedOn: Date? = nil,
-                 introducedWithAddress: String? = nil) {
+                 introducedWithAddress: BlockchainAddress? = nil) {
         self.sourceIssuer = issuer
         self.hostedIssuer = hostedIssuer
         self.isIssuerConfirmed = isIssuerConfirmed
@@ -98,7 +98,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
         let issuerConfirmedOnString = try container.decodeIfPresent(String.self, forKey: .issuerConfirmedOn)
         issuerConfirmedOn = issuerConfirmedOnString?.toDate()
         isIssuerConfirmed = (issuerConfirmedOn != nil)
-        introducedWithAddress = try container.decodeIfPresent(String.self, forKey: .introducedWithAddress)
+        introducedWithAddress = try container.decodeIfPresent(BlockchainAddress.self, forKey: .introducedWithAddress)
         let introducedOnString = try container.decodeIfPresent(String.self, forKey: .introducedOn)
         introducedOn = introducedOnString?.toDate()
         
@@ -124,7 +124,10 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     
     // MARK: NSCoding
     required convenience init?(coder decoder: NSCoder) {
-        let address = decoder.decodeObject(forKey: CodingKeys.introducedWithAddress.rawValue) as? String
+        var address : BlockchainAddress? = nil
+        if let addressString = decoder.decodeObject(forKey: CodingKeys.introducedWithAddress.rawValue) as? String {
+            address = BlockchainAddress(string: addressString)
+        }
         var issuer : Issuer?
         var hostedIssuer : Issuer?
         let isConfirmed = decoder.decodeBool(forKey: CodingKeys.isIssuerConfirmed.rawValue)
