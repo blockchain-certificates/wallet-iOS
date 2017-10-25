@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Logger.main.info("Application was launched!")
+        
         let configuration = ArgumentParser().parse(arguments: ProcessInfo.processInfo.arguments)
         do {
             try ConfigurationManager().configure(with: configuration)
@@ -28,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Attempted to launch from command line with unknown error: \(error)")
         }
 
-        Logger.main.debug(Paths.managedIssuersListURL.description)
+        Logger.main.debug("Managed issuers list url: \(Paths.managedIssuersListURL)")
         
         setupApplication()
         
@@ -39,11 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // The app has launched from a universal link
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        Logger.main.info("Application was launched from a user activity.")
+        
         setupApplication()
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let url = userActivity.webpageURL {
-            
+            Logger.main.info("Application was launched with this url: \(url)")
             return importState(from: url)
         }
 
@@ -52,6 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // The app is launching with a document
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        Logger.main.info("Application was launched with a document at \(url)")
+        
         setupApplication()
         launchAddCertificate(at: url, showCertificate: true, animated: false)
         return true
