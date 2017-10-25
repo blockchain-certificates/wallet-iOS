@@ -12,7 +12,7 @@ import XCTest
 class LoggerTests: XCTestCase {
     func testBasicLogging() {
         let file = FileManager.default.temporaryDirectory.appendingPathComponent("test1")
-        var l = Logger(logFile: file)
+        let l = Logger(logFile: file)
         
         l.debug("Debug String")
         l.info("Info String")
@@ -29,4 +29,21 @@ class LoggerTests: XCTestCase {
         print(contents!)
     }
     
+//    func testPreflushLogging() {
+//        let file = FileManager.default.temporaryDirectory.appendingPathComponent("test2")
+//        let l = Logger(logFile: file)
+//
+//        l.debug("Debug String")
+//
+//        let absentFileData = FileManager.default.contents(atPath: file.path)
+//        XCTAssertNil(absentFileData)
+//
+//        wai
+//
+//        let fileData = FileManager.default.contents(atPath: file.path)
+//        XCTAssertNotNil(fileData)
+//        let contents = String(data: fileData!, encoding: .utf8)
+//        XCTAssertNotNil(contents)
+//        print(contents!)
+//    }
 }

@@ -34,17 +34,17 @@ struct ManagedIssuerManager {
                     let issuerList = try decoder.decode(ManagedIssuerList.self, from: jsonData)
                     loadedIssuers = issuerList.managedIssuers
                 } catch {
-                    print("Failed to decode file at \(issuerReadURL)")
+                    Logger.main.error("Failed to decode file at \(issuerReadURL)")
                 }
             } else {
-                print("MIM had no data at \(issuerReadURL.path)")
+                Logger.main.error("MIM had no data at \(issuerReadURL.path)")
             }
         } else if let oldReadURL = backwardsCompatibilityURL {
             loadedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: oldReadURL.path) as? [ManagedIssuer]
-            print("Loading issuers from the old read URL")
+            Logger.main.debug("Loading issuers from the old read URL")
         }
         
-        print("Loaded \(loadedIssuers?.count ?? -1) from disk")
+        Logger.main.debug("Loaded \(loadedIssuers?.count ?? -1) from disk")
         
         return loadedIssuers ?? []
     }
