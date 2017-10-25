@@ -173,12 +173,16 @@ class IssuerCollectionViewController: UICollectionViewController {
 
     // MARK: - Actions
     @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
+        Logger.main.info("Settings button tapped")
+        
         let settingsTable = SettingsTableViewController()
         let controller = UINavigationController(rootViewController: settingsTable)
         present(controller, animated: true, completion: nil)
     }
 
     @objc func addIssuerButtonTapped() {
+        Logger.main.info("Add issuer button tapped")
+        
         showAddIssuerFlow()
     }
 
@@ -243,6 +247,8 @@ class IssuerCollectionViewController: UICollectionViewController {
             return
         }
         
+        Logger.main.info("Redirecting from the Issuer Collection to a certificate: \(certificate)")
+        
         shouldRedirectToCertificate = certificate
     }
     
@@ -256,6 +262,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         case .none:
             break
         case .addIssuer(let identificationURL, let nonce):
+            Logger.main.info("Processing autocomplete request to add issuer at \(identificationURL)")
+
             if presentedViewController != nil {
                 presentedViewController?.dismiss(animated: false, completion: {
                     self.showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
@@ -264,6 +272,8 @@ class IssuerCollectionViewController: UICollectionViewController {
                 showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
             }
         case .addCertificate(let certificateURL, let silently, let animated):
+            Logger.main.info("Processing autocomplete request to add certificate at \(certificateURL)")
+            
             _ = add(certificateURL: certificateURL, silently: silently, animated: animated)
         }
     }
@@ -495,6 +505,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func navigateTo(issuer managedIssuer: ManagedIssuer, animated: Bool = true) -> IssuerViewController {
+        Logger.main.info("Navigating to issuer \(managedIssuer.issuer?.name ?? "unknown")")
+        
         if navigationController?.topViewController != self {
             navigationController?.popToViewController(self, animated: animated)
         }
@@ -513,6 +525,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func navigateTo(certificate: Certificate, animated: Bool = true) {
+        Logger.main.info("Navigating to certificate \(certificate.title)")
+        
         guard let managedIssuer = managedIssuers.filter({ (possibleIssuer) -> Bool in
             return possibleIssuer.issuer?.id == certificate.issuer.id
         }).first else {
