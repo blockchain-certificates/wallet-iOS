@@ -29,7 +29,7 @@ struct CertificateManager {
             return try? CertificateParser.parse(data: data)
         }
 
-        print("Loaded \(loadedCertificates.count) certificates from \(files.count) files")
+        Logger.main.info("Loaded \(loadedCertificates.count) certificates from \(files.count) files")
         
         return loadedCertificates
     }
@@ -39,20 +39,17 @@ struct CertificateManager {
     func save(certificates: [Certificate]) {
         // Make sure the `certificatesDirectory` exists by trying to create it every time.
         try? FileManager.default.createDirectory(at: writeDirectory, withIntermediateDirectories: false, attributes: nil)
-        print("Saving \(certificates.count) certificates.")
+        Logger.main.info("Saving \(certificates.count) certificates.")
         for certificate in certificates {
             guard let fileName = certificate.filename else {
-                print("ERROR: Couldn't convert \(certificate.title) to character encoding.")
+                Logger.main.warning("Couldn't convert \(certificate.title) to character encoding.")
                 continue
             }
             let fileURL = writeDirectory.appendingPathComponent(fileName)
             do {
                 try certificate.file.write(to: fileURL)
             } catch {
-                print("ERROR: Couldn't save \(certificate.title) to \(fileURL): \(error)")
-                dump(certificate)
-                // TODO: Remove this fatalError call. It's really just in here during development.
-                fatalError()
+                Logger.main.error("ERROR: Couldn't save \(certificate.title) to \(fileURL): \(error)")
             }
         }
     }
@@ -90,7 +87,7 @@ struct CertificateManager {
             let certificate = try CertificateParser.parse(data: certificateData)
             return certificate
         } catch {
-            print("Certificate failed to parse with \(error)")
+            Logger.main.warning("Certificate failed to parse with \(error)")
         }
 
         return nil

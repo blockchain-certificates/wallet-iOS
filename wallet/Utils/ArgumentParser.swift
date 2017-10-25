@@ -95,17 +95,17 @@ enum Argument {
                 if let url = URL(string: array[index]) {
                     args.append(.usingIssuerData(from: url))
                 } else {
-                    print("\(ArgumentLabels.useIssuerData.rawValue) observed, but \(array[index]) isn't a valid URL.")
+                    Logger.main.warning("\(ArgumentLabels.useIssuerData.rawValue) observed, but \(array[index]) isn't a valid URL.")
                 }
             case ArgumentLabels.useCertificatesInDirectory.rawValue:
                 index += 1
                 if let url = URL(string: array[index]) {
                     args.append(.usingCertificates(from: url))
                 } else {
-                    print("\(ArgumentLabels.useCertificatesInDirectory.rawValue) observed, but \(array[index]) isn't a valid URL.")
+                    Logger.main.warning("\(ArgumentLabels.useCertificatesInDirectory.rawValue) observed, but \(array[index]) isn't a valid URL.")
                 }
             default:
-                print("Unknown argument \(array[index]):  Ignoring.")
+                Logger.main.warning("Unknown argument \(array[index]):  Ignoring.")
             }
             index += 1
         }
@@ -177,7 +177,7 @@ struct ArgumentParser {
 
 struct ConfigurationManager {
     func configure(with configuration: AppConfiguration) throws {
-        print(configuration)
+        Logger.main.info(configuration.description)
         if configuration.shouldDeletePassphrase || configuration.shouldSetPassphraseTo != nil {
             deletePassphrase()
         }
@@ -236,7 +236,7 @@ struct ConfigurationManager {
             do {
                 try FileManager.default.removeItem(at: Paths.issuersNSCodingArchiveURL)
             } catch {
-                print("Failed to delete the old nscoding issuers archive. Error: \(error)")
+                Logger.main.error("Failed to delete the old nscoding issuers archive. Error: \(error)")
             }
         }
         
@@ -244,7 +244,7 @@ struct ConfigurationManager {
             do {
                 try FileManager.default.removeItem(at: Paths.managedIssuersListURL)
             } catch {
-                print("Something went wrong deleting issuers... Error: \(error)")
+                Logger.main.error("Something went wrong deleting issuers... Error: \(error)")
             }
         }
     }
@@ -256,7 +256,7 @@ struct ConfigurationManager {
                 try FileManager.default.removeItem(at: Paths.certificatesDirectory.appendingPathComponent(filePath))
             }
         } catch {
-            print("Could not clear temp folder: \(error)")
+            Logger.main.error("Could not clear temp folder: \(error)")
         }
     }
 }
