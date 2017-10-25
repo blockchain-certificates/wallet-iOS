@@ -44,25 +44,31 @@ struct AppConfiguration {
 
 extension AppConfiguration : CustomStringConvertible {
     var description : String {
-        var result = "This config should...\n"
+        var result = "This application config should..."
+        let untouchedLength = result.count
         if shouldDeletePassphrase {
-            result += "  ...delete the passphrase\n"
+            result += "\n  ...delete the passphrase"
         }
         if shouldDeleteIssuersAndCertificates {
-            result += "  ...delete the issuers & certificates\n"
+            result += "\n  ...delete the issuers & certificates"
         }
         if shouldDeleteCertificates {
-            result += "  ...delete the certificates\n"
+            result += "\n  ...delete the certificates"
         }
         if let newPassphrase = shouldSetPassphraseTo {
-            result += "  ...set the passphrase to \(newPassphrase)\n"
+            result += "\n  ...set the passphrase to \(newPassphrase)"
         }
         if let issuerURL = shouldLoadIssuersFrom {
-            result += "  ...load issuers from \(issuerURL)\n"
+            result += "\n  ...load issuers from \(issuerURL)"
         }
         if shouldResetAfterConfiguring {
-            result += "  ...and reset after configuring\n"
+            result += "\n  ...and reset after configuring"
         }
+        
+        if result.count == untouchedLength {
+            result += "launch completely normally."
+        }
+        
         return result
     }
 }

@@ -41,10 +41,7 @@ struct ManagedIssuerManager {
             }
         } else if let oldReadURL = backwardsCompatibilityURL {
             loadedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: oldReadURL.path) as? [ManagedIssuer]
-            Logger.main.debug("Loading issuers from the old read URL")
         }
-        
-        Logger.main.debug("Loaded \(loadedIssuers?.count ?? -1) from disk")
         
         return loadedIssuers ?? []
     }
