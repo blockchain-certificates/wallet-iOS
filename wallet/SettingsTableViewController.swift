@@ -65,6 +65,7 @@ class SettingsTableViewController: UITableViewController {
     }
 
     @objc func dismissSettings() {
+        Logger.main.info("Dismissing the settings screen.")
         dismiss(animated: true, completion: nil)
     }
 
@@ -80,7 +81,7 @@ class SettingsTableViewController: UITableViewController {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return 1
+            return 2
         } else if isDebugBuild && section == 2 {
             return 3
         }
@@ -97,6 +98,8 @@ class SettingsTableViewController: UITableViewController {
             text = NSLocalizedString("Reveal Passphrase", comment: "Action item in settings screen.")
         case (1, 0):
             text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
+        case (1, 1):
+            text = NSLocalizedString("Share Device Logs", comment: "Menu action item for sharing device logs.")
         case (2, 0):
             text = "Destroy passphrase & crash"
         case (2, 1):
@@ -126,16 +129,25 @@ class SettingsTableViewController: UITableViewController {
         
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
+            Logger.main.info("Reveal passphrase tapped")
             controller = RevealPassphraseTableViewController()
         case (1, 0):
+            Logger.main.info("Privacy statement tapped")
             controller = PrivacyViewController()
+        case (1, 1):
+            Logger.main.info("Sharing device logs")
+            controller = nil
+            shareLogs()
         case (2, 0):
+            Logger.main.info("Destroying passphrase & crashing...")
             configuration = AppConfiguration(shouldDeletePassphrase: true, shouldResetAfterConfiguring: true)
         case (2, 1):
+            Logger.main.info("Deleting all issuers & certificates...")
             configuration = AppConfiguration(shouldDeleteIssuersAndCertificates: true)
             tableView.deselectRow(at: indexPath, animated: true)
             break;
         case (2, 2):
+            Logger.main.info("Deleting all data & crashing...")
             configuration = AppConfiguration.resetEverything
             break;
         default:
@@ -172,5 +184,23 @@ class SettingsTableViewController: UITableViewController {
         } catch {
             Logger.main.warning("Could not delete managed issuers list: \(error)")
         }
+    }
+    
+    func shareLogs() {
+        guard let shareURL = try? Logger.main.shareLogs() else {
+            Logger.main.error("Sharing the logs failed. Not sure how we'll ever get this information back to you. ¯\\_(ツ)_/¯")
+            let alert = UIAlertController(title: NSLocalizedString("File not found", comment: "Title for the failed-to-share-your-logs alert"),
+                                          message: NSLocalizedString("We couldn't find the logs on the device.", comment: "Explanation for failing to share the log file"),
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "ok action"), style: .default, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        let items : [Any] = [ shareURL ]
+        let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        
+        present(shareController, animated: true, completion: nil)
     }
 }

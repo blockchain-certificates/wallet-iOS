@@ -123,6 +123,8 @@ class AddIssuerViewController: UIViewController {
     }
 
     @objc func saveIssuerTapped(_ sender: UIBarButtonItem) {
+        Logger.main.info("Save issuer tapped")
+        
         // TODO: validation.
         
         saveDataIntoFields()
@@ -136,6 +138,8 @@ class AddIssuerViewController: UIViewController {
     }
 
     @objc func cancelTapped(_ sender: UIBarButtonItem) {
+        Logger.main.info("Cancel Add Issuer tapped")
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -166,6 +170,8 @@ class AddIssuerViewController: UIViewController {
     }
     
     func identifyAndIntroduceIssuer(at url: URL) {
+        Logger.main.info("Starting process to identify and introduce issuer at \(url)")
+        
         cancelWebLogin()
         
         let targetRecipient = Recipient(givenName: "",
@@ -228,6 +234,8 @@ class AddIssuerViewController: UIViewController {
     }
     
     @IBAction func cancelLoadingTapped(_ sender: Any) {
+        Logger.main.info("Cancel Loading tapped.")
+        
         managedIssuer?.abortRequests()
         isLoading = false
     }
@@ -296,6 +304,8 @@ class AddIssuerViewController: UIViewController {
 
 extension AddIssuerViewController : ManagedIssuerDelegate {
     func presentWebView(at url: URL, with navigationDelegate: WKNavigationDelegate) throws {
+        Logger.main.info("Presenting the web view in the Add Issuer screen.")
+        
         let webController = WebLoginViewController(requesting: url, navigationDelegate: navigationDelegate) { [weak self] in
             self?.cancelWebLogin()
         }
