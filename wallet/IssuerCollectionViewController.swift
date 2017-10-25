@@ -235,11 +235,11 @@ class IssuerCollectionViewController: UICollectionViewController {
     // Mark: Notifications
     @objc func redirectRequested(notification: Notification) {
         guard let info = notification.userInfo as? [String: Certificate] else {
-            print("Redirect requested without a certificate. Ignoring.")
+            Logger.main.warning("Redirect requested without a certificate. Ignoring.")
             return
         }
         guard let certificate = info["certificate"] else {
-            print("We don't have a certificate in the user info. whoops.")
+            Logger.main.warning("We don't have a certificate in the user info. whoops.")
             return
         }
         
@@ -330,10 +330,10 @@ class IssuerCollectionViewController: UICollectionViewController {
             let data = try encoder.encode(list)
             let success = FileManager.default.createFile(atPath: managedIssuersArchiveURL.path, contents: data, attributes: nil)
             if !success {
-                print("Something went wrong saving the managed issuers list")
+                Logger.main.warning("Something went wrong saving the managed issuers list")
             }
         } catch {
-            print("An exception was thrown saving the managed issuers list: \(error)")
+            Logger.main.error("An exception was thrown saving the managed issuers list: \(error)")
         }
     }
 
@@ -342,7 +342,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         managedIssuer.manage(issuer: issuer) { [weak self] success in
             self?.reloadCollectionView()
             self?.saveIssuers()
-            print("Got identity from raw issuer \(String(describing: success))")
+            Logger.main.info("Got identity from raw issuer \(String(describing: success))")
         }
 
         add(managedIssuer: managedIssuer)
@@ -415,10 +415,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             do {
                 try certificate.file.write(to: fileURL)
             } catch {
-                print("ERROR: Couldn't save \(certificate.title) to \(fileURL): \(error)")
-                dump(certificate)
-                // TODO: Remove this fatalError call. It's really just in here during development.
-                fatalError()
+                Logger.main.error("ERROR: Couldn't save \(certificate.title) to \(fileURL): \(error)")
             }
         }
     }
@@ -579,7 +576,7 @@ extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
         if managedIssuer.issuer != nil {
             self.add(managedIssuer: managedIssuer)
         } else {
-            print("Something weird -- delegate called with nil issuer. \(#function)")
+            Logger.main.warning("Something weird -- delegate called with nil issuer. \(#function)")
         }
     }
 }

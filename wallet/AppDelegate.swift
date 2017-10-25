@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Attempted to launch from command line with unknown error: \(error)")
         }
 
-        print(Paths.managedIssuersListURL)
+        Logger.main.debug(Paths.managedIssuersListURL.description)
         
         setupApplication()
         
@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         guard let sampleCertURL = Bundle.main.url(forResource: "SampleCertificate.json", withExtension: nil) else {
-            print("Unable to load the sample certificate.")
+            Logger.main.warning("Unable to load the sample certificate.")
             return
         }
 
@@ -128,9 +128,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let encodedCertificateURL = pathComponents.removeFirst()
             if let decodedCertificateString = encodedCertificateURL.removingPercentEncoding,
                 let certificateURL = URL(string: decodedCertificateString) {
-                print()
-                print(decodedCertificateString)
-                print()
                 launchAddCertificate(at: certificateURL, showCertificate: true, animated: false)
                 return true
             } else {

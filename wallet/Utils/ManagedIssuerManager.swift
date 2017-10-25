@@ -52,14 +52,14 @@ struct ManagedIssuerManager {
     public func save(_ managedIssuers: [ManagedIssuer]) -> Bool {
         let list = ManagedIssuerList(managedIssuers: managedIssuers)
         let encoder = JSONEncoder()
-        print("Saving \(managedIssuers.count) managed issuers...")
+        Logger.main.debug("Saving \(managedIssuers.count) managed issuers...")
         do {
             let data = try encoder.encode(list)
             let success = FileManager.default.createFile(atPath: issuerWriteURL.path, contents: data, attributes: nil)
-            print("...it was \(success ? "great" : "a failure")")
+            Logger.main.debug("...it was \(success ? "great" : "a failure")")
             return success
         } catch {
-            print("An exception was thrown saving the managed issuers list: \(error)")
+            Logger.main.error("An exception was thrown saving the managed issuers list: \(error)")
             return false
         }
     }
