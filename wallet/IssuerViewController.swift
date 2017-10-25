@@ -146,7 +146,7 @@ class IssuerViewController: UIViewController {
             
             saveCertificateIfOwned(certificate: certificate)
         } catch {
-            print("Importing failed with error: \(error)")
+            Logger.main.error("Importing failed with error: \(error)")
             
             let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
             let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
@@ -199,7 +199,7 @@ extension IssuerViewController : CertificateViewControllerDelegate {
             return
         }
         guard let certificateFilename = certificate.filename else {
-            print("Something went wrong with generating a filename for \(certificate.id)")
+            Logger.main.error("Something went wrong with generating a filename for \(certificate.id)")
             return
         }
         
@@ -218,7 +218,8 @@ extension IssuerViewController : CertificateViewControllerDelegate {
                     realSelf.certificateTableController.tableView.reloadData()
                 }
             } catch {
-                print(error)
+                Logger.main.error("Failed to delete certificate: \(certificate.id) with error: \(error)")
+                
                 let title = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
                 let message = NSLocalizedString("Something went wrong when deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
                 let okay = NSLocalizedString("OK", comment: "Confirm action")
@@ -231,9 +232,9 @@ extension IssuerViewController : CertificateViewControllerDelegate {
         })
         
         if let error = coordinationError {
-            print("Coordination failed with \(error)")
+            Logger.main.error("Coordination failed with \(error)")
         } else {
-            print("Coordination went fine.")
+            Logger.main.info("Coordination went fine.")
         }
     }
 }

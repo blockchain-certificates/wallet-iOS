@@ -63,9 +63,9 @@ class IssuerTableViewController: UITableViewController {
                     case .success(estimates: let estimates):
                         self?.estimates = estimates
                     case .errored(message: let message):
-                        print("Issuer IssuingEstimate errored with error:\(message)")
+                        Logger.main.error("Issuer IssuingEstimate errored with error:\(message)")
                     case .aborted:
-                        print("Aborted")
+                        Logger.main.info("Aborted issuing estimate request")
                     }
                 }
                 estimateRequest?.start()
@@ -228,7 +228,7 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
             return
         }
         guard let filename = certificate.filename else {
-            print("Unable to delete \(certificate.title)")
+            Logger.main.error("Unable to delete \(certificate.title)")
             return
         }
         
@@ -244,7 +244,7 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
                 self?.certificates.remove(at: index)
                 self?.tableView.reloadData()
             } catch {
-                print(error)
+                Logger.main.error("Deleting certificate \(certificate.id) failed with \(error)")
                 
                 let deleteTitle = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
                 let deleteMessage = NSLocalizedString("Something went wrong when deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
@@ -257,9 +257,9 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
         })
         
         if let error = coordinationError {
-            print("Coordination failed with \(error)")
+            Logger.main.error("Coordination failed with \(error)")
         } else {
-            print("Coordination went fine.")
+            Logger.main.info("Coordination went fine.")
         }
     }
 }

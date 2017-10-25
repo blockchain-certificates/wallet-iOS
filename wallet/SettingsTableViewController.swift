@@ -158,19 +158,19 @@ class SettingsTableViewController: UITableViewController {
                 try FileManager.default.removeItem(at: Paths.certificatesDirectory.appendingPathComponent(filePath))
             }
         } catch {
-            print("Could not clear temp folder: \(error)")
+            Logger.main.warning("Could not clear temp folder: \(error)")
         }
         
         do {
             try FileManager.default.removeItem(at: Paths.issuersNSCodingArchiveURL)
         } catch {
-            print("Could not delete NSCoding-based issuer list: \(error)")
+            Logger.main.warning("Could not delete NSCoding-based issuer list: \(error)")
         }
         
         do {
             try FileManager.default.removeItem(at: Paths.managedIssuersListURL)
         } catch {
-            print("Could not delete managed issuers list: \(error)")
+            Logger.main.warning("Could not delete managed issuers list: \(error)")
         }
     }
 }

@@ -408,14 +408,14 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         for certificate in certificates {
             guard let fileName = certificate.filename else {
-                print("ERROR: Couldn't convert \(certificate.title) to character encoding.")
+                Logger.main.error("Couldn't convert \(certificate.title) to character encoding.")
                 continue
             }
             let fileURL = certificatesDirectory.appendingPathComponent(fileName)
             do {
                 try certificate.file.write(to: fileURL)
             } catch {
-                Logger.main.error("ERROR: Couldn't save \(certificate.title) to \(fileURL): \(error)")
+                Logger.main.error("Couldn't save \(certificate.title) to \(fileURL): \(error)")
             }
         }
     }
