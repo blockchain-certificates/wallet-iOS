@@ -279,7 +279,15 @@ class AddIssuerViewController: UIViewController {
             failureReason = String.init(format: NSLocalizedString("Issuer responded, but didn't include the \"%@\" property", comment: "Format string for an issuer response with a missing property. Variable is the property name that's missing."), named)
         case .issuerInvalid(reason: .invalid, scope: .property(let named)):
             failureReason = String.init(format: NSLocalizedString("Issuer responded, but it contained an invalid property named \"%@\"", comment: "Format string for an issuer response with an invalid property. Variable is the property name that's invalid."), named)
-        case .genericError:
+        case .authenticationFailure:
+            Logger.main.error("Failed to authenticate the user to the issuer. Either because of a bad nonce or a failed web auth.")
+            failureReason = NSLocalizedString("We couldn't authenticate you to the issuer. Double-check your one-time code and try again.", comment: "This error is presented when the user uses a bad nonce")
+        case .genericError(let error, let data):
+            var message : String?
+            if data != nil {
+                message = String(data: data!, encoding: .utf8)
+            }
+            Logger.main.error("Generic error during add issuer: \(error?.localizedDescription ?? "none"), data: \(message ?? "none")")
             failureReason = NSLocalizedString("Adding this issuer failed. Please try again", comment: "Generic error when adding an issuer.")
         default:
             failureReason = nil
