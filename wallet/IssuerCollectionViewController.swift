@@ -173,12 +173,16 @@ class IssuerCollectionViewController: UICollectionViewController {
 
     // MARK: - Actions
     @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
+        Logger.main.info("Settings button tapped")
+        
         let settingsTable = SettingsTableViewController()
         let controller = UINavigationController(rootViewController: settingsTable)
         present(controller, animated: true, completion: nil)
     }
 
     @objc func addIssuerButtonTapped() {
+        Logger.main.info("Add issuer button tapped")
+        
         showAddIssuerFlow()
     }
 
@@ -235,13 +239,15 @@ class IssuerCollectionViewController: UICollectionViewController {
     // Mark: Notifications
     @objc func redirectRequested(notification: Notification) {
         guard let info = notification.userInfo as? [String: Certificate] else {
-            print("Redirect requested without a certificate. Ignoring.")
+            Logger.main.warning("Redirect requested without a certificate. Ignoring.")
             return
         }
         guard let certificate = info["certificate"] else {
-            print("We don't have a certificate in the user info. whoops.")
+            Logger.main.warning("We don't have a certificate in the user info. whoops.")
             return
         }
+        
+        Logger.main.info("Redirecting from the Issuer Collection to a certificate: \(certificate)")
         
         shouldRedirectToCertificate = certificate
     }
@@ -256,6 +262,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         case .none:
             break
         case .addIssuer(let identificationURL, let nonce):
+            Logger.main.info("Processing autocomplete request to add issuer at \(identificationURL)")
+
             if presentedViewController != nil {
                 presentedViewController?.dismiss(animated: false, completion: {
                     self.showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
@@ -264,6 +272,8 @@ class IssuerCollectionViewController: UICollectionViewController {
                 showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
             }
         case .addCertificate(let certificateURL, let silently, let animated):
+            Logger.main.info("Processing autocomplete request to add certificate at \(certificateURL)")
+            
             _ = add(certificateURL: certificateURL, silently: silently, animated: animated)
         }
     }
@@ -330,10 +340,10 @@ class IssuerCollectionViewController: UICollectionViewController {
             let data = try encoder.encode(list)
             let success = FileManager.default.createFile(atPath: managedIssuersArchiveURL.path, contents: data, attributes: nil)
             if !success {
-                print("Something went wrong saving the managed issuers list")
+                Logger.main.warning("Something went wrong saving the managed issuers list")
             }
         } catch {
-            print("An exception was thrown saving the managed issuers list: \(error)")
+            Logger.main.error("An exception was thrown saving the managed issuers list: \(error)")
         }
     }
 
@@ -342,7 +352,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         managedIssuer.manage(issuer: issuer) { [weak self] success in
             self?.reloadCollectionView()
             self?.saveIssuers()
-            print("Got identity from raw issuer \(String(describing: success))")
+            Logger.main.info("Got identity from raw issuer \(String(describing: success))")
         }
 
         add(managedIssuer: managedIssuer)
@@ -408,17 +418,14 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         for certificate in certificates {
             guard let fileName = certificate.filename else {
-                print("ERROR: Couldn't convert \(certificate.title) to character encoding.")
+                Logger.main.error("Couldn't convert \(certificate.title) to character encoding.")
                 continue
             }
             let fileURL = certificatesDirectory.appendingPathComponent(fileName)
             do {
                 try certificate.file.write(to: fileURL)
             } catch {
-                print("ERROR: Couldn't save \(certificate.title) to \(fileURL): \(error)")
-                dump(certificate)
-                // TODO: Remove this fatalError call. It's really just in here during development.
-                fatalError()
+                Logger.main.error("Couldn't save \(certificate.title) to \(fileURL): \(error)")
             }
         }
     }
@@ -498,6 +505,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func navigateTo(issuer managedIssuer: ManagedIssuer, animated: Bool = true) -> IssuerViewController {
+        Logger.main.info("Navigating to issuer \(managedIssuer.issuer?.name ?? "unknown")")
+        
         if navigationController?.topViewController != self {
             navigationController?.popToViewController(self, animated: animated)
         }
@@ -516,6 +525,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func navigateTo(certificate: Certificate, animated: Bool = true) {
+        Logger.main.info("Navigating to certificate \(certificate.title)")
+        
         guard let managedIssuer = managedIssuers.filter({ (possibleIssuer) -> Bool in
             return possibleIssuer.issuer?.id == certificate.issuer.id
         }).first else {
@@ -579,7 +590,7 @@ extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
         if managedIssuer.issuer != nil {
             self.add(managedIssuer: managedIssuer)
         } else {
-            print("Something weird -- delegate called with nil issuer. \(#function)")
+            Logger.main.warning("Something weird -- delegate called with nil issuer. \(#function)")
         }
     }
 }

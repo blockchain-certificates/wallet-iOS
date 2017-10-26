@@ -27,7 +27,7 @@ class Analytics {
     public func track(event: AnalyticsEvent, certificate: Certificate) {
         switch environment {
         case .debug:
-            print("Tracking \(certificate.assertion.uid).")
+            Logger.main.debug("Tracking \(certificate.assertion.uid).")
         case .production:
             // Tracking with custom analytics
             report(action: event, for: certificate)
@@ -48,18 +48,18 @@ class Analytics {
         
         let downloadIssuerTask : URLSessionDataTask = URLSession.shared.dataTask(with: certificate.issuer.id) { [weak self] (issuerData, response, error) in
             guard error == nil else {
-                print("Got an error requesting data from \(certificate.issuer.id)")
+                Logger.main.error("Got an error requesting data from \(certificate.issuer.id)")
                 return
             }
             guard let issuerData = issuerData,
                 let parsedJSON = try? JSONSerialization.jsonObject(with: issuerData, options: []),
                 let json = parsedJSON as? [String: Any] else {
-                print("GET \(certificate.issuer.id) did not respond with JSON data.")
+                Logger.main.error("GET \(certificate.issuer.id) did not respond with JSON data.")
                     return
             }
             
             guard let issuer = IssuerParser.parse(dictionary: json) else {
-                print("Couldn't parse JSON as an issuer from \(certificate.issuer.id)")
+                Logger.main.error("Couldn't parse JSON as an issuer from \(certificate.issuer.id)")
                 return
             }
             
@@ -88,9 +88,7 @@ class Analytics {
         
         let uploadTask : URLSessionDataTask = URLSession.shared.dataTask(with: uploadRequest as URLRequest) { [weak self] (data, response, error) in
             guard error == nil else {
-                print("Got an error trying to report \(action) event for \(String(describing: certificate.assertion.id))")
-                dump(error!)
-                dump(response)
+                Logger.main.error("Got an error trying to report \(action) event for \(String(describing: certificate.assertion.id)): \(String(describing: error)). Response: \(String(describing:response))")
                 return
             }
             

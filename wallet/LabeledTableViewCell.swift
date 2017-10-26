@@ -48,8 +48,6 @@ class LabeledTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        print("\n\n\nawoke\n")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

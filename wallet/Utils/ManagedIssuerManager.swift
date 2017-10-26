@@ -34,17 +34,14 @@ struct ManagedIssuerManager {
                     let issuerList = try decoder.decode(ManagedIssuerList.self, from: jsonData)
                     loadedIssuers = issuerList.managedIssuers
                 } catch {
-                    print("Failed to decode file at \(issuerReadURL)")
+                    Logger.main.error("Failed to decode file at \(issuerReadURL)")
                 }
             } else {
-                print("MIM had no data at \(issuerReadURL.path)")
+                Logger.main.error("MIM had no data at \(issuerReadURL.path)")
             }
         } else if let oldReadURL = backwardsCompatibilityURL {
             loadedIssuers = NSKeyedUnarchiver.unarchiveObject(withFile: oldReadURL.path) as? [ManagedIssuer]
-            print("Loading issuers from the old read URL")
         }
-        
-        print("Loaded \(loadedIssuers?.count ?? -1) from disk")
         
         return loadedIssuers ?? []
     }
@@ -52,14 +49,14 @@ struct ManagedIssuerManager {
     public func save(_ managedIssuers: [ManagedIssuer]) -> Bool {
         let list = ManagedIssuerList(managedIssuers: managedIssuers)
         let encoder = JSONEncoder()
-        print("Saving \(managedIssuers.count) managed issuers...")
+        Logger.main.debug("Saving \(managedIssuers.count) managed issuers...")
         do {
             let data = try encoder.encode(list)
             let success = FileManager.default.createFile(atPath: issuerWriteURL.path, contents: data, attributes: nil)
-            print("...it was \(success ? "great" : "a failure")")
+            Logger.main.debug("...it was \(success ? "great" : "a failure")")
             return success
         } catch {
-            print("An exception was thrown saving the managed issuers list: \(error)")
+            Logger.main.error("An exception was thrown saving the managed issuers list: \(error)")
             return false
         }
     }

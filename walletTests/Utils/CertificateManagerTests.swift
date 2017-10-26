@@ -20,9 +20,9 @@ class CertificateManagerSingleCertificateTests: XCTestCase {
         let testBundle = Bundle(for: type(of: self))
         let certURL = testBundle.url(forResource: "mainnet", withExtension: "json")!
         do {
-        try FileManager.default.copyItem(at: certURL, to: readDirectory.appendingPathComponent("certificate.json"))
+            try FileManager.default.copyItem(at: certURL, to: readDirectory.appendingPathComponent("certificate.json"))
         } catch {
-            print("uh oh \(error)")
+            print(error)
         }
     }
     

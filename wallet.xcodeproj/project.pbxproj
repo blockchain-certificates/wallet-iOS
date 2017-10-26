@@ -59,6 +59,9 @@
 		836031C51E5E513A005B2D2E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 836031C41E5E513A005B2D2E /* Settings.bundle */; };
 		836075271F2A4D9800758C9E /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836075261F2A4D9800758C9E /* OnboardingUITests.swift */; };
 		836B7E411F572C940086932D /* WebAuthIssuerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B7E401F572C940086932D /* WebAuthIssuerTests.swift */; };
+		8372F2F51FA12421007F0BC2 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8372F2F41FA12421007F0BC2 /* Logger.swift */; };
+		8372F2F71FA1317F007F0BC2 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8372F2F61FA1317F007F0BC2 /* LoggerTests.swift */; };
+		8372F2F81FA131DE007F0BC2 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8372F2F41FA12421007F0BC2 /* Logger.swift */; };
 		83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */; };
 		8388B8AA1EDE15BF00B28A57 /* WebLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388B8A91EDE15BF00B28A57 /* WebLoginViewController.swift */; };
 		838DC1301E43EF1600533AEB /* ReplacePassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */; };
@@ -189,6 +192,8 @@
 		836075201F2A4CD300758C9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		836075261F2A4D9800758C9E /* OnboardingUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
 		836B7E401F572C940086932D /* WebAuthIssuerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthIssuerTests.swift; sourceTree = "<group>"; };
+		8372F2F41FA12421007F0BC2 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Utils/Logger.swift; sourceTree = "<group>"; };
+		8372F2F61FA1317F007F0BC2 /* LoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCertificatesTableViewCell.swift; sourceTree = "<group>"; };
 		8388B8A91EDE15BF00B28A57 /* WebLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebLoginViewController.swift; sourceTree = "<group>"; };
 		838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplacePassphraseViewController.swift; sourceTree = "<group>"; };
@@ -270,6 +275,7 @@
 			children = (
 				838DE6D31F3B67B300185A49 /* Analytics.swift */,
 				830120341EF4483F008EC454 /* ArgumentParser.swift */,
+				8372F2F41FA12421007F0BC2 /* Logger.swift */,
 				838DE6CF1F3B659800185A49 /* CertificateManager.swift */,
 				838DE6D51F3B67F400185A49 /* Constants.swift */,
 				838DE6D41F3B67F400185A49 /* Extensions.swift */,
@@ -457,6 +463,7 @@
 				83BB5E431F4240F1002CA970 /* ArgumentParserTests.swift */,
 				8332F5631F475B7F002534D0 /* CertificateManagerTests.swift */,
 				83BB5E441F4240F1002CA970 /* ManagedIssuerTests.swift */,
+				8372F2F61FA1317F007F0BC2 /* LoggerTests.swift */,
 				83BB5E451F424122002CA970 /* ManagedIssuerManagerTests.swift */,
 			);
 			path = Utils;
@@ -829,6 +836,7 @@
 				8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */,
 				83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */,
 				832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */,
+				8372F2F51FA12421007F0BC2 /* Logger.swift in Sources */,
 				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
 				838DE6D81F3B680800185A49 /* Extensions.swift in Sources */,
 				83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */,
@@ -847,9 +855,11 @@
 				838DE6D91F3B680900185A49 /* Extensions.swift in Sources */,
 				838DE6E11F3B6D5D00185A49 /* ManagedIssuerManager.swift in Sources */,
 				8332F5641F475B7F002534D0 /* CertificateManagerTests.swift in Sources */,
+				8372F2F81FA131DE007F0BC2 /* Logger.swift in Sources */,
 				8345E0EC1EF47F5D007C1FC5 /* Keychain.swift in Sources */,
 				838DE6D71F3B680600185A49 /* Constants.swift in Sources */,
 				838DE6CA1F3A750300185A49 /* ManagedIssuerList.swift in Sources */,
+				8372F2F71FA1317F007F0BC2 /* LoggerTests.swift in Sources */,
 				830120381EF44AE5008EC454 /* ArgumentParser.swift in Sources */,
 				83BB5E461F424122002CA970 /* ManagedIssuerManagerTests.swift in Sources */,
 				838DE6DB1F3B684700185A49 /* Analytics.swift in Sources */,
@@ -1050,7 +1060,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = wallet/wallet.entitlements;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1071,7 +1081,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = wallet/wallet.entitlements;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;

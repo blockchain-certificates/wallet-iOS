@@ -123,6 +123,8 @@ class AddIssuerViewController: UIViewController {
     }
 
     @objc func saveIssuerTapped(_ sender: UIBarButtonItem) {
+        Logger.main.info("Save issuer tapped")
+        
         // TODO: validation.
         
         saveDataIntoFields()
@@ -136,6 +138,8 @@ class AddIssuerViewController: UIViewController {
     }
 
     @objc func cancelTapped(_ sender: UIBarButtonItem) {
+        Logger.main.info("Cancel Add Issuer tapped")
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -166,6 +170,8 @@ class AddIssuerViewController: UIViewController {
     }
     
     func identifyAndIntroduceIssuer(at url: URL) {
+        Logger.main.info("Starting process to identify and introduce issuer at \(url)")
+        
         cancelWebLogin()
         
         let targetRecipient = Recipient(givenName: "",
@@ -188,14 +194,14 @@ class AddIssuerViewController: UIViewController {
                 switch(identifyError!) {
                 case .invalidState(let reason):
                     // This is a developer error, so write it to the log so we can see it later.
-                    print("Invalid ManagedIssuer state: \(reason)")
+                    Logger.main.fatal("Invalid ManagedIssuer state: \(reason)")
                     failureReason = NSLocalizedString("The app is in an invalid state. Please quit the app & relaunch. Then try again.", comment: "Invalid state error message when adding an issuer.")
                 case .untrustworthyIssuer:
                     failureReason = NSLocalizedString("This issuer appears to have been tampered with. Please contact the issuer.", comment: "Error message when the issuer's data doesn't match the URL it's hosted at.")
                 case .abortedIntroductionStep:
                     failureReason = NSLocalizedString("The request was aborted. Please try again.", comment: "Error message when an identification request is aborted")
                 case .serverError(let code):
-                    print("Identification server error: \(code)")
+                    Logger.main.error("Identification server error: \(code)")
                     failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
                 case .issuerInvalid(_, scope: .json):
                     failureReason = NSLocalizedString("We couldn't understand this Issuer's response. Please contact the Issuer.", comment: "Error message displayed when we see missing or invalid JSON in the response.")
@@ -228,6 +234,8 @@ class AddIssuerViewController: UIViewController {
     }
     
     @IBAction func cancelLoadingTapped(_ sender: Any) {
+        Logger.main.info("Cancel Loading tapped.")
+        
         managedIssuer?.abortRequests()
         isLoading = false
     }
@@ -248,14 +256,14 @@ class AddIssuerViewController: UIViewController {
         switch error {
         case .invalidState(let reason):
             // This is a developer error, so write it to the log so we can see it later.
-            print("Invalid ManagedIssuer state: \(reason)")
+            Logger.main.fatal("Invalid ManagedIssuer state: \(reason)")
             failureReason = NSLocalizedString("The app is in an invalid state. Please quit the app & relaunch. Then try again.", comment: "Invalid state error message when adding an issuer.")
         case .untrustworthyIssuer:
             failureReason = NSLocalizedString("This issuer appears to have been tampered with. Please contact the issuer.", comment: "Error message when the issuer's data doesn't match the URL it's hosted at.")
         case .abortedIntroductionStep:
             failureReason = nil //NSLocalizedString("The request was aborted. Please try again.", comment: "Error message when an identification request is aborted")
         case .serverError(let code):
-            print("Identification server error: \(code)")
+            Logger.main.error("Identification server error: \(code)")
             failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
         case .issuerInvalid(_, scope: .json):
             failureReason = NSLocalizedString("We couldn't understand this Issuer's response. Please contact the Issuer.", comment: "Error message displayed when we see missing or invalid JSON in the response.")
@@ -296,6 +304,8 @@ class AddIssuerViewController: UIViewController {
 
 extension AddIssuerViewController : ManagedIssuerDelegate {
     func presentWebView(at url: URL, with navigationDelegate: WKNavigationDelegate) throws {
+        Logger.main.info("Presenting the web view in the Add Issuer screen.")
+        
         let webController = WebLoginViewController(requesting: url, navigationDelegate: navigationDelegate) { [weak self] in
             self?.cancelWebLogin()
         }

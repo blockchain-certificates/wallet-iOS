@@ -168,7 +168,7 @@ class CertificateViewController: UIViewController {
         do {
             try certificate.file.write(to: url)
         } catch {
-            print("Failed to write temporary URL")
+            Logger.main.error("Couldn't share certificate. Failed to write temporary URL. \(error)")
             
             let title = NSLocalizedString("Couldn't share certificate.", comment: "Alert title when sharing a certificate fails.")
             let message = NSLocalizedString("Something went wrong preparing that file for sharing. Try again later.", comment: "Alert message when sharing a certificate fails. Generic error.")
