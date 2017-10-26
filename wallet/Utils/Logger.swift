@@ -94,7 +94,12 @@ class Logger {
         flushLogs()
         
         let tempFile = manager.temporaryDirectory.appendingPathComponent("logs.json")
+        
+        if manager.fileExists(atPath: tempFile.path) {
+            try manager.removeItem(at: tempFile)
+        }
         try manager.copyItem(at: logFile, to: tempFile)
+
         return tempFile
     }
     
