@@ -200,8 +200,11 @@ class AddIssuerViewController: UIViewController {
                     failureReason = NSLocalizedString("This issuer appears to have been tampered with. Please contact the issuer.", comment: "Error message when the issuer's data doesn't match the URL it's hosted at.")
                 case .abortedIntroductionStep:
                     failureReason = NSLocalizedString("The request was aborted. Please try again.", comment: "Error message when an identification request is aborted")
-                case .serverError(let code):
-                    Logger.main.error("Identification server error: \(code)")
+                case .serverErrorDuringIdentification(let code, let message):
+                    Logger.main.error("Error during issuer identification: \(code) \(message)")
+                    failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
+                case .serverErrorDuringIntroduction(let code, let message):
+                    Logger.main.error("Error during issuer introduction: \(code) \(message)")
                     failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
                 case .issuerInvalid(_, scope: .json):
                     failureReason = NSLocalizedString("We couldn't understand this Issuer's response. Please contact the Issuer.", comment: "Error message displayed when we see missing or invalid JSON in the response.")
@@ -216,6 +219,8 @@ class AddIssuerViewController: UIViewController {
 
                 return
             }
+            
+            Logger.main.info("Issuer identification at \(url) succeeded. Beginning introduction step.")
             
             if let nonce = self?.nonce {
                 managedIssuer.delegate = self
@@ -262,8 +267,11 @@ class AddIssuerViewController: UIViewController {
             failureReason = NSLocalizedString("This issuer appears to have been tampered with. Please contact the issuer.", comment: "Error message when the issuer's data doesn't match the URL it's hosted at.")
         case .abortedIntroductionStep:
             failureReason = nil //NSLocalizedString("The request was aborted. Please try again.", comment: "Error message when an identification request is aborted")
-        case .serverError(let code):
-            Logger.main.error("Identification server error: \(code)")
+        case .serverErrorDuringIdentification(let code, let message):
+            Logger.main.error("Issuer identification failed with code: \(code) error: \(message)")
+            failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
+        case .serverErrorDuringIntroduction(let code, let message):
+            Logger.main.error("Issuer introduction failed with code: \(code) error: \(message)")
             failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
         case .issuerInvalid(_, scope: .json):
             failureReason = NSLocalizedString("We couldn't understand this Issuer's response. Please contact the Issuer.", comment: "Error message displayed when we see missing or invalid JSON in the response.")

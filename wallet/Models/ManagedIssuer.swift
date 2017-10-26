@@ -25,7 +25,8 @@ enum ManagedIssuerError {
     case abortedIdentificationStep
     case abortedIntroductionStep
     case issuerInvalid(reason: InvalidIssuerReason, scope: InvalidIssuerScope)
-    case serverError(code: Int)
+    case serverErrorDuringIdentification(code: Int, message: String)
+    case serverErrorDuringIntroduction(code: Int, message: String)
 
 }
 
@@ -212,8 +213,8 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                     returnError = .issuerInvalid(reason: .missing, scope: .property(named: property))
                 case .issuerInvalid(let property):
                     returnError = .issuerInvalid(reason: .invalid, scope: .property(named: property))
-                case .httpFailure(let status, _):
-                    returnError = .serverError(code: status)
+                case .httpFailure(let status, let response):
+                    returnError = .serverErrorDuringIdentification(code: status, message: response.description)
                     
                 case .unknownResponse:
                     fallthrough
@@ -258,7 +259,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                 case .cannotSerializePostData:
                     reportError = .issuerInvalid(reason: .invalid, scope: .json)
                 case .errorResponseFromServer(let response):
-                    reportError = .serverError(code: response.statusCode)
+                    reportError = .serverErrorDuringIntroduction(code: response.statusCode, message: response.description)
                 case .genericErrorFromServer:
                     fallthrough
                 default:
