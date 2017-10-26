@@ -19,14 +19,15 @@ enum InvalidIssuerScope {
 }
 
 enum ManagedIssuerError {
-    case genericError
+    case genericError(error: Error?, data: Data?)
     case invalidState(reason: String)
     case untrustworthyIssuer(reason: String)
     case abortedIdentificationStep
     case abortedIntroductionStep
     case issuerInvalid(reason: InvalidIssuerReason, scope: InvalidIssuerScope)
-    case serverError(code: Int)
-
+    case serverErrorDuringIdentification(code: Int, message: String)
+    case serverErrorDuringIntroduction(code: Int, message: String)
+    case authenticationFailure
 }
 
 class ManagedIssuer : NSObject, NSCoding, Codable {
@@ -212,13 +213,13 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                     returnError = .issuerInvalid(reason: .missing, scope: .property(named: property))
                 case .issuerInvalid(let property):
                     returnError = .issuerInvalid(reason: .invalid, scope: .property(named: property))
-                case .httpFailure(let status, _):
-                    returnError = .serverError(code: status)
+                case .httpFailure(let status, let response):
+                    returnError = .serverErrorDuringIdentification(code: status, message: response.description)
                     
                 case .unknownResponse:
                     fallthrough
                 default:
-                    returnError = .genericError
+                    returnError = .genericError(error: nil, data: nil)
                 }
             }
 
@@ -257,12 +258,20 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                     reportError = .issuerInvalid(reason: .missing, scope: .property(named: "introductionURL"))
                 case .cannotSerializePostData:
                     reportError = .issuerInvalid(reason: .invalid, scope: .json)
-                case .errorResponseFromServer(let response):
-                    reportError = .serverError(code: response.statusCode)
-                case .genericErrorFromServer:
+                case .errorResponseFromServer(let response, let data):
+                    var dataString : String? = nil
+                    if data != nil {
+                        dataString = String(data: data!, encoding: .utf8)
+                    }
+                    reportError = .serverErrorDuringIntroduction(code: response.statusCode, message: "\(response.description)\n\n\(dataString ?? "") ")
+                case .webAuthenticationFailed:
                     fallthrough
+                case .authenticationFailed:
+                    reportError = .authenticationFailure
+                case .genericErrorFromServer(let error, let data):
+                    reportError = .genericError(error: error, data: data)
                 default:
-                    reportError = .genericError
+                    reportError = .genericError(error: nil, data: nil)
                 }
             } else {
                 self?.introducedWithAddress = recipient.publicAddress
