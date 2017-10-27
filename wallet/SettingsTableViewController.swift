@@ -81,7 +81,7 @@ class SettingsTableViewController: UITableViewController {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return 2
+            return 3
         } else if isDebugBuild && section == 2 {
             return 3
         }
@@ -100,6 +100,8 @@ class SettingsTableViewController: UITableViewController {
             text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
         case (1, 1):
             text = NSLocalizedString("Share Device Logs", comment: "Menu action item for sharing device logs.")
+        case (1, 2):
+            text = NSLocalizedString("Clear Device Logs", comment: "Menu item for clearing the device logs")
         case (2, 0):
             text = "Destroy passphrase & crash"
         case (2, 1):
@@ -138,6 +140,10 @@ class SettingsTableViewController: UITableViewController {
             Logger.main.info("Sharing device logs")
             controller = nil
             shareLogs()
+        case (1, 2):
+            Logger.main.info("Clearing device logs")
+            controller = nil
+            clearLogs()
         case (2, 0):
             Logger.main.info("Destroying passphrase & crashing...")
             configuration = AppConfiguration(shouldDeletePassphrase: true, shouldResetAfterConfiguring: true)
@@ -192,15 +198,39 @@ class SettingsTableViewController: UITableViewController {
             let alert = UIAlertController(title: NSLocalizedString("File not found", comment: "Title for the failed-to-share-your-logs alert"),
                                           message: NSLocalizedString("We couldn't find the logs on the device.", comment: "Explanation for failing to share the log file"),
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "ok action"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "ok action"), style: .default, handler: {[weak self] _ in
+                self?.deselectRow()
+            }))
             
             present(alert, animated: true, completion: nil)
+            
             return
         }
         
         let items : [Any] = [ shareURL ]
         let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         
-        present(shareController, animated: true, completion: nil)
+        present(shareController, animated: true, completion: { [weak self] in
+            self?.deselectRow()
+        })
+    }
+    
+    func clearLogs() {
+        Logger.main.clearLogs()
+        
+        let controller = UIAlertController(title: NSLocalizedString("Success!", comment: "action completed successfully"), message: NSLocalizedString("Logs have been deleted from this device.", comment: "A message displayed after clearing the logs successfully."), preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "action confirmed"), style: .default, handler: { [weak self] _ in
+            self?.deselectRow()
+        }))
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    func deselectRow() {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
     }
 }
