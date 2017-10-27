@@ -242,7 +242,6 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
         let coordinator = NSFileCoordinator()
         var coordinationError : NSError?
         coordinator.coordinate(writingItemAt: filePath, options: [.forDeleting], error: &coordinationError, byAccessor: { [weak self] (file) in
-            
             do {
                 try FileManager.default.removeItem(at: filePath)
                 self?.certificates.remove(at: index)
@@ -261,9 +260,7 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
         })
         
         if let error = coordinationError {
-            Logger.main.error("Coordination failed with \(error)")
-        } else {
-            Logger.main.info("Coordination went fine.")
+            Logger.main.error("Coordination during deletion failed with \(error)")
         }
     }
 }

@@ -58,6 +58,8 @@ class IssuerViewController: UIViewController {
     }
     
     @objc func addCertificateTapped() {
+        Logger.main.info("Add certificate button tapped")
+        
         let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
         let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
         let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
@@ -66,6 +68,8 @@ class IssuerViewController: UIViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
+            Logger.main.info("User has chosen to add a certificate from file")
+            
             let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
             controller.delegate = self
             controller.modalPresentationStyle = .formSheet
@@ -74,6 +78,8 @@ class IssuerViewController: UIViewController {
         }))
         
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
+            Logger.main.info("User has chosen to add a certificate from URL")
+            
             let certificateURLPrompt = NSLocalizedString("What's the URL of the certificate?", comment: "Certificate URL prompt for importing a certificate.")
             let importAction = NSLocalizedString("Import", comment: "Import certificate action")
             
@@ -88,11 +94,14 @@ class IssuerViewController: UIViewController {
                     let url = URL(string: trimmedText) else {
                         return
                 }
+                Logger.main.info("User attempting to add a certificate from \(url).")
                 
                 _ = self?.addCertificate(from: url)
             }))
             
-            urlPrompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
+            urlPrompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: { _ in
+                Logger.main.info("User cancelled adding a certificate from URL.")
+            }))
             
             self?.present(urlPrompt, animated: true, completion: nil)
         }))
@@ -124,9 +133,12 @@ class IssuerViewController: UIViewController {
     // Certificate handling
     func addCertificate(from url: URL) {
         guard let certificate = CertificateManager().load(certificateAt: url) else {
+            Logger.main.error("Failed to load certificate from \(url)")
+            
             let title = NSLocalizedString("Invalid Certificate", comment: "Title for an alert when importing an invalid certificate")
             let message = NSLocalizedString("That file doesn't appear to be a valid certificate.", comment: "Message in an alert when importing an invalid certificate")
             alertError(localizedTitle: title, localizedMessage: message)
+            
             return
         }
         
@@ -135,6 +147,8 @@ class IssuerViewController: UIViewController {
     
     func importCertificate(from data: Data?) {
         guard let data = data else {
+            Logger.main.error("Failed to load a certificate from file. Data is nil.")
+            
             let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
             let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
             alertError(localizedTitle: title, localizedMessage: message)
