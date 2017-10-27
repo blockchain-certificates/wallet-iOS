@@ -379,7 +379,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         guard let index = managedIssuers.index(of: managedIssuer) else {
             return
         }
-
+        Logger.main.info("Deleting issuer named \(managedIssuer.issuer?.name ?? "unknown")")
+        
         managedIssuers.remove(at: index)
         saveIssuers()
 
@@ -505,7 +506,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func navigateTo(issuer managedIssuer: ManagedIssuer, animated: Bool = true) -> IssuerViewController {
-        Logger.main.info("Navigating to issuer \(managedIssuer.issuer?.name ?? "unknown")")
+        Logger.main.info("Navigating to issuer \(managedIssuer.issuer?.name ?? "unknown") with id: \(managedIssuer.issuer?.id.absoluteString ?? "unknown")")
         
         if navigationController?.topViewController != self {
             navigationController?.popToViewController(self, animated: animated)
