@@ -184,6 +184,9 @@ class IssuerTableViewController: UITableViewController {
         }
         
         let selectedCertificate = certificates[indexPath.row]
+        
+        Logger.main.info("Navigating to certificate \(selectedCertificate.title) with id: \(selectedCertificate.id)")
+        
         delegate?.show(certificate: selectedCertificate)
     }
     
@@ -192,6 +195,7 @@ class IssuerTableViewController: UITableViewController {
         guard let issuerToDelete = self.managedIssuer else {
             return
         }
+        Logger.main.info("Attempting to delete issuer \(issuerToDelete.issuer?.name ?? "unknown")")
         
         let deleteConfirmationTitle = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Prompt to confirm delete issuer.")
         let deleteAction = NSLocalizedString("Delete", comment: "Delete issuer action")
@@ -238,7 +242,6 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
         let coordinator = NSFileCoordinator()
         var coordinationError : NSError?
         coordinator.coordinate(writingItemAt: filePath, options: [.forDeleting], error: &coordinationError, byAccessor: { [weak self] (file) in
-            
             do {
                 try FileManager.default.removeItem(at: filePath)
                 self?.certificates.remove(at: index)
@@ -257,9 +260,7 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
         })
         
         if let error = coordinationError {
-            Logger.main.error("Coordination failed with \(error)")
-        } else {
-            Logger.main.info("Coordination went fine.")
+            Logger.main.error("Coordination during deletion failed with \(error)")
         }
     }
 }

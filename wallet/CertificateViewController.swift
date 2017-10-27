@@ -63,16 +63,21 @@ class CertificateViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
+        Logger.main.info("Showing share certificate dialog for \(certificate.id)")
         // TODO: Guard against sample cert
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let shareFileAction = UIAlertAction(title: NSLocalizedString("Share Certificate File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
+            Logger.main.info("User chose to share certificate via file")
             self?.shareCertificateFile()
         }
         let shareURLAction = UIAlertAction(title: NSLocalizedString("Share Certificate URL", comment: "Action to share the certificate's hosting URL, presented in an action sheet."), style: .default) { [weak self] _ in
+            Logger.main.info("User chose to share the certificate via URL.")
             self?.shareCertificateURL()
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the action sheet."), style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the action sheet."), style: .cancel, handler: { _ in
+            Logger.main.info("Share dialog cancelled.")
+        })
         
         if certificate.shareUrl != nil {
             alertController.addAction(shareURLAction)
@@ -84,10 +89,12 @@ class CertificateViewController: UIViewController {
     }
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
+        Logger.main.info("User tapped verify on this certificate.")
         analytics.track(event: .validated, certificate: certificate)
         
         // Check for the Sample Certificate
         guard certificate.assertion.uid != Identifiers.sampleCertificateUID else {
+            Logger.main.info("User was trying to verify the sample certificate, so we showed them our usual dialog.")
             let alert = UIAlertController(
                 title: NSLocalizedString("Sample Certificate", comment: "Title for our specific warning about validating a sample certificate"),
                 message: NSLocalizedString("This is a sample certificate that cannot be verified. Real certificates will perform a live validation process.", comment: "Explanation for why you can't validate the sample certificate."),
@@ -112,9 +119,11 @@ class CertificateViewController: UIViewController {
                 let title : String!
                 let message : String!
                 if success {
+                    Logger.main.info("Successfully verified certificate \(self?.certificate.title ?? "unknown") with id \(self?.certificate.id ?? "unknown")")
                     title = NSLocalizedString("Success", comment: "Title for a successful certificate validation")
                     message = NSLocalizedString("This is a valid certificate!", comment: "Message for a successful certificate validation")
                 } else {
+                    Logger.main.info("The \(self?.certificate.title ?? "unknown") certificate failed verification with reason: \(error ?? "unknown"). ID: \(self?.certificate.id ?? "unknown")")
                     title = NSLocalizedString("Invalid", comment: "Title for a failed certificate validation")
                     message = NSLocalizedString(error!, comment: "Specific error message for an invalid certificate.")
                 }
@@ -136,24 +145,25 @@ class CertificateViewController: UIViewController {
         self.inProgressRequest = validationRequest
     }
     
-    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
-        let certificateToDelete = certificate
-        let title = NSLocalizedString("Be careful", comment: "Caution title presented when attempting to delete a certificate.")
-        let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Explanation of the effects of deleting a certificate.")
-        let delete = NSLocalizedString("Delete", comment: "Confirm delete action")
-        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
-        
-        let prompt = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] (_) in
-            _ = self?.navigationController?.popViewController(animated: true)
-            self?.delegate?.delete(certificate: certificateToDelete)
-        }))
-        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
-        
-        present(prompt, animated: true, completion: nil)
-    }
+//    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
+//        let certificateToDelete = certificate
+//        let title = NSLocalizedString("Be careful", comment: "Caution title presented when attempting to delete a certificate.")
+//        let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Explanation of the effects of deleting a certificate.")
+//        let delete = NSLocalizedString("Delete", comment: "Confirm delete action")
+//        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
+//
+//        let prompt = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] (_) in
+//            _ = self?.navigationController?.popViewController(animated: true)
+//            self?.delegate?.delete(certificate: certificateToDelete)
+//        }))
+//        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
+//
+//        present(prompt, animated: true, completion: nil)
+//    }
     
     @objc func moreInfoTapped() {
+        Logger.main.info("More info tapped on the Certificate display.")
         let controller = CertificateMetadataViewController(certificate: certificate)
         controller.delegate = self
         let navController = UINavigationController(rootViewController: controller);
@@ -186,7 +196,10 @@ class CertificateViewController: UIViewController {
         let capturedCertificate = certificate
         shareController.completionWithItemsHandler = { [weak self] (activity, completed, _, _) in
             if completed {
+                Logger.main.info("User completed share via file.")
                 self?.analytics.track(event: .shared, certificate: capturedCertificate)
+            } else {
+                Logger.main.info("User canceled sharing that certificate via file.")
             }
         }
         
@@ -203,7 +216,10 @@ class CertificateViewController: UIViewController {
         let capturedCertificate = certificate
         shareController.completionWithItemsHandler = { [weak self] (activity, completed, _, _) in
             if completed {
+                Logger.main.info("User completed share via URL")
                 self?.analytics.track(event: .shared, certificate: capturedCertificate)
+            } else {
+                Logger.main.info("User canceled sharing that certificate via URL")
             }
         }
         

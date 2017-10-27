@@ -72,17 +72,19 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         if isDebugBuild {
-            return 3
+            return 4
         }
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else if section == 1 {
+            return 1
+        } else if section == 2 {
             return 2
-        } else if isDebugBuild && section == 2 {
+        } else if isDebugBuild && section == 3 {
             return 3
         }
         return 0
@@ -90,7 +92,12 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
-        cell.accessoryType = .disclosureIndicator
+        
+        if indexPath.section < 2 {
+            cell.accessoryType = .disclosureIndicator
+        } else {
+            cell.accessoryType = .none
+        }
         
         var text : String?
         switch (indexPath.section, indexPath.row) {
@@ -98,13 +105,15 @@ class SettingsTableViewController: UITableViewController {
             text = NSLocalizedString("Reveal Passphrase", comment: "Action item in settings screen.")
         case (1, 0):
             text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
-        case (1, 1):
-            text = NSLocalizedString("Share Device Logs", comment: "Menu action item for sharing device logs.")
         case (2, 0):
-            text = "Destroy passphrase & crash"
+            text = NSLocalizedString("Share Device Logs", comment: "Menu action item for sharing device logs.")
         case (2, 1):
+            text = NSLocalizedString("Clear Device Logs", comment: "Menu item for clearing the device logs")
+        case (3, 0):
+            text = "Destroy passphrase & crash"
+        case (3, 1):
             text = "Delete all issuers & certificates"
-        case (2, 2):
+        case (3, 2):
             text = "Destroy all data & crash"
         default:
             text = nil
@@ -116,7 +125,10 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if isDebugBuild && section == 2 {
+        if section == 2 {
+            return NSLocalizedString("Device Logs", comment: "title for the action section in settings about logs.")
+        }
+        if isDebugBuild && section == 3 {
             return "Debug Actions"
         }
         return nil
@@ -134,19 +146,23 @@ class SettingsTableViewController: UITableViewController {
         case (1, 0):
             Logger.main.info("Privacy statement tapped")
             controller = PrivacyViewController()
-        case (1, 1):
+        case (2, 0):
             Logger.main.info("Sharing device logs")
             controller = nil
             shareLogs()
-        case (2, 0):
+        case (2, 1):
+            Logger.main.info("Clearing device logs")
+            controller = nil
+            clearLogs()
+        case (3, 0):
             Logger.main.info("Destroying passphrase & crashing...")
             configuration = AppConfiguration(shouldDeletePassphrase: true, shouldResetAfterConfiguring: true)
-        case (2, 1):
+        case (3, 1):
             Logger.main.info("Deleting all issuers & certificates...")
             configuration = AppConfiguration(shouldDeleteIssuersAndCertificates: true)
             tableView.deselectRow(at: indexPath, animated: true)
             break;
-        case (2, 2):
+        case (3, 2):
             Logger.main.info("Deleting all data & crashing...")
             configuration = AppConfiguration.resetEverything
             break;
@@ -192,15 +208,39 @@ class SettingsTableViewController: UITableViewController {
             let alert = UIAlertController(title: NSLocalizedString("File not found", comment: "Title for the failed-to-share-your-logs alert"),
                                           message: NSLocalizedString("We couldn't find the logs on the device.", comment: "Explanation for failing to share the log file"),
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "ok action"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "ok action"), style: .default, handler: {[weak self] _ in
+                self?.deselectRow()
+            }))
             
             present(alert, animated: true, completion: nil)
+            
             return
         }
         
         let items : [Any] = [ shareURL ]
         let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         
-        present(shareController, animated: true, completion: nil)
+        present(shareController, animated: true, completion: { [weak self] in
+            self?.deselectRow()
+        })
+    }
+    
+    func clearLogs() {
+        Logger.main.clearLogs()
+        
+        let controller = UIAlertController(title: NSLocalizedString("Success!", comment: "action completed successfully"), message: NSLocalizedString("Logs have been deleted from this device.", comment: "A message displayed after clearing the logs successfully."), preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "action confirmed"), style: .default, handler: { [weak self] _ in
+            self?.deselectRow()
+        }))
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    func deselectRow() {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
     }
 }

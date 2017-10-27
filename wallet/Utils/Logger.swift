@@ -103,6 +103,10 @@ class Logger {
         return tempFile
     }
     
+    public func clearLogs() {
+        save(logs: [])
+    }
+    
     // Mark - private helper functions
     private func log(level: LogLevel, message: String) {
         let entry = LogEntry(level: level, message: message)

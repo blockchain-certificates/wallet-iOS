@@ -299,6 +299,8 @@ class AddIssuerViewController: UIViewController {
     }
     
     func showAddIssuerError(message: String) {
+        Logger.main.info("Add issuer failed with message: \(message)")
+        
         let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         

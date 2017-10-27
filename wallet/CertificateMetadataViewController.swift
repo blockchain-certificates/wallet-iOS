@@ -178,6 +178,7 @@ class CertificateMetadataViewController: UIViewController {
     }
     
     func promptForCertificateDeletion() {
+        Logger.main.info("User has tapped the delete button on this certificate.")
         let certificateToDelete = certificate
         let title = NSLocalizedString("Be careful", comment: "Caution title presented when attempting to delete a certificate.")
         let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Explanation of the effects of deleting a certificate.")
@@ -186,10 +187,12 @@ class CertificateMetadataViewController: UIViewController {
         
         let prompt = UIAlertController(title: title, message: message, preferredStyle: .alert)
         prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] (_) in
+            Logger.main.info("User has deleted certificate \(certificateToDelete.title) with id \(certificateToDelete.id)")
             self?.delegate?.delete(certificate: certificateToDelete)
             self?.dismissSelf();
         }))
         prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: { [weak self] (_) in
+            Logger.main.info("User canceled the deletion of the certificate.")
             if let selectedPath = self?.tableView.indexPathForSelectedRow {
                 self?.tableView.deselectRow(at: selectedPath, animated: true)
             }
