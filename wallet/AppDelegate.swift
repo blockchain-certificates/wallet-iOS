@@ -62,6 +62,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         launchAddCertificate(at: url, showCertificate: true, animated: false)
         return true
     }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        Logger.main.info("Application entered the background.")
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        Logger.main.info("Application will terminate.")
+    }
         
     func setupApplication() {
         self.window?.addSubview(JSONLD.shared.webView)

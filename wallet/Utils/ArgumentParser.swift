@@ -88,7 +88,7 @@ enum Argument {
     
     static func from(array: [String]) -> [Argument] {
         var args = [Argument]()
-        var index = 0
+        var index = 1 // the first argument at index 0 is the app path.
         while index < array.count {
             switch array[index] {
             case ArgumentLabels.resetData.rawValue:
