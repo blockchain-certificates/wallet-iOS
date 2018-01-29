@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import certificates
+//@testable import certificates
 
 class walletTests: XCTestCase {
     
