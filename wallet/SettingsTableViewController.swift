@@ -79,7 +79,7 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return 2
         } else if section == 1 {
             return 1
         } else if section == 2 {
@@ -103,6 +103,8 @@ class SettingsTableViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             text = NSLocalizedString("Reveal Passphrase", comment: "Action item in settings screen.")
+        case (0, 1):
+            text = NSLocalizedString("Add Issuer", comment: "Action item in settings screen to add an Issuer manually.")
         case (1, 0):
             text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
         case (2, 0):
@@ -143,6 +145,9 @@ class SettingsTableViewController: UITableViewController {
         case (0, 0):
             Logger.main.info("Reveal passphrase tapped")
             controller = RevealPassphraseTableViewController()
+        case (0, 1):
+            Logger.main.info("Add Issuer tapped in settings")
+            showAddIssuerFlow()
         case (1, 0):
             Logger.main.info("Privacy statement tapped")
             controller = PrivacyViewController()
@@ -241,6 +246,43 @@ class SettingsTableViewController: UITableViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.tableView.deselectRow(at: indexPath, animated: true)
             }
+        }
+    }
+    
+    // MARK: - Add Issuer
+    
+    func showAddIssuerFlow(identificationURL: URL? = nil, nonce : String? = nil) {
+        let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
+        controller.delegate = self
+        
+        let navigation = UINavigationController(rootViewController: controller)
+        
+        if presentedViewController != nil {
+            presentedViewController?.dismiss(animated: false) { [weak self] in
+                OperationQueue.main.addOperation {
+                    self?.present(navigation, animated: true) {
+                        controller.autoSubmitIfPossible()
+                    }
+                }
+            }
+        } else {
+            present(navigation, animated: true) {
+                controller.autoSubmitIfPossible()
+            }
+        }
+    }
+
+}
+
+extension SettingsTableViewController: AddIssuerViewControllerDelegate {
+    func added(managedIssuer: ManagedIssuer) {
+        if managedIssuer.issuer != nil {
+            let manager = ManagedIssuerManager()
+            let managedIssuers = manager.load()
+            let updatedIssuers = managedIssuers.filter{ $0.issuer?.id != managedIssuer.issuer?.id } + [managedIssuer]
+            _ = manager.save(updatedIssuers)
+        } else {
+            Logger.main.warning("Something weird -- delegate called with nil issuer. \(#function)")
         }
     }
 }

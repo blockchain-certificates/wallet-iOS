@@ -91,12 +91,6 @@ class IssuerCollectionViewController: UICollectionViewController {
             loadEmptyBackgroundView()
             title = nil
             navigationItem.rightBarButtonItem = nil
-        } else {
-            title = NSLocalizedString("Issuers", comment: "Title in screen of multiple issuers")
-            if navigationItem.rightBarButtonItem == nil {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addIssuerButtonTapped))
-            }
-            collectionView?.backgroundView = nil
         }
     }
 
@@ -107,7 +101,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
         let title = NSLocalizedString("YOU ARE READY!", comment: "Title for empty issuers view. Very encouraging.")
         let message = NSLocalizedString("Issuers will send you email with a link to add them. This will send a special code that represents you. If you already have their information, continue.", comment: "Long explainer about what you have to do to wait with the app.")
-        let actionButtonText = NSLocalizedString("ADD ISSUER", comment: "Action button for adding an issuer")
 
         let titleView = TitleLabel(frame: .zero)
         titleView.text = title
@@ -120,12 +113,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         messageView.font = UIFont.systemFont(ofSize: 14)
         messageView.textColor = UIColor(red:0.11, green:0.11, blue:0.11, alpha:1.0)
 
-        let actionButton = RectangularButton(type: .custom)
-        actionButton.setTitle(actionButtonText, for: .normal)
-        actionButton.addTarget(self, action: #selector(addIssuerButtonTapped), for: .touchUpInside)
-
-
-        let stackView = UIStackView(arrangedSubviews: [titleView, messageView, actionButton])
+        let stackView = UIStackView(arrangedSubviews: [titleView, messageView])
         stackView.axis = .vertical
         stackView.spacing = 30
         stackView.translatesAutoresizingMaskIntoConstraints = false
