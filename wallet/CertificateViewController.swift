@@ -116,8 +116,8 @@ class CertificateViewController: UIViewController {
             for: certificate,
             bitcoinManager: bitcoinManager,
             jsonld: JSONLD.shared) { [weak self] (success, error) in
-                let title : String!
-                let message : String!
+                let title : String
+                let message : String
                 if success {
                     Logger.main.info("Successfully verified certificate \(self?.certificate.title ?? "unknown") with id \(self?.certificate.id ?? "unknown")")
                     title = NSLocalizedString("Success", comment: "Title for a successful certificate validation")
@@ -258,12 +258,12 @@ extension CertificateViewController : CertificateValidationRequestDelegate {
             percentage = 0.9
         }
         
-        if percentage != nil {
-            UIView.animate(withDuration: 0.1, animations: {
-                OperationQueue.main.addOperation {
-                    self.progressView.progress = percentage!
+        if let percentage = percentage {
+            OperationQueue.main.addOperation {
+                UIView.animate(withDuration: 0.1) {
+                    self.progressView.progress = percentage
                 }
-            })
+            }
         }
     }
 }
