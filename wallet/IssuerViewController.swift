@@ -57,6 +57,35 @@ class IssuerViewController: UIViewController {
         }
     }
     
+    var activityIndicator: UIActivityIndicatorView?
+    
+    func showActivityIndicator() {
+        guard self.activityIndicator == nil else { return }
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activityIndicator.startAnimating()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.layer.cornerRadius = 10
+        activityIndicator.backgroundColor = .gray
+        activityIndicator.alpha = 0.8
+        
+        let center: CGPoint
+        if let keyView: UIView = UIApplication.shared.keyWindow?.rootViewController?.view {
+            center = keyView.convert(keyView.center, to: view)
+        } else {
+            center = CGPoint(x: view.center.x, y: view.center.y - 32)
+        }
+        activityIndicator.center = center
+        
+        view.addSubview(activityIndicator)
+        self.activityIndicator = activityIndicator
+    }
+    
+    func hideActivityIndicator() {
+        guard let activityIndicator = activityIndicator else { return }
+        activityIndicator.removeFromSuperview()
+        self.activityIndicator = nil
+    }
+    
     @objc func addCertificateTapped() {
         Logger.main.info("Add certificate button tapped")
         
@@ -130,8 +159,13 @@ class IssuerViewController: UIViewController {
         }
     }
     
+
     // Certificate handling
     func addCertificate(from url: URL) {
+        showActivityIndicator()
+        defer {
+            hideActivityIndicator()
+        }
         guard let certificate = CertificateManager().load(certificateAt: url) else {
             Logger.main.error("Failed to load certificate from \(url)")
             
@@ -146,6 +180,10 @@ class IssuerViewController: UIViewController {
     }
     
     func importCertificate(from data: Data?) {
+        showActivityIndicator()
+        defer {
+            hideActivityIndicator()
+        }
         guard let data = data else {
             Logger.main.error("Failed to load a certificate from file. Data is nil.")
             
