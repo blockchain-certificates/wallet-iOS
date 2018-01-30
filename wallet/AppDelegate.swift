@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    // MARK: - UIApplicationDelegate
+
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Logger.main.info("Application was launched!")
@@ -63,6 +65,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return [.portrait]
+    }
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         Logger.main.info("Application entered the background.")
     }
@@ -70,7 +76,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         Logger.main.info("Application will terminate.")
     }
-        
+    
+    // MARK: - Application specific
+    
     func setupApplication() {
         self.window?.addSubview(JSONLD.shared.webView)
 
