@@ -7,12 +7,17 @@
 //
 
 import UIKit
-private let cellReuseIdentifier = "UITableViewCell"
-
-private let isDebugBuild = false
 
 class SettingsTableViewController: UITableViewController {
     private var oldBarStyle : UIBarStyle?
+
+    private let cellReuseIdentifier = "UITableViewCell"
+    
+    #if DEBUG
+        private let isDebugBuild = true
+    #else
+        private let isDebugBuild = false
+    #endif
 
     convenience init() {
         self.init(style: .grouped)
@@ -71,10 +76,7 @@ class SettingsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if isDebugBuild {
-            return 4
-        }
-        return 3
+        return isDebugBuild ? 4 : 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
