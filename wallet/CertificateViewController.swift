@@ -67,11 +67,11 @@ class CertificateViewController: UIViewController {
         // TODO: Guard against sample cert
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let shareFileAction = UIAlertAction(title: NSLocalizedString("Share Certificate File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
+        let shareFileAction = UIAlertAction(title: NSLocalizedString("Share File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
             Logger.main.info("User chose to share certificate via file")
             self?.shareCertificateFile()
         }
-        let shareURLAction = UIAlertAction(title: NSLocalizedString("Share Certificate URL", comment: "Action to share the certificate's hosting URL, presented in an action sheet."), style: .default) { [weak self] _ in
+        let shareURLAction = UIAlertAction(title: NSLocalizedString("Share Link", comment: "Action to share the certificate's hosting URL, presented in an action sheet."), style: .default) { [weak self] _ in
             Logger.main.info("User chose to share the certificate via URL.")
             self?.shareCertificateURL()
         }
