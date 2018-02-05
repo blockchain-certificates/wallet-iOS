@@ -105,6 +105,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         let titleView = TitleLabel(frame: .zero)
         titleView.text = title
         titleView.textAlignment = .center
+        titleView.font = Style.Font.T5S
 
         let messageView = UILabel(frame: .zero)
         messageView.text = message

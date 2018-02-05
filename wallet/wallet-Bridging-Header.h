@@ -3,4 +3,4 @@
 //
 
 #import <CoreBitcoin/CoreBitcoin.h>
-
+#import <OpenSans/UIFont+OpenSans.h>
