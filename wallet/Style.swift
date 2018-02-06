@@ -97,6 +97,8 @@ struct Style {
         
         static let heightButtonLarge = CGFloat(52)
         
+        static let cornerRadius = CGFloat(7)
+        
     }
     
 }

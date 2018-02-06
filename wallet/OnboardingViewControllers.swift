@@ -12,12 +12,18 @@ class LandingScreenViewController : UIViewController {
     @IBOutlet weak var logoImageView: UIImageView!
     override func viewDidLoad() {
         title = ""
+        view.backgroundColor = Style.Color.primary
         
         // Remove the drop shadow
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .default
     }
 }
 
@@ -131,6 +137,76 @@ class GeneratedPassphraseViewController: UIViewController {
 
 
 // MARK: - CUstom UI elements
+
+protocol Button {
+    var textColor : UIColor {get}
+    var strokeColor : UIColor {get}
+    var fillColor : UIColor {get}
+    func commonInit()
+}
+
+extension Button where Self : UIButton {
+    
+    func commonInit() {
+        let edgeInsets : CGFloat = 20
+        contentEdgeInsets = UIEdgeInsets(top: edgeInsets, left: edgeInsets, bottom: edgeInsets, right: edgeInsets)
+        
+        layer.borderWidth = Style.Measure.stroke
+        layer.cornerRadius = Style.Measure.cornerRadius
+        layer.borderColor = strokeColor.cgColor
+        
+        titleLabel?.font = Style.Font.T3S
+        setTitleColor(textColor, for: .normal)
+        setTitleColor(textColor, for: .selected)
+        setTitleColor(textColor, for: .highlighted)
+        setTitleColor(textColor, for: .focused)
+
+        backgroundColor = fillColor
+    }
+
+}
+
+
+@IBDesignable
+class PrimaryButton : UIButton, Button {
+    
+    let textColor = Style.Color.white
+    let strokeColor = Style.Color.secondary
+    let fillColor = Style.Color.secondary
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+}
+
+@IBDesignable
+class SecondaryButton : UIButton, Button {
+
+    let textColor = Style.Color.secondary
+    let strokeColor = Style.Color.secondary
+    let fillColor = UIColor.clear
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+}
+
+
+
 @IBDesignable
 class RectangularButton : UIButton {
     required init?(coder aDecoder: NSCoder) {
