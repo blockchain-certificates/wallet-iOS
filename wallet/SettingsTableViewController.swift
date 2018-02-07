@@ -87,7 +87,7 @@ class SettingsTableViewController: UITableViewController {
         } else if section == 2 {
             return 2
         } else if isDebugBuild && section == 3 {
-            return 3
+            return 4
         }
         return 0
     }
@@ -119,6 +119,8 @@ class SettingsTableViewController: UITableViewController {
             text = "Delete all issuers & certificates"
         case (3, 2):
             text = "Destroy all data & crash"
+        case (3, 3):
+            text = "Show onboarding"
         default:
             text = nil
         }
@@ -154,25 +156,26 @@ class SettingsTableViewController: UITableViewController {
             Logger.main.info("Privacy statement tapped")
             controller = PrivacyViewController()
         case (2, 0):
-            Logger.main.info("Sharing device logs")
+            Logger.main.info("Share device logs")
             controller = nil
             shareLogs()
         case (2, 1):
-            Logger.main.info("Clearing device logs")
+            Logger.main.info("Clear device logs")
             controller = nil
             clearLogs()
         case (3, 0):
-            Logger.main.info("Destroying passphrase & crashing...")
+            Logger.main.info("Destroy passphrase & crash...")
             configuration = AppConfiguration(shouldDeletePassphrase: true, shouldResetAfterConfiguring: true)
         case (3, 1):
-            Logger.main.info("Deleting all issuers & certificates...")
+            Logger.main.info("Delete all issuers & certificates...")
             configuration = AppConfiguration(shouldDeleteIssuersAndCertificates: true)
             tableView.deselectRow(at: indexPath, animated: true)
-            break;
         case (3, 2):
-            Logger.main.info("Deleting all data & crashing...")
+            Logger.main.info("Delete all data & crash...")
             configuration = AppConfiguration.resetEverything
-            break;
+        case (3, 3):
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
+            present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
         default:
             controller = nil
         }

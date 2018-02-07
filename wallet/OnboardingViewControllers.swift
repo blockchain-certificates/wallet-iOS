@@ -12,7 +12,7 @@ class LandingScreenViewController : UIViewController {
     @IBOutlet weak var logoImageView: UIImageView!
     override func viewDidLoad() {
         title = ""
-        view.backgroundColor = Style.Color.primary
+        view.backgroundColor = Style.Color.C3
         
         // Remove the drop shadow
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -85,8 +85,8 @@ extension RestoreAccountViewController : UITextViewDelegate {
 class PrenupViewController: UIViewController {
     @IBOutlet weak var logoImageView: GreyTintImageView!
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
+//        navigationController?.setNavigationBarHidden(false, animated: true)
+//        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
     }
     override func viewDidLoad() {
         title = ""
@@ -170,9 +170,9 @@ extension Button where Self : UIButton {
 @IBDesignable
 class PrimaryButton : UIButton, Button {
     
-    let textColor = Style.Color.white
-    let strokeColor = Style.Color.secondary
-    let fillColor = Style.Color.secondary
+    let textColor = Style.Color.C1
+    let strokeColor = Style.Color.C4
+    let fillColor = Style.Color.C4
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -189,8 +189,8 @@ class PrimaryButton : UIButton, Button {
 @IBDesignable
 class SecondaryButton : UIButton, Button {
 
-    let textColor = Style.Color.secondary
-    let strokeColor = Style.Color.secondary
+    let textColor = Style.Color.C4
+    let strokeColor = Style.Color.C4
     let fillColor = UIColor.clear
 
     required init?(coder aDecoder: NSCoder) {
