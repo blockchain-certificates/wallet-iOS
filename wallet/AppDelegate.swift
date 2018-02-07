@@ -82,11 +82,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupApplication() {
         self.window?.addSubview(JSONLD.shared.webView)
 
-        UIButton.appearance().tintColor = .tintColor
-        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .titleColor
-        UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = .titleColor
-        UINavigationBar.appearance().tintColor = .tintColor
-        
+        UINavigationBar.appearance().titleTextAttributes =
+            [NSAttributedStringKey.font: Style.Font.T4B,
+             NSAttributedStringKey.foregroundColor: Style.Color.C1]
+
+        UINavigationBar.appearance().tintColor = Style.Color.C1
+
+        UIApplication.shared.statusBarStyle = .lightContent
+
         UserDefaults.standard.register(defaults: [
             sampleCertificateResetKey : false
         ])

@@ -9,23 +9,43 @@
 import UIKit
 
 class LandingScreenViewController : UIViewController {
-    @IBOutlet weak var logoImageView: UIImageView!
     override func viewDidLoad() {
         title = ""
         view.backgroundColor = Style.Color.C3
-        
-        // Remove the drop shadow
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .default
     }
 }
+
+class NewUserViewController: UIViewController {
+    @IBOutlet weak var passphraseLabel: UILabel!
+    var attempts = 5
+    
+    override func viewDidLoad() {
+        title = NSLocalizedString("New User", comment: "Onboarding screen label for New User")
+        generatePassphrase()
+    }
+    
+    func generatePassphrase() {
+        let passphrase = Keychain.generateSeedPhrase()
+        
+        do {
+            try Keychain.updateShared(with: passphrase)
+            passphraseLabel.text = passphrase
+        } catch {
+            attempts -= 1
+            
+            if attempts < 0 {
+                fatalError("Couldn't generate a passphrase after failing 5 times.")
+                // TODO: Should message user instead of crash? Is this plausible?
+            } else {
+                generatePassphrase()
+            }
+        }
+    }
+    
+}
+
+
+
 
 class RestoreAccountViewController: UIViewController {
     @IBOutlet weak var logoImageView: UIImageView!
@@ -35,7 +55,6 @@ class RestoreAccountViewController: UIViewController {
         title = ""
         let sideInsets : CGFloat = 16
         let vertInsets : CGFloat = 32
-        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
         passphraseTextView.textContainerInset = UIEdgeInsets(top: vertInsets, left: sideInsets, bottom: vertInsets, right: sideInsets)
         passphraseTextView.delegate = self
     }
@@ -82,24 +101,13 @@ extension RestoreAccountViewController : UITextViewDelegate {
     }
 }
 
-class PrenupViewController: UIViewController {
-    @IBOutlet weak var logoImageView: GreyTintImageView!
-    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.setNavigationBarHidden(false, animated: true)
-//        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
-    }
-    override func viewDidLoad() {
-        title = ""
-    }
-}
-
 class GeneratedPassphraseViewController: UIViewController {
     @IBOutlet weak var passphraseLabel: UILabel!
     @IBOutlet weak var logoImageView: UIImageView!
     var attempts = 5
     
     override func viewDidLoad() {
-        title = ""
+//        title = ""
         generatePassphrase()
         
         logoImageView.tintColor = UIColor(red:0.00, green:0.54, blue:0.48, alpha:1.0)

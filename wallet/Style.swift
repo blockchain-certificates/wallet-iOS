@@ -10,34 +10,34 @@ import Foundation
 
 struct Style {
     struct Color {
-        // C1
+        /// C1: white
         static let C1 = UIColor.white
         
-        // C2 / default background / light grey
+        /// C2: default background / light grey
         static let C2 = UIColor(hexString: "#F2F5FA")
         
-        // C3 / primary brand color / dark blue
+        /// C3: primary brand color / dark blue
         static let C3 = UIColor(hexString: "#062451")
         
-        // C4 / secondary brand color / green
+        /// C4: secondary brand color / green
         static let C4 = UIColor(hexString: "#2AB27B")
         
-        // C5 / Headlines
+        /// C5: Headlines
         static let C5 = UIColor(hexString: "#1B66AE")
         
-        // C6 / Primary text
+        /// C6: Primary text
         static let C6 = UIColor(hexString: "#333333")
         
-        // C7 / Secondary text
+        /// C7: Secondary text
         static let C7 = UIColor(hexString: "#919396")
         
-        // C8 / Strokes
+        /// C8: Strokes
         static let C8 = UIColor(hexString: "#D8D8D8")
         
-        // C9 / Error states
+        /// C9: Error states
         static let C9 = UIColor(hexString: "#D0021B")
         
-        // C10 // Text field highlight
+        /// C10: Text field highlight
         static let C10 = UIColor(hexString: "#EBEFF7")
     }
 
@@ -78,6 +78,8 @@ struct Style {
         
         static let T4S = create(.semiBold, size: 18)
         
+        static let T4B = create(.bold, size: 18)
+
         static let T5S = create(.semiBold, size: 22)
         
     }
