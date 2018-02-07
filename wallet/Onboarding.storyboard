@@ -8,7 +8,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,9 +15,10 @@
         <scene sceneID="JHV-Fb-ny0">
             <objects>
                 <navigationController storyboardIdentifier="onboarding" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gKt-0J-INy" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QbR-4T-K5s">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="QbR-4T-K5s">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.060152135789999998" green="0.1407451928" blue="0.305898577" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <connections>
                         <segue destination="C6e-aU-jG4" kind="relationship" relationship="rootViewController" id="bdv-ns-NVn"/>
@@ -78,7 +78,7 @@
                             <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="qKJ-hu-YmP" secondAttribute="bottom" constant="20" id="Oyh-Ns-D2r"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uWO-Mc-lvh" secondAttribute="trailing" constant="20" id="RZU-MA-7gM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VIg-Nn-J7f" secondAttribute="trailing" id="Vxc-iH-dH1"/>
-                            <constraint firstItem="uWO-Mc-lvh" firstAttribute="top" secondItem="VIg-Nn-J7f" secondAttribute="bottom" id="YjO-at-Xyd"/>
+                            <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="VIg-Nn-J7f" secondAttribute="bottom" constant="116" id="YjO-at-Xyd"/>
                             <constraint firstItem="uWO-Mc-lvh" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" constant="20" id="Yqg-aR-7nW"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" constant="20" id="eKv-uB-s0z"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="vhZ-Ij-9SM"/>
@@ -91,10 +91,10 @@
             </objects>
             <point key="canvasLocation" x="1824.6376811594205" y="849.45652173913049"/>
         </scene>
-        <!--Prenup View Controller-->
+        <!--New User-->
         <scene sceneID="35f-qu-Nzo">
             <objects>
-                <viewController id="T7K-XY-0w3" customClass="PrenupViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="New User" id="T7K-XY-0w3" customClass="PrenupViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fTF-sV-48q"/>
                         <viewControllerLayoutGuide type="bottom" id="TkE-ae-Q2Z"/>
@@ -102,65 +102,10 @@
                     <view key="view" contentMode="scaleToFill" id="Dxu-0f-vEN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="qdm-4b-3tu" customClass="GreyTintImageView" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="177" y="100" width="60" height="60"/>
-                                <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="0Yp-eu-Goe"/>
-                                    <constraint firstAttribute="width" secondItem="qdm-4b-3tu" secondAttribute="height" multiplier="1:1" id="d6Y-iJ-kw9"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CWL-Lq-3pX">
-                                <rect key="frame" x="41.333333333333343" y="230" width="331.33333333333326" height="81"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW ACCOUNT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFO-rF-eLK" customClass="TitleLabel" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="331.33333333333331" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you ever lose your phone, you will need this passphrase to recover your records." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cd7-q0-Wpt">
-                                        <rect key="frame" x="0.0" y="40.333333333333314" width="331.33333333333331" height="40.666666666666657"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwR-15-ti6" customClass="RectangularButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="77" y="341" width="260" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="260" id="1Gx-li-fPO"/>
-                                </constraints>
-                                <state key="normal" title="GENERATE PASSPHRASE"/>
-                                <connections>
-                                    <segue destination="pBd-jD-deD" kind="show" id="VW3-xk-zpR">
-                                        <nil key="action"/>
-                                    </segue>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="JwR-15-ti6" firstAttribute="centerX" secondItem="Dxu-0f-vEN" secondAttribute="centerX" id="45N-N4-0ab"/>
-                            <constraint firstItem="CWL-Lq-3pX" firstAttribute="centerX" secondItem="Dxu-0f-vEN" secondAttribute="centerX" id="6OT-aw-oAS"/>
-                            <constraint firstItem="qdm-4b-3tu" firstAttribute="top" secondItem="fTF-sV-48q" secondAttribute="bottom" constant="100" id="CYj-Zq-0PC">
-                                <variation key="heightClass=compact" constant="20"/>
-                            </constraint>
-                            <constraint firstItem="CWL-Lq-3pX" firstAttribute="width" secondItem="Dxu-0f-vEN" secondAttribute="width" multiplier="0.8" id="KUO-Xf-I0L"/>
-                            <constraint firstItem="CWL-Lq-3pX" firstAttribute="top" secondItem="qdm-4b-3tu" secondAttribute="bottom" constant="70" id="RBs-4l-hrI">
-                                <variation key="heightClass=compact" constant="20"/>
-                            </constraint>
-                            <constraint firstItem="qdm-4b-3tu" firstAttribute="centerX" secondItem="Dxu-0f-vEN" secondAttribute="centerX" id="kDv-2a-YL3"/>
-                            <constraint firstItem="JwR-15-ti6" firstAttribute="top" secondItem="cd7-q0-Wpt" secondAttribute="bottom" constant="30" id="uL8-ZI-r4o"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bQl-QP-8rb"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <connections>
-                        <outlet property="logoImageView" destination="qdm-4b-3tu" id="3ae-nH-5UQ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CqJ-tU-RMw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

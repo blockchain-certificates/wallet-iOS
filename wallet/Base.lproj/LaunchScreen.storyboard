@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="ipad12_9" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,22 +19,25 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Sua-0o-4Xo">
-                                <rect key="frame" x="409.5" y="580.5" width="205" height="205"/>
-                                <color key="tintColor" red="0.3294117647" green="0.3294117647" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Sua-0o-4Xo" secondAttribute="height" multiplier="1:1" id="HGN-Ok-9xJ"/>
-                                </constraints>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="iEc-fP-vRQ">
+                                <rect key="frame" x="20" y="20" width="374" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blockcerts_logo" translatesAutoresizingMaskIntoConstraints="NO" id="eP5-4S-we7">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="600"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.060152135789999998" green="0.1407451928" blue="0.305898577" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="Sua-0o-4Xo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5D6-eU-mnS"/>
-                            <constraint firstItem="Sua-0o-4Xo" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.2" id="j8U-yc-pKL"/>
-                            <constraint firstItem="Sua-0o-4Xo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="pTo-Ix-Dnj"/>
+                            <constraint firstItem="iEc-fP-vRQ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="1TO-gQ-bc5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iEc-fP-vRQ" secondAttribute="trailing" id="KN6-m6-2Wq"/>
+                            <constraint firstItem="iEc-fP-vRQ" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="MK1-Tj-rTl"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="iEc-fP-vRQ" secondAttribute="bottom" constant="116" id="iw7-Gj-DpS"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -45,6 +47,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="58" height="61"/>
+        <image name="blockcerts_logo" width="250" height="52"/>
     </resources>
 </document>
