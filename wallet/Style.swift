@@ -101,6 +101,9 @@ struct Style {
         
         static let cornerRadius = CGFloat(7)
         
+        /// Padding between right edge of button and right edge of checkmark image
+        static let buttonCheckPadding = CGFloat(12)
+        
     }
     
 }
