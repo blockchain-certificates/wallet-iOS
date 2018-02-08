@@ -327,10 +327,116 @@
             </objects>
             <point key="canvasLocation" x="3542" y="504"/>
         </scene>
+        <!--Manual Backup-->
+        <scene sceneID="Hgm-kK-cQi">
+            <objects>
+                <viewController storyboardIdentifier="manualBackup" title="Manual Backup" id="CdH-oJ-v0k" customClass="OnboardingManualBackup" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="208-Ud-Tmj"/>
+                        <viewControllerLayoutGuide type="bottom" id="6yH-oq-bb6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9pM-qE-SXt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-7Y-4vX" userLabel="Container">
+                                <rect key="frame" x="20" y="218.66666666666663" width="374" height="299"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_writtenbackup" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-2e-aVj">
+                                        <rect key="frame" x="134.66666666666666" y="0.33333333333331439" width="104.66666666666666" height="104.66666666666667"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="j3U-2e-aVj" secondAttribute="height" multiplier="1:1" id="dQJ-VD-IHL"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual Hardcopy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PE0-wT-KoM" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="120.99999999999997" width="374" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Write your passphrase by hand on a piece of paper and store it in a secure location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vj-p9-n0G" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="166" y="53" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlN-eo-GeR" userLabel="Passphrase container">
+                                        <rect key="frame" x="20" y="186.99999999999997" width="334" height="44.333333333333343"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pass phrase generate electricity dynamo femur shake fries joystick corgi jingle wall sticker sandwich soup pencil coffee" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Sq-he-eXT" customClass="LabelC1T4S" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="11.999999999999998" width="302" height="20.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.92156862750000001" green="0.93725490199999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="5Sq-he-eXT" secondAttribute="bottom" constant="12" id="Byk-cA-SLs"/>
+                                            <constraint firstItem="5Sq-he-eXT" firstAttribute="leading" secondItem="qlN-eo-GeR" secondAttribute="leading" constant="16" id="OcJ-k7-fV9"/>
+                                            <constraint firstAttribute="trailing" secondItem="5Sq-he-eXT" secondAttribute="trailing" constant="16" id="T2K-EL-woc"/>
+                                            <constraint firstItem="5Sq-he-eXT" firstAttribute="top" secondItem="qlN-eo-GeR" secondAttribute="top" constant="12" id="Vrj-S2-0Jo"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="7"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ImO-LW-82b" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="255.33333333333337" width="374" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Kbe-lr-h6d"/>
+                                        </constraints>
+                                        <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="dismiss" destination="i9A-JE-Qz9" eventType="touchUpInside" id="3qt-FE-9EH"/>
+                                            <action selector="dismiss" destination="CdH-oJ-v0k" eventType="touchUpInside" id="rkd-OL-znz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="j3U-2e-aVj" firstAttribute="width" secondItem="MI6-7Y-4vX" secondAttribute="width" multiplier="0.28" id="4f3-Rk-VN9"/>
+                                    <constraint firstItem="qlN-eo-GeR" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" constant="20" id="7FY-vj-fBT"/>
+                                    <constraint firstItem="ImO-LW-82b" firstAttribute="centerX" secondItem="MI6-7Y-4vX" secondAttribute="centerX" id="83l-t0-OGM"/>
+                                    <constraint firstItem="ImO-LW-82b" firstAttribute="top" secondItem="qlN-eo-GeR" secondAttribute="bottom" constant="24" id="8xh-Ji-h95"/>
+                                    <constraint firstItem="PE0-wT-KoM" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" id="AJh-hq-9pI"/>
+                                    <constraint firstItem="PE0-wT-KoM" firstAttribute="top" secondItem="j3U-2e-aVj" secondAttribute="bottom" constant="16" id="GhR-pC-cgA"/>
+                                    <constraint firstItem="ImO-LW-82b" firstAttribute="width" secondItem="MI6-7Y-4vX" secondAttribute="width" id="H3o-Mx-pFg"/>
+                                    <constraint firstItem="j3U-2e-aVj" firstAttribute="centerX" secondItem="MI6-7Y-4vX" secondAttribute="centerX" id="MV7-UI-Byf"/>
+                                    <constraint firstAttribute="trailing" secondItem="qlN-eo-GeR" secondAttribute="trailing" constant="20" id="P1j-YG-yO3"/>
+                                    <constraint firstItem="4vj-p9-n0G" firstAttribute="top" secondItem="PE0-wT-KoM" secondAttribute="bottom" constant="12" id="Ppb-z0-Q2v"/>
+                                    <constraint firstAttribute="trailing" secondItem="PE0-wT-KoM" secondAttribute="trailing" id="bzd-Iz-bPl"/>
+                                    <constraint firstAttribute="trailing" secondItem="4vj-p9-n0G" secondAttribute="trailing" id="cte-ik-yJT"/>
+                                    <constraint firstItem="4vj-p9-n0G" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" id="mkb-H7-neV"/>
+                                    <constraint firstAttribute="bottom" secondItem="ImO-LW-82b" secondAttribute="bottom" id="nvQ-hC-86K"/>
+                                    <constraint firstItem="j3U-2e-aVj" firstAttribute="top" secondItem="MI6-7Y-4vX" secondAttribute="top" id="oUY-gU-zN9"/>
+                                    <constraint firstItem="qlN-eo-GeR" firstAttribute="top" secondItem="4vj-p9-n0G" secondAttribute="bottom" constant="12" id="qay-wk-wJS"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MI6-7Y-4vX" firstAttribute="centerY" secondItem="9pM-qE-SXt" secondAttribute="centerY" id="PtY-EV-CuR"/>
+                            <constraint firstItem="MI6-7Y-4vX" firstAttribute="leading" secondItem="9pM-qE-SXt" secondAttribute="leading" constant="20" id="TUK-I6-U1l"/>
+                            <constraint firstAttribute="trailing" secondItem="MI6-7Y-4vX" secondAttribute="trailing" constant="20" id="buX-xQ-mlX"/>
+                            <constraint firstItem="MI6-7Y-4vX" firstAttribute="centerX" secondItem="9pM-qE-SXt" secondAttribute="centerX" id="hk8-u6-2kg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="passphraseLabel" destination="5Sq-he-eXT" id="hm7-HU-5fM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i9A-JE-Qz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4486" y="530"/>
+        </scene>
     </scenes>
     <resources>
         <image name="blockcerts_logo" width="250" height="52"/>
         <image name="illo_backup" width="105" height="105"/>
         <image name="illo_success" width="105" height="105"/>
+        <image name="illo_writtenbackup" width="105" height="105"/>
     </resources>
 </document>

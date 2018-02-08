@@ -57,8 +57,10 @@ class OnboardingBackupMethods : UIViewController {
     var hasCopiedPasscode = false
     
     @IBAction func backupManual() {
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
+        present(storyboard.instantiateViewController(withIdentifier: "manualBackup"), animated: true, completion: nil)
+
         hasWrittenPasscode = true
-        updateStates()
     }
     
     @IBAction func backupCopy() {
@@ -70,6 +72,7 @@ class OnboardingBackupMethods : UIViewController {
         let activity = UIActivityViewController(activityItems: [passPhrase as NSString], applicationActivities: nil)
         
         present(activity, animated: true) {
+            // TODO: can detect if user cancels?
             self.hasCopiedPasscode = true
             self.updateStates()
         }
@@ -105,6 +108,19 @@ class OnboardingBackupMethods : UIViewController {
     }
 }
 
+
+class OnboardingManualBackup : UIViewController {
+    @IBOutlet var passphraseLabel : UILabel!
+    
+    @IBAction func dismiss() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        passphraseLabel.text = Keychain.loadSeedPhrase()
+    }
+}
 
 
 class RestoreAccountViewController : UIViewController {

@@ -48,6 +48,11 @@ class LabelC1T3S : LabelC3T3B {
 }
 
 @IBDesignable
+class LabelC1T4S : LabelC3T3B {
+    override var labelFont: UIFont { return Style.Font.T4S }
+}
+
+@IBDesignable
 class LabelC3T3S : LabelC6T3S {
     override var color: UIColor { return Style.Color.C3 }
 }
