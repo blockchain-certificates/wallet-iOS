@@ -249,7 +249,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select at least one option from the choices below:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCG-WK-gg0" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select at least one option from the choices below:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCG-WK-gg0" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="165.66666666666669" width="374" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -261,6 +261,9 @@
                                             <constraint firstAttribute="height" constant="44" id="MEl-rE-JLq"/>
                                         </constraints>
                                         <state key="normal" title="Manual Hardcopy"/>
+                                        <connections>
+                                            <action selector="backupManual" destination="i5s-AP-Aeo" eventType="touchUpInside" id="4wc-0w-PN3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGc-Ah-B2Q" customClass="CheckmarkButton" customModule="certificates" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="262.66666666666669" width="374" height="44"/>
@@ -268,13 +271,19 @@
                                             <constraint firstAttribute="height" constant="44" id="KzO-Rs-PWb"/>
                                         </constraints>
                                         <state key="normal" title="Copy to E-mail or Clipboard"/>
+                                        <connections>
+                                            <action selector="backupCopy" destination="i5s-AP-Aeo" eventType="touchUpInside" id="LkO-Nw-57D"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iB4-IF-EY4" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iB4-IF-EY4" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="330.66666666666663" width="374" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="XQe-cc-u3d"/>
                                         </constraints>
                                         <state key="normal" title="Select at Least One to Continue"/>
+                                        <connections>
+                                            <action selector="dismiss" destination="i5s-AP-Aeo" eventType="touchUpInside" id="kJM-w7-bF3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

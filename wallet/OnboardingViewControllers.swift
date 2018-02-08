@@ -48,10 +48,51 @@ class NewUserViewController : UIViewController {
 class OnboardingBackupMethods : UIViewController {
     @IBOutlet var manualButton : CheckmarkButton!
     @IBOutlet var copyButton : CheckmarkButton!
-    @IBOutlet var continueButton : SecondaryButton!
-    
+    @IBOutlet var continueButton : PrimaryButton!
+
+    // TODO: must persist these - user defaults? keychain? Cannot depend solely on presence of keychain
+    // b/c we'll present onboarding in some modified form for existing users. Could store last launched
+    // version in userdefaults and use both pieces of information to determine (or hasOnboarded)
     var hasWrittenPasscode = false
     var hasCopiedPasscode = false
+    
+    @IBAction func backupManual() {
+        hasWrittenPasscode = true
+        updateStates()
+    }
+    
+    @IBAction func backupCopy() {
+        guard let passPhrase = Keychain.loadSeedPhrase() else {
+            // TODO: present alert? how to help user in this case?
+            return
+        }
+
+        let activity = UIActivityViewController(activityItems: [passPhrase as NSString], applicationActivities: nil)
+        
+        present(activity, animated: true) {
+            self.hasCopiedPasscode = true
+            self.updateStates()
+        }
+
+    }
+    
+    @IBAction func dismiss() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func updateStates() {
+        manualButton.checked = hasWrittenPasscode
+        copyButton.checked = hasCopiedPasscode
+        continueButton.isEnabled = hasWrittenPasscode || hasCopiedPasscode
+
+        let title = continueButton.isEnabled ?
+            NSLocalizedString("Done", comment: "Button copy") :
+            NSLocalizedString("Select at Least One to Continue", comment: "Button copy")
+
+        continueButton.setTitle(title, for: .normal)
+        continueButton.setTitle(title, for: .highlighted)
+        continueButton.setTitle(title, for: .disabled)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +101,7 @@ class OnboardingBackupMethods : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        manualButton.checked = hasWrittenPasscode
-        copyButton.checked = hasCopiedPasscode
-        continueButton.isEnabled = hasWrittenPasscode || hasCopiedPasscode
+        updateStates()
     }
 }
 

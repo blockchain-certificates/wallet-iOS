@@ -63,13 +63,13 @@ class ButtonBase : UIButton {
 
     var textColor : UIColor { return .white }
     var textColorHighlighted : UIColor { return .white }
-    var textColorDisabled: UIColor { return .white }
+    var textColorDisabled : UIColor { return Style.Color.C7 }
     var strokeColor : UIColor { return .white }
     var strokeColorHighlighted : UIColor { return .white }
-    var strokeColorDisabled: UIColor { return .white }
+    var strokeColorDisabled : UIColor { return Style.Color.C7 }
     var fillColor : UIColor { return .white }
     var fillColorHighlighted : UIColor { return .white }
-    var fillColorDisabled: UIColor { return .white }
+    var fillColorDisabled : UIColor { return .clear }
 
     func commonInit() {
         let edgeInsets : CGFloat = 20
@@ -121,15 +121,12 @@ class PrimaryButton : ButtonBase {
     
     override var textColor : UIColor { return Style.Color.C1 }
     override var textColorHighlighted : UIColor { return Style.Color.C6_40 }
-    override var textColorDisabled : UIColor { return Style.Color.C7 }
-    
+
     override var strokeColor : UIColor { return Style.Color.C4 }
     override var strokeColorHighlighted : UIColor { return Style.Color.C11_80 }
-    override var strokeColorDisabled : UIColor { return Style.Color.C7 }
 
     override var fillColor : UIColor { return Style.Color.C4 }
     override var fillColorHighlighted : UIColor { return Style.Color.C11_80 }
-    override var fillColorDisabled : UIColor { return Style.Color.C7 }
 
 }
 
@@ -138,15 +135,12 @@ class SecondaryButton : ButtonBase {
     
     override var textColor : UIColor { return Style.Color.C4 }
     override var textColorHighlighted : UIColor { return Style.Color.C11 }
-    override var textColorDisabled : UIColor { return Style.Color.C7 }
     
     override var strokeColor : UIColor { return Style.Color.C4 }
     override var strokeColorHighlighted : UIColor { return Style.Color.C4_80 }
-    override var strokeColorDisabled : UIColor { return Style.Color.C7 }
     
     override var fillColor : UIColor { return .clear }
     override var fillColorHighlighted : UIColor { return Style.Color.C4_80 }
-    override var fillColorDisabled : UIColor { return .clear }
 
 }
 

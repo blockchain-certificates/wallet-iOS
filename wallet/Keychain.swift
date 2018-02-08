@@ -102,7 +102,7 @@ extension Keychain {
         return _shared!
     }
     
-    private static func loadSeedPhrase() -> String? {
+    static func loadSeedPhrase() -> String? {
         let query : [String : Any] = [
             String(kSecClass): kSecClassGenericPassword,
             String(kSecAttrAccount): seedPhraseKey,
