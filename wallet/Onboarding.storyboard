@@ -48,8 +48,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWO-Mc-lvh" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="174" y="609" width="67" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWO-Mc-lvh" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
+                                <rect key="frame" x="40" y="620" width="334" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Oh5-KR-oha"/>
                                 </constraints>
@@ -58,8 +58,8 @@
                                     <segue destination="T7K-XY-0w3" kind="show" id="M7C-el-hH1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="89" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKJ-hu-YmP" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="163" y="669" width="89" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="89" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKJ-hu-YmP" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
+                                <rect key="frame" x="40" y="672" width="334" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="3Lh-bT-Xi2"/>
                                 </constraints>
@@ -354,8 +354,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Write your passphrase by hand on a piece of paper and store it in a secure location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vj-p9-n0G" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="166" y="53" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write your passphrase by hand on a piece of paper and store it in a secure location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vj-p9-n0G" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="154.00000000000003" width="374" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
