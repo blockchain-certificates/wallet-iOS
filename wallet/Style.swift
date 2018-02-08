@@ -24,7 +24,7 @@ struct Style {
         static let C4_80 = UIColor(hexString: "#11493E")
 
         /// C5: Headlines
-        static let C5 = UIColor(hexString: "#1B66AE")
+        static let C5 = UIColor(hexString: "#207BD3")
         
         /// C6: Primary text
         static let C6 = UIColor(hexString: "#333333")
@@ -40,7 +40,7 @@ struct Style {
         static let C9 = UIColor(hexString: "#D0021B")
         
         /// C10: Text field highlight
-        static let C10 = UIColor(hexString: "#EBEFF7")
+        static let C10 = UIColor(hexString: "#ECF5FE")
         
         /// C11: Selected primary button background
         static let C11 = UIColor(hexString: "#FFFFFF")
