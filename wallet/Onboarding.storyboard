@@ -155,7 +155,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.92156862745098034" green="0.93725490196078431" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="vDS-eb-6Ul" secondAttribute="trailing" constant="16" id="Efh-av-WFi"/>
                                             <constraint firstItem="vDS-eb-6Ul" firstAttribute="top" secondItem="sPd-ZI-ehX" secondAttribute="top" constant="12" id="Hg6-sw-mLD"/>
@@ -201,7 +201,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="RyP-ht-mHB" firstAttribute="centerY" secondItem="Dxu-0f-vEN" secondAttribute="centerY" id="Bi4-yE-bQp"/>
                             <constraint firstItem="RyP-ht-mHB" firstAttribute="centerX" secondItem="Dxu-0f-vEN" secondAttribute="centerX" id="POC-HY-oRf"/>
@@ -343,13 +343,13 @@
                                 <rect key="frame" x="20" y="218.66666666666663" width="374" height="299"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_writtenbackup" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-2e-aVj">
-                                        <rect key="frame" x="134.66666666666666" y="0.33333333333331439" width="104.66666666666666" height="104.66666666666667"/>
+                                        <rect key="frame" x="134.66666666666666" y="0.33333333333334281" width="104.66666666666666" height="104.66666666666667"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="j3U-2e-aVj" secondAttribute="height" multiplier="1:1" id="dQJ-VD-IHL"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual Hardcopy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PE0-wT-KoM" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120.99999999999997" width="374" height="21"/>
+                                        <rect key="frame" x="0.0" y="121.00000000000003" width="374" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -361,7 +361,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlN-eo-GeR" userLabel="Passphrase container">
-                                        <rect key="frame" x="20" y="186.99999999999997" width="334" height="44.333333333333343"/>
+                                        <rect key="frame" x="20" y="187.00000000000003" width="334" height="44.333333333333343"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pass phrase generate electricity dynamo femur shake fries joystick corgi jingle wall sticker sandwich soup pencil coffee" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Sq-he-eXT" customClass="LabelC1T4S" customModule="certificates" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="11.999999999999998" width="302" height="20.333333333333329"/>
@@ -370,7 +370,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.92156862750000001" green="0.93725490199999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.92549019607843142" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="5Sq-he-eXT" secondAttribute="bottom" constant="12" id="Byk-cA-SLs"/>
                                             <constraint firstItem="5Sq-he-eXT" firstAttribute="leading" secondItem="qlN-eo-GeR" secondAttribute="leading" constant="16" id="OcJ-k7-fV9"/>
