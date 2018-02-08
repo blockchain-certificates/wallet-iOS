@@ -56,14 +56,21 @@ class LabelC3T3S : LabelC6T3S {
 // MARK: - Buttons
 
 protocol Button {
-    var textColor : UIColor {get}
-    var strokeColor : UIColor {get}
-    var fillColor : UIColor {get}
     func commonInit()
 }
 
-extension Button where Self : UIButton {
-    
+class ButtonBase : UIButton {
+
+    var textColor : UIColor { return .white }
+    var textColorHighlighted : UIColor { return .white }
+    var textColorDisabled: UIColor { return .white }
+    var strokeColor : UIColor { return .white }
+    var strokeColorHighlighted : UIColor { return .white }
+    var strokeColorDisabled: UIColor { return .white }
+    var fillColor : UIColor { return .white }
+    var fillColorHighlighted : UIColor { return .white }
+    var fillColorDisabled: UIColor { return .white }
+
     func commonInit() {
         let edgeInsets : CGFloat = 20
         contentEdgeInsets = UIEdgeInsets(top: edgeInsets, left: edgeInsets, bottom: edgeInsets, right: edgeInsets)
@@ -74,79 +81,92 @@ extension Button where Self : UIButton {
         
         titleLabel?.font = Style.Font.T3S
         setTitleColor(textColor, for: .normal)
-        setTitleColor(textColor, for: .selected)
-        setTitleColor(textColor, for: .highlighted)
-        setTitleColor(textColor, for: .focused)
+        setTitleColor(textColorHighlighted, for: .highlighted)
+        setTitleColor(textColorDisabled, for: .disabled)
         
-        backgroundColor = fillColor
-    }
-    
-}
-
-
-@IBDesignable
-class PrimaryButton : UIButton, Button {
-    
-    let textColor = Style.Color.C1
-    let strokeColor = Style.Color.C4
-    let fillColor = Style.Color.C4
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+        isHighlighted = false
+        isEnabled = true
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
-}
-
-@IBDesignable
-class SecondaryButton : UIButton, Button {
-    
-    let textColor = Style.Color.C4
-    let strokeColor = Style.Color.C4
-    let fillColor = UIColor.clear
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
+
+    override var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isHighlighted ? fillColorHighlighted : fillColor
+            layer.borderColor = (isHighlighted ? strokeColorHighlighted : strokeColor).cgColor
+            layer.cornerRadius = Style.Measure.cornerRadius
+        }
     }
+
+    override var isEnabled: Bool {
+        didSet {
+            backgroundColor = isEnabled ? fillColor : fillColorDisabled
+            layer.borderColor = (isEnabled ? strokeColor : strokeColorDisabled).cgColor
+            layer.cornerRadius = Style.Measure.cornerRadius
+        }
+    }
+
+}
+
+
+@IBDesignable
+class PrimaryButton : ButtonBase {
     
+    override var textColor : UIColor { return Style.Color.C1 }
+    override var textColorHighlighted : UIColor { return Style.Color.C6_40 }
+    override var textColorDisabled : UIColor { return Style.Color.C7 }
+    
+    override var strokeColor : UIColor { return Style.Color.C4 }
+    override var strokeColorHighlighted : UIColor { return Style.Color.C11_80 }
+    override var strokeColorDisabled : UIColor { return Style.Color.C7 }
+
+    override var fillColor : UIColor { return Style.Color.C4 }
+    override var fillColorHighlighted : UIColor { return Style.Color.C11_80 }
+    override var fillColorDisabled : UIColor { return Style.Color.C7 }
+
+}
+
+@IBDesignable
+class SecondaryButton : ButtonBase {
+    
+    override var textColor : UIColor { return Style.Color.C4 }
+    override var textColorHighlighted : UIColor { return Style.Color.C11 }
+    override var textColorDisabled : UIColor { return Style.Color.C7 }
+    
+    override var strokeColor : UIColor { return Style.Color.C4 }
+    override var strokeColorHighlighted : UIColor { return Style.Color.C4_80 }
+    override var strokeColorDisabled : UIColor { return Style.Color.C7 }
+    
+    override var fillColor : UIColor { return .clear }
+    override var fillColorHighlighted : UIColor { return Style.Color.C4_80 }
+    override var fillColorDisabled : UIColor { return .clear }
+
 }
 
 @IBDesignable
 class CheckmarkButton : SecondaryButton {
-    var checkmark : UIImageView!
+    var checkmark = UIImageView()
     var checked : Bool = true {
         didSet {
             checkmark.isHidden = !checked
         }
     }
     
-    func commonInit() {
+    override func commonInit() {
         super.commonInit()
+        checkmark.translatesAutoresizingMaskIntoConstraints = false
         checkmark.image = #imageLiteral(resourceName: "icon_check")
         addSubview(checkmark)
+        
         checkmark.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Style.Measure.buttonCheckPadding).isActive = true
         checkmark.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 
-    override init(frame: CGRect) {
-        checkmark = UIImageView()
-        super.init(frame: frame)
-        commonInit()
-    }
-    required init?(coder aDecoder: NSCoder) {
-        checkmark = UIImageView()
-        super.init(coder: aDecoder)
-        commonInit()
-    }
 }

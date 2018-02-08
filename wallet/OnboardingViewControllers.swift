@@ -46,7 +46,25 @@ class NewUserViewController : UIViewController {
 
 
 class OnboardingBackupMethods : UIViewController {
+    @IBOutlet var manualButton : CheckmarkButton!
+    @IBOutlet var copyButton : CheckmarkButton!
+    @IBOutlet var continueButton : SecondaryButton!
     
+    var hasWrittenPasscode = false
+    var hasCopiedPasscode = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = NSLocalizedString("Backup Passphrase", comment: "Onboarding screen backup passphrase title")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        manualButton.checked = hasWrittenPasscode
+        copyButton.checked = hasCopiedPasscode
+        continueButton.isEnabled = hasWrittenPasscode || hasCopiedPasscode
+    }
 }
 
 

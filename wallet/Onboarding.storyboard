@@ -308,6 +308,11 @@
                             <constraint firstAttribute="trailing" secondItem="WqY-ow-1Di" secondAttribute="trailing" constant="20" id="tPs-iW-qYy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="continueButton" destination="iB4-IF-EY4" id="gp1-x5-Liu"/>
+                        <outlet property="copyButton" destination="OGc-Ah-B2Q" id="Vgb-Wz-Q81"/>
+                        <outlet property="manualButton" destination="tFl-gf-qas" id="Ah1-om-2ti"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="91k-bU-sa9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
