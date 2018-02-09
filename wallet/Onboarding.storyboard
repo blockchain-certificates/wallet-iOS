@@ -76,16 +76,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.060152135789394379" green="0.14074519276618958" blue="0.30589857697486877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="qKJ-hu-YmP" secondAttribute="trailing" constant="20" id="BFh-mC-Y9j"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qKJ-hu-YmP" secondAttribute="trailing" id="BFh-mC-Y9j"/>
                             <constraint firstItem="VIg-Nn-J7f" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="J06-EM-lL7"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="Kuj-oZ-T7k"/>
                             <constraint firstItem="VIg-Nn-J7f" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" id="LLV-3k-Fv5"/>
                             <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="qKJ-hu-YmP" secondAttribute="bottom" constant="20" id="Oyh-Ns-D2r"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uWO-Mc-lvh" secondAttribute="trailing" constant="20" id="RZU-MA-7gM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uWO-Mc-lvh" secondAttribute="trailing" id="RZU-MA-7gM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VIg-Nn-J7f" secondAttribute="trailing" id="Vxc-iH-dH1"/>
                             <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="VIg-Nn-J7f" secondAttribute="bottom" constant="116" id="YjO-at-Xyd"/>
-                            <constraint firstItem="uWO-Mc-lvh" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" constant="20" id="Yqg-aR-7nW"/>
-                            <constraint firstItem="qKJ-hu-YmP" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" constant="20" id="eKv-uB-s0z"/>
+                            <constraint firstItem="uWO-Mc-lvh" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="Yqg-aR-7nW"/>
+                            <constraint firstItem="qKJ-hu-YmP" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="eKv-uB-s0z"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="vhZ-Ij-9SM"/>
                         </constraints>
                     </view>
