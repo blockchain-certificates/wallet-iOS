@@ -140,9 +140,8 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="DLg-pQ-CGl"/>
                                                 </constraints>
-                                                <string key="text">dolor sit er elit lamet, consectetaur cillium adipisicing pecu eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation</string>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" smartDashesType="no" smartQuotesType="no" textContentType="username"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" smartDashesType="no" smartQuotesType="no" textContentType="username"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="7"/>
@@ -152,6 +151,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BkJ-EG-3bX" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
                                                 <rect key="frame" x="164" y="170" width="46" height="30"/>
                                                 <state key="normal" title="Enter"/>
+                                                <connections>
+                                                    <action selector="savePassphrase" destination="BDX-GA-efs" eventType="touchUpInside" id="Psm-cQ-sWO"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -150,8 +150,64 @@ class OnboardingManualBackup : OnboardingControllerBase {
 
 
 
-class OnboardingCurrentUser : OnboardingControllerBase {
+class OnboardingCurrentUser : OnboardingControllerBase, UITextViewDelegate {
     @IBOutlet weak var textView : UITextView!
+
+    @IBAction func savePassphrase() {
+        guard let passphrase = textView.text else {
+            return
+        }
+        
+        let lowercasePassphrase = passphrase.lowercased()
+        
+        guard Keychain.isValidPassphrase(lowercasePassphrase) else {
+//            failedPassphrase(error: NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
+            return
+        }
+        do {
+            try Keychain.updateShared(with: lowercasePassphrase)
+            dismiss(animated: true) {
+                self.dismiss(animated: true, completion: nil)
+            }
+        } catch {
+//            failedPassphrase(error: NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
+        }
+    }
+    
+    // MARK: - Text view and keyboard
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.resignFirstResponder()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let keyboardScreenEndFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else {
+                return
+        }
+        
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame.cgRectValue, from: view.window)
+        
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            scrollView.contentInset = defaultScrollViewInset
+        } else {
+            // TODO: check these for iOS 11/iPhone X
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+            scrollView.isScrollEnabled = true
+        }
+        
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
+
+    // MARK: - View lifecycle
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -160,6 +216,7 @@ class OnboardingCurrentUser : OnboardingControllerBase {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        textView.delegate = self
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(adjustForKeyboard),
@@ -171,23 +228,6 @@ class OnboardingCurrentUser : OnboardingControllerBase {
                                                object: nil)
     }
     
-    @objc func adjustForKeyboard(notification: Notification) {
-        guard let userInfo = notification.userInfo,
-            let keyboardScreenEndFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else {
-            return
-        }
-        
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame.cgRectValue, from: view.window)
-        
-        if notification.name == Notification.Name.UIKeyboardWillHide {
-            scrollView.contentInset = defaultScrollViewInset
-        } else {
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
-            scrollView.isScrollEnabled = true
-        }
-        
-        scrollView.scrollIndicatorInsets = scrollView.contentInset
-    }
 }
 
 
