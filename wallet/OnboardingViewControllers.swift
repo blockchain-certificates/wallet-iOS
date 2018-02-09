@@ -12,25 +12,23 @@ class OnboardingControllerBase : UIViewController {
     @IBOutlet weak var scrollView : UIScrollView!
     @IBOutlet weak var containerView : UIView!
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        // Vertically center scrolling content
+    var defaultScrollViewInset : UIEdgeInsets {
         let padding: CGFloat
         if #available(iOS 11.0, *) {
             padding = (scrollView.frame.height - scrollView.contentLayoutGuide.layoutFrame.height) / 2
         } else {
             let safeHeight = scrollView.bounds.height
             padding = (safeHeight - containerView.bounds.height) / 2
-            print("scrollView.bounds.height \(scrollView.bounds.height)")
         }
         
-        if padding > 0 {
-            let insets = UIEdgeInsets(top: padding, left: 0, bottom: 0, right: 0)
-            scrollView.contentInset = insets
-            scrollView.isScrollEnabled = true
-            print(insets)
-        }
+        return UIEdgeInsets(top: padding, left: 0, bottom: 0, right: 0)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        scrollView.contentInset = defaultScrollViewInset
+        scrollView.isScrollEnabled = scrollView.contentInset.top == 0
     }
 
 }
@@ -149,6 +147,50 @@ class OnboardingManualBackup : OnboardingControllerBase {
         passphraseLabel.text = Keychain.loadSeedPhrase()
     }
 }
+
+
+
+class OnboardingCurrentUser : OnboardingControllerBase {
+    @IBOutlet weak var textView : UITextView!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        textView.becomeFirstResponder()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(adjustForKeyboard),
+                                               name: Notification.Name.UIKeyboardWillHide,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(adjustForKeyboard),
+                                               name: Notification.Name.UIKeyboardWillChangeFrame,
+                                               object: nil)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let keyboardScreenEndFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame.cgRectValue, from: view.window)
+        
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            scrollView.contentInset = defaultScrollViewInset
+        } else {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+            scrollView.isScrollEnabled = true
+        }
+        
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
+}
+
+
 
 
 class RestoreAccountViewController : UIViewController {

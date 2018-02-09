@@ -57,6 +57,11 @@ class LabelC3T3S : LabelC6T3S {
     override var color: UIColor { return Style.Color.C3 }
 }
 
+@IBDesignable
+class LabelC6T3R : LabelC6T3S {
+    override var labelFont: UIFont { return Style.Font.T3R }
+}
+
 
 // MARK: - Buttons
 
