@@ -137,7 +137,7 @@ class OnboardingBackupMethods : OnboardingControllerBase {
 }
 
 
-class OnboardingManualBackup : UIViewController {
+class OnboardingManualBackup : OnboardingControllerBase {
     @IBOutlet var passphraseLabel : UILabel!
     
     @IBAction func dismiss() {

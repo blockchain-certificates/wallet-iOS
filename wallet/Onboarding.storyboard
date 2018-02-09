@@ -352,98 +352,111 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-7Y-4vX" userLabel="Container">
-                                <rect key="frame" x="20" y="218.66666666666663" width="374" height="299"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pC5-bs-3BH">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_writtenbackup" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-2e-aVj">
-                                        <rect key="frame" x="134.66666666666666" y="0.33333333333334281" width="104.66666666666666" height="104.66666666666667"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="j3U-2e-aVj" secondAttribute="height" multiplier="1:1" id="dQJ-VD-IHL"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual Hardcopy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PE0-wT-KoM" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="121.00000000000003" width="374" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write your passphrase by hand on a piece of paper and store it in a secure location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vj-p9-n0G" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="154.00000000000003" width="374" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlN-eo-GeR" userLabel="Passphrase container">
-                                        <rect key="frame" x="20" y="187.00000000000003" width="334" height="44.333333333333343"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-7Y-4vX" userLabel="Container">
+                                        <rect key="frame" x="20" y="0.0" width="394" height="305"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pass phrase generate electricity dynamo femur shake fries joystick corgi jingle wall sticker sandwich soup pencil coffee" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Sq-he-eXT" customClass="LabelC1T4S" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="11.999999999999998" width="302" height="20.333333333333329"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_writtenbackup" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-2e-aVj">
+                                                <rect key="frame" x="141.66666666666666" y="0.6666666666666643" width="110.66666666666666" height="110.66666666666669"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="j3U-2e-aVj" secondAttribute="height" multiplier="1:1" id="dQJ-VD-IHL"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual Hardcopy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PE0-wT-KoM" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="127.33333333333334" width="394" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write your passphrase by hand on a piece of paper and store it in a secure location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vj-p9-n0G" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="160.33333333333334" width="394" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlN-eo-GeR" userLabel="Passphrase container">
+                                                <rect key="frame" x="20" y="193.33333333333334" width="354" height="44.333333333333343"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pass phrase generate electricity dynamo femur shake fries joystick corgi jingle wall sticker sandwich soup pencil coffee" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Sq-he-eXT" customClass="LabelC1T4S" customModule="certificates" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="11.999999999999998" width="322" height="20.333333333333329"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.92549019607843142" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="5Sq-he-eXT" secondAttribute="bottom" constant="12" id="Byk-cA-SLs"/>
+                                                    <constraint firstItem="5Sq-he-eXT" firstAttribute="leading" secondItem="qlN-eo-GeR" secondAttribute="leading" constant="16" id="OcJ-k7-fV9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="5Sq-he-eXT" secondAttribute="trailing" constant="16" id="T2K-EL-woc"/>
+                                                    <constraint firstItem="5Sq-he-eXT" firstAttribute="top" secondItem="qlN-eo-GeR" secondAttribute="top" constant="12" id="Vrj-S2-0Jo"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ImO-LW-82b" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="261.66666666666669" width="394" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="Kbe-lr-h6d"/>
+                                                </constraints>
+                                                <state key="normal" title="Done"/>
+                                                <connections>
+                                                    <action selector="dismiss" destination="i9A-JE-Qz9" eventType="touchUpInside" id="3qt-FE-9EH"/>
+                                                    <action selector="dismiss" destination="CdH-oJ-v0k" eventType="touchUpInside" id="rkd-OL-znz"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.92549019607843142" green="0.96078431372549022" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="5Sq-he-eXT" secondAttribute="bottom" constant="12" id="Byk-cA-SLs"/>
-                                            <constraint firstItem="5Sq-he-eXT" firstAttribute="leading" secondItem="qlN-eo-GeR" secondAttribute="leading" constant="16" id="OcJ-k7-fV9"/>
-                                            <constraint firstAttribute="trailing" secondItem="5Sq-he-eXT" secondAttribute="trailing" constant="16" id="T2K-EL-woc"/>
-                                            <constraint firstItem="5Sq-he-eXT" firstAttribute="top" secondItem="qlN-eo-GeR" secondAttribute="top" constant="12" id="Vrj-S2-0Jo"/>
+                                            <constraint firstItem="j3U-2e-aVj" firstAttribute="width" secondItem="MI6-7Y-4vX" secondAttribute="width" multiplier="0.28" id="4f3-Rk-VN9"/>
+                                            <constraint firstItem="qlN-eo-GeR" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" id="7FY-vj-fBT"/>
+                                            <constraint firstItem="ImO-LW-82b" firstAttribute="centerX" secondItem="MI6-7Y-4vX" secondAttribute="centerX" id="83l-t0-OGM"/>
+                                            <constraint firstItem="ImO-LW-82b" firstAttribute="top" secondItem="qlN-eo-GeR" secondAttribute="bottom" constant="24" id="8xh-Ji-h95"/>
+                                            <constraint firstItem="PE0-wT-KoM" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" id="AJh-hq-9pI"/>
+                                            <constraint firstItem="PE0-wT-KoM" firstAttribute="top" secondItem="j3U-2e-aVj" secondAttribute="bottom" constant="16" id="GhR-pC-cgA"/>
+                                            <constraint firstItem="ImO-LW-82b" firstAttribute="width" secondItem="MI6-7Y-4vX" secondAttribute="width" id="H3o-Mx-pFg"/>
+                                            <constraint firstItem="j3U-2e-aVj" firstAttribute="centerX" secondItem="MI6-7Y-4vX" secondAttribute="centerX" id="MV7-UI-Byf"/>
+                                            <constraint firstAttribute="trailing" secondItem="qlN-eo-GeR" secondAttribute="trailing" id="P1j-YG-yO3"/>
+                                            <constraint firstItem="4vj-p9-n0G" firstAttribute="top" secondItem="PE0-wT-KoM" secondAttribute="bottom" constant="12" id="Ppb-z0-Q2v"/>
+                                            <constraint firstAttribute="trailing" secondItem="PE0-wT-KoM" secondAttribute="trailing" id="bzd-Iz-bPl"/>
+                                            <constraint firstAttribute="trailing" secondItem="4vj-p9-n0G" secondAttribute="trailing" id="cte-ik-yJT"/>
+                                            <constraint firstItem="4vj-p9-n0G" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" id="mkb-H7-neV"/>
+                                            <constraint firstAttribute="bottom" secondItem="ImO-LW-82b" secondAttribute="bottom" id="nvQ-hC-86K"/>
+                                            <constraint firstItem="j3U-2e-aVj" firstAttribute="top" secondItem="MI6-7Y-4vX" secondAttribute="top" id="oUY-gU-zN9"/>
+                                            <constraint firstItem="qlN-eo-GeR" firstAttribute="top" secondItem="4vj-p9-n0G" secondAttribute="bottom" constant="12" id="qay-wk-wJS"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="7"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ImO-LW-82b" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="255.33333333333337" width="374" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Kbe-lr-h6d"/>
-                                        </constraints>
-                                        <state key="normal" title="Done"/>
-                                        <connections>
-                                            <action selector="dismiss" destination="i9A-JE-Qz9" eventType="touchUpInside" id="3qt-FE-9EH"/>
-                                            <action selector="dismiss" destination="CdH-oJ-v0k" eventType="touchUpInside" id="rkd-OL-znz"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="j3U-2e-aVj" firstAttribute="width" secondItem="MI6-7Y-4vX" secondAttribute="width" multiplier="0.28" id="4f3-Rk-VN9"/>
-                                    <constraint firstItem="qlN-eo-GeR" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" constant="20" id="7FY-vj-fBT"/>
-                                    <constraint firstItem="ImO-LW-82b" firstAttribute="centerX" secondItem="MI6-7Y-4vX" secondAttribute="centerX" id="83l-t0-OGM"/>
-                                    <constraint firstItem="ImO-LW-82b" firstAttribute="top" secondItem="qlN-eo-GeR" secondAttribute="bottom" constant="24" id="8xh-Ji-h95"/>
-                                    <constraint firstItem="PE0-wT-KoM" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" id="AJh-hq-9pI"/>
-                                    <constraint firstItem="PE0-wT-KoM" firstAttribute="top" secondItem="j3U-2e-aVj" secondAttribute="bottom" constant="16" id="GhR-pC-cgA"/>
-                                    <constraint firstItem="ImO-LW-82b" firstAttribute="width" secondItem="MI6-7Y-4vX" secondAttribute="width" id="H3o-Mx-pFg"/>
-                                    <constraint firstItem="j3U-2e-aVj" firstAttribute="centerX" secondItem="MI6-7Y-4vX" secondAttribute="centerX" id="MV7-UI-Byf"/>
-                                    <constraint firstAttribute="trailing" secondItem="qlN-eo-GeR" secondAttribute="trailing" constant="20" id="P1j-YG-yO3"/>
-                                    <constraint firstItem="4vj-p9-n0G" firstAttribute="top" secondItem="PE0-wT-KoM" secondAttribute="bottom" constant="12" id="Ppb-z0-Q2v"/>
-                                    <constraint firstAttribute="trailing" secondItem="PE0-wT-KoM" secondAttribute="trailing" id="bzd-Iz-bPl"/>
-                                    <constraint firstAttribute="trailing" secondItem="4vj-p9-n0G" secondAttribute="trailing" id="cte-ik-yJT"/>
-                                    <constraint firstItem="4vj-p9-n0G" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" id="mkb-H7-neV"/>
-                                    <constraint firstAttribute="bottom" secondItem="ImO-LW-82b" secondAttribute="bottom" id="nvQ-hC-86K"/>
-                                    <constraint firstItem="j3U-2e-aVj" firstAttribute="top" secondItem="MI6-7Y-4vX" secondAttribute="top" id="oUY-gU-zN9"/>
-                                    <constraint firstItem="qlN-eo-GeR" firstAttribute="top" secondItem="4vj-p9-n0G" secondAttribute="bottom" constant="12" id="qay-wk-wJS"/>
+                                    <constraint firstItem="MI6-7Y-4vX" firstAttribute="top" secondItem="pC5-bs-3BH" secondAttribute="top" id="FmJ-GK-uI8"/>
+                                    <constraint firstAttribute="bottom" secondItem="MI6-7Y-4vX" secondAttribute="bottom" id="ogU-Vw-TQ5"/>
                                 </constraints>
-                            </view>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="MI6-7Y-4vX" firstAttribute="centerY" secondItem="9pM-qE-SXt" secondAttribute="centerY" id="PtY-EV-CuR"/>
-                            <constraint firstItem="MI6-7Y-4vX" firstAttribute="leading" secondItem="9pM-qE-SXt" secondAttribute="leading" constant="20" id="TUK-I6-U1l"/>
-                            <constraint firstAttribute="trailing" secondItem="MI6-7Y-4vX" secondAttribute="trailing" constant="20" id="buX-xQ-mlX"/>
-                            <constraint firstItem="MI6-7Y-4vX" firstAttribute="centerX" secondItem="9pM-qE-SXt" secondAttribute="centerX" id="hk8-u6-2kg"/>
+                            <constraint firstItem="pC5-bs-3BH" firstAttribute="top" secondItem="208-Ud-Tmj" secondAttribute="bottom" id="5Xa-Vt-ddJ"/>
+                            <constraint firstItem="pC5-bs-3BH" firstAttribute="leading" secondItem="9pM-qE-SXt" secondAttribute="leading" id="BN5-a6-sc3"/>
+                            <constraint firstItem="6yH-oq-bb6" firstAttribute="top" secondItem="pC5-bs-3BH" secondAttribute="bottom" id="bLQ-Fa-Zk9"/>
+                            <constraint firstAttribute="trailing" secondItem="pC5-bs-3BH" secondAttribute="trailing" id="gQT-eF-r23"/>
+                            <constraint firstItem="MI6-7Y-4vX" firstAttribute="leading" secondItem="9pM-qE-SXt" secondAttribute="leading" constant="20" id="iLU-ha-8DB"/>
+                            <constraint firstAttribute="trailing" secondItem="MI6-7Y-4vX" secondAttribute="trailing" constant="20" id="osT-kk-el4"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="MI6-7Y-4vX" id="Uu1-aI-xpF"/>
                         <outlet property="passphraseLabel" destination="5Sq-he-eXT" id="hm7-HU-5fM"/>
+                        <outlet property="scrollView" destination="pC5-bs-3BH" id="tCf-rl-7of"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i9A-JE-Qz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4486" y="530"/>
+            <point key="canvasLocation" x="4486" y="504"/>
         </scene>
     </scenes>
     <resources>
