@@ -125,13 +125,13 @@ class ButtonBase : UIButton {
 class PrimaryButton : ButtonBase {
     
     override var textColor : UIColor { return Style.Color.C1 }
-    override var textColorHighlighted : UIColor { return Style.Color.C6_40 }
+    override var textColorHighlighted : UIColor { return Style.Color.C1 }
 
     override var strokeColor : UIColor { return Style.Color.C4 }
-    override var strokeColorHighlighted : UIColor { return Style.Color.C11_80 }
+    override var strokeColorHighlighted : UIColor { return Style.Color.C12_80 }
 
     override var fillColor : UIColor { return Style.Color.C4 }
-    override var fillColorHighlighted : UIColor { return Style.Color.C11_80 }
+    override var fillColorHighlighted : UIColor { return Style.Color.C12_80 }
 
 }
 
@@ -142,10 +142,10 @@ class SecondaryButton : ButtonBase {
     override var textColorHighlighted : UIColor { return Style.Color.C11 }
     
     override var strokeColor : UIColor { return Style.Color.C4 }
-    override var strokeColorHighlighted : UIColor { return Style.Color.C4_80 }
+    override var strokeColorHighlighted : UIColor { return Style.Color.C12 }
     
     override var fillColor : UIColor { return .clear }
-    override var fillColorHighlighted : UIColor { return Style.Color.C4_80 }
+    override var fillColorHighlighted : UIColor { return Style.Color.C12 }
 
 }
 
