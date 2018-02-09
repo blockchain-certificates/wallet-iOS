@@ -8,6 +8,33 @@
 
 import UIKit
 
+class OnboardingControllerBase : UIViewController {
+    @IBOutlet weak var scrollView : UIScrollView!
+    @IBOutlet weak var containerView : UIView!
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // Vertically center scrolling content
+        let padding: CGFloat
+        if #available(iOS 11.0, *) {
+            padding = (scrollView.frame.height - scrollView.contentLayoutGuide.layoutFrame.height) / 2
+        } else {
+            let safeHeight = scrollView.bounds.height
+            padding = (safeHeight - containerView.bounds.height) / 2
+            print("scrollView.bounds.height \(scrollView.bounds.height)")
+        }
+        
+        if padding > 0 {
+            let insets = UIEdgeInsets(top: padding, left: 0, bottom: 0, right: 0)
+            scrollView.contentInset = insets
+            scrollView.isScrollEnabled = true
+            print(insets)
+        }
+    }
+
+}
+
 class LandingScreenViewController : UIViewController {
     override func viewDidLoad() {
         title = ""
@@ -15,10 +42,8 @@ class LandingScreenViewController : UIViewController {
     }
 }
 
-class NewUserViewController : UIViewController {
+class NewUserViewController : OnboardingControllerBase {
     @IBOutlet weak var passphraseLabel : UILabel!
-    @IBOutlet weak var scrollView : UIScrollView!
-    @IBOutlet weak var containerView : UIView!
 
     var attempts = 5
     
@@ -45,31 +70,10 @@ class NewUserViewController : UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        // Vertically center scrolling content
-        let padding: CGFloat
-        if #available(iOS 11.0, *) {
-            padding = (scrollView.frame.height - scrollView.contentLayoutGuide.layoutFrame.height) / 2
-        } else {
-            let safeHeight = scrollView.bounds.height
-            padding = (safeHeight - containerView.bounds.height) / 2
-            print("scrollView.bounds.height \(scrollView.bounds.height)")
-        }
-        
-        if padding > 0 {
-            let insets = UIEdgeInsets(top: padding, left: 0, bottom: 0, right: 0)
-            scrollView.contentInset = insets
-            scrollView.isScrollEnabled = true
-            print(insets)
-        }
-    }
-    
 }
 
 
-class OnboardingBackupMethods : UIViewController {
+class OnboardingBackupMethods : OnboardingControllerBase {
     @IBOutlet var manualButton : CheckmarkButton!
     @IBOutlet var copyButton : CheckmarkButton!
     @IBOutlet var continueButton : PrimaryButton!
