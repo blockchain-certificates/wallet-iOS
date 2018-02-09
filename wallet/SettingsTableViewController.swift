@@ -40,13 +40,13 @@ class SettingsTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
         title = NSLocalizedString("Settings", comment: "Title of the Settings screen.")
 
-        navigationController?.navigationBar.barTintColor = .brandColor
+        navigationController?.navigationBar.barTintColor = Style.Color.C3
         
         let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
         navigationItem.leftBarButtonItem = cancelBarButton
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        tableView.backgroundColor = .baseColor
+        tableView.backgroundColor = Style.Color.C2
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,6 +126,7 @@ class SettingsTableViewController: UITableViewController {
         }
         
         cell.textLabel?.text = text
+        cell.textLabel?.font = Style.Font.T2R
         
         return cell
     }
