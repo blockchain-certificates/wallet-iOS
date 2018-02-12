@@ -54,7 +54,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWO-Mc-lvh" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="40" y="620" width="334" height="44"/>
+                                <rect key="frame" x="20" y="620" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Oh5-KR-oha"/>
                                 </constraints>
@@ -64,7 +64,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="89" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKJ-hu-YmP" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="40" y="672" width="334" height="44"/>
+                                <rect key="frame" x="20" y="672" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="3Lh-bT-Xi2"/>
                                 </constraints>
@@ -117,25 +117,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vY5-pE-shK">
-                                <rect key="frame" x="0.0" y="-21" width="414" height="757"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUC-ws-ppc" userLabel="Container">
-                                        <rect key="frame" x="20" y="20" width="374" height="371"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUC-ws-ppc" userLabel="Container">
+                                        <rect key="frame" x="20" y="0.0" width="374" height="292"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your passphrase" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tl7-ac-PeD" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="53" width="374" height="21"/>
+                                                <rect key="frame" x="0.0" y="16" width="374" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please type or paste your passphrase here:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3k-Qr-aZc" customClass="LabelC6T3R">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Please type or paste your passphrase here:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3k-Qr-aZc" customClass="LabelC6T3R">
                                                 <rect key="frame" x="166" y="53" width="42" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6y0-pi-oZA">
-                                                <rect key="frame" x="67" y="121" width="240" height="128"/>
+                                                <rect key="frame" x="0.0" y="94" width="374" height="128"/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.93725490199999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="DLg-pQ-CGl"/>
@@ -149,7 +149,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BkJ-EG-3bX" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="164" y="170" width="46" height="30"/>
+                                                <rect key="frame" x="0.0" y="246" width="374" height="30"/>
                                                 <state key="normal" title="Enter"/>
                                                 <connections>
                                                     <action selector="savePassphrase" destination="BDX-GA-efs" eventType="touchUpInside" id="Psm-cQ-sWO"/>
@@ -460,31 +460,31 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-7Y-4vX" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="394" height="305"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="299.33333333333331"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_writtenbackup" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-2e-aVj">
-                                                <rect key="frame" x="141.66666666666666" y="0.6666666666666643" width="110.66666666666666" height="110.66666666666669"/>
+                                                <rect key="frame" x="134.33333333333334" y="0.6666666666666714" width="105.33333333333334" height="105"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="j3U-2e-aVj" secondAttribute="height" multiplier="1:1" id="dQJ-VD-IHL"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual Hardcopy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PE0-wT-KoM" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="127.33333333333334" width="394" height="21"/>
+                                                <rect key="frame" x="0.0" y="121.66666666666666" width="374" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write your passphrase by hand on a piece of paper and store it in a secure location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vj-p9-n0G" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="160.33333333333334" width="394" height="21"/>
+                                                <rect key="frame" x="0.0" y="154.66666666666666" width="374" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlN-eo-GeR" userLabel="Passphrase container">
-                                                <rect key="frame" x="20" y="193.33333333333334" width="354" height="44.333333333333343"/>
+                                                <rect key="frame" x="0.0" y="187.66666666666666" width="374" height="44.333333333333343"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pass phrase generate electricity dynamo femur shake fries joystick corgi jingle wall sticker sandwich soup pencil coffee" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Sq-he-eXT" customClass="LabelC1T4S" customModule="certificates" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="11.999999999999998" width="322" height="20.333333333333329"/>
+                                                        <rect key="frame" x="16" y="11.999999999999998" width="342" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -504,7 +504,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ImO-LW-82b" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="261.66666666666669" width="394" height="44"/>
+                                                <rect key="frame" x="0.0" y="256" width="374" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="Kbe-lr-h6d"/>
                                                 </constraints>

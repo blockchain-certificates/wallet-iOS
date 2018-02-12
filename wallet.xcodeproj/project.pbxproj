@@ -96,6 +96,7 @@
 		83FF5DE71ECBA4100063397C /* Blockcerts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; };
 		83FF5DE81ECBA4100063397C /* Blockcerts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF5DE91ECBAC7A0063397C /* CertificateView.swift */; };
+		A927355A2031E1C9002361FD /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92735592031E1C9002361FD /* AlertViewController.swift */; };
 		A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A958CCD4202E4BD100CD35C6 /* Alert.storyboard */; };
 		A961EBC72028BE020016CD1E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A961EBC62028BE020016CD1E /* Style.swift */; };
 		A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2B049202B5893002015F0 /* UIElements.swift */; };
@@ -226,6 +227,7 @@
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
 		83FF5DE61ECBA4100063397C /* Blockcerts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Blockcerts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FF5DE91ECBAC7A0063397C /* CertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateView.swift; sourceTree = "<group>"; };
+		A92735592031E1C9002361FD /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A958CCD4202E4BD100CD35C6 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		A961EBC62028BE020016CD1E /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		A9D2B049202B5893002015F0 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
@@ -320,8 +322,9 @@
 			children = (
 				83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */,
 				838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */,
-				83111B271DA4110C006B058D /* AppDelegate.swift */,
 				A958CCD4202E4BD100CD35C6 /* Alert.storyboard */,
+				A92735592031E1C9002361FD /* AlertViewController.swift */,
+				83111B271DA4110C006B058D /* AppDelegate.swift */,
 				83111B2E1DA4110C006B058D /* Assets.xcassets */,
 				83802BF61E01BC2B00E54C13 /* Cells */,
 				832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */,
@@ -335,7 +338,6 @@
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
 				831EDC121ED5F7DA004F135B /* Keychain.swift */,
-				A9D2B049202B5893002015F0 /* UIElements.swift */,
 				83111B301DA4110C006B058D /* LaunchScreen.storyboard */,
 				83111B2B1DA4110C006B058D /* Main.storyboard */,
 				838DE6C81F3A74B400185A49 /* Models */,
@@ -350,6 +352,7 @@
 				8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */,
 				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
 				A961EBC62028BE020016CD1E /* Style.swift */,
+				A9D2B049202B5893002015F0 /* UIElements.swift */,
 				830120331EF4481B008EC454 /* Utils */,
 				83111B561DA41417006B058D /* wallet-Bridging-Header.h */,
 				8318FC561DAD958F006A8FD5 /* wallet.entitlements */,
@@ -864,6 +867,7 @@
 				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
 				838DE6D81F3B680800185A49 /* Extensions.swift in Sources */,
 				83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */,
+				A927355A2031E1C9002361FD /* AlertViewController.swift in Sources */,
 				838DE6E01F3B6D5D00185A49 /* ManagedIssuerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

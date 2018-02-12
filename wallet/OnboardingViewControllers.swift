@@ -38,6 +38,28 @@ class LandingScreenViewController : UIViewController {
         title = ""
         view.backgroundColor = Style.Color.C3
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        let alert = AlertViewController.create(title: "Verified!", message: "Your credential has been successfully verified.", icon: .success)
+//        
+//        let b1 = SecondaryButton(frame: .zero)
+//        b1.setTitle("Okay", for: .normal)
+//        b1.onTouchUpInside {
+//            alert.dismiss(animated: false, completion: nil)
+//        }
+//
+//        let b2 = SecondaryButton(frame: .zero)
+//        b2.setTitle("Okay", for: .normal)
+//        b2.onTouchUpInside {
+//            alert.dismiss(animated: false, completion: nil)
+//        }
+//
+//        alert.set(buttons: [b1, b2])
+        
+        present(alert, animated: false, completion: nil)
+    }
 }
 
 class NewUserViewController : OnboardingControllerBase {
