@@ -88,6 +88,92 @@ class CertificateViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    
+    
+/*
+    Step 0
+    Network accessibility check
+    Verification 0, fail
+    Your network connection
+
+    Step 1
+    Comparing computed hash with expected hash
+    Verification 1, fail
+    Computed hash does not match expected hash. This credential may have been altered. Please contact the issuer.
+
+    Step 2
+    Ensuring the Merkle receipt is valid
+    Verification 2, fail
+    The Merkle receipt is not valid. Please contact the issuer.
+    Verification 3
+
+    Step 3
+    Comparing expected Merkle root with value on the blockchain
+    Verification 3, fail
+    Merkle root does not match the hash value on the blockchain. Please contact the issuer.
+
+    Step 4
+    Checking if the credential has been revoked
+    Verification 4, fail
+    This credential was revoked by the issuer on [issuer.revokedAssertions[i].id] ‘or’ [issuer.revokedAssertions[i].revocationReason]
+
+    Step 5
+    Validating issuer identity
+    Verification 5, fail
+    Transaction occurred when the issuing address was not considered valid. Please contact the issuer.
+
+    Step 6
+    Checking expiration
+    Verification 6, fail
+    This credential expired on [certificate.expires].
+
+    card 7 dialog
+    Verified!
+    Your credential certificate has been successfully verified.
+*/
+    let verificationSteps = [
+        "Comparing computed hash with expected hash",
+        "Ensuring the Merkle receipt is valid",
+        "Comparing expected Merkle root with value on the blockchain",
+        "Checking if the credential has been revoked",
+        "Validating issuer identity",
+        "Checking expiration",
+    ]
+    
+    func verificationTitle(step: Int) -> String {
+        // TODO: localize
+        return "Verifying Step \(step + 1) of \(verificationSteps.count)"
+    }
+    
+    let verificationDuration = 5.5 // seconds, total verification process
+    
+    var verifying = false
+    func animateVerification(alert: AlertViewController, currentDelay: TimeInterval, toStep: Int? = nil) {
+        verifying = true
+        
+        let doubleDuration = verificationDuration * 1_000_000.0 / Double(verificationSteps.count)
+        let stepDuration = useconds_t(Int(doubleDuration))
+        
+        DispatchQueue.global().async { [weak self] in
+            let firstDelay = stepDuration - useconds_t(Int(currentDelay * 1_000_000.0))
+            if firstDelay > 0 {
+                usleep(firstDelay)
+            }
+            print("firstDelay = \(firstDelay)   stepDuration = \(stepDuration)")
+            guard let weakSelf = self, weakSelf.verifying else { return }
+            var verificationStep = 0
+            while verificationStep < weakSelf.verificationSteps.count - 1 {
+                verificationStep += 1
+                DispatchQueue.main.async {
+                    alert.set(title: weakSelf.verificationTitle(step: verificationStep))
+                    alert.set(message: weakSelf.verificationSteps[verificationStep])
+                }
+                usleep(stepDuration)
+            }
+            
+        }
+    }
+    
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
         Logger.main.info("User tapped verify on this certificate.")
         analytics.track(event: .validated, certificate: certificate)
@@ -106,39 +192,30 @@ class CertificateViewController: UIViewController {
             
             return
         }
-        
-        verifyButton.isEnabled = false
-        verifyButton.title = NSLocalizedString("Verifying...", comment: "Verifying a certificate is currently in progress")
-        progressView.progress = 0.5
-        progressView.isHidden = false
+
+        let progressAlert = AlertViewController.create(title: verificationTitle(step: 0), message: verificationSteps[0], icon: .verifying)
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
+        cancelButton.onTouchUpInside { [weak self] in
+            self?.verifying = false
+            progressAlert.dismiss(animated: false, completion: nil)
+        }
+        progressAlert.set(buttons: [cancelButton])
+        present(progressAlert, animated: false, completion: nil)
+        let startDate = Date()
         
         let validationRequest = CertificateValidationRequest(
             for: certificate,
             bitcoinManager: bitcoinManager,
             jsonld: JSONLD.shared) { [weak self] (success, error) in
-                let title : String
-                let message : String
                 if success {
                     Logger.main.info("Successfully verified certificate \(self?.certificate.title ?? "unknown") with id \(self?.certificate.id ?? "unknown")")
-                    title = NSLocalizedString("Success", comment: "Title for a successful certificate validation")
-                    message = NSLocalizedString("This is a valid certificate!", comment: "Message for a successful certificate validation")
+                    let elapsedTime = Date().timeIntervalSince(startDate)
+                    self?.animateVerification(alert: progressAlert, currentDelay: elapsedTime, toStep: nil)
                 } else {
                     Logger.main.info("The \(self?.certificate.title ?? "unknown") certificate failed verification with reason: \(error ?? "unknown"). ID: \(self?.certificate.id ?? "unknown")")
-                    title = NSLocalizedString("Invalid", comment: "Title for a failed certificate validation")
-                    message = NSLocalizedString(error!, comment: "Specific error message for an invalid certificate.")
                 }
 
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .default, handler: nil))
-                
-                OperationQueue.main.addOperation {
-                    self?.present(alert, animated: true, completion: nil)
-                    self?.inProgressRequest = nil
-                    self?.verifyButton.isEnabled = true
-                    self?.verifyButton.title = NSLocalizedString("Verify", comment: "Action button. Tap this to verify a certificate.")
-                    self?.progressView.progress = 1
-                    self?.progressView.isHidden = true
-                }
         }
         validationRequest?.delegate = self
         validationRequest?.start()
