@@ -96,7 +96,7 @@ class OnboardingBackupMethods : OnboardingControllerBase {
     @IBAction func backupCopy() {
         let alert = AlertViewController.create(title: NSLocalizedString("Are you sure?", comment: "Confirmation before copying for backup"),
                                                message: NSLocalizedString("Email is a low-security backup method. Do you want to continue?", comment: "Scare tactic to warn user about insecurity of email"),
-                                               icon: .question)
+                                               icon: .warning)
 
         let okayButton = SecondaryButton(frame: .zero)
         okayButton.setTitle(NSLocalizedString("Okay", comment: "Button to confirm user action"), for: .normal)
@@ -187,17 +187,47 @@ class OnboardingCurrentUser : OnboardingControllerBase, UITextViewDelegate {
         let lowercasePassphrase = passphrase.lowercased()
         
         guard Keychain.isValidPassphrase(lowercasePassphrase) else {
-//            failedPassphrase(error: NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
+            presentErrorAlert()
             return
         }
         do {
             try Keychain.updateShared(with: lowercasePassphrase)
-            dismiss(animated: true) {
-                self.dismiss(animated: true, completion: nil)
-            }
+            presentSuccessAlert()
         } catch {
-//            failedPassphrase(error: NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
+            presentErrorAlert()
         }
+    }
+    
+    func presentErrorAlert() {
+        let alert = AlertViewController.create(title: NSLocalizedString("Passphrase invalid", comment: "Title in alert view after processing failed user input"),
+                                               message: NSLocalizedString("Please check your passphrase and try again.", comment: "Message to user to check the passphrase"),
+                                               icon: .failure)
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button to confirm user action"), for: .normal)
+        okayButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: nil)
+        }
+        
+        alert.set(buttons: [okayButton])
+        present(alert, animated: false, completion: nil)
+    }
+    
+    func presentSuccessAlert() {
+        let alert = AlertViewController.create(title: NSLocalizedString("Success!", comment: "Title in alert view after processing user input entered passphrase"),
+                                               message: NSLocalizedString("You may now access your issueres and credentials on this device.", comment: "Message to user after successful passphrase entry"),
+                                               icon: .success)
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button to confirm user action"), for: .normal)
+        okayButton.onTouchUpInside { [weak self] in
+            alert.dismiss(animated: false) { [weak self] in
+                self?.dismiss(animated: false, completion: nil)
+            }
+        }
+        
+        alert.set(buttons: [okayButton])
+        present(alert, animated: false, completion: nil)
     }
     
     // MARK: - Text view and keyboard
