@@ -55,12 +55,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         adjustCellSize()
 
         // Style this bad boy
+        navigationController?.navigationBar.barTintColor = Style.Color.C3
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.barTintColor = .brandColor
-        self.navigationController?.navigationBar.tintColor = .tintColor
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor.titleColor
-        ]
 
         // Load any existing issuers.
         loadIssuers(shouldReloadCollection: false)

@@ -382,10 +382,6 @@ class RectangularButton : UIButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         
         setTitleColor(.black, for: .normal)
-        setTitleColor(.black, for: .selected)
-        setTitleColor(.black, for: .highlighted)
-        setTitleColor(.black, for: .focused)
-        setTitleShadowColor(.red, for: .highlighted)
     }
 }
 
