@@ -89,7 +89,7 @@
                             <constraint firstItem="mi1-BP-46d" firstAttribute="leading" secondItem="Rua-7E-jDL" secondAttribute="leading" id="cpo-L5-8mD"/>
                             <constraint firstItem="cpo-Hz-KIj" firstAttribute="centerY" secondItem="Rua-7E-jDL" secondAttribute="centerY" id="eyb-gN-JJ7"/>
                             <constraint firstItem="cpo-Hz-KIj" firstAttribute="width" secondItem="nvp-ki-xfD" secondAttribute="width" multiplier="0.76" id="mNn-jR-ODT"/>
-                            <constraint firstItem="mi1-BP-46d" firstAttribute="bottom" secondItem="Rua-7E-jDL" secondAttribute="bottom" id="tZJ-Ub-vSh"/>
+                            <constraint firstItem="mi1-BP-46d" firstAttribute="bottom" secondItem="nvp-ki-xfD" secondAttribute="bottom" id="tZJ-Ub-vSh"/>
                             <constraint firstItem="mi1-BP-46d" firstAttribute="top" secondItem="nvp-ki-xfD" secondAttribute="top" id="x0S-Ko-8gd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rua-7E-jDL"/>

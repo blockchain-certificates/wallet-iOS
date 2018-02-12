@@ -14,6 +14,7 @@ class AlertViewController : UIViewController {
     enum Icon {
         case success
         case failure
+        case question
         case verifying
         
         var image: UIImage {
@@ -22,6 +23,8 @@ class AlertViewController : UIViewController {
                 return #imageLiteral(resourceName: "icon_sucess")
             case .failure:
                 return #imageLiteral(resourceName: "icon_failure")
+            case .question:
+                return #imageLiteral(resourceName: "icon_sucess")
             case .verifying:
                 return #imageLiteral(resourceName: "icon_loading")
             }

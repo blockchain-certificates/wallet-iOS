@@ -41,24 +41,6 @@ class LandingScreenViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        let alert = AlertViewController.create(title: "Verified!", message: "Your credential has been successfully verified.", icon: .success)
-//        
-//        let b1 = SecondaryButton(frame: .zero)
-//        b1.setTitle("Okay", for: .normal)
-//        b1.onTouchUpInside {
-//            alert.dismiss(animated: false, completion: nil)
-//        }
-//
-//        let b2 = SecondaryButton(frame: .zero)
-//        b2.setTitle("Okay", for: .normal)
-//        b2.onTouchUpInside {
-//            alert.dismiss(animated: false, completion: nil)
-//        }
-//
-//        alert.set(buttons: [b1, b2])
-        
-        present(alert, animated: false, completion: nil)
     }
 }
 
@@ -112,11 +94,34 @@ class OnboardingBackupMethods : OnboardingControllerBase {
     }
     
     @IBAction func backupCopy() {
+        let alert = AlertViewController.create(title: NSLocalizedString("Are you sure?", comment: "Confirmation before copying for backup"),
+                                               message: NSLocalizedString("Email is a low-security backup method. Do you want to continue?", comment: "Scare tactic to warn user about insecurity of email"),
+                                               icon: .question)
+
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button to confirm user action"), for: .normal)
+        okayButton.onTouchUpInside { [weak self] in
+            alert.dismiss(animated: false, completion: nil)
+            self?.presentCopySheet()
+        }
+
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
+        cancelButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: nil)
+        }
+
+        alert.set(buttons: [okayButton, cancelButton])
+
+        present(alert, animated: false, completion: nil)
+    }
+    
+    func presentCopySheet() {
         guard let passPhrase = Keychain.loadSeedPhrase() else {
             // TODO: present alert? how to help user in this case?
             return
         }
-
+        
         let activity = UIActivityViewController(activityItems: [passPhrase as NSString], applicationActivities: nil)
         
         present(activity, animated: true) {
@@ -124,7 +129,6 @@ class OnboardingBackupMethods : OnboardingControllerBase {
             self.hasCopiedPasscode = true
             self.updateStates()
         }
-
     }
     
     @IBAction func dismiss() {
