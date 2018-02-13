@@ -115,6 +115,7 @@ class CertificateViewController: UIViewController {
         case .checkingMerkleRoot: return 2
         case .checkingRevokedStatus: return 3
         case .checkingIssuerSignature, .checkingAuthenticity: return 4
+        case .checkingExpiration: return 5
 
         // these should not happen in the case of a failure
         case .assertingChain, .notStarted, .success, .failure(_, _):
@@ -133,9 +134,10 @@ class CertificateViewController: UIViewController {
         
         let doubleDuration = verificationDuration * 1_000_000.0 / Double(verificationSteps.count)
         let stepDuration = useconds_t(Int(doubleDuration))
+        let currentDelayUs = useconds_t(Int(currentDelay * 1_000_000.0))
         
         DispatchQueue.global().async { [weak self] in
-            let firstDelay = stepDuration - useconds_t(Int(currentDelay * 1_000_000.0))
+            let firstDelay = useconds_t(stepDuration - currentDelayUs)
             if firstDelay > 0 {
                 usleep(firstDelay)
             }
