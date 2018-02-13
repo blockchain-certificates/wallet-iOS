@@ -25,27 +25,27 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpo-Hz-KIj">
-                                <rect key="frame" x="46.5" y="239" width="281" height="209"/>
+                                <rect key="frame" x="44.5" y="239" width="285" height="209"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check" translatesAutoresizingMaskIntoConstraints="NO" id="0LK-tw-3MB">
-                                        <rect key="frame" x="125.5" y="24" width="30" height="35"/>
+                                        <rect key="frame" x="127.5" y="24" width="30" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="e3U-fq-3HL"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBu-a2-q2m" customClass="LabelC3T4S" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="71" width="241" height="21"/>
+                                        <rect key="frame" x="20" y="71" width="245" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItE-y2-6ZW">
-                                        <rect key="frame" x="20" y="100" width="241" height="21"/>
+                                        <rect key="frame" x="20" y="100" width="245" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="62R-9Z-Mie" userLabel="Button stack">
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="62R-9Z-Mie" userLabel="Button stack">
                                         <rect key="frame" x="20" y="145" width="241" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="sGZ-lc-oxQ"/>
@@ -96,7 +96,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonStack" destination="62R-9Z-Mie" id="3Jo-Km-dn2"/>
-                        <outlet property="icon" destination="0LK-tw-3MB" id="kO4-ON-5zt"/>
+                        <outlet property="iconView" destination="0LK-tw-3MB" id="Mhh-r7-tfg"/>
                         <outlet property="messageLabel" destination="ItE-y2-6ZW" id="C4M-dW-WGk"/>
                         <outlet property="titleLabel" destination="iBu-a2-q2m" id="VjU-Qd-dxH"/>
                     </connections>

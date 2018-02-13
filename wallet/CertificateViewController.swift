@@ -11,6 +11,12 @@ import Blockcerts
 import JSONLD
 
 class CertificateViewController: UIViewController {
+    
+    // The full amount of time that the verification alert UI remains on screen during
+    // a verification process. This time is divided by the number of steps and each
+    // step remains on screen at least that long
+    let verificationDuration = 7.5
+    
     var delegate : CertificateViewControllerDelegate?
     
     public let certificate: Certificate
@@ -46,7 +52,6 @@ class CertificateViewController: UIViewController {
         infoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
         _ = toolbar.items?.popLast()
         toolbar.items?.append(UIBarButtonItem(customView: infoButton))
-        
         
         shareButton.isEnabled = (certificate.assertion.uid != Identifiers.sampleCertificateUID)
         
@@ -88,49 +93,8 @@ class CertificateViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    
-    
-/*
-    Step 0
-    Network accessibility check
-    Verification 0, fail
-    Your network connection
+    // MARK: - Verification
 
-    Step 1
-    Comparing computed hash with expected hash
-    Verification 1, fail
-    Computed hash does not match expected hash. This credential may have been altered. Please contact the issuer.
-
-    Step 2
-    Ensuring the Merkle receipt is valid
-    Verification 2, fail
-    The Merkle receipt is not valid. Please contact the issuer.
-    Verification 3
-
-    Step 3
-    Comparing expected Merkle root with value on the blockchain
-    Verification 3, fail
-    Merkle root does not match the hash value on the blockchain. Please contact the issuer.
-
-    Step 4
-    Checking if the credential has been revoked
-    Verification 4, fail
-    This credential was revoked by the issuer on [issuer.revokedAssertions[i].id] ‘or’ [issuer.revokedAssertions[i].revocationReason]
-
-    Step 5
-    Validating issuer identity
-    Verification 5, fail
-    Transaction occurred when the issuing address was not considered valid. Please contact the issuer.
-
-    Step 6
-    Checking expiration
-    Verification 6, fail
-    This credential expired on [certificate.expires].
-
-    card 7 dialog
-    Verified!
-    Your credential certificate has been successfully verified.
-*/
     let verificationSteps = [
         "Comparing computed hash with expected hash",
         "Ensuring the Merkle receipt is valid",
@@ -140,6 +104,7 @@ class CertificateViewController: UIViewController {
         "Checking expiration",
     ]
     
+    // TODO: make steps 3 and 5 copy dynamic
     let validationErrors = [
         "Computed hash does not match expected hash. This credential may have been altered. Please contact the issuer.",
         "The Merkle receipt is not valid. Please contact the issuer.",
@@ -172,8 +137,6 @@ class CertificateViewController: UIViewController {
         return "Verifying Step \(step + 1) of \(verificationSteps.count)"
     }
     
-    let verificationDuration = 5.5 // seconds, total verification process
-    
     var verifying = false
     func animateVerification(alert: AlertViewController, currentDelay: TimeInterval, toStep: Int? = nil) {
         verifying = true
@@ -202,12 +165,12 @@ class CertificateViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 if let toStep = toStep {
                     // error, show specific error message
-                    alert.set(icon: .failure)
+                    alert.icon = .failure
                     alert.set(title: NSLocalizedString("Failure!", comment: "Title in alert after validation fails"))
                     alert.set(message: NSLocalizedString(self?.validationErrors[toStep] ?? "", comment: "Detail message after validation failure, variable"))
                 } else {
                     // successfully validated
-                    alert.set(icon: .success)
+                    alert.icon = .success
                     alert.set(title: NSLocalizedString("Verified!", comment: "Title in alert after validation succeeds"))
                     alert.set(message: NSLocalizedString("Your credential has been successfully verified.", comment: "Detail message after validation succeeds"))
                 }
@@ -265,6 +228,8 @@ class CertificateViewController: UIViewController {
         validationRequest?.start()
         self.inProgressRequest = validationRequest
     }
+    
+    // MARK: - Other actions
     
 //    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
 //        let certificateToDelete = certificate
@@ -349,44 +314,7 @@ class CertificateViewController: UIViewController {
 }
 
 extension CertificateViewController : CertificateValidationRequestDelegate {
-    func certificateValidationStateChanged(from: ValidationState, to: ValidationState) {
-        var percentage : Float? = nil
-        
-        switch to {
-        case .notStarted:
-            percentage = 0.1
-        case .assertingChain:
-            percentage = 0.2
-        case .computingLocalHash:
-            percentage = 0.3
-        case .fetchingRemoteHash:
-            percentage = 0.4
-        case .comparingHashes:
-            percentage = 0.5
-        case .checkingIssuerSignature:
-            percentage = 0.6
-        case .checkingRevokedStatus:
-            percentage = 0.7
-        case .success:
-            percentage = 1
-        case .failure:
-            percentage = 1
-        case .checkingReceipt:
-            percentage = 0.8
-        case .checkingAuthenticity:
-            percentage = 0.85
-        case .checkingMerkleRoot:
-            percentage = 0.9
-        }
-        
-        if let percentage = percentage {
-            OperationQueue.main.addOperation {
-                UIView.animate(withDuration: 0.1) {
-                    self.progressView.progress = percentage
-                }
-            }
-        }
-    }
+    func certificateValidationStateChanged(from: ValidationState, to: ValidationState) { }
 }
 
 protocol CertificateViewControllerDelegate : class {

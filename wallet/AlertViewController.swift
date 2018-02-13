@@ -31,11 +31,18 @@ class AlertViewController : UIViewController {
         }
     }
     
-    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var buttonStack: UIStackView!
     var buttons = [UIButton]()
+    
+    var icon = Icon.success {
+        didSet {
+            iconView.image = icon.image
+            animateIconIfNeeded()
+        }
+    }
 
     func set(title: String) {
         titleLabel.text = title
@@ -43,10 +50,6 @@ class AlertViewController : UIViewController {
     
     func set(message: String) {
         messageLabel.text = message
-    }
-    
-    func set(icon: Icon) {
-        self.icon.image = icon.image
     }
     
     func set(buttons: [UIButton]) {
@@ -59,11 +62,26 @@ class AlertViewController : UIViewController {
         }
         self.buttons = buttons
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+
+    func animateIconIfNeeded() {
+        let animationKey = "rotationAnimation"
+        if icon == .verifying {
+            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+            rotationAnimation.toValue = NSNumber(value: .pi * 2.0)
+            rotationAnimation.duration = 1.5
+            rotationAnimation.isCumulative = true
+            rotationAnimation.repeatCount = .infinity
+            iconView.layer.add(rotationAnimation, forKey: animationKey)
+        } else {
+            iconView.layer.removeAllAnimations()
+        }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateIconIfNeeded()
+    }
+
     static func create(title: String, message: String, icon: Icon) -> AlertViewController {
         let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
@@ -72,7 +90,7 @@ class AlertViewController : UIViewController {
         
         vc.set(title: title)
         vc.set(message: message)
-        vc.set(icon: icon)
+        vc.icon = icon
         
         // TODO: animate loading image
         return vc
