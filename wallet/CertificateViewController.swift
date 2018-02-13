@@ -140,6 +140,33 @@ class CertificateViewController: UIViewController {
         "Checking expiration",
     ]
     
+    let validationErrors = [
+        "Computed hash does not match expected hash. This credential may have been altered. Please contact the issuer.",
+        "The Merkle receipt is not valid. Please contact the issuer.",
+        "Merkle root does not match the hash value on the blockchain. Please contact the issuer.",
+        "This credential was revoked by the issuer on [issuer.revokedAssertions[i].id] ‘or’ [issuer.revokedAssertions[i].revocationReason]",
+        "Transaction occurred when the issuing address was not considered valid. Please contact the issuer.",
+        "This credential expired on [certificate.expires].",
+    ]
+
+    /// Given the ValidationState returned from validation (if any) this will
+    /// return the number of steps to show the user in the validation UI.
+    /// returns nil for success, otherwise the number of the failed step.
+    func validationSteps(state: ValidationState?) -> Int? {
+        guard let state = state else { return nil }
+        switch state {
+        case .computingLocalHash, .fetchingRemoteHash, .comparingHashes: return 0
+        case .checkingReceipt: return 1
+        case .checkingMerkleRoot: return 2
+        case .checkingRevokedStatus: return 3
+        case .checkingIssuerSignature, .checkingAuthenticity: return 4
+
+        // these should not happen in the case of a failure
+        case .assertingChain, .notStarted, .success, .failure(_, _):
+            return -1
+        }
+    }
+    
     func verificationTitle(step: Int) -> String {
         // TODO: localize
         return "Verifying Step \(step + 1) of \(verificationSteps.count)"
@@ -159,10 +186,10 @@ class CertificateViewController: UIViewController {
             if firstDelay > 0 {
                 usleep(firstDelay)
             }
-            print("firstDelay = \(firstDelay)   stepDuration = \(stepDuration)")
             guard let weakSelf = self, weakSelf.verifying else { return }
             var verificationStep = 0
-            while verificationStep < weakSelf.verificationSteps.count - 1 {
+            let stepsToShow = toStep ?? weakSelf.verificationSteps.count - 1
+            while verificationStep < stepsToShow {
                 verificationStep += 1
                 DispatchQueue.main.async {
                     alert.set(title: weakSelf.verificationTitle(step: verificationStep))
@@ -171,6 +198,21 @@ class CertificateViewController: UIViewController {
                 usleep(stepDuration)
             }
             
+            // Show final result
+            DispatchQueue.main.async { [weak self] in
+                if let toStep = toStep {
+                    // error, show specific error message
+                    alert.set(icon: .failure)
+                    alert.set(title: NSLocalizedString("Failure!", comment: "Title in alert after validation fails"))
+                    alert.set(message: NSLocalizedString(self?.validationErrors[toStep] ?? "", comment: "Detail message after validation failure, variable"))
+                } else {
+                    // successfully validated
+                    alert.set(icon: .success)
+                    alert.set(title: NSLocalizedString("Verified!", comment: "Title in alert after validation succeeds"))
+                    alert.set(message: NSLocalizedString("Your credential has been successfully verified.", comment: "Detail message after validation succeeds"))
+                }
+                alert.buttons.first?.setTitle("Close", for: .normal)
+            }
         }
     }
     
@@ -207,13 +249,15 @@ class CertificateViewController: UIViewController {
         let validationRequest = CertificateValidationRequest(
             for: certificate,
             bitcoinManager: bitcoinManager,
-            jsonld: JSONLD.shared) { [weak self] (success, error) in
+            jsonld: JSONLD.shared) { [weak self] (success, error, state) in
+                let elapsedTime = Date().timeIntervalSince(startDate)
                 if success {
                     Logger.main.info("Successfully verified certificate \(self?.certificate.title ?? "unknown") with id \(self?.certificate.id ?? "unknown")")
-                    let elapsedTime = Date().timeIntervalSince(startDate)
                     self?.animateVerification(alert: progressAlert, currentDelay: elapsedTime, toStep: nil)
                 } else {
                     Logger.main.info("The \(self?.certificate.title ?? "unknown") certificate failed verification with reason: \(error ?? "unknown"). ID: \(self?.certificate.id ?? "unknown")")
+                    let toStep = self?.validationSteps(state: state)
+                    self?.animateVerification(alert: progressAlert, currentDelay: elapsedTime, toStep: toStep)
                 }
 
         }

@@ -35,6 +35,7 @@ class AlertViewController : UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var buttonStack: UIStackView!
+    var buttons = [UIButton]()
 
     func set(title: String) {
         titleLabel.text = title
@@ -42,6 +43,10 @@ class AlertViewController : UIViewController {
     
     func set(message: String) {
         messageLabel.text = message
+    }
+    
+    func set(icon: Icon) {
+        self.icon.image = icon.image
     }
     
     func set(buttons: [UIButton]) {
@@ -52,6 +57,7 @@ class AlertViewController : UIViewController {
             // 0.304 multiplier is 40% of 0.76 x screen width
             button.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.304).isActive = true
         }
+        self.buttons = buttons
     }
     
     override func viewDidLoad() {
@@ -66,7 +72,7 @@ class AlertViewController : UIViewController {
         
         vc.set(title: title)
         vc.set(message: message)
-        vc.icon.image = icon.image
+        vc.set(icon: icon)
         
         // TODO: animate loading image
         return vc
