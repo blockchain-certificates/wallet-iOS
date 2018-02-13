@@ -161,6 +161,16 @@ class SecondaryButton : ButtonBase {
     
     override var fillColor : UIColor { return .clear }
     override var fillColorHighlighted : UIColor { return Style.Color.C12 }
+    
+}
+
+@IBDesignable
+class TertiaryButton : SecondaryButton {
+    
+    override var strokeColor : UIColor { return .clear }
+    override var strokeColorHighlighted : UIColor { return .clear }
+
+    override var fillColorHighlighted : UIColor { return .clear }
 
 }
 

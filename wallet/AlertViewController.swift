@@ -68,7 +68,7 @@ class AlertViewController : UIViewController {
         if icon == .verifying {
             let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
             rotationAnimation.toValue = NSNumber(value: .pi * 2.0)
-            rotationAnimation.duration = 1.5
+            rotationAnimation.duration = 1.2
             rotationAnimation.isCumulative = true
             rotationAnimation.repeatCount = .infinity
             iconView.layer.add(rotationAnimation, forKey: animationKey)

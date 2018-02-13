@@ -24,10 +24,8 @@ class CertificateViewController: UIViewController {
     
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     
-    @IBOutlet weak var shareButton: UIBarButtonItem!
-    @IBOutlet weak var toolbar: UIToolbar!
-    @IBOutlet weak var verifyButton: UIBarButtonItem!
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var verifyButton: UIButton!
     private var inProgressRequest : CommonRequest?
     
     private let analytics = Analytics()
@@ -50,20 +48,12 @@ class CertificateViewController: UIViewController {
         
         let infoButton = UIButton(type: .infoLight)
         infoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
-        _ = toolbar.items?.popLast()
-        toolbar.items?.append(UIBarButtonItem(customView: infoButton))
         
-        shareButton.isEnabled = (certificate.assertion.uid != Identifiers.sampleCertificateUID)
+        shareButton.isEnabled = certificate.assertion.uid != Identifiers.sampleCertificateUID
         
         renderedCertificateView.render(certificate: certificate)
-        stylize()
         
         analytics.track(event: .viewed, certificate: certificate)
-    }
-    
-    func stylize() {
-        toolbar.tintColor = .tintColor
-        progressView.tintColor = .tintColor
     }
     
     // MARK: Actions
@@ -71,7 +61,7 @@ class CertificateViewController: UIViewController {
         Logger.main.info("Showing share certificate dialog for \(certificate.id)")
         // TODO: Guard against sample cert
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: nil, message: "Share this credential", preferredStyle: .actionSheet)
         let shareFileAction = UIAlertAction(title: NSLocalizedString("Share File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
             Logger.main.info("User chose to share certificate via file")
             self?.shareCertificateFile()

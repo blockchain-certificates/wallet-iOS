@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateViewController" customModule="certificates" customModuleProvider="target">
             <connections>
-                <outlet property="progressView" destination="n59-Wb-jff" id="NFS-vH-HwO"/>
                 <outlet property="renderedCertificateView" destination="0Jh-Wq-q8h" id="aCa-RX-aLX"/>
-                <outlet property="shareButton" destination="ZCJ-X0-pIW" id="ro2-ye-z4g"/>
-                <outlet property="toolbar" destination="t1f-kp-ARu" id="AWf-Ik-nHH"/>
-                <outlet property="verifyButton" destination="Jl2-eC-Dxd" id="Me1-3S-TtV"/>
+                <outlet property="shareButton" destination="YTQ-rO-N6E" id="dfh-IN-bk4"/>
+                <outlet property="verifyButton" destination="rHb-06-Fky" id="VjV-vR-wfv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gag-J3-nMn">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zt0-2q-H1n" userLabel="ContentView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
@@ -55,47 +53,59 @@
                         <constraint firstAttribute="trailing" secondItem="Zt0-2q-H1n" secondAttribute="trailing" id="zEW-Ri-lf9"/>
                     </constraints>
                 </scrollView>
-                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n59-Wb-jff">
-                    <rect key="frame" x="0.0" y="621" width="375" height="2"/>
-                </progressView>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1f-kp-ARu">
-                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                    <items>
-                        <barButtonItem systemItem="action" id="ZCJ-X0-pIW">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X1h-nY-yXF" userLabel="Footer">
+                    <rect key="frame" x="0.0" y="549" width="375" height="118"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-rO-N6E" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="20" y="14" width="335" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="9MR-sy-Y0P"/>
+                            </constraints>
+                            <state key="normal" title="Share" image="icon_share"/>
                             <connections>
-                                <action selector="shareTapped:" destination="-1" id="z6B-DJ-kHe"/>
+                                <action selector="shareTapped:" destination="-1" eventType="touchUpInside" id="gla-Jz-T6K"/>
                             </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="0hU-4C-Rsx"/>
-                        <barButtonItem title="Verify" id="Jl2-eC-Dxd">
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-06-Fky" customClass="TertiaryButton" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="117" y="66" width="141" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="m7M-SU-Nkt"/>
+                            </constraints>
+                            <state key="normal" title="Verify this credential"/>
                             <connections>
-                                <action selector="verifyTapped:" destination="-1" id="5U1-wJ-aRe"/>
+                                <action selector="verifyTapped:" destination="-1" eventType="touchUpInside" id="C3Q-PG-9AX"/>
                             </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ofp-6K-IP1"/>
-                        <barButtonItem systemItem="trash" id="iPa-z6-olf">
-                            <connections>
-                                <action selector="deleteTapped:" destination="-1" id="zpR-LD-i6M"/>
-                            </connections>
-                        </barButtonItem>
-                    </items>
-                </toolbar>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.94901960780000005" green="0.96078431369999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="YTQ-rO-N6E" firstAttribute="leading" secondItem="X1h-nY-yXF" secondAttribute="leading" constant="20" id="Ajt-H6-CQs"/>
+                        <constraint firstItem="rHb-06-Fky" firstAttribute="centerX" secondItem="X1h-nY-yXF" secondAttribute="centerX" id="AuR-Cx-JCo"/>
+                        <constraint firstAttribute="trailing" secondItem="YTQ-rO-N6E" secondAttribute="trailing" constant="20" id="V8l-x8-745"/>
+                        <constraint firstItem="YTQ-rO-N6E" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" constant="14" id="k2h-V6-CLm"/>
+                        <constraint firstItem="rHb-06-Fky" firstAttribute="top" secondItem="YTQ-rO-N6E" secondAttribute="bottom" constant="8" id="tnO-QV-vz9"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="t1f-kp-ARu" firstAttribute="top" secondItem="Gag-J3-nMn" secondAttribute="bottom" id="Gvb-te-knu"/>
-                <constraint firstItem="n59-Wb-jff" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QDG-CX-BHB"/>
-                <constraint firstItem="t1f-kp-ARu" firstAttribute="top" secondItem="n59-Wb-jff" secondAttribute="bottom" id="dVT-2g-VxE"/>
-                <constraint firstAttribute="trailing" secondItem="t1f-kp-ARu" secondAttribute="trailing" id="gmG-Ek-wxL"/>
-                <constraint firstItem="t1f-kp-ARu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iXt-8L-94a"/>
+                <constraint firstItem="YTQ-rO-N6E" firstAttribute="leading" secondItem="GiI-79-T71" secondAttribute="leading" constant="20" id="IHq-8j-QYX"/>
+                <constraint firstItem="GiI-79-T71" firstAttribute="trailing" secondItem="X1h-nY-yXF" secondAttribute="trailing" id="MNA-EQ-B0N"/>
+                <constraint firstAttribute="bottom" secondItem="X1h-nY-yXF" secondAttribute="bottom" id="NBo-Oj-Y9O"/>
+                <constraint firstItem="GiI-79-T71" firstAttribute="trailing" secondItem="YTQ-rO-N6E" secondAttribute="trailing" constant="20" id="cNa-X0-QQN"/>
+                <constraint firstItem="GiI-79-T71" firstAttribute="bottom" secondItem="rHb-06-Fky" secondAttribute="bottom" constant="8" id="eXn-a3-jFu"/>
+                <constraint firstItem="X1h-nY-yXF" firstAttribute="top" secondItem="Gag-J3-nMn" secondAttribute="bottom" id="fJz-MJ-5pX"/>
                 <constraint firstItem="Zt0-2q-H1n" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="jYy-qK-YJe"/>
-                <constraint firstAttribute="bottomMargin" secondItem="t1f-kp-ARu" secondAttribute="bottom" id="l1q-0q-lHf"/>
-                <constraint firstAttribute="trailing" secondItem="n59-Wb-jff" secondAttribute="trailing" id="sVJ-tD-KuF"/>
+                <constraint firstItem="X1h-nY-yXF" firstAttribute="leading" secondItem="GiI-79-T71" secondAttribute="leading" id="phh-64-KXX"/>
                 <constraint firstItem="Gag-J3-nMn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="se3-Fw-Oxc"/>
                 <constraint firstItem="Gag-J3-nMn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tML-WG-Ygf"/>
                 <constraint firstAttribute="trailing" secondItem="Gag-J3-nMn" secondAttribute="trailing" id="yR4-O3-fRV"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="GiI-79-T71"/>
             <point key="canvasLocation" x="39.5" y="53.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon_share" width="28" height="28"/>
+    </resources>
 </document>
