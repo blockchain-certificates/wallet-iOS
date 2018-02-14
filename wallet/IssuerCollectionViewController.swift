@@ -40,23 +40,26 @@ class IssuerCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = NSLocalizedString("Blockcerts Wallet", comment: "Title of main interface")
+
         // Register for notifications
         NotificationCenter.default.addObserver(self, selector: #selector(redirectRequested(notification:)), name: NotificationNames.redirectToCertificate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onboardingCompleted(notification:)), name: NotificationNames.onboardingComplete, object: nil)
 
         // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
-        self.collectionView?.register(cellNib, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView?.register(cellNib, forCellWithReuseIdentifier: reuseIdentifier)
         let addNib = UINib(nibName: "AddIssuerCollectionViewCell", bundle: nil)
-        self.collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
-        self.collectionView?.delegate = self
-        self.collectionView?.backgroundColor = .baseColor
+        collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
+        collectionView?.delegate = self
+        collectionView?.backgroundColor = .baseColor
 
-        adjustCellSize()
+        let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: collectionView!.bounds.width, height: 136)
+        layout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8)
 
-        // Style this bad boy
         navigationController?.navigationBar.barTintColor = Style.Color.C3
-        self.navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.isTranslucent = false
 
         // Load any existing issuers.
         loadIssuers(shouldReloadCollection: false)
@@ -135,25 +138,6 @@ class IssuerCollectionViewController: UICollectionViewController {
             let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
             present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
         }
-    }
-
-    func adjustCellSize() {
-        // Constants
-        let spacing : CGFloat = 8
-        let textHeight : CGFloat = 35
-
-        guard let deviceWidth = self.collectionView?.bounds.width,
-            let deviceHeight = self.collectionView?.bounds.height else {
-            return
-        }
-        let targetWidth = min(deviceWidth, deviceHeight)
-
-        // figure out best size.
-        let newWidth = (targetWidth - (3 * spacing)) / 2
-        let newHeight = newWidth + textHeight
-
-        let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: newWidth, height: newHeight)
     }
 
     // MARK: - Actions

@@ -17,7 +17,7 @@ class IssuerCollectionViewCell: UICollectionViewCell {
 
     var issuerName : String? {
         didSet {
-            self.accessibilityLabel = issuerName
+            accessibilityLabel = issuerName
             if titleLabel != nil {
                 titleLabel.text = issuerName
             }
@@ -27,27 +27,25 @@ class IssuerCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.containerView.layer.masksToBounds = true
-        self.containerView.layer.cornerRadius = Dimensions.issuerCornerRadius
+        containerView.layer.masksToBounds = true
+        containerView.layer.cornerRadius = Dimensions.issuerCornerRadius
         
         titleLabel.text = issuerName
         
-        self.isAccessibilityElement = true
-        self.accessibilityLabel = NSLocalizedString("Issuer", comment: "This describes the issuer cell in the collection view. It's an accessibility label read aloud for users with VoiceOver.")
-        self.accessibilityTraits |= UIAccessibilityTraitButton
+        isAccessibilityElement = true
+        accessibilityLabel = NSLocalizedString("Issuer", comment: "This describes the issuer cell in the collection view. It's an accessibility label read aloud for users with VoiceOver.")
+        accessibilityTraits |= UIAccessibilityTraitButton
     }
 
-    var certificateCount : Int {
-        get {
-            var count = 0
-            if let string = certificateCountLabel.text,
-                let possibleCount = Int(string) {
-                count = possibleCount
+    var certificateCount = 0 {
+        didSet {
+            if certificateCount == 0 {
+                certificateCountLabel.text = "No credentials"
+            } else if certificateCount == 1 {
+                certificateCountLabel.text = "1 credential"
+            } else {
+                certificateCountLabel.text = "\(certificateCount) credentials"
             }
-            return count
-        }
-        set {
-            certificateCountLabel.text = "\(newValue)"
         }
     }
     

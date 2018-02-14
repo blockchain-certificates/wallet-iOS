@@ -39,7 +39,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="3aE-tM-Qbn">
-                        <barButtonItem key="leftBarButtonItem" image="SettingsIcon" id="fxI-yi-2W3">
+                        <barButtonItem key="rightBarButtonItem" image="SettingsIcon" id="fxI-yi-2W3">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Settings"/>
                             </userDefinedRuntimeAttributes>
