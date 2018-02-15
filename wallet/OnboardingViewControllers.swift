@@ -75,7 +75,7 @@ class NewUserViewController : OnboardingControllerBase {
 }
 
 
-class OnboardingBackupMethods : OnboardingControllerBase {
+class OnboardingBackupMethods : OnboardingControllerBase, UIActivityItemSource {
     @IBOutlet var manualButton : CheckmarkButton!
     @IBOutlet var copyButton : CheckmarkButton!
     @IBOutlet var continueButton : PrimaryButton!
@@ -85,6 +85,7 @@ class OnboardingBackupMethods : OnboardingControllerBase {
     // version in userdefaults and use both pieces of information to determine (or hasOnboarded)
     var hasWrittenPasscode = false
     var hasCopiedPasscode = false
+    var passphrase : String?
     
     @IBAction func backupManual() {
         let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
@@ -117,12 +118,13 @@ class OnboardingBackupMethods : OnboardingControllerBase {
     }
     
     func presentCopySheet() {
-        guard let passPhrase = Keychain.loadSeedPhrase() else {
+        guard let passphrase = Keychain.loadSeedPhrase() else {
             // TODO: present alert? how to help user in this case?
             return
         }
         
-        let activity = UIActivityViewController(activityItems: [passPhrase as NSString], applicationActivities: nil)
+        self.passphrase = passphrase
+        let activity = UIActivityViewController(activityItems: [self], applicationActivities: nil)
         
         present(activity, animated: true) {
             // TODO: can detect if user cancels?
@@ -158,6 +160,22 @@ class OnboardingBackupMethods : OnboardingControllerBase {
         super.viewWillAppear(animated)
         updateStates()
     }
+    
+    // MARK: - Activity Item Source
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return passphrase!
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+        return passphrase! as NSString
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController,
+                                subjectForActivityType activityType: UIActivityType?) -> String {
+        return NSLocalizedString("BlockCerts Backup", comment: "Email subject line when backing up passphrase")
+    }
+
 }
 
 
