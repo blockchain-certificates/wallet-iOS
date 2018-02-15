@@ -28,17 +28,18 @@ class CertificateTitleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var certificateTitleLabel: UILabel!
     @IBOutlet weak var certificateSubtitleLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        accessoryType = .disclosureIndicator
-        
+                
         certificateTitleLabel.text = title
-        certificateTitleLabel.textColor = primaryTextColor
         certificateSubtitleLabel.text = subtitle
-        certificateSubtitleLabel.textColor = primaryTextColor
+        
+        containerView.layer.cornerRadius = Style.Measure.cornerRadius
+        containerView.layer.borderColor = Style.Color.C8.cgColor
+        containerView.layer.borderWidth = 1
+        
     }
     
 }

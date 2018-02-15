@@ -99,6 +99,8 @@
 		A927355A2031E1C9002361FD /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92735592031E1C9002361FD /* AlertViewController.swift */; };
 		A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A958CCD4202E4BD100CD35C6 /* Alert.storyboard */; };
 		A961EBC72028BE020016CD1E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A961EBC62028BE020016CD1E /* Style.swift */; };
+		A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */; };
+		A9B1784B203615D000B76375 /* IssuerHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */; };
 		A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2B049202B5893002015F0 /* UIElements.swift */; };
 		ABC6BB21B68837562003AED2 /* libPods-certificates.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F8F788045077CB0389D73 /* libPods-certificates.a */; };
 		D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
@@ -230,6 +232,8 @@
 		A92735592031E1C9002361FD /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A958CCD4202E4BD100CD35C6 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		A961EBC62028BE020016CD1E /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuerHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		A9D2B049202B5893002015F0 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
 		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -442,6 +446,8 @@
 				83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */,
 				834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */,
 				834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */,
+				A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */,
+				A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */,
 				8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */,
 				8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */,
 				83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */,
@@ -635,6 +641,7 @@
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
+				A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */,
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				836031C51E5E513A005B2D2E /* Settings.bundle in Resources */,
 				838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */,
@@ -863,6 +870,7 @@
 				8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */,
 				83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */,
 				832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */,
+				A9B1784B203615D000B76375 /* IssuerHeaderTableViewCell.swift in Sources */,
 				8372F2F51FA12421007F0BC2 /* Logger.swift in Sources */,
 				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
 				838DE6D81F3B680800185A49 /* Extensions.swift in Sources */,

@@ -9,16 +9,14 @@
 import UIKit
 import Blockcerts
 
-private let issuerSummaryCellReuseIdentifier = "IssuerSummaryTableViewCell"
-private let certificateCellReuseIdentifier = "CertificateTitleTableViewCell"
-private let noCertificatesCellReuseIdentififer = "NoCertificateTableViewCell"
-
-fileprivate enum Sections : Int {
-    case certificates
-    case count
-}
 
 class IssuerTableViewController: UITableViewController {
+
+    private let issuerHeaderCellReuseIdentifier = "IssuerHeaderTableViewCell"
+    private let issuerSummaryCellReuseIdentifier = "IssuerSummaryTableViewCell"
+    private let certificateCellReuseIdentifier = "CertificateTitleTableViewCell"
+    private let noCertificatesCellReuseIdentififer = "NoCertificateTableViewCell"
+
     public var delegate : IssuerTableViewControllerDelegate?
     public var managedIssuer : ManagedIssuer? {
         didSet {
@@ -38,6 +36,7 @@ class IssuerTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UINib(nibName: "IssuerHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: issuerHeaderCellReuseIdentifier)
         tableView.register(UINib(nibName: "IssuerSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: issuerSummaryCellReuseIdentifier)
         tableView.register(UINib(nibName: "NoCertificatesTableViewCell", bundle: nil), forCellReuseIdentifier: noCertificatesCellReuseIdentififer)
         tableView.register(UINib(nibName: "CertificateTitleTableViewCell", bundle: nil), forCellReuseIdentifier: certificateCellReuseIdentifier)
@@ -116,26 +115,33 @@ class IssuerTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return Sections.count.rawValue
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return certificates.count
+        return section == 0 ? 1 : certificates.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier) as! CertificateTitleTableViewCell
-        let certificate = certificates[indexPath.row]
-        cell.title = certificate.title
-        cell.subtitle = certificate.subtitle
-        cell.backgroundColor = .baseColor
-        
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: issuerHeaderCellReuseIdentifier) as! IssuerHeaderTableViewCell
+            guard let issuer = managedIssuer?.issuer else { return cell }
+            cell.logoImage.image = UIImage(data: issuer.image)
+            cell.nameLabel.text = issuer.name
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier) as! CertificateTitleTableViewCell
+            let certificate = certificates[indexPath.row]
+            cell.title = certificate.title
+            cell.subtitle = certificate.subtitle
+            cell.backgroundColor = .baseColor
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == Sections.certificates.rawValue else {
+        guard section == 1 else {
             return nil
         }
         let containerView = UIView()
@@ -171,14 +177,11 @@ class IssuerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == Sections.certificates.rawValue {
-            return 25
-        }
-        return 0
+        return section == 1 ? 25 : 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section == Sections.certificates.rawValue else {
+        guard indexPath.section == 1 else {
             tableView.deselectRow(at: indexPath, animated: false)
             return
         }

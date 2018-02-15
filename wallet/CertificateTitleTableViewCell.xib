@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,38 +16,66 @@
             <rect key="frame" x="0.0" y="0.0" width="299" height="104"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="299" height="103"/>
+                <rect key="frame" x="0.0" y="0.0" width="299" height="103.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Certificate Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8HA-RN-JeB">
-                        <rect key="frame" x="16" y="32" width="238" height="21"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Certificate Subtitle, 2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wy-xB-7je">
-                        <rect key="frame" x="16" y="53.5" width="238" height="18"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4f-Hr-g23">
+                        <rect key="frame" x="-4" y="4" width="278" height="99"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Certificate title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8HA-RN-JeB" customClass="LabelC3T3B" customModule="certificates" customModuleProvider="target">
+                                <rect key="frame" x="20" y="20" width="238" height="33"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Certificate Subtitle, 2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wy-xB-7je">
+                                <rect key="frame" x="20" y="61" width="238" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="Vbf-B6-vRa">
+                                <rect key="frame" x="118" y="21" width="41" height="57"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Vbf-B6-vRa" firstAttribute="centerY" secondItem="R4f-Hr-g23" secondAttribute="centerY" id="3Qz-cS-VtV"/>
+                            <constraint firstItem="8HA-RN-JeB" firstAttribute="leading" secondItem="R4f-Hr-g23" secondAttribute="leading" constant="20" id="4Ir-qY-cyV"/>
+                            <constraint firstAttribute="trailing" secondItem="9wy-xB-7je" secondAttribute="trailing" constant="40" id="9xJ-fI-at6"/>
+                            <constraint firstItem="9wy-xB-7je" firstAttribute="top" secondItem="8HA-RN-JeB" secondAttribute="bottom" constant="8" id="Gy2-Iy-iwH"/>
+                            <constraint firstAttribute="bottom" secondItem="9wy-xB-7je" secondAttribute="bottom" constant="20" id="Mcn-98-w1v"/>
+                            <constraint firstAttribute="trailing" secondItem="8HA-RN-JeB" secondAttribute="trailing" constant="40" id="Mt4-ep-dR6"/>
+                            <constraint firstItem="9wy-xB-7je" firstAttribute="leading" secondItem="R4f-Hr-g23" secondAttribute="leading" constant="20" id="OLe-cN-uXz"/>
+                            <constraint firstItem="8HA-RN-JeB" firstAttribute="top" secondItem="R4f-Hr-g23" secondAttribute="top" constant="20" id="OU0-zz-l5e"/>
+                            <constraint firstAttribute="trailing" secondItem="Vbf-B6-vRa" secondAttribute="trailing" constant="8" id="sHR-HX-cNY"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="7"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="9wy-xB-7je" secondAttribute="bottom" id="0t3-62-yaE"/>
-                    <constraint firstItem="8HA-RN-JeB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="7jS-tF-QZ1"/>
-                    <constraint firstItem="9wy-xB-7je" firstAttribute="top" secondItem="8HA-RN-JeB" secondAttribute="bottom" constant="0.5" id="7sL-kI-YR9"/>
-                    <constraint firstItem="8HA-RN-JeB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ccM-OQ-rQ8"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="9wy-xB-7je" secondAttribute="trailing" id="uaC-GN-jb8"/>
-                    <constraint firstItem="9wy-xB-7je" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="xfF-ZS-0jE"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="8HA-RN-JeB" secondAttribute="trailing" id="ytF-xQ-X3b"/>
+                    <constraint firstAttribute="trailing" secondItem="R4f-Hr-g23" secondAttribute="trailing" constant="20" id="SsB-Dv-iCn"/>
+                    <constraint firstItem="R4f-Hr-g23" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="eHi-Rt-8RU"/>
+                    <constraint firstAttribute="bottom" secondItem="R4f-Hr-g23" secondAttribute="bottom" constant="4" id="eMc-eH-wgr"/>
+                    <constraint firstItem="R4f-Hr-g23" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="oqs-Fb-QeD"/>
                 </constraints>
                 <edgeInsets key="layoutMargins" top="32" left="16" bottom="32" right="45"/>
             </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="2kq-ik-1dz"/>
             <connections>
                 <outlet property="certificateSubtitleLabel" destination="9wy-xB-7je" id="OM1-CE-g4P"/>
                 <outlet property="certificateTitleLabel" destination="8HA-RN-JeB" id="qjG-n0-nkO"/>
+                <outlet property="containerView" destination="R4f-Hr-g23" id="jX8-kD-h6T"/>
             </connections>
             <point key="canvasLocation" x="52.5" y="-7"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="icon_disclosure" width="30" height="30"/>
+    </resources>
 </document>
