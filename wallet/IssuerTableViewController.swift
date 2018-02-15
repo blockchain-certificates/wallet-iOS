@@ -146,43 +146,30 @@ class IssuerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 1 else {
+        guard section == 1, certificates.count > 0 else {
             return nil
         }
         let containerView = UIView()
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         containerView.backgroundColor = .baseColor
+
+        let credentialsCount = certificates.count == 1 ? "1 credential" : "\(certificates.count) credentials"
         
-        let label = UILabel()
-        label.text = NSLocalizedString("Certificates", comment: "Section title listing all certificates from this issuer.").uppercased()
-        label.textColor = .primaryTextColor
-        label.font = UIFont.systemFont(ofSize: 11, weight: UIFont.Weight.bold)
+        let label = LabelC5T2B()
+        label.text = "You have \(credentialsCount)"
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        let separator = UIView()
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = .baseColor
-        certificatesHeaderSeparator = separator
-        
         containerView.addSubview(label)
-        containerView.addSubview(separator)
-        let constraints = [
-            NSLayoutConstraint(item: label, attribute: .left, relatedBy: .equal, toItem: containerView, attribute: .leftMargin, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: label, attribute: .right, relatedBy: .equal, toItem: containerView, attribute: .rightMargin, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .topMargin, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: separator, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: separator, attribute: .left, relatedBy: .equal, toItem: containerView, attribute: .left, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: separator, attribute: .right, relatedBy: .equal, toItem: containerView, attribute: .right, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: separator, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottomMargin, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: separator, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: 0.5)
-        ]
-        NSLayoutConstraint.activate(constraints)
+        label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
+        label.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20).isActive = true
+        label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 8).isActive = true
         
         return containerView
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 1 ? 25 : 0
+        return section == 1 ? 32 : 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
