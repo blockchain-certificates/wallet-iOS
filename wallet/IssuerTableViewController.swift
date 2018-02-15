@@ -33,6 +33,11 @@ class IssuerTableViewController: UITableViewController {
         }
     }
     
+    let shortDateFormatter = { formatter -> (DateFormatter) in
+        formatter.dateStyle = .medium
+        return formatter
+    }(DateFormatter())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -134,7 +139,7 @@ class IssuerTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier) as! CertificateTitleTableViewCell
             let certificate = certificates[indexPath.row]
             cell.title = certificate.title
-            cell.subtitle = certificate.subtitle
+            cell.subtitle = shortDateFormatter.string(from: certificate.assertion.issuedOn)
             cell.backgroundColor = .baseColor
             return cell
         }
