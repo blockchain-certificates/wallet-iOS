@@ -217,6 +217,7 @@ class FullBleedImageView : UIImageView {
         didSet {
             guard let image = image else { return }
             backgroundColor = image.color(at: .zero)
+            
         }
     }
 }

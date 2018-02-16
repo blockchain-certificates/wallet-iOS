@@ -88,6 +88,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     func loadBackgroundView() {
         if managedIssuers.isEmpty {
             loadEmptyBackgroundView()
+        } else {
+            collectionView?.backgroundView = nil
         }
     }
 
@@ -98,19 +100,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
         
         let emptyView: IssuerCollectionEmptyView = .fromNib()
-
-//        let constraints = [
-//            NSLayoutConstraint(item: emptyView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0),
-//            NSLayoutConstraint(item: emptyView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0),
-//            NSLayoutConstraint(item: emptyView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-//        ]
-//
-//        let backgroundView = UIView()
-//        backgroundView.addSubview(emptyView)
-//        emptyView.leadingAnchor.constraint(equalTo: backgroundView.)
-
         collectionView?.backgroundView = emptyView
-//        NSLayoutConstraint.activate(constraints)
     }
 
     func loadOnboardingIfNeeded() {
@@ -511,6 +501,11 @@ class IssuerCollectionViewController: UICollectionViewController {
 
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let managedIssuer = managedIssuers[indexPath.item]
 
