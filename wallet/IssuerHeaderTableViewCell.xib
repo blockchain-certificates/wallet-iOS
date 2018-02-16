@@ -18,14 +18,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="377" height="308.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fWg-mr-5rN">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fWg-mr-5rN" customClass="FullBleedImageView" customModule="certificates" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="377" height="188"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="188" id="IPA-OU-1Ac"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zir-UZ-s9I" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                        <rect key="frame" x="16" y="209" width="345" height="36"/>
+                        <rect key="frame" x="167.5" y="212" width="42" height="84.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>

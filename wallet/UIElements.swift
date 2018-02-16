@@ -210,6 +210,17 @@ class CheckmarkButton : SecondaryButton {
 
 }
 
+/// Sets the background of the image view to the top-left pixel of its image
+@IBDesignable
+class FullBleedImageView : UIImageView {
+    override var image: UIImage? {
+        didSet {
+            guard let image = image else { return }
+            backgroundColor = image.color(at: .zero)
+        }
+    }
+}
+
 
 
 class ClosureSleeve {
