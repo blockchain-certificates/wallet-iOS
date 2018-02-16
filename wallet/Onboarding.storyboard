@@ -104,6 +104,92 @@
             </objects>
             <point key="canvasLocation" x="1824.6376811594205" y="849.45652173913049"/>
         </scene>
+        <!--Welcome Returning Users View Controller-->
+        <scene sceneID="a3e-su-2Kq">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeReturningUsers" id="g39-vY-4w6" customClass="WelcomeReturningUsersViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ab0-sK-zLW"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lmu-Wc-t3J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="viy-wW-g0f">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZe-ki-NCg" userLabel="Container">
+                                <rect key="frame" x="0.0" y="196.66666666666663" width="414" height="343"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_announcement" translatesAutoresizingMaskIntoConstraints="NO" id="CWt-dI-oKE">
+                                        <rect key="frame" x="154.66666666666666" y="0.0" width="104.99999999999997" height="105"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We've improved the exprience, but you'll be able to receive and manage your credentials as before." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z88-Iu-wjr" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="154.00000000000003" width="374" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please note that you are now required to back up your passphrase, but you can do so easily in the app!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="McB-xV-fyP" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="199.00000000000003" width="374" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap continue to begin." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ0-U4-Kxs" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="244.00000000000003" width="374" height="20.999999999999972"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffR-78-xzB" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="289" width="374" height="30"/>
+                                        <state key="normal" title="Continue"/>
+                                        <connections>
+                                            <segue destination="i5s-AP-Aeo" kind="show" id="aCt-1w-xH5"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the new BlockCerts Wallet!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krn-fT-lMh" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="121.00000000000003" width="374" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ffR-78-xzB" secondAttribute="trailing" constant="20" id="0r1-5X-uoy"/>
+                                    <constraint firstItem="ZZ0-U4-Kxs" firstAttribute="leading" secondItem="kZe-ki-NCg" secondAttribute="leading" constant="20" id="2rh-uV-CdE"/>
+                                    <constraint firstItem="McB-xV-fyP" firstAttribute="top" secondItem="z88-Iu-wjr" secondAttribute="bottom" constant="24" id="4bJ-6h-S6Z"/>
+                                    <constraint firstItem="McB-xV-fyP" firstAttribute="leading" secondItem="kZe-ki-NCg" secondAttribute="leading" constant="20" id="4dA-JI-MeO"/>
+                                    <constraint firstAttribute="trailing" secondItem="krn-fT-lMh" secondAttribute="trailing" constant="20" id="6Xr-bL-ZED"/>
+                                    <constraint firstItem="ffR-78-xzB" firstAttribute="centerX" secondItem="kZe-ki-NCg" secondAttribute="centerX" id="9BX-1f-Hb5"/>
+                                    <constraint firstItem="CWt-dI-oKE" firstAttribute="top" secondItem="kZe-ki-NCg" secondAttribute="top" id="CDB-dx-hh0"/>
+                                    <constraint firstItem="z88-Iu-wjr" firstAttribute="leading" secondItem="kZe-ki-NCg" secondAttribute="leading" constant="20" id="G9b-jk-zIo"/>
+                                    <constraint firstItem="ffR-78-xzB" firstAttribute="top" secondItem="ZZ0-U4-Kxs" secondAttribute="bottom" constant="24" id="GtO-7l-h6k"/>
+                                    <constraint firstItem="krn-fT-lMh" firstAttribute="top" secondItem="CWt-dI-oKE" secondAttribute="bottom" constant="16" id="NT0-pp-fjX"/>
+                                    <constraint firstAttribute="trailing" secondItem="z88-Iu-wjr" secondAttribute="trailing" constant="20" id="fJg-zI-fjl"/>
+                                    <constraint firstItem="ffR-78-xzB" firstAttribute="leading" secondItem="kZe-ki-NCg" secondAttribute="leading" constant="20" id="hdi-8w-cOa"/>
+                                    <constraint firstItem="z88-Iu-wjr" firstAttribute="top" secondItem="krn-fT-lMh" secondAttribute="bottom" constant="12" id="lEa-C2-Xye"/>
+                                    <constraint firstItem="ZZ0-U4-Kxs" firstAttribute="top" secondItem="McB-xV-fyP" secondAttribute="bottom" constant="24" id="pe4-Fp-mcG"/>
+                                    <constraint firstItem="krn-fT-lMh" firstAttribute="leading" secondItem="kZe-ki-NCg" secondAttribute="leading" constant="20" id="ru2-Gs-wJc"/>
+                                    <constraint firstAttribute="trailing" secondItem="McB-xV-fyP" secondAttribute="trailing" constant="20" id="rvb-yN-D8X"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZZ0-U4-Kxs" secondAttribute="trailing" constant="20" id="s7i-8F-Wi4"/>
+                                    <constraint firstItem="CWt-dI-oKE" firstAttribute="centerX" secondItem="kZe-ki-NCg" secondAttribute="centerX" id="smn-mI-8qe"/>
+                                    <constraint firstAttribute="bottom" secondItem="ffR-78-xzB" secondAttribute="bottom" constant="24" id="y2x-Hl-7sT"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kZe-ki-NCg" firstAttribute="centerY" secondItem="viy-wW-g0f" secondAttribute="centerY" id="4oP-e2-Q5f"/>
+                            <constraint firstAttribute="trailing" secondItem="kZe-ki-NCg" secondAttribute="trailing" id="NXO-g7-X3D"/>
+                            <constraint firstItem="kZe-ki-NCg" firstAttribute="leading" secondItem="viy-wW-g0f" secondAttribute="leading" id="hlG-pi-Oi8"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nkP-a7-glE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1824.6376811594205" y="-8.1521739130434785"/>
+        </scene>
         <!--Onboarding Current User-->
         <scene sceneID="0Aa-Fw-X41">
             <objects>
@@ -335,11 +421,11 @@
                         <viewControllerLayoutGuide type="bottom" id="G2a-o9-fAF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CJM-tU-YMm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9L-es-UFv">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqY-ow-1Di" userLabel="Container">
                                         <rect key="frame" x="20" y="0.0" width="374" height="394.66666666666669"/>
@@ -360,7 +446,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFl-gf-qas" customClass="CheckmarkButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="214.66666666666669" width="374" height="44"/>
+                                                <rect key="frame" x="0.0" y="214.66666666666666" width="374" height="43.999999999999972"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="MEl-rE-JLq"/>
                                                 </constraints>
@@ -442,7 +528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="91k-bU-sa9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3542" y="504"/>
+            <point key="canvasLocation" x="3674" y="167"/>
         </scene>
         <!--Manual Backup-->
         <scene sceneID="Hgm-kK-cQi">
@@ -560,13 +646,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i9A-JE-Qz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4486" y="504"/>
+            <point key="canvasLocation" x="4483" y="166"/>
         </scene>
     </scenes>
     <resources>
         <image name="blockcerts_logo" width="250" height="52"/>
+        <image name="illo_announcement" width="105" height="105"/>
         <image name="illo_backup" width="105" height="105"/>
         <image name="illo_success" width="105" height="105"/>
         <image name="illo_writtenbackup" width="105" height="105"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="aCt-1w-xH5"/>
+    </inferredMetricsTieBreakers>
 </document>

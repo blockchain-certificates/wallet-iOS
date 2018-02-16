@@ -44,6 +44,16 @@ class LandingScreenViewController : UIViewController {
     }
 }
 
+class WelcomeReturningUsersViewController : UIViewController {
+    override func viewDidLoad() {
+        title = "Welcome"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+}
+
 class NewUserViewController : OnboardingControllerBase {
     @IBOutlet weak var passphraseLabel : UILabel!
 

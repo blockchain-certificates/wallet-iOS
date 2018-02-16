@@ -102,11 +102,21 @@ class IssuerCollectionViewController: UICollectionViewController {
         let emptyView: IssuerCollectionEmptyView = .fromNib()
         collectionView?.backgroundView = emptyView
     }
+    
+    func isReturningUser() -> Bool {
+        // TODO:
+        return false
+    }
 
     func loadOnboardingIfNeeded() {
         if !Keychain.hasPassphrase() {
             let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
-            present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
+            let vc = storyboard.instantiateInitialViewController()! as! UINavigationController
+            if isReturningUser() {
+                let welcome = storyboard.instantiateViewController(withIdentifier: "WelcomeReturningUsers")
+                vc.viewControllers = [welcome]
+            }
+            present(vc, animated: false, completion: nil)
         }
     }
 
