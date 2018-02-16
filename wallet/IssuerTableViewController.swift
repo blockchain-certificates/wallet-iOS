@@ -16,6 +16,7 @@ class IssuerTableViewController: UITableViewController {
     private let issuerSummaryCellReuseIdentifier = "IssuerSummaryTableViewCell"
     private let certificateCellReuseIdentifier = "CertificateTitleTableViewCell"
     private let noCertificatesCellReuseIdentififer = "NoCertificateTableViewCell"
+    private let buttonCellReuseIdentifier = "ButtonTableViewCell"
 
     public var delegate : IssuerTableViewControllerDelegate?
     public var managedIssuer : ManagedIssuer? {
@@ -45,14 +46,14 @@ class IssuerTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "IssuerSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: issuerSummaryCellReuseIdentifier)
         tableView.register(UINib(nibName: "NoCertificatesTableViewCell", bundle: nil), forCellReuseIdentifier: noCertificatesCellReuseIdentififer)
         tableView.register(UINib(nibName: "CertificateTitleTableViewCell", bundle: nil), forCellReuseIdentifier: certificateCellReuseIdentifier)
-        
+        tableView.register(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: buttonCellReuseIdentifier)
+
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.backgroundColor = .baseColor
+        tableView.backgroundColor = Style.Color.C10
         
         tableView.tableFooterView = UIView()
-        
-        tableView.separatorColor = .borderColor
+        tableView.separatorColor = .clear
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
@@ -120,11 +121,11 @@ class IssuerTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : certificates.count
+        return section == 1 ? certificates.count : 1
     }
     
     
@@ -134,6 +135,13 @@ class IssuerTableViewController: UITableViewController {
             guard let issuer = managedIssuer?.issuer else { return cell }
             cell.logoImage.image = UIImage(data: issuer.image)
             cell.nameLabel.text = issuer.name
+            return cell
+        } else if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: buttonCellReuseIdentifier) as! ButtonTableViewCell
+            cell.button.setTitle(NSLocalizedString("Add a Credential", comment: "Add credential in issuer detail"), for: .normal)
+            cell.button.onTouchUpInside { [weak self] in
+                self?.delegate?.addCertificateTapped()
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier) as! CertificateTitleTableViewCell
@@ -258,9 +266,11 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
             Logger.main.error("Coordination during deletion failed with \(error)")
         }
     }
+    
 }
 
 
 protocol IssuerTableViewControllerDelegate : class {
-    func show(certificate: Certificate);
+    func show(certificate: Certificate)
+    func addCertificateTapped()
 }
