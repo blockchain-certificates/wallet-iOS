@@ -97,6 +97,7 @@
 		83FF5DE81ECBA4100063397C /* Blockcerts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF5DE91ECBAC7A0063397C /* CertificateView.swift */; };
 		A927355A2031E1C9002361FD /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92735592031E1C9002361FD /* AlertViewController.swift */; };
+		A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */; };
 		A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A958CCD4202E4BD100CD35C6 /* Alert.storyboard */; };
 		A961EBC72028BE020016CD1E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A961EBC62028BE020016CD1E /* Style.swift */; };
 		A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */; };
@@ -233,6 +234,7 @@
 		83FF5DE61ECBA4100063397C /* Blockcerts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Blockcerts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FF5DE91ECBAC7A0063397C /* CertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateView.swift; sourceTree = "<group>"; };
 		A92735592031E1C9002361FD /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		A958CCD4202E4BD100CD35C6 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		A961EBC62028BE020016CD1E /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerHeaderTableViewCell.xib; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */,
 				834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */,
 				834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */,
+				A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */,
 				A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */,
 				A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */,
 				8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */,
@@ -645,6 +648,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */,
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
 				831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,

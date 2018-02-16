@@ -17,20 +17,22 @@ class IssuerTableViewController: UITableViewController {
     private let certificateCellReuseIdentifier = "CertificateTitleTableViewCell"
     private let noCertificatesCellReuseIdentififer = "NoCertificateTableViewCell"
     private let buttonCellReuseIdentifier = "ButtonTableViewCell"
+    private let emptyCellReuseIdentifier = "IssuerEmptyTableViewCell"
 
-    public var delegate : IssuerTableViewControllerDelegate?
-    public var managedIssuer : ManagedIssuer? {
+    var delegate : IssuerTableViewControllerDelegate?
+    var managedIssuer : ManagedIssuer? {
         didSet {
             self.title = managedIssuer?.issuer?.name
         }
     }
-    public var certificates : [Certificate] = []
+    var certificates : [Certificate] = []
+    var hasCertificates : Bool { return certificates.count > 0 }
     
-    private var certificatesHeaderSeparator : UIView?
+    var certificatesHeaderSeparator : UIView?
     private var estimateRequest : IssuerIssuingEstimateRequest?
     private var estimates : [CertificateIssuingEstimate]? {
         didSet {
-            updateBackgroundView()
+//            updateBackgroundView()
         }
     }
     
@@ -47,8 +49,9 @@ class IssuerTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "NoCertificatesTableViewCell", bundle: nil), forCellReuseIdentifier: noCertificatesCellReuseIdentififer)
         tableView.register(UINib(nibName: "CertificateTitleTableViewCell", bundle: nil), forCellReuseIdentifier: certificateCellReuseIdentifier)
         tableView.register(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: buttonCellReuseIdentifier)
+        tableView.register(UINib(nibName: "IssuerEmptyTableViewCell", bundle: nil), forCellReuseIdentifier: emptyCellReuseIdentifier)
 
-        tableView.estimatedRowHeight = 87
+        tableView.estimatedRowHeight = 187
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor = Style.Color.C2
         
@@ -78,45 +81,9 @@ class IssuerTableViewController: UITableViewController {
         }
     }
     
-    fileprivate func updateBackgroundView() {
-        guard certificates.isEmpty else {
-            tableView.backgroundView = nil
-            return
-        }
-        let issuerName = managedIssuer?.issuer?.name ?? "this issuer"
-
-
-        let noCertificatesTitle = NSLocalizedString("No Certificates", comment: "Title when we have no certificates for this issuer.")
-        var subtitle = String(format: NSLocalizedString("You don't have any certificates from %@.", comment: "Empty certificates description when we haven't been introduced to this issuer. Format arguments: {Issuer name}"), issuerName);
-        
-        let hasBeenIntroduced = (managedIssuer?.introducedWithAddress != nil)
-        if hasBeenIntroduced {
-            if let estimates = estimates, !estimates.isEmpty {
-                let sortedEstimates = estimates.sorted(by: { (leftEstimate, rightEstimate) -> Bool in
-                    return leftEstimate.willIssueOn < rightEstimate.willIssueOn
-                })
-                let firstEstimate = sortedEstimates.first!
-                
-                let formatter = DateFormatter()
-                formatter.dateStyle = .medium
-                formatter.timeStyle = .none
-
-                let dateString = formatter.string(from: firstEstimate.willIssueOn)
-                
-                subtitle = String(format: NSLocalizedString("You should see your %@ certificate from %@ around %@", comment: "Detailed estimate string for an issuer. 3 arguments: 1st is the title of the certificate, 2nd is the issuer name, 3rd is the date it will be issued on."), arguments: [firstEstimate.title, issuerName, dateString])
-            } else {
-                subtitle = String(format: NSLocalizedString("Hang tight! You should see an email with your certificate from %@ soon.", comment: "Empty certificates description when we've already been introduced to the issuer. Format arguments: {Issuer Name}"), issuerName)
-            }
-        }
-        
-        OperationQueue.main.addOperation { [weak self] in
-            self?.tableView.backgroundView = NoContentView(title: noCertificatesTitle, subtitle: subtitle)
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         tableView.isScrollEnabled = !certificates.isEmpty
-        updateBackgroundView()
+//        updateBackgroundView()
     }
     
     // MARK: - Table view data source
@@ -125,7 +92,7 @@ class IssuerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 1 ? certificates.count : 1
+        return section == 1 ? max(1, certificates.count) : 1
     }
     
     
@@ -144,11 +111,15 @@ class IssuerTableViewController: UITableViewController {
             }
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier) as! CertificateTitleTableViewCell
-            let certificate = certificates[indexPath.row]
-            cell.title = certificate.title
-            cell.subtitle = shortDateFormatter.string(from: certificate.assertion.issuedOn)
-            return cell
+            if hasCertificates {
+                let cell = tableView.dequeueReusableCell(withIdentifier: certificateCellReuseIdentifier) as! CertificateTitleTableViewCell
+                let certificate = certificates[indexPath.row]
+                cell.title = certificate.title
+                cell.subtitle = shortDateFormatter.string(from: certificate.assertion.issuedOn)
+                return cell
+            } else {
+                return tableView.dequeueReusableCell(withIdentifier: emptyCellReuseIdentifier)!
+            }
         }
     }
     
@@ -175,11 +146,15 @@ class IssuerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 1 ? 32 : 0
+        return hasCertificates && section == 1 ? 32 : 0
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return hasCertificates && indexPath.section == 1
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section == 1 else {
+        guard hasCertificates, indexPath.section == 1 else {
             tableView.deselectRow(at: indexPath, animated: false)
             return
         }
