@@ -50,7 +50,7 @@ class IssuerTableViewController: UITableViewController {
 
         tableView.estimatedRowHeight = 87
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.backgroundColor = Style.Color.C10
+        tableView.backgroundColor = Style.Color.C2
         
         tableView.tableFooterView = UIView()
         tableView.separatorColor = .clear
@@ -148,7 +148,6 @@ class IssuerTableViewController: UITableViewController {
             let certificate = certificates[indexPath.row]
             cell.title = certificate.title
             cell.subtitle = shortDateFormatter.string(from: certificate.assertion.issuedOn)
-            cell.backgroundColor = .baseColor
             return cell
         }
     }
@@ -159,7 +158,6 @@ class IssuerTableViewController: UITableViewController {
         }
         let containerView = UIView()
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        containerView.backgroundColor = .baseColor
 
         let credentialsCount = certificates.count == 1 ? "1 credential" : "\(certificates.count) credentials"
         
@@ -217,13 +215,6 @@ class IssuerTableViewController: UITableViewController {
         present(prompt, animated: true, completion: nil)
     }
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y <= 0 {
-            certificatesHeaderSeparator?.backgroundColor = .baseColor
-        } else {
-            certificatesHeaderSeparator?.backgroundColor = .borderColor
-        }
-    }
 }
 
 extension IssuerTableViewController : CertificateViewControllerDelegate {
