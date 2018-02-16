@@ -242,3 +242,10 @@ extension UIControl {
         objc_setAssociatedObject(self, String(format: "[%d]", arc4random()), sleeve, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
     }
 }
+
+extension UIView {
+    class func fromNib<T: UIView>() -> T {
+        print(T.self)
+        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+    }
+}

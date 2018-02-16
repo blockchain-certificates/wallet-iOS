@@ -30,7 +30,7 @@
                 <constraints>
                     <constraint firstItem="mbW-KT-zpj" firstAttribute="centerX" secondItem="pPo-TH-GG2" secondAttribute="centerX" id="276-Ey-GPX"/>
                     <constraint firstAttribute="bottom" secondItem="mbW-KT-zpj" secondAttribute="bottom" constant="12" id="2hF-HH-aRR"/>
-                    <constraint firstItem="mbW-KT-zpj" firstAttribute="top" secondItem="pPo-TH-GG2" secondAttribute="top" constant="12" id="tKA-Re-gDv"/>
+                    <constraint firstItem="mbW-KT-zpj" firstAttribute="top" secondItem="pPo-TH-GG2" secondAttribute="top" constant="20" id="tKA-Re-gDv"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

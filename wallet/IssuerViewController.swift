@@ -24,7 +24,7 @@ class IssuerViewController: UIViewController {
         view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addCertificateTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(addCertificateTapped))
 
         certificateTableController = IssuerTableViewController()
         certificateTableController.managedIssuer = managedIssuer

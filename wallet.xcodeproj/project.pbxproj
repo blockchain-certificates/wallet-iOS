@@ -103,6 +103,7 @@
 		A9B1784B203615D000B76375 /* IssuerHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */; };
 		A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */; };
 		A9B1784F203727AD00B76375 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B1784E203727AD00B76375 /* ButtonTableViewCell.swift */; };
+		A9B17851203746E300B76375 /* IssuerCollectionEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */; };
 		A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2B049202B5893002015F0 /* UIElements.swift */; };
 		ABC6BB21B68837562003AED2 /* libPods-certificates.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F8F788045077CB0389D73 /* libPods-certificates.a */; };
 		D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
@@ -238,6 +239,7 @@
 		A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuerHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
 		A9B1784E203727AD00B76375 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerCollectionEmptyView.xib; sourceTree = "<group>"; };
 		A9D2B049202B5893002015F0 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
 		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -342,6 +344,7 @@
 				831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */,
 				83111B331DA4110C006B058D /* Info.plist */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
+				A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */,
 				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
@@ -653,6 +656,7 @@
 				836031C51E5E513A005B2D2E /* Settings.bundle in Resources */,
 				838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */,
 				838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */,
+				A9B17851203746E300B76375 /* IssuerCollectionEmptyView.xib in Resources */,
 				838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
 				A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */,
