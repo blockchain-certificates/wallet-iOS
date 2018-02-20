@@ -24,7 +24,7 @@ class IssuerViewController: UIViewController {
         view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(addCertificateTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(displayIssuerInfo))
 
         certificateTableController = IssuerTableViewController()
         certificateTableController.managedIssuer = managedIssuer
@@ -84,6 +84,17 @@ class IssuerViewController: UIViewController {
         guard let activityIndicator = activityIndicator else { return }
         activityIndicator.removeFromSuperview()
         self.activityIndicator = nil
+    }
+    
+    @objc func displayIssuerInfo() {
+        guard let managedIssuer = managedIssuer else {
+            return
+        }
+        Logger.main.info("More info tapped on the Issuer display.")
+        let controller = IssuerMetadataViewController(issuer: managedIssuer)
+        controller.delegate = self
+        let navController = UINavigationController(rootViewController: controller);
+        present(navController, animated: true, completion: nil)
     }
     
     @objc func addCertificateTapped() {

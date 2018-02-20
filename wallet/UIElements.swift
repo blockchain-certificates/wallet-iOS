@@ -209,7 +209,7 @@ class DangerButton : SecondaryButton {
     override var strokeColorHighlighted : UIColor { return Style.Color.C9 }
     
     override var fillColor : UIColor { return .clear }
-    override var fillColorHighlighted : UIColor { return Style.Color.C12 }
+    override var fillColorHighlighted : UIColor { return Style.Color.C8 }
     
 }
 

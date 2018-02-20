@@ -9,41 +9,60 @@
 import UIKit
 import Blockcerts
 
-enum Section : Int {
-    case information = 0, deleteCertificate
-    case count
+// MARK: - Table Cell View Model
+
+protocol TableCellModel {
+    static var cellClass: AnyClass { get }
+    static var reuseIdentifier: String { get }
+    var reuseIdentifier: String { get }
+    func decorate(_ cell: UITableViewCell)
 }
 
+extension TableCellModel {
+    var reuseIdentifier: String {
+        return type(of: self).reuseIdentifier
+    }
+}
+
+struct InfoCell : TableCellModel {
+    static let cellClass: AnyClass = InformationTableViewCell.self
+    static let reuseIdentifier = "InformationTableViewCell"
+    
+    let title: String
+    let detail: String
+    let url: URL?
+    
+    func decorate(_ cell: UITableViewCell) {
+        guard let cell = cell as? InformationTableViewCell else { return }
+        cell.textLabel?.text = title
+        cell.detailTextLabel?.text = detail
+        cell.isTappable = url != nil
+        cell.selectionStyle = cell.isTappable ? .default : .none
+    }
+}
+
+struct DeleteCell : TableCellModel {
+    static let cellClass: AnyClass = DeleteTableViewCell.self
+    static let reuseIdentifier = "DeleteTableViewCell"
+    
+    func decorate(_ cell: UITableViewCell) {
+        cell.selectionStyle = .none
+    }
+}
+
+
 // Mark: - Custom UITableViewCells
-private let MissingInformationCellReuseIdentifier = "MissingInformationTableViewCell"
 private let InformationCellReuseIdentifier = "InformationTableViewCell"
 private let DeleteCellReuseIdentifier = "DeleteTableViewCell"
 
 class InformationTableViewCell : UITableViewCell {
-    public var isTappable = false {
-        didSet {
-            if isTappable {
-                selectionStyle = .default
-                accessoryType = .disclosureIndicator
-            } else {
-                selectionStyle = .none
-                accessoryType = .none
-            }
-        }
-    }
-    public var metadatum : Metadatum? {
-        didSet {
-            if let datum = metadatum {
-                textLabel?.text = datum.label
-                detailTextLabel?.text = datum.value
-            }
-        }
-    }
+    
+    var isTappable = false
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
-        guard let textLabel = self.textLabel, let detailTextLabel = detailTextLabel else {
+        guard let textLabel = textLabel, let detailTextLabel = detailTextLabel else {
             return
         }
         textLabel.font = Style.Font.T2B
@@ -69,13 +88,6 @@ class InformationTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateSelectabilityIfNeeded() {
-        if let datum = metadatum, datum.type == .uri {
-            isTappable = true
-            return
-        }
-        isTappable = false
-    }
 }
 
 class DeleteTableViewCell : UITableViewCell {
@@ -86,7 +98,7 @@ class DeleteTableViewCell : UITableViewCell {
         button = DangerButton(frame: .zero)
         button.setTitle(NSLocalizedString("Delete Credential", comment: "Action to delete a credential in the metadata view."), for: .normal)
 
-        super.init(style: style, reuseIdentifier: reuseIdentifier);
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -98,32 +110,28 @@ class DeleteTableViewCell : UITableViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented");
-    }
-}
-
-class MissingInformationTableViewCell : UITableViewCell {
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        textLabel?.text = NSLocalizedString("No additional information", comment: "Informational message about this certificate not having any metadata.")
-        selectionStyle = .none
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-class CertificateMetadataViewController: UIViewController {
+
+
+// MARK: - View Controller
+
+class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var data = [TableCellModel]()
+    
     public var delegate : CertificateViewControllerDelegate?
-    fileprivate let certificate : Certificate
     private var tableView : UITableView!
 
-    init(certificate: Certificate) {
-        self.certificate = certificate
+    let dateFormatter = { formatter -> (DateFormatter) in
+        formatter.dateStyle = .medium
+        return formatter
+    }(DateFormatter())
+
+    init() {
         tableView = nil
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -134,26 +142,22 @@ class CertificateMetadataViewController: UIViewController {
     override func loadView() {
         let view = UIView()
         
-        let tableView : UITableView = UITableView(frame: .zero, style: .grouped);
+        let tableView : UITableView = UITableView(frame: .zero, style: .grouped)
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
-        tableView.register(InformationTableViewCell.self, forCellReuseIdentifier: InformationCellReuseIdentifier)
-        tableView.register(DeleteTableViewCell.self, forCellReuseIdentifier: DeleteCellReuseIdentifier)
-        tableView.register(MissingInformationTableViewCell.self, forCellReuseIdentifier: MissingInformationCellReuseIdentifier)
+        tableView.register(InfoCell.cellClass, forCellReuseIdentifier: InfoCell.reuseIdentifier)
+        tableView.register(DeleteCell.cellClass, forCellReuseIdentifier: DeleteCell.reuseIdentifier)
         
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80
         
-        let constraints = [
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints);
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         self.tableView = tableView
         self.view = view
@@ -164,7 +168,6 @@ class CertificateMetadataViewController: UIViewController {
         
         let dismissButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissSelf))
         navigationItem.leftBarButtonItem = dismissButton
-        navigationItem.title = NSLocalizedString("Credential Info", comment: "Title of credential information screen")
         navigationController?.navigationBar.barTintColor = Style.Color.C3
 
         tableView.separatorStyle = .none
@@ -182,6 +185,70 @@ class CertificateMetadataViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+
+
+    // MARK: - UITableViewDataSource
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? data.count : 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard indexPath.section == 0 else { return UITableViewCell() }
+
+        let item = data[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: item.reuseIdentifier)!
+        item.decorate(cell)
+        
+        return cell
+    }
+    
+}
+
+
+class CertificateMetadataViewController: BaseMetadataViewController {
+
+    private let certificate : Certificate
+
+    init(certificate: Certificate) {
+        self.certificate = certificate
+        super.init()
+        
+        let issuedOn = dateFormatter.string(from: certificate.assertion.issuedOn)
+        let expirationDate = certificate.issuer.publicKeys.first?.expires
+        let expiresOn = expirationDate.map { dateFormatter.string(from: $0) } ?? NSLocalizedString("Never", comment: "Credential info screen description of credential that never expires")
+        
+        data.append(InfoCell(title: NSLocalizedString("Credential Name", comment: "Credential info screen field label"), detail: certificate.title, url: nil))
+        data.append(InfoCell(title: NSLocalizedString("Date Issued", comment: "Credential info screen field label"), detail: issuedOn, url: nil))
+        data.append(InfoCell(title: NSLocalizedString("Credential Expiration", comment: "Credential info screen field label"), detail: expiresOn, url: nil))
+        data.append(InfoCell(title: NSLocalizedString("Description", comment: "Credential info screen field label"), detail: certificate.description, url: nil))
+        data.append(DeleteCell())
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.title = NSLocalizedString("Credential Info", comment: "Title of credential information screen")
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        if let cell = cell as? DeleteTableViewCell {
+            cell.button.onTouchUpInside { [weak self] in
+                self?.promptForCertificateDeletion()
+            }
+        }
+        return cell
+    }
+
     func promptForCertificateDeletion() {
         Logger.main.info("User has tapped the delete button on this certificate.")
         let certificateToDelete = certificate
@@ -194,13 +261,13 @@ class CertificateMetadataViewController: UIViewController {
         prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] (_) in
             Logger.main.info("User has deleted certificate \(certificateToDelete.title) with id \(certificateToDelete.id)")
             self?.delegate?.delete(certificate: certificateToDelete)
-            self?.dismissSelf();
+            self?.dismissSelf()
         }))
         prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: { [weak self] (_) in
             Logger.main.info("User canceled the deletion of the certificate.")
-            if let selectedPath = self?.tableView.indexPathForSelectedRow {
-                self?.tableView.deselectRow(at: selectedPath, animated: true)
-            }
+//            if let selectedPath = self?.tableView.indexPathForSelectedRow {
+//                self?.tableView.deselectRow(at: selectedPath, animated: true)
+//            }
         }))
         
         present(prompt, animated: true, completion: nil)
@@ -208,145 +275,36 @@ class CertificateMetadataViewController: UIViewController {
     
 }
 
-extension CertificateMetadataViewController : UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.count.rawValue
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch Section(rawValue:section) {
-        case .some(.information):
-            if certificate.metadata.visibleMetadata.isEmpty {
-                // We'll still have a cell explaining why there's no metadata
-                return 1
-            }
-            return certificate.metadata.visibleMetadata.count
-        case .some(.deleteCertificate):
-            return 1
-        case .none:
-            fallthrough
-        default:
-            return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return nil
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Choose which cell to use
-        var identifier = InformationCellReuseIdentifier
-        if (indexPath.section == Section.deleteCertificate.rawValue) {
-            identifier = DeleteCellReuseIdentifier
-        } else if (indexPath.section == Section.information.rawValue && certificate.metadata.visibleMetadata.isEmpty) {
-            identifier = MissingInformationCellReuseIdentifier
-        }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier)!
-        
-        // Load it up with data
-        switch indexPath.section {
-        case Section.information.rawValue:
-            if !certificate.metadata.visibleMetadata.isEmpty {
-                let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
-                if let infoCell = cell as? InformationTableViewCell {
-                    infoCell.metadatum = metadatum
-                }
-            }
-        case Section.deleteCertificate.rawValue:
-            break
-        default:
-            // TODO: Is there a better way of failing here?
-            cell.textLabel?.text = ""
-        }
-        
-        return cell;
-    }
-    
-}
 
-extension CertificateMetadataViewController : UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let section = Section(rawValue: indexPath.section) else {
-            tableView.deselectRow(at: indexPath, animated: false)
-            return
+class IssuerMetadataViewController : BaseMetadataViewController {
+    
+    private let issuer : ManagedIssuer
+    
+    init(issuer: ManagedIssuer) {
+        self.issuer = issuer
+        super.init()
+        
+        if let name = issuer.issuer?.name {
+            data.append(InfoCell(title: NSLocalizedString("Issuer Name", comment: "Issuer info screen field label"), detail: name, url: nil))
         }
-
-        switch section {
-        case .information:
-            if let infoCell = tableView.cellForRow(at: indexPath) as? InformationTableViewCell,
-                infoCell.isTappable {
-                let metadatum = certificate.metadata.visibleMetadata[indexPath.row]
-                if metadatum.type == .uri {
-                    UIApplication.shared.open(URL(string:metadatum.value)!, options: [:]) { success in
-                        OperationQueue.main.addOperation {
-                            tableView.deselectRow(at: indexPath, animated: true)
-                        }
-                    }
-                } else {
-                    let detailView = MetadatumViewController()
-                    detailView.metadatum = metadatum
-                    self.navigationController?.pushViewController(detailView, animated: true)
-                }
-            } else {
-                tableView.deselectRow(at: indexPath, animated: true)
-            }
-        case .deleteCertificate:
-            promptForCertificateDeletion();
-        default:
-            tableView.deselectRow(at: indexPath, animated: true)
+        if let introducedOn = issuer.introducedOn {
+            data.append(InfoCell(title: NSLocalizedString("Introduced on", comment: "Issuer info screen field label"), detail: dateFormatter.string(from: introducedOn), url: nil))
         }
+        if let address = issuer.introducedWithAddress {
+            data.append(InfoCell(title: NSLocalizedString("Shared Address", comment: "Issuer info screen field label"), detail: address.scopedValue, url: nil))
+        }
+//        data.append(InfoCell(title: NSLocalizedString("URL", comment: "Issuer info screen field label"), detail: issuer.url  // issuer.id.absoluteString, url: issuer.id))
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let infoCell = cell as? InformationTableViewCell {
-            infoCell.updateSelectabilityIfNeeded()
-        }
-    }
-}
-
-// Mark: - Certificate MetadataDetailViewController
-class MetadatumViewController : UIViewController {
-    var metadatum : Metadatum? {
-        didSet {
-            title = metadatum?.label
-            valueLabel?.text = metadatum?.value
-        }
-    }
-    
-    private var valueLabel : UILabel?
-    
-    override func loadView() {
-        let scrollView = UIScrollView()
-        
-        let contentView = UIView()
-        let valueLabel = UILabel()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        valueLabel.translatesAutoresizingMaskIntoConstraints = false
-        valueLabel.numberOfLines = 0
-        
-        scrollView.addSubview(contentView)
-        contentView.addSubview(valueLabel)
-        
-        let views = [
-            "contentView": contentView,
-            "valueLabel": valueLabel
-        ]
-        
-        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[valueLabel]-|", options: .alignAllCenterX, metrics: nil, views: views)
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-[valueLabel]-|", options: .alignAllCenterY, metrics: nil, views: views))
-        constraints.append(NSLayoutConstraint(item: contentView, attribute: .width, relatedBy: .equal, toItem: scrollView, attribute: .width, multiplier: 1, constant: 0))
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[contentView]|", options: .alignAllCenterX, metrics: nil, views: views))
-        NSLayoutConstraint.activate(constraints)
-        
-        view = scrollView
-        self.valueLabel = valueLabel
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
-        valueLabel?.text = metadatum?.value
+        super.viewDidLoad()
+        
+        navigationItem.title = NSLocalizedString("Credential Info", comment: "Title of credential information screen")
     }
-    
+
 }
+
