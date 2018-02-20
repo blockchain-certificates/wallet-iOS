@@ -207,6 +207,20 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
         return cell
     }
     
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        guard let cellData = data[indexPath.row] as? InfoCell,
+            let url = cellData.url,
+            UIApplication.shared.canOpenURL(url) else { return false }
+        return cellData.url != nil
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cellData = data[indexPath.row] as? InfoCell,
+            let url = cellData.url,
+            UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
 }
 
 
@@ -226,6 +240,23 @@ class CertificateMetadataViewController: BaseMetadataViewController {
         data.append(InfoCell(title: NSLocalizedString("Date Issued", comment: "Credential info screen field label"), detail: issuedOn, url: nil))
         data.append(InfoCell(title: NSLocalizedString("Credential Expiration", comment: "Credential info screen field label"), detail: expiresOn, url: nil))
         data.append(InfoCell(title: NSLocalizedString("Description", comment: "Credential info screen field label"), detail: certificate.description, url: nil))
+        
+        let metadata : [TableCellModel] = certificate.metadata.visibleMetadata.map { metadata in
+            let url : URL?
+            switch metadata.type {
+            case .uri:
+                url = URL(string: metadata.value)
+            case .email:
+                url = URL(string: "mailto:\(metadata.value)")
+            case .phoneNumber:
+                url = URL(string: "tel:\(metadata.value)")
+            default:
+                url = nil
+            }
+            return InfoCell(title: metadata.label, detail: metadata.value, url: url)
+        }
+        data += metadata
+
         data.append(DeleteCell())
     }
     
@@ -292,6 +323,9 @@ class IssuerMetadataViewController : BaseMetadataViewController {
         }
         if let address = issuer.introducedWithAddress {
             data.append(InfoCell(title: NSLocalizedString("Shared Address", comment: "Issuer info screen field label"), detail: address.scopedValue, url: nil))
+        }
+        if let email = issuer.issuer?.email {
+            data.append(InfoCell(title: NSLocalizedString("Email", comment: "Issuer info screen field label"), detail: email, url: URL(string: "mailto:\(email)")))
         }
 //        data.append(InfoCell(title: NSLocalizedString("URL", comment: "Issuer info screen field label"), detail: issuer.url  // issuer.id.absoluteString, url: issuer.id))
     }
