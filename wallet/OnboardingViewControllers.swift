@@ -89,12 +89,29 @@ class OnboardingBackupMethods : OnboardingControllerBase, UIActivityItemSource {
     @IBOutlet var manualButton : CheckmarkButton!
     @IBOutlet var copyButton : CheckmarkButton!
     @IBOutlet var continueButton : PrimaryButton!
+    
+    static var hasPerformedBackup : Bool {
+        return UserDefaults.standard.bool(forKey: UserDefaultsKey.hasPerformedBackup)
+    }
+    
+    func set(hasPerformedBackup: Bool) {
+        UserDefaults.standard.set(hasPerformedBackup, forKey: UserDefaultsKey.hasPerformedBackup)
+    }
 
-    // TODO: must persist these - user defaults? keychain? Cannot depend solely on presence of keychain
-    // b/c we'll present onboarding in some modified form for existing users. Could store last launched
-    // version in userdefaults and use both pieces of information to determine (or hasOnboarded)
-    var hasWrittenPasscode = false
-    var hasCopiedPasscode = false
+    var hasWrittenPasscode = false {
+        didSet {
+            if hasWrittenPasscode {
+                set(hasPerformedBackup: true)
+            }
+        }
+    }
+    var hasCopiedPasscode = false {
+        didSet {
+            if hasCopiedPasscode {
+                set(hasPerformedBackup: true)
+            }
+        }
+    }
     var passphrase : String?
     
     @IBAction func backupManual() {

@@ -10,18 +10,21 @@ import UIKit
 import Foundation
 import Blockcerts
 
-enum Paths {
+struct Paths {
     static let managedIssuersListURL     = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("managed-issuers.json")
     static let issuersNSCodingArchiveURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Issuers")
     static let certificatesDirectory     = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Certificates", isDirectory: true)
 }
 
-enum Identifiers {
+struct Identifiers {
     static let sampleCertificateUID = "sample-certificate"
 }
 
-enum NotificationNames {
+struct NotificationNames {
     static let redirectToCertificate = Notification.Name("RedirectToCertificate")
     static let onboardingComplete = Notification.Name("OnboardingComplete")
 }
 
+struct UserDefaultsKey {
+    static let hasPerformedBackup = "backup-performed"
+}
