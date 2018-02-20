@@ -55,8 +55,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         collectionView?.backgroundColor = .baseColor
 
         let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: collectionView!.bounds.width, height: 136)
-        layout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8)
+        layout.itemSize = CGSize(width: collectionView!.bounds.width - 40, height: 136)
+        layout.sectionInset = UIEdgeInsetsMake(12, 20, 8, 20)
 
         navigationController?.navigationBar.barTintColor = Style.Color.C3
         navigationController?.navigationBar.isTranslucent = false
@@ -259,9 +259,12 @@ class IssuerCollectionViewController: UICollectionViewController {
         genericCell = cell
 
         // Common styling
-        genericCell.layer.borderColor = UIColor.borderColor.cgColor
-        genericCell.layer.borderWidth = 0.5
-        genericCell.layer.cornerRadius = 3
+        genericCell.layer.borderColor = Style.Color.C8.cgColor
+        genericCell.layer.borderWidth = 1
+        genericCell.layer.cornerRadius = Style.Measure.cornerRadius
+        genericCell.layer.shadowColor = Style.Color.C13.cgColor
+        genericCell.layer.shadowRadius = 4
+        genericCell.layer.shadowOffset = CGSize(width: 2, height: 2)
 
         return genericCell
     }
