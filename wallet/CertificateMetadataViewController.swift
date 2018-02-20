@@ -46,11 +46,9 @@ class InformationTableViewCell : UITableViewCell {
         guard let textLabel = self.textLabel, let detailTextLabel = detailTextLabel else {
             return
         }
-        textLabel.textColor = .secondaryTextColor
         textLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        detailTextLabel.textColor = .primaryTextColor
         detailTextLabel.font = UIFont.preferredFont(forTextStyle: .body)
         detailTextLabel.numberOfLines = 2
         detailTextLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +101,6 @@ class MissingInformationTableViewCell : UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         textLabel?.text = NSLocalizedString("No additional information", comment: "Informational message about this certificate not having any metadata.")
-        textLabel?.textColor = .disabledTextColor
         selectionStyle = .none
     }
     
@@ -134,7 +131,6 @@ class CertificateMetadataViewController: UIViewController {
         let tableView : UITableView = UITableView(frame: .zero, style: .grouped);
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .baseColor
 
         tableView.register(InformationTableViewCell.self, forCellReuseIdentifier: InformationCellReuseIdentifier)
         tableView.register(DeleteTableViewCell.self, forCellReuseIdentifier: DeleteCellReuseIdentifier)
@@ -318,7 +314,6 @@ class MetadatumViewController : UIViewController {
     
     override func loadView() {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .baseColor
         
         let contentView = UIView()
         let valueLabel = UILabel()

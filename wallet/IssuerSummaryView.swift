@@ -43,7 +43,6 @@ class IssuerSummaryView: UIView {
         
         descriptionLabel = UILabel()
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        descriptionLabel.textColor = .primaryTextColor
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         

@@ -49,7 +49,7 @@ class RevealPassphraseTableViewController: UITableViewController {
         tableView.register(LabeledTableViewCell.self, forCellReuseIdentifier: labeledCellReuseIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        tableView.backgroundColor = .baseColor
+        tableView.backgroundColor = Style.Color.C2
         
         authenticate()
     }
@@ -78,7 +78,6 @@ class RevealPassphraseTableViewController: UITableViewController {
             cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
             cell.textLabel?.text = NSLocalizedString("Show Passphrase", comment: "Action button for revealing the current passphrase")
             cell.selectionStyle = .default
-            cell.textLabel?.textColor = .brandColor
         }
         return cell
     }

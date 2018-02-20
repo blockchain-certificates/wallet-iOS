@@ -28,7 +28,7 @@ class IssuerCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         containerView.layer.masksToBounds = true
-        containerView.layer.cornerRadius = Dimensions.issuerCornerRadius
+        containerView.layer.cornerRadius = Style.Measure.cornerRadius
         
         titleLabel.text = issuerName
         

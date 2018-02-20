@@ -52,7 +52,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         let addNib = UINib(nibName: "AddIssuerCollectionViewCell", bundle: nil)
         collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
         collectionView?.delegate = self
-        collectionView?.backgroundColor = .baseColor
+        collectionView?.backgroundColor = Style.Color.C2
 
         let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: collectionView!.bounds.width - 40, height: 136)

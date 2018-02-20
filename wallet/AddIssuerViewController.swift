@@ -54,14 +54,12 @@ class AddIssuerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .baseColor
         
         title = NSLocalizedString("Add Issuer", comment: "Navigation title for the 'Add Issuer' form.")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveIssuerTapped(_:)))
         
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = .brandColor
         
         loadingView.isHidden = !isLoading
         
@@ -91,36 +89,7 @@ class AddIssuerViewController: UIViewController {
         nonce = nonceField.text
     }
     
-    func stylize() {
-        let fields = [
-            issuerURLField,
-            nonceField
-        ]
-        
-        fields.forEach { (textField) in
-            if let field = textField as? SkyFloatingLabelTextField {
-                field.tintColor = .tintColor
-                field.selectedTitleColor = .primaryTextColor
-                field.textColor = .primaryTextColor
-                field.font = Fonts.brandFont
-
-                field.lineColor = .placeholderTextColor
-                field.selectedLineHeight = 1
-                field.selectedLineColor = .tintColor
-                
-                field.placeholderColor = .placeholderTextColor
-                field.placeholderFont = Fonts.placeholderFont
-            }
-        }
-        
-        let labels = [
-            issuerURLLabel,
-            identityInformationLabel
-        ]
-        labels.forEach { (label) in
-            label?.textColor = .primaryTextColor
-        }
-    }
+    func stylize() { }
 
     @objc func saveIssuerTapped(_ sender: UIBarButtonItem) {
         Logger.main.info("Save issuer tapped")
