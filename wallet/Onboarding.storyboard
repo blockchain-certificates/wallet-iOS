@@ -123,8 +123,7 @@
                                         <rect key="frame" x="154.66666666666666" y="0.0" width="104.99999999999997" height="105"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We've improved the exprience, but you'll be able to receive and manage your credentials as before." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z88-Iu-wjr" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="We've improved the exprience, but you'll be able to receive and manage your credentials as before." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z88-Iu-wjr" userLabel="We've improved the experience, but you'll be able to receive and manage your credentials as before." customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="-170" y="154" width="755" height="21"/>
+                                        <rect key="frame" x="20" y="154.00000000000003" width="374" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
