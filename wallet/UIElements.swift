@@ -200,6 +200,21 @@ class TertiaryButton : SecondaryButton {
 }
 
 @IBDesignable
+class DangerButton : SecondaryButton {
+    
+    override var textColor : UIColor { return Style.Color.C9 }
+    override var textColorHighlighted : UIColor { return Style.Color.C9 }
+    
+    override var strokeColor : UIColor { return Style.Color.C8 }
+    override var strokeColorHighlighted : UIColor { return Style.Color.C9 }
+    
+    override var fillColor : UIColor { return .clear }
+    override var fillColorHighlighted : UIColor { return Style.Color.C12 }
+    
+}
+
+
+@IBDesignable
 class CheckmarkButton : SecondaryButton {
     var checkmark = UIImageView()
     var checked : Bool = true {

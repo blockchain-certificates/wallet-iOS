@@ -46,23 +46,23 @@ class InformationTableViewCell : UITableViewCell {
         guard let textLabel = self.textLabel, let detailTextLabel = detailTextLabel else {
             return
         }
-        textLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        textLabel.font = Style.Font.T2B
+        textLabel.textColor = Style.Color.C5
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        detailTextLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        detailTextLabel.numberOfLines = 2
+        detailTextLabel.font = Style.Font.T3R
+        detailTextLabel.textColor = Style.Color.C6
+        detailTextLabel.numberOfLines = 0
         detailTextLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+        textLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        trailingAnchor.constraint(equalTo: textLabel.trailingAnchor, constant: 20).isActive = true
         
-        let views = [
-            "titleLabel": textLabel,
-            "valueLabel": detailTextLabel
-        ]
-        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[titleLabel][valueLabel]-|", options: .alignAllLeading, metrics: nil, views: views)
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-[titleLabel]-|", options: .alignAllLeading, metrics: nil, views: views))
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "|-[valueLabel]-|", options: .alignAllLeading, metrics: nil, views: views))
-        
-        NSLayoutConstraint.activate(constraints)
-        
+        detailTextLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+        trailingAnchor.constraint(equalTo: detailTextLabel.trailingAnchor, constant: 20).isActive = true
+        detailTextLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 4).isActive = true
+        bottomAnchor.constraint(equalTo: detailTextLabel.bottomAnchor, constant: 8).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -70,10 +70,6 @@ class InformationTableViewCell : UITableViewCell {
     }
     
     func updateSelectabilityIfNeeded() {
-        if let isTruncated = detailTextLabel?.isTruncated(), isTruncated {
-            isTappable = true
-            return
-        }
         if let datum = metadatum, datum.type == .uri {
             isTappable = true
             return
@@ -83,12 +79,22 @@ class InformationTableViewCell : UITableViewCell {
 }
 
 class DeleteTableViewCell : UITableViewCell {
+    
+    var button : UIButton
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        button = DangerButton(frame: .zero)
+        button.setTitle(NSLocalizedString("Delete Credential", comment: "Action to delete a credential in the metadata view."), for: .normal)
+
         super.init(style: style, reuseIdentifier: reuseIdentifier);
-        
-        textLabel?.textAlignment = .center
-        textLabel?.textColor = .red
-        textLabel?.text = NSLocalizedString("Delete Certificate", comment: "Action to delete a certificate in the metadata view.")
+
+        contentView.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        button.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: 24).isActive = true
+        button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: 20).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -155,12 +161,15 @@ class CertificateMetadataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        self.title = certificate.title
         
         let dismissButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissSelf))
         navigationItem.leftBarButtonItem = dismissButton
+        navigationItem.title = NSLocalizedString("Credential Info", comment: "Title of credential information screen")
+        navigationController?.navigationBar.barTintColor = Style.Color.C3
+
+        tableView.separatorStyle = .none
+        view.backgroundColor = Style.Color.C1
+        tableView.backgroundColor = Style.Color.C1
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -222,9 +231,6 @@ extension CertificateMetadataViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == Section.information.rawValue {
-            return NSLocalizedString("Information", comment: "Title for the metadata view, showing additional information on a certificate")
-        }
         return nil
     }
     

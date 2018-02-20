@@ -30,11 +30,7 @@ class IssuerTableViewController: UITableViewController {
     
     var certificatesHeaderSeparator : UIView?
     private var estimateRequest : IssuerIssuingEstimateRequest?
-    private var estimates : [CertificateIssuingEstimate]? {
-        didSet {
-//            updateBackgroundView()
-        }
-    }
+    private var estimates : [CertificateIssuingEstimate]?
     
     let shortDateFormatter = { formatter -> (DateFormatter) in
         formatter.dateStyle = .medium
@@ -83,7 +79,6 @@ class IssuerTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.isScrollEnabled = !certificates.isEmpty
-//        updateBackgroundView()
     }
     
     // MARK: - Table view data source

@@ -46,9 +46,8 @@ class CertificateViewController: UIViewController {
 
         self.title = certificate.title
         
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(displayCredentialInfo))
+
         shareButton.isEnabled = certificate.assertion.uid != Identifiers.sampleCertificateUID
         
         renderedCertificateView.render(certificate: certificate)
@@ -240,7 +239,7 @@ class CertificateViewController: UIViewController {
 //        present(prompt, animated: true, completion: nil)
 //    }
     
-    @objc func moreInfoTapped() {
+    @objc func displayCredentialInfo() {
         Logger.main.info("More info tapped on the Certificate display.")
         let controller = CertificateMetadataViewController(certificate: certificate)
         controller.delegate = self

@@ -35,7 +35,7 @@ class IssuerSummaryView: UIView {
     }
     
     func commonInit() {
-        backgroundColor = .white
+        backgroundColor = Style.Color.C1
         
         iconView = UIImageView()
         iconView.contentMode = .scaleAspectFit
@@ -46,8 +46,8 @@ class IssuerSummaryView: UIView {
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addSubview(iconView)
-        self.addSubview(descriptionLabel)
+        addSubview(iconView)
+        addSubview(descriptionLabel)
         
         let views : [String: UIView] = [
             "iconView": iconView,
