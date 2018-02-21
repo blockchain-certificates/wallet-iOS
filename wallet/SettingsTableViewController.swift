@@ -100,7 +100,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isDebugBuild ? 11 : 7
+        return isDebugBuild ? 10 : 6
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -120,16 +120,14 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
         case 5:
             text = NSLocalizedString("Email Logs", comment: "Action item in settings screen.")
-        case 6:
-            text = NSLocalizedString("Log Out", comment: "Action item in settings screen.")
         // The following are only visible in DEBUG builds
-        case 7:
+        case 6:
             text = "Destroy passphrase & crash"
-        case 8:
+        case 7:
             text = "Delete all issuers & certificates"
-        case 9:
+        case 8:
             text = "Destroy all data & crash"
-        case 10:
+        case 9:
             text = "Show onboarding"
         default:
             text = nil
@@ -165,23 +163,19 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             Logger.main.info("Share device logs")
             controller = nil
             shareLogs()
-        case 6:
-            Logger.main.info("Share device logs")
-            controller = nil
-            // TODO: logout, probably with confirmation alert
             
         // The following are only visible in DEBUG builds
-        case 7:
+        case 6:
             Logger.main.info("Destroy passphrase & crash...")
             configuration = AppConfiguration(shouldDeletePassphrase: true, shouldResetAfterConfiguring: true)
-        case 8:
+        case 7:
             Logger.main.info("Delete all issuers & certificates...")
             configuration = AppConfiguration(shouldDeleteIssuersAndCertificates: true)
             tableView.deselectRow(at: indexPath, animated: true)
-        case 9:
+        case 8:
             Logger.main.info("Delete all data & crash...")
             configuration = AppConfiguration.resetEverything
-        case 10:
+        case 9:
             let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
             present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
         default:
