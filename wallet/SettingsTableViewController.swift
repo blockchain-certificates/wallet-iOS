@@ -8,6 +8,21 @@
 
 import UIKit
 
+class SettingsCell : UITableViewCell {
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        accessoryView  = UIImageView(image: #imageLiteral(resourceName: "icon_disclosure"))
+        textLabel?.font = Style.Font.T3S
+        textLabel?.textColor = Style.Color.C6
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
 class SettingsTableViewController: UITableViewController {
     private var oldBarStyle : UIBarStyle?
 
@@ -25,7 +40,7 @@ class SettingsTableViewController: UITableViewController {
     
     override init(style: UITableViewStyle) {
         // ignore input. This view is always the grouped style
-        super.init(style: .grouped)
+        super.init(style: .plain)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,12 +56,16 @@ class SettingsTableViewController: UITableViewController {
         title = NSLocalizedString("Settings", comment: "Title of the Settings screen.")
 
         navigationController?.navigationBar.barTintColor = Style.Color.C3
+        navigationController?.navigationBar.isTranslucent = false
         
         let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
         navigationItem.leftBarButtonItem = cancelBarButton
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(SettingsCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.backgroundColor = Style.Color.C2
+        tableView.rowHeight = 56
+        tableView.tableFooterView = UIView()
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,69 +95,48 @@ class SettingsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return isDebugBuild ? 4 : 3
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 2
-        } else if section == 1 {
-            return 1
-        } else if section == 2 {
-            return 2
-        } else if isDebugBuild && section == 3 {
-            return 4
-        }
-        return 0
+        return isDebugBuild ? 11 : 7
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
         
-        if indexPath.section < 2 {
-            cell.accessoryType = .disclosureIndicator
-        } else {
-            cell.accessoryType = .none
-        }
-        
-        var text : String?
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
-            text = NSLocalizedString("Reveal Passphrase", comment: "Action item in settings screen.")
-        case (0, 1):
-            text = NSLocalizedString("Add Issuer", comment: "Action item in settings screen to add an Issuer manually.")
-        case (1, 0):
+        let text : String?
+        switch indexPath.row {
+        case 0:
+            text = NSLocalizedString("Add an Issuer", comment: "Action item in settings screen to add an Issuer manually.")
+        case 1:
+            text = NSLocalizedString("Add a Credential", comment: "Action item in settings screen to add an Issuer manually.")
+        case 2:
+            text = NSLocalizedString("My Passphrase", comment: "Action item in settings screen.")
+        case 3:
+            text = NSLocalizedString("About Passphrases", comment: "Menu action item for sharing device logs.")
+        case 4:
             text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
-        case (2, 0):
-            text = NSLocalizedString("Share Device Logs", comment: "Menu action item for sharing device logs.")
-        case (2, 1):
-            text = NSLocalizedString("Clear Device Logs", comment: "Menu item for clearing the device logs")
-        case (3, 0):
+        case 5:
+            text = NSLocalizedString("Email Logs", comment: "Action item in settings screen.")
+        case 6:
+            text = NSLocalizedString("Log Out", comment: "Action item in settings screen.")
+        // The following are only visible in DEBUG builds
+        case 7:
             text = "Destroy passphrase & crash"
-        case (3, 1):
+        case 8:
             text = "Delete all issuers & certificates"
-        case (3, 2):
+        case 9:
             text = "Destroy all data & crash"
-        case (3, 3):
+        case 10:
             text = "Show onboarding"
         default:
             text = nil
         }
         
         cell.textLabel?.text = text
-        cell.textLabel?.font = Style.Font.T2R
-        
+
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 2 {
-            return NSLocalizedString("Device Logs", comment: "title for the action section in settings about logs.")
-        }
-        if isDebugBuild && section == 3 {
-            return "Debug Actions"
-        }
-        return nil
     }
     
     // MARK: - Table view delegate
@@ -146,40 +144,51 @@ class SettingsTableViewController: UITableViewController {
         var controller : UIViewController?
         var configuration : AppConfiguration?
         
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
-            Logger.main.info("Reveal passphrase tapped")
-            controller = RevealPassphraseTableViewController()
-        case (0, 1):
+        switch indexPath.row {
+        case 0:
             Logger.main.info("Add Issuer tapped in settings")
             showAddIssuerFlow()
-        case (1, 0):
-            Logger.main.info("Privacy statement tapped")
+        case 1:
+            Logger.main.info("Add Credential tapped in settings")
+//            showAddCredentialFlow()
+        case 2:
+            Logger.main.info("My passphrase tapped in settings")
+            controller = RevealPassphraseTableViewController()
+        case 3:
+            Logger.main.info("About passphrase tapped in settings")
+//            controller = RevealAboutPassphraseViewController()
+        case 4:
+            Logger.main.info("Privacy statement tapped in settings")
             controller = PrivacyViewController()
-        case (2, 0):
+        case 5:
             Logger.main.info("Share device logs")
             controller = nil
             shareLogs()
-        case (2, 1):
-            Logger.main.info("Clear device logs")
+        case 6:
+            Logger.main.info("Share device logs")
             controller = nil
-            clearLogs()
-        case (3, 0):
+            // TODO: logout, probably with confirmation alert
+            
+        // The following are only visible in DEBUG builds
+        case 7:
             Logger.main.info("Destroy passphrase & crash...")
             configuration = AppConfiguration(shouldDeletePassphrase: true, shouldResetAfterConfiguring: true)
-        case (3, 1):
+        case 8:
             Logger.main.info("Delete all issuers & certificates...")
             configuration = AppConfiguration(shouldDeleteIssuersAndCertificates: true)
             tableView.deselectRow(at: indexPath, animated: true)
-        case (3, 2):
+        case 9:
             Logger.main.info("Delete all data & crash...")
             configuration = AppConfiguration.resetEverything
-        case (3, 3):
+        case 10:
             let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
             present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
         default:
             controller = nil
         }
+//            Logger.main.info("Clear device logs")
+//            controller = nil
+//            clearLogs()
         
         if let newAppConfig = configuration {
             try! ConfigurationManager().configure(with: newAppConfig)
