@@ -8,6 +8,7 @@
 
 import UIKit
 import Blockcerts
+import LocalAuthentication
 
 class SettingsCell : UITableViewCell {
     
@@ -53,7 +54,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        clearsSelectionOnViewWillAppear = true
         title = NSLocalizedString("Settings", comment: "Title of the Settings screen.")
 
         navigationController?.navigationBar.barTintColor = Style.Color.C3
@@ -70,6 +71,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         oldBarStyle = navigationController?.navigationBar.barStyle
         navigationController?.navigationBar.barStyle = .default
     }
@@ -152,8 +154,8 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             showAddCredentialFlow()
         case 2:
             Logger.main.info("My passphrase tapped in settings")
-            let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
-            controller = storyboard.instantiateViewController(withIdentifier: "MyPassphrase")
+            authenticate()
+            controller = nil
         case 3:
             Logger.main.info("About passphrase tapped in settings")
             controller = AboutPassphraseViewController()
@@ -425,6 +427,69 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         
         present(prompt, animated: true, completion: nil)
     }
+    
+    
+    // MARK: - User Authentication (TouchID/FaceID)
+    
+    func authenticate() {
+        defer {
+            if let selectionIndexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: selectionIndexPath, animated: true)
+            }
+        }
+        
+        authenticateUser { [weak self] (success, error) in
+            
+            guard success else {
+                guard let error = error else {
+                    return
+                }
+                
+                switch error {
+                case AuthErrors.noAuthMethodAllowed:
+                    DispatchQueue.main.async { [weak self] in
+                        let title = NSLocalizedString("Authentication Error", comment: "Alert view title shown when unable to authenticate for My Passphrase")
+                        let message = NSLocalizedString("It looks like local authentication is disabled for this app. Without it, showing your passphrase is insecure. Please enable local authentication for this app in Settings.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
+                        let buttonText = NSLocalizedString("Okay", comment: "Button copy")
+                        let alert = AlertViewController.create(title: title, message: message, icon: .warning, buttonText: buttonText)
+                        self?.present(alert, animated: false, completion: nil)
+                    }
+                default:
+                    //                    self.specificAuthenticationError = nil
+                    break
+                }
+                
+                dump(error)
+                return
+            }
+            
+            // Successful authentication - show the users's passphrase
+            DispatchQueue.main.async { [weak self] in
+                let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
+                let controller = storyboard.instantiateViewController(withIdentifier: "MyPassphrase")
+                self?.navigationController?.pushViewController(controller, animated: true)
+            }
+        }
+        
+    }
+    
+    func authenticateUser(completionHandler: @escaping (Bool, Error?) -> Void) {
+        let context = LAContext()
+        var error : NSError? = nil
+        let reason = NSLocalizedString("Authenticate to see your secure passphrase.", comment: "Prompt to authenticate in order to reveal their passphrase.")
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason, reply: completionHandler)
+        } else if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            context.evaluatePolicy(
+                .deviceOwnerAuthentication,
+                localizedReason: reason,
+                reply: completionHandler)
+        } else {
+            completionHandler(false, AuthErrors.noAuthMethodAllowed)
+        }
+    }
+    
 }
 
 extension SettingsTableViewController: AddIssuerViewControllerDelegate {
@@ -505,4 +570,5 @@ class SettingsMyPassphraseViewController : OnboardingControllerBase, UIActivityI
                                 subjectForActivityType activityType: UIActivityType?) -> String {
         return NSLocalizedString("BlockCerts Backup", comment: "Email subject line when backing up passphrase")
     }
+    
 }

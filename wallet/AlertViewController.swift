@@ -82,7 +82,7 @@ class AlertViewController : UIViewController {
         animateIconIfNeeded()
     }
 
-    static func create(title: String, message: String, icon: Icon) -> AlertViewController {
+    static func create(title: String, message: String, icon: Icon, buttonText: String? = nil) -> AlertViewController {
         let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
         vc.view.backgroundColor = .clear
@@ -91,8 +91,17 @@ class AlertViewController : UIViewController {
         vc.set(title: title)
         vc.set(message: message)
         vc.icon = icon
+
+        if let buttonText = buttonText {
+            // assume a simple, single button to dismiss the alert
+            let button = SecondaryButton(frame: .zero)
+            button.setTitle(buttonText, for: .normal)
+            button.onTouchUpInside {
+                vc.dismiss(animated: false, completion: nil)
+            }
+            vc.set(buttons: [button])
+       }
         
-        // TODO: animate loading image
         return vc
     }
     
