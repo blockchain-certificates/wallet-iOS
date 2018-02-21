@@ -377,7 +377,6 @@ class GeneratedPassphraseViewController: UIViewController {
     var attempts = 5
     
     override func viewDidLoad() {
-//        title = ""
         generatePassphrase()
         
         logoImageView.tintColor = UIColor(red:0.00, green:0.54, blue:0.48, alpha:1.0)
@@ -410,90 +409,5 @@ class GeneratedPassphraseViewController: UIViewController {
             }
         }
 
-    }
-}
-
-
-// MARK: - CUstom UI elements
-
-
-@IBDesignable
-class RectangularButton : UIButton {
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    func commonInit() {
-        let edgeInsets : CGFloat = 20
-        
-        backgroundColor = .white
-        layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 0.5
-        contentEdgeInsets = UIEdgeInsets(top: edgeInsets, left: edgeInsets, bottom: edgeInsets, right: edgeInsets)
-        tintColor = .black
-        titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
-        
-        setTitleColor(.black, for: .normal)
-    }
-}
-
-@IBDesignable
-class SecondaryRectangularButton : RectangularButton {
-    override func commonInit() {
-        super.commonInit()
-        backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
-    }
-}
-
-@IBDesignable
-class TitleLabel: UILabel {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    func commonInit() {
-        self.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
-    }
-}
-
-@IBDesignable
-class GreenTintImageView: UIImageView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        updateTint()
-    }
-    override init(image: UIImage?) {
-        super.init(image: image)
-        updateTint()
-    }
-    override init(image: UIImage?, highlightedImage: UIImage?) {
-        super.init(image: image, highlightedImage: highlightedImage)
-        updateTint()
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        updateTint()
-    }
-    
-    func updateTint() {
-        tintColor = #colorLiteral(red: 0.1647058824, green: 0.6980392157, blue: 0.4823529412, alpha: 1)
-    }
-}
-
-@IBDesignable
-class GreyTintImageView: UIImageView {
-    func updateTint() {
-        tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     }
 }

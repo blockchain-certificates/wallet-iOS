@@ -152,7 +152,8 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             showAddCredentialFlow()
         case 2:
             Logger.main.info("My passphrase tapped in settings")
-            controller = RevealPassphraseTableViewController()
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
+            controller = storyboard.instantiateViewController(withIdentifier: "MyPassphrase")
         case 3:
             Logger.main.info("About passphrase tapped in settings")
             controller = AboutPassphraseViewController()
@@ -181,9 +182,6 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         default:
             controller = nil
         }
-//            Logger.main.info("Clear device logs")
-//            controller = nil
-//            clearLogs()
         
         if let newAppConfig = configuration {
             try! ConfigurationManager().configure(with: newAppConfig)
@@ -439,5 +437,72 @@ extension SettingsTableViewController: AddIssuerViewControllerDelegate {
         } else {
             Logger.main.warning("Something weird -- delegate called with nil issuer. \(#function)")
         }
+    }
+}
+
+class SettingsMyPassphraseViewController : OnboardingControllerBase, UIActivityItemSource {
+    @IBOutlet var manualButton : SecondaryButton!
+    @IBOutlet var copyButton : SecondaryButton!
+    @IBOutlet var passphraseLabel : UILabel!
+
+    var passphrase: String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        passphraseLabel.text = Keychain.loadSeedPhrase()
+    }
+
+    override var defaultScrollViewInset : UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+    @IBAction func backupCopy() {
+        let alert = AlertViewController.create(title: NSLocalizedString("Are you sure?", comment: "Confirmation before copying for backup"),
+                                               message: NSLocalizedString("Email is a low-security backup method. Do you want to continue?", comment: "Scare tactic to warn user about insecurity of email"),
+                                               icon: .warning)
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button to confirm user action"), for: .normal)
+        okayButton.onTouchUpInside { [weak self] in
+            alert.dismiss(animated: false, completion: nil)
+            self?.presentCopySheet()
+        }
+        
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
+        cancelButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: nil)
+        }
+        
+        alert.set(buttons: [okayButton, cancelButton])
+        
+        present(alert, animated: false, completion: nil)
+    }
+
+    func presentCopySheet() {
+        guard let passphrase = Keychain.loadSeedPhrase() else {
+            // TODO: present alert? how to help user in this case?
+            return
+        }
+        
+        self.passphrase = passphrase
+        let activity = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        
+        present(activity, animated: true) {}
+    }
+    
+    // MARK: - Activity Item Source
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return passphrase!
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+        return passphrase! as NSString
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController,
+                                subjectForActivityType activityType: UIActivityType?) -> String {
+        return NSLocalizedString("BlockCerts Backup", comment: "Email subject line when backing up passphrase")
     }
 }
