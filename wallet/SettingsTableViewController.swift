@@ -157,7 +157,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             controller = RevealPassphraseTableViewController()
         case 3:
             Logger.main.info("About passphrase tapped in settings")
-//            controller = RevealAboutPassphraseViewController()
+            controller = AboutPassphraseViewController()
         case 4:
             Logger.main.info("Privacy statement tapped in settings")
             controller = PrivacyViewController()

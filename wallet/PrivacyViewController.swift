@@ -31,3 +31,32 @@ class PrivacyViewController: UIViewController {
     }
 
 }
+
+
+class AboutPassphraseViewController: UIViewController {
+    var webView : WKWebView!
+    
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        view = webView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+        title = NSLocalizedString("About Passphrase", comment: "Title for the screen with about passphrase info on it.")
+        
+        let url = URL(string: "http://www.learningmachine.com/about-passphrases/")!
+        let request = URLRequest(url: url)
+        
+        webView.load(request)
+    }
+    
+}
+
+
+
+
+
