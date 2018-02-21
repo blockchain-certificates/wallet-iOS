@@ -237,7 +237,7 @@ class OnboardingCurrentUser : OnboardingControllerBase, UITextViewDelegate {
         }
         do {
             try Keychain.updateShared(with: lowercasePassphrase)
-            presentSuccessAlert()
+            dismiss(animated: false, completion: nil)
         } catch {
             presentErrorAlert()
         }
@@ -257,24 +257,7 @@ class OnboardingCurrentUser : OnboardingControllerBase, UITextViewDelegate {
         alert.set(buttons: [okayButton])
         present(alert, animated: false, completion: nil)
     }
-    
-    func presentSuccessAlert() {
-        let alert = AlertViewController.create(title: NSLocalizedString("Success!", comment: "Title in alert view after processing user input entered passphrase"),
-                                               message: NSLocalizedString("You may now access your issueres and credentials on this device.", comment: "Message to user after successful passphrase entry"),
-                                               icon: .success)
         
-        let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button to confirm user action"), for: .normal)
-        okayButton.onTouchUpInside { [weak self] in
-            alert.dismiss(animated: false) { [weak self] in
-                self?.dismiss(animated: false, completion: nil)
-            }
-        }
-        
-        alert.set(buttons: [okayButton])
-        present(alert, animated: false, completion: nil)
-    }
-    
     // MARK: - Text view and keyboard
     
     func textViewDidEndEditing(_ textView: UITextView) {
