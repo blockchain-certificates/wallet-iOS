@@ -131,6 +131,19 @@ class CertificateViewController: UIViewController {
         return "Verifying Step \(step + 1) of \(verificationSteps.count)"
     }
     
+    func successMessage() -> String {
+        switch blockChain ?? .testnet {
+        case .mainnet:
+            return NSLocalizedString("Your credential has been successfully verified.", comment: "Detail message after mainnet validation succeeds")
+
+        case .mocknet:
+            return NSLocalizedString("This mock credential passed all checks. Mocknet mode is only used by issuers to test their workflow locally. This credential was not recorded to a blockchain and should not be considered a verified credential.", comment: "Detail message after mocknet validation succeeds")
+            
+        case .testnet:
+            return NSLocalizedString("Your test credential has been successfully verified. This credential is for test purposes only; it has not been recorded to a blockchain.", comment: "Detail message after testnet validation succeeds")
+        }
+    }
+    
     var verifying = false
     func animateVerification(alert: AlertViewController, currentDelay: TimeInterval, toStep: Int? = nil) {
         verifying = true
@@ -166,7 +179,7 @@ class CertificateViewController: UIViewController {
                     // successfully validated
                     alert.icon = .success
                     alert.set(title: NSLocalizedString("Verified!", comment: "Title in alert after validation succeeds"))
-                    alert.set(message: NSLocalizedString("Your credential has been successfully verified.", comment: "Detail message after validation succeeds"))
+                    alert.set(message: self?.successMessage() ?? "")
                 }
                 alert.buttons.first?.setTitle("Close", for: .normal)
             }
@@ -175,6 +188,7 @@ class CertificateViewController: UIViewController {
     
     var progressAlert: AlertViewController?
     var verificationStartDate: Date?
+    var blockChain: VerifyCredential.BlockChain?
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
         Logger.main.info("User tapped verify on this certificate.")
@@ -209,6 +223,7 @@ class CertificateViewController: UIViewController {
 
         let verifier = VerifyCredential(certificate: certificate.file, callback: verificationCallback)
         verifier.verify()
+        blockChain = verifier.chain
     }
     
     func verificationCallback(success: Bool, steps: [String]) {

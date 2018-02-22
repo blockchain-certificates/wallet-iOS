@@ -11,14 +11,21 @@ import WebKit
 
 class VerifyCredential {
     
+    enum BlockChain: String {
+        case mainnet = "bitcoinMainnet"
+        case testnet = "bitcoinTestnet"
+        case mocknet = "mochchain"
+    }
+    
     let certificate: Data
     var webView: WKWebView?
     var callback: ((Bool, [String]) -> Void)
     var updateTimer: Timer?
+    var chain: BlockChain?
 
     var output = "" {
         didSet {
-            if output.contains("success") || output.contains("failure") {
+            if output.contains("uccess") || output.contains("failure") {
                 cleanup()
                 process(output)
             }
@@ -26,7 +33,7 @@ class VerifyCredential {
     }
 
     func process(_ output: String) {
-        let success = output.contains("success")
+        let success = output.contains("uccess")
         let lines = output.split(separator: "\n")
         let steps = lines.prefix(through: max(0, lines.count - 2))
         callback(success, steps.map{ String($0) })
@@ -47,6 +54,15 @@ class VerifyCredential {
         self.webView = webView
         print(cachePath)
         updateTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateOutput), userInfo: nil, repeats: true)
+        
+        do {
+            let credential = try Credential.decode(data: certificate)
+            let blockchain = credential?.signature.anchors.first?.chain ?? "unknown"
+            chain = BlockChain(rawValue: blockchain)
+        } catch {
+            print("JSON parsing error")
+            print(error)
+        }
     }
     
     @objc func updateOutput() {
@@ -95,3 +111,25 @@ class VerifyCredential {
     }
     
 }
+
+
+struct Credential: Codable {
+
+    struct Signature: Codable {
+        var anchors: [Anchor]
+    }
+    
+    struct Anchor: Codable {
+        var chain: String
+    }
+
+    var signature: Signature
+    
+    static func decode(data: Data) throws -> Credential? {
+        let decoder = JSONDecoder()
+        return try decoder.decode(Credential.self, from: data)
+    }
+    
+}
+
+
