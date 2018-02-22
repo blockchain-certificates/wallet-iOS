@@ -105,6 +105,9 @@
 		A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */; };
 		A9B1784F203727AD00B76375 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B1784E203727AD00B76375 /* ButtonTableViewCell.swift */; };
 		A9B17851203746E300B76375 /* IssuerCollectionEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */; };
+		A9B997A1203F1CE000C05153 /* verifier.js in Resources */ = {isa = PBXBuildFile; fileRef = A9B9979F203F1CE000C05153 /* verifier.js */; };
+		A9B997A2203F1CE000C05153 /* verify.html in Resources */ = {isa = PBXBuildFile; fileRef = A9B997A0203F1CE000C05153 /* verify.html */; };
+		A9B997A4203F1D0800C05153 /* VerifyCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B997A3203F1D0800C05153 /* VerifyCredential.swift */; };
 		A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2B049202B5893002015F0 /* UIElements.swift */; };
 		ABC6BB21B68837562003AED2 /* libPods-certificates.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F8F788045077CB0389D73 /* libPods-certificates.a */; };
 		D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
@@ -242,6 +245,9 @@
 		A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
 		A9B1784E203727AD00B76375 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerCollectionEmptyView.xib; sourceTree = "<group>"; };
+		A9B9979F203F1CE000C05153 /* verifier.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = verifier.js; sourceTree = "<group>"; };
+		A9B997A0203F1CE000C05153 /* verify.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = verify.html; sourceTree = "<group>"; };
+		A9B997A3203F1D0800C05153 /* VerifyCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCredential.swift; sourceTree = "<group>"; };
 		A9D2B049202B5893002015F0 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
 		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -345,8 +351,8 @@
 				838DC13A1E43F0F700533AEB /* CertificateViewController.xib */,
 				831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */,
 				83111B331DA4110C006B058D /* Info.plist */,
-				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
 				A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */,
+				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
 				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
@@ -367,6 +373,7 @@
 				A961EBC62028BE020016CD1E /* Style.swift */,
 				A9D2B049202B5893002015F0 /* UIElements.swift */,
 				830120331EF4481B008EC454 /* Utils */,
+				A9B9979E203F1CE000C05153 /* Verification */,
 				83111B561DA41417006B058D /* wallet-Bridging-Header.h */,
 				8318FC561DAD958F006A8FD5 /* wallet.entitlements */,
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
@@ -512,6 +519,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A9B9979E203F1CE000C05153 /* Verification */ = {
+			isa = PBXGroup;
+			children = (
+				A9B9979F203F1CE000C05153 /* verifier.js */,
+				A9B997A0203F1CE000C05153 /* verify.html */,
+				A9B997A3203F1D0800C05153 /* VerifyCredential.swift */,
+			);
+			path = Verification;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -650,6 +667,7 @@
 			files = (
 				A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */,
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
+				A9B997A1203F1CE000C05153 /* verifier.js in Resources */,
 				831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
@@ -666,6 +684,7 @@
 				A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */,
 				83ACB7701EDE556500A1149E /* Onboarding.storyboard in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
+				A9B997A2203F1CE000C05153 /* verify.html in Resources */,
 				836031C31E5E5064005B2D2E /* SampleCertificate.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -875,6 +894,7 @@
 				832F2A491E944E1C00A65C3A /* CertificateMetadataViewController.swift in Sources */,
 				A961EBC72028BE020016CD1E /* Style.swift in Sources */,
 				8388B8AA1EDE15BF00B28A57 /* WebLoginViewController.swift in Sources */,
+				A9B997A4203F1D0800C05153 /* VerifyCredential.swift in Sources */,
 				836031BD1E5651C9005B2D2E /* PrivacyViewController.swift in Sources */,
 				838DE6CD1F3A771D00185A49 /* ManagedIssuer.swift in Sources */,
 				83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */,

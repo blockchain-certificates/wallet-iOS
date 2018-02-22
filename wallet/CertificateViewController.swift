@@ -53,6 +53,9 @@ class CertificateViewController: UIViewController {
         renderedCertificateView.render(certificate: certificate)
         
         analytics.track(event: .viewed, certificate: certificate)
+        
+        let verifier = VerifyCredential(certificate: certificate.file, callback: { _ in print("ohai!") })
+        verifier.verify()
     }
     
     // MARK: Actions
