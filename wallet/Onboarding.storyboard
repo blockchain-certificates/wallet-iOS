@@ -706,36 +706,18 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Back Up My Passphrase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxF-AV-GIh" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="139" width="221" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="If you haven't created a backup, please choose from the options below:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGL-5b-jTD" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="168" width="374" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="iGL-5b-jTD" firstAttribute="leading" secondItem="Vxr-dN-nYu" secondAttribute="leading" id="5uX-MB-gGn"/>
                                             <constraint firstItem="G2Y-qF-nOc" firstAttribute="leading" secondItem="Vxr-dN-nYu" secondAttribute="leading" id="7g3-Ny-LEJ"/>
-                                            <constraint firstAttribute="trailing" secondItem="iGL-5b-jTD" secondAttribute="trailing" id="8cS-oN-JXv"/>
                                             <constraint firstItem="8iX-rK-XlR" firstAttribute="leading" secondItem="Vxr-dN-nYu" secondAttribute="leading" id="8vL-oY-wSQ"/>
-                                            <constraint firstItem="8iX-rK-XlR" firstAttribute="top" secondItem="iGL-5b-jTD" secondAttribute="bottom" constant="16" id="Ck3-3b-brm"/>
-                                            <constraint firstItem="cxF-AV-GIh" firstAttribute="leading" secondItem="Vxr-dN-nYu" secondAttribute="leading" id="OOL-GG-YAq"/>
                                             <constraint firstItem="bHu-At-8Ka" firstAttribute="top" secondItem="Vxr-dN-nYu" secondAttribute="top" constant="24" id="V3g-Fp-QWU"/>
                                             <constraint firstItem="bHu-At-8Ka" firstAttribute="leading" secondItem="Vxr-dN-nYu" secondAttribute="leading" id="cbj-d4-T6Z"/>
-                                            <constraint firstAttribute="trailing" secondItem="cxF-AV-GIh" secondAttribute="trailing" id="e6D-fM-wF3"/>
                                             <constraint firstAttribute="trailing" secondItem="bHu-At-8Ka" secondAttribute="trailing" id="eHm-Jd-5hS"/>
-                                            <constraint firstItem="cxF-AV-GIh" firstAttribute="top" secondItem="G2Y-qF-nOc" secondAttribute="bottom" constant="32" id="j05-51-qeN"/>
+                                            <constraint firstItem="8iX-rK-XlR" firstAttribute="top" secondItem="G2Y-qF-nOc" secondAttribute="bottom" constant="24" id="hAZ-TD-cQR"/>
                                             <constraint firstAttribute="bottom" secondItem="8iX-rK-XlR" secondAttribute="bottom" constant="4" id="kbx-yw-u6n"/>
                                             <constraint firstAttribute="trailing" secondItem="8iX-rK-XlR" secondAttribute="trailing" id="sNe-ji-gTZ"/>
                                             <constraint firstAttribute="trailing" secondItem="G2Y-qF-nOc" secondAttribute="trailing" id="v2r-G4-bk2"/>
-                                            <constraint firstItem="iGL-5b-jTD" firstAttribute="top" secondItem="cxF-AV-GIh" secondAttribute="bottom" constant="8" id="wXc-VI-8xf"/>
                                             <constraint firstItem="G2Y-qF-nOc" firstAttribute="top" secondItem="bHu-At-8Ka" secondAttribute="bottom" constant="12" id="zSq-5B-BdD"/>
                                         </constraints>
                                     </view>
