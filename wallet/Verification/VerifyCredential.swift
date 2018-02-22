@@ -13,18 +13,26 @@ class VerifyCredential {
     
     let certificate: Data
     var webView: WKWebView?
-    var callback: ((String) -> Void)
+    var callback: ((Bool, [String]) -> Void)
     var updateTimer: Timer?
 
     var output = "" {
         didSet {
             if output.contains("success") || output.contains("failure") {
                 cleanup()
+                process(output)
             }
         }
     }
 
-    init(certificate: Data, callback: @escaping ((String) -> Void)) {
+    func process(_ output: String) {
+        let success = output.contains("success")
+        let lines = output.split(separator: "\n")
+        let steps = lines.prefix(through: max(0, lines.count - 2))
+        callback(success, steps.map{ String($0) })
+    }
+    
+    init(certificate: Data, callback: @escaping ((Bool, [String]) -> Void)) {
         self.certificate = certificate
         self.callback = callback
     }
@@ -38,7 +46,7 @@ class VerifyCredential {
         webView.loadFileURL(htmlCopy, allowingReadAccessTo: URL(fileURLWithPath: cachePath))
         self.webView = webView
         print(cachePath)
-        updateTimer = Timer.scheduledTimer(timeInterval: 0.9, target: self, selector: #selector(updateOutput), userInfo: nil, repeats: true)
+        updateTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateOutput), userInfo: nil, repeats: true)
     }
     
     @objc func updateOutput() {
@@ -79,7 +87,6 @@ class VerifyCredential {
     
     func cleanup() {
         updateTimer?.invalidate()
-        callback(output)
         webView = nil
     }
     
@@ -88,5 +95,3 @@ class VerifyCredential {
     }
     
 }
-
-

@@ -53,9 +53,6 @@ class CertificateViewController: UIViewController {
         renderedCertificateView.render(certificate: certificate)
         
         analytics.track(event: .viewed, certificate: certificate)
-        
-        let verifier = VerifyCredential(certificate: certificate.file, callback: { _ in print("ohai!") })
-        verifier.verify()
     }
     
     // MARK: Actions
@@ -88,40 +85,44 @@ class CertificateViewController: UIViewController {
     // MARK: - Verification
 
     let verificationSteps = [
-        "Comparing computed hash with expected hash",
-        "Ensuring the Merkle receipt is valid",
-        "Comparing expected Merkle root with value on the blockchain",
-        "Checking if the credential has been revoked",
-        "Validating issuer identity",
-        "Checking expiration",
+        NSLocalizedString("Comparing computed hash with expected hash", comment: "Verification alert title"),
+        NSLocalizedString("Ensuring the Merkle receipt is valid", comment: "Verification alert title"),
+        NSLocalizedString("Comparing expected Merkle root with value on the blockchain", comment: "Verification alert title"),
+        NSLocalizedString("Checking if the credential has been revoked", comment: "Verification alert title"),
+        NSLocalizedString("Validating issuer identity", comment: "Verification alert title"),
+        NSLocalizedString("Checking expiration", comment: "Verification alert title"),
     ]
     
     // TODO: make steps 3 and 5 copy dynamic
     let validationErrors = [
-        "Computed hash does not match expected hash. This credential may have been altered. Please contact the issuer.",
-        "The Merkle receipt is not valid. Please contact the issuer.",
-        "Merkle root does not match the hash value on the blockchain. Please contact the issuer.",
-        "This credential was revoked by the issuer on [issuer.revokedAssertions[i].id] ‘or’ [issuer.revokedAssertions[i].revocationReason]",
-        "Transaction occurred when the issuing address was not considered valid. Please contact the issuer.",
-        "This credential expired on [certificate.expires].",
+        NSLocalizedString("Computed hash does not match expected hash. This credential may have been altered. Please contact the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("The Merkle receipt is not valid. Please contact the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("Merkle root does not match the hash value on the blockchain. Please contact the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("This credential was revoked by the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("Transaction occurred when the issuing address was not considered valid. Please contact the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("This credential expired.", comment: "Verification alert error description"),
     ]
 
     /// Given the ValidationState returned from validation (if any) this will
     /// return the number of steps to show the user in the validation UI.
     /// returns nil for success, otherwise the number of the failed step.
-    func validationSteps(state: ValidationState?) -> Int? {
+    func validationSteps(state: String?) -> Int? {
         guard let state = state else { return nil }
         switch state {
-        case .computingLocalHash, .fetchingRemoteHash, .comparingHashes: return 0
-        case .checkingReceipt: return 1
-        case .checkingMerkleRoot: return 2
-        case .checkingRevokedStatus: return 3
-        case .checkingIssuerSignature, .checkingAuthenticity: return 4
-        case .checkingExpiration: return 5
-
-        // these should not happen in the case of a failure
-        case .assertingChain, .notStarted, .success, .failure(_, _):
-            return -1
+        case "computingLocalHash", "fetchingRemoteHash", "comparingHashes":
+            return 0
+        case "checkingReceipt":
+            return 1
+        case "checkingMerkleRoot":
+            return 2
+        case "checkingRevokedStatus":
+            return 3
+        case "checkingIssuerSignature", "checkingAuthenticity":
+            return 4
+        case "checkingExpiresDate":
+            return 5
+        default:
+            return 0
         }
     }
     
@@ -136,12 +137,11 @@ class CertificateViewController: UIViewController {
         
         let doubleDuration = verificationDuration * 1_000_000.0 / Double(verificationSteps.count)
         let stepDuration = useconds_t(Int(doubleDuration))
-        let currentDelayUs = useconds_t(Int(currentDelay * 1_000_000.0))
-        
+        let firstDelay = useconds_t(max(0, Int(stepDuration) - Int(currentDelay * 1_000_000.0)))
+
         DispatchQueue.global().async { [weak self] in
-            let firstDelay = useconds_t(stepDuration - currentDelayUs)
             if firstDelay > 0 {
-                usleep(firstDelay)
+                usleep(useconds_t(firstDelay))
             }
             guard let weakSelf = self, weakSelf.verifying else { return }
             var verificationStep = 0
@@ -173,6 +173,9 @@ class CertificateViewController: UIViewController {
         }
     }
     
+    var progressAlert: AlertViewController?
+    var verificationStartDate: Date?
+    
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
         Logger.main.info("User tapped verify on this certificate.")
         analytics.track(event: .validated, certificate: certificate)
@@ -201,26 +204,23 @@ class CertificateViewController: UIViewController {
         }
         progressAlert.set(buttons: [cancelButton])
         present(progressAlert, animated: false, completion: nil)
-        let startDate = Date()
-        
-        let validationRequest = CertificateValidationRequest(
-            for: certificate,
-            bitcoinManager: bitcoinManager,
-            jsonld: JSONLD.shared) { [weak self] (success, error, state) in
-                let elapsedTime = Date().timeIntervalSince(startDate)
-                if success {
-                    Logger.main.info("Successfully verified certificate \(self?.certificate.title ?? "unknown") with id \(self?.certificate.id ?? "unknown")")
-                    self?.animateVerification(alert: progressAlert, currentDelay: elapsedTime, toStep: nil)
-                } else {
-                    Logger.main.info("The \(self?.certificate.title ?? "unknown") certificate failed verification with reason: \(error ?? "unknown"). ID: \(self?.certificate.id ?? "unknown")")
-                    let toStep = self?.validationSteps(state: state)
-                    self?.animateVerification(alert: progressAlert, currentDelay: elapsedTime, toStep: toStep)
-                }
+        self.progressAlert = progressAlert
+        verificationStartDate = Date()
 
+        let verifier = VerifyCredential(certificate: certificate.file, callback: verificationCallback)
+        verifier.verify()
+    }
+    
+    func verificationCallback(success: Bool, steps: [String]) {
+        guard let progressAlert = progressAlert else { return }
+        let elapsedTime = Date().timeIntervalSince(verificationStartDate ?? Date())
+        if success {
+            Logger.main.info("Successfully verified certificate \(certificate.title) with id \(certificate.id)")
+            animateVerification(alert: progressAlert, currentDelay: elapsedTime, toStep: nil)
+        } else {
+            Logger.main.info("The \(certificate.title) certificate failed verification at step \(steps.last ?? "unknown") ID: \(certificate.id)")
+            animateVerification(alert: progressAlert, currentDelay: elapsedTime, toStep: validationSteps(state: steps.last))
         }
-        validationRequest?.delegate = self
-        validationRequest?.start()
-        self.inProgressRequest = validationRequest
     }
     
     // MARK: - Other actions
