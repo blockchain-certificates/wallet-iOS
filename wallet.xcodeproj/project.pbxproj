@@ -108,6 +108,7 @@
 		A9B997A1203F1CE000C05153 /* verifier.js in Resources */ = {isa = PBXBuildFile; fileRef = A9B9979F203F1CE000C05153 /* verifier.js */; };
 		A9B997A2203F1CE000C05153 /* verify.html in Resources */ = {isa = PBXBuildFile; fileRef = A9B997A0203F1CE000C05153 /* verify.html */; };
 		A9B997A4203F1D0800C05153 /* VerifyCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B997A3203F1D0800C05153 /* VerifyCredential.swift */; };
+		A9B997A62040611D00C05153 /* IssuerCollectionReturningUserEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */; };
 		A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2B049202B5893002015F0 /* UIElements.swift */; };
 		ABC6BB21B68837562003AED2 /* libPods-certificates.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F8F788045077CB0389D73 /* libPods-certificates.a */; };
 		D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
@@ -248,6 +249,7 @@
 		A9B9979F203F1CE000C05153 /* verifier.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = verifier.js; sourceTree = "<group>"; };
 		A9B997A0203F1CE000C05153 /* verify.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = verify.html; sourceTree = "<group>"; };
 		A9B997A3203F1D0800C05153 /* VerifyCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCredential.swift; sourceTree = "<group>"; };
+		A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionReturningUserEmptyView.xib; sourceTree = "<group>"; };
 		A9D2B049202B5893002015F0 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
 		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -352,6 +354,7 @@
 				831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */,
 				83111B331DA4110C006B058D /* Info.plist */,
 				A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */,
+				A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
 				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
@@ -672,6 +675,7 @@
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
+				A9B997A62040611D00C05153 /* IssuerCollectionReturningUserEmptyView.xib in Resources */,
 				A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */,
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */,

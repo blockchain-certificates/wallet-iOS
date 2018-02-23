@@ -94,13 +94,13 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func loadEmptyBackgroundView() {
-        guard collectionView?.backgroundView == nil else {
-            // We know the backgroundView is either this emptyState or nil. So this saves us from re-loading the same background view if it's already loaded.
-            return
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.hasReenteredPassphrase) {
+            let emptyView: IssuerCollectionReturningUserEmptyView = .fromNib()
+            collectionView?.backgroundView = emptyView
+        } else {
+            let emptyView: IssuerCollectionEmptyView = .fromNib()
+            collectionView?.backgroundView = emptyView
         }
-        
-        let emptyView: IssuerCollectionEmptyView = .fromNib()
-        collectionView?.backgroundView = emptyView
     }
     
     func loadOnboardingIfNeeded() {
@@ -524,15 +524,9 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
 
 extension IssuerCollectionViewController : ManagedIssuerDelegate {
     func updated(managedIssuer: ManagedIssuer) {
-//        guard let index = self.managedIssuers.index(where: { (existingIssuer) -> Bool in
-//            existingIssuer.issuer?.id == managedIssuer.issuer?.id
-//        }) else { return }
-//
         OperationQueue.main.addOperation { [weak self] in
             self?.collectionView?.reloadData()
         }
-//        let itemsIndexPath = IndexPath(item: index, section: 0)
-//        collectionView?.reloadItems(at: [ itemsIndexPath ])
     }
 }
 
@@ -589,6 +583,6 @@ extension IssuerCollectionViewController : UIDocumentPickerDelegate {
 }
 
 
-class IssuerCollectionEmptyView : UIView {
-    
-}
+class IssuerCollectionEmptyView : UIView {}
+class IssuerCollectionReturningUserEmptyView : UIView {}
+

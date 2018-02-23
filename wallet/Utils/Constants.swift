@@ -27,4 +27,5 @@ struct NotificationNames {
 
 struct UserDefaultsKey {
     static let hasPerformedBackup = "backup-performed"
+    static let hasReenteredPassphrase = "reentered-passphrase"
 }

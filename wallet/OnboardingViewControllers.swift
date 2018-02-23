@@ -236,6 +236,7 @@ class OnboardingCurrentUser : OnboardingControllerBase, UITextViewDelegate {
             return
         }
         do {
+            UserDefaults.standard.set(true, forKey: UserDefaultsKey.hasReenteredPassphrase)
             try Keychain.updateShared(with: lowercasePassphrase)
             dismiss(animated: false, completion: nil)
         } catch {
