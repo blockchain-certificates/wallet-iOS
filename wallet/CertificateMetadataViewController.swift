@@ -72,6 +72,7 @@ class InformationTableViewCell : UITableViewCell {
         detailTextLabel.font = Style.Font.T3R
         detailTextLabel.textColor = Style.Color.C6
         detailTextLabel.numberOfLines = 0
+        detailTextLabel.lineBreakMode = .byWordWrapping
         detailTextLabel.translatesAutoresizingMaskIntoConstraints = false
 
         textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
