@@ -664,7 +664,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxr-dN-nYu" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="247.33333333333334"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="173.33333333333334"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G2Y-qF-nOc" userLabel="Passphrase container">
                                                 <rect key="frame" x="8" y="69" width="374" height="44.333333333333343"/>
@@ -690,7 +690,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iX-rK-XlR" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="199.33333333333334" width="374" height="44"/>
+                                                <rect key="frame" x="0.0" y="125.33333333333334" width="374" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="mrE-Qk-tor"/>
                                                 </constraints>

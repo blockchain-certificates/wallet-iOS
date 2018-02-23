@@ -20,26 +20,13 @@ class AddIssuerViewController: UIViewController {
     
     @IBOutlet weak var scrollView : UIScrollView!
     
-    @IBOutlet weak var issuerURLLabel: UILabel!
-    @IBOutlet weak var issuerURLField: UITextField!
-    
-    @IBOutlet weak var identityInformationLabel : UILabel!
-    @IBOutlet weak var nonceField : UITextField!
+    @IBOutlet weak var issuerURLField: UITextView!
+    @IBOutlet weak var nonceField : UITextView!
     
     var isLoading = false {
         didSet {
-            if loadingView != nil {
-                OperationQueue.main.addOperation { [weak self] in
-                    self?.loadingView.isHidden = !(self?.isLoading)!
-                }
-            }
         }
     }
-    @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var loadingStatusLabel : UILabel!
-    @IBOutlet weak var loadingCancelButton : UIButton!
-
     
     init(identificationURL: URL? = nil, nonce: String? = nil) {
         self.identificationURL = identificationURL
@@ -55,13 +42,10 @@ class AddIssuerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("Add Issuer", comment: "Navigation title for the 'Add Issuer' form.")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveIssuerTapped(_:)))
+        title = NSLocalizedString("Add an Issuer", comment: "Navigation title for the 'Add Issuer' form.")
         
         navigationController?.navigationBar.isTranslucent = false
-        
-        loadingView.isHidden = !isLoading
+        navigationController?.navigationBar.backgroundColor = Style.Color.C3
         
         loadDataIntoFields()
         stylize()
@@ -91,7 +75,7 @@ class AddIssuerViewController: UIViewController {
     
     func stylize() { }
 
-    @objc func saveIssuerTapped(_ sender: UIBarButtonItem) {
+    @IBAction func addIssuerTapped(_ sender: Any) {
         Logger.main.info("Save issuer tapped")
         
         // TODO: validation.
@@ -322,30 +306,6 @@ struct ValidationOptions : OptionSet {
     static let required = ValidationOptions(rawValue: 1 << 0)
     static let url      = ValidationOptions(rawValue: 1 << 1)
     static let email    = ValidationOptions(rawValue: 1 << 2)
-}
-
-extension AddIssuerViewController : UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let errorMessage : String? = nil
-        
-        switch textField {
-        case issuerURLField:
-            break;
-        case nonceField:
-            break;
-        default:
-            break;
-        }
-        
-        if let field = textField as? SkyFloatingLabelTextField {
-            field.errorMessage = errorMessage
-        }
-        return true
-    }
-    
-    func validate(field : UITextField, options: ValidationOptions) -> String? {
-        return nil
-    }
 }
 
 protocol AddIssuerViewControllerDelegate : class {

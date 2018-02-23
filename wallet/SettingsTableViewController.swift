@@ -265,21 +265,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
         controller.delegate = self
         
-        let navigation = UINavigationController(rootViewController: controller)
-        
-        if presentedViewController != nil {
-            presentedViewController?.dismiss(animated: false) { [weak self] in
-                OperationQueue.main.addOperation {
-                    self?.present(navigation, animated: true) {
-                        controller.autoSubmitIfPossible()
-                    }
-                }
-            }
-        } else {
-            present(navigation, animated: true) {
-                controller.autoSubmitIfPossible()
-            }
-        }
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - Add Credential
