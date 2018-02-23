@@ -142,6 +142,8 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     override func loadView() {
         let view = UIView()
         
+        navigationController?.navigationBar.isTranslucent = false
+        
         let tableView : UITableView = UITableView(frame: .zero, style: .grouped)
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -283,25 +285,32 @@ class CertificateMetadataViewController: BaseMetadataViewController {
     func promptForCertificateDeletion() {
         Logger.main.info("User has tapped the delete button on this certificate.")
         let certificateToDelete = certificate
+        
         let title = NSLocalizedString("Be careful", comment: "Caution title presented when attempting to delete a certificate.")
         let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Explanation of the effects of deleting a certificate.")
         let delete = NSLocalizedString("Delete", comment: "Confirm delete action")
         let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
-        
-        let prompt = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] (_) in
+
+        let alert = AlertViewController.create(title: title, message: message, icon: .warning)
+
+        let okayButton = DangerButton(frame: .zero)
+        okayButton.setTitle(delete, for: .normal)
+        okayButton.onTouchUpInside { [weak self] in
             Logger.main.info("User has deleted certificate \(certificateToDelete.title) with id \(certificateToDelete.id)")
             self?.delegate?.delete(certificate: certificateToDelete)
+            alert.dismiss(animated: false, completion: nil)
             self?.dismissSelf()
-        }))
-        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: { [weak self] (_) in
-            Logger.main.info("User canceled the deletion of the certificate.")
-//            if let selectedPath = self?.tableView.indexPathForSelectedRow {
-//                self?.tableView.deselectRow(at: selectedPath, animated: true)
-//            }
-        }))
+        }
         
-        present(prompt, animated: true, completion: nil)
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(cancel, for: .normal)
+        cancelButton.onTouchUpInside {
+            Logger.main.info("User canceled the deletion of the certificate.")
+            alert.dismiss(animated: false, completion: nil)
+        }
+        alert.set(buttons: [okayButton, cancelButton])
+
+        present(alert, animated: false, completion: nil)
     }
     
 }
@@ -337,7 +346,7 @@ class IssuerMetadataViewController : BaseMetadataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = NSLocalizedString("Credential Info", comment: "Title of credential information screen")
+        navigationItem.title = NSLocalizedString("Issuer Info", comment: "Title of credential information screen")
     }
 
 }

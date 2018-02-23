@@ -277,8 +277,10 @@ extension IssuerViewController : CertificateViewControllerDelegate {
                 try FileManager.default.removeItem(at: filePath)
                 if let realSelf = self {
                     realSelf.certificates.remove(at: index)
-                    realSelf.certificateTableController.certificates = realSelf.certificates
-                    realSelf.certificateTableController.tableView.reloadData()
+                    if realSelf.certificateTableController != nil {
+                        realSelf.certificateTableController.certificates = realSelf.certificates
+                        realSelf.certificateTableController.tableView.reloadData()
+                    }
                 }
             } catch {
                 Logger.main.error("Failed to delete certificate: \(certificate.id) with error: \(error)")

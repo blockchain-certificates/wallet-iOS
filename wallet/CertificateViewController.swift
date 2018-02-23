@@ -330,7 +330,7 @@ protocol CertificateViewControllerDelegate : class {
 
 extension CertificateViewController : CertificateViewControllerDelegate {
     func delete(certificate: Certificate) {
-        _ = navigationController?.popViewController(animated: true)
+//        _ = navigationController?.popViewController(animated: true)
         delegate?.delete(certificate: certificate)
     }
 }
