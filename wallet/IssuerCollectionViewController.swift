@@ -424,21 +424,28 @@ class IssuerCollectionViewController: UICollectionViewController {
         let assertionUid = certificate.assertion.uid;
         guard !certificates.contains(where: { $0.assertion.uid == assertionUid }) else {
             if !silently {
+                
                 let title = NSLocalizedString("File already imported", comment: "Alert title when you re-import an existing certificate")
                 let message = NSLocalizedString("You've already imported that file. Want to view it?", comment: "Longer explanation about importing an existing file.")
-
-                let viewAction = UIAlertAction(title: NSLocalizedString("View", comment: "Action prompt to view the imported certificate"), style: .default, handler: { [weak self] _ in
-                    if let certificate = self?.certificates.first(where: { $0.assertion.uid == assertionUid }) {
-                        self?.navigateTo(certificate: certificate, animated: true)
-                    }
-                })
-                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Dismiss action"), style: .cancel, handler: nil)
-
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alertController.addAction(cancelAction)
-                alertController.addAction(viewAction)
-
-                present(alertController, animated: true, completion: nil)
+                let view = NSLocalizedString("View", comment: "Action prompt to view the imported certificate")
+                let cancel = NSLocalizedString("Cancel", comment: "Dismiss action")
+                let alert = AlertViewController.create(title: title, message: message, icon: .warning)
+                
+                let okayButton = SecondaryButton(frame: .zero)
+                okayButton.setTitle(view, for: .normal)
+                okayButton.onTouchUpInside { [weak self] in
+                    alert.dismiss(animated: false, completion: nil)
+                    self?.navigateTo(certificate: certificate, animated: true)
+                }
+                
+                let cancelButton = SecondaryButton(frame: .zero)
+                cancelButton.setTitle(cancel, for: .normal)
+                cancelButton.onTouchUpInside {
+                    alert.dismiss(animated: false, completion: nil)
+                }
+                alert.set(buttons: [okayButton, cancelButton])
+                
+                present(alert, animated: false, completion: nil)
             }
             return true
         }
