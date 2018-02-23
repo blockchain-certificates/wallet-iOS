@@ -25,7 +25,6 @@
 		83111B781DA414EB006B058D /* JSONLD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */; };
 		83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */; };
-		83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
 		831EDC0F1ED3A20E004F135B /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDC0D1ED3A20E004F135B /* RenderedCertificateView.swift */; };
 		831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831EDC0E1ED3A20E004F135B /* RenderedCertificateView.xib */; };
@@ -174,7 +173,6 @@
 		83111B761DA414EB006B058D /* JSONLD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONLD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
 		83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerViewController.swift; sourceTree = "<group>"; };
-		83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryView.swift; sourceTree = "<group>"; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
 		831EDC0D1ED3A20E004F135B /* RenderedCertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderedCertificateView.swift; sourceTree = "<group>"; };
@@ -356,7 +354,6 @@
 				A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */,
 				A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
-				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
 				831EDC121ED5F7DA004F135B /* Keychain.swift */,
@@ -878,7 +875,6 @@
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
 				832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
 				838DE6CE1F3A772400185A49 /* ManagedIssuerList.swift in Sources */,
-				83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */,
 				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
 				83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */,
 				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,
