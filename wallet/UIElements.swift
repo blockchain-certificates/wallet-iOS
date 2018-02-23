@@ -128,6 +128,9 @@ class ButtonBase : UIButton {
         setTitleColor(textColor, for: .normal)
         setTitleColor(textColorHighlighted, for: .highlighted)
         setTitleColor(textColorDisabled, for: .disabled)
+
+        imageView?.contentMode = .center
+        imageView?.clipsToBounds = false
         
         isHighlighted = false
         isEnabled = true
