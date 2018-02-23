@@ -273,8 +273,8 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
     func showAddCredentialFlow() {
         Logger.main.info("Add certificate button tapped")
         
-        let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
-        let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
+        let addCertificateFromFile = NSLocalizedString("Import Credential from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
+        let addCertificateFromURL = NSLocalizedString("Import Credential from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
         let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
         
         
@@ -293,7 +293,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
             Logger.main.info("User has chosen to add a certificate from URL")
             
-            let certificateURLPrompt = NSLocalizedString("What's the URL of the certificate?", comment: "Certificate URL prompt for importing a certificate.")
+            let certificateURLPrompt = NSLocalizedString("What's the URL of the credential?", comment: "Certificate URL prompt for importing a certificate.")
             let importAction = NSLocalizedString("Import", comment: "Import certificate action")
             
             let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)
@@ -362,8 +362,8 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         guard let certificate = CertificateManager().load(certificateAt: url) else {
             Logger.main.error("Failed to load certificate from \(url)")
             
-            let title = NSLocalizedString("Invalid Certificate", comment: "Title for an alert when importing an invalid certificate")
-            let message = NSLocalizedString("That file doesn't appear to be a valid certificate.", comment: "Message in an alert when importing an invalid certificate")
+            let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
+            let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
             alertError(localizedTitle: title, localizedMessage: message)
             
             return
@@ -380,8 +380,8 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         guard let data = data else {
             Logger.main.error("Failed to load a certificate from file. Data is nil.")
             
-            let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
+            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
+            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
             alertError(localizedTitle: title, localizedMessage: message)
             return
         }
@@ -393,8 +393,8 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         } catch {
             Logger.main.error("Importing failed with error: \(error)")
             
-            let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
+            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
+            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
             alertError(localizedTitle: title, localizedMessage: message)
             return
         }

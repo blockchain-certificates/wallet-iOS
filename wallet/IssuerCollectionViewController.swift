@@ -133,8 +133,8 @@ class IssuerCollectionViewController: UICollectionViewController {
 
     func addButtonTapped(_ sender: UIBarButtonItem) {
         let addIssuer = NSLocalizedString("Add Issuer", comment: "Contextual action. Tapping this brings up the Add Issuer form.")
-        let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
-        let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
+        let addCertificateFromFile = NSLocalizedString("Import Credential from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
+        let addCertificateFromURL = NSLocalizedString("Import Credential from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
         let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
 
 
@@ -153,7 +153,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         }))
 
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
-            let certificateURLPrompt = NSLocalizedString("What's the URL of the certificate?", comment: "Certificate URL prompt for importing a certificate.")
+            let certificateURLPrompt = NSLocalizedString("What's the URL of the credential?", comment: "Certificate URL prompt for importing a certificate.")
             let importAction = NSLocalizedString("Import", comment: "Import certificate action")
 
             let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)
@@ -410,8 +410,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
 
         guard data != nil, let certificate = try? CertificateParser.parse(data: data!) else {
-            let title = NSLocalizedString("Invalid Certificate", comment: "Title for an alert when importing an invalid certificate")
-            let message = NSLocalizedString("That file doesn't appear to be a valid certificate.", comment: "Message in an alert when importing an invalid certificate")
+            let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
+            let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
 
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .default, handler: nil))
@@ -558,8 +558,8 @@ extension IssuerCollectionViewController {
             return
         }
         guard let certificate = try? CertificateParser.parse(data: data) else {
-            let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
+            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
+            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
 
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: okay, style: .default, handler: { [weak alertController] action in
