@@ -105,4 +105,26 @@ class AlertViewController : UIViewController {
         return vc
     }
     
+    static func createWarning(title: String, message: String, buttonText: String? = nil) -> AlertViewController {
+        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
+        vc.view.backgroundColor = .clear
+        vc.modalPresentationStyle = .custom
+        
+        vc.set(title: title)
+        vc.set(message: message)
+        vc.icon = .warning
+        
+        // assume a simple, single button to dismiss the alert
+        let button = DangerButton(frame: .zero)
+        let buttonCopy = buttonText ?? NSLocalizedString("Okay", comment: "Button label")
+        button.setTitle(buttonCopy, for: .normal)
+        button.onTouchUpInside {
+            vc.dismiss(animated: false, completion: nil)
+        }
+        vc.set(buttons: [button])
+        
+        return vc
+    }
+    
 }

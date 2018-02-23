@@ -9,6 +9,7 @@
 import UIKit
 import Blockcerts
 import JSONLD
+import SystemConfiguration
 
 class CertificateViewController: UIViewController {
     
@@ -18,6 +19,7 @@ class CertificateViewController: UIViewController {
     let verificationDuration = 7.5
     
     var delegate : CertificateViewControllerDelegate?
+    let reachability = SCNetworkReachabilityCreateWithName(nil, "certificates.learningmachine.com")!
     
     public let certificate: Certificate
     private let bitcoinManager = CoreBitcoinManager()
@@ -33,7 +35,6 @@ class CertificateViewController: UIViewController {
     
     init(certificate: Certificate) {
         self.certificate = certificate
-
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,15 +44,10 @@ class CertificateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.title = certificate.title
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(displayCredentialInfo))
-
         shareButton.isEnabled = certificate.assertion.uid != Identifiers.sampleCertificateUID
-        
         renderedCertificateView.render(certificate: certificate)
-        
         analytics.track(event: .viewed, certificate: certificate)
     }
     
@@ -209,6 +205,13 @@ class CertificateViewController: UIViewController {
             return
         }
 
+        if !isNetworkReachable() {
+            let alert = AlertViewController.createWarning(title: NSLocalizedString("No Network Connection", comment: "No network connection alert title"),
+                                              message: NSLocalizedString("Please check your network connection and try again.", comment: "No network connection alert message"))
+            present(alert, animated: false, completion: nil)
+            return
+        }
+        
         let progressAlert = AlertViewController.create(title: verificationTitle(step: 0), message: verificationSteps[0], icon: .verifying)
         let cancelButton = SecondaryButton(frame: .zero)
         cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
@@ -238,24 +241,19 @@ class CertificateViewController: UIViewController {
         }
     }
     
-    // MARK: - Other actions
+    func isNetworkReachable() -> Bool {
+        var flags = SCNetworkReachabilityFlags()
+        SCNetworkReachabilityGetFlags(reachability, &flags)
+        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
+    }
     
-//    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
-//        let certificateToDelete = certificate
-//        let title = NSLocalizedString("Be careful", comment: "Caution title presented when attempting to delete a certificate.")
-//        let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Explanation of the effects of deleting a certificate.")
-//        let delete = NSLocalizedString("Delete", comment: "Confirm delete action")
-//        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
-//
-//        let prompt = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] (_) in
-//            _ = self?.navigationController?.popViewController(animated: true)
-//            self?.delegate?.delete(certificate: certificateToDelete)
-//        }))
-//        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
-//
-//        present(prompt, animated: true, completion: nil)
-//    }
+    // MARK: - Other actions
     
     @objc func displayCredentialInfo() {
         Logger.main.info("More info tapped on the Certificate display.")
