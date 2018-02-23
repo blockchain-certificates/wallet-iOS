@@ -206,8 +206,7 @@ class AddIssuerViewController: UIViewController {
         
         OperationQueue.main.addOperation { [weak self] in
             self?.isLoading = false
-            self?.presentedViewController?.dismiss(animated: true, completion: nil)
-            self?.dismiss(animated: true, completion: nil)
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     
