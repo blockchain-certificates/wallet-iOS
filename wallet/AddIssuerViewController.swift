@@ -19,7 +19,6 @@ class AddIssuerViewController: UIViewController {
     var managedIssuer: ManagedIssuer?
     
     @IBOutlet weak var scrollView : UIScrollView!
-    
     @IBOutlet weak var issuerURLField: UITextView!
     @IBOutlet weak var nonceField : UITextView!
     
@@ -46,6 +45,9 @@ class AddIssuerViewController: UIViewController {
         
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.backgroundColor = Style.Color.C3
+        
+        issuerURLField.delegate = self
+        nonceField.delegate = self
         
         loadDataIntoFields()
         stylize()
@@ -113,6 +115,7 @@ class AddIssuerViewController: UIViewController {
         }
 
         let scrollInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardRect.size.height, right: 0)
+        scrollView.isScrollEnabled = true
         scrollView.contentInset = scrollInsets
         scrollView.scrollIndicatorInsets = scrollInsets
     }
@@ -310,4 +313,18 @@ struct ValidationOptions : OptionSet {
 
 protocol AddIssuerViewControllerDelegate : class {
     func added(managedIssuer: ManagedIssuer)
+}
+
+extension AddIssuerViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            if textView === issuerURLField {
+                nonceField.becomeFirstResponder()
+            } else {
+                textView.resignFirstResponder()
+            }
+            return false
+        }
+        return true
+    }
 }
