@@ -78,27 +78,23 @@ class VerifyCredential {
     }
     
     func setup() {
-        do {
-            // copy html file to cache dir
-            let htmlURL = Bundle.main.url(forResource: "verify", withExtension: "html")!
-            let htmlCopy = URL(fileURLWithPath: NSString(string: cachePath).appendingPathComponent("verify.html"))
-            try FileManager.default.removeItem(at: htmlCopy)
-            try FileManager.default.copyItem(at: htmlURL, to: htmlCopy)
-            
-            // copy js library to cache dir
-            let jsURL = Bundle.main.url(forResource: "verifier", withExtension: "js")!
-            let jsCopy = URL(fileURLWithPath: NSString(string: cachePath).appendingPathComponent("verifier.js"))
-            try FileManager.default.removeItem(at: jsCopy)
-            try FileManager.default.copyItem(at: jsURL, to: jsCopy)
-            
-            // write certificate to cache
-            let certString = String(data: certificate, encoding: .utf8)
-            let certPath = URL(fileURLWithPath: NSString(string: cachePath).appendingPathComponent("certificate.json"))
-            try FileManager.default.removeItem(at: certPath)
-            try certString?.write(to: certPath, atomically: true, encoding: .utf8)
-        } catch {
-            print(error)
-        }
+        // copy html file to cache dir
+        let htmlURL = Bundle.main.url(forResource: "verify", withExtension: "html")!
+        let htmlCopy = URL(fileURLWithPath: NSString(string: cachePath).appendingPathComponent("verify.html"))
+        try? FileManager.default.removeItem(at: htmlCopy)
+        try! FileManager.default.copyItem(at: htmlURL, to: htmlCopy)
+        
+        // copy js library to cache dir
+        let jsURL = Bundle.main.url(forResource: "verifier", withExtension: "js")!
+        let jsCopy = URL(fileURLWithPath: NSString(string: cachePath).appendingPathComponent("verifier.js"))
+        try? FileManager.default.removeItem(at: jsCopy)
+        try! FileManager.default.copyItem(at: jsURL, to: jsCopy)
+        
+        // write certificate to cache
+        let certString = String(data: certificate, encoding: .utf8)
+        let certPath = URL(fileURLWithPath: NSString(string: cachePath).appendingPathComponent("certificate.json"))
+        try? FileManager.default.removeItem(at: certPath)
+        try! certString?.write(to: certPath, atomically: true, encoding: .utf8)
     }
     
     func cleanup() {
