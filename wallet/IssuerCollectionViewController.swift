@@ -51,16 +51,20 @@ class IssuerCollectionViewController: UICollectionViewController {
         collectionView?.register(cellNib, forCellWithReuseIdentifier: reuseIdentifier)
         let addNib = UINib(nibName: "AddIssuerCollectionViewCell", bundle: nil)
         collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
+        // Add a section header "Issuers"
+        collectionView?.register(UINib(nibName: "C5T2BLabelCell", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView")
         collectionView?.delegate = self
         collectionView?.backgroundColor = Style.Color.C2
 
         let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: collectionView!.bounds.width - 40, height: 136)
         layout.sectionInset = UIEdgeInsetsMake(12, 20, 8, 20)
+        layout.headerReferenceSize = CGSize(width: view.bounds.width, height: 44)
 
         navigationController?.navigationBar.barTintColor = Style.Color.C3
         navigationController?.navigationBar.isTranslucent = false
 
+        
         // Load any existing issuers.
         loadIssuers(shouldReloadCollection: false)
         loadCertificates(shouldReloadCollection: false)
@@ -263,6 +267,11 @@ class IssuerCollectionViewController: UICollectionViewController {
         genericCell.layer.shadowOffset = CGSize(width: 2, height: 2)
 
         return genericCell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", for: indexPath)
+        return headerView
     }
 
     // MARK: Issuer handling
@@ -595,4 +604,5 @@ extension IssuerCollectionViewController : UIDocumentPickerDelegate {
 
 class IssuerCollectionEmptyView : UIView {}
 class IssuerCollectionReturningUserEmptyView : UIView {}
+class C5T2BLabelCell : UICollectionViewCell {}
 
