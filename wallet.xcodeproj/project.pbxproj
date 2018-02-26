@@ -100,6 +100,7 @@
 		A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */; };
 		A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A958CCD4202E4BD100CD35C6 /* Alert.storyboard */; };
 		A961EBC72028BE020016CD1E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A961EBC62028BE020016CD1E /* Style.swift */; };
+		A970D00A2044AFC6004BC1AE /* introduction.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A970D0092044AFC6004BC1AE /* introduction.mp4 */; };
 		A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */; };
 		A9B1784B203615D000B76375 /* IssuerHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */; };
 		A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */; };
@@ -241,6 +242,7 @@
 		A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		A958CCD4202E4BD100CD35C6 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		A961EBC62028BE020016CD1E /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		A970D0092044AFC6004BC1AE /* introduction.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = introduction.mp4; path = Assets/introduction.mp4; sourceTree = "<group>"; };
 		A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuerHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				838DC13A1E43F0F700533AEB /* CertificateViewController.xib */,
 				831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */,
 				83111B331DA4110C006B058D /* Info.plist */,
+				A970D0092044AFC6004BC1AE /* introduction.mp4 */,
 				A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */,
 				A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
@@ -669,6 +672,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */,
+				A970D00A2044AFC6004BC1AE /* introduction.mp4 in Resources */,
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
 				A9B997A1203F1CE000C05153 /* verifier.js in Resources */,
 				A909528220449DD000F29CF5 /* C5T2BLabelCell.xib in Resources */,

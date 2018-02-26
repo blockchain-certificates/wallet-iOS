@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 class OnboardingControllerBase : UIViewController {
     @IBOutlet weak var scrollView : UIScrollView!
@@ -31,7 +32,7 @@ class OnboardingControllerBase : UIViewController {
         scrollView.contentInset = defaultScrollViewInset
         scrollView.isScrollEnabled = scrollView.contentInset.top == 0
     }
-
+    
 }
 
 class LandingScreenViewController : UIViewController {
@@ -43,6 +44,33 @@ class LandingScreenViewController : UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+
+    @IBAction func playWelcomeVideo() {
+        guard let path = Bundle.main.path(forResource: "introduction", ofType:"mp4") else {
+            print("Video file not found")
+            return
+        }
+        let player = AVPlayer(url: URL(fileURLWithPath: path))
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        playerController.showsPlaybackControls = true
+        if #available(iOS 11.0, *) {
+            playerController.exitsFullScreenWhenPlaybackEnds = true
+        } else {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(didEndPlaying),
+                                                   name: .AVPlayerItemDidPlayToEndTime,
+                                                   object: nil)
+        }
+        present(playerController, animated: true) {
+            player.play()
+        }
+    }
+
+    @objc func didEndPlaying(_ notification: Notification) {
+        presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 class WelcomeReturningUsersViewController : UIViewController {
