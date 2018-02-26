@@ -10,11 +10,7 @@ import UIKit
 import Blockcerts
 
 class IssuerViewController: UIViewController {
-    var managedIssuer: ManagedIssuer? {
-        didSet {
-            self.title = managedIssuer?.issuer?.name
-        }
-    }
+    var managedIssuer: ManagedIssuer?
     var certificates = [Certificate]()
     
     fileprivate var certificateTableController : IssuerTableViewController!
