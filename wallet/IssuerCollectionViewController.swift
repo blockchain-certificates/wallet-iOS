@@ -108,7 +108,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         if !Keychain.hasPassphrase() || !hasPerformedBackup {
             let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
             let vc = storyboard.instantiateInitialViewController()! as! UINavigationController
-            if !hasPerformedBackup {
+            if Keychain.hasPassphrase() && !hasPerformedBackup {
                 let welcome = storyboard.instantiateViewController(withIdentifier: "WelcomeReturningUsers")
                 vc.viewControllers = [welcome]
             }

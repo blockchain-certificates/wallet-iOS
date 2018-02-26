@@ -27,6 +27,7 @@ class OnboardingControllerBase : UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        scrollView.layoutIfNeeded()
         scrollView.contentInset = defaultScrollViewInset
         scrollView.isScrollEnabled = scrollView.contentInset.top == 0
     }

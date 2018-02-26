@@ -307,8 +307,8 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="990" image="illo_success" translatesAutoresizingMaskIntoConstraints="NO" id="exI-R6-GGd">
                                                 <rect key="frame" x="134.66666666666666" y="16.666666666666671" width="105.33333333333334" height="105"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase Generated!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQM-Bm-Iw4" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="97.666666666666671" y="137.66666666666666" width="178.66666666666663" height="20.333333333333343"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Passphrase Generated!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQM-Bm-Iw4" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="138" width="374" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -367,11 +367,12 @@
                                             <constraint firstItem="MEY-4S-zBG" firstAttribute="top" secondItem="sPd-ZI-ehX" secondAttribute="bottom" constant="24" id="Qdu-Mh-4fX"/>
                                             <constraint firstItem="z6G-c0-sOB" firstAttribute="centerX" secondItem="RyP-ht-mHB" secondAttribute="centerX" id="W7y-ow-TtL"/>
                                             <constraint firstItem="sPd-ZI-ehX" firstAttribute="width" secondItem="RyP-ht-mHB" secondAttribute="width" id="akk-3p-Cw0"/>
-                                            <constraint firstItem="DQM-Bm-Iw4" firstAttribute="centerX" secondItem="RyP-ht-mHB" secondAttribute="centerX" id="atj-Fj-M4d"/>
+                                            <constraint firstAttribute="trailing" secondItem="DQM-Bm-Iw4" secondAttribute="trailing" id="c4f-oC-58K"/>
                                             <constraint firstItem="MEY-4S-zBG" firstAttribute="centerX" secondItem="RyP-ht-mHB" secondAttribute="centerX" id="eo3-cb-vef"/>
                                             <constraint firstItem="exI-R6-GGd" firstAttribute="width" secondItem="RyP-ht-mHB" secondAttribute="width" multiplier="0.28" id="fpV-RM-PFz"/>
                                             <constraint firstItem="z6G-c0-sOB" firstAttribute="width" secondItem="RyP-ht-mHB" secondAttribute="width" id="fwv-jY-Zkm"/>
                                             <constraint firstItem="8z5-Yg-UUa" firstAttribute="width" secondItem="RyP-ht-mHB" secondAttribute="width" id="hKd-eI-8dc"/>
+                                            <constraint firstItem="DQM-Bm-Iw4" firstAttribute="leading" secondItem="RyP-ht-mHB" secondAttribute="leading" id="krk-Hs-ZU0"/>
                                             <constraint firstItem="exI-R6-GGd" firstAttribute="top" secondItem="RyP-ht-mHB" secondAttribute="top" constant="16" id="sdD-7a-ReW"/>
                                             <constraint firstItem="sPd-ZI-ehX" firstAttribute="top" secondItem="8z5-Yg-UUa" secondAttribute="bottom" constant="8" id="tzi-Je-TOW"/>
                                             <constraint firstItem="z6G-c0-sOB" firstAttribute="top" secondItem="DQM-Bm-Iw4" secondAttribute="bottom" constant="12" id="uam-M1-7fY"/>
@@ -410,7 +411,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CqJ-tU-RMw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684" y="504"/>
+            <point key="canvasLocation" x="2682.608695652174" y="503.804347826087"/>
         </scene>
         <!--Onboarding Backup Methods-->
         <scene sceneID="HDx-wo-1Xq">
