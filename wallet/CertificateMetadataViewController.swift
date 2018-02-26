@@ -65,6 +65,9 @@ class InformationTableViewCell : UITableViewCell {
         guard let textLabel = textLabel, let detailTextLabel = detailTextLabel else {
             return
         }
+
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+
         textLabel.font = Style.Font.T2B
         textLabel.textColor = Style.Color.C5
         textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -74,15 +77,20 @@ class InformationTableViewCell : UITableViewCell {
         detailTextLabel.numberOfLines = 0
         detailTextLabel.lineBreakMode = .byWordWrapping
         detailTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        detailTextLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
 
         textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        textLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
         trailingAnchor.constraint(equalTo: textLabel.trailingAnchor, constant: 20).isActive = true
         
         detailTextLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         trailingAnchor.constraint(equalTo: detailTextLabel.trailingAnchor, constant: 20).isActive = true
         detailTextLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 4).isActive = true
-        bottomAnchor.constraint(equalTo: detailTextLabel.bottomAnchor, constant: 8).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: detailTextLabel.bottomAnchor, constant: 8).isActive = true
+        
+        contentView.topAnchor.constraint(equalTo: topAnchor)
+        contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -154,8 +162,8 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 80
         
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
