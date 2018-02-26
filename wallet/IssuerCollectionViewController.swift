@@ -483,6 +483,9 @@ class IssuerCollectionViewController: UICollectionViewController {
     func navigateTo(certificate: Certificate, animated: Bool = true) {
         Logger.main.info("Navigating to certificate \(certificate.title)")
         
+        // dismiss a modal view, if present
+        presentedViewController?.dismiss(animated: false, completion: nil)
+        
         guard let managedIssuer = managedIssuers.filter({ (possibleIssuer) -> Bool in
             return possibleIssuer.issuer?.id == certificate.issuer.id
         }).first else {

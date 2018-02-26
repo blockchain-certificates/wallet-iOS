@@ -196,7 +196,13 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
         dismiss(animated: true, completion: nil)
     }
     
-
+    @objc func dismissSelfAfterDeletion() {
+        guard let navigationController = presentingViewController as? UINavigationController, navigationController.viewControllers.count > 1 else { return }
+        
+        let depth = navigationController.viewControllers.count
+        let popTo = depth > 2 ? navigationController.viewControllers[1] : navigationController.viewControllers.first!
+        dismiss(animated: true, completion: { navigationController.popToViewController(popTo, animated: true) })
+    }
 
     // MARK: - UITableViewDataSource
     
@@ -308,7 +314,7 @@ class CertificateMetadataViewController: BaseMetadataViewController {
             Logger.main.info("User has deleted certificate \(certificateToDelete.title) with id \(certificateToDelete.id)")
             self?.delegate?.delete(certificate: certificateToDelete)
             alert.dismiss(animated: false, completion: nil)
-            self?.dismissSelf()
+            self?.dismissSelfAfterDeletion()
         }
         
         let cancelButton = SecondaryButton(frame: .zero)
