@@ -213,6 +213,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         case .addIssuer(let identificationURL, let nonce):
             Logger.main.info("Processing autocomplete request to add issuer at \(identificationURL)")
 
+            
+            
             if presentedViewController != nil {
                 presentedViewController?.dismiss(animated: false, completion: {
                     self.showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
@@ -505,14 +507,19 @@ class IssuerCollectionViewController: UICollectionViewController {
         issuerController.navigateTo(certificate: certificate, animated: animated)
     }
 
-    func showAddIssuerFlow(identificationURL: URL? = nil, nonce : String? = nil) {
+    func showAddIssuerFlow(identificationURL: URL? = nil, nonce: String? = nil) {
         let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
         controller.delegate = self
 
         let navigation = UINavigationController(rootViewController: controller)
+        navigation.navigationBar.isTranslucent = false
+        navigation.navigationBar.backgroundColor = Style.Color.C3
+        navigation.navigationBar.barTintColor = Style.Color.C3
+        let closeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), style: .plain, target: self, action: #selector(dismissModal))
+        controller.navigationItem.rightBarButtonItem = closeButton
 
-        if presentedViewController != nil {
-            presentedViewController?.dismiss(animated: false) { [weak self] in
+        if let presentedViewController = presentedViewController {
+            presentedViewController.dismiss(animated: false) { [weak self] in
                 OperationQueue.main.addOperation {
                     self?.present(navigation, animated: true) {
                         controller.autoSubmitIfPossible()
@@ -525,6 +532,11 @@ class IssuerCollectionViewController: UICollectionViewController {
             }
         }
     }
+    
+    @objc func dismissModal() {
+        presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
