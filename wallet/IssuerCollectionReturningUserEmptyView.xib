@@ -22,9 +22,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-L3-LXy" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="To see your issuers, go to Settings to add your credentials or add them via the email from the Issuer." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-L3-LXy" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
                     <rect key="frame" x="16" y="365" width="343" height="56"/>
-                    <string key="text">There is no need to add issuers from whom you have already received credentials. When you import your credentials into the app, the issuers will automatically be added as well.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -32,7 +31,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLa-Hv-leI">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="illo_empty_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="jzP-lF-GAk">
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="illo_ready_for_certs" translatesAutoresizingMaskIntoConstraints="NO" id="jzP-lF-GAk">
                             <rect key="frame" x="39" y="28" width="296" height="237"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="237" id="ZD4-Bw-nF1"/>
@@ -73,6 +72,6 @@
         </view>
     </objects>
     <resources>
-        <image name="illo_empty_wallet" width="280" height="245"/>
+        <image name="illo_ready_for_certs" width="260" height="156"/>
     </resources>
 </document>
