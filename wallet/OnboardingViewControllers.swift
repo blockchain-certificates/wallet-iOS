@@ -10,6 +10,36 @@ import UIKit
 import AVKit
 
 class OnboardingControllerBase : UIViewController {
+    
+    @IBAction func playWelcomeVideo() {
+        guard let path = Bundle.main.path(forResource: "introduction", ofType:"mp4") else {
+            print("Video file not found")
+            return
+        }
+        let player = AVPlayer(url: URL(fileURLWithPath: path))
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        playerController.showsPlaybackControls = true
+        if #available(iOS 11.0, *) {
+            playerController.exitsFullScreenWhenPlaybackEnds = true
+        } else {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(didEndPlaying),
+                                                   name: .AVPlayerItemDidPlayToEndTime,
+                                                   object: nil)
+        }
+        present(playerController, animated: true) {
+            player.play()
+        }
+    }
+    
+    @objc func didEndPlaying(_ notification: Notification) {
+        presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+class ScrollingOnboardingControllerBase : OnboardingControllerBase {
     @IBOutlet weak var scrollView : UIScrollView!
     @IBOutlet weak var containerView : UIView!
 
@@ -35,46 +65,18 @@ class OnboardingControllerBase : UIViewController {
     
 }
 
-class LandingScreenViewController : UIViewController {
+class LandingScreenViewController : OnboardingControllerBase {
     override func viewDidLoad() {
+        super.viewDidLoad()
         title = ""
         view.backgroundColor = Style.Color.C3
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
-    @IBAction func playWelcomeVideo() {
-        guard let path = Bundle.main.path(forResource: "introduction", ofType:"mp4") else {
-            print("Video file not found")
-            return
-        }
-        let player = AVPlayer(url: URL(fileURLWithPath: path))
-        let playerController = AVPlayerViewController()
-        playerController.player = player
-        playerController.showsPlaybackControls = true
-        if #available(iOS 11.0, *) {
-            playerController.exitsFullScreenWhenPlaybackEnds = true
-        } else {
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(didEndPlaying),
-                                                   name: .AVPlayerItemDidPlayToEndTime,
-                                                   object: nil)
-        }
-        present(playerController, animated: true) {
-            player.play()
-        }
-    }
-
-    @objc func didEndPlaying(_ notification: Notification) {
-        presentedViewController?.dismiss(animated: true, completion: nil)
-    }
-    
 }
 
-class WelcomeReturningUsersViewController : OnboardingControllerBase {
+class WelcomeReturningUsersViewController : ScrollingOnboardingControllerBase {
     override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = Style.Color.C1
         title = NSLocalizedString("Welcome", comment: "Onboarding screen title")
     }
     
@@ -84,7 +86,7 @@ class WelcomeReturningUsersViewController : OnboardingControllerBase {
     }
 }
 
-class NewUserViewController : OnboardingControllerBase {
+class NewUserViewController : ScrollingOnboardingControllerBase {
     @IBOutlet weak var passphraseLabel : UILabel!
 
     var attempts = 5
@@ -115,7 +117,7 @@ class NewUserViewController : OnboardingControllerBase {
 }
 
 
-class OnboardingBackupMethods : OnboardingControllerBase, UIActivityItemSource {
+class OnboardingBackupMethods : ScrollingOnboardingControllerBase, UIActivityItemSource {
     @IBOutlet var manualButton : CheckmarkButton!
     @IBOutlet var copyButton : CheckmarkButton!
     @IBOutlet var continueButton : PrimaryButton!
@@ -237,7 +239,7 @@ class OnboardingBackupMethods : OnboardingControllerBase, UIActivityItemSource {
 }
 
 
-class OnboardingManualBackup : OnboardingControllerBase {
+class OnboardingManualBackup : ScrollingOnboardingControllerBase {
     @IBOutlet var passphraseLabel : UILabel!
     
     @IBAction func dismiss() {
@@ -253,7 +255,7 @@ class OnboardingManualBackup : OnboardingControllerBase {
 
 
 
-class OnboardingCurrentUser : OnboardingControllerBase, UITextViewDelegate {
+class OnboardingCurrentUser : ScrollingOnboardingControllerBase, UITextViewDelegate {
     @IBOutlet weak var textView : UITextView!
 
     @IBAction func savePassphrase() {

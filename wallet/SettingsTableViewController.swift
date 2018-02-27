@@ -491,7 +491,7 @@ extension SettingsTableViewController: AddIssuerViewControllerDelegate {
     }
 }
 
-class SettingsMyPassphraseViewController : OnboardingControllerBase, UIActivityItemSource {
+class SettingsMyPassphraseViewController : ScrollingOnboardingControllerBase, UIActivityItemSource {
     @IBOutlet var manualButton : SecondaryButton!
     @IBOutlet var copyButton : SecondaryButton!
     @IBOutlet var passphraseLabel : UILabel!

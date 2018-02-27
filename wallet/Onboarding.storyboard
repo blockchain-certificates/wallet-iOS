@@ -141,6 +141,17 @@
                                                     <constraint firstAttribute="width" secondItem="CWt-dI-oKE" secondAttribute="height" multiplier="16:9" id="RVD-8t-SkR"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qsh-TP-saI" userLabel="Play button">
+                                                <rect key="frame" x="145" y="74.666666666666671" width="84" height="84.000000000000014"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="84" id="5hV-kN-qzV"/>
+                                                    <constraint firstAttribute="height" constant="84" id="PoU-rG-zFt"/>
+                                                </constraints>
+                                                <state key="normal" image="icon_play"/>
+                                                <connections>
+                                                    <action selector="playWelcomeVideo" destination="g39-vY-4w6" eventType="touchUpInside" id="QBd-wQ-3rv"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We've improved the experience, but you'll be able to receive and manage your credentials as before." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z88-Iu-wjr" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="282" width="334" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -184,6 +195,8 @@
                                             <constraint firstItem="CWt-dI-oKE" firstAttribute="top" secondItem="kZe-ki-NCg" secondAttribute="top" id="CDB-dx-hh0"/>
                                             <constraint firstItem="z88-Iu-wjr" firstAttribute="leading" secondItem="kZe-ki-NCg" secondAttribute="leading" constant="20" id="G9b-jk-zIo"/>
                                             <constraint firstItem="ffR-78-xzB" firstAttribute="top" secondItem="ZZ0-U4-Kxs" secondAttribute="bottom" constant="24" id="GtO-7l-h6k"/>
+                                            <constraint firstItem="qsh-TP-saI" firstAttribute="centerX" secondItem="CWt-dI-oKE" secondAttribute="centerX" id="H89-Xs-VHo"/>
+                                            <constraint firstItem="qsh-TP-saI" firstAttribute="centerY" secondItem="CWt-dI-oKE" secondAttribute="centerY" id="HUp-vO-aAY"/>
                                             <constraint firstItem="krn-fT-lMh" firstAttribute="top" secondItem="CWt-dI-oKE" secondAttribute="bottom" constant="16" id="NT0-pp-fjX"/>
                                             <constraint firstAttribute="trailing" secondItem="z88-Iu-wjr" secondAttribute="trailing" constant="20" id="fJg-zI-fjl"/>
                                             <constraint firstItem="ffR-78-xzB" firstAttribute="leading" secondItem="kZe-ki-NCg" secondAttribute="leading" constant="20" id="hdi-8w-cOa"/>
