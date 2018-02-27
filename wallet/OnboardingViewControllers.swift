@@ -75,11 +75,12 @@ class LandingScreenViewController : UIViewController {
 
 class WelcomeReturningUsersViewController : OnboardingControllerBase {
     override func viewDidLoad() {
-        title = "Welcome"
+        title = NSLocalizedString("Welcome", comment: "Onboarding screen title")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.contentInset = .zero
     }
 }
 
