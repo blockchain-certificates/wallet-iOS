@@ -215,6 +215,7 @@ class OnboardingBackupMethods : OnboardingControllerBase, UIActivityItemSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateStates()
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     // MARK: - Activity Item Source
@@ -245,6 +246,7 @@ class OnboardingManualBackup : OnboardingControllerBase {
     override func viewDidLoad() {
         super.viewDidLoad()
         passphraseLabel.text = Keychain.loadSeedPhrase()
+        UIApplication.shared.statusBarStyle = .default
     }
 }
 
