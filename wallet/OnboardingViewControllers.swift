@@ -22,7 +22,7 @@ class OnboardingControllerBase : UIViewController {
             padding = (safeHeight - containerView.bounds.height) / 2
         }
         
-        return UIEdgeInsets(top: padding, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: max(0, padding), left: 0, bottom: 0, right: 0)
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,7 +73,7 @@ class LandingScreenViewController : UIViewController {
     
 }
 
-class WelcomeReturningUsersViewController : UIViewController {
+class WelcomeReturningUsersViewController : OnboardingControllerBase {
     override func viewDidLoad() {
         title = "Welcome"
     }

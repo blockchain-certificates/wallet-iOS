@@ -59,12 +59,10 @@ class IssuerCollectionViewController: UICollectionViewController {
         let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: collectionView!.bounds.width - 40, height: 136)
         layout.sectionInset = UIEdgeInsetsMake(12, 20, 8, 20)
-        layout.headerReferenceSize = CGSize(width: view.bounds.width, height: 44)
 
         navigationController?.navigationBar.barTintColor = Style.Color.C3
         navigationController?.navigationBar.isTranslucent = false
 
-        
         // Load any existing issuers.
         loadIssuers(shouldReloadCollection: false)
         loadCertificates(shouldReloadCollection: false)
@@ -94,6 +92,12 @@ class IssuerCollectionViewController: UICollectionViewController {
             loadEmptyBackgroundView()
         } else {
             collectionView?.backgroundView = nil
+        }
+        let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        if managedIssuers.isEmpty {
+            layout.headerReferenceSize = CGSize(width: view.bounds.width, height: 0)
+        } else {
+            layout.headerReferenceSize = CGSize(width: view.bounds.width, height: 44)
         }
     }
 
