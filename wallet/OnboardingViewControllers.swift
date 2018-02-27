@@ -78,6 +78,7 @@ class WelcomeReturningUsersViewController : ScrollingOnboardingControllerBase {
         super.viewDidLoad()
         view.backgroundColor = Style.Color.C1
         title = NSLocalizedString("Welcome", comment: "Onboarding screen title")
+        UserDefaults.standard.set(true, forKey: UserDefaultsKey.hasReenteredPassphrase)
     }
     
     override func viewDidLayoutSubviews() {
