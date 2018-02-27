@@ -53,6 +53,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="landing_background" translatesAutoresizingMaskIntoConstraints="NO" id="0Wu-ce-MCr">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWO-Mc-lvh" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="620" width="374" height="44"/>
                                 <constraints>
@@ -73,37 +76,37 @@
                                     <segue destination="BDX-GA-efs" kind="show" id="vkf-IZ-y29"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VIg-Nn-J7f">
-                                <rect key="frame" x="20" y="20" width="374" height="600"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blockcerts_logo" translatesAutoresizingMaskIntoConstraints="NO" id="vSz-46-HGY">
-                                        <rect key="frame" x="62" y="0.0" width="250" height="600"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtK-UX-7h3">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <state key="normal" title="Play video">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="playWelcomeVideo" destination="C6e-aU-jG4" eventType="touchUpInside" id="652-y0-ll5"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEb-1p-Syt" userLabel="Play button">
+                                <rect key="frame" x="165" y="353" width="84" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="84" id="fsO-cp-LR3"/>
+                                    <constraint firstAttribute="height" constant="84" id="kRU-Gt-UT1"/>
+                                </constraints>
+                                <state key="normal" image="icon_play"/>
+                                <connections>
+                                    <action selector="playWelcomeVideo" destination="C6e-aU-jG4" eventType="touchUpInside" id="Wwr-Pl-kia"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="blockcerts_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rU6-4J-hvL">
+                                <rect key="frame" x="87" y="35" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.060152135789394379" green="0.14074519276618958" blue="0.30589857697486877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="TEb-1p-Syt" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="1FV-7N-EBM"/>
+                            <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="0Wu-ce-MCr" secondAttribute="bottom" id="4aa-sr-yue"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qKJ-hu-YmP" secondAttribute="trailing" id="BFh-mC-Y9j"/>
-                            <constraint firstItem="VIg-Nn-J7f" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="J06-EM-lL7"/>
+                            <constraint firstItem="TEb-1p-Syt" firstAttribute="centerY" secondItem="5m7-RT-iLO" secondAttribute="centerY" id="Gl5-bF-h5X"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="Kuj-oZ-T7k"/>
-                            <constraint firstItem="VIg-Nn-J7f" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" id="LLV-3k-Fv5"/>
                             <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="qKJ-hu-YmP" secondAttribute="bottom" constant="20" id="Oyh-Ns-D2r"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uWO-Mc-lvh" secondAttribute="trailing" id="RZU-MA-7gM"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="VIg-Nn-J7f" secondAttribute="trailing" id="Vxc-iH-dH1"/>
-                            <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="VIg-Nn-J7f" secondAttribute="bottom" constant="116" id="YjO-at-Xyd"/>
+                            <constraint firstItem="0Wu-ce-MCr" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" id="YIY-KJ-4Hj"/>
                             <constraint firstItem="uWO-Mc-lvh" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="Yqg-aR-7nW"/>
+                            <constraint firstItem="0Wu-ce-MCr" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leading" id="bHf-Br-qX3"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="eKv-uB-s0z"/>
+                            <constraint firstItem="rU6-4J-hvL" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="huW-XS-Cbl"/>
+                            <constraint firstItem="rU6-4J-hvL" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" constant="60" id="lqN-0Q-3Ao"/>
+                            <constraint firstAttribute="trailing" secondItem="0Wu-ce-MCr" secondAttribute="trailing" id="qjW-TV-Elx"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="vhZ-Ij-9SM"/>
                         </constraints>
                     </view>
@@ -763,10 +766,12 @@
     </scenes>
     <resources>
         <image name="blockcerts_logo" width="250" height="52"/>
+        <image name="icon_play" width="338" height="340"/>
         <image name="illo_announcement" width="105" height="105"/>
         <image name="illo_backup" width="105" height="105"/>
         <image name="illo_success" width="105" height="105"/>
         <image name="illo_writtenbackup" width="105" height="105"/>
+        <image name="landing_background" width="1606" height="2370"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aCt-1w-xH5"/>
