@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings Add Credential View Controller-->
+        <scene sceneID="mLI-ud-q07">
+            <objects>
+                <viewController storyboardIdentifier="addIssuer" id="zKg-vx-nna" customClass="SettingsAddCredentialViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GHF-L8-3LO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your method:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cmi-6p-YUh" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
+                                <rect key="frame" x="20" y="44" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRt-yX-u7H" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
+                                <rect key="frame" x="20" y="81" width="335" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="JpM-lR-CEX"/>
+                                </constraints>
+                                <state key="normal" title="Import from URL"/>
+                                <connections>
+                                    <action selector="importFromURL" destination="zKg-vx-nna" eventType="touchUpInside" id="DG6-Qf-SLt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvw-zt-Ulb" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
+                                <rect key="frame" x="20" y="133" width="335" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="hrY-bj-6ta"/>
+                                </constraints>
+                                <state key="normal" title="Import from File"/>
+                                <connections>
+                                    <action selector="importFromFile" destination="zKg-vx-nna" eventType="touchUpInside" id="Dsa-06-OPH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="KlT-W9-Avl" firstAttribute="trailing" secondItem="Cmi-6p-YUh" secondAttribute="trailing" constant="20" id="CDZ-Lo-ZUQ"/>
+                            <constraint firstItem="Cmi-6p-YUh" firstAttribute="leading" secondItem="KlT-W9-Avl" secondAttribute="leading" constant="20" id="HEv-9e-FjR"/>
+                            <constraint firstItem="CRt-yX-u7H" firstAttribute="leading" secondItem="KlT-W9-Avl" secondAttribute="leading" constant="20" id="Img-qr-k4G"/>
+                            <constraint firstItem="CRt-yX-u7H" firstAttribute="top" secondItem="Cmi-6p-YUh" secondAttribute="bottom" constant="16" id="KoK-n8-IV6"/>
+                            <constraint firstItem="KlT-W9-Avl" firstAttribute="trailing" secondItem="CRt-yX-u7H" secondAttribute="trailing" constant="20" id="SWK-8j-gpm"/>
+                            <constraint firstItem="KlT-W9-Avl" firstAttribute="trailing" secondItem="Uvw-zt-Ulb" secondAttribute="trailing" constant="20" id="X7o-EK-dLr"/>
+                            <constraint firstItem="Cmi-6p-YUh" firstAttribute="top" secondItem="KlT-W9-Avl" secondAttribute="top" constant="24" id="ZAf-42-BB4"/>
+                            <constraint firstItem="Uvw-zt-Ulb" firstAttribute="leading" secondItem="KlT-W9-Avl" secondAttribute="leading" constant="20" id="eaq-hY-Q7g"/>
+                            <constraint firstItem="Uvw-zt-Ulb" firstAttribute="top" secondItem="CRt-yX-u7H" secondAttribute="bottom" constant="8" id="rG2-M5-4LF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="KlT-W9-Avl"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cr0-i5-FSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-442.39999999999998" y="-35.532233883058474"/>
+        </scene>
+    </scenes>
+</document>
