@@ -37,7 +37,7 @@ struct Style {
         /// C9: Error states
         static let C9 = UIColor(hexString: "#D0021B")
         
-        /// C10: Text field highlight
+        /// C10: Text field highlight/background light blue
         static let C10 = UIColor(hexString: "#ECF5FE")
         
         /// C11: Selected primary button background

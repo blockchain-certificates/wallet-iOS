@@ -425,7 +425,11 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
     // MARK: - Add Credential
     
     @IBAction func importFromURL() {
-        
+        Logger.main.info("Add Credential from URL tapped in settings")
+        let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
+        let controller = storyboard.instantiateViewController(withIdentifier: "addCredentialFromURL") as! SettingsAddCredentialURLViewController
+
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction func importFromFile() {
@@ -436,61 +440,6 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
         controller.modalPresentationStyle = .formSheet
         
         present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
-    }
-    
-    func showAddCredentialFlow() {
-//        
-//        alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
-//            Logger.main.info("User has chosen to add a certificate from URL")
-//            
-//            let certificateURLPrompt = NSLocalizedString("What's the URL of the credential?", comment: "Certificate URL prompt for importing a certificate.")
-//            let importAction = NSLocalizedString("Import", comment: "Import certificate action")
-//            
-//            let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)
-//            urlPrompt.addTextField(configurationHandler: { (textField) in
-//                textField.placeholder = NSLocalizedString("URL", comment: "URL placeholder text")
-//            })
-//            
-//            urlPrompt.addAction(UIAlertAction(title: importAction, style: .default, handler: { (_) in
-//                guard let urlField = urlPrompt.textFields?.first,
-//                    let trimmedText = urlField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
-//                    let url = URL(string: trimmedText) else {
-//                        return
-//                }
-//                Logger.main.info("User attempting to add a certificate from \(url).")
-//                
-//                _ = self?.addCertificate(from: url)
-//            }))
-//            
-//            urlPrompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: { _ in
-//                Logger.main.info("User cancelled adding a certificate from URL.")
-//            }))
-//            
-//            self?.present(urlPrompt, animated: true, completion: nil)
-//        }))
-//        
-//        alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
-//        
-//        present(alertController, animated: true, completion: nil)
-    }
-    
-    // Certificate handling
-    func addCertificate(from url: URL) {
-        showActivityIndicator()
-        defer {
-            hideActivityIndicator()
-        }
-        guard let certificate = CertificateManager().load(certificateAt: url) else {
-            Logger.main.error("Failed to load certificate from \(url)")
-            
-            let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
-            let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
-            alertError(localizedTitle: title, localizedMessage: message)
-            
-            return
-        }
-        
-        saveCertificateIfOwned(certificate: certificate)
     }
     
     func importCertificate(from data: Data?) {
@@ -557,12 +506,78 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
     }
     
     func alertError(localizedTitle: String, localizedMessage: String) {
-        let okay = NSLocalizedString("OK", comment: "OK dismiss action")
-        
-        let prompt = UIAlertController(title: localizedTitle, message: localizedMessage, preferredStyle: .alert);
-        prompt.addAction(UIAlertAction(title: okay, style: .cancel, handler: nil))
-        
-        present(prompt, animated: true, completion: nil)
+        let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
+        let alert = AlertViewController.createWarning(title: localizedTitle, message: localizedMessage, buttonText: okay)
+        present(alert, animated: false, completion: nil)
+    }
+
+    func alertSuccess(callback: (() -> Void)?) {
+        let title = NSLocalizedString("Success!", comment: "Alert title")
+        let message = NSLocalizedString("A credential was imported. Please check your credentials screen.", comment: "Successful credential import from URL in settings alert message")
+        let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
+        let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
+        if let callback = callback {
+            alert.buttons.first?.onTouchUpInside {
+                callback()
+            }
+        }
+        present(alert, animated: false, completion: nil)
     }
     
 }
+
+class SettingsAddCredentialURLViewController: SettingsAddCredentialViewController, UITextViewDelegate {
+    
+    @IBOutlet weak var urlTextView: UITextView!
+    
+    @IBAction func importURL() {
+        guard let urlString = urlTextView.text,
+            let url = URL(string: urlString.trimmingCharacters(in: CharacterSet.whitespaces)) else {
+                return
+        }
+        Logger.main.info("User attempting to add a certificate from \(url).")
+        
+        addCertificate(from: url)
+    }
+    
+    func addCertificate(from url: URL) {
+        showActivityIndicator()
+        defer {
+            hideActivityIndicator()
+        }
+        guard let certificate = CertificateManager().load(certificateAt: url) else {
+            Logger.main.error("Failed to load certificate from \(url)")
+            
+            let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
+            let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
+            alertError(localizedTitle: title, localizedMessage: message)
+            
+            return
+        }
+        
+        saveCertificateIfOwned(certificate: certificate)
+        
+        alertSuccess(callback: { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        })
+        
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        urlTextView.backgroundColor = Style.Color.C10
+        urlTextView.text = ""
+        urlTextView.delegate = self
+    }
+    
+    // Mark: - UITextViewDelegate
+
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+}
+

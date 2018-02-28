@@ -316,7 +316,7 @@ class CertificateViewController: UIViewController {
             }
         }
         
-        self.present(shareController, animated: true, completion: nil)
+        present(shareController, animated: true, completion: nil)
     }
 }
 

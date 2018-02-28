@@ -64,5 +64,80 @@
             </objects>
             <point key="canvasLocation" x="-442.39999999999998" y="-35.532233883058474"/>
         </scene>
+        <!--Settings Add Credential URL View Controller-->
+        <scene sceneID="wkW-G8-r8z">
+            <objects>
+                <viewController storyboardIdentifier="addCredentialFromURL" id="QjL-oU-RBK" customClass="SettingsAddCredentialURLViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sjh-my-skp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy and paste the credential URL:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuG-pc-4Tk">
+                                <rect key="frame" x="20" y="44" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1y-BS-XQd" userLabel="Container">
+                                <rect key="frame" x="20" y="77" width="335" height="104"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nen-0i-pkh">
+                                        <rect key="frame" x="12" y="12" width="311" height="80"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="AYG-wT-JHt"/>
+                                        </constraints>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="url"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="c7h-6g-o2i" firstAttribute="trailing" secondItem="nen-0i-pkh" secondAttribute="trailing" constant="12" id="Hdo-ld-UYN"/>
+                                    <constraint firstItem="nen-0i-pkh" firstAttribute="top" secondItem="c7h-6g-o2i" secondAttribute="top" constant="12" id="arW-Zi-uL1"/>
+                                    <constraint firstItem="c7h-6g-o2i" firstAttribute="bottom" secondItem="nen-0i-pkh" secondAttribute="bottom" constant="12" id="icH-j6-2hl"/>
+                                    <constraint firstItem="nen-0i-pkh" firstAttribute="leading" secondItem="c7h-6g-o2i" secondAttribute="leading" constant="12" id="yoP-aB-6f8"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="c7h-6g-o2i"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwB-R1-Lad" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
+                                <rect key="frame" x="20" y="197" width="335" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="r9I-ci-YfX"/>
+                                </constraints>
+                                <state key="normal" title="Import"/>
+                                <connections>
+                                    <action selector="importURL" destination="QjL-oU-RBK" eventType="touchUpInside" id="cEc-QQ-kPN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="c1y-BS-XQd" firstAttribute="leading" secondItem="a4k-Yl-GI9" secondAttribute="leading" constant="20" id="5qI-ZI-3Os"/>
+                            <constraint firstItem="VuG-pc-4Tk" firstAttribute="top" secondItem="a4k-Yl-GI9" secondAttribute="top" constant="24" id="7ba-5d-kI6"/>
+                            <constraint firstItem="c1y-BS-XQd" firstAttribute="top" secondItem="VuG-pc-4Tk" secondAttribute="bottom" constant="12" id="FHX-ae-IFX"/>
+                            <constraint firstItem="a4k-Yl-GI9" firstAttribute="trailing" secondItem="c1y-BS-XQd" secondAttribute="trailing" constant="20" id="Gn4-w3-xSz"/>
+                            <constraint firstItem="bwB-R1-Lad" firstAttribute="top" secondItem="c1y-BS-XQd" secondAttribute="bottom" constant="16" id="acJ-MF-oqP"/>
+                            <constraint firstItem="bwB-R1-Lad" firstAttribute="leading" secondItem="a4k-Yl-GI9" secondAttribute="leading" constant="20" id="dvc-qY-EHq"/>
+                            <constraint firstItem="a4k-Yl-GI9" firstAttribute="trailing" secondItem="VuG-pc-4Tk" secondAttribute="trailing" constant="20" id="gLO-be-EMm"/>
+                            <constraint firstItem="a4k-Yl-GI9" firstAttribute="trailing" secondItem="bwB-R1-Lad" secondAttribute="trailing" constant="20" id="reG-kJ-v9F"/>
+                            <constraint firstItem="VuG-pc-4Tk" firstAttribute="leading" secondItem="a4k-Yl-GI9" secondAttribute="leading" constant="20" id="ulM-I6-ILB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="a4k-Yl-GI9"/>
+                    </view>
+                    <connections>
+                        <outlet property="urlTextView" destination="nen-0i-pkh" id="gg6-xE-OTx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tuz-cB-pNc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="356" y="-35.532233883058474"/>
+        </scene>
     </scenes>
 </document>
