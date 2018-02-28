@@ -78,6 +78,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         loadCertificates(shouldReloadCollection: false)
         loadBackgroundView()
         reloadCollectionView()
+        AppDelegate.instance.styleApplicationDefault()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,7 +139,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         showAddIssuerFlow()
     }
-
+    
     func addButtonTapped(_ sender: UIBarButtonItem) {
         let addIssuer = NSLocalizedString("Add Issuer", comment: "Contextual action. Tapping this brings up the Add Issuer form.")
         let addCertificateFromFile = NSLocalizedString("Import Credential from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
@@ -156,8 +157,8 @@ class IssuerCollectionViewController: UICollectionViewController {
             let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
             controller.delegate = self
             controller.modalPresentationStyle = .formSheet
-
-            self?.present(controller, animated: true, completion: nil)
+            
+            self?.present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
         }))
 
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in

@@ -72,8 +72,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        oldBarStyle = navigationController?.navigationBar.barStyle
-        navigationController?.navigationBar.barStyle = .default
+        AppDelegate.instance.styleApplicationDefault()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -287,7 +286,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             controller.delegate = self
             controller.modalPresentationStyle = .formSheet
             
-            self?.present(controller, animated: true, completion: nil)
+            self?.present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
         }))
         
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in

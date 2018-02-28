@@ -53,6 +53,11 @@ class IssuerViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppDelegate.instance.styleApplicationDefault()
+    }
+    
     var activityIndicator: UIActivityIndicatorView?
     
     func showActivityIndicator() {
@@ -109,8 +114,8 @@ class IssuerViewController: UIViewController {
             let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
             controller.delegate = self
             controller.modalPresentationStyle = .formSheet
-            
-            self?.present(controller, animated: true, completion: nil)
+
+            self?.present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
         }))
         
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
