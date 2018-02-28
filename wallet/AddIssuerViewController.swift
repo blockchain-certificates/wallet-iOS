@@ -257,19 +257,18 @@ class AddIssuerViewController: UIViewController {
         Logger.main.info("Add issuer failed with message: \(message)")
         
         let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .cancel, handler: nil))
 
+        let alert = AlertViewController.createWarning(title: title, message: message)
+        
         isLoading = false
         
         OperationQueue.main.addOperation {
             if self.presentedViewController != nil {
                 self.presentedViewController?.dismiss(animated: true, completion: { 
-                    self.present(alertController, animated: true, completion: nil)
+                    self.present(alert, animated: false, completion: nil)
                 })
             } else {
-                self.present(alertController, animated: true, completion: nil)
+                self.present(alert, animated: false, completion: nil)
             }
         }
     }
