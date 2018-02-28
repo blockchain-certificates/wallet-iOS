@@ -468,6 +468,11 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
             alertError(localizedTitle: title, localizedMessage: message)
             return
         }
+
+        alertSuccess(callback: { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        })
+        
     }
     
     func saveCertificateIfOwned(certificate: Certificate) {
@@ -522,6 +527,13 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
             }
         }
         present(alert, animated: false, completion: nil)
+    }
+    
+    // MARK: - UIDocumentPickerDelegate
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        let data = try? Data(contentsOf: url)
+        importCertificate(from: data)
     }
     
 }
@@ -579,5 +591,6 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
         }
         return true
     }
+    
 }
 
