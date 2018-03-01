@@ -133,6 +133,9 @@ class IssuerViewController: UIViewController {
             controller.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: controller, action: #selector(SettingsAddCredentialURLViewController.dismissModally))
             controller.navigationItem.title = NSLocalizedString("Add Credential", comment: "View controller navigation bar title")
             controller.presentedModally = true
+            controller.successCallback = { [weak self] (certificate) in
+                self?.navigateTo(certificate: certificate, animated: true)
+            }
             
             self?.present(navigationController, animated: true, completion: nil)
         }))
@@ -146,7 +149,7 @@ class IssuerViewController: UIViewController {
         let controller = CertificateViewController(certificate: certificate)
         controller.delegate = self
 
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             self.navigationController?.pushViewController(controller, animated: animated)
         }
     }

@@ -458,8 +458,12 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
         
         do {
             let certificate = try CertificateParser.parse(data: data)
-            
             saveCertificateIfOwned(certificate: certificate)
+
+            alertSuccess(callback: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            })
+
         } catch {
             Logger.main.error("Importing failed with error: \(error)")
             
@@ -468,11 +472,6 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
             alertError(localizedTitle: title, localizedMessage: message)
             return
         }
-
-        alertSuccess(callback: { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        })
-        
     }
     
     func saveCertificateIfOwned(certificate: Certificate) {
@@ -542,6 +541,8 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
     
     @IBOutlet weak var urlTextView: UITextView!
     
+    // closure called when presented modally and credential successfully added
+    var successCallback: ((Certificate) -> ())?
     var presentedModally = false
     
     @IBAction func importURL() {
@@ -555,6 +556,7 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
     }
     
     func addCertificate(from url: URL) {
+        urlTextView.resignFirstResponder()
         showActivityIndicator()
         defer {
             hideActivityIndicator()
@@ -573,7 +575,9 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
         
         alertSuccess(callback: { [weak self] in
             if self?.presentedModally ?? true {
-                self?.dismissModally()
+                self?.presentingViewController?.dismiss(animated: true, completion: { [weak self] in
+                    self?.successCallback?(certificate)
+                })
             } else {
                 self?.navigationController?.popViewController(animated: true)
             }
@@ -590,7 +594,7 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
     
     @objc func dismissModally() {
         presentingViewController?.dismiss(animated: true, completion: nil)
-    }
+   }
     
     // Mark: - UITextViewDelegate
 
