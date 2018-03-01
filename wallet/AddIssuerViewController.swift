@@ -204,9 +204,19 @@ class AddIssuerViewController: UIViewController {
     func notifyAndDismiss(managedIssuer: ManagedIssuer) {
         delegate?.added(managedIssuer: managedIssuer)
         
-        OperationQueue.main.addOperation { [weak self] in
+        DispatchQueue.main.async { [weak self] in
+            
+            let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
+            let message = NSLocalizedString("An isser was added. Please check your issuers screen.", comment: "Add issuer alert message")
+            let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
+            let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
+            if let button = alert.buttons.first {
+                button.onTouchUpInside { [weak self] in
+                    self?.presentingViewController?.dismiss(animated: true, completion: nil)
+                }
+            }
             self?.isLoading = false
-            self?.navigationController?.popViewController(animated: true)
+            self?.present(alert, animated: false, completion: nil)
         }
     }
     
