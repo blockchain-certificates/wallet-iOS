@@ -232,12 +232,9 @@ class IssuerViewController: UIViewController {
     }
     
     func alertError(localizedTitle: String, localizedMessage: String) {
-        let okay = NSLocalizedString("OK", comment: "OK dismiss action")
-        
-        let prompt = UIAlertController(title: localizedTitle, message: localizedMessage, preferredStyle: .alert);
-        prompt.addAction(UIAlertAction(title: okay, style: .cancel, handler: nil))
-        
-        present(prompt, animated: true, completion: nil)
+        let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
+        let alert = AlertViewController.createWarning(title: localizedTitle, message: localizedMessage, buttonText: okay)
+        present(alert, animated: false, completion: nil)
     }
 }
 
