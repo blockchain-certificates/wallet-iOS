@@ -17,6 +17,7 @@ class AddIssuerViewController: UIViewController {
     var identificationURL: URL?
     var nonce: String?
     var managedIssuer: ManagedIssuer?
+    var presentedModally = false
     
     @IBOutlet weak var scrollView : UIScrollView!
     @IBOutlet weak var issuerURLField: UITextView!
@@ -212,7 +213,11 @@ class AddIssuerViewController: UIViewController {
             let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
             if let button = alert.buttons.first {
                 button.onTouchUpInside { [weak self] in
-                    self?.presentingViewController?.dismiss(animated: true, completion: nil)
+                    if self?.presentedModally ?? true {
+                        self?.presentingViewController?.dismiss(animated: true, completion: nil)
+                    } else {
+                        self?.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
             self?.isLoading = false

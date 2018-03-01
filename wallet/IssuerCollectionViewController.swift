@@ -515,6 +515,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     func showAddIssuerFlow(identificationURL: URL? = nil, nonce: String? = nil) {
         let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
         controller.delegate = self
+        controller.presentedModally = true
 
         let navigation = UINavigationController(rootViewController: controller)
         navigation.navigationBar.isTranslucent = false

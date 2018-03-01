@@ -261,7 +261,7 @@ class SettingsTableViewController: UITableViewController {
     
     // MARK: - Add Issuer
     
-    func showAddIssuerFlow(identificationURL: URL? = nil, nonce : String? = nil) {
+    func showAddIssuerFlow(identificationURL: URL? = nil, nonce: String? = nil) {
         let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
         controller.delegate = self
         
