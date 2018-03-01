@@ -133,62 +133,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         let controller = UINavigationController(rootViewController: settingsTable)
         present(controller, animated: true, completion: nil)
     }
-
-    @objc func addIssuerButtonTapped() {
-        Logger.main.info("Add issuer button tapped")
-        
-        showAddIssuerFlow()
-    }
-    
-    func addButtonTapped(_ sender: UIBarButtonItem) {
-        let addIssuer = NSLocalizedString("Add Issuer", comment: "Contextual action. Tapping this brings up the Add Issuer form.")
-        let addCertificateFromFile = NSLocalizedString("Import Credential from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
-        let addCertificateFromURL = NSLocalizedString("Import Credential from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
-        let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
-
-
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        alertController.addAction(UIAlertAction(title: addIssuer, style: .default, handler: { [weak self] _ in
-            self?.addIssuerButtonTapped()
-        }))
-
-        alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
-            let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
-            controller.delegate = self
-            controller.modalPresentationStyle = .formSheet
-            
-            self?.present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
-        }))
-
-        alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
-            let certificateURLPrompt = NSLocalizedString("What's the URL of the credential?", comment: "Certificate URL prompt for importing a certificate.")
-            let importAction = NSLocalizedString("Import", comment: "Import certificate action")
-
-            let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)
-            urlPrompt.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = NSLocalizedString("URL", comment: "URL placeholder text")
-            })
-
-            urlPrompt.addAction(UIAlertAction(title: importAction, style: .default, handler: { (_) in
-                guard let urlField = urlPrompt.textFields?.first,
-                    let trimmedText = urlField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
-                    let url = URL(string: trimmedText) else {
-                        return
-                }
-
-                _ = self?.add(certificateURL: url)
-            }))
-
-            urlPrompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
-
-            self?.present(urlPrompt, animated: true, completion: nil)
-        }))
-
-        alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
-
-        present(alertController, animated: true, completion: nil)
-    }
     
     // Mark: Notifications
     @objc func redirectRequested(notification: Notification) {
@@ -218,8 +162,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         case .addIssuer(let identificationURL, let nonce):
             Logger.main.info("Processing autocomplete request to add issuer at \(identificationURL)")
 
-            
-            
             if presentedViewController != nil {
                 presentedViewController?.dismiss(animated: false, completion: {
                     self.showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)

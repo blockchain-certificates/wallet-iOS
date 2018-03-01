@@ -542,6 +542,8 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
     
     @IBOutlet weak var urlTextView: UITextView!
     
+    var presentedModally = false
+    
     @IBAction func importURL() {
         guard let urlString = urlTextView.text,
             let url = URL(string: urlString.trimmingCharacters(in: CharacterSet.whitespaces)) else {
@@ -570,7 +572,11 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
         saveCertificateIfOwned(certificate: certificate)
         
         alertSuccess(callback: { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            if self?.presentedModally ?? true {
+                self?.dismissModally()
+            } else {
+                self?.navigationController?.popViewController(animated: true)
+            }
         })
         
     }
@@ -580,6 +586,10 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
         urlTextView.backgroundColor = Style.Color.C10
         urlTextView.text = ""
         urlTextView.delegate = self
+    }
+    
+    @objc func dismissModally() {
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     // Mark: - UITextViewDelegate

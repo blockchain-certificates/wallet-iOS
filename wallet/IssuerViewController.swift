@@ -56,6 +56,9 @@ class IssuerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppDelegate.instance.styleApplicationDefault()
+        certificates = CertificateManager().loadCertificates()
+        certificateTableController.certificates = certificates
+        certificateTableController.tableView.reloadData()
     }
     
     var activityIndicator: UIActivityIndicatorView?
@@ -119,32 +122,19 @@ class IssuerViewController: UIViewController {
         }))
         
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
-            Logger.main.info("User has chosen to add a certificate from URL")
+            Logger.main.info("Add Credential from URL tapped in issuer view")
+            let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
+            let controller = storyboard.instantiateViewController(withIdentifier: "addCredentialFromURL") as! SettingsAddCredentialURLViewController
             
-            let certificateURLPrompt = NSLocalizedString("What's the URL of the credential?", comment: "Certificate URL prompt for importing a certificate.")
-            let importAction = NSLocalizedString("Import", comment: "Import certificate action")
+            let navigationController = UINavigationController(rootViewController: controller)
+            navigationController.navigationBar.barTintColor = Style.Color.C3
+            navigationController.navigationBar.isTranslucent = false
             
-            let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)
-            urlPrompt.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = NSLocalizedString("URL", comment: "URL placeholder text")
-            })
+            controller.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: controller, action: #selector(SettingsAddCredentialURLViewController.dismissModally))
+            controller.navigationItem.title = NSLocalizedString("Add Credential", comment: "View controller navigation bar title")
+            controller.presentedModally = true
             
-            urlPrompt.addAction(UIAlertAction(title: importAction, style: .default, handler: { (_) in
-                guard let urlField = urlPrompt.textFields?.first,
-                    let trimmedText = urlField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
-                    let url = URL(string: trimmedText) else {
-                        return
-                }
-                Logger.main.info("User attempting to add a certificate from \(url).")
-                
-                _ = self?.addCertificate(from: url)
-            }))
-            
-            urlPrompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: { _ in
-                Logger.main.info("User cancelled adding a certificate from URL.")
-            }))
-            
-            self?.present(urlPrompt, animated: true, completion: nil)
+            self?.present(navigationController, animated: true, completion: nil)
         }))
         
         alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
