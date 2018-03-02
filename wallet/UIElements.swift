@@ -131,6 +131,7 @@ class ButtonBase : UIButton {
 
         imageView?.contentMode = .center
         imageView?.clipsToBounds = false
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
         
         let height = heightAnchor.constraint(equalToConstant: Style.Measure.heightButtonLarge)
         height.priority = UILayoutPriority(rawValue: 900)
@@ -172,7 +173,7 @@ class ButtonBase : UIButton {
 class PrimaryButton : ButtonBase {
     
     override var textColor : UIColor { return Style.Color.C1 }
-    override var textColorHighlighted : UIColor { return Style.Color.C1 }
+    override var textColorHighlighted : UIColor { return Style.Color.C14 }
     override var textColorDisabled : UIColor { return Style.Color.C1 }
 
     override var strokeColor : UIColor { return Style.Color.C4 }

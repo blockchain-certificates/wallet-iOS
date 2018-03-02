@@ -49,6 +49,9 @@ struct Style {
         
         /// C13: drop shadow, 5% black
         static let C13 = UIColor(hexString: "#0000000C")
+        
+        /// C14: button disabled text
+        static let C14 = UIColor(hexString: "#888888")
     }
 
     struct Font {

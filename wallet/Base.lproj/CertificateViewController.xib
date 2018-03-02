@@ -58,9 +58,6 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-rO-N6E" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
                             <rect key="frame" x="20" y="14" width="335" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="9MR-sy-Y0P"/>
-                            </constraints>
                             <state key="normal" title="Share" image="icon_share"/>
                             <connections>
                                 <action selector="shareTapped:" destination="-1" eventType="touchUpInside" id="gla-Jz-T6K"/>
