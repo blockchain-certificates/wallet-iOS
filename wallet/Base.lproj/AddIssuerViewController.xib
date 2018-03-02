@@ -20,6 +20,7 @@
                 <outlet property="issuerURLField" destination="zSZ-UY-k6C" id="BMf-Bh-qTk"/>
                 <outlet property="nonceField" destination="Yob-Sd-s4n" id="nhT-8T-i6v"/>
                 <outlet property="scrollView" destination="BJT-za-OkO" id="ez4-Mt-eA3"/>
+                <outlet property="submitButton" destination="YfE-OO-122" id="p4o-5c-y8p"/>
                 <outlet property="view" destination="HUU-c9-L9F" id="et7-50-x3v"/>
             </connections>
         </placeholder>
