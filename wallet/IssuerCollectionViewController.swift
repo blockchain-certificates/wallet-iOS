@@ -370,12 +370,10 @@ class IssuerCollectionViewController: UICollectionViewController {
         guard data != nil, let certificate = try? CertificateParser.parse(data: data!) else {
             let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
             let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
+            let okay = NSLocalizedString("Okay", comment: "Button copy")
 
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .default, handler: nil))
-
-            present(alertController, animated: true, completion: nil)
-
+            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            present(alert, animated: false, completion: nil)
             return false
         }
 
@@ -525,26 +523,22 @@ extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
 // MARK: Functions from the open source.
 extension IssuerCollectionViewController {
     func importCertificate(from data: Data?) {
-        let okay = NSLocalizedString("OK", comment: "OK dismiss action")
         guard let data = data else {
             let title = NSLocalizedString("Couldn't read file", comment: "Title for an error message displayed when we can't read a certificate file the user tried to import.")
             let message = NSLocalizedString("Something went wrong when trying to open the file.", comment: "A longer explanation of the error message displayed when we can't read a certificate file the user tried to import.")
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: okay, style: .default, handler: { [weak alertController] action in
-                alertController?.dismiss(animated: true, completion: nil)
-                }))
-            present(alertController, animated: true, completion: nil)
+            let okay = NSLocalizedString("Okay", comment: "Button copy")
+            
+            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            present(alert, animated: false, completion: nil)
             return
         }
         guard let certificate = try? CertificateParser.parse(data: data) else {
             let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
             let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
-
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: okay, style: .default, handler: { [weak alertController] action in
-                alertController?.dismiss(animated: true, completion: nil)
-                }))
-            present(alertController, animated: true, completion: nil)
+            let okay = NSLocalizedString("Okay", comment: "Button copy")
+            
+            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            present(alert, animated: false, completion: nil)
             return
         }
 

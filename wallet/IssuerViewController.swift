@@ -278,12 +278,10 @@ extension IssuerViewController : CertificateViewControllerDelegate {
                 
                 let title = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
                 let message = NSLocalizedString("Something went wrong when deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
-                let okay = NSLocalizedString("OK", comment: "Confirm action")
+                let okay = NSLocalizedString("Okay", comment: "Button copy")
                 
-                
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
-                self?.present(alertController, animated: true, completion: nil)
+                let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+                self?.present(alert, animated: false, completion: nil)
             }
         })
         

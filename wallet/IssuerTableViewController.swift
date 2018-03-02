@@ -55,26 +55,6 @@ class IssuerTableViewController: UITableViewController {
         tableView.separatorColor = .clear
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        if certificates.isEmpty {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(confirmDeleteIssuer))
-            
-            if let issuer = managedIssuer?.issuer as? IssuingEstimateSupport,
-                let key = managedIssuer?.introducedWithAddress {
-                
-                estimateRequest = IssuerIssuingEstimateRequest(from: issuer, with: key) { [weak self] (result) in
-                    switch result {
-                    case .success(estimates: let estimates):
-                        self?.estimates = estimates
-                    case .errored(message: let message):
-                        Logger.main.error("Issuer IssuingEstimate errored with error:\(message)")
-                    case .aborted:
-                        Logger.main.info("Aborted issuing estimate request")
-                    }
-                }
-                estimateRequest?.start()
-            }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,34 +135,8 @@ class IssuerTableViewController: UITableViewController {
         }
         
         let selectedCertificate = certificates[indexPath.row]
-        
         Logger.main.info("Navigating to certificate \(selectedCertificate.title) with id: \(selectedCertificate.id)")
-        
         delegate?.show(certificate: selectedCertificate)
-    }
-    
-    // MARK: Key actions
-    @objc func confirmDeleteIssuer() {
-        guard let issuerToDelete = self.managedIssuer else {
-            return
-        }
-        Logger.main.info("Attempting to delete issuer \(issuerToDelete.issuer?.name ?? "unknown")")
-        
-        let deleteConfirmationTitle = NSLocalizedString("Are you sure you want to delete this issuer?", comment: "Prompt to confirm delete issuer.")
-        let deleteAction = NSLocalizedString("Delete", comment: "Delete issuer action")
-        let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
-        
-        let prompt = UIAlertController(title: deleteConfirmationTitle, message: nil, preferredStyle: .alert)
-        prompt.addAction(UIAlertAction(title: deleteAction, style: .destructive, handler: { [weak self] _ in
-            _ = self?.navigationController?.popToRootViewController(animated: true)
-            if let rootController = self?.navigationController?.topViewController as? IssuerCollectionViewController {
-                rootController.remove(managedIssuer: issuerToDelete)
-            }
-            
-        }))
-        prompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
-        
-        present(prompt, animated: true, completion: nil)
     }
     
 }
@@ -215,11 +169,10 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
                 
                 let deleteTitle = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
                 let deleteMessage = NSLocalizedString("Something went wrong when deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
-                let okay = NSLocalizedString("OK", comment: "Confirm action")
+                let okay = NSLocalizedString("Okay", comment: "Button copy")
                 
-                let alertController = UIAlertController(title: deleteTitle, message: deleteMessage, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
-                self?.present(alertController, animated: true, completion: nil)
+                let alert = AlertViewController.createWarning(title: deleteTitle, message: deleteMessage, buttonText: okay)
+                self?.present(alert, animated: false, completion: nil)
             }
         })
         

@@ -220,14 +220,15 @@ class SettingsTableViewController: UITableViewController {
     func shareLogs() {
         guard let shareURL = try? Logger.main.shareLogs() else {
             Logger.main.error("Sharing the logs failed. Not sure how we'll ever get this information back to you. ¯\\_(ツ)_/¯")
-            let alert = UIAlertController(title: NSLocalizedString("File not found", comment: "Title for the failed-to-share-your-logs alert"),
-                                          message: NSLocalizedString("We couldn't find the logs on the device.", comment: "Explanation for failing to share the log file"),
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "ok action"), style: .default, handler: {[weak self] _ in
-                self?.deselectRow()
-            }))
+
+            let title = NSLocalizedString("File not found", comment: "Title for the failed-to-share-your-logs alert")
+            let message = NSLocalizedString("We couldn't find the logs on the device.", comment: "Explanation for failing to share the log file")
+            let okay = NSLocalizedString("Okay", comment: "Button copy")
             
-            present(alert, animated: true, completion: nil)
+            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            present(alert, animated: false, completion: { [weak self] in
+                self?.deselectRow()
+            })
             
             return
         }
@@ -243,12 +244,14 @@ class SettingsTableViewController: UITableViewController {
     func clearLogs() {
         Logger.main.clearLogs()
         
-        let controller = UIAlertController(title: NSLocalizedString("Success!", comment: "action completed successfully"), message: NSLocalizedString("Logs have been deleted from this device.", comment: "A message displayed after clearing the logs successfully."), preferredStyle: .alert)
-        controller.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "action confirmed"), style: .default, handler: { [weak self] _ in
-            self?.deselectRow()
-        }))
+        let title = NSLocalizedString("Success!", comment: "action completed successfully")
+        let message = NSLocalizedString("Logs have been deleted from this device.", comment: "A message displayed after clearing the logs successfully.")
+        let okay = NSLocalizedString("Okay", comment: "Button copy")
         
-        present(controller, animated: true, completion: nil)
+        let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
+        present(alert, animated: false, completion: { [weak self] in
+            self?.deselectRow()
+        })
     }
     
     func deselectRow() {
