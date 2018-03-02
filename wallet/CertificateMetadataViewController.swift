@@ -80,13 +80,13 @@ class InformationTableViewCell : UITableViewCell {
         detailTextLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
 
         textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
         trailingAnchor.constraint(equalTo: textLabel.trailingAnchor, constant: 20).isActive = true
         
         detailTextLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         trailingAnchor.constraint(equalTo: detailTextLabel.trailingAnchor, constant: 20).isActive = true
         detailTextLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 4).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: detailTextLabel.bottomAnchor, constant: 8).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: detailTextLabel.bottomAnchor, constant: 0).isActive = true
         
         contentView.topAnchor.constraint(equalTo: topAnchor)
         contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -111,8 +111,7 @@ class DeleteTableViewCell : UITableViewCell {
 
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        button.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24).isActive = true
+        button.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 64).isActive = true
         contentView.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: 24).isActive = true
         button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         contentView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: 20).isActive = true
@@ -153,7 +152,7 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
         
         navigationController?.navigationBar.isTranslucent = false
         
-        let tableView : UITableView = UITableView(frame: .zero, style: .grouped)
+        let tableView : UITableView = UITableView(frame: .zero, style: .plain)
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
