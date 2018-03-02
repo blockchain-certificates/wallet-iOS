@@ -25,14 +25,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRt-yX-u7H" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="20" y="81" width="335" height="44"/>
+                                <rect key="frame" x="20" y="81" width="335" height="30"/>
                                 <state key="normal" title="Import from URL"/>
                                 <connections>
                                     <action selector="importFromURL" destination="zKg-vx-nna" eventType="touchUpInside" id="DG6-Qf-SLt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvw-zt-Ulb" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="20" y="133" width="335" height="44"/>
+                                <rect key="frame" x="20" y="119" width="335" height="30"/>
                                 <state key="normal" title="Import from File"/>
                                 <connections>
                                     <action selector="importFromFile" destination="zKg-vx-nna" eventType="touchUpInside" id="Dsa-06-OPH"/>
@@ -101,7 +101,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwB-R1-Lad" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="20" y="197" width="335" height="44"/>
+                                <rect key="frame" x="20" y="197" width="335" height="30"/>
                                 <state key="normal" title="Import"/>
                                 <connections>
                                     <action selector="importURL" destination="QjL-oU-RBK" eventType="touchUpInside" id="cEc-QQ-kPN"/>
@@ -123,6 +123,7 @@
                         <viewLayoutGuide key="safeArea" id="a4k-Yl-GI9"/>
                     </view>
                     <connections>
+                        <outlet property="submitButton" destination="bwB-R1-Lad" id="1A5-od-tfe"/>
                         <outlet property="urlTextView" destination="nen-0i-pkh" id="gg6-xE-OTx"/>
                     </connections>
                 </viewController>

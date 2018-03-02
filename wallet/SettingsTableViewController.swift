@@ -543,6 +543,7 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
 class SettingsAddCredentialURLViewController: SettingsAddCredentialViewController, UITextViewDelegate {
     
     @IBOutlet weak var urlTextView: UITextView!
+    @IBOutlet weak var submitButton: UIButton!
     
     // closure called when presented modally and credential successfully added
     var successCallback: ((Certificate) -> ())?
@@ -595,6 +596,7 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
         urlTextView.delegate = self
         urlTextView.font = Style.Font.T3S
         urlTextView.textColor = Style.Color.C3
+        submitButton.isEnabled = false
     }
     
     @objc func dismissModally() {
@@ -609,6 +611,10 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
             return false
         }
         return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        submitButton.isEnabled = textView.text.count > 0
     }
     
 }
