@@ -41,12 +41,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Vbf-B6-vRa" firstAttribute="centerY" secondItem="R4f-Hr-g23" secondAttribute="centerY" id="3Qz-cS-VtV"/>
-                            <constraint firstItem="8HA-RN-JeB" firstAttribute="leading" secondItem="R4f-Hr-g23" secondAttribute="leading" constant="20" id="4Ir-qY-cyV"/>
+                            <constraint firstItem="8HA-RN-JeB" firstAttribute="leading" secondItem="R4f-Hr-g23" secondAttribute="leading" constant="16" id="4Ir-qY-cyV"/>
                             <constraint firstAttribute="trailing" secondItem="9wy-xB-7je" secondAttribute="trailing" constant="40" id="9xJ-fI-at6"/>
                             <constraint firstItem="9wy-xB-7je" firstAttribute="top" secondItem="8HA-RN-JeB" secondAttribute="bottom" constant="8" id="Gy2-Iy-iwH"/>
                             <constraint firstAttribute="bottom" secondItem="9wy-xB-7je" secondAttribute="bottom" constant="20" id="Mcn-98-w1v"/>
                             <constraint firstAttribute="trailing" secondItem="8HA-RN-JeB" secondAttribute="trailing" constant="40" id="Mt4-ep-dR6"/>
-                            <constraint firstItem="9wy-xB-7je" firstAttribute="leading" secondItem="R4f-Hr-g23" secondAttribute="leading" constant="20" id="OLe-cN-uXz"/>
+                            <constraint firstItem="9wy-xB-7je" firstAttribute="leading" secondItem="R4f-Hr-g23" secondAttribute="leading" constant="16" id="OLe-cN-uXz"/>
                             <constraint firstItem="8HA-RN-JeB" firstAttribute="top" secondItem="R4f-Hr-g23" secondAttribute="top" constant="20" id="OU0-zz-l5e"/>
                             <constraint firstAttribute="trailing" secondItem="Vbf-B6-vRa" secondAttribute="trailing" constant="8" id="sHR-HX-cNY"/>
                         </constraints>
