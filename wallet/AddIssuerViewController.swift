@@ -22,6 +22,7 @@ class AddIssuerViewController: UIViewController {
     @IBOutlet weak var scrollView : UIScrollView!
     @IBOutlet weak var issuerURLField: UITextView!
     @IBOutlet weak var nonceField : UITextView!
+    @IBOutlet weak var submitButton : UIButton!
     
     var isLoading = false {
         didSet {
@@ -66,6 +67,8 @@ class AddIssuerViewController: UIViewController {
     func loadDataIntoFields() {
         issuerURLField.text = identificationURL?.absoluteString
         nonceField.text = nonce
+        
+        submitButton.isEnabled = nonceField.text.count > 0 && issuerURLField.text.count > 0
     }
     
     func saveDataIntoFields() {
@@ -345,4 +348,9 @@ extension AddIssuerViewController: UITextViewDelegate {
         }
         return true
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        submitButton.isEnabled = nonceField.text.count > 0 && issuerURLField.text.count > 0
+    }
+    
 }

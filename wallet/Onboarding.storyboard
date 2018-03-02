@@ -326,6 +326,7 @@
                     <connections>
                         <outlet property="containerView" destination="aUC-ws-ppc" id="1hj-Ll-MGD"/>
                         <outlet property="scrollView" destination="vY5-pE-shK" id="Moh-c7-hqc"/>
+                        <outlet property="submitButton" destination="BkJ-EG-3bX" id="no5-TB-eBR"/>
                         <outlet property="textView" destination="6y0-pi-oZA" id="AqO-kJ-ODX"/>
                     </connections>
                 </viewController>
@@ -789,6 +790,6 @@
         <image name="returning_video_background" width="1630" height="912"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f6t-HF-4A9"/>
+        <segue reference="aCt-1w-xH5"/>
     </inferredMetricsTieBreakers>
 </document>

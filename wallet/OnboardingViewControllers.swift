@@ -276,6 +276,7 @@ class OnboardingManualBackup : ScrollingOnboardingControllerBase {
 
 class OnboardingCurrentUser : ScrollingOnboardingControllerBase, UITextViewDelegate {
     @IBOutlet weak var textView : UITextView!
+    @IBOutlet weak var submitButton : UIButton!
 
     @IBAction func savePassphrase() {
         guard let passphrase = textView.text else {
@@ -326,6 +327,10 @@ class OnboardingCurrentUser : ScrollingOnboardingControllerBase, UITextViewDeleg
         return true
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        submitButton.isEnabled = textView.text.count > 0
+    }
+    
     @objc func adjustForKeyboard(notification: Notification) {
         guard let userInfo = notification.userInfo,
             let keyboardScreenEndFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else {
@@ -357,7 +362,8 @@ class OnboardingCurrentUser : ScrollingOnboardingControllerBase, UITextViewDeleg
         textView.delegate = self
         textView.font = Style.Font.T3S
         textView.textColor = Style.Color.C3
-
+        submitButton.isEnabled = false
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(adjustForKeyboard),
                                                name: Notification.Name.UIKeyboardWillHide,
