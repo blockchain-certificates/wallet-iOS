@@ -26,9 +26,6 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRt-yX-u7H" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="81" width="335" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="JpM-lR-CEX"/>
-                                </constraints>
                                 <state key="normal" title="Import from URL"/>
                                 <connections>
                                     <action selector="importFromURL" destination="zKg-vx-nna" eventType="touchUpInside" id="DG6-Qf-SLt"/>
@@ -36,9 +33,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvw-zt-Ulb" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="133" width="335" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="hrY-bj-6ta"/>
-                                </constraints>
                                 <state key="normal" title="Import from File"/>
                                 <connections>
                                     <action selector="importFromFile" destination="zKg-vx-nna" eventType="touchUpInside" id="Dsa-06-OPH"/>
@@ -108,9 +102,6 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwB-R1-Lad" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="197" width="335" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="r9I-ci-YfX"/>
-                                </constraints>
                                 <state key="normal" title="Import"/>
                                 <connections>
                                     <action selector="importURL" destination="QjL-oU-RBK" eventType="touchUpInside" id="cEc-QQ-kPN"/>

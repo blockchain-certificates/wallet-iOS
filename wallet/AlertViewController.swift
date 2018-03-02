@@ -59,6 +59,7 @@ class AlertViewController : UIViewController {
             buttonStack.addArrangedSubview(button)
             // 0.304 multiplier is 40% of 0.76 x screen width
             button.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.304).isActive = true
+            button.heightAnchor.constraint(equalToConstant: Style.Measure.heightButtonSmall).isActive = true
         }
         self.buttons = buttons
     }

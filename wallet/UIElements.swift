@@ -132,6 +132,10 @@ class ButtonBase : UIButton {
         imageView?.contentMode = .center
         imageView?.clipsToBounds = false
         
+        let height = heightAnchor.constraint(equalToConstant: Style.Measure.heightButtonLarge)
+        height.priority = UILayoutPriority(rawValue: 900)
+        height.isActive = true
+        
         isHighlighted = false
         isEnabled = true
     }
@@ -198,6 +202,7 @@ class TertiaryButton : SecondaryButton {
     override var strokeColor : UIColor { return .clear }
     override var strokeColorHighlighted : UIColor { return .clear }
 
+    override var fillColor : UIColor { return .clear }
     override var fillColorHighlighted : UIColor { return .clear }
 
 }

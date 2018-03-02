@@ -105,7 +105,7 @@ struct Style {
         
         static let gapS = CGFloat(8)
         
-        static let heightButtonSmall = CGFloat(40)
+        static let heightButtonSmall = CGFloat(44)
         
         static let heightButtonLarge = CGFloat(52)
         
