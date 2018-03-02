@@ -25,14 +25,14 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zir-UZ-s9I" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                        <rect key="frame" x="167.5" y="212" width="42" height="84.5"/>
+                        <rect key="frame" x="20" y="212" width="337" height="84.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.94901960784313721" green="0.96078431372549022" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="fWg-mr-5rN" firstAttribute="leading" secondItem="iyo-AB-Jhf" secondAttribute="leading" id="40R-qW-5kk"/>
                     <constraint firstItem="Zir-UZ-s9I" firstAttribute="top" secondItem="fWg-mr-5rN" secondAttribute="bottom" constant="24" id="AMn-PV-eMg"/>
@@ -43,6 +43,7 @@
                     <constraint firstItem="Zir-UZ-s9I" firstAttribute="leading" secondItem="iyo-AB-Jhf" secondAttribute="leading" constant="20" id="YJF-Ef-GP4"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.94117647058823528" green="0.95294117647058818" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="logoImage" destination="fWg-mr-5rN" id="hKG-Lc-YgZ"/>
                 <outlet property="nameLabel" destination="Zir-UZ-s9I" id="yR3-YY-w64"/>
