@@ -67,32 +67,44 @@
                                     <segue destination="BDX-GA-efs" kind="show" id="vkf-IZ-y29"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEb-1p-Syt" userLabel="Play button">
-                                <rect key="frame" x="165" y="353" width="84" height="84"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="fsO-cp-LR3"/>
-                                    <constraint firstAttribute="height" constant="120" id="kRU-Gt-UT1"/>
-                                </constraints>
-                                <state key="normal" image="icon_play"/>
-                                <connections>
-                                    <action selector="playWelcomeVideo" destination="C6e-aU-jG4" eventType="touchUpInside" id="Wwr-Pl-kia"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="blockcerts_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rU6-4J-hvL">
                                 <rect key="frame" x="87" y="35" width="240" height="128"/>
                             </imageView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="58a-hx-ELF">
+                                <rect key="frame" x="145" y="128" width="124" height="512"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEb-1p-Syt" userLabel="Play button">
+                                        <rect key="frame" x="20" y="20" width="84" height="84"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="fsO-cp-LR3"/>
+                                            <constraint firstAttribute="height" constant="120" id="kRU-Gt-UT1"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_play"/>
+                                        <connections>
+                                            <action selector="playWelcomeVideo" destination="C6e-aU-jG4" eventType="touchUpInside" id="Wwr-Pl-kia"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="TEb-1p-Syt" firstAttribute="centerY" secondItem="58a-hx-ELF" secondAttribute="centerY" id="Haf-0J-7HI"/>
+                                    <constraint firstItem="TEb-1p-Syt" firstAttribute="centerX" secondItem="58a-hx-ELF" secondAttribute="centerX" id="hx8-lK-Yqi"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.060152135789394379" green="0.14074519276618958" blue="0.30589857697486877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="TEb-1p-Syt" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="1FV-7N-EBM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qKJ-hu-YmP" secondAttribute="trailing" id="BFh-mC-Y9j"/>
-                            <constraint firstItem="TEb-1p-Syt" firstAttribute="centerY" secondItem="5m7-RT-iLO" secondAttribute="centerY" id="Gl5-bF-h5X"/>
+                            <constraint firstItem="uWO-Mc-lvh" firstAttribute="top" secondItem="58a-hx-ELF" secondAttribute="bottom" id="DpN-z0-Y8n"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="Kuj-oZ-T7k"/>
                             <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="qKJ-hu-YmP" secondAttribute="bottom" constant="20" id="Oyh-Ns-D2r"/>
+                            <constraint firstItem="58a-hx-ELF" firstAttribute="width" secondItem="5m7-RT-iLO" secondAttribute="width" id="QnQ-g2-xcW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uWO-Mc-lvh" secondAttribute="trailing" id="RZU-MA-7gM"/>
                             <constraint firstItem="uWO-Mc-lvh" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="Yqg-aR-7nW"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="eKv-uB-s0z"/>
+                            <constraint firstItem="58a-hx-ELF" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="hNc-BH-uV8"/>
                             <constraint firstItem="rU6-4J-hvL" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="huW-XS-Cbl"/>
+                            <constraint firstItem="58a-hx-ELF" firstAttribute="top" secondItem="rU6-4J-hvL" secondAttribute="bottom" id="k7y-CF-1Wx"/>
                             <constraint firstItem="rU6-4J-hvL" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" id="lqN-0Q-3Ao"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="vhZ-Ij-9SM"/>
                         </constraints>
