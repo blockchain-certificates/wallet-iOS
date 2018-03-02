@@ -76,8 +76,8 @@
                             <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEb-1p-Syt" userLabel="Play button">
                                 <rect key="frame" x="165" y="353" width="84" height="84"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="84" id="fsO-cp-LR3"/>
-                                    <constraint firstAttribute="height" constant="84" id="kRU-Gt-UT1"/>
+                                    <constraint firstAttribute="width" constant="120" id="fsO-cp-LR3"/>
+                                    <constraint firstAttribute="height" constant="120" id="kRU-Gt-UT1"/>
                                 </constraints>
                                 <state key="normal" image="icon_play"/>
                                 <connections>
@@ -794,7 +794,7 @@
     </scenes>
     <resources>
         <image name="blockcerts_logo" width="250" height="52"/>
-        <image name="icon_play" width="338" height="340"/>
+        <image name="icon_play" width="200" height="200"/>
         <image name="illo_backup" width="105" height="105"/>
         <image name="illo_success" width="105" height="105"/>
         <image name="illo_writtenbackup" width="105" height="105"/>
