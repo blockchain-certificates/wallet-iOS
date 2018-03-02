@@ -251,7 +251,6 @@ class FullBleedImageView : UIImageView {
 }
 
 
-
 class ClosureSleeve {
     let closure: ()->()
     

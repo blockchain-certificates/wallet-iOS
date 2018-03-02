@@ -97,6 +97,8 @@
 		83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF5DE91ECBAC7A0063397C /* CertificateView.swift */; };
 		A909528220449DD000F29CF5 /* C5T2BLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A909528120449DD000F29CF5 /* C5T2BLabelCell.xib */; };
 		A927355A2031E1C9002361FD /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92735592031E1C9002361FD /* AlertViewController.swift */; };
+		A92E89662049A63D0035460B /* liblottie-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A92E89672049A63D0035460B /* liblottie-ios.a */; };
+		A92E89692049A93C0035460B /* welcome_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = A92E89682049A93B0035460B /* welcome_lottie.json */; };
 		A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */; };
 		A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A958CCD4202E4BD100CD35C6 /* Alert.storyboard */; };
 		A961EBC72028BE020016CD1E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A961EBC62028BE020016CD1E /* Style.swift */; };
@@ -240,6 +242,8 @@
 		83FF5DE91ECBAC7A0063397C /* CertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateView.swift; sourceTree = "<group>"; };
 		A909528120449DD000F29CF5 /* C5T2BLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = C5T2BLabelCell.xib; sourceTree = "<group>"; };
 		A92735592031E1C9002361FD /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		A92E89672049A63D0035460B /* liblottie-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblottie-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A92E89682049A93B0035460B /* welcome_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = welcome_lottie.json; path = Assets/welcome_lottie.json; sourceTree = "<group>"; };
 		A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		A958CCD4202E4BD100CD35C6 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		A961EBC62028BE020016CD1E /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A92E89662049A63D0035460B /* liblottie-ios.a in Frameworks */,
 				83FF5DE71ECBA4100063397C /* Blockcerts.framework in Frameworks */,
 				830AB9EF1DA6BC4B00185E19 /* CommonCrypto.framework in Frameworks */,
 				83111B771DA414EB006B058D /* JSONLD.framework in Frameworks */,
@@ -376,8 +381,8 @@
 				838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */,
 				838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */,
 				8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */,
-				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
 				A98911D2204711E300E4E722 /* Settings.storyboard */,
+				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
 				A961EBC62028BE020016CD1E /* Style.swift */,
 				A9D2B049202B5893002015F0 /* UIElements.swift */,
 				830120331EF4481B008EC454 /* Utils */,
@@ -387,6 +392,7 @@
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
 				83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */,
 				8388B8A91EDE15BF00B28A57 /* WebLoginViewController.swift */,
+				A92E89682049A93B0035460B /* welcome_lottie.json */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -518,6 +524,7 @@
 		A653FD3709C0B4FB37E36B2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A92E89672049A63D0035460B /* liblottie-ios.a */,
 				83FF5DE61ECBA4100063397C /* Blockcerts.framework */,
 				830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */,
 				83111B761DA414EB006B058D /* JSONLD.framework */,
@@ -687,6 +694,7 @@
 				A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */,
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */,
+				A92E89692049A93C0035460B /* welcome_lottie.json in Resources */,
 				836031C51E5E513A005B2D2E /* Settings.bundle in Resources */,
 				838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */,
 				838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */,

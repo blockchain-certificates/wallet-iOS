@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 
 class OnboardingControllerBase : UIViewController {
-    
+
     @IBAction func playWelcomeVideo() {
         guard let path = Bundle.main.path(forResource: "introduction", ofType:"mp4") else {
             print("Video file not found")
@@ -70,6 +70,17 @@ class LandingScreenViewController : OnboardingControllerBase {
         super.viewDidLoad()
         title = ""
         view.backgroundColor = Style.Color.C3
+        
+        let animation = LOTAnimationView(name: "welcome_lottie.json")
+        animation.loopAnimation = true
+        animation.contentMode = .scaleAspectFill
+        animation.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(animation, at: 0)
+        animation.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        animation.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        animation.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        animation.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        animation.play()
     }
 }
 

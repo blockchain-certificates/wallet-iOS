@@ -3,11 +3,13 @@ PODS:
     - ISO8601DateFormatter
     - OpenSSL-Universal (= 1.0.1.16)
   - ISO8601DateFormatter (0.8)
+  - lottie-ios (2.5.0)
   - OpenSans (1.0.3)
   - OpenSSL-Universal (1.0.1.16)
 
 DEPENDENCIES:
   - CoreBitcoin (from `https://raw.github.com/oleganza/CoreBitcoin/master/CoreBitcoin.podspec`)
+  - lottie-ios
   - OpenSans
 
 EXTERNAL SOURCES:
@@ -17,9 +19,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   CoreBitcoin: 4ac6f6a61e543f08399c2fe57496d4fdcbaf74f9
   ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
+  lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
   OpenSans: 33078846463eae780aa5f82986b51cce085f970d
   OpenSSL-Universal: 85ef63bf81d0741b03c8719cd29685c37c59518d
 
-PODFILE CHECKSUM: 04c0862188b076822fd7c8a779b71db7151a1b5b
+PODFILE CHECKSUM: f5eff986df741e007132745bd97f4043a957c8bc
 
 COCOAPODS: 1.4.0

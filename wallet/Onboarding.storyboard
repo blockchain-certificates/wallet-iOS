@@ -53,9 +53,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="landing_background" translatesAutoresizingMaskIntoConstraints="NO" id="0Wu-ce-MCr">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWO-Mc-lvh" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="620" width="374" height="44"/>
                                 <constraints>
@@ -94,19 +91,15 @@
                         <color key="backgroundColor" red="0.060152135789394379" green="0.14074519276618958" blue="0.30589857697486877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="TEb-1p-Syt" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="1FV-7N-EBM"/>
-                            <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="0Wu-ce-MCr" secondAttribute="bottom" id="4aa-sr-yue"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qKJ-hu-YmP" secondAttribute="trailing" id="BFh-mC-Y9j"/>
                             <constraint firstItem="TEb-1p-Syt" firstAttribute="centerY" secondItem="5m7-RT-iLO" secondAttribute="centerY" id="Gl5-bF-h5X"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="Kuj-oZ-T7k"/>
                             <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="qKJ-hu-YmP" secondAttribute="bottom" constant="20" id="Oyh-Ns-D2r"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uWO-Mc-lvh" secondAttribute="trailing" id="RZU-MA-7gM"/>
-                            <constraint firstItem="0Wu-ce-MCr" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" id="YIY-KJ-4Hj"/>
                             <constraint firstItem="uWO-Mc-lvh" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="Yqg-aR-7nW"/>
-                            <constraint firstItem="0Wu-ce-MCr" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leading" id="bHf-Br-qX3"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="eKv-uB-s0z"/>
                             <constraint firstItem="rU6-4J-hvL" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="huW-XS-Cbl"/>
-                            <constraint firstItem="rU6-4J-hvL" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" constant="60" id="lqN-0Q-3Ao"/>
-                            <constraint firstAttribute="trailing" secondItem="0Wu-ce-MCr" secondAttribute="trailing" id="qjW-TV-Elx"/>
+                            <constraint firstItem="rU6-4J-hvL" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" id="lqN-0Q-3Ao"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="vhZ-Ij-9SM"/>
                         </constraints>
                     </view>
@@ -805,7 +798,6 @@
         <image name="illo_backup" width="105" height="105"/>
         <image name="illo_success" width="105" height="105"/>
         <image name="illo_writtenbackup" width="105" height="105"/>
-        <image name="landing_background" width="1606" height="2370"/>
         <image name="returning_video_background" width="1630" height="912"/>
     </resources>
     <inferredMetricsTieBreakers>

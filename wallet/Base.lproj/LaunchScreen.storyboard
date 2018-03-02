@@ -24,11 +24,6 @@
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="iEc-fP-vRQ">
                                 <rect key="frame" x="20" y="20" width="374" height="600"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blockcerts_logo" translatesAutoresizingMaskIntoConstraints="NO" id="eP5-4S-we7">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="600"/>
-                                    </imageView>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                         </subviews>
@@ -46,7 +41,4 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="blockcerts_logo" width="250" height="52"/>
-    </resources>
 </document>
