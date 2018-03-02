@@ -145,7 +145,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             return
         }
         
-        Logger.main.info("Redirecting from the Issuer Collection to a certificate: \(certificate)")
+        Logger.main.info("Redirecting from the Issuer Collection to a certificate: \(certificate.id)")
         
         shouldRedirectToCertificate = certificate
     }

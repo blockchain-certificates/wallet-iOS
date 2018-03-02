@@ -52,7 +52,6 @@ class VerifyCredential {
         let htmlCopy = URL(fileURLWithPath: NSString(string: cachePath).appendingPathComponent("verify.html"))
         webView.loadFileURL(htmlCopy, allowingReadAccessTo: URL(fileURLWithPath: cachePath))
         self.webView = webView
-        print(cachePath)
         updateTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateOutput), userInfo: nil, repeats: true)
         
         do {
@@ -60,8 +59,7 @@ class VerifyCredential {
             let blockchain = credential?.signature.anchors.first?.chain ?? "unknown"
             chain = BlockChain(rawValue: blockchain)
         } catch {
-            print("JSON parsing error")
-            print(error)
+            Logger.main.info("JSON parsing error during verification: \(error)")
         }
     }
     

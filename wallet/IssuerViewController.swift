@@ -134,7 +134,7 @@ class IssuerViewController: UIViewController {
             controller.navigationItem.title = NSLocalizedString("Add Credential", comment: "View controller navigation bar title")
             controller.presentedModally = true
             controller.successCallback = { [weak self] (certificate) in
-                self?.navigateTo(certificate: certificate, animated: true)
+                self?.navigateAfterAdding(certificate: certificate)
             }
             
             self?.present(navigationController, animated: true, completion: nil)
@@ -166,23 +166,6 @@ class IssuerViewController: UIViewController {
     
 
     // Certificate handling
-    func addCertificate(from url: URL) {
-        showActivityIndicator()
-        defer {
-            hideActivityIndicator()
-        }
-        guard let certificate = CertificateManager().load(certificateAt: url) else {
-            Logger.main.error("Failed to load certificate from \(url)")
-            
-            let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
-            let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
-            alertError(localizedTitle: title, localizedMessage: message)
-            
-            return
-        }
-        
-        saveCertificateIfOwned(certificate: certificate)
-    }
     
     func importCertificate(from data: Data?) {
         showActivityIndicator()
@@ -219,7 +202,10 @@ class IssuerViewController: UIViewController {
         manager.save(certificate: certificate)
         certificates = manager.loadCertificates()
         certificateTableController.certificates = certificates
-        
+        navigateAfterAdding(certificate: certificate)
+    }
+    
+    func navigateAfterAdding(certificate: Certificate) {
         if certificate.issuer.id == managedIssuer?.issuer?.id {
             navigateTo(certificate: certificate)
             
