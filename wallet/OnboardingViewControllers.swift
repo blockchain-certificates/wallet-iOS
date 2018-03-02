@@ -70,6 +70,10 @@ class LandingScreenViewController : OnboardingControllerBase {
         super.viewDidLoad()
         title = ""
         view.backgroundColor = Style.Color.C3
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = Style.Color.C3
         
         let animation = LOTAnimationView(name: "welcome_lottie.json")
         animation.loopAnimation = true
