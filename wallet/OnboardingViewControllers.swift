@@ -261,6 +261,9 @@ class OnboardingManualBackup : ScrollingOnboardingControllerBase {
     override func viewDidLoad() {
         super.viewDidLoad()
         passphraseLabel.text = Keychain.loadSeedPhrase()
+        passphraseLabel.font = Style.Font.T3S
+        passphraseLabel.textColor = Style.Color.C3
+
         UIApplication.shared.statusBarStyle = .default
     }
 }
@@ -348,7 +351,9 @@ class OnboardingCurrentUser : ScrollingOnboardingControllerBase, UITextViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.delegate = self
-        
+        textView.font = Style.Font.T3S
+        textView.textColor = Style.Color.C3
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(adjustForKeyboard),
                                                name: Notification.Name.UIKeyboardWillHide,

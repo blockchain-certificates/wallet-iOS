@@ -593,6 +593,8 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
         urlTextView.backgroundColor = Style.Color.C10
         urlTextView.text = ""
         urlTextView.delegate = self
+        urlTextView.font = Style.Font.T3S
+        urlTextView.textColor = Style.Color.C3
     }
     
     @objc func dismissModally() {

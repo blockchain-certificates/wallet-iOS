@@ -48,8 +48,13 @@ class AddIssuerViewController: UIViewController {
         navigationController?.navigationBar.backgroundColor = Style.Color.C3
         
         issuerURLField.delegate = self
+        issuerURLField.font = Style.Font.T3S
+        issuerURLField.textColor = Style.Color.C3
+
         nonceField.delegate = self
-        
+        issuerURLField.font = Style.Font.T3S
+        issuerURLField.textColor = Style.Color.C3
+
         loadDataIntoFields()
         stylize()
         
