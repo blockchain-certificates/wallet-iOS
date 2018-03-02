@@ -202,7 +202,7 @@ class SecondaryButton : ButtonBase {
 
 @IBDesignable
 class TertiaryButton : SecondaryButton {
-    
+    override var textColorHighlighted : UIColor { return Style.Color.C11 }
     override var strokeColor : UIColor { return .clear }
     override var strokeColorHighlighted : UIColor { return .clear }
 

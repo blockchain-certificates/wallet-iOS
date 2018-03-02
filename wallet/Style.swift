@@ -41,11 +41,10 @@ struct Style {
         static let C10 = UIColor(hexString: "#ECF5FE")
         
         /// C11: Selected primary button background
-        static let C11 = UIColor(hexString: "#FFFFFF")
+        static let C11 = UIColor(hexString: "#97CEB8")
         
         /// C12: highlighted button fill/outline
         static let C12 = UIColor(hexString: "#11493E")
-        static let C12_80 = UIColor(hexString: "#11493Ee8")
         
         /// C13: drop shadow, 5% black
         static let C13 = UIColor(hexString: "#0000000C")
