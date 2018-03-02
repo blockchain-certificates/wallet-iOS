@@ -22,7 +22,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You will receive an email when an issuer is ready to be added. Follow the link in the email to complete the process." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-L3-LXy" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You will receive an email when an issuer is ready to be added. Follow the link in the email to complete the process." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-L3-LXy" customClass="LabelC6T3S" customModule="certificates" customModuleProvider="target">
                     <rect key="frame" x="16" y="365" width="343" height="56"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -38,7 +38,7 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.94901960784313721" green="0.96078431372549022" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="288" id="AsO-Uf-nRq"/>
                         <constraint firstItem="jzP-lF-GAk" firstAttribute="centerY" secondItem="BLa-Hv-leI" secondAttribute="centerY" id="C0G-ii-mIN"/>
@@ -52,7 +52,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.94901960784313721" green="0.96078431372549022" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BLa-Hv-leI" secondAttribute="trailing" id="13M-UM-xBw"/>
                 <constraint firstItem="9j9-s2-uov" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="B6N-yg-5s8"/>
