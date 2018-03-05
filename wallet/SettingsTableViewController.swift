@@ -400,7 +400,7 @@ class SettingsMyPassphraseViewController : ScrollingOnboardingControllerBase, UI
 
     @IBAction func backupCopy() {
         let alert = AlertViewController.create(title: NSLocalizedString("Are you sure?", comment: "Confirmation before copying for backup"),
-                                               message: NSLocalizedString("Email is a low-security backup method. Do you want to continue?", comment: "Scare tactic to warn user about insecurity of email"),
+                                               message: NSLocalizedString("This is a low-security backup method. Do you want to continue?", comment: "Scare tactic to warn user about insecurity of email"),
                                                icon: .warning)
         
         let okayButton = SecondaryButton(frame: .zero)
