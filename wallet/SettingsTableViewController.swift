@@ -291,14 +291,48 @@ class SettingsTableViewController: UITableViewController {
                 switch error {
                 case AuthErrors.noAuthMethodAllowed:
                     DispatchQueue.main.async { [weak self] in
-                        let title = NSLocalizedString("Authentication Error", comment: "Alert view title shown when unable to authenticate for My Passphrase")
-                        let message = NSLocalizedString("It looks like local authentication is disabled for this app. Without it, showing your passphrase is insecure. Please enable local authentication for this app in Settings.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
+
+                        var biometricType: BiometricType {
+                            let authContext = LAContext()
+                            if #available(iOS 11, *) {
+                                let _ = authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+                                switch(authContext.biometryType) {
+                                case .none:
+                                    return .none
+                                case .touchID:
+                                    return .touch
+                                case .faceID:
+                                    return .face
+                                }
+                            } else {
+                                return authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? .touch : .none
+                            }
+                        }
+                        
+                        enum BiometricType {
+                            case none
+                            case touch
+                            case face
+                        }
+
+                        let title = NSLocalizedString("Protect Your Passphrase", comment: "Alert view title shown when unable to authenticate for My Passphrase")
+
+                        let message: String
+                        switch biometricType {
+                        case .face:
+                            message = NSLocalizedString("It looks like Face ID has been disabled for this app. Please go to Settings and enable Face ID to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
+                        case .touch:
+                            message = NSLocalizedString("It looks like Touch ID has been disabled for this app. Please go to Settings and enable Touch ID to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
+                        case .none:
+                            message = NSLocalizedString("It looks like device authentication has not been enabled. Please go to Settings and enable authentication to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
+                        }
+
                         let buttonText = NSLocalizedString("Okay", comment: "Button copy")
                         let alert = AlertViewController.create(title: title, message: message, icon: .warning, buttonText: buttonText)
                         self?.present(alert, animated: false, completion: nil)
                     }
                 default:
-                    //                    self.specificAuthenticationError = nil
+                    // self.specificAuthenticationError = nil
                     break
                 }
                 
