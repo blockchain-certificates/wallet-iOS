@@ -348,7 +348,7 @@ class IssuerMetadataViewController : BaseMetadataViewController {
             data.append(InfoCell(title: NSLocalizedString("Shared Address", comment: "Issuer info screen field label"), detail: address.scopedValue, url: nil))
         }
         if let email = issuer.issuer?.email {
-            data.append(InfoCell(title: NSLocalizedString("Email", comment: "Issuer info screen field label"), detail: email, url: URL(string: "mailto:\(email)")))
+            data.append(InfoCell(title: NSLocalizedString("Issuer Contact Email", comment: "Issuer info screen field label"), detail: email, url: URL(string: "mailto:\(email)")))
         }
 //        data.append(InfoCell(title: NSLocalizedString("URL", comment: "Issuer info screen field label"), detail: issuer.url  // issuer.id.absoluteString, url: issuer.id))
     }
