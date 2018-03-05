@@ -52,7 +52,12 @@ class AlertViewController : UIViewController {
         messageLabel.text = message
     }
     
-    func set(buttons: [UIButton]) {
+    func set(buttons: [UIButton], clear: Bool = false) {
+        if clear {
+            buttonStack.arrangedSubviews.forEach {
+                buttonStack.removeArrangedSubview($0)
+            }
+        }
         buttons.forEach { button in
             button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
             button.setContentHuggingPriority(.defaultLow, for: .horizontal)

@@ -512,56 +512,54 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
     }
     
     func saveCertificateIfOwned(certificate: Certificate) {
+        guard !userCancelledAction else { return }
         let manager = CertificateManager()
         manager.save(certificate: certificate)
     }
     
+    var userCancelledAction = false
     
-    var activityIndicator: UIActivityIndicatorView?
+    // User tapped cancel in progress alert
+    func cancelAddCredential() {
+        userCancelledAction = true
+        hideActivityIndicator()
+    }
     
     func showActivityIndicator() {
-        guard self.activityIndicator == nil else { return }
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        activityIndicator.startAnimating()
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        activityIndicator.layer.cornerRadius = 10
-        activityIndicator.backgroundColor = .gray
-        activityIndicator.alpha = 0.8
+        userCancelledAction = false
         
-        let center: CGPoint
-        if let keyView: UIView = UIApplication.shared.keyWindow?.rootViewController?.view {
-            center = keyView.convert(keyView.center, to: view)
-        } else {
-            center = CGPoint(x: view.center.x, y: view.center.y - 32)
+        let title = NSLocalizedString("Adding Credential", comment: "Progress alert title")
+        let message = NSLocalizedString("Please wait while your credential is added.", comment: "Progress alert message while adding a credential")
+        let cancel = NSLocalizedString("Cancel", comment: "Button copy")
+
+        let alert = AlertViewController.create(title: title, message: message, icon: .verifying, buttonText: cancel)
+
+        alert.buttons.first?.onTouchUpInside { [weak self] in
+            self?.cancelAddCredential()
         }
-        activityIndicator.center = center
-        
-        view.addSubview(activityIndicator)
-        self.activityIndicator = activityIndicator
+
+        present(alert, animated: false, completion: nil)
     }
     
     func hideActivityIndicator() {
-        guard let activityIndicator = activityIndicator else { return }
-        activityIndicator.removeFromSuperview()
-        self.activityIndicator = nil
+        presentedViewController?.dismiss(animated: false, completion: nil)
     }
     
     func alertError(localizedTitle: String, localizedMessage: String) {
+        hideActivityIndicator()
+        
         let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
-        let alert = AlertViewController.createWarning(title: localizedTitle, message: localizedMessage, buttonText: okay)
+        let alert = AlertViewController.create(title: localizedTitle, message: localizedMessage, icon: .warning, buttonText: okay)
         present(alert, animated: false, completion: nil)
     }
 
     func alertSuccess(callback: (() -> Void)?) {
+        hideActivityIndicator()
+
         let title = NSLocalizedString("Success!", comment: "Alert title")
         let message = NSLocalizedString("A credential was imported. Please check your credentials screen.", comment: "Successful credential import from URL in settings alert message")
         let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
         let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
-        if let callback = callback {
-            alert.buttons.first?.onTouchUpInside {
-                callback()
-            }
-        }
         present(alert, animated: false, completion: nil)
     }
     
@@ -596,31 +594,35 @@ class SettingsAddCredentialURLViewController: SettingsAddCredentialViewControlle
     func addCertificate(from url: URL) {
         urlTextView.resignFirstResponder()
         showActivityIndicator()
-        defer {
-            hideActivityIndicator()
-        }
-        guard let certificate = CertificateManager().load(certificateAt: url) else {
-            Logger.main.error("Failed to load certificate from \(url)")
-            
-            let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
-            let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
-            alertError(localizedTitle: title, localizedMessage: message)
-            
-            return
-        }
         
-        saveCertificateIfOwned(certificate: certificate)
-        
-        alertSuccess(callback: { [weak self] in
-            if self?.presentedModally ?? true {
-                self?.presentingViewController?.dismiss(animated: true, completion: { [weak self] in
-                    self?.successCallback?(certificate)
-                })
-            } else {
-                self?.navigationController?.popViewController(animated: true)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+
+            guard let certificate = CertificateManager().load(certificateAt: url) else {
+                DispatchQueue.main.async { [weak self] in
+                    Logger.main.error("Failed to load certificate from \(url)")
+                    
+                    let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
+                    let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
+                    self?.alertError(localizedTitle: title, localizedMessage: message)
+                }
+                return
             }
-        })
-        
+            
+            DispatchQueue.main.async { [weak self] in
+                guard !(self?.userCancelledAction ?? false) else { return }
+                self?.saveCertificateIfOwned(certificate: certificate)
+            
+                self?.alertSuccess(callback: { [weak self] in
+                    if self?.presentedModally ?? true {
+                        self?.presentingViewController?.dismiss(animated: true, completion: { [weak self] in
+                            self?.successCallback?(certificate)
+                        })
+                    } else {
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                })
+            }
+        }
     }
 
     override func viewDidLoad() {
