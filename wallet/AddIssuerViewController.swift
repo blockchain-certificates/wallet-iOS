@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import Blockcerts
 
-class AddIssuerViewController: UIViewController {
+class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     private var inProgressRequest : CommonRequest?
     var delegate : AddIssuerViewControllerDelegate?
     
@@ -189,7 +189,7 @@ class AddIssuerViewController: UIViewController {
                         self?.showAddIssuerError(withManagedIssuerError: introductionError!)
                         return
                     }
-                    
+                    self?.dismissWebView()
                     self?.notifyAndDismiss(managedIssuer: managedIssuer)
                 }
             } else {
@@ -291,16 +291,23 @@ class AddIssuerViewController: UIViewController {
             }
         }
     }
-}
-
-extension AddIssuerViewController : ManagedIssuerDelegate {
+    
+    // MARK: - ManagedIssuerDelegate
+    
+    var webViewNavigationController: UINavigationController?
+    
     func presentWebView(at url: URL, with navigationDelegate: WKNavigationDelegate) throws {
         Logger.main.info("Presenting the web view in the Add Issuer screen.")
         
         let webController = WebLoginViewController(requesting: url, navigationDelegate: navigationDelegate) { [weak self] in
             self?.cancelWebLogin()
+            self?.dismissWebView()
         }
         let navigationController = UINavigationController(rootViewController: webController)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = Style.Color.C3
+        navigationController.navigationBar.barTintColor = Style.Color.C3
+        webViewNavigationController = navigationController
         
         OperationQueue.main.addOperation {
             self.present(navigationController, animated: true, completion: nil)
@@ -309,7 +316,7 @@ extension AddIssuerViewController : ManagedIssuerDelegate {
     
     func dismissWebView() {
         OperationQueue.main.addOperation { [weak self] in
-            self?.presentedViewController?.dismiss(animated: true, completion: nil)
+            self?.webViewNavigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
