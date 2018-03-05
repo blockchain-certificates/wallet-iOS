@@ -72,12 +72,7 @@ class AddIssuerViewController: UIViewController {
     }
     
     func saveDataIntoFields() {
-        guard let urlString = issuerURLField.text else {
-            // TODO: Somehow alert/convey the fact that this field is required.
-            return
-        }
-        guard let url = URL(string: urlString) else {
-            // TODO: Somehow alert/convey that this isn't a valid URL
+        guard let urlString = issuerURLField.text, let url = URL(string: urlString) else {
             return
         }
         identificationURL = url
@@ -280,8 +275,9 @@ class AddIssuerViewController: UIViewController {
         Logger.main.info("Add issuer failed with message: \(message)")
         
         let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
+        let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
 
-        let alert = AlertViewController.createWarning(title: title, message: message)
+        let alert = AlertViewController.createWarning(title: title, message: cannedMessage)
         
         isLoading = false
         
