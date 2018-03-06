@@ -11,6 +11,11 @@ import AVKit
 
 class OnboardingControllerBase : UIViewController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
     @IBAction func playWelcomeVideo() {
         guard let path = Bundle.main.path(forResource: "introduction", ofType:"mp4") else {
             print("Video file not found")
@@ -108,6 +113,7 @@ class NewUserViewController : ScrollingOnboardingControllerBase {
     var attempts = 5
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         title = NSLocalizedString("New User", comment: "Onboarding screen label for New User")
         generatePassphrase()
     }

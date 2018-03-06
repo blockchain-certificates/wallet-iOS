@@ -34,6 +34,7 @@ class ReplacePassphraseViewController: UIViewController {
                                         action: #selector(saveNewPassphrase))
         
         navigationItem.rightBarButtonItem = replaceButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     @objc func saveNewPassphrase() {

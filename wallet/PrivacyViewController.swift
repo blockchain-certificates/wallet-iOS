@@ -21,7 +21,8 @@ class PrivacyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         title = NSLocalizedString("Privacy Policy", comment: "Title for the screen with our privacy policy on it.")
 
         let privacyURL = URL(string: "http://www.learningmachine.com/mobile-privacy.html")!
@@ -45,7 +46,7 @@ class AboutPassphraseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         title = NSLocalizedString("About Passphrase", comment: "Title for the screen with about passphrase info on it.")
         
         let url = URL(string: "http://www.learningmachine.com/about-passphrases/")!

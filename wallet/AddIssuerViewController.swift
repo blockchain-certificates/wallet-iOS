@@ -47,7 +47,8 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.backgroundColor = Style.Color.C3
-        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         issuerURLField.delegate = self
         issuerURLField.font = Style.Font.T3S
         issuerURLField.textColor = Style.Color.C3

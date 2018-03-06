@@ -46,6 +46,7 @@ class CertificateViewController: UIViewController {
         super.viewDidLoad()
         self.title = certificate.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(displayCredentialInfo))
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         shareButton.isEnabled = certificate.assertion.uid != Identifiers.sampleCertificateUID
         renderedCertificateView.render(certificate: certificate)
         analytics.track(event: .viewed, certificate: certificate)

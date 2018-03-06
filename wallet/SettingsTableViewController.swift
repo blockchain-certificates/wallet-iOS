@@ -59,7 +59,8 @@ class SettingsTableViewController: UITableViewController {
 
         navigationController?.navigationBar.barTintColor = Style.Color.C3
         navigationController?.navigationBar.isTranslucent = false
-        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
         navigationItem.leftBarButtonItem = cancelBarButton
         
@@ -391,6 +392,7 @@ class SettingsMyPassphraseViewController : ScrollingOnboardingControllerBase, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         passphraseLabel.text = Keychain.loadSeedPhrase()
     }
 
@@ -453,6 +455,12 @@ class SettingsMyPassphraseViewController : ScrollingOnboardingControllerBase, UI
 
 
 class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.title = NSLocalizedString("Add a Credential", comment: "Title in settings")
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
