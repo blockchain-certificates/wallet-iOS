@@ -56,8 +56,10 @@ class IssuerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppDelegate.instance.styleApplicationDefault()
-        certificates = CertificateManager().loadCertificates()
-        certificateTableController.certificates = certificates
+        guard let managedIssuer = managedIssuer else { return }
+        certificates = CertificateManager().loadCertificates().filter { certificate in
+            return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
+        }
         certificateTableController.tableView.reloadData()
     }
     
