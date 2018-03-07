@@ -130,7 +130,9 @@ class IssuerViewController: UIViewController {
             navigationController.navigationBar.barTintColor = Style.Color.C3
             navigationController.navigationBar.isTranslucent = false
             
-            controller.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: controller, action: #selector(SettingsAddCredentialURLViewController.dismissModally))
+            let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: controller, action: #selector(SettingsAddCredentialURLViewController.dismissModally))
+            controller.navigationItem.rightBarButtonItem = cancelBarButton
+            
             controller.navigationItem.title = NSLocalizedString("Add Credential", comment: "View controller navigation bar title")
             controller.presentedModally = true
             controller.successCallback = { [weak self] (certificate) in
