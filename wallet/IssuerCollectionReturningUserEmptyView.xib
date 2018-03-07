@@ -31,7 +31,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLa-Hv-leI">
                     <rect key="frame" x="0.0" y="20" width="375" height="288"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="illo_ready_for_certs" translatesAutoresizingMaskIntoConstraints="NO" id="jzP-lF-GAk">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="illo_ready_for_certs" translatesAutoresizingMaskIntoConstraints="NO" id="jzP-lF-GAk">
                             <rect key="frame" x="39" y="28" width="296" height="237"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="237" id="ZD4-Bw-nF1"/>
@@ -40,8 +40,9 @@
                     </subviews>
                     <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="288" id="AsO-Uf-nRq"/>
+                        <constraint firstItem="jzP-lF-GAk" firstAttribute="top" secondItem="BLa-Hv-leI" secondAttribute="top" constant="25" id="1gd-Qm-I8m"/>
                         <constraint firstItem="jzP-lF-GAk" firstAttribute="centerY" secondItem="BLa-Hv-leI" secondAttribute="centerY" id="C0G-ii-mIN"/>
+                        <constraint firstAttribute="bottom" secondItem="jzP-lF-GAk" secondAttribute="bottom" constant="25" id="YOM-Xq-LNh"/>
                         <constraint firstItem="jzP-lF-GAk" firstAttribute="centerX" secondItem="BLa-Hv-leI" secondAttribute="centerX" id="ty5-dQ-uAA"/>
                     </constraints>
                 </view>
@@ -68,10 +69,13 @@
                 <constraint firstItem="BLa-Hv-leI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xRB-CD-B4J"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="imageHeightConstraint" destination="ZD4-Bw-nF1" id="zdw-VH-hlE"/>
+            </connections>
             <point key="canvasLocation" x="34.5" y="54.5"/>
         </view>
     </objects>
     <resources>
-        <image name="illo_ready_for_certs" width="260" height="156"/>
+        <image name="illo_ready_for_certs" width="280" height="245"/>
     </resources>
 </document>

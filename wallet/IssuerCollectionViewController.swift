@@ -571,6 +571,6 @@ class IssuerCollectionEmptyView : UIView {
         setNeedsLayout()
     }
 }
-class IssuerCollectionReturningUserEmptyView : UIView {}
+class IssuerCollectionReturningUserEmptyView : IssuerCollectionEmptyView {}
 class C5T2BLabelCell : UICollectionViewCell {}
 
