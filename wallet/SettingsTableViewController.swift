@@ -234,6 +234,7 @@ class SettingsTableViewController: UITableViewController {
             return
         }
         
+        // TODO: set recipient to techsupport@learningmachine.com
         let items : [Any] = [ shareURL ]
         let shareController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         

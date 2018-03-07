@@ -139,6 +139,8 @@ class ButtonBase : UIButton {
         
         isHighlighted = false
         isEnabled = true
+        
+        titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     override init(frame: CGRect) {
