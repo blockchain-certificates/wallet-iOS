@@ -321,9 +321,9 @@ class SettingsTableViewController: UITableViewController {
                         let message: String
                         switch biometricType {
                         case .face:
-                            message = NSLocalizedString("Please go to Settings and enable Face ID for Blockcerts Wallet to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
+                            message = NSLocalizedString("Please go to the Settings for Blockcerts Wallet and enable Face ID to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
                         case .touch:
-                            message = NSLocalizedString("Please go to Settings and enable Touch ID for Blockcerts Wallet to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
+                            message = NSLocalizedString("Please go to the Settings for Blockcerts Wallet and enable Touch ID to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
                         case .none:
                             message = NSLocalizedString("Please go to Settings and create a passcode for this phone to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
                         }
