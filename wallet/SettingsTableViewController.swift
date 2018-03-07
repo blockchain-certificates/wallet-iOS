@@ -395,6 +395,11 @@ class SettingsMyPassphraseViewController : ScrollingOnboardingControllerBase, UI
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         passphraseLabel.text = Keychain.loadSeedPhrase()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppDelegate.instance.styleApplicationDefault()
+    }
 
     override var defaultScrollViewInset : UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -432,6 +437,8 @@ class SettingsMyPassphraseViewController : ScrollingOnboardingControllerBase, UI
         self.passphrase = passphrase
         let activity = UIActivityViewController(activityItems: [self], applicationActivities: nil)
         
+        AppDelegate.instance.styleApplicationAlternate()
+
         present(activity, animated: true) {}
     }
     
