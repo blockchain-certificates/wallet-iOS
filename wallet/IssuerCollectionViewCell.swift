@@ -15,6 +15,18 @@ class IssuerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var certificateCountLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
 
+    override var isSelected: Bool {
+        didSet {
+            containerView.backgroundColor = isSelected ? Style.Color.C10 : Style.Color.C1
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            containerView.backgroundColor = isHighlighted ? Style.Color.C10 : Style.Color.C1
+        }
+    }
+    
     var issuerName : String? {
         didSet {
             accessibilityLabel = issuerName
@@ -31,10 +43,12 @@ class IssuerCollectionViewCell: UICollectionViewCell {
         containerView.layer.cornerRadius = Style.Measure.cornerRadius
         
         titleLabel.text = issuerName
+        titleLabel.backgroundColor = .clear
         
         isAccessibilityElement = true
         accessibilityLabel = NSLocalizedString("Issuer", comment: "This describes the issuer cell in the collection view. It's an accessibility label read aloud for users with VoiceOver.")
         accessibilityTraits |= UIAccessibilityTraitButton
+        
     }
 
     var certificateCount = 0 {
