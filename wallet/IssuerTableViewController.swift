@@ -57,10 +57,6 @@ class IssuerTableViewController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.isScrollEnabled = !certificates.isEmpty
-    }
-    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
