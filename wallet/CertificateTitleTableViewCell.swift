@@ -30,6 +30,16 @@ class CertificateTitleTableViewCell: UITableViewCell {
     @IBOutlet weak var certificateSubtitleLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        containerView.backgroundColor = selected ? Style.Color.C10 : Style.Color.C1
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        containerView.backgroundColor = highlighted ? Style.Color.C10 : Style.Color.C1
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
                 
@@ -40,6 +50,7 @@ class CertificateTitleTableViewCell: UITableViewCell {
         containerView.layer.borderColor = Style.Color.C8.cgColor
         containerView.layer.borderWidth = 1
         
+        selectedBackgroundView = UIView()
     }
     
 }
