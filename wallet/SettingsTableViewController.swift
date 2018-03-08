@@ -497,10 +497,6 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
     }
     
     func importCertificate(from data: Data?) {
-        showActivityIndicator()
-        defer {
-            hideActivityIndicator()
-        }
         guard let data = data else {
             Logger.main.error("Failed to load a certificate from file. Data is nil.")
             
@@ -517,7 +513,6 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
             alertSuccess(callback: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             })
-
         } catch {
             Logger.main.error("Importing failed with error: \(error)")
             

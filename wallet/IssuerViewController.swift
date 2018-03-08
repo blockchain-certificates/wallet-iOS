@@ -113,16 +113,6 @@ class IssuerViewController: UIViewController {
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
-            Logger.main.info("User has chosen to add a certificate from file")
-            
-            let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
-            controller.delegate = self
-            controller.modalPresentationStyle = .formSheet
-
-            self?.present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
-        }))
-        
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
             Logger.main.info("Add Credential from URL tapped in issuer view")
             let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
@@ -142,6 +132,16 @@ class IssuerViewController: UIViewController {
             }
             
             self?.present(navigationController, animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
+            Logger.main.info("User has chosen to add a certificate from file")
+            
+            let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
+            controller.delegate = self
+            controller.modalPresentationStyle = .formSheet
+            
+            self?.present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
         }))
         
         alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
