@@ -240,6 +240,7 @@ class SettingsTableViewController: UITableViewController {
         
         present(shareController, animated: true, completion: { [weak self] in
             self?.deselectRow()
+            AppDelegate.instance.styleApplicationAlternate()
         })
     }
     
