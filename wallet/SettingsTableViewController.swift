@@ -459,7 +459,8 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
         controller.delegate = self
         controller.modalPresentationStyle = .formSheet
         
-        present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
+        AppDelegate.instance.styleApplicationAlternate()
+        present(controller, animated: true, completion: nil)
     }
     
     func importCertificate(from data: Data?) {
