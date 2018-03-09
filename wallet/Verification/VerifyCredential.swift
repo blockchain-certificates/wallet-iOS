@@ -14,7 +14,7 @@ class VerifyCredential {
     enum BlockChain: String {
         case mainnet = "bitcoinMainnet"
         case testnet = "bitcoinTestnet"
-        case mocknet = "mochchain"
+        case mocknet = "mockchain"
     }
     
     let certificate: Data
