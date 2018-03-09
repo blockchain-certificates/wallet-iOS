@@ -295,7 +295,7 @@ class SettingsTableViewController: UITableViewController {
                 case AuthErrors.noAuthMethodAllowed:
                     DispatchQueue.main.async { [weak self] in
                         let title = NSLocalizedString("Protect Your Passphrase", comment: "Alert view title shown when unable to authenticate for My Passphrase")
-                        let message = NSLocalizedString("Please go to the Settings for Blockcerts Wallet and enable Touch ID, Face ID or a passcode to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
+                        let message = NSLocalizedString("Please go to the Settings for Blockcerts Wallet and enable Touch ID, Face ID, or a passcode to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
                         let buttonText = NSLocalizedString("Okay", comment: "Button copy")
                         let alert = AlertViewController.create(title: title, message: message, icon: .warning, buttonText: buttonText)
                         self?.present(alert, animated: false, completion: nil)
