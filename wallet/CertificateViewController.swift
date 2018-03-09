@@ -169,7 +169,7 @@ class CertificateViewController: UIViewController {
                 if let toStep = toStep {
                     // error, show specific error message
                     alert.icon = .failure
-                    alert.set(title: NSLocalizedString("Failure!", comment: "Title in alert after validation fails"))
+                    alert.set(title: NSLocalizedString("Fail", comment: "Title in alert after validation fails"))
                     alert.set(message: NSLocalizedString(self?.validationErrors[toStep] ?? "", comment: "Detail message after validation failure, variable"))
                 } else {
                     // successfully validated
