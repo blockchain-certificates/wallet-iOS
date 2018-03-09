@@ -245,6 +245,9 @@ class CheckmarkButton : SecondaryButton {
         
         checkmark.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Style.Measure.buttonCheckPadding).isActive = true
         checkmark.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        titleEdgeInsets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+
     }
 
 }
