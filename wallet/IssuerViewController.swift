@@ -60,6 +60,7 @@ class IssuerViewController: UIViewController {
         certificates = CertificateManager().loadCertificates().filter { certificate in
             return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
         }
+        certificateTableController.certificates = certificates
         certificateTableController.tableView.reloadData()
     }
     

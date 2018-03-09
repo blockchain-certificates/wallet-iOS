@@ -538,6 +538,7 @@ class SettingsAddCredentialViewController: UIViewController, UIDocumentPickerDel
         let message = NSLocalizedString("A credential was imported. Please check your credentials screen.", comment: "Successful credential import from URL in settings alert message")
         let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
         let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
+        alert.buttons.first?.onTouchUpInside { callback?() }
         present(alert, animated: false, completion: nil)
     }
     
