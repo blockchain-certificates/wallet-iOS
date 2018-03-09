@@ -212,7 +212,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         DispatchQueue.main.async { [weak self] in
             
             let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
-            let message = NSLocalizedString("An isser was added. Please check your issuers screen.", comment: "Add issuer alert message")
+            let message = NSLocalizedString("An issuer was added. Please check your issuers screen.", comment: "Add issuer alert message")
             let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
             let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
             if let button = alert.buttons.first {
