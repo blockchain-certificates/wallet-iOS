@@ -422,7 +422,7 @@ class SettingsMyPassphraseViewController : ScrollingOnboardingControllerBase, UI
     
     func activityViewController(_ activityViewController: UIActivityViewController,
                                 subjectForActivityType activityType: UIActivityType?) -> String {
-        return NSLocalizedString("BlockCerts Backup", comment: "Email subject line when backing up passphrase")
+        return NSLocalizedString("Blockcerts Backup", comment: "Email subject line when backing up passphrase")
     }
     
 }
