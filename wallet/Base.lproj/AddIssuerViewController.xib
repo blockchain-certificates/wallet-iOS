@@ -75,6 +75,12 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </textView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you've added an issuer from email, please don't tap on the Add Issuer button." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVq-9y-QK2" customClass="LabelC6T3R" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="166" y="156" width="42" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YfE-OO-122" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
                                     <rect key="frame" x="51" y="86" width="272.5" height="30"/>
                                     <state key="normal" title="Add an Issuer"/>
@@ -89,15 +95,18 @@
                                 <constraint firstItem="zSZ-UY-k6C" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="3kj-8i-CpV"/>
                                 <constraint firstAttribute="trailing" secondItem="krB-iU-XOc" secondAttribute="trailing" constant="20" id="AQO-kf-mno"/>
                                 <constraint firstItem="krB-iU-XOc" firstAttribute="top" secondItem="zSZ-UY-k6C" secondAttribute="bottom" constant="24" id="BDI-o4-SLd"/>
+                                <constraint firstAttribute="trailing" secondItem="aVq-9y-QK2" secondAttribute="trailing" constant="20" id="Byq-xp-O3V"/>
                                 <constraint firstAttribute="trailing" secondItem="zSZ-UY-k6C" secondAttribute="trailing" constant="20" id="OeV-gh-m0q"/>
+                                <constraint firstItem="aVq-9y-QK2" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="UQK-WG-6EK"/>
                                 <constraint firstItem="SVg-Ue-m8l" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" constant="20" id="abx-xg-9Iv"/>
+                                <constraint firstItem="aVq-9y-QK2" firstAttribute="top" secondItem="Yob-Sd-s4n" secondAttribute="bottom" constant="24" id="dyC-x8-283"/>
                                 <constraint firstAttribute="bottom" secondItem="YfE-OO-122" secondAttribute="bottom" id="iBE-Wq-JyF"/>
                                 <constraint firstAttribute="trailing" secondItem="YfE-OO-122" secondAttribute="trailing" constant="20" id="mXb-eD-JoJ"/>
                                 <constraint firstItem="SVg-Ue-m8l" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="mvQ-qV-3hf"/>
                                 <constraint firstItem="Yob-Sd-s4n" firstAttribute="top" secondItem="krB-iU-XOc" secondAttribute="bottom" constant="16" id="nIf-bP-5Ot"/>
-                                <constraint firstItem="YfE-OO-122" firstAttribute="top" secondItem="Yob-Sd-s4n" secondAttribute="bottom" constant="24" id="pQp-5D-Bgp"/>
                                 <constraint firstItem="Yob-Sd-s4n" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="qrY-rA-mKM"/>
                                 <constraint firstItem="krB-iU-XOc" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="sj8-h7-2yy"/>
+                                <constraint firstItem="YfE-OO-122" firstAttribute="top" secondItem="aVq-9y-QK2" secondAttribute="bottom" constant="16" id="vu2-28-7vR"/>
                                 <constraint firstAttribute="trailing" secondItem="SVg-Ue-m8l" secondAttribute="trailing" constant="20" id="wqO-LE-mFY"/>
                                 <constraint firstAttribute="trailing" secondItem="Yob-Sd-s4n" secondAttribute="trailing" constant="20" id="zIe-bo-LHa"/>
                             </constraints>
