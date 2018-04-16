@@ -10,36 +10,24 @@ import UIKit
 import WebKit
 import Blockcerts
 
-class AddIssuerViewController: UIViewController {
+class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     private var inProgressRequest : CommonRequest?
     var delegate : AddIssuerViewControllerDelegate?
     
     var identificationURL: URL?
     var nonce: String?
     var managedIssuer: ManagedIssuer?
+    var presentedModally = false
     
     @IBOutlet weak var scrollView : UIScrollView!
-    
-    @IBOutlet weak var issuerURLLabel: UILabel!
-    @IBOutlet weak var issuerURLField: UITextField!
-    
-    @IBOutlet weak var identityInformationLabel : UILabel!
-    @IBOutlet weak var nonceField : UITextField!
+    @IBOutlet weak var issuerURLField: UITextView!
+    @IBOutlet weak var nonceField : UITextView!
+    @IBOutlet weak var submitButton : UIButton!
     
     var isLoading = false {
         didSet {
-            if loadingView != nil {
-                OperationQueue.main.addOperation { [weak self] in
-                    self?.loadingView.isHidden = !(self?.isLoading)!
-                }
-            }
         }
     }
-    @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var loadingStatusLabel : UILabel!
-    @IBOutlet weak var loadingCancelButton : UIButton!
-
     
     init(identificationURL: URL? = nil, nonce: String? = nil) {
         self.identificationURL = identificationURL
@@ -54,17 +42,21 @@ class AddIssuerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .baseColor
         
-        title = NSLocalizedString("Add Issuer", comment: "Navigation title for the 'Add Issuer' form.")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveIssuerTapped(_:)))
+        title = NSLocalizedString("Add an Issuer", comment: "Navigation title for the 'Add Issuer' form.")
         
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = .brandColor
-        
-        loadingView.isHidden = !isLoading
-        
+        navigationController?.navigationBar.backgroundColor = Style.Color.C3
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+        issuerURLField.delegate = self
+        issuerURLField.font = Style.Font.T3S
+        issuerURLField.textColor = Style.Color.C3
+
+        nonceField.delegate = self
+        issuerURLField.font = Style.Font.T3S
+        issuerURLField.textColor = Style.Color.C3
+
         loadDataIntoFields()
         stylize()
         
@@ -76,53 +68,21 @@ class AddIssuerViewController: UIViewController {
     func loadDataIntoFields() {
         issuerURLField.text = identificationURL?.absoluteString
         nonceField.text = nonce
+        
+        submitButton.isEnabled = nonceField.text.count > 0 && issuerURLField.text.count > 0
     }
     
     func saveDataIntoFields() {
-        guard let urlString = issuerURLField.text else {
-            // TODO: Somehow alert/convey the fact that this field is required.
-            return
-        }
-        guard let url = URL(string: urlString) else {
-            // TODO: Somehow alert/convey that this isn't a valid URL
+        guard let urlString = issuerURLField.text, let url = URL(string: urlString) else {
             return
         }
         identificationURL = url
         nonce = nonceField.text
     }
     
-    func stylize() {
-        let fields = [
-            issuerURLField,
-            nonceField
-        ]
-        
-        fields.forEach { (textField) in
-            if let field = textField as? SkyFloatingLabelTextField {
-                field.tintColor = .tintColor
-                field.selectedTitleColor = .primaryTextColor
-                field.textColor = .primaryTextColor
-                field.font = Fonts.brandFont
+    func stylize() { }
 
-                field.lineColor = .placeholderTextColor
-                field.selectedLineHeight = 1
-                field.selectedLineColor = .tintColor
-                
-                field.placeholderColor = .placeholderTextColor
-                field.placeholderFont = Fonts.placeholderFont
-            }
-        }
-        
-        let labels = [
-            issuerURLLabel,
-            identityInformationLabel
-        ]
-        labels.forEach { (label) in
-            label?.textColor = .primaryTextColor
-        }
-    }
-
-    @objc func saveIssuerTapped(_ sender: UIBarButtonItem) {
+    @IBAction func addIssuerTapped(_ sender: Any) {
         Logger.main.info("Save issuer tapped")
         
         // TODO: validation.
@@ -160,6 +120,7 @@ class AddIssuerViewController: UIViewController {
         }
 
         let scrollInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardRect.size.height, right: 0)
+        scrollView.isScrollEnabled = true
         scrollView.contentInset = scrollInsets
         scrollView.scrollIndicatorInsets = scrollInsets
     }
@@ -229,7 +190,7 @@ class AddIssuerViewController: UIViewController {
                         self?.showAddIssuerError(withManagedIssuerError: introductionError!)
                         return
                     }
-                    
+                    self?.dismissWebView()
                     self?.notifyAndDismiss(managedIssuer: managedIssuer)
                 }
             } else {
@@ -248,10 +209,23 @@ class AddIssuerViewController: UIViewController {
     func notifyAndDismiss(managedIssuer: ManagedIssuer) {
         delegate?.added(managedIssuer: managedIssuer)
         
-        OperationQueue.main.addOperation { [weak self] in
+        DispatchQueue.main.async { [weak self] in
+            
+            let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
+            let message = NSLocalizedString("An issuer was added. Please check your issuers screen.", comment: "Add issuer alert message")
+            let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
+            let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
+            if let button = alert.buttons.first {
+                button.onTouchUpInside { [weak self] in
+                    if self?.presentedModally ?? true {
+                        self?.presentingViewController?.dismiss(animated: true, completion: nil)
+                    } else {
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
             self?.isLoading = false
-            self?.presentedViewController?.dismiss(animated: true, completion: nil)
-            self?.dismiss(animated: true, completion: nil)
+            self?.present(alert, animated: false, completion: nil)
         }
     }
     
@@ -302,32 +276,39 @@ class AddIssuerViewController: UIViewController {
         Logger.main.info("Add issuer failed with message: \(message)")
         
         let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .cancel, handler: nil))
+        let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
 
+        let alert = AlertViewController.createWarning(title: title, message: cannedMessage)
+        
         isLoading = false
         
         OperationQueue.main.addOperation {
             if self.presentedViewController != nil {
                 self.presentedViewController?.dismiss(animated: true, completion: { 
-                    self.present(alertController, animated: true, completion: nil)
+                    self.present(alert, animated: false, completion: nil)
                 })
             } else {
-                self.present(alertController, animated: true, completion: nil)
+                self.present(alert, animated: false, completion: nil)
             }
         }
     }
-}
-
-extension AddIssuerViewController : ManagedIssuerDelegate {
+    
+    // MARK: - ManagedIssuerDelegate
+    
+    var webViewNavigationController: UINavigationController?
+    
     func presentWebView(at url: URL, with navigationDelegate: WKNavigationDelegate) throws {
         Logger.main.info("Presenting the web view in the Add Issuer screen.")
         
         let webController = WebLoginViewController(requesting: url, navigationDelegate: navigationDelegate) { [weak self] in
             self?.cancelWebLogin()
+            self?.dismissWebView()
         }
         let navigationController = UINavigationController(rootViewController: webController)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = Style.Color.C3
+        navigationController.navigationBar.barTintColor = Style.Color.C3
+        webViewNavigationController = navigationController
         
         OperationQueue.main.addOperation {
             self.present(navigationController, animated: true, completion: nil)
@@ -336,7 +317,7 @@ extension AddIssuerViewController : ManagedIssuerDelegate {
     
     func dismissWebView() {
         OperationQueue.main.addOperation { [weak self] in
-            self?.presentedViewController?.dismiss(animated: true, completion: nil)
+            self?.webViewNavigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -355,30 +336,25 @@ struct ValidationOptions : OptionSet {
     static let email    = ValidationOptions(rawValue: 1 << 2)
 }
 
-extension AddIssuerViewController : UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let errorMessage : String? = nil
-        
-        switch textField {
-        case issuerURLField:
-            break;
-        case nonceField:
-            break;
-        default:
-            break;
-        }
-        
-        if let field = textField as? SkyFloatingLabelTextField {
-            field.errorMessage = errorMessage
+protocol AddIssuerViewControllerDelegate : class {
+    func added(managedIssuer: ManagedIssuer)
+}
+
+extension AddIssuerViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            if textView === issuerURLField {
+                nonceField.becomeFirstResponder()
+            } else {
+                textView.resignFirstResponder()
+            }
+            return false
         }
         return true
     }
     
-    func validate(field : UITextField, options: ValidationOptions) -> String? {
-        return nil
+    func textViewDidChange(_ textView: UITextView) {
+        submitButton.isEnabled = nonceField.text.count > 0 && issuerURLField.text.count > 0
     }
-}
-
-protocol AddIssuerViewControllerDelegate : class {
-    func added(managedIssuer: ManagedIssuer)
+    
 }

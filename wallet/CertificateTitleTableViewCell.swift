@@ -9,7 +9,6 @@
 import UIKit
 
 class CertificateTitleTableViewCell: UITableViewCell {
-    let missingSubtitleText = "No subtitle provided"
     let primaryTextColor = UIColor.black
     
     public var title : String? {
@@ -21,32 +20,37 @@ class CertificateTitleTableViewCell: UITableViewCell {
     }
     public var subtitle : String? {
         didSet {
-            updateSubtitleLabel()
+            if certificateSubtitleLabel != nil {
+                certificateSubtitleLabel.text = subtitle
+            }
         }
     }
 
     @IBOutlet weak var certificateTitleLabel: UILabel!
     @IBOutlet weak var certificateSubtitleLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        containerView.backgroundColor = selected ? Style.Color.C10 : Style.Color.C1
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        containerView.backgroundColor = highlighted ? Style.Color.C10 : Style.Color.C1
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        self.accessoryType = .disclosureIndicator
-        
+                
         certificateTitleLabel.text = title
-        certificateTitleLabel.textColor = primaryTextColor
+        certificateSubtitleLabel.text = subtitle
         
-        updateSubtitleLabel()
+        containerView.layer.cornerRadius = Style.Measure.cornerRadius
+        containerView.layer.borderColor = Style.Color.C8.cgColor
+        containerView.layer.borderWidth = 1
+        
+        selectedBackgroundView = UIView()
     }
     
-    func updateSubtitleLabel() {
-        if let subtitle = subtitle {
-            certificateSubtitleLabel.text = subtitle
-            certificateSubtitleLabel.textColor = primaryTextColor
-        } else {
-            certificateSubtitleLabel.text = missingSubtitleText
-            certificateSubtitleLabel.textColor = .placeholderTextColor
-        }
-    }
 }

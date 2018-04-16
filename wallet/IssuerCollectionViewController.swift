@@ -40,27 +40,28 @@ class IssuerCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = NSLocalizedString("Blockcerts Wallet", comment: "Title of main interface")
+
         // Register for notifications
         NotificationCenter.default.addObserver(self, selector: #selector(redirectRequested(notification:)), name: NotificationNames.redirectToCertificate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onboardingCompleted(notification:)), name: NotificationNames.onboardingComplete, object: nil)
 
         // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
-        self.collectionView?.register(cellNib, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView?.register(cellNib, forCellWithReuseIdentifier: reuseIdentifier)
         let addNib = UINib(nibName: "AddIssuerCollectionViewCell", bundle: nil)
-        self.collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
-        self.collectionView?.delegate = self
-        self.collectionView?.backgroundColor = .baseColor
+        collectionView?.register(addNib, forCellWithReuseIdentifier: addIssuerReuseIdentifier)
+        // Add a section header "Issuers"
+        collectionView?.register(UINib(nibName: "C5T2BLabelCell", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView")
+        collectionView?.delegate = self
+        collectionView?.backgroundColor = Style.Color.C2
 
-        adjustCellSize()
+        let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: collectionView!.bounds.width - 40, height: 136)
+        layout.sectionInset = UIEdgeInsetsMake(12, 20, 8, 20)
 
-        // Style this bad boy
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.barTintColor = .brandColor
-        self.navigationController?.navigationBar.tintColor = .tintColor
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor.titleColor
-        ]
+        navigationController?.navigationBar.barTintColor = Style.Color.C3
+        navigationController?.navigationBar.isTranslucent = false
 
         // Load any existing issuers.
         loadIssuers(shouldReloadCollection: false)
@@ -77,6 +78,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         loadCertificates(shouldReloadCollection: false)
         loadBackgroundView()
         reloadCollectionView()
+        AppDelegate.instance.styleApplicationDefault()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -89,86 +91,38 @@ class IssuerCollectionViewController: UICollectionViewController {
     func loadBackgroundView() {
         if managedIssuers.isEmpty {
             loadEmptyBackgroundView()
-            title = nil
-            navigationItem.rightBarButtonItem = nil
         } else {
-            title = NSLocalizedString("Issuers", comment: "Title in screen of multiple issuers")
-            if navigationItem.rightBarButtonItem == nil {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addIssuerButtonTapped))
-            }
             collectionView?.backgroundView = nil
+        }
+        let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        if managedIssuers.isEmpty {
+            layout.headerReferenceSize = CGSize(width: view.bounds.width, height: 0)
+        } else {
+            layout.headerReferenceSize = CGSize(width: view.bounds.width, height: 44)
         }
     }
 
     func loadEmptyBackgroundView() {
-        guard collectionView?.backgroundView == nil else {
-            // We know the backgroundView is either this emptyState or nil. So this saves us from re-loading the same background view if it's already loaded.
-            return
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.hasReenteredPassphrase) {
+            let emptyView: IssuerCollectionReturningUserEmptyView = .fromNib()
+            collectionView?.backgroundView = emptyView
+        } else {
+            let emptyView: IssuerCollectionEmptyView = .fromNib()
+            collectionView?.backgroundView = emptyView
         }
-        let title = NSLocalizedString("YOU ARE READY!", comment: "Title for empty issuers view. Very encouraging.")
-        let message = NSLocalizedString("Issuers will send you email with a link to add them. This will send a special code that represents you. If you already have their information, continue.", comment: "Long explainer about what you have to do to wait with the app.")
-        let actionButtonText = NSLocalizedString("ADD ISSUER", comment: "Action button for adding an issuer")
-
-        let titleView = TitleLabel(frame: .zero)
-        titleView.text = title
-        titleView.textAlignment = .center
-
-        let messageView = UILabel(frame: .zero)
-        messageView.text = message
-        messageView.numberOfLines = 0
-        messageView.textAlignment = .center
-        messageView.font = UIFont.systemFont(ofSize: 14)
-        messageView.textColor = UIColor(red:0.11, green:0.11, blue:0.11, alpha:1.0)
-
-        let actionButton = RectangularButton(type: .custom)
-        actionButton.setTitle(actionButtonText, for: .normal)
-        actionButton.addTarget(self, action: #selector(addIssuerButtonTapped), for: .touchUpInside)
-
-
-        let stackView = UIStackView(arrangedSubviews: [titleView, messageView, actionButton])
-        stackView.axis = .vertical
-        stackView.spacing = 30
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        let sidePadding : CGFloat = 40
-        let verticalPadding : CGFloat = 44
-        let constraints = [
-            NSLayoutConstraint(item: stackView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: sidePadding),
-            NSLayoutConstraint(item: stackView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -sidePadding),
-            NSLayoutConstraint(item: stackView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: verticalPadding)
-        ]
-
-        let backgroundView = UIView()
-        backgroundView.addSubview(stackView)
-
-        collectionView?.backgroundView = backgroundView
-        NSLayoutConstraint.activate(constraints)
     }
-
+    
     func loadOnboardingIfNeeded() {
-        if !Keychain.hasPassphrase() {
+        let hasPerformedBackup = OnboardingBackupMethods.hasPerformedBackup
+        if !Keychain.hasPassphrase() || !hasPerformedBackup {
             let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
-            present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
+            let vc = storyboard.instantiateInitialViewController()! as! UINavigationController
+            if Keychain.hasPassphrase() && !hasPerformedBackup {
+                let welcome = storyboard.instantiateViewController(withIdentifier: "WelcomeReturningUsers")
+                vc.viewControllers = [welcome]
+            }
+            present(vc, animated: false, completion: nil)
         }
-    }
-
-    func adjustCellSize() {
-        // Constants
-        let spacing : CGFloat = 8
-        let textHeight : CGFloat = 35
-
-        guard let deviceWidth = self.collectionView?.bounds.width,
-            let deviceHeight = self.collectionView?.bounds.height else {
-            return
-        }
-        let targetWidth = min(deviceWidth, deviceHeight)
-
-        // figure out best size.
-        let newWidth = (targetWidth - (3 * spacing)) / 2
-        let newHeight = newWidth + textHeight
-
-        let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: newWidth, height: newHeight)
     }
 
     // MARK: - Actions
@@ -178,62 +132,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         let settingsTable = SettingsTableViewController()
         let controller = UINavigationController(rootViewController: settingsTable)
         present(controller, animated: true, completion: nil)
-    }
-
-    @objc func addIssuerButtonTapped() {
-        Logger.main.info("Add issuer button tapped")
-        
-        showAddIssuerFlow()
-    }
-
-    func addButtonTapped(_ sender: UIBarButtonItem) {
-        let addIssuer = NSLocalizedString("Add Issuer", comment: "Contextual action. Tapping this brings up the Add Issuer form.")
-        let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
-        let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
-        let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
-
-
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        alertController.addAction(UIAlertAction(title: addIssuer, style: .default, handler: { [weak self] _ in
-            self?.addIssuerButtonTapped()
-        }))
-
-        alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
-            let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
-            controller.delegate = self
-            controller.modalPresentationStyle = .formSheet
-
-            self?.present(controller, animated: true, completion: nil)
-        }))
-
-        alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
-            let certificateURLPrompt = NSLocalizedString("What's the URL of the certificate?", comment: "Certificate URL prompt for importing a certificate.")
-            let importAction = NSLocalizedString("Import", comment: "Import certificate action")
-
-            let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)
-            urlPrompt.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = NSLocalizedString("URL", comment: "URL placeholder text")
-            })
-
-            urlPrompt.addAction(UIAlertAction(title: importAction, style: .default, handler: { (_) in
-                guard let urlField = urlPrompt.textFields?.first,
-                    let trimmedText = urlField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
-                    let url = URL(string: trimmedText) else {
-                        return
-                }
-
-                _ = self?.add(certificateURL: url)
-            }))
-
-            urlPrompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
-
-            self?.present(urlPrompt, animated: true, completion: nil)
-        }))
-
-        alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
-
-        present(alertController, animated: true, completion: nil)
     }
     
     // Mark: Notifications
@@ -247,7 +145,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             return
         }
         
-        Logger.main.info("Redirecting from the Issuer Collection to a certificate: \(certificate)")
+        Logger.main.info("Redirecting from the Issuer Collection to a certificate: \(certificate.id)")
         
         shouldRedirectToCertificate = certificate
     }
@@ -310,11 +208,19 @@ class IssuerCollectionViewController: UICollectionViewController {
         genericCell = cell
 
         // Common styling
-        genericCell.layer.borderColor = UIColor.borderColor.cgColor
-        genericCell.layer.borderWidth = 0.5
-        genericCell.layer.cornerRadius = 3
+        genericCell.layer.borderColor = Style.Color.C8.cgColor
+        genericCell.layer.borderWidth = 1
+        genericCell.layer.cornerRadius = Style.Measure.cornerRadius
+        genericCell.layer.shadowColor = Style.Color.C13.cgColor
+        genericCell.layer.shadowRadius = 4
+        genericCell.layer.shadowOffset = CGSize(width: 2, height: 2)
 
         return genericCell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", for: indexPath)
+        return headerView
     }
 
     // MARK: Issuer handling
@@ -462,35 +368,40 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
 
         guard data != nil, let certificate = try? CertificateParser.parse(data: data!) else {
-            let title = NSLocalizedString("Invalid Certificate", comment: "Title for an alert when importing an invalid certificate")
-            let message = NSLocalizedString("That file doesn't appear to be a valid certificate.", comment: "Message in an alert when importing an invalid certificate")
+            let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
+            let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
+            let okay = NSLocalizedString("Okay", comment: "Button copy")
 
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .default, handler: nil))
-
-            present(alertController, animated: true, completion: nil)
-
+            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            present(alert, animated: false, completion: nil)
             return false
         }
 
         let assertionUid = certificate.assertion.uid;
         guard !certificates.contains(where: { $0.assertion.uid == assertionUid }) else {
             if !silently {
+                
                 let title = NSLocalizedString("File already imported", comment: "Alert title when you re-import an existing certificate")
                 let message = NSLocalizedString("You've already imported that file. Want to view it?", comment: "Longer explanation about importing an existing file.")
-
-                let viewAction = UIAlertAction(title: NSLocalizedString("View", comment: "Action prompt to view the imported certificate"), style: .default, handler: { [weak self] _ in
-                    if let certificate = self?.certificates.first(where: { $0.assertion.uid == assertionUid }) {
-                        self?.navigateTo(certificate: certificate, animated: true)
-                    }
-                })
-                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Dismiss action"), style: .cancel, handler: nil)
-
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alertController.addAction(cancelAction)
-                alertController.addAction(viewAction)
-
-                present(alertController, animated: true, completion: nil)
+                let view = NSLocalizedString("View", comment: "Action prompt to view the imported certificate")
+                let cancel = NSLocalizedString("Cancel", comment: "Dismiss action")
+                let alert = AlertViewController.create(title: title, message: message, icon: .warning)
+                
+                let okayButton = SecondaryButton(frame: .zero)
+                okayButton.setTitle(view, for: .normal)
+                okayButton.onTouchUpInside { [weak self] in
+                    alert.dismiss(animated: false, completion: nil)
+                    self?.navigateTo(certificate: certificate, animated: true)
+                }
+                
+                let cancelButton = SecondaryButton(frame: .zero)
+                cancelButton.setTitle(cancel, for: .normal)
+                cancelButton.onTouchUpInside {
+                    alert.dismiss(animated: false, completion: nil)
+                }
+                alert.set(buttons: [okayButton, cancelButton])
+                
+                present(alert, animated: false, completion: nil)
             }
             return true
         }
@@ -528,6 +439,9 @@ class IssuerCollectionViewController: UICollectionViewController {
     func navigateTo(certificate: Certificate, animated: Bool = true) {
         Logger.main.info("Navigating to certificate \(certificate.title)")
         
+        // dismiss a modal view, if present
+        presentedViewController?.dismiss(animated: false, completion: nil)
+        
         guard let managedIssuer = managedIssuers.filter({ (possibleIssuer) -> Bool in
             return possibleIssuer.issuer?.id == certificate.issuer.id
         }).first else {
@@ -538,14 +452,20 @@ class IssuerCollectionViewController: UICollectionViewController {
         issuerController.navigateTo(certificate: certificate, animated: animated)
     }
 
-    func showAddIssuerFlow(identificationURL: URL? = nil, nonce : String? = nil) {
+    func showAddIssuerFlow(identificationURL: URL? = nil, nonce: String? = nil) {
         let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
         controller.delegate = self
+        controller.presentedModally = true
 
         let navigation = UINavigationController(rootViewController: controller)
+        navigation.navigationBar.isTranslucent = false
+        navigation.navigationBar.backgroundColor = Style.Color.C3
+        navigation.navigationBar.barTintColor = Style.Color.C3
+        let closeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), style: .plain, target: self, action: #selector(dismissModal))
+        controller.navigationItem.rightBarButtonItem = closeButton
 
-        if presentedViewController != nil {
-            presentedViewController?.dismiss(animated: false) { [weak self] in
+        if let presentedViewController = presentedViewController {
+            presentedViewController.dismiss(animated: false) { [weak self] in
                 OperationQueue.main.addOperation {
                     self?.present(navigation, animated: true) {
                         controller.autoSubmitIfPossible()
@@ -558,10 +478,20 @@ class IssuerCollectionViewController: UICollectionViewController {
             }
         }
     }
+    
+    @objc func dismissModal() {
+        presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let managedIssuer = managedIssuers[indexPath.item]
 
@@ -571,15 +501,9 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
 
 extension IssuerCollectionViewController : ManagedIssuerDelegate {
     func updated(managedIssuer: ManagedIssuer) {
-//        guard let index = self.managedIssuers.index(where: { (existingIssuer) -> Bool in
-//            existingIssuer.issuer?.id == managedIssuer.issuer?.id
-//        }) else { return }
-//
         OperationQueue.main.addOperation { [weak self] in
             self?.collectionView?.reloadData()
         }
-//        let itemsIndexPath = IndexPath(item: index, section: 0)
-//        collectionView?.reloadItems(at: [ itemsIndexPath ])
     }
 }
 
@@ -599,26 +523,22 @@ extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
 // MARK: Functions from the open source.
 extension IssuerCollectionViewController {
     func importCertificate(from data: Data?) {
-        let okay = NSLocalizedString("OK", comment: "OK dismiss action")
         guard let data = data else {
             let title = NSLocalizedString("Couldn't read file", comment: "Title for an error message displayed when we can't read a certificate file the user tried to import.")
             let message = NSLocalizedString("Something went wrong when trying to open the file.", comment: "A longer explanation of the error message displayed when we can't read a certificate file the user tried to import.")
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: okay, style: .default, handler: { [weak alertController] action in
-                alertController?.dismiss(animated: true, completion: nil)
-                }))
-            present(alertController, animated: true, completion: nil)
+            let okay = NSLocalizedString("Okay", comment: "Button copy")
+            
+            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            present(alert, animated: false, completion: nil)
             return
         }
         guard let certificate = try? CertificateParser.parse(data: data) else {
-            let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
-
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: okay, style: .default, handler: { [weak alertController] action in
-                alertController?.dismiss(animated: true, completion: nil)
-                }))
-            present(alertController, animated: true, completion: nil)
+            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
+            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
+            let okay = NSLocalizedString("Okay", comment: "Button copy")
+            
+            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            present(alert, animated: false, completion: nil)
             return
         }
 
@@ -634,3 +554,23 @@ extension IssuerCollectionViewController : UIDocumentPickerDelegate {
         importCertificate(from: data)
     }
 }
+
+
+class IssuerCollectionEmptyView : UIView {
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if UIScreen.main.bounds.height < 490 {
+            // Handle special layout needs of app running inside an iPad
+            imageHeightConstraint.constant = 120
+        } else if UIScreen.main.bounds.height < 570 {
+            // Handle special layout needs of app running in an iPhone 5 sized device
+            imageHeightConstraint.constant = 200
+        }
+        setNeedsLayout()
+    }
+}
+class IssuerCollectionReturningUserEmptyView : IssuerCollectionEmptyView {}
+class C5T2BLabelCell : UICollectionViewCell {}
+

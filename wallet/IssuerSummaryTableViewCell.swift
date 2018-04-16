@@ -27,10 +27,8 @@ class IssuerSummaryTableViewCell: UITableViewCell {
     func updateDescriptionLabel() {
         if let description = issuerDescription {
             descriptionLabel.text = description
-            descriptionLabel.textColor = .primaryTextColor
         } else {
             descriptionLabel.text = NSLocalizedString("No description provided.", comment: "Missing description text for issuer.")
-            descriptionLabel.textColor = .placeholderTextColor
         }
     }
 }

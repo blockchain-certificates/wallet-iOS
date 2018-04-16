@@ -10,11 +10,7 @@ import UIKit
 import Blockcerts
 
 class IssuerViewController: UIViewController {
-    var managedIssuer: ManagedIssuer? {
-        didSet {
-            self.title = managedIssuer?.issuer?.name
-        }
-    }
+    var managedIssuer: ManagedIssuer?
     var certificates = [Certificate]()
     
     fileprivate var certificateTableController : IssuerTableViewController!
@@ -24,7 +20,7 @@ class IssuerViewController: UIViewController {
         view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddIcon"), style: .plain, target: self, action: #selector(addCertificateTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(displayIssuerInfo))
 
         certificateTableController = IssuerTableViewController()
         certificateTableController.managedIssuer = managedIssuer
@@ -57,15 +53,87 @@ class IssuerViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppDelegate.instance.styleApplicationDefault()
+        guard let managedIssuer = managedIssuer else { return }
+        certificates = CertificateManager().loadCertificates().filter { certificate in
+            return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
+        }
+        certificateTableController.certificates = certificates
+        certificateTableController.tableView.reloadData()
+    }
+    
+    var activityIndicator: UIActivityIndicatorView?
+    
+    func showActivityIndicator() {
+        guard self.activityIndicator == nil else { return }
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activityIndicator.startAnimating()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.layer.cornerRadius = 10
+        activityIndicator.backgroundColor = .gray
+        activityIndicator.alpha = 0.8
+        
+        let center: CGPoint
+        if let keyView: UIView = UIApplication.shared.keyWindow?.rootViewController?.view {
+            center = keyView.convert(keyView.center, to: view)
+        } else {
+            center = CGPoint(x: view.center.x, y: view.center.y - 32)
+        }
+        activityIndicator.center = center
+        
+        view.addSubview(activityIndicator)
+        self.activityIndicator = activityIndicator
+    }
+    
+    func hideActivityIndicator() {
+        guard let activityIndicator = activityIndicator else { return }
+        activityIndicator.removeFromSuperview()
+        self.activityIndicator = nil
+    }
+    
+    @objc func displayIssuerInfo() {
+        guard let managedIssuer = managedIssuer else {
+            return
+        }
+        Logger.main.info("More info tapped on the Issuer display.")
+        let controller = IssuerMetadataViewController(issuer: managedIssuer)
+        controller.delegate = self
+        let navController = UINavigationController(rootViewController: controller);
+        present(navController, animated: true, completion: nil)
+    }
+    
     @objc func addCertificateTapped() {
         Logger.main.info("Add certificate button tapped")
         
-        let addCertificateFromFile = NSLocalizedString("Import Certificate from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
-        let addCertificateFromURL = NSLocalizedString("Import Certificate from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
+        let addCertificateFromFile = NSLocalizedString("Import Credential from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
+        let addCertificateFromURL = NSLocalizedString("Import Credential from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
         let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
         
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
+            Logger.main.info("Add Credential from URL tapped in issuer view")
+            let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
+            let controller = storyboard.instantiateViewController(withIdentifier: "addCredentialFromURL") as! SettingsAddCredentialURLViewController
+            
+            let navigationController = UINavigationController(rootViewController: controller)
+            navigationController.navigationBar.barTintColor = Style.Color.C3
+            navigationController.navigationBar.isTranslucent = false
+            
+            let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: controller, action: #selector(SettingsAddCredentialURLViewController.dismissModally))
+            controller.navigationItem.rightBarButtonItem = cancelBarButton
+            
+            controller.navigationItem.title = NSLocalizedString("Add Credential", comment: "View controller navigation bar title")
+            controller.presentedModally = true
+            controller.successCallback = { [weak self] (certificate) in
+                self?.navigateAfterAdding(certificate: certificate)
+            }
+            
+            self?.present(navigationController, animated: true, completion: nil)
+        }))
         
         alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
             Logger.main.info("User has chosen to add a certificate from file")
@@ -74,36 +142,7 @@ class IssuerViewController: UIViewController {
             controller.delegate = self
             controller.modalPresentationStyle = .formSheet
             
-            self?.present(controller, animated: true, completion: nil)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
-            Logger.main.info("User has chosen to add a certificate from URL")
-            
-            let certificateURLPrompt = NSLocalizedString("What's the URL of the certificate?", comment: "Certificate URL prompt for importing a certificate.")
-            let importAction = NSLocalizedString("Import", comment: "Import certificate action")
-            
-            let urlPrompt = UIAlertController(title: nil, message: certificateURLPrompt, preferredStyle: .alert)
-            urlPrompt.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = NSLocalizedString("URL", comment: "URL placeholder text")
-            })
-            
-            urlPrompt.addAction(UIAlertAction(title: importAction, style: .default, handler: { (_) in
-                guard let urlField = urlPrompt.textFields?.first,
-                    let trimmedText = urlField.text?.trimmingCharacters(in: CharacterSet.whitespaces),
-                    let url = URL(string: trimmedText) else {
-                        return
-                }
-                Logger.main.info("User attempting to add a certificate from \(url).")
-                
-                _ = self?.addCertificate(from: url)
-            }))
-            
-            urlPrompt.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: { _ in
-                Logger.main.info("User cancelled adding a certificate from URL.")
-            }))
-            
-            self?.present(urlPrompt, animated: true, completion: nil)
+            self?.present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
         }))
         
         alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
@@ -115,7 +154,7 @@ class IssuerViewController: UIViewController {
         let controller = CertificateViewController(certificate: certificate)
         controller.delegate = self
 
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             self.navigationController?.pushViewController(controller, animated: animated)
         }
     }
@@ -130,27 +169,19 @@ class IssuerViewController: UIViewController {
         }
     }
     
+
     // Certificate handling
-    func addCertificate(from url: URL) {
-        guard let certificate = CertificateManager().load(certificateAt: url) else {
-            Logger.main.error("Failed to load certificate from \(url)")
-            
-            let title = NSLocalizedString("Invalid Certificate", comment: "Title for an alert when importing an invalid certificate")
-            let message = NSLocalizedString("That file doesn't appear to be a valid certificate.", comment: "Message in an alert when importing an invalid certificate")
-            alertError(localizedTitle: title, localizedMessage: message)
-            
-            return
-        }
-        
-        saveCertificateIfOwned(certificate: certificate)
-    }
     
     func importCertificate(from data: Data?) {
+        showActivityIndicator()
+        defer {
+            hideActivityIndicator()
+        }
         guard let data = data else {
             Logger.main.error("Failed to load a certificate from file. Data is nil.")
             
-            let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
+            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
+            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
             alertError(localizedTitle: title, localizedMessage: message)
             return
         }
@@ -162,8 +193,8 @@ class IssuerViewController: UIViewController {
         } catch {
             Logger.main.error("Importing failed with error: \(error)")
             
-            let title = NSLocalizedString("Invalid Certificate", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid Certificate file.", comment: "Imported title didn't parse message")
+            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
+            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
             alertError(localizedTitle: title, localizedMessage: message)
             return
         }
@@ -176,7 +207,10 @@ class IssuerViewController: UIViewController {
         manager.save(certificate: certificate)
         certificates = manager.loadCertificates()
         certificateTableController.certificates = certificates
-        
+        navigateAfterAdding(certificate: certificate)
+    }
+    
+    func navigateAfterAdding(certificate: Certificate) {
         if certificate.issuer.id == managedIssuer?.issuer?.id {
             navigateTo(certificate: certificate)
             
@@ -189,12 +223,9 @@ class IssuerViewController: UIViewController {
     }
     
     func alertError(localizedTitle: String, localizedMessage: String) {
-        let okay = NSLocalizedString("OK", comment: "OK dismiss action")
-        
-        let prompt = UIAlertController(title: localizedTitle, message: localizedMessage, preferredStyle: .alert);
-        prompt.addAction(UIAlertAction(title: okay, style: .cancel, handler: nil))
-        
-        present(prompt, animated: true, completion: nil)
+        let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
+        let alert = AlertViewController.createWarning(title: localizedTitle, message: localizedMessage, buttonText: okay)
+        present(alert, animated: false, completion: nil)
     }
 }
 
@@ -228,20 +259,20 @@ extension IssuerViewController : CertificateViewControllerDelegate {
                 try FileManager.default.removeItem(at: filePath)
                 if let realSelf = self {
                     realSelf.certificates.remove(at: index)
-                    realSelf.certificateTableController.certificates = realSelf.certificates
-                    realSelf.certificateTableController.tableView.reloadData()
+                    if realSelf.certificateTableController != nil {
+                        realSelf.certificateTableController.certificates = realSelf.certificates
+                        realSelf.certificateTableController.tableView.reloadData()
+                    }
                 }
             } catch {
                 Logger.main.error("Failed to delete certificate: \(certificate.id) with error: \(error)")
                 
                 let title = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
                 let message = NSLocalizedString("Something went wrong when deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
-                let okay = NSLocalizedString("OK", comment: "Confirm action")
+                let okay = NSLocalizedString("Okay", comment: "Button copy")
                 
-                
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
-                self?.present(alertController, animated: true, completion: nil)
+                let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+                self?.present(alert, animated: false, completion: nil)
             }
         })
         

@@ -39,6 +39,8 @@ class RevealPassphraseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -49,7 +51,7 @@ class RevealPassphraseTableViewController: UITableViewController {
         tableView.register(LabeledTableViewCell.self, forCellReuseIdentifier: labeledCellReuseIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        tableView.backgroundColor = .baseColor
+        tableView.backgroundColor = Style.Color.C2
         
         authenticate()
     }
@@ -78,7 +80,6 @@ class RevealPassphraseTableViewController: UITableViewController {
             cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
             cell.textLabel?.text = NSLocalizedString("Show Passphrase", comment: "Action button for revealing the current passphrase")
             cell.selectionStyle = .default
-            cell.textLabel?.textColor = .brandColor
         }
         return cell
     }

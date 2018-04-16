@@ -14,8 +14,12 @@ private let enforceStrongOwnershipKey = "enforceStrongOwnership"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    static var instance = UIApplication.shared.delegate as! AppDelegate
 
     var window: UIWindow?
+
+    // MARK: - UIApplicationDelegate
 
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -63,6 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return [.portrait]
+    }
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         Logger.main.info("Application entered the background.")
     }
@@ -70,21 +78,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         Logger.main.info("Application will terminate.")
     }
-        
+    
+    // MARK: - Application specific
+    
     func setupApplication() {
         self.window?.addSubview(JSONLD.shared.webView)
 
-        UIButton.appearance().tintColor = .tintColor
-        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .titleColor
-        UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = .titleColor
-        UINavigationBar.appearance().tintColor = .tintColor
-        
+        styleApplicationDefault()
+
         UserDefaults.standard.register(defaults: [
             sampleCertificateResetKey : false
         ])
         
         // Reset state if needed
         resetSampleCertificateIfNeeded()
+    }
+    
+    // Styling changes for a brand color (dark) status/navigation bar
+    func styleApplicationDefault() {
+        UINavigationBar.appearance().titleTextAttributes =
+            [NSAttributedStringKey.font: Style.Font.T4B,
+             NSAttributedStringKey.foregroundColor: Style.Color.C1]
+
+        UINavigationBar.appearance().tintColor = Style.Color.C1
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    /// Styling changes for a light status/navigation bar
+    func styleApplicationAlternate() {
+        UINavigationBar.appearance().titleTextAttributes =
+            [NSAttributedStringKey.font: Style.Font.T4B,
+             NSAttributedStringKey.foregroundColor: Style.Color.C6]
+        
+        UINavigationBar.appearance().tintColor = Style.Color.C6
+        UIApplication.shared.statusBarStyle = .default
     }
     
     @objc func settingsDidChange() {

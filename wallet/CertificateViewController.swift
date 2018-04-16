@@ -9,19 +9,25 @@
 import UIKit
 import Blockcerts
 import JSONLD
+import SystemConfiguration
 
 class CertificateViewController: UIViewController {
+    
+    // The full amount of time that the verification alert UI remains on screen during
+    // a verification process. This time is divided by the number of steps and each
+    // step remains on screen at least that long
+    let verificationDuration = 7.5
+    
     var delegate : CertificateViewControllerDelegate?
+    let reachability = SCNetworkReachabilityCreateWithName(nil, "certificates.learningmachine.com")!
     
     public let certificate: Certificate
     private let bitcoinManager = CoreBitcoinManager()
     
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     
-    @IBOutlet weak var shareButton: UIBarButtonItem!
-    @IBOutlet weak var toolbar: UIToolbar!
-    @IBOutlet weak var verifyButton: UIBarButtonItem!
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var verifyButton: UIButton!
     private var inProgressRequest : CommonRequest?
     
     private let analytics = Analytics()
@@ -29,7 +35,6 @@ class CertificateViewController: UIViewController {
     
     init(certificate: Certificate) {
         self.certificate = certificate
-
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,26 +44,11 @@ class CertificateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = certificate.title
-        
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(moreInfoTapped), for: .touchUpInside)
-        _ = toolbar.items?.popLast()
-        toolbar.items?.append(UIBarButtonItem(customView: infoButton))
-        
-        
-        shareButton.isEnabled = (certificate.assertion.uid != Identifiers.sampleCertificateUID)
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(displayCredentialInfo))
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        shareButton.isEnabled = certificate.assertion.uid != Identifiers.sampleCertificateUID
         renderedCertificateView.render(certificate: certificate)
-        stylize()
-        
         analytics.track(event: .viewed, certificate: certificate)
-    }
-    
-    func stylize() {
-        toolbar.tintColor = .tintColor
-        progressView.tintColor = .tintColor
     }
     
     // MARK: Actions
@@ -66,12 +56,12 @@ class CertificateViewController: UIViewController {
         Logger.main.info("Showing share certificate dialog for \(certificate.id)")
         // TODO: Guard against sample cert
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let shareFileAction = UIAlertAction(title: NSLocalizedString("Share Certificate File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
+        let alertController = UIAlertController(title: nil, message: "Share this credential", preferredStyle: .actionSheet)
+        let shareFileAction = UIAlertAction(title: NSLocalizedString("Share File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
             Logger.main.info("User chose to share certificate via file")
             self?.shareCertificateFile()
         }
-        let shareURLAction = UIAlertAction(title: NSLocalizedString("Share Certificate URL", comment: "Action to share the certificate's hosting URL, presented in an action sheet."), style: .default) { [weak self] _ in
+        let shareURLAction = UIAlertAction(title: NSLocalizedString("Share Link", comment: "Action to share the certificate's hosting URL, presented in an action sheet."), style: .default) { [weak self] _ in
             Logger.main.info("User chose to share the certificate via URL.")
             self?.shareCertificateURL()
         }
@@ -87,6 +77,114 @@ class CertificateViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    // MARK: - Verification
+
+    let verificationSteps = [
+        NSLocalizedString("Comparing computed hash with expected hash", comment: "Verification alert title"),
+        NSLocalizedString("Ensuring the Merkle receipt is valid", comment: "Verification alert title"),
+        NSLocalizedString("Comparing expected Merkle root with value on the blockchain", comment: "Verification alert title"),
+        NSLocalizedString("Checking if the credential has been revoked", comment: "Verification alert title"),
+        NSLocalizedString("Validating issuer identity", comment: "Verification alert title"),
+        NSLocalizedString("Checking expiration", comment: "Verification alert title"),
+    ]
+    
+    // TODO: make steps 3 and 5 copy dynamic
+    let validationErrors = [
+        NSLocalizedString("Computed hash does not match expected hash. This credential may have been altered. Please contact the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("The Merkle receipt is not valid. Please contact the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("Merkle root does not match the hash value on the blockchain. Please contact the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("This credential was revoked by the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("Transaction occurred when the issuing address was not considered valid. Please contact the issuer.", comment: "Verification alert error description"),
+        NSLocalizedString("This credential expired.", comment: "Verification alert error description"),
+    ]
+
+    /// Given the ValidationState returned from validation (if any) this will
+    /// return the number of steps to show the user in the validation UI.
+    /// returns nil for success, otherwise the number of the failed step.
+    func validationSteps(state: String?) -> Int? {
+        guard let state = state else { return nil }
+        switch state {
+        case "computingLocalHash", "fetchingRemoteHash", "comparingHashes":
+            return 0
+        case "checkingReceipt":
+            return 1
+        case "checkingMerkleRoot":
+            return 2
+        case "checkingRevokedStatus":
+            return 3
+        case "checkingIssuerSignature", "checkingAuthenticity":
+            return 4
+        case "checkingExpiresDate":
+            return 5
+        default:
+            return 0
+        }
+    }
+    
+    func verificationTitle(step: Int) -> String {
+        // TODO: localize
+        return "Verifying Step \(step + 1) of \(verificationSteps.count)"
+    }
+    
+    func successMessage() -> String {
+        switch blockChain ?? .testnet {
+        case .mainnet:
+            return NSLocalizedString("Your credential has been successfully verified.", comment: "Detail message after mainnet validation succeeds")
+
+        case .mocknet:
+            return NSLocalizedString("This mock credential passed all checks. Mocknet mode is only used by issuers to test their workflow locally. This credential was not recorded to a blockchain and should not be considered a verified credential.", comment: "Detail message after mocknet validation succeeds")
+            
+        case .testnet:
+            return NSLocalizedString("Your test credential has been successfully verified. This credential is for test purposes only; it has not been recorded to a blockchain.", comment: "Detail message after testnet validation succeeds")
+        }
+    }
+    
+    var verifying = false
+    func animateVerification(alert: AlertViewController, currentDelay: TimeInterval, toStep: Int? = nil) {
+        verifying = true
+        
+        let doubleDuration = verificationDuration * 1_000_000.0 / Double(verificationSteps.count)
+        let stepDuration = useconds_t(Int(doubleDuration))
+        let firstDelay = useconds_t(max(0, Int(stepDuration) - Int(currentDelay * 1_000_000.0)))
+
+        DispatchQueue.global().async { [weak self] in
+            if firstDelay > 0 {
+                usleep(useconds_t(firstDelay))
+            }
+            guard let weakSelf = self, weakSelf.verifying else { return }
+            var verificationStep = 0
+            let stepsToShow = toStep ?? weakSelf.verificationSteps.count - 1
+            while verificationStep < stepsToShow {
+                verificationStep += 1
+                DispatchQueue.main.async {
+                    alert.set(title: weakSelf.verificationTitle(step: verificationStep))
+                    alert.set(message: weakSelf.verificationSteps[verificationStep])
+                }
+                usleep(stepDuration)
+            }
+            
+            // Show final result
+            DispatchQueue.main.async { [weak self] in
+                if let toStep = toStep {
+                    // error, show specific error message
+                    alert.icon = .failure
+                    alert.set(title: NSLocalizedString("Fail", comment: "Title in alert after validation fails"))
+                    alert.set(message: NSLocalizedString(self?.validationErrors[toStep] ?? "", comment: "Detail message after validation failure, variable"))
+                } else {
+                    // successfully validated
+                    alert.icon = .success
+                    alert.set(title: NSLocalizedString("Verified!", comment: "Title in alert after validation succeeds"))
+                    alert.set(message: self?.successMessage() ?? "")
+                }
+                alert.buttons.first?.setTitle("Close", for: .normal)
+            }
+        }
+    }
+    
+    var progressAlert: AlertViewController?
+    var verificationStartDate: Date?
+    var blockChain: VerifyCredential.BlockChain?
     
     @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
         Logger.main.info("User tapped verify on this certificate.")
@@ -106,63 +204,58 @@ class CertificateViewController: UIViewController {
             
             return
         }
-        
-        verifyButton.isEnabled = false
-        verifyButton.title = NSLocalizedString("Verifying...", comment: "Verifying a certificate is currently in progress")
-        progressView.progress = 0.5
-        progressView.isHidden = false
-        
-        let validationRequest = CertificateValidationRequest(
-            for: certificate,
-            bitcoinManager: bitcoinManager,
-            jsonld: JSONLD.shared) { [weak self] (success, error) in
-                let title : String!
-                let message : String!
-                if success {
-                    Logger.main.info("Successfully verified certificate \(self?.certificate.title ?? "unknown") with id \(self?.certificate.id ?? "unknown")")
-                    title = NSLocalizedString("Success", comment: "Title for a successful certificate validation")
-                    message = NSLocalizedString("This is a valid certificate!", comment: "Message for a successful certificate validation")
-                } else {
-                    Logger.main.info("The \(self?.certificate.title ?? "unknown") certificate failed verification with reason: \(error ?? "unknown"). ID: \(self?.certificate.id ?? "unknown")")
-                    title = NSLocalizedString("Invalid", comment: "Title for a failed certificate validation")
-                    message = NSLocalizedString(error!, comment: "Specific error message for an invalid certificate.")
-                }
 
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .default, handler: nil))
-                
-                OperationQueue.main.addOperation {
-                    self?.present(alert, animated: true, completion: nil)
-                    self?.inProgressRequest = nil
-                    self?.verifyButton.isEnabled = true
-                    self?.verifyButton.title = NSLocalizedString("Verify", comment: "Action button. Tap this to verify a certificate.")
-                    self?.progressView.progress = 1
-                    self?.progressView.isHidden = true
-                }
+        if !isNetworkReachable() {
+            let alert = AlertViewController.createWarning(title: NSLocalizedString("No Network Connection", comment: "No network connection alert title"),
+                                              message: NSLocalizedString("Please check your network connection and try again.", comment: "No network connection alert message"))
+            present(alert, animated: false, completion: nil)
+            return
         }
-        validationRequest?.delegate = self
-        validationRequest?.start()
-        self.inProgressRequest = validationRequest
+        
+        let progressAlert = AlertViewController.create(title: verificationTitle(step: 0), message: verificationSteps[0], icon: .verifying)
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
+        cancelButton.onTouchUpInside { [weak self] in
+            self?.verifying = false
+            progressAlert.dismiss(animated: false, completion: nil)
+        }
+        progressAlert.set(buttons: [cancelButton])
+        present(progressAlert, animated: false, completion: nil)
+        self.progressAlert = progressAlert
+        verificationStartDate = Date()
+
+        let verifier = VerifyCredential(certificate: certificate.file, callback: verificationCallback)
+        verifier.verify()
+        blockChain = verifier.chain
     }
     
-//    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
-//        let certificateToDelete = certificate
-//        let title = NSLocalizedString("Be careful", comment: "Caution title presented when attempting to delete a certificate.")
-//        let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Explanation of the effects of deleting a certificate.")
-//        let delete = NSLocalizedString("Delete", comment: "Confirm delete action")
-//        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
-//
-//        let prompt = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        prompt.addAction(UIAlertAction(title: delete, style: .destructive, handler: { [weak self] (_) in
-//            _ = self?.navigationController?.popViewController(animated: true)
-//            self?.delegate?.delete(certificate: certificateToDelete)
-//        }))
-//        prompt.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
-//
-//        present(prompt, animated: true, completion: nil)
-//    }
+    func verificationCallback(success: Bool, steps: [String]) {
+        guard let progressAlert = progressAlert else { return }
+        let elapsedTime = Date().timeIntervalSince(verificationStartDate ?? Date())
+        if success {
+            Logger.main.info("Successfully verified certificate \(certificate.title) with id \(certificate.id)")
+            animateVerification(alert: progressAlert, currentDelay: elapsedTime, toStep: nil)
+        } else {
+            Logger.main.info("The \(certificate.title) certificate failed verification at step \(steps.last ?? "unknown") ID: \(certificate.id)")
+            animateVerification(alert: progressAlert, currentDelay: elapsedTime, toStep: validationSteps(state: steps.last))
+        }
+    }
     
-    @objc func moreInfoTapped() {
+    func isNetworkReachable() -> Bool {
+        var flags = SCNetworkReachabilityFlags()
+        SCNetworkReachabilityGetFlags(reachability, &flags)
+        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
+    }
+    
+    // MARK: - Other actions
+    
+    @objc func displayCredentialInfo() {
         Logger.main.info("More info tapped on the Certificate display.")
         let controller = CertificateMetadataViewController(certificate: certificate)
         controller.delegate = self
@@ -223,49 +316,12 @@ class CertificateViewController: UIViewController {
             }
         }
         
-        self.present(shareController, animated: true, completion: nil)
+        present(shareController, animated: true, completion: nil)
     }
 }
 
 extension CertificateViewController : CertificateValidationRequestDelegate {
-    func certificateValidationStateChanged(from: ValidationState, to: ValidationState) {
-        var percentage : Float? = nil
-        
-        switch to {
-        case .notStarted:
-            percentage = 0.1
-        case .assertingChain:
-            percentage = 0.2
-        case .computingLocalHash:
-            percentage = 0.3
-        case .fetchingRemoteHash:
-            percentage = 0.4
-        case .comparingHashes:
-            percentage = 0.5
-        case .checkingIssuerSignature:
-            percentage = 0.6
-        case .checkingRevokedStatus:
-            percentage = 0.7
-        case .success:
-            percentage = 1
-        case .failure:
-            percentage = 1
-        case .checkingReceipt:
-            percentage = 0.8
-        case .checkingAuthenticity:
-            percentage = 0.85
-        case .checkingMerkleRoot:
-            percentage = 0.9
-        }
-        
-        if percentage != nil {
-            UIView.animate(withDuration: 0.1, animations: {
-                OperationQueue.main.addOperation {
-                    self.progressView.progress = percentage!
-                }
-            })
-        }
-    }
+    func certificateValidationStateChanged(from: ValidationState, to: ValidationState) { }
 }
 
 protocol CertificateViewControllerDelegate : class {
@@ -274,7 +330,7 @@ protocol CertificateViewControllerDelegate : class {
 
 extension CertificateViewController : CertificateViewControllerDelegate {
     func delete(certificate: Certificate) {
-        _ = navigationController?.popViewController(animated: true)
+//        _ = navigationController?.popViewController(animated: true)
         delegate?.delete(certificate: certificate)
     }
 }

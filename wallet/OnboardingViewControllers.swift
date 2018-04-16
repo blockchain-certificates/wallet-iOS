@@ -7,112 +7,120 @@
 //
 
 import UIKit
+import AVKit
 
-class LandingScreenViewController : UIViewController {
-    @IBOutlet weak var logoImageView: UIImageView!
+class OnboardingControllerBase : UIViewController {
+
     override func viewDidLoad() {
-        title = ""
+        super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    @IBAction func playWelcomeVideo() {
+        guard let path = Bundle.main.path(forResource: "introduction", ofType:"mp4") else {
+            print("Video file not found")
+            return
+        }
+        let player = AVPlayer(url: URL(fileURLWithPath: path))
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        playerController.showsPlaybackControls = true
+        if #available(iOS 11.0, *) {
+            playerController.exitsFullScreenWhenPlaybackEnds = true
+        } else {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(didEndPlaying),
+                                                   name: .AVPlayerItemDidPlayToEndTime,
+                                                   object: nil)
+        }
+        present(playerController, animated: true) {
+            player.play()
+        }
+    }
+    
+    @objc func didEndPlaying(_ notification: Notification) {
+        presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+class ScrollingOnboardingControllerBase : OnboardingControllerBase {
+    @IBOutlet weak var scrollView : UIScrollView!
+    @IBOutlet weak var containerView : UIView!
+
+    var defaultScrollViewInset : UIEdgeInsets {
+        let padding: CGFloat
+        if #available(iOS 11.0, *) {
+            padding = (scrollView.frame.height - scrollView.contentLayoutGuide.layoutFrame.height) / 2
+        } else {
+            let safeHeight = scrollView.bounds.height
+            padding = (safeHeight - containerView.bounds.height) / 2
+        }
         
-        // Remove the drop shadow
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        return UIEdgeInsets(top: max(0, padding), left: 0, bottom: 0, right: 0)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        scrollView.layoutIfNeeded()
+        scrollView.contentInset = defaultScrollViewInset
+        scrollView.isScrollEnabled = scrollView.contentInset.top == 0
+    }
+    
+}
+
+class LandingScreenViewController : OnboardingControllerBase {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = ""
+        view.backgroundColor = Style.Color.C3
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = Style.Color.C3
         
-        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
+        let animation = LOTAnimationView(name: "welcome_lottie.json")
+        animation.loopAnimation = true
+        animation.contentMode = .scaleAspectFill
+        animation.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(animation, at: 0)
+        animation.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        animation.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        animation.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        animation.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        animation.play()
     }
 }
 
-class RestoreAccountViewController: UIViewController {
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var passphraseTextView: UITextView!
-    
+class WelcomeReturningUsersViewController : ScrollingOnboardingControllerBase {
     override func viewDidLoad() {
-        title = ""
-        let sideInsets : CGFloat = 16
-        let vertInsets : CGFloat = 32
-        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
-        passphraseTextView.textContainerInset = UIEdgeInsets(top: vertInsets, left: sideInsets, bottom: vertInsets, right: sideInsets)
-        passphraseTextView.delegate = self
+        super.viewDidLoad()
+        view.backgroundColor = Style.Color.C1
+        title = NSLocalizedString("Welcome", comment: "Onboarding screen title")
+        UserDefaults.standard.set(true, forKey: UserDefaultsKey.hasReenteredPassphrase)
     }
     
-    @IBAction func doneTapped() {
-        savePassphrase()
-    }
-    
-    func savePassphrase() {
-        guard let passphrase = passphraseTextView.text else {
-            return
-        }
-        
-        guard Keychain.isValidPassphrase(passphrase) else {
-            failedPassphrase(error: NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
-            return
-        }
-        do {
-            try Keychain.updateShared(with: passphrase)
-            dismiss(animated: true, completion: {
-                NotificationCenter.default.post(name: NotificationNames.onboardingComplete, object: nil)
-            })
-        } catch {
-            failedPassphrase(error: NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
-        }
-    }
-    
-    func failedPassphrase(error : String) {
-        let title = NSLocalizedString("Invalid passphrase", comment: "Title when trying to use an invalid passphrase as your passphrase")
-        let controller = UIAlertController(title: title, message: error, preferredStyle: .alert)
-        controller.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "confirm action"), style: .cancel, handler: nil))
-        present(controller, animated: true, completion: nil)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.contentInset = .zero
     }
 }
 
-extension RestoreAccountViewController : UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-            savePassphrase()
-            return false
-        }
-        return true
-    }
-}
+class NewUserViewController : ScrollingOnboardingControllerBase {
+    @IBOutlet weak var passphraseLabel : UILabel!
 
-class PrenupViewController: UIViewController {
-    @IBOutlet weak var logoImageView: GreyTintImageView!
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        logoImageView.tintColor = UIColor(red:0.84, green:0.84, blue:0.84, alpha:1.0)
-    }
-    override func viewDidLoad() {
-        title = ""
-    }
-}
-
-class GeneratedPassphraseViewController: UIViewController {
-    @IBOutlet weak var passphraseLabel: UILabel!
-    @IBOutlet weak var logoImageView: UIImageView!
     var attempts = 5
     
     override func viewDidLoad() {
-        title = ""
+        super.viewDidLoad()
+        title = NSLocalizedString("New User", comment: "Onboarding screen label for New User")
         generatePassphrase()
-        
-        logoImageView.tintColor = UIColor(red:0.00, green:0.54, blue:0.48, alpha:1.0)
-        passphraseLabel.accessibilityIdentifier = "GeneratedPassphrase"
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    @IBAction func doneTapped() {
-        dismiss(animated: true) {
-            NotificationCenter.default.post(name: NotificationNames.onboardingComplete, object: nil)
-        }
     }
     
     func generatePassphrase() {
         let passphrase = Keychain.generateSeedPhrase()
-
+        
         do {
             try Keychain.updateShared(with: passphrase)
             passphraseLabel.text = passphrase
@@ -121,97 +129,255 @@ class GeneratedPassphraseViewController: UIViewController {
             
             if attempts < 0 {
                 fatalError("Couldn't generate a passphrase after failing 5 times.")
+                // TODO: Should message user instead of crash? Is this plausible?
             } else {
                 generatePassphrase()
             }
         }
-
     }
+    
 }
 
 
-// MARK: - CUstom UI elements
-@IBDesignable
-class RectangularButton : UIButton {
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+class OnboardingBackupMethods : ScrollingOnboardingControllerBase, UIActivityItemSource {
+    @IBOutlet var manualButton : CheckmarkButton!
+    @IBOutlet var copyButton : CheckmarkButton!
+    @IBOutlet var continueButton : PrimaryButton!
+    
+    static var hasPerformedBackup : Bool {
+        return UserDefaults.standard.bool(forKey: UserDefaultsKey.hasPerformedBackup)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
+    func set(hasPerformedBackup: Bool) {
+        UserDefaults.standard.set(hasPerformedBackup, forKey: UserDefaultsKey.hasPerformedBackup)
+    }
+
+    var hasWrittenPasscode = false {
+        didSet {
+            if hasWrittenPasscode {
+                set(hasPerformedBackup: true)
+            }
+        }
+    }
+    var hasCopiedPasscode = false {
+        didSet {
+            if hasCopiedPasscode {
+                set(hasPerformedBackup: true)
+            }
+        }
+    }
+    var passphrase : String?
+    
+    @IBAction func backupManual() {
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
+        present(storyboard.instantiateViewController(withIdentifier: "manualBackup"), animated: true, completion: nil)
+
+        hasWrittenPasscode = true
     }
     
-    func commonInit() {
-        let edgeInsets : CGFloat = 20
+    @IBAction func backupCopy() {
+        let alert = AlertViewController.create(title: NSLocalizedString("Are you sure?", comment: "Confirmation before copying for backup"),
+                                               message: NSLocalizedString("This is a low-security backup method. Do you want to continue?", comment: "Scare tactic to warn user about insecurity of email"),
+                                               icon: .warning)
+
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button to confirm user action"), for: .normal)
+        okayButton.onTouchUpInside { [weak self] in
+            alert.dismiss(animated: false, completion: nil)
+            self?.presentCopySheet()
+        }
+
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
+        cancelButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: nil)
+        }
+
+        alert.set(buttons: [okayButton, cancelButton])
+
+        present(alert, animated: false, completion: nil)
+    }
+    
+    func presentCopySheet() {
+        guard let passphrase = Keychain.loadSeedPhrase() else {
+            // TODO: present alert? how to help user in this case?
+            return
+        }
         
-        backgroundColor = .white
-        layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 0.5
-        contentEdgeInsets = UIEdgeInsets(top: edgeInsets, left: edgeInsets, bottom: edgeInsets, right: edgeInsets)
-        tintColor = .black
-        titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
+        self.passphrase = passphrase
+        let activity = UIActivityViewController(activityItems: [self], applicationActivities: nil)
         
-        setTitleColor(.black, for: .normal)
-        setTitleColor(.black, for: .selected)
-        setTitleColor(.black, for: .highlighted)
-        setTitleColor(.black, for: .focused)
-        setTitleShadowColor(.red, for: .highlighted)
-    }
-}
-
-@IBDesignable
-class SecondaryRectangularButton : RectangularButton {
-    override func commonInit() {
-        super.commonInit()
-        backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
-    }
-}
-
-@IBDesignable
-class TitleLabel: UILabel {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+        present(activity, animated: true) {
+            // TODO: can detect if user cancels?
+            self.hasCopiedPasscode = true
+            self.updateStates()
+        }
     }
     
-    func commonInit() {
-        self.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
-    }
-}
-
-@IBDesignable
-class GreenTintImageView: UIImageView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        updateTint()
-    }
-    override init(image: UIImage?) {
-        super.init(image: image)
-        updateTint()
-    }
-    override init(image: UIImage?, highlightedImage: UIImage?) {
-        super.init(image: image, highlightedImage: highlightedImage)
-        updateTint()
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        updateTint()
+    @IBAction func dismiss() {
+        dismiss(animated: true, completion: nil)
     }
     
-    func updateTint() {
-        tintColor = #colorLiteral(red: 0.1647058824, green: 0.6980392157, blue: 0.4823529412, alpha: 1)
+    fileprivate func updateStates() {
+        manualButton.checked = hasWrittenPasscode
+        copyButton.checked = hasCopiedPasscode
+        continueButton.isEnabled = hasWrittenPasscode || hasCopiedPasscode
+
+        let title = continueButton.isEnabled ?
+            NSLocalizedString("Done", comment: "Button copy") :
+            NSLocalizedString("Select at Least One to Continue", comment: "Button copy")
+
+        continueButton.setTitle(title, for: .normal)
+        continueButton.setTitle(title, for: .highlighted)
+        continueButton.setTitle(title, for: .disabled)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = NSLocalizedString("Backup Passphrase", comment: "Onboarding screen backup passphrase title")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateStates()
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    // MARK: - Activity Item Source
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return passphrase!
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+        return passphrase! as NSString
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController,
+                                subjectForActivityType activityType: UIActivityType?) -> String {
+        return NSLocalizedString("Blockcerts Backup", comment: "Email subject line when backing up passphrase")
+    }
+
+}
+
+
+class OnboardingManualBackup : ScrollingOnboardingControllerBase {
+    @IBOutlet var passphraseLabel : UILabel!
+    
+    @IBAction func dismiss() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        passphraseLabel.text = Keychain.loadSeedPhrase()
+        passphraseLabel.font = Style.Font.T3S
+        passphraseLabel.textColor = Style.Color.C3
+
+        UIApplication.shared.statusBarStyle = .default
     }
 }
 
-@IBDesignable
-class GreyTintImageView: UIImageView {
-    func updateTint() {
-        tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+
+
+class OnboardingCurrentUser : ScrollingOnboardingControllerBase, UITextViewDelegate {
+    @IBOutlet weak var textView : UITextView!
+    @IBOutlet weak var submitButton : UIButton!
+
+    @IBAction func savePassphrase() {
+        guard let passphrase = textView.text else {
+            return
+        }
+        
+        let lowercasePassphrase = passphrase.lowercased()
+        
+        guard Keychain.isValidPassphrase(lowercasePassphrase) else {
+            presentErrorAlert()
+            return
+        }
+        do {
+            UserDefaults.standard.set(true, forKey: UserDefaultsKey.hasReenteredPassphrase)
+            try Keychain.updateShared(with: lowercasePassphrase)
+            dismiss(animated: false, completion: nil)
+        } catch {
+            presentErrorAlert()
+        }
     }
+    
+    func presentErrorAlert() {
+        let alert = AlertViewController.create(title: NSLocalizedString("Passphrase invalid", comment: "Title in alert view after processing failed user input"),
+                                               message: NSLocalizedString("Please check your passphrase and try again.", comment: "Message to user to check the passphrase"),
+                                               icon: .failure)
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button to confirm user action"), for: .normal)
+        okayButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: nil)
+        }
+        
+        alert.set(buttons: [okayButton])
+        present(alert, animated: false, completion: nil)
+    }
+        
+    // MARK: - Text view and keyboard
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.resignFirstResponder()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        submitButton.isEnabled = textView.text.count > 0
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let keyboardScreenEndFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else {
+                return
+        }
+        
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame.cgRectValue, from: view.window)
+        
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            scrollView.contentInset = defaultScrollViewInset
+        } else {
+            // TODO: check these for iOS 11/iPhone X
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+            scrollView.isScrollEnabled = true
+        }
+        
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
+
+    // MARK: - View lifecycle
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        textView.becomeFirstResponder()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        textView.delegate = self
+        textView.font = Style.Font.T3S
+        textView.textColor = Style.Color.C3
+        submitButton.isEnabled = false
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(adjustForKeyboard),
+                                               name: Notification.Name.UIKeyboardWillHide,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(adjustForKeyboard),
+                                               name: Notification.Name.UIKeyboardWillChangeFrame,
+                                               object: nil)
+    }
+    
 }

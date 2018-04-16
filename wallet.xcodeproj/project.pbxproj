@@ -25,7 +25,6 @@
 		83111B781DA414EB006B058D /* JSONLD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83111B761DA414EB006B058D /* JSONLD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */; };
 		83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */; };
-		83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */; };
 		8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */; };
 		831EDC0F1ED3A20E004F135B /* RenderedCertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EDC0D1ED3A20E004F135B /* RenderedCertificateView.swift */; };
 		831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831EDC0E1ED3A20E004F135B /* RenderedCertificateView.xib */; };
@@ -96,6 +95,25 @@
 		83FF5DE71ECBA4100063397C /* Blockcerts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; };
 		83FF5DE81ECBA4100063397C /* Blockcerts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF5DE61ECBA4100063397C /* Blockcerts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF5DE91ECBAC7A0063397C /* CertificateView.swift */; };
+		A909528220449DD000F29CF5 /* C5T2BLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A909528120449DD000F29CF5 /* C5T2BLabelCell.xib */; };
+		A927355A2031E1C9002361FD /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92735592031E1C9002361FD /* AlertViewController.swift */; };
+		A92E89662049A63D0035460B /* liblottie-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A92E89672049A63D0035460B /* liblottie-ios.a */; };
+		A92E89692049A93C0035460B /* welcome_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = A92E89682049A93B0035460B /* welcome_lottie.json */; };
+		A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */; };
+		A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A958CCD4202E4BD100CD35C6 /* Alert.storyboard */; };
+		A961EBC72028BE020016CD1E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A961EBC62028BE020016CD1E /* Style.swift */; };
+		A970D00A2044AFC6004BC1AE /* introduction.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A970D0092044AFC6004BC1AE /* introduction.mp4 */; };
+		A98911D3204711E300E4E722 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A98911D2204711E300E4E722 /* Settings.storyboard */; };
+		A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */; };
+		A9B1784B203615D000B76375 /* IssuerHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */; };
+		A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */; };
+		A9B1784F203727AD00B76375 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B1784E203727AD00B76375 /* ButtonTableViewCell.swift */; };
+		A9B17851203746E300B76375 /* IssuerCollectionEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */; };
+		A9B997A1203F1CE000C05153 /* verifier.js in Resources */ = {isa = PBXBuildFile; fileRef = A9B9979F203F1CE000C05153 /* verifier.js */; };
+		A9B997A2203F1CE000C05153 /* verify.html in Resources */ = {isa = PBXBuildFile; fileRef = A9B997A0203F1CE000C05153 /* verify.html */; };
+		A9B997A4203F1D0800C05153 /* VerifyCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B997A3203F1D0800C05153 /* VerifyCredential.swift */; };
+		A9B997A62040611D00C05153 /* IssuerCollectionReturningUserEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */; };
+		A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2B049202B5893002015F0 /* UIElements.swift */; };
 		ABC6BB21B68837562003AED2 /* libPods-certificates.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F8F788045077CB0389D73 /* libPods-certificates.a */; };
 		D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
 /* End PBXBuildFile section */
@@ -160,7 +178,6 @@
 		83111B761DA414EB006B058D /* JSONLD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONLD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
 		83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerViewController.swift; sourceTree = "<group>"; };
-		83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerSummaryView.swift; sourceTree = "<group>"; };
 		8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuerCollectionViewController.swift; sourceTree = "<group>"; };
 		8318FC561DAD958F006A8FD5 /* wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wallet.entitlements; sourceTree = "<group>"; };
 		831EDC0D1ED3A20E004F135B /* RenderedCertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderedCertificateView.swift; sourceTree = "<group>"; };
@@ -223,6 +240,25 @@
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
 		83FF5DE61ECBA4100063397C /* Blockcerts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Blockcerts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FF5DE91ECBAC7A0063397C /* CertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateView.swift; sourceTree = "<group>"; };
+		A909528120449DD000F29CF5 /* C5T2BLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = C5T2BLabelCell.xib; sourceTree = "<group>"; };
+		A92735592031E1C9002361FD /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		A92E89672049A63D0035460B /* liblottie-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblottie-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A92E89682049A93B0035460B /* welcome_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = welcome_lottie.json; path = Assets/welcome_lottie.json; sourceTree = "<group>"; };
+		A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerEmptyTableViewCell.xib; sourceTree = "<group>"; };
+		A958CCD4202E4BD100CD35C6 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
+		A961EBC62028BE020016CD1E /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		A970D0092044AFC6004BC1AE /* introduction.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = introduction.mp4; path = Assets/introduction.mp4; sourceTree = "<group>"; };
+		A98911D2204711E300E4E722 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuerHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
+		A9B1784E203727AD00B76375 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerCollectionEmptyView.xib; sourceTree = "<group>"; };
+		A9B9979F203F1CE000C05153 /* verifier.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = verifier.js; sourceTree = "<group>"; };
+		A9B997A0203F1CE000C05153 /* verify.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = verify.html; sourceTree = "<group>"; };
+		A9B997A3203F1D0800C05153 /* VerifyCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCredential.swift; sourceTree = "<group>"; };
+		A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionReturningUserEmptyView.xib; sourceTree = "<group>"; };
+		A9D2B049202B5893002015F0 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
 		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -231,6 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A92E89662049A63D0035460B /* liblottie-ios.a in Frameworks */,
 				83FF5DE71ECBA4100063397C /* Blockcerts.framework in Frameworks */,
 				830AB9EF1DA6BC4B00185E19 /* CommonCrypto.framework in Frameworks */,
 				83111B771DA414EB006B058D /* JSONLD.framework in Frameworks */,
@@ -312,41 +349,50 @@
 		83111B261DA4110C006B058D /* wallet */ = {
 			isa = PBXGroup;
 			children = (
-				8318FC561DAD958F006A8FD5 /* wallet.entitlements */,
-				831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */,
-				831EDC121ED5F7DA004F135B /* Keychain.swift */,
-				838DE6C81F3A74B400185A49 /* Models */,
-				830120331EF4481B008EC454 /* Utils */,
-				83111B271DA4110C006B058D /* AppDelegate.swift */,
-				83802BF61E01BC2B00E54C13 /* Cells */,
-				83111B2B1DA4110C006B058D /* Main.storyboard */,
-				83111B2E1DA4110C006B058D /* Assets.xcassets */,
-				83111B301DA4110C006B058D /* LaunchScreen.storyboard */,
-				83111B331DA4110C006B058D /* Info.plist */,
-				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
-				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
-				8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */,
-				83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */,
-				83ACB76F1EDE556500A1149E /* Onboarding.storyboard */,
-				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
-				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
-				832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */,
-				836031BC1E5651C9005B2D2E /* PrivacyViewController.swift */,
-				83115A5F1E08863100EDC0A2 /* IssuerSummaryView.swift */,
-				83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */,
-				838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */,
 				83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */,
+				838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */,
+				A958CCD4202E4BD100CD35C6 /* Alert.storyboard */,
+				A92735592031E1C9002361FD /* AlertViewController.swift */,
+				83111B271DA4110C006B058D /* AppDelegate.swift */,
+				83111B2E1DA4110C006B058D /* Assets.xcassets */,
+				83802BF61E01BC2B00E54C13 /* Cells */,
+				832F2A481E944E1C00A65C3A /* CertificateMetadataViewController.swift */,
+				83FF5DE91ECBAC7A0063397C /* CertificateView.swift */,
 				83A6EDD81DAFFD5B00ABFB47 /* CertificateViewController.swift */,
 				838DC13A1E43F0F700533AEB /* CertificateViewController.xib */,
+				831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */,
+				83111B331DA4110C006B058D /* Info.plist */,
+				A970D0092044AFC6004BC1AE /* introduction.mp4 */,
+				A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */,
+				A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */,
+				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
+				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
+				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
+				831EDC121ED5F7DA004F135B /* Keychain.swift */,
+				83111B301DA4110C006B058D /* LaunchScreen.storyboard */,
+				83111B2B1DA4110C006B058D /* Main.storyboard */,
+				838DE6C81F3A74B400185A49 /* Models */,
+				83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */,
+				83ACB76F1EDE556500A1149E /* Onboarding.storyboard */,
+				83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */,
+				836031BC1E5651C9005B2D2E /* PrivacyViewController.swift */,
+				831EDC0D1ED3A20E004F135B /* RenderedCertificateView.swift */,
+				831EDC0E1ED3A20E004F135B /* RenderedCertificateView.xib */,
+				838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */,
+				838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */,
+				8337CFCE1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift */,
+				A98911D2204711E300E4E722 /* Settings.storyboard */,
+				8337CFCB1E1D65140080E876 /* SettingsTableViewController.swift */,
+				A961EBC62028BE020016CD1E /* Style.swift */,
+				A9D2B049202B5893002015F0 /* UIElements.swift */,
+				830120331EF4481B008EC454 /* Utils */,
+				A9B9979E203F1CE000C05153 /* Verification */,
 				83111B561DA41417006B058D /* wallet-Bridging-Header.h */,
+				8318FC561DAD958F006A8FD5 /* wallet.entitlements */,
 				83111B5A1DA4144E006B058D /* walletTests-Bridging-Header.h */,
 				83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */,
 				8388B8A91EDE15BF00B28A57 /* WebLoginViewController.swift */,
-				838DC1311E43EFB900533AEB /* ReplacePassphraseViewController.xib */,
-				838DC12C1E43EF1600533AEB /* ReplacePassphraseViewController.swift */,
-				83FF5DE91ECBAC7A0063397C /* CertificateView.swift */,
-				831EDC0D1ED3A20E004F135B /* RenderedCertificateView.swift */,
-				831EDC0E1ED3A20E004F135B /* RenderedCertificateView.xib */,
+				A92E89682049A93B0035460B /* welcome_lottie.json */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -425,13 +471,19 @@
 		83802BF61E01BC2B00E54C13 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */,
+				A9B1784E203727AD00B76375 /* ButtonTableViewCell.swift */,
+				A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */,
 				83D947971E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift */,
 				83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */,
 				834B94C51DC1618900543E4F /* IssuerCollectionViewCell.swift */,
 				834B94C61DC1618900543E4F /* IssuerCollectionViewCell.xib */,
+				A909528120449DD000F29CF5 /* C5T2BLabelCell.xib */,
+				A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */,
+				A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */,
+				A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */,
 				8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */,
 				8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */,
+				8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */,
 				83802BF21E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift */,
 				838DC1341E43F0A400533AEB /* NoCertificatesTableViewCell.xib */,
 			);
@@ -472,6 +524,7 @@
 		A653FD3709C0B4FB37E36B2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A92E89672049A63D0035460B /* liblottie-ios.a */,
 				83FF5DE61ECBA4100063397C /* Blockcerts.framework */,
 				830AB9EE1DA6BC4B00185E19 /* CommonCrypto.framework */,
 				83111B761DA414EB006B058D /* JSONLD.framework */,
@@ -480,6 +533,16 @@
 				4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A9B9979E203F1CE000C05153 /* Verification */ = {
+			isa = PBXGroup;
+			children = (
+				A9B9979F203F1CE000C05153 /* verifier.js */,
+				A9B997A0203F1CE000C05153 /* verify.html */,
+				A9B997A3203F1D0800C05153 /* VerifyCredential.swift */,
+			);
+			path = Verification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -618,19 +681,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */,
+				A970D00A2044AFC6004BC1AE /* introduction.mp4 in Resources */,
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
+				A9B997A1203F1CE000C05153 /* verifier.js in Resources */,
+				A909528220449DD000F29CF5 /* C5T2BLabelCell.xib in Resources */,
 				831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
 				8329A0531DDA825200863285 /* IssuerSummaryTableViewCell.xib in Resources */,
 				83111B2F1DA4110C006B058D /* Assets.xcassets in Resources */,
+				A9B997A62040611D00C05153 /* IssuerCollectionReturningUserEmptyView.xib in Resources */,
+				A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */,
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
+				A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */,
+				A92E89692049A93C0035460B /* welcome_lottie.json in Resources */,
 				836031C51E5E513A005B2D2E /* Settings.bundle in Resources */,
 				838DC1361E43F0A400533AEB /* NoCertificatesTableViewCell.xib in Resources */,
 				838DC1331E43EFB900533AEB /* ReplacePassphraseViewController.xib in Resources */,
+				A9B17851203746E300B76375 /* IssuerCollectionEmptyView.xib in Resources */,
 				838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
+				A98911D3204711E300E4E722 /* Settings.storyboard in Resources */,
+				A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */,
 				83ACB7701EDE556500A1149E /* Onboarding.storyboard in Resources */,
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
+				A9B997A2203F1CE000C05153 /* verify.html in Resources */,
 				836031C31E5E5064005B2D2E /* SampleCertificate.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -699,13 +774,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-certificatesTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4BD338FB69DC8B791B60AD67 /* [CP] Copy Pods Resources */ = {
@@ -729,13 +807,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-certificatesUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6BBF86BD3E74082EB2FE92F7 /* [CP] Embed Pods Frameworks */ = {
@@ -774,13 +855,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-certificates-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F65C77CEA313DD3106C499D5 /* [CP] Copy Pods Resources */ = {
@@ -789,9 +873,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-certificates/Pods-certificates-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/OpenSans/OpenSans.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/OpenSans.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -808,23 +895,26 @@
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
 				832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
 				838DE6CE1F3A772400185A49 /* ManagedIssuerList.swift in Sources */,
-				83115A601E08863100EDC0A2 /* IssuerSummaryView.swift in Sources */,
 				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
 				83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */,
 				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,
 				838DE6D61F3B680500185A49 /* Constants.swift in Sources */,
 				831EDC141ED5F7DA004F135B /* Keychain.swift in Sources */,
 				8337CFD21E1D78110080E876 /* LabeledTableViewCell.swift in Sources */,
+				A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */,
 				83111B281DA4110C006B058D /* AppDelegate.swift in Sources */,
 				838DC1301E43EF1600533AEB /* ReplacePassphraseViewController.swift in Sources */,
 				834B94C71DC1618900543E4F /* IssuerCollectionViewCell.swift in Sources */,
 				83115A5E1E087EA500EDC0A2 /* IssuerViewController.swift in Sources */,
 				838DE6D21F3B665C00185A49 /* CertificateManager.swift in Sources */,
+				A9B1784F203727AD00B76375 /* ButtonTableViewCell.swift in Sources */,
 				83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */,
 				838DE6DA1F3B684600185A49 /* Analytics.swift in Sources */,
 				830120351EF4483F008EC454 /* ArgumentParser.swift in Sources */,
 				832F2A491E944E1C00A65C3A /* CertificateMetadataViewController.swift in Sources */,
+				A961EBC72028BE020016CD1E /* Style.swift in Sources */,
 				8388B8AA1EDE15BF00B28A57 /* WebLoginViewController.swift in Sources */,
+				A9B997A4203F1D0800C05153 /* VerifyCredential.swift in Sources */,
 				836031BD1E5651C9005B2D2E /* PrivacyViewController.swift in Sources */,
 				838DE6CD1F3A771D00185A49 /* ManagedIssuer.swift in Sources */,
 				83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */,
@@ -836,10 +926,12 @@
 				8337CFCF1E1D6B7A0080E876 /* RevealPassphraseTableViewController.swift in Sources */,
 				83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */,
 				832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */,
+				A9B1784B203615D000B76375 /* IssuerHeaderTableViewCell.swift in Sources */,
 				8372F2F51FA12421007F0BC2 /* Logger.swift in Sources */,
 				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
 				838DE6D81F3B680800185A49 /* Extensions.swift in Sources */,
 				83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */,
+				A927355A2031E1C9002361FD /* AlertViewController.swift in Sources */,
 				838DE6E01F3B6D5D00185A49 /* ManagedIssuerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

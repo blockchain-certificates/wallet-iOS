@@ -31,17 +31,15 @@ class NoContentView: UIView {
     }
     
     func commonInit() {
-        backgroundColor = .baseColor
+        backgroundColor = Style.Color.C2
         
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.textColor = .disabledTextColor
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         titleLabel.textAlignment = .center
         
         let subtitleLabel = UILabel()
         subtitleLabel.text = subtitle
-        subtitleLabel.textColor = .disabledTextColor
         subtitleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         subtitleLabel.numberOfLines = 0
         subtitleLabel.textAlignment = .center

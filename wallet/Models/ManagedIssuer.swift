@@ -343,10 +343,8 @@ extension ManagedIssuer {
 
 protocol ManagedIssuerDelegate : class {
     func updated(managedIssuer: ManagedIssuer)
-    
     func presentWebView(at url:URL, with navigationDelegate:WKNavigationDelegate) throws
     func dismissWebView()
-
 }
 
 extension ManagedIssuerDelegate {
