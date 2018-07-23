@@ -303,7 +303,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         let existingFiles = try? FileManager.default.contentsOfDirectory(at: certificatesDirectory, includingPropertiesForKeys: nil, options: [])
         let files = existingFiles ?? []
 
-        let loadedCertificates : [Certificate] = files.flatMap { fileURL in
+        let loadedCertificates : [Certificate] = files.compactMap { fileURL in
             guard let data = try? Data(contentsOf: fileURL) else {
                 return nil
             }
