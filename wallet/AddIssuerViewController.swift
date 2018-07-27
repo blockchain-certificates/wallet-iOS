@@ -9,15 +9,18 @@
 import UIKit
 import WebKit
 import Blockcerts
+import SystemConfiguration
 
 class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     private var inProgressRequest : CommonRequest?
     var delegate : AddIssuerViewControllerDelegate?
+    let reachability = SCNetworkReachabilityCreateWithName(nil, "certificates.learningmachine.com")!
     
     var identificationURL: URL?
     var nonce: String?
     var managedIssuer: ManagedIssuer?
     var presentedModally = false
+    var progressAlert: AlertViewController?
     
     @IBOutlet weak var scrollView : UIScrollView!
     @IBOutlet weak var issuerURLField: UITextView!
@@ -87,6 +90,17 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         
         // TODO: validation.
         
+        if !isNetworkReachable() {
+            let alert = AlertViewController.createWarning(title: NSLocalizedString("No Network Connection", comment: "No network connection alert title"),
+                                                          message: NSLocalizedString("Please check your network connection and try again.", comment: "No network connection alert message"))
+            present(alert, animated: false, completion: nil)
+            return
+        }
+
+        let progressAlert = AlertViewController.create(title: NSLocalizedString("[Placeholder] Title", comment: ""), message: NSLocalizedString("[Placeholder] Message", comment: ""), icon: .verifying)
+        present(progressAlert, animated: false, completion: nil)
+        self.progressAlert = progressAlert
+        
         saveDataIntoFields()
         
         guard identificationURL != nil,
@@ -95,6 +109,18 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         }
         
         identifyAndIntroduceIssuer(at: identificationURL!)
+    }
+    
+    func isNetworkReachable() -> Bool {
+        var flags = SCNetworkReachabilityFlags()
+        SCNetworkReachabilityGetFlags(reachability, &flags)
+        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
     }
 
     @objc func cancelTapped(_ sender: UIBarButtonItem) {
@@ -146,6 +172,9 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         let managedIssuer = ManagedIssuer()
         self.managedIssuer = managedIssuer
         isLoading = true
+        
+        // LOADING IND
+        
         managedIssuer.getIssuerIdentity(from: url) { [weak self] identifyError in
             guard identifyError == nil else {
                 self?.isLoading = false
@@ -207,25 +236,32 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     }
     
     func notifyAndDismiss(managedIssuer: ManagedIssuer) {
+        guard let progressAlert = progressAlert else { return }
         delegate?.added(managedIssuer: managedIssuer)
         
         DispatchQueue.main.async { [weak self] in
             
             let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
             let message = NSLocalizedString("An issuer was added. Please check your issuers screen.", comment: "Add issuer alert message")
-            let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
-            let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
-            if let button = alert.buttons.first {
-                button.onTouchUpInside { [weak self] in
-                    if self?.presentedModally ?? true {
-                        self?.presentingViewController?.dismiss(animated: true, completion: nil)
-                    } else {
-                        self?.navigationController?.popViewController(animated: true)
-                    }
+            
+            progressAlert.set(title: title)
+            progressAlert.set(message: message)
+            progressAlert.icon = .success
+            
+            let okayButton = SecondaryButton(frame: .zero)
+            okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+            okayButton.onTouchUpInside { [weak self] in
+                progressAlert.dismiss(animated: false, completion: nil)
+                
+                if self?.presentedModally ?? true {
+                    self?.presentingViewController?.dismiss(animated: true, completion: nil)
+                } else {
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }
+            progressAlert.set(buttons: [okayButton])
+
             self?.isLoading = false
-            self?.present(alert, animated: false, completion: nil)
         }
     }
     
@@ -274,23 +310,23 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     
     func showAddIssuerError(message: String) {
         Logger.main.info("Add issuer failed with message: \(message)")
+        guard let progressAlert = progressAlert else { return }
         
         let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
         let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
 
-        let alert = AlertViewController.createWarning(title: title, message: cannedMessage)
+        progressAlert.set(title: title)
+        progressAlert.set(message: cannedMessage)
+        progressAlert.icon = .failure
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.onTouchUpInside {
+            progressAlert.dismiss(animated: false, completion: nil)
+        }
+        progressAlert.set(buttons: [okayButton])
         
         isLoading = false
-        
-        OperationQueue.main.addOperation {
-            if self.presentedViewController != nil {
-                self.presentedViewController?.dismiss(animated: true, completion: { 
-                    self.present(alert, animated: false, completion: nil)
-                })
-            } else {
-                self.present(alert, animated: false, completion: nil)
-            }
-        }
     }
     
     // MARK: - ManagedIssuerDelegate
