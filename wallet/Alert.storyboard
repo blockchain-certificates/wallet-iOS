@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -24,8 +24,48 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7e-sd-uGh">
+                                <rect key="frame" x="45" y="241.5" width="285" height="184.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check" translatesAutoresizingMaskIntoConstraints="NO" id="qDi-0A-xQg">
+                                        <rect key="frame" x="127.5" y="54" width="30" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="MnQ-ef-xED"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUR-eI-uhr" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="104" width="245" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="qDi-0A-xQg" firstAttribute="centerX" secondItem="f7e-sd-uGh" secondAttribute="centerX" id="42z-LH-n1U"/>
+                                    <constraint firstItem="hUR-eI-uhr" firstAttribute="top" secondItem="qDi-0A-xQg" secondAttribute="bottom" constant="15" id="AEV-ox-Xyt"/>
+                                    <constraint firstItem="qDi-0A-xQg" firstAttribute="top" secondItem="f7e-sd-uGh" secondAttribute="top" constant="54" id="KOr-GY-Vy5"/>
+                                    <constraint firstAttribute="bottom" secondItem="hUR-eI-uhr" secondAttribute="bottom" constant="60" id="azv-ti-huv"/>
+                                    <constraint firstAttribute="trailing" secondItem="hUR-eI-uhr" secondAttribute="trailing" constant="20" id="f2M-2i-fqN"/>
+                                    <constraint firstItem="hUR-eI-uhr" firstAttribute="leading" secondItem="f7e-sd-uGh" secondAttribute="leading" constant="20" id="vuS-7l-nt3"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                        <size key="value" width="10" height="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpo-Hz-KIj">
-                                <rect key="frame" x="44.5" y="239" width="285" height="209"/>
+                                <rect key="frame" x="44.5" y="239.5" width="285" height="208"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check" translatesAutoresizingMaskIntoConstraints="NO" id="0LK-tw-3MB">
                                         <rect key="frame" x="127.5" y="24" width="30" height="35"/>
@@ -34,19 +74,19 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBu-a2-q2m" customClass="LabelC3T4S" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="71" width="245" height="21"/>
+                                        <rect key="frame" x="20" y="71" width="245" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItE-y2-6ZW" customClass="LabelC6T2R" customModule="certificates" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="100" width="245" height="21"/>
+                                        <rect key="frame" x="20" y="99.5" width="245" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="62R-9Z-Mie" userLabel="Button stack">
-                                        <rect key="frame" x="20" y="145" width="241" height="44"/>
+                                        <rect key="frame" x="20" y="144" width="241" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="sGZ-lc-oxQ"/>
                                         </constraints>
@@ -84,20 +124,27 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="f7e-sd-uGh" firstAttribute="width" secondItem="nvp-ki-xfD" secondAttribute="width" multiplier="0.76" id="4cA-JY-dsu"/>
+                            <constraint firstItem="f7e-sd-uGh" firstAttribute="centerY" secondItem="Rua-7E-jDL" secondAttribute="centerY" constant="-9.75" id="Iwj-eP-Jkv"/>
                             <constraint firstItem="cpo-Hz-KIj" firstAttribute="centerX" secondItem="Rua-7E-jDL" secondAttribute="centerX" id="UCI-hs-U6t"/>
                             <constraint firstItem="mi1-BP-46d" firstAttribute="trailing" secondItem="Rua-7E-jDL" secondAttribute="trailing" id="awf-xq-a4w"/>
                             <constraint firstItem="mi1-BP-46d" firstAttribute="leading" secondItem="Rua-7E-jDL" secondAttribute="leading" id="cpo-L5-8mD"/>
                             <constraint firstItem="cpo-Hz-KIj" firstAttribute="centerY" secondItem="Rua-7E-jDL" secondAttribute="centerY" id="eyb-gN-JJ7"/>
                             <constraint firstItem="cpo-Hz-KIj" firstAttribute="width" secondItem="nvp-ki-xfD" secondAttribute="width" multiplier="0.76" id="mNn-jR-ODT"/>
+                            <constraint firstItem="f7e-sd-uGh" firstAttribute="centerX" secondItem="Rua-7E-jDL" secondAttribute="centerX" id="pCC-DU-ebo"/>
                             <constraint firstItem="mi1-BP-46d" firstAttribute="bottom" secondItem="nvp-ki-xfD" secondAttribute="bottom" id="tZJ-Ub-vSh"/>
                             <constraint firstItem="mi1-BP-46d" firstAttribute="top" secondItem="nvp-ki-xfD" secondAttribute="top" id="x0S-Ko-8gd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rua-7E-jDL"/>
                     </view>
                     <connections>
+                        <outlet property="alertView" destination="cpo-Hz-KIj" id="hCK-6x-cKf"/>
                         <outlet property="buttonStack" destination="62R-9Z-Mie" id="3Jo-Km-dn2"/>
                         <outlet property="iconView" destination="0LK-tw-3MB" id="Mhh-r7-tfg"/>
                         <outlet property="messageLabel" destination="ItE-y2-6ZW" id="C4M-dW-WGk"/>
+                        <outlet property="progressAlertView" destination="f7e-sd-uGh" id="6kM-Ul-Soi"/>
+                        <outlet property="progressIconView" destination="qDi-0A-xQg" id="LEq-CN-lhJ"/>
+                        <outlet property="progressTitleLabel" destination="hUR-eI-uhr" id="JCX-IE-oIp"/>
                         <outlet property="titleLabel" destination="iBu-a2-q2m" id="VjU-Qd-dxH"/>
                     </connections>
                 </viewController>

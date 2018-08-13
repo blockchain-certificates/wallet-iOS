@@ -97,8 +97,9 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             return
         }
 
-        let progressAlert = AlertViewController.create(title: NSLocalizedString("[Placeholder] Title", comment: ""), message: NSLocalizedString("[Placeholder] Message", comment: ""), icon: .verifying)
+        let progressAlert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
         present(progressAlert, animated: false, completion: nil)
+        
         self.progressAlert = progressAlert
         
         saveDataIntoFields()
@@ -244,6 +245,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
             let message = NSLocalizedString("An issuer was added. Please check your issuers screen.", comment: "Add issuer alert message")
             
+            progressAlert.setProgressAlert(false)
             progressAlert.set(title: title)
             progressAlert.set(message: message)
             progressAlert.icon = .success
@@ -312,21 +314,25 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         Logger.main.info("Add issuer failed with message: \(message)")
         guard let progressAlert = progressAlert else { return }
         
-        let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
-        let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
+        DispatchQueue.main.async { [weak self] in
+            
+            let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
+            let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
 
-        progressAlert.set(title: title)
-        progressAlert.set(message: cannedMessage)
-        progressAlert.icon = .failure
+            progressAlert.setProgressAlert(false)
+            progressAlert.set(title: title)
+            progressAlert.set(message: cannedMessage)
+            progressAlert.icon = .failure
+            
+            let okayButton = SecondaryButton(frame: .zero)
+            okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+            okayButton.onTouchUpInside {
+                progressAlert.dismiss(animated: false, completion: nil)
+            }
+            progressAlert.set(buttons: [okayButton])
         
-        let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
-        okayButton.onTouchUpInside {
-            progressAlert.dismiss(animated: false, completion: nil)
-        }
-        progressAlert.set(buttons: [okayButton])
-        
-        isLoading = false
+            self?.isLoading = false
+        })
     }
     
     // MARK: - ManagedIssuerDelegate

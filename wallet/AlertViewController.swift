@@ -31,6 +31,7 @@ class AlertViewController : UIViewController {
         }
     }
     
+    @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -43,13 +44,33 @@ class AlertViewController : UIViewController {
             animateIconIfNeeded()
         }
     }
-
+    
+    var progressIcon = Icon.verifying {
+        didSet {
+            progressIconView.image = progressIcon.image
+            animateIconIfNeeded()
+        }
+    }
+    
+    @IBOutlet weak var progressAlertView: UIView!
+    @IBOutlet weak var progressIconView: UIImageView!
+    @IBOutlet weak var progressTitleLabel: UILabel!
+    
+    func setProgressAlert(_ isProgressAlert: Bool) {
+        alertView.isHidden = isProgressAlert
+        progressAlertView.isHidden = !isProgressAlert
+    }
+    
     func set(title: String) {
         titleLabel.text = title
     }
     
     func set(message: String) {
         messageLabel.text = message
+    }
+    
+    func set(progressTitle: String) {
+        progressTitleLabel.text = progressTitle
     }
     
     func set(buttons: [UIButton], clear: Bool = false) {
@@ -81,6 +102,16 @@ class AlertViewController : UIViewController {
         } else {
             iconView.layer.removeAllAnimations()
         }
+        if progressIcon == .verifying {
+            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+            rotationAnimation.toValue = NSNumber(value: .pi * 2.0)
+            rotationAnimation.duration = 1.2
+            rotationAnimation.isCumulative = true
+            rotationAnimation.repeatCount = .infinity
+            progressIconView.layer.add(rotationAnimation, forKey: animationKey)
+        } else {
+            progressIconView.layer.removeAllAnimations()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +125,7 @@ class AlertViewController : UIViewController {
         vc.view.backgroundColor = .clear
         vc.modalPresentationStyle = .custom
         
+        vc.setProgressAlert(false)
         vc.set(title: title)
         vc.set(message: message)
         vc.icon = icon
@@ -117,6 +149,7 @@ class AlertViewController : UIViewController {
         vc.view.backgroundColor = .clear
         vc.modalPresentationStyle = .custom
         
+        vc.setProgressAlert(false)
         vc.set(title: title)
         vc.set(message: message)
         vc.icon = .warning
@@ -129,6 +162,19 @@ class AlertViewController : UIViewController {
             vc.dismiss(animated: false, completion: nil)
         }
         vc.set(buttons: [button])
+        
+        return vc
+    }
+    
+    static func createProgress(title: String) -> AlertViewController {
+        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
+        vc.view.backgroundColor = .clear
+        vc.modalPresentationStyle = .custom
+        
+        vc.setProgressAlert(true)
+        vc.set(progressTitle: title)
+        vc.progressIcon = .verifying
         
         return vc
     }
