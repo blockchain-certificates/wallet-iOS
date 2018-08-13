@@ -332,7 +332,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             progressAlert.set(buttons: [okayButton])
         
             self?.isLoading = false
-        })
+        }
     }
     
     // MARK: - ManagedIssuerDelegate
