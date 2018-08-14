@@ -23,13 +23,13 @@ struct Style {
         static let C4 = UIColor(hexString: "#2AB27B")
 
         /// C5: Headlines
-        static let C5 = UIColor(hexString: "#207BD3")
+        static let C5 = UIColor(hexString: "#156DCB")
         
         /// C6: Primary text
         static let C6 = UIColor(hexString: "#333333")
 
         /// C7: Secondary text
-        static let C7 = UIColor(hexString: "#919396")
+        static let C7 = UIColor(hexString: "#666666")
         
         /// C8: Strokes
         static let C8 = UIColor(hexString: "#D8D8D8")
@@ -41,7 +41,7 @@ struct Style {
         static let C10 = UIColor(hexString: "#ECF5FE")
         
         /// C11: Selected primary button background
-        static let C11 = UIColor(hexString: "#97CEB8")
+        static let C11 = UIColor(hexString: "#006239")
         
         /// C12: highlighted button fill/outline
         static let C12 = UIColor(hexString: "#11493E")
@@ -50,7 +50,7 @@ struct Style {
         static let C13 = UIColor(hexString: "#0000000C")
         
         /// C14: button disabled text
-        static let C14 = UIColor(hexString: "#888888")
+        static let C14 = UIColor(hexString: "#7CE4B4")
     }
 
     struct Font {
