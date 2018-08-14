@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gag-J3-nMn">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="565"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zt0-2q-H1n" userLabel="ContentView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
@@ -54,17 +54,17 @@
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X1h-nY-yXF" userLabel="Footer">
-                    <rect key="frame" x="0.0" y="549" width="375" height="118"/>
+                    <rect key="frame" x="0.0" y="565" width="375" height="102"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-rO-N6E" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                            <rect key="frame" x="20" y="14" width="335" height="44"/>
+                            <rect key="frame" x="20" y="14" width="335" height="28"/>
                             <state key="normal" title="Share" image="icon_share"/>
                             <connections>
                                 <action selector="shareTapped:" destination="-1" eventType="touchUpInside" id="gla-Jz-T6K"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-06-Fky" customClass="TertiaryButton" customModule="certificates" customModuleProvider="target">
-                            <rect key="frame" x="117" y="66" width="141" height="44"/>
+                            <rect key="frame" x="117" y="50" width="141" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="m7M-SU-Nkt"/>
                             </constraints>

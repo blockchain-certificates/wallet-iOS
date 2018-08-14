@@ -2,10 +2,10 @@
     <head>
         <script src="./verifier.js"></script>
     </head>
-    
+
     <body>
         <div id="output" />
-        
+
         <script>
             function loadJSON(url, callback) {
                 var xobj = new XMLHttpRequest();
@@ -18,16 +18,20 @@
                 };
                 xobj.send(null);
             }
-        
-        function statusCallback(arg1) {
-            const output = document.getElementById('output')
-            console.log(arg1)
-            output.innerHTML = output.innerHTML + arg1 + "<br>"
+
+        function substepCallback(message) {
+            window.webkit.messageHandlers["scriptHandler"].postMessage(message);
         }
-        
-        loadJSON("./certificate.json", function(certificateContentsString) {
-                 v = new Verifier.CertificateVerifier(certificateContentsString, statusCallback)
-                 v.verify()
+
+        loadJSON("./certificate.json", async function(certificateContentsString) {
+                 var certificate = new Verifier.Certificate(certificateContentsString)
+                 window.webkit.messageHandlers["scriptHandler"].postMessage(certificate.chain.code);
+
+                 var verificationSteps = certificate.verificationSteps
+                 window.webkit.messageHandlers["scriptHandler"].postMessage(certificate.verificationSteps);
+
+                 var result = await certificate.verify(substepCallback);
+                 window.webkit.messageHandlers["scriptHandler"].postMessage(result);
                  });
             </script>
     </body>

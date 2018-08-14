@@ -111,11 +111,11 @@
 		A9B17851203746E300B76375 /* IssuerCollectionEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */; };
 		A9B997A1203F1CE000C05153 /* verifier.js in Resources */ = {isa = PBXBuildFile; fileRef = A9B9979F203F1CE000C05153 /* verifier.js */; };
 		A9B997A2203F1CE000C05153 /* verify.html in Resources */ = {isa = PBXBuildFile; fileRef = A9B997A0203F1CE000C05153 /* verify.html */; };
-		A9B997A4203F1D0800C05153 /* VerifyCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B997A3203F1D0800C05153 /* VerifyCredential.swift */; };
 		A9B997A62040611D00C05153 /* IssuerCollectionReturningUserEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */; };
 		A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2B049202B5893002015F0 /* UIElements.swift */; };
 		ABC6BB21B68837562003AED2 /* libPods-certificates.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F8F788045077CB0389D73 /* libPods-certificates.a */; };
 		D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
+		EE651190212369A0009AC972 /* CertificateVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE65118F212369A0009AC972 /* CertificateVerifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,10 +256,10 @@
 		A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerCollectionEmptyView.xib; sourceTree = "<group>"; };
 		A9B9979F203F1CE000C05153 /* verifier.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = verifier.js; sourceTree = "<group>"; };
 		A9B997A0203F1CE000C05153 /* verify.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = verify.html; sourceTree = "<group>"; };
-		A9B997A3203F1D0800C05153 /* VerifyCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCredential.swift; sourceTree = "<group>"; };
 		A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionReturningUserEmptyView.xib; sourceTree = "<group>"; };
 		A9D2B049202B5893002015F0 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
 		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE65118F212369A0009AC972 /* CertificateVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -540,7 +540,7 @@
 			children = (
 				A9B9979F203F1CE000C05153 /* verifier.js */,
 				A9B997A0203F1CE000C05153 /* verify.html */,
-				A9B997A3203F1D0800C05153 /* VerifyCredential.swift */,
+				EE65118F212369A0009AC972 /* CertificateVerifier.swift */,
 			);
 			path = Verification;
 			sourceTree = "<group>";
@@ -914,7 +914,6 @@
 				832F2A491E944E1C00A65C3A /* CertificateMetadataViewController.swift in Sources */,
 				A961EBC72028BE020016CD1E /* Style.swift in Sources */,
 				8388B8AA1EDE15BF00B28A57 /* WebLoginViewController.swift in Sources */,
-				A9B997A4203F1D0800C05153 /* VerifyCredential.swift in Sources */,
 				836031BD1E5651C9005B2D2E /* PrivacyViewController.swift in Sources */,
 				838DE6CD1F3A771D00185A49 /* ManagedIssuer.swift in Sources */,
 				83802BF41E01BC1E00E54C13 /* NoCertificatesTableViewCell.swift in Sources */,
@@ -927,6 +926,7 @@
 				83115A5C1E0847EE00EDC0A2 /* NoContentView.swift in Sources */,
 				832AE0151DF893A900A3CA4A /* SkyFloatingLabelTextField.swift in Sources */,
 				A9B1784B203615D000B76375 /* IssuerHeaderTableViewCell.swift in Sources */,
+				EE651190212369A0009AC972 /* CertificateVerifier.swift in Sources */,
 				8372F2F51FA12421007F0BC2 /* Logger.swift in Sources */,
 				83A6EDD41DAFFAC200ABFB47 /* AddIssuerViewController.swift in Sources */,
 				838DE6D81F3B680800185A49 /* Extensions.swift in Sources */,
