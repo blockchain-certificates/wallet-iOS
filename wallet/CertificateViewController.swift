@@ -98,21 +98,27 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         //
     }
     
-    func startStep(code: String, label: String) {
-        progressAlert?.set(title: label)
+    func startSubstep(stepLabel: String, substepLabel: String) {
+        progressAlert?.set(title: stepLabel)
+        progressAlert?.set(message: substepLabel)
     }
     
-    func startSubstep(code: String, label: String) {
-        progressAlert?.set(message: label)
-    }
-    
-    func finishSubstep(code: String, success: Bool, errorMessage: String?) {
+    func finishSubstep(success: Bool, errorMessage: String?) {
         //
     }
     
     func finish(success: Bool, errorMessage: String?) {
-        progressAlert?.set(title: "TEMP Title")
-        progressAlert?.set(message: "TEMP Message")
+        
+        if success {
+            progressAlert?.icon = .success
+            progressAlert?.set(title: "[Placeholder] Success")
+            progressAlert?.set(message: "[Placeholder] This is a valid certificate.")
+        } else {
+            progressAlert?.icon = .failure
+            progressAlert?.set(title: "[Placeholder] Fail")
+            progressAlert?.set(message: errorMessage!)
+        }
+        progressAlert?.buttons.first?.setTitle("Close", for: .normal)
     }
     
     // MARK: - More Info
