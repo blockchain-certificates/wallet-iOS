@@ -9,12 +9,10 @@
 import UIKit
 import Blockcerts
 import JSONLD
-import SystemConfiguration
 
 class CertificateViewController: UIViewController, CertificateVerifierDelegate {
     
     var delegate : CertificateViewControllerDelegate?
-    let reachability = SCNetworkReachabilityCreateWithName(nil, "certificates.learningmachine.com")!
     
     public let certificate: Certificate
     private let bitcoinManager = CoreBitcoinManager()
@@ -72,14 +70,13 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         }
 
         // Check for connectivity
-        if !isNetworkReachable() {
-            let alert = AlertViewController.createWarning(title: NSLocalizedString("No Network Connection", comment: "No network connection alert title"),
-                                              message: NSLocalizedString("Please check your network connection and try again.", comment: "No network connection alert message"))
+        if !Reachability.isNetworkReachable() {
+            let alert = AlertViewController.createNetworkWarning()
             present(alert, animated: false, completion: nil)
             return
         }
         
-        progressAlert = AlertViewController.create(title: "", message: "", icon: .verifying)
+        progressAlert = AlertViewController.create(title: "[Initializing]", message: "[Loading blockchain type and all steps.]", icon: .verifying)
         let cancelButton = SecondaryButton(frame: .zero)
         cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
         cancelButton.onTouchUpInside { [weak self] in
@@ -111,8 +108,8 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         
         if success {
             progressAlert?.icon = .success
-            progressAlert?.set(title: "[Placeholder] Success")
-            progressAlert?.set(message: "[Placeholder] This is a valid certificate.")
+            progressAlert?.set(title: "[Success Message]")
+            progressAlert?.set(message: "[This is a valid certificate.]")
         } else {
             progressAlert?.icon = .failure
             progressAlert?.set(title: "[Placeholder] Fail")
@@ -212,20 +209,6 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
             }
         }
         present(shareController, animated: true, completion: nil)
-    }
-    
-    // MARK: - Other
-    
-    func isNetworkReachable() -> Bool {
-        var flags = SCNetworkReachabilityFlags()
-        SCNetworkReachabilityGetFlags(reachability, &flags)
-        
-        let isReachable = flags.contains(.reachable)
-        let needsConnection = flags.contains(.connectionRequired)
-        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
-        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
-        
-        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
     }
 }
 

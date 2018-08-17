@@ -9,39 +9,20 @@
 import UIKit
 import WebKit
 import Blockcerts
-import SystemConfiguration
 
 class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
-    private var inProgressRequest : CommonRequest?
-    var delegate : AddIssuerViewControllerDelegate?
-    let reachability = SCNetworkReachabilityCreateWithName(nil, "certificates.learningmachine.com")!
     
-    var identificationURL: URL?
-    var nonce: String?
+    private var inProgressRequest: CommonRequest?
+    var delegate: AddIssuerViewControllerDelegate?
     var managedIssuer: ManagedIssuer?
-    var presentedModally = false
     var progressAlert: AlertViewController?
+    var presentedModally = false
+    var isLoading = false
     
     @IBOutlet weak var scrollView : UIScrollView!
     @IBOutlet weak var issuerURLField: UITextView!
     @IBOutlet weak var nonceField : UITextView!
     @IBOutlet weak var submitButton : UIButton!
-    
-    var isLoading = false {
-        didSet {
-        }
-    }
-    
-    init(identificationURL: URL? = nil, nonce: String? = nil) {
-        self.identificationURL = identificationURL
-        self.nonce = nonce
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,88 +38,33 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         issuerURLField.textColor = Style.Color.C3
 
         nonceField.delegate = self
-        issuerURLField.font = Style.Font.T3S
-        issuerURLField.textColor = Style.Color.C3
-
-        loadDataIntoFields()
-        stylize()
+        nonceField.font = Style.Font.T3S
+        nonceField.textColor = Style.Color.C3
         
-        // No need to unregister these. Thankfully.
+        submitButton.isEnabled = false
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
-    
-    func loadDataIntoFields() {
-        issuerURLField.text = identificationURL?.absoluteString
-        nonceField.text = nonce
-        
-        submitButton.isEnabled = nonceField.text.count > 0 && issuerURLField.text.count > 0
-    }
-    
-    func saveDataIntoFields() {
-        guard let urlString = issuerURLField.text, let url = URL(string: urlString) else {
-            return
-        }
-        identificationURL = url
-        nonce = nonceField.text
-    }
-    
-    func stylize() { }
 
     @IBAction func addIssuerTapped(_ sender: Any) {
         Logger.main.info("Save issuer tapped")
-        
-        // TODO: validation.
-        
-        if !isNetworkReachable() {
-            let alert = AlertViewController.createWarning(title: NSLocalizedString("No Network Connection", comment: "No network connection alert title"),
-                                                          message: NSLocalizedString("Please check your network connection and try again.", comment: "No network connection alert message"))
-            present(alert, animated: false, completion: nil)
-            return
-        }
-
-        let progressAlert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
-        present(progressAlert, animated: false, completion: nil)
-        
-        self.progressAlert = progressAlert
-        
-        saveDataIntoFields()
-        
-        guard identificationURL != nil,
-            nonce != nil else {
-                return
-        }
-        
-        identifyAndIntroduceIssuer(at: identificationURL!)
-    }
-    
-    func isNetworkReachable() -> Bool {
-        var flags = SCNetworkReachabilityFlags()
-        SCNetworkReachabilityGetFlags(reachability, &flags)
-        
-        let isReachable = flags.contains(.reachable)
-        let needsConnection = flags.contains(.connectionRequired)
-        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
-        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
-        
-        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
+        identifyAndIntroduceIssuer()
     }
 
     @objc func cancelTapped(_ sender: UIBarButtonItem) {
         Logger.main.info("Cancel Add Issuer tapped")
-        
         dismiss(animated: true, completion: nil)
     }
-    
+    /*
     func autoSubmitIfPossible() {
-        loadDataIntoFields()
         
         let areAllFieldsFilled = identificationURL != nil && nonce != nil
 
         if areAllFieldsFilled {
             identifyAndIntroduceIssuer(at: identificationURL!)
         }
-    }
+    }*/
     
     @objc func keyboardDidShow(notification: NSNotification) {
         guard let info = notification.userInfo,
@@ -157,8 +83,21 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         scrollView.scrollIndicatorInsets = .zero
     }
     
-    func identifyAndIntroduceIssuer(at url: URL) {
+    func identifyAndIntroduceIssuer() {
+        guard let urlString = issuerURLField.text, let url = URL(string: urlString), let nonce = nonceField.text else {
+            return
+        }
+        
+        if !Reachability.isNetworkReachable() {
+            let alert = AlertViewController.createNetworkWarning()
+            present(alert, animated: false, completion: nil)
+            return
+        }
+        
         Logger.main.info("Starting process to identify and introduce issuer at \(url)")
+        
+        progressAlert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
+        present(progressAlert!, animated: false, completion: nil)
         
         cancelWebLogin()
         
@@ -170,13 +109,9 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
                                         publicAddress: Keychain.shared.nextPublicAddress(),
                                         revocationAddress: nil)
         
-        let managedIssuer = ManagedIssuer()
-        self.managedIssuer = managedIssuer
         isLoading = true
-        
-        // LOADING IND
-        
-        managedIssuer.getIssuerIdentity(from: url) { [weak self] identifyError in
+        managedIssuer = ManagedIssuer()
+        managedIssuer!.getIssuerIdentity(from: url) { [weak self] identifyError in
             guard identifyError == nil else {
                 self?.isLoading = false
                 
@@ -213,18 +148,14 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             
             Logger.main.info("Issuer identification at \(url) succeeded. Beginning introduction step.")
             
-            if let nonce = self?.nonce {
-                managedIssuer.delegate = self
-                managedIssuer.introduce(recipient: targetRecipient, with: nonce) { introductionError in
-                    guard introductionError == nil else {
-                        self?.showAddIssuerError(withManagedIssuerError: introductionError!)
-                        return
-                    }
-                    self?.dismissWebView()
-                    self?.notifyAndDismiss(managedIssuer: managedIssuer)
+            self?.managedIssuer?.delegate = self
+            self?.managedIssuer?.introduce(recipient: targetRecipient, with: nonce) { introductionError in
+                guard introductionError == nil else {
+                    self?.showAddIssuerError(withManagedIssuerError: introductionError!)
+                    return
                 }
-            } else {
-                self?.showAddIssuerError(message: NSLocalizedString("We've encountered an error state when trying to talk to the issuer. Please try again.", comment: "Generic error when we've begun to introduce, but we don't have a nonce."))
+                self?.dismissWebView()
+                self?.notifyAndDismiss()
             }
         }
     }
@@ -236,9 +167,12 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         isLoading = false
     }
     
-    func notifyAndDismiss(managedIssuer: ManagedIssuer) {
+    func notifyAndDismiss() {
         guard let progressAlert = progressAlert else { return }
-        delegate?.added(managedIssuer: managedIssuer)
+        
+        if let managedIssuer = managedIssuer {
+            delegate?.added(managedIssuer: managedIssuer)
+        }
         
         DispatchQueue.main.async { [weak self] in
             
@@ -369,7 +303,6 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     }
 }
 
-
 struct ValidationOptions : OptionSet {
     let rawValue : Int
     
@@ -398,5 +331,4 @@ extension AddIssuerViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         submitButton.isEnabled = nonceField.text.count > 0 && issuerURLField.text.count > 0
     }
-    
 }

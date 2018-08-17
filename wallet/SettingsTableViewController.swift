@@ -267,10 +267,9 @@ class SettingsTableViewController: UITableViewController {
     
     // MARK: - Add Issuer
     
-    func showAddIssuerFlow(identificationURL: URL? = nil, nonce: String? = nil) {
-        let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
+    func showAddIssuerFlow() {
+        let controller = AddIssuerViewController()
         controller.delegate = self
-        
         navigationController?.pushViewController(controller, animated: true)
     }
     

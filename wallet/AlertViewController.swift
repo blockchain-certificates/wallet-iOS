@@ -166,6 +166,28 @@ class AlertViewController : UIViewController {
         return vc
     }
     
+    static func createNetworkWarning() -> AlertViewController {
+        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
+        vc.view.backgroundColor = .clear
+        vc.modalPresentationStyle = .custom
+        
+        vc.setProgressAlert(false)
+        vc.set(title: NSLocalizedString("No Network Connection", comment: "No network connection alert title"))
+        vc.set(message: NSLocalizedString("Please check your network connection and try again.", comment: "No network connection alert message"))
+        vc.icon = .warning
+        
+        // assume a simple, single button to dismiss the alert
+        let button = DangerButton(frame: .zero)
+        button.setTitle(NSLocalizedString("Okay", comment: "Button label"), for: .normal)
+        button.onTouchUpInside {
+            vc.dismiss(animated: false, completion: nil)
+        }
+        vc.set(buttons: [button])
+        
+        return vc
+    }
+    
     static func createProgress(title: String) -> AlertViewController {
         let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController

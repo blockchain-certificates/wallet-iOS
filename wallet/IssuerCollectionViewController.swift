@@ -453,7 +453,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func showAddIssuerFlow(identificationURL: URL? = nil, nonce: String? = nil) {
-        let controller = AddIssuerViewController(identificationURL: identificationURL, nonce: nonce)
+        let controller = AddIssuerViewController()
         controller.delegate = self
         controller.presentedModally = true
 
@@ -468,13 +468,13 @@ class IssuerCollectionViewController: UICollectionViewController {
             presentedViewController.dismiss(animated: false) { [weak self] in
                 OperationQueue.main.addOperation {
                     self?.present(navigation, animated: true) {
-                        controller.autoSubmitIfPossible()
+                        //controller.autoSubmitIfPossible()
                     }
                 }
             }
         } else {
             present(navigation, animated: true) {
-                controller.autoSubmitIfPossible()
+                //controller.autoSubmitIfPossible()
             }
         }
     }
@@ -482,9 +482,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     @objc func dismissModal() {
         presentedViewController?.dismiss(animated: true, completion: nil)
     }
-    
 }
-
 
 extension IssuerCollectionViewController { //  : UICollectionViewDelegate
     
