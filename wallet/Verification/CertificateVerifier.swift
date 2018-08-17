@@ -117,7 +117,7 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
         case VerifierMessageType.blockchain:
             break
             
-        case VerifierMessageType.allSteps:
+        case VerifierMessageType.allSteps: // TODO: Write non-shit code
             let stepArr = message.body as! [Any]
             for stepObj in stepArr {
                 let stepDict = stepObj as! [String: Any]
@@ -134,7 +134,7 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
                 }
             }
             
-        case VerifierMessageType.substepUpdate:
+        case VerifierMessageType.substepUpdate: // TODO: Write non-shit code
             let substepObj = message.body as! [String: Any]
             let substepObjKey = substepObj["code"] as! String
             let substep = substeps[substepObjKey]!

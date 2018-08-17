@@ -162,13 +162,12 @@ class IssuerCollectionViewController: UICollectionViewController {
         case .addIssuer(let identificationURL, let nonce):
             Logger.main.info("Processing autocomplete request to add issuer at \(identificationURL)")
 
-            if presentedViewController != nil {
-                presentedViewController?.dismiss(animated: false, completion: {
-                    self.showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
-                })
-            } else {
-                showAddIssuerFlow(identificationURL: identificationURL, nonce: nonce)
+            if let modalVC = presentedViewController {
+                modalVC.dismiss(animated: false, completion: nil)
             }
+            
+            addIssuerFromUniversalLink(identificationURL: identificationURL, nonce: nonce)
+            
         case .addCertificate(let certificateURL, let silently, let animated):
             Logger.main.info("Processing autocomplete request to add certificate at \(certificateURL)")
             
@@ -237,6 +236,10 @@ class IssuerCollectionViewController: UICollectionViewController {
         if shouldReloadCollection {
             reloadCollectionView()
         }
+    }
+    
+    func addIssuerFromUniversalLink(identificationURL: URL, nonce: String) {
+        
     }
 
     func saveIssuers() {
@@ -450,33 +453,6 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         let issuerController = navigateTo(issuer: managedIssuer, animated: animated)
         issuerController.navigateTo(certificate: certificate, animated: animated)
-    }
-
-    func showAddIssuerFlow(identificationURL: URL? = nil, nonce: String? = nil) {
-        let controller = AddIssuerViewController()
-        controller.delegate = self
-        controller.presentedModally = true
-
-        let navigation = UINavigationController(rootViewController: controller)
-        navigation.navigationBar.isTranslucent = false
-        navigation.navigationBar.backgroundColor = Style.Color.C3
-        navigation.navigationBar.barTintColor = Style.Color.C3
-        let closeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), style: .plain, target: self, action: #selector(dismissModal))
-        controller.navigationItem.rightBarButtonItem = closeButton
-
-        if let presentedViewController = presentedViewController {
-            presentedViewController.dismiss(animated: false) { [weak self] in
-                OperationQueue.main.addOperation {
-                    self?.present(navigation, animated: true) {
-                        //controller.autoSubmitIfPossible()
-                    }
-                }
-            }
-        } else {
-            present(navigation, animated: true) {
-                //controller.autoSubmitIfPossible()
-            }
-        }
     }
     
     @objc func dismissModal() {
