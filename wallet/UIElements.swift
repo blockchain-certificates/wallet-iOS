@@ -108,10 +108,10 @@ class ButtonBase : UIButton {
 
     var textColor : UIColor { return .white }
     var textColorHighlighted : UIColor { return .white }
-    var textColorDisabled : UIColor { return Style.Color.C7 }
+    var textColorDisabled : UIColor { return Style.Color.C12 }
     var strokeColor : UIColor { return .white }
     var strokeColorHighlighted : UIColor { return .white }
-    var strokeColorDisabled : UIColor { return Style.Color.C7 }
+    var strokeColorDisabled : UIColor { return Style.Color.C12 }
     var fillColor : UIColor { return .white }
     var fillColorHighlighted : UIColor { return .white }
     var fillColorDisabled : UIColor { return .clear }
@@ -174,37 +174,52 @@ class ButtonBase : UIButton {
 @IBDesignable
 class PrimaryButton : ButtonBase {
     
-    override var textColor : UIColor { return Style.Color.C1 }
-    override var textColorHighlighted : UIColor { return Style.Color.C14 }
-    override var textColorDisabled : UIColor { return Style.Color.C1 }
+    override var textColor : UIColor { return Style.Color.C3 }
+    override var textColorHighlighted : UIColor { return Style.Color.C3 }
+    override var textColorDisabled : UIColor { return Style.Color.C12 }
 
-    override var strokeColor : UIColor { return Style.Color.C4 }
-    override var strokeColorHighlighted : UIColor { return Style.Color.C12 }
+    override var strokeColor : UIColor { return Style.Color.C14 }
+    override var strokeColorHighlighted : UIColor { return Style.Color.C4 }
     override var strokeColorDisabled : UIColor { return Style.Color.C8 }
 
-    override var fillColor : UIColor { return Style.Color.C4 }
-    override var fillColorHighlighted : UIColor { return Style.Color.C12 }
+    override var fillColor : UIColor { return Style.Color.C14 }
+    override var fillColorHighlighted : UIColor { return Style.Color.C4 }
     override var fillColorDisabled : UIColor { return Style.Color.C8 }
 
 }
 
 @IBDesignable
+class HomeSecondaryButton : ButtonBase {
+    
+    override var textColor : UIColor { return Style.Color.C14 }
+    override var textColorHighlighted : UIColor { return Style.Color.C14 }
+    
+    override var strokeColor : UIColor { return Style.Color.C14 }
+    override var strokeColorHighlighted : UIColor { return Style.Color.C4 }
+    
+    override var fillColor : UIColor { return Style.Color.C3 }
+    override var fillColorHighlighted : UIColor { return Style.Color.C3 }
+    
+}
+
+
+@IBDesignable
 class SecondaryButton : ButtonBase {
     
-    override var textColor : UIColor { return Style.Color.C4 }
-    override var textColorHighlighted : UIColor { return Style.Color.C11 }
+    override var textColor : UIColor { return Style.Color.C3 }
+    override var textColorHighlighted : UIColor { return Style.Color.C3 }
     
-    override var strokeColor : UIColor { return Style.Color.C4 }
-    override var strokeColorHighlighted : UIColor { return Style.Color.C12 }
+    override var strokeColor : UIColor { return Style.Color.C14 }
+    override var strokeColorHighlighted : UIColor { return Style.Color.C4 }
     
     override var fillColor : UIColor { return .clear }
-    override var fillColorHighlighted : UIColor { return Style.Color.C12 }
+    override var fillColorHighlighted : UIColor { return Style.Color.C4 }
     
 }
 
 @IBDesignable
 class TertiaryButton : SecondaryButton {
-    override var textColorHighlighted : UIColor { return Style.Color.C11 }
+    override var textColorHighlighted : UIColor { return Style.Color.C3 }
     override var strokeColor : UIColor { return .clear }
     override var strokeColorHighlighted : UIColor { return .clear }
 
