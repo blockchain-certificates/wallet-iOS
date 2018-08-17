@@ -32,7 +32,7 @@ struct Style {
         static let C7 = UIColor(hexString: "#666666")
         
         /// C8: Strokes
-        static let C8 = UIColor(hexString: "#D8D8D8")
+        static let C8 = UIColor(hexString: "#E3E3E3")
         
         /// C9: Error states
         static let C9 = UIColor(hexString: "#D0021B")
@@ -43,8 +43,8 @@ struct Style {
         /// C11: Selected primary button background
         static let C11 = UIColor(hexString: "#006239")
         
-        /// C12: highlighted button fill/outline
-        static let C12 = UIColor(hexString: "#11493E")
+        /// C12: Dsiabled/Pending
+        static let C12 = UIColor(hexString: "#9F9F9F")
         
         /// C13: drop shadow, 5% black
         static let C13 = UIColor(hexString: "#0000000C")
