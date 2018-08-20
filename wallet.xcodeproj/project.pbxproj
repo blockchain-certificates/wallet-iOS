@@ -559,7 +559,6 @@
 				83111B201DA4110C006B058D /* Sources */,
 				83111B211DA4110C006B058D /* Frameworks */,
 				83111B221DA4110C006B058D /* Resources */,
-				006B5852D595A9A01201CAA3 /* [CP] Embed Pods Frameworks */,
 				F65C77CEA313DD3106C499D5 /* [CP] Copy Pods Resources */,
 				83111B791DA414EC006B058D /* Embed Frameworks */,
 			);
@@ -580,8 +579,6 @@
 				83111B341DA4110C006B058D /* Sources */,
 				83111B351DA4110C006B058D /* Frameworks */,
 				83111B361DA4110C006B058D /* Resources */,
-				ACDFADC4D19B0BC3A8E63BA3 /* [CP] Embed Pods Frameworks */,
-				0BB09ADEF5FA9DAE711D9B64 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -601,8 +598,6 @@
 				836075181F2A4CD300758C9E /* Sources */,
 				836075191F2A4CD300758C9E /* Frameworks */,
 				8360751A1F2A4CD300758C9E /* Resources */,
-				6BBF86BD3E74082EB2FE92F7 /* [CP] Embed Pods Frameworks */,
-				4BD338FB69DC8B791B60AD67 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -626,7 +621,7 @@
 				TargetAttributes = {
 					83111B231DA4110C006B058D = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 4WR66L3TZA;
+						DevelopmentTeam = CYEWR6MU44;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -741,36 +736,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		006B5852D595A9A01201CAA3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificates/Pods-certificates-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0BB09ADEF5FA9DAE711D9B64 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesTests/Pods-certificatesTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2856E0708F57BE4D4AFEDE2C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -789,21 +754,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4BD338FB69DC8B791B60AD67 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4E0FF421B4AAC602A8ADECE2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -820,36 +770,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6BBF86BD3E74082EB2FE92F7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ACDFADC4D19B0BC3A8E63BA3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificatesTests/Pods-certificatesTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C4F92AA0A7F6B12082D77826 /* [CP] Check Pods Manifest.lock */ = {
@@ -1163,12 +1083,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 112;
-				DEVELOPMENT_TEAM = 4WR66L3TZA;
+				DEVELOPMENT_TEAM = CYEWR6MU44;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.smallplanet.cert-wallet";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.blockcerts.cert-wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wallet/wallet-Bridging-Header.h";
@@ -1187,12 +1107,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 112;
-				DEVELOPMENT_TEAM = 4WR66L3TZA;
+				DEVELOPMENT_TEAM = CYEWR6MU44;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.smallplanet.cert-wallet";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.blockcerts.cert-wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wallet/wallet-Bridging-Header.h";

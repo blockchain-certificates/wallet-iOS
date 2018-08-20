@@ -9,6 +9,10 @@
 import UIKit
 import JSONLD
 
+#if DEBUG
+import Bugsee
+#endif
+
 private let sampleCertificateResetKey = "resetSampleCertificate"
 private let enforceStrongOwnershipKey = "enforceStrongOwnership"
 
@@ -24,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Logger.main.info("Application was launched!")
+        
+        #if DEBUG
+        Bugsee.launch(token :"ef62e737-3645-43fa-ba0b-062afb7743af")
+        #endif
         
         let configuration = ArgumentParser().parse(arguments: ProcessInfo.processInfo.arguments)
         do {

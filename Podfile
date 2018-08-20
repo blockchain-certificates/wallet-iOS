@@ -9,6 +9,7 @@ target 'certificates' do
   pod 'CoreBitcoin', :podspec => 'https://raw.github.com/oleganza/CoreBitcoin/master/CoreBitcoin.podspec', :inhibit_warnings => true
   pod 'OpenSans'
   pod 'lottie-ios'
+  pod 'Bugsee'
 
   target 'certificatesTests' do
     inherit! :search_paths

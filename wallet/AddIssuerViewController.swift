@@ -17,7 +17,6 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     var managedIssuer: ManagedIssuer?
     var progressAlert: AlertViewController?
     var presentedModally = false
-    var isLoading = false
     
     @IBOutlet weak var scrollView : UIScrollView!
     @IBOutlet weak var issuerURLField: UITextView!
@@ -56,15 +55,6 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         Logger.main.info("Cancel Add Issuer tapped")
         dismiss(animated: true, completion: nil)
     }
-    /*
-    func autoSubmitIfPossible() {
-        
-        let areAllFieldsFilled = identificationURL != nil && nonce != nil
-
-        if areAllFieldsFilled {
-            identifyAndIntroduceIssuer(at: identificationURL!)
-        }
-    }*/
     
     @objc func keyboardDidShow(notification: NSNotification) {
         guard let info = notification.userInfo,
@@ -109,11 +99,9 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
                                         publicAddress: Keychain.shared.nextPublicAddress(),
                                         revocationAddress: nil)
         
-        isLoading = true
         managedIssuer = ManagedIssuer()
         managedIssuer!.getIssuerIdentity(from: url) { [weak self] identifyError in
             guard identifyError == nil else {
-                self?.isLoading = false
                 
                 var failureReason = NSLocalizedString("Something went wrong adding this issuer. Try again later.", comment: "Generic error for failure to add an issuer")
                 
@@ -160,13 +148,6 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         }
     }
     
-    @IBAction func cancelLoadingTapped(_ sender: Any) {
-        Logger.main.info("Cancel Loading tapped.")
-        
-        managedIssuer?.abortRequests()
-        isLoading = false
-    }
-    
     func notifyAndDismiss() {
         guard let progressAlert = progressAlert else { return }
         
@@ -196,8 +177,6 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
                 }
             }
             progressAlert.set(buttons: [okayButton])
-
-            self?.isLoading = false
         }
     }
     
@@ -264,8 +243,6 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
                 progressAlert.dismiss(animated: false, completion: nil)
             }
             progressAlert.set(buttons: [okayButton])
-        
-            self?.isLoading = false
         }
     }
     
@@ -299,7 +276,6 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     
     func cancelWebLogin() {
         managedIssuer?.abortRequests()
-        isLoading = false
     }
 }
 

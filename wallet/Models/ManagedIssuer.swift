@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ManagedIssuer.swift
 //  wallet
 //
 //  Created by Chris Downie on 11/1/16.

@@ -36,7 +36,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     // TODO: Should probably be AttributedIssuer, once I make up that model.
     var managedIssuers = [ManagedIssuer]()
     var certificates = [Certificate]()
-
+    var progressAlert: AlertViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -166,7 +167,7 @@ class IssuerCollectionViewController: UICollectionViewController {
                 modalVC.dismiss(animated: false, completion: nil)
             }
             
-            addIssuerFromUniversalLink(identificationURL: identificationURL, nonce: nonce)
+            addIssuerFromUniversalLink(url: identificationURL, nonce: nonce)
             
         case .addCertificate(let certificateURL, let silently, let animated):
             Logger.main.info("Processing autocomplete request to add certificate at \(certificateURL)")
@@ -238,8 +239,68 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
     }
     
-    func addIssuerFromUniversalLink(identificationURL: URL, nonce: String) {
+    func addIssuerFromUniversalLink(url: URL, nonce: String) {
         
+        if !Reachability.isNetworkReachable() {
+            let alert = AlertViewController.createNetworkWarning()
+            present(alert, animated: false, completion: nil)
+            return
+        }
+        
+        Logger.main.info("Starting process to identify and introduce issuer at \(url)")
+        
+        progressAlert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
+        present(progressAlert!, animated: false, completion: nil)
+        
+        let targetRecipient = Recipient(givenName: "",
+                                        familyName: "",
+                                        identity: "",
+                                        identityType: "email",
+                                        isHashed: false,
+                                        publicAddress: Keychain.shared.nextPublicAddress(),
+                                        revocationAddress: nil)
+        
+        let managedIssuer = ManagedIssuer()
+        managedIssuer.getIssuerIdentity(from: url) { [weak self] identifyError in
+            guard identifyError == nil else {
+                self?.showAddIssuerError()
+                return
+            }
+            
+            Logger.main.info("Issuer identification at \(url) succeeded. Beginning introduction step.")
+            
+            managedIssuer.delegate = self
+            managedIssuer.introduce(recipient: targetRecipient, with: nonce) { introductionError in
+                guard introductionError == nil else {
+                    self?.showAddIssuerError()
+                    return
+                }
+                self?.add(managedIssuer: managedIssuer)
+                self?.progressAlert?.dismiss(animated: false, completion: nil)
+            }
+        }
+    }
+    
+    func showAddIssuerError() {
+        Logger.main.info("Add issuer failed.")
+        guard let progressAlert = progressAlert else { return }
+        
+        DispatchQueue.main.async {
+            let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
+            let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
+            
+            progressAlert.setProgressAlert(false)
+            progressAlert.set(title: title)
+            progressAlert.set(message: cannedMessage)
+            progressAlert.icon = .failure
+            
+            let okayButton = SecondaryButton(frame: .zero)
+            okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+            okayButton.onTouchUpInside {
+                progressAlert.dismiss(animated: false, completion: nil)
+            }
+            progressAlert.set(buttons: [okayButton])
+        }
     }
 
     func saveIssuers() {
@@ -281,6 +342,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         saveIssuers()
         OperationQueue.main.addOperation {
             self.collectionView?.reloadData()
+            self.loadBackgroundView()
         }
     }
 
