@@ -160,7 +160,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
             let message = NSLocalizedString("An issuer was added. Please check your issuers screen.", comment: "Add issuer alert message")
             
-            progressAlert.setProgressAlert(false)
+            progressAlert.type = .normal
             progressAlert.set(title: title)
             progressAlert.set(message: message)
             progressAlert.icon = .success
@@ -232,7 +232,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
             let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
 
-            progressAlert.setProgressAlert(false)
+            progressAlert.type = .normal
             progressAlert.set(title: title)
             progressAlert.set(message: cannedMessage)
             progressAlert.icon = .failure

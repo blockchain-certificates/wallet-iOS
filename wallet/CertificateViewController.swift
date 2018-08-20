@@ -76,14 +76,14 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
             return
         }
         
-        progressAlert = AlertViewController.create(title: "[Initializing]", message: "[Loading blockchain type and all steps.]", icon: .verifying)
+        progressAlert = AlertViewController.createProgress(title: "[Initializing]")
         let cancelButton = SecondaryButton(frame: .zero)
         cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
         cancelButton.onTouchUpInside { [weak self] in
             self?.verifier.cancel()
             self?.progressAlert!.dismiss(animated: false, completion: nil)
         }
-        progressAlert!.set(buttons: [cancelButton])
+        progressAlert!.set(verificationButtons: [cancelButton])
         present(progressAlert!, animated: false, completion: nil)
 
         verifier.verify()
@@ -92,10 +92,12 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
     // MARK: - CertificateVerifierDelegate
     
     func start(blockChain: BlockChain) {
-        //
+        progressAlert?.set(title: "Verifying Ethereum")
     }
     
     func startSubstep(stepLabel: String, substepLabel: String) {
+        progressAlert?.type = .verification
+        progressAlert?.set(header: "Verifying Ethereum")
         progressAlert?.set(title: stepLabel)
         progressAlert?.set(message: substepLabel)
     }
@@ -105,17 +107,24 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
     }
     
     func finish(success: Bool, errorMessage: String?) {
+        progressAlert?.type = .normal
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(NSLocalizedString("Close", comment: "Button to cancel user action"), for: .normal)
+        cancelButton.onTouchUpInside { [weak self] in
+            self?.verifier.cancel()
+            self?.progressAlert!.dismiss(animated: false, completion: nil)
+        }
+        progressAlert!.set(buttons: [cancelButton])
         
         if success {
             progressAlert?.icon = .success
-            progressAlert?.set(title: "[Success Message]")
-            progressAlert?.set(message: "[This is a valid certificate.]")
+            progressAlert?.set(title: "Verified!")
+            progressAlert?.set(message: "Your credential has been successfully verified.")
         } else {
             progressAlert?.icon = .failure
-            progressAlert?.set(title: "[Placeholder] Fail")
+            progressAlert?.set(title: "Verification Fail")
             progressAlert?.set(message: errorMessage!)
         }
-        progressAlert?.buttons.first?.setTitle("Close", for: .normal)
     }
     
     // MARK: - More Info

@@ -31,46 +31,78 @@ class AlertViewController : UIViewController {
         }
     }
     
+    enum AlertType {
+        case normal
+        case progress
+        case verification
+    }
+    
+    // Normal Alert
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var buttonStack: UIStackView!
-    var buttons = [UIButton]()
     
-    var icon = Icon.success {
-        didSet {
-            iconView.image = icon.image
-            animateIconIfNeeded()
-        }
-    }
-    
-    var progressIcon = Icon.verifying {
-        didSet {
-            progressIconView.image = progressIcon.image
-            animateIconIfNeeded()
-        }
-    }
-    
+    // Progress Alert
     @IBOutlet weak var progressAlertView: UIView!
     @IBOutlet weak var progressIconView: UIImageView!
     @IBOutlet weak var progressTitleLabel: UILabel!
     
-    func setProgressAlert(_ isProgressAlert: Bool) {
-        alertView.isHidden = isProgressAlert
-        progressAlertView.isHidden = !isProgressAlert
+    // Certificate Verification Alert
+    @IBOutlet weak var verificationAlertView: UIView!
+    @IBOutlet weak var verificationIconView: UIImageView!
+    @IBOutlet weak var verificationHeaderLabel: UILabel!
+    @IBOutlet weak var verificationTitleLabel: UILabel!
+    @IBOutlet weak var verificationMessageLabel: UILabel!
+    @IBOutlet weak var verificationButtonStack: UIStackView!
+    
+    var icon = Icon.success {
+        didSet {
+            iconView.image = icon.image
+            progressIconView.image = icon.image
+            verificationIconView.image = icon.image
+            animateIconIfNeeded()
+        }
+    }
+    
+    var type = AlertType.normal {
+        didSet {
+            switch type {
+            case .normal:
+                alertView.isHidden = false
+                progressAlertView.isHidden = true
+                verificationAlertView.isHidden = true
+                
+            case .progress:
+                alertView.isHidden = true
+                progressAlertView.isHidden = false
+                verificationAlertView.isHidden = true
+                
+            case .verification:
+                alertView.isHidden = true
+                progressAlertView.isHidden = true
+                verificationAlertView.isHidden = false
+            }
+        }
+    }
+    
+    var buttons = [UIButton]()
+    var verificationButtons =  [UIButton]()
+    
+    func set(header: String) {
+        verificationHeaderLabel.text = header
     }
     
     func set(title: String) {
         titleLabel.text = title
+        progressTitleLabel.text = title
+        verificationTitleLabel.text = title
     }
     
     func set(message: String) {
         messageLabel.text = message
-    }
-    
-    func set(progressTitle: String) {
-        progressTitleLabel.text = progressTitle
+        verificationMessageLabel.text = message
     }
     
     func set(buttons: [UIButton], clear: Bool = false) {
@@ -79,6 +111,7 @@ class AlertViewController : UIViewController {
                 buttonStack.removeArrangedSubview($0)
             }
         }
+        
         buttons.forEach { button in
             button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
             button.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -89,6 +122,24 @@ class AlertViewController : UIViewController {
         }
         self.buttons = buttons
     }
+    
+    func set(verificationButtons: [UIButton], clear: Bool = false) {
+        if clear {
+            verificationButtonStack.arrangedSubviews.forEach {
+                verificationButtonStack.removeArrangedSubview($0)
+            }
+        }
+        
+        verificationButtons.forEach { button in
+            button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+            button.setContentHuggingPriority(.defaultLow, for: .horizontal)
+            verificationButtonStack.addArrangedSubview(button)
+            // 0.304 multiplier is 40% of 0.76 x screen width
+            button.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.304).isActive = true
+            button.heightAnchor.constraint(equalToConstant: Style.Measure.heightButtonSmall).isActive = true
+        }
+        self.verificationButtons = verificationButtons
+    }
 
     func animateIconIfNeeded() {
         let animationKey = "rotationAnimation"
@@ -98,19 +149,21 @@ class AlertViewController : UIViewController {
             rotationAnimation.duration = 1.2
             rotationAnimation.isCumulative = true
             rotationAnimation.repeatCount = .infinity
-            iconView.layer.add(rotationAnimation, forKey: animationKey)
+            
+            switch type {
+            case .normal:
+                iconView.layer.add(rotationAnimation, forKey: animationKey)
+                
+            case .progress:
+                progressIconView.layer.add(rotationAnimation, forKey: animationKey)
+                
+            case .verification:
+                verificationIconView.layer.add(rotationAnimation, forKey: animationKey)
+            }
         } else {
             iconView.layer.removeAllAnimations()
-        }
-        if progressIcon == .verifying {
-            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-            rotationAnimation.toValue = NSNumber(value: .pi * 2.0)
-            rotationAnimation.duration = 1.2
-            rotationAnimation.isCumulative = true
-            rotationAnimation.repeatCount = .infinity
-            progressIconView.layer.add(rotationAnimation, forKey: animationKey)
-        } else {
             progressIconView.layer.removeAllAnimations()
+            verificationIconView.layer.removeAllAnimations()
         }
     }
     
@@ -125,7 +178,7 @@ class AlertViewController : UIViewController {
         vc.view.backgroundColor = .clear
         vc.modalPresentationStyle = .custom
         
-        vc.setProgressAlert(false)
+        vc.type = .normal
         vc.set(title: title)
         vc.set(message: message)
         vc.icon = icon
@@ -149,7 +202,7 @@ class AlertViewController : UIViewController {
         vc.view.backgroundColor = .clear
         vc.modalPresentationStyle = .custom
         
-        vc.setProgressAlert(false)
+        vc.type = .normal
         vc.set(title: title)
         vc.set(message: message)
         vc.icon = .warning
@@ -167,25 +220,8 @@ class AlertViewController : UIViewController {
     }
     
     static func createNetworkWarning() -> AlertViewController {
-        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
-        vc.view.backgroundColor = .clear
-        vc.modalPresentationStyle = .custom
-        
-        vc.setProgressAlert(false)
-        vc.set(title: NSLocalizedString("No Network Connection", comment: "No network connection alert title"))
-        vc.set(message: NSLocalizedString("Please check your network connection and try again.", comment: "No network connection alert message"))
-        vc.icon = .warning
-        
-        // assume a simple, single button to dismiss the alert
-        let button = DangerButton(frame: .zero)
-        button.setTitle(NSLocalizedString("Okay", comment: "Button label"), for: .normal)
-        button.onTouchUpInside {
-            vc.dismiss(animated: false, completion: nil)
-        }
-        vc.set(buttons: [button])
-        
-        return vc
+        return createWarning(title: NSLocalizedString("No Network Connection", comment: "No network connection alert title"),
+                             message: NSLocalizedString("Please check your network connection and try again.", comment: "No network connection alert message"))
     }
     
     static func createProgress(title: String) -> AlertViewController {
@@ -194,9 +230,24 @@ class AlertViewController : UIViewController {
         vc.view.backgroundColor = .clear
         vc.modalPresentationStyle = .custom
         
-        vc.setProgressAlert(true)
-        vc.set(progressTitle: title)
-        vc.progressIcon = .verifying
+        vc.type = .progress
+        vc.set(title: title)
+        vc.icon = .verifying
+        
+        return vc
+    }
+    
+    static func createVerification(header: String, title: String, message: String) -> AlertViewController {
+        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
+        vc.view.backgroundColor = .clear
+        vc.modalPresentationStyle = .custom
+        
+        vc.type = .verification
+        vc.set(header: header)
+        vc.set(title: title)
+        vc.set(message: message)
+        vc.icon = .verifying
         
         return vc
     }
