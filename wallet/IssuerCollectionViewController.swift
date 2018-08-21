@@ -156,6 +156,21 @@ class IssuerCollectionViewController: UICollectionViewController {
         processAutocompleteRequest()
     }
     
+    func makeViewControllerVisible(action: @escaping () -> Void) {
+        if let modalVC = presentedViewController {
+            modalVC.dismiss(animated: false) {
+                action()
+            }
+        } else if navigationController?.topViewController != self {
+            CATransaction.begin()
+            CATransaction.setCompletionBlock(action)
+            navigationController?.popToViewController(self, animated: false)
+            CATransaction.commit()
+        } else {
+            action()
+        }
+    }
+    
     func processAutocompleteRequest() {
         switch autocompleteRequest {
         case .none:
@@ -163,16 +178,16 @@ class IssuerCollectionViewController: UICollectionViewController {
         case .addIssuer(let identificationURL, let nonce):
             Logger.main.info("Processing autocomplete request to add issuer at \(identificationURL)")
 
-            if let modalVC = presentedViewController {
-                modalVC.dismiss(animated: false, completion: nil)
+            makeViewControllerVisible() {
+                self.addIssuerFromUniversalLink(url: identificationURL, nonce: nonce)
             }
-            
-            addIssuerFromUniversalLink(url: identificationURL, nonce: nonce)
             
         case .addCertificate(let certificateURL, let silently, let animated):
             Logger.main.info("Processing autocomplete request to add certificate at \(certificateURL)")
             
-            _ = add(certificateURL: certificateURL, silently: silently, animated: animated)
+            makeViewControllerVisible() {
+                self.addCertificateFromUniversalLink(url: certificateURL, silently: silently, animated: animated)
+            }
         }
     }
 
@@ -238,7 +253,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             reloadCollectionView()
         }
     }
-    
+
     func addIssuerFromUniversalLink(url: URL, nonce: String) {
         
         if !Reachability.isNetworkReachable() {
@@ -317,7 +332,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
     }
 
-    func add(issuer: Issuer) {
+    func add(issuer: Issuer) {        
         let managedIssuer = ManagedIssuer()
         managedIssuer.manage(issuer: issuer) { [weak self] success in
             self?.reloadCollectionView()
@@ -415,8 +430,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         saveCertificates()
     }
 
-    func add(certificateURL: URL, silently: Bool = false, animated: Bool = true) -> Bool {
-        var components = URLComponents(url: certificateURL, resolvingAgainstBaseURL: false)
+    func addCertificateFromUniversalLink(url: URL, silently: Bool = false, animated: Bool = true) {
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         let formatQueryItem = URLQueryItem(name: "format", value: "json")
 
         if components?.queryItems == nil {
@@ -439,7 +454,7 @@ class IssuerCollectionViewController: UICollectionViewController {
 
             let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
             present(alert, animated: false, completion: nil)
-            return false
+            return
         }
 
         let assertionUid = certificate.assertion.uid;
@@ -468,7 +483,7 @@ class IssuerCollectionViewController: UICollectionViewController {
                 
                 present(alert, animated: false, completion: nil)
             }
-            return true
+            return
         }
 
         add(certificate: certificate)
@@ -477,8 +492,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         if !silently {
             navigateTo(certificate: certificate, animated: animated)
         }
-
-        return true
     }
 
     func navigateTo(issuer managedIssuer: ManagedIssuer, animated: Bool = true) -> IssuerViewController {
