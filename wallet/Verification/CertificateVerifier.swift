@@ -57,7 +57,7 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
     let certificate: Data
     var webView: WKWebView?
     var delegate: CertificateVerifierDelegate?
-    var chain: BlockChain?
+    var blockchainLabel: String?
     var steps = [String: VerifierStep]()
     var substeps = [String: VerifierStep]()
     
@@ -115,7 +115,8 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
         
         switch message.name {
         case VerifierMessageType.blockchain:
-            break
+            blockchainLabel = "Verifying \(message.body)"
+            delegate?.identifyBlockchain()
             
         case VerifierMessageType.allSteps: // TODO: Write non-shit code
             let stepArr = message.body as! [Any]
@@ -165,14 +166,8 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
     }
 }
 
-enum BlockChain: String {
-    case mainnet = "bitcoinMainnet"
-    case testnet = "bitcoinTestnet"
-    case mocknet = "mockchain"
-}
-
 protocol CertificateVerifierDelegate: class {
-    func start(blockChain: BlockChain)
+    func identifyBlockchain()
     func startSubstep(stepLabel: String, substepLabel: String)
     func finishSubstep(success: Bool, errorMessage: String?)
     func finish(success: Bool, errorMessage: String?)

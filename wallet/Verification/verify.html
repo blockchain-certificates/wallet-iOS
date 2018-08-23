@@ -25,7 +25,7 @@
 
         loadJSON("./certificate.json", async function(certificateContentsString) {
                  var certificate = new Verifier.Certificate(certificateContentsString)
-                 window.webkit.messageHandlers["blockchain"].postMessage(certificate.chain.code);
+                 window.webkit.messageHandlers["blockchain"].postMessage(certificate.chain.name);
 
                  var verificationSteps = certificate.verificationSteps
                  window.webkit.messageHandlers["allSteps"].postMessage(certificate.verificationSteps);

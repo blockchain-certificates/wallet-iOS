@@ -91,13 +91,13 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
     
     // MARK: - CertificateVerifierDelegate
     
-    func start(blockChain: BlockChain) {
-        progressAlert?.set(title: "Verifying Ethereum")
+    func identifyBlockchain() {
+        progressAlert?.set(title: verifier.blockchainLabel!)
     }
     
     func startSubstep(stepLabel: String, substepLabel: String) {
         progressAlert?.type = .verification
-        progressAlert?.set(header: "Verifying Ethereum")
+        progressAlert?.set(header: verifier.blockchainLabel!)
         progressAlert?.set(title: stepLabel)
         progressAlert?.set(message: substepLabel)
     }
