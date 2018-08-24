@@ -117,6 +117,7 @@
 		D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
 		EE651190212369A0009AC972 /* CertificateVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE65118F212369A0009AC972 /* CertificateVerifier.swift */; };
 		EE6511922126053E009AC972 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6511912126053E009AC972 /* Reachability.swift */; };
+		EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -262,6 +263,7 @@
 		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE65118F212369A0009AC972 /* CertificateVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerifier.swift; sourceTree = "<group>"; };
 		EE6511912126053E009AC972 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCheck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +322,7 @@
 				838DE6D41F3B67F400185A49 /* Extensions.swift */,
 				838DE6DF1F3B6D5D00185A49 /* ManagedIssuerManager.swift */,
 				EE6511912126053E009AC972 /* Reachability.swift */,
+				EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -817,6 +820,7 @@
 			files = (
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
 				832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
+				EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */,
 				838DE6CE1F3A772400185A49 /* ManagedIssuerList.swift in Sources */,
 				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
 				83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */,
