@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 import Blockcerts
 
 private let reuseIdentifier = "IssuerCollectionViewCell"
@@ -21,6 +22,7 @@ public enum AutocompleteRequest {
 }
  
 class IssuerCollectionViewController: UICollectionViewController {
+    
     private let managedIssuersArchiveURL = Paths.managedIssuersListURL
     private let issuersArchiveURL = Paths.issuersNSCodingArchiveURL
     private let certificatesDirectory = Paths.certificatesDirectory
@@ -35,8 +37,10 @@ class IssuerCollectionViewController: UICollectionViewController {
 
     // TODO: Should probably be AttributedIssuer, once I make up that model.
     var managedIssuers = [ManagedIssuer]()
+    var pendingNewManagedIssuer: ManagedIssuer?
     var certificates = [Certificate]()
     var progressAlert: AlertViewController?
+    var webViewNavigationController: UINavigationController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -262,38 +266,64 @@ class IssuerCollectionViewController: UICollectionViewController {
             return
         }
         
-        Logger.main.info("Starting process to identify and introduce issuer at \(url)")
-        
         progressAlert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
         present(progressAlert!, animated: false, completion: nil)
         
-        let targetRecipient = Recipient(givenName: "",
-                                        familyName: "",
-                                        identity: "",
-                                        identityType: "email",
-                                        isHashed: false,
-                                        publicAddress: Keychain.shared.nextPublicAddress(),
-                                        revocationAddress: nil)
-        
-        let managedIssuer = ManagedIssuer()
-        managedIssuer.getIssuerIdentity(from: url) { [weak self] identifyError in
-            guard identifyError == nil else {
-                self?.showAddIssuerError()
+        AppVersion.checkUpdateRequired { [weak self] updateRequired in
+            guard !updateRequired else {
+                self?.showAppUpdateError()
                 return
             }
             
-            Logger.main.info("Issuer identification at \(url) succeeded. Beginning introduction step.")
-            
-            managedIssuer.delegate = self
-            managedIssuer.introduce(recipient: targetRecipient, with: nonce) { introductionError in
-                guard introductionError == nil else {
+            self?.pendingNewManagedIssuer = ManagedIssuer()
+            self?.pendingNewManagedIssuer!.delegate = self
+            self?.pendingNewManagedIssuer!.identify(from: url) { identifyError in
+                guard identifyError == nil else {
                     self?.showAddIssuerError()
                     return
                 }
-                self?.add(managedIssuer: managedIssuer)
-                self?.progressAlert?.dismiss(animated: false, completion: nil)
+                
+                self?.pendingNewManagedIssuer?.introduce(nonce: nonce) { introductionError in
+                    guard introductionError == nil else {
+                        self?.showAddIssuerError()
+                        return
+                    }
+                    
+                    self?.dismissWebView()
+                    self?.progressAlert?.dismiss(animated: false, completion: nil)
+                    
+                    if let pendingNewManagedIssuer = self?.pendingNewManagedIssuer {
+                        self?.add(managedIssuer: pendingNewManagedIssuer)
+                    }
+                }
             }
         }
+    }
+    
+    func showAppUpdateError() {
+        Logger.main.info("App needs update.")
+        guard let progressAlert = progressAlert else { return }
+        
+        progressAlert.type = .normal
+        progressAlert.set(title: NSLocalizedString("[Old Version]", comment: "Force app update dialog title"))
+        progressAlert.set(message: NSLocalizedString("[Lorem ipsum latin for go to App Store]", comment: "Force app update dialog message"))
+        progressAlert.icon = .warning
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button copy"), for: .normal)
+        okayButton.onTouchUpInside {
+            let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            progressAlert.dismiss(animated: false, completion: nil)
+        }
+        
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Dismiss action"), for: .normal)
+        cancelButton.onTouchUpInside {
+            progressAlert.dismiss(animated: false, completion: nil)
+        }
+        
+        progressAlert.set(buttons: [okayButton, cancelButton])
     }
     
     func showAddIssuerError() {
@@ -330,17 +360,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         } catch {
             Logger.main.error("An exception was thrown saving the managed issuers list: \(error)")
         }
-    }
-
-    func add(issuer: Issuer) {        
-        let managedIssuer = ManagedIssuer()
-        managedIssuer.manage(issuer: issuer) { [weak self] success in
-            self?.reloadCollectionView()
-            self?.saveIssuers()
-            Logger.main.info("Got identity from raw issuer \(String(describing: success))")
-        }
-
-        add(managedIssuer: managedIssuer)
     }
 
     func add(managedIssuer: ManagedIssuer) {
@@ -423,7 +442,14 @@ class IssuerCollectionViewController: UICollectionViewController {
         })
 
         if !isKnownIssuer {
-            add(issuer: certificate.issuer)
+            let managedIssuer = ManagedIssuer()
+            managedIssuer.manage(issuer: certificate.issuer) { [weak self] success in
+                self?.reloadCollectionView()
+                self?.saveIssuers()
+                Logger.main.info("Got identity from raw issuer \(String(describing: success))")
+            }
+            
+            add(managedIssuer: managedIssuer)
         }
 
         certificates.append(certificate)
@@ -549,15 +575,43 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
 }
 
 extension IssuerCollectionViewController : ManagedIssuerDelegate {
+    
     func updated(managedIssuer: ManagedIssuer) {
         OperationQueue.main.addOperation { [weak self] in
             self?.collectionView?.reloadData()
         }
     }
+    
+    func presentWebView(at url: URL, with navigationDelegate: WKNavigationDelegate) throws {
+        Logger.main.info("Presenting the web view in the Add Issuer screen.")
+        
+        let webController = WebLoginViewController(requesting: url, navigationDelegate: navigationDelegate) { [weak self] in
+            self?.cancelWebLogin()
+            self?.dismissWebView()
+        }
+        let navigationController = UINavigationController(rootViewController: webController)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = Style.Color.C3
+        navigationController.navigationBar.barTintColor = Style.Color.C3
+        webViewNavigationController = navigationController
+        
+        OperationQueue.main.addOperation {
+            self.progressAlert?.dismiss(animated: false, completion: {
+                self.present(navigationController, animated: true, completion: nil)
+            })
+        }
+    }
+    
+    func dismissWebView() {
+        OperationQueue.main.addOperation { [weak self] in
+            self?.webViewNavigationController?.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    func cancelWebLogin() {
+        pendingNewManagedIssuer?.abortRequests()
+    }
 }
-
-
-
 
 extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
     func added(managedIssuer: ManagedIssuer) {

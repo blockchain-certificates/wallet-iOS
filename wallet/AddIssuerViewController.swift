@@ -84,78 +84,48 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             return
         }
         
-        Logger.main.info("Starting process to identify and introduce issuer at \(url)")
-        
         progressAlert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
         present(progressAlert!, animated: false, completion: nil)
         
-        cancelWebLogin()
-        
-        let targetRecipient = Recipient(givenName: "",
-                                        familyName: "",
-                                        identity: "",
-                                        identityType: "email",
-                                        isHashed: false,
-                                        publicAddress: Keychain.shared.nextPublicAddress(),
-                                        revocationAddress: nil)
-        
-        managedIssuer = ManagedIssuer()
-        managedIssuer!.getIssuerIdentity(from: url) { [weak self] identifyError in
-            guard identifyError == nil else {
-                
-                var failureReason = NSLocalizedString("Something went wrong adding this issuer. Try again later.", comment: "Generic error for failure to add an issuer")
-                
-                switch(identifyError!) {
-                case .invalidState(let reason):
-                    // This is a developer error, so write it to the log so we can see it later.
-                    Logger.main.fatal("Invalid ManagedIssuer state: \(reason)")
-                    failureReason = NSLocalizedString("The app is in an invalid state. Please quit the app & relaunch. Then try again.", comment: "Invalid state error message when adding an issuer.")
-                case .untrustworthyIssuer:
-                    failureReason = NSLocalizedString("This issuer appears to have been tampered with. Please contact the issuer.", comment: "Error message when the issuer's data doesn't match the URL it's hosted at.")
-                case .abortedIntroductionStep:
-                    failureReason = NSLocalizedString("The request was aborted. Please try again.", comment: "Error message when an identification request is aborted")
-                case .serverErrorDuringIdentification(let code, let message):
-                    Logger.main.error("Error during issuer identification: \(code) \(message)")
-                    failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
-                case .serverErrorDuringIntroduction(let code, let message):
-                    Logger.main.error("Error during issuer introduction: \(code) \(message)")
-                    failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
-                case .issuerInvalid(_, scope: .json):
-                    failureReason = NSLocalizedString("We couldn't understand this Issuer's response. Please contact the Issuer.", comment: "Error message displayed when we see missing or invalid JSON in the response.")
-                case .issuerInvalid(reason: .missing, scope: .property(let named)):
-                    failureReason = String.init(format: NSLocalizedString("Issuer responded, but didn't include the \"%@\" property", comment: "Format string for an issuer response with a missing property. Variable is the property name that's missing."), named)
-                case .issuerInvalid(reason: .invalid, scope: .property(let named)):
-                    failureReason = String.init(format: NSLocalizedString("Issuer responded, but it contained an invalid property named \"%@\"", comment: "Format string for an issuer response with an invalid property. Variable is the property name that's invalid."), named)
-                default: break
-                }
-                
-                self?.showAddIssuerError(message: failureReason)
-
+        AppVersion.checkUpdateRequired { [weak self] updateRequired in
+            guard !updateRequired else {
+                self?.showAppUpdateError()
                 return
             }
             
-            Logger.main.info("Issuer identification at \(url) succeeded. Beginning introduction step.")
+            self?.cancelWebLogin()
             
-            self?.managedIssuer?.delegate = self
-            self?.managedIssuer?.introduce(recipient: targetRecipient, with: nonce) { introductionError in
-                guard introductionError == nil else {
-                    self?.showAddIssuerError(withManagedIssuerError: introductionError!)
+            self?.managedIssuer = ManagedIssuer()
+            self?.managedIssuer!.delegate = self
+            self?.managedIssuer!.identify(from: url) { [weak self] identifyError in
+                guard identifyError == nil else {
+                    self?.showAddIssuerError()
                     return
                 }
-                self?.dismissWebView()
-                self?.notifyAndDismiss()
+                
+                self?.managedIssuer?.introduce(nonce: nonce) { introductionError in
+                    guard introductionError == nil else {
+                        self?.showAddIssuerError()
+                        return
+                    }
+                    
+                    self?.dismissWebView()
+                    self?.notifyAndDismiss()
+                }
             }
         }
     }
     
     func notifyAndDismiss() {
-        guard let progressAlert = progressAlert else { return }
-        
         if let managedIssuer = managedIssuer {
             delegate?.added(managedIssuer: managedIssuer)
         }
         
         DispatchQueue.main.async { [weak self] in
+            
+            guard let progressAlert = self?.progressAlert else {
+                return
+            }
             
             let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
             let message = NSLocalizedString("An issuer was added. Please check your issuers screen.", comment: "Add issuer alert message")
@@ -177,57 +147,43 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
                 }
             }
             progressAlert.set(buttons: [okayButton])
-        }
-    }
-    
-    func showAddIssuerError(withManagedIssuerError error: ManagedIssuerError) {
-        var failureReason : String?
-        
-        switch error {
-        case .invalidState(let reason):
-            // This is a developer error, so write it to the log so we can see it later.
-            Logger.main.fatal("Invalid ManagedIssuer state: \(reason)")
-            failureReason = NSLocalizedString("The app is in an invalid state. Please quit the app & relaunch. Then try again.", comment: "Invalid state error message when adding an issuer.")
-        case .untrustworthyIssuer:
-            failureReason = NSLocalizedString("This issuer appears to have been tampered with. Please contact the issuer.", comment: "Error message when the issuer's data doesn't match the URL it's hosted at.")
-        case .abortedIntroductionStep:
-            failureReason = nil //NSLocalizedString("The request was aborted. Please try again.", comment: "Error message when an identification request is aborted")
-        case .serverErrorDuringIdentification(let code, let message):
-            Logger.main.error("Issuer identification failed with code: \(code) error: \(message)")
-            failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
-        case .serverErrorDuringIntroduction(let code, let message):
-            Logger.main.error("Issuer introduction failed with code: \(code) error: \(message)")
-            failureReason = NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
-        case .issuerInvalid(_, scope: .json):
-            failureReason = NSLocalizedString("We couldn't understand this Issuer's response. Please contact the Issuer.", comment: "Error message displayed when we see missing or invalid JSON in the response.")
-        case .issuerInvalid(reason: .missing, scope: .property(let named)):
-            failureReason = String.init(format: NSLocalizedString("Issuer responded, but didn't include the \"%@\" property", comment: "Format string for an issuer response with a missing property. Variable is the property name that's missing."), named)
-        case .issuerInvalid(reason: .invalid, scope: .property(let named)):
-            failureReason = String.init(format: NSLocalizedString("Issuer responded, but it contained an invalid property named \"%@\"", comment: "Format string for an issuer response with an invalid property. Variable is the property name that's invalid."), named)
-        case .authenticationFailure:
-            Logger.main.error("Failed to authenticate the user to the issuer. Either because of a bad nonce or a failed web auth.")
-            failureReason = NSLocalizedString("We couldn't authenticate you to the issuer. Double-check your one-time code and try again.", comment: "This error is presented when the user uses a bad nonce")
-        case .genericError(let error, let data):
-            var message : String?
-            if data != nil {
-                message = String(data: data!, encoding: .utf8)
+            
+            if self?.presentedViewController != progressAlert {
+                self?.present(progressAlert, animated: false, completion: nil)
             }
-            Logger.main.error("Generic error during add issuer: \(error?.localizedDescription ?? "none"), data: \(message ?? "none")")
-            failureReason = NSLocalizedString("Adding this issuer failed. Please try again", comment: "Generic error when adding an issuer.")
-        default:
-            failureReason = nil
-        }
-        
-        if let message = failureReason {
-            showAddIssuerError(message: message)
         }
     }
     
-    func showAddIssuerError(message: String) {
-        Logger.main.info("Add issuer failed with message: \(message)")
+    func showAppUpdateError() {
+        Logger.main.info("App needs update.")
         guard let progressAlert = progressAlert else { return }
         
-        DispatchQueue.main.async { [weak self] in
+        progressAlert.type = .normal
+        progressAlert.set(title: NSLocalizedString("[Old Version]", comment: "Force app update dialog title"))
+        progressAlert.set(message: NSLocalizedString("[Lorem ipsum latin for go to App Store]", comment: "Force app update dialog message"))
+        progressAlert.icon = .warning
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button copy"), for: .normal)
+        okayButton.onTouchUpInside {
+            let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            progressAlert.dismiss(animated: false, completion: nil)
+        }
+        
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Dismiss action"), for: .normal)
+        cancelButton.onTouchUpInside {
+            progressAlert.dismiss(animated: false, completion: nil)
+        }
+        
+        progressAlert.set(buttons: [okayButton, cancelButton])
+    }
+    
+    func showAddIssuerError() {
+        guard let progressAlert = progressAlert else { return }
+        
+        DispatchQueue.main.async {
             
             let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
             let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
@@ -264,7 +220,9 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         webViewNavigationController = navigationController
         
         OperationQueue.main.addOperation {
-            self.present(navigationController, animated: true, completion: nil)
+            self.progressAlert?.dismiss(animated: false, completion: {
+                self.present(navigationController, animated: true, completion: nil)
+            })
         }
     }
     

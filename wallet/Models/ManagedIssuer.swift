@@ -34,7 +34,6 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     var delegate : ManagedIssuerDelegate?
     var issuerDescription : String?
     
-    
     private(set) var issuerConfirmedOn: Date?
     private(set) var isIssuerConfirmed = false
     
@@ -183,10 +182,12 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
             return
         }
         
-        getIssuerIdentity(from: issuer.id, completion: completion)
+        identify(from: issuer.id, completion: completion)
     }
     
-    func getIssuerIdentity(from url: URL, completion: @escaping (ManagedIssuerError?) -> Void) {
+    func identify(from url: URL, completion: @escaping (ManagedIssuerError?) -> Void) {
+        Logger.main.info("Starting process to identify and introduce issuer at \(url)")
+        
         let identityRequest = IssuerIdentificationRequest(id: url) { [weak self] (possibleIssuer, error) in
             var returnError : ManagedIssuerError? = nil
             
@@ -222,6 +223,10 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                     returnError = .genericError(error: nil, data: nil)
                 }
             }
+            
+            if returnError != nil {
+                Logger.main.info("Issuer identification at \(url) succeeded. Beginning introduction step.")
+            }
 
             // Call the completion handler, and the delegate as the last thing we do.
             completion(returnError)
@@ -235,11 +240,67 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
         inProgressRequest = identityRequest
     }
     
-    func introduce(recipient: Recipient, with nonce: String, completion: @escaping (ManagedIssuerError?) -> Void) {
+    // This is currently unused. Moving to a function here for potential future use.
+    func identifyErrorDisplayString(identifyError: ManagedIssuerError?) -> String {
+        switch(identifyError!) {
+        case .invalidState(let reason):
+            // This is a developer error, so write it to the log so we can see it later.
+            Logger.main.fatal("Invalid ManagedIssuer state: \(reason)")
+            return NSLocalizedString("The app is in an invalid state. Please quit the app & relaunch. Then try again.", comment: "Invalid state error message when adding an issuer.")
+        
+        case .untrustworthyIssuer:
+            return NSLocalizedString("This issuer appears to have been tampered with. Please contact the issuer.", comment: "Error message when the issuer's data doesn't match the URL it's hosted at.")
+        
+        case .abortedIntroductionStep:
+            return NSLocalizedString("The request was aborted. Please try again.", comment: "Error message when an identification request is aborted")
+        
+        case .serverErrorDuringIdentification(let code, let message):
+            Logger.main.error("Error during issuer identification: \(code) \(message)")
+            return NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
+        
+        case .serverErrorDuringIntroduction(let code, let message):
+            Logger.main.error("Error during issuer introduction: \(code) \(message)")
+            return NSLocalizedString("The server encountered an error. Please try again.", comment: "Error message when an identification request sees a server error")
+        
+        case .issuerInvalid(_, scope: .json):
+            return NSLocalizedString("We couldn't understand this Issuer's response. Please contact the Issuer.", comment: "Error message displayed when we see missing or invalid JSON in the response.")
+        
+        case .issuerInvalid(reason: .missing, scope: .property(let named)):
+            return String.init(format: NSLocalizedString("Issuer responded, but didn't include the \"%@\" property", comment: "Format string for an issuer response with a missing property. Variable is the property name that's missing."), named)
+        
+        case .issuerInvalid(reason: .invalid, scope: .property(let named)):
+            return String.init(format: NSLocalizedString("Issuer responded, but it contained an invalid property named \"%@\"", comment: "Format string for an issuer response with an invalid property. Variable is the property name that's invalid."), named)
+            
+        case .authenticationFailure:
+            Logger.main.error("Failed to authenticate the user to the issuer. Either because of a bad nonce or a failed web auth.")
+            return NSLocalizedString("We couldn't authenticate you to the issuer. Double-check your one-time code and try again.", comment: "This error is presented when the user uses a bad nonce")
+        
+        case .genericError(let error, let data):
+            var message : String?
+            if data != nil {
+                message = String(data: data!, encoding: .utf8)
+            }
+            Logger.main.error("Generic error during add issuer: \(error?.localizedDescription ?? "none"), data: \(message ?? "none")")
+            return NSLocalizedString("Adding this issuer failed. Please try again", comment: "Generic error when adding an issuer.")
+        
+        default:
+            return NSLocalizedString("Something went wrong adding this issuer. Try again later.", comment: "Generic error for failure to add an issuer")
+        }
+    }
+    
+    func introduce(nonce: String, completion: @escaping (ManagedIssuerError?) -> Void) {
         guard let issuer = issuer else {
             completion(.invalidState(reason: "Can't introduce until we have a valid Issuer."))
             return
         }
+        
+        let recipient = Recipient(givenName: "",
+                                  familyName: "",
+                                  identity: "",
+                                  identityType: "email",
+                                  isHashed: false,
+                                  publicAddress: Keychain.shared.nextPublicAddress(),
+                                  revocationAddress: nil)
         
         self.nonce = nonce
         let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer) { [weak self] (error) in

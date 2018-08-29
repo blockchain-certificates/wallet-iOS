@@ -68,20 +68,18 @@ class AlertViewController : UIViewController {
     
     var type = AlertType.normal {
         didSet {
+            alertView.isHidden = true
+            progressAlertView.isHidden = true
+            verificationAlertView.isHidden = true
+            
             switch type {
             case .normal:
                 alertView.isHidden = false
-                progressAlertView.isHidden = true
-                verificationAlertView.isHidden = true
                 
             case .progress:
-                alertView.isHidden = true
                 progressAlertView.isHidden = false
-                verificationAlertView.isHidden = true
                 
             case .verification:
-                alertView.isHidden = true
-                progressAlertView.isHidden = true
                 verificationAlertView.isHidden = false
             }
         }
