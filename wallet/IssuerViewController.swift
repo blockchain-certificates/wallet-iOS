@@ -163,7 +163,7 @@ class IssuerViewController: UIViewController {
         let data = [
             "certificate": certificate
         ]
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
             NotificationCenter.default.post(name: NotificationNames.redirectToCertificate, object: self, userInfo: data)
         }
@@ -214,7 +214,7 @@ class IssuerViewController: UIViewController {
         if certificate.issuer.id == managedIssuer?.issuer?.id {
             navigateTo(certificate: certificate)
             
-            OperationQueue.main.addOperation { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.certificateTableController.tableView.reloadData()
             }
         } else {

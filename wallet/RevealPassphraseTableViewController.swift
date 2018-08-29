@@ -142,7 +142,7 @@ class RevealPassphraseTableViewController: UITableViewController {
     func authenticate() {
         authenticateUser { (success, error) in
             defer {
-                OperationQueue.main.addOperation {
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }

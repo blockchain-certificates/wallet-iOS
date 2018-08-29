@@ -65,7 +65,7 @@ class ReplacePassphraseViewController: UIViewController {
     }
     
     func successfulSave() {
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             _ = self.navigationController?.popViewController(animated: true)
         }
     }

@@ -163,6 +163,23 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
         coder.encode(introducedWithAddress, forKey: CodingKeys.introducedWithAddress.rawValue)
     }
     
+    // MARK: Add (Identify and introduce)
+    func add(from url: URL, nonce: String, completion: @escaping (ManagedIssuerError?) -> Void) {
+        identify { [weak self] identificationError in
+            guard identificationError == nil else {
+                DispatchQueue.main.async {
+                    completion(identificationError)
+                }
+                return
+            }
+            
+            self?.introduce(nonce: nonce, completion: { introductionError in
+                DispatchQueue.main.async {
+                    completion(introductionError)
+                }
+            })
+        }
+    }
     
     // MARK: Identification step
     func manage(issuer: Issuer, completion: @escaping (ManagedIssuerError?) -> Void) {
@@ -173,10 +190,10 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
         
         self.sourceIssuer = issuer
         
-        getIssuerIdentity(completion: completion)
+        identify(completion: completion)
     }
     
-    func getIssuerIdentity(completion: @escaping (ManagedIssuerError?) -> Void) {
+    func identify(completion: @escaping (ManagedIssuerError?) -> Void) {
         guard let issuer = self.issuer else {
             completion(.invalidState(reason: "Can't call \(#function) when Issuer isn't set. Use manage(issuer:completion:) instead."))
             return
@@ -288,6 +305,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
         }
     }
     
+    // MARK: Introduction step
     func introduce(nonce: String, completion: @escaping (ManagedIssuerError?) -> Void) {
         guard let issuer = issuer else {
             completion(.invalidState(reason: "Can't introduce until we have a valid Issuer."))

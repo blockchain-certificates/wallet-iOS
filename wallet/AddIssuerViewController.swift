@@ -97,60 +97,48 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             
             self?.managedIssuer = ManagedIssuer()
             self?.managedIssuer!.delegate = self
-            self?.managedIssuer!.identify(from: url) { [weak self] identifyError in
-                guard identifyError == nil else {
+            self?.managedIssuer!.add(from: url, nonce: nonce, completion: { error in
+                guard error == nil else {
                     self?.showAddIssuerError()
                     return
                 }
                 
-                self?.managedIssuer?.introduce(nonce: nonce) { introductionError in
-                    guard introductionError == nil else {
-                        self?.showAddIssuerError()
-                        return
-                    }
-                    
-                    self?.dismissWebView()
-                    self?.notifyAndDismiss()
+                if let managedIssuer = self?.managedIssuer {
+                    self?.delegate?.added(managedIssuer: managedIssuer)
                 }
-            }
+                
+                self?.dismissWebView()
+                self?.showAddIssuerSuccess()
+            })
         }
     }
     
-    func notifyAndDismiss() {
-        if let managedIssuer = managedIssuer {
-            delegate?.added(managedIssuer: managedIssuer)
-        }
+    func showAddIssuerSuccess() {
+        guard let progressAlert = self.progressAlert else { return }
         
-        DispatchQueue.main.async { [weak self] in
+        let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
+        let message = NSLocalizedString("An issuer was added. Please check your issuers screen.", comment: "Add issuer alert message")
+        
+        progressAlert.type = .normal
+        progressAlert.set(title: title)
+        progressAlert.set(message: message)
+        progressAlert.icon = .success
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.onTouchUpInside { [weak self] in
+            progressAlert.dismiss(animated: false, completion: nil)
             
-            guard let progressAlert = self?.progressAlert else {
-                return
+            if self?.presentedModally ?? true {
+                self?.presentingViewController?.dismiss(animated: true, completion: nil)
+            } else {
+                self?.navigationController?.popViewController(animated: true)
             }
-            
-            let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
-            let message = NSLocalizedString("An issuer was added. Please check your issuers screen.", comment: "Add issuer alert message")
-            
-            progressAlert.type = .normal
-            progressAlert.set(title: title)
-            progressAlert.set(message: message)
-            progressAlert.icon = .success
-            
-            let okayButton = SecondaryButton(frame: .zero)
-            okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
-            okayButton.onTouchUpInside { [weak self] in
-                progressAlert.dismiss(animated: false, completion: nil)
-                
-                if self?.presentedModally ?? true {
-                    self?.presentingViewController?.dismiss(animated: true, completion: nil)
-                } else {
-                    self?.navigationController?.popViewController(animated: true)
-                }
-            }
-            progressAlert.set(buttons: [okayButton])
-            
-            if self?.presentedViewController != progressAlert {
-                self?.present(progressAlert, animated: false, completion: nil)
-            }
+        }
+        progressAlert.set(buttons: [okayButton])
+        
+        if self.presentedViewController != progressAlert {
+            self.present(progressAlert, animated: false, completion: nil)
         }
     }
     
@@ -183,23 +171,20 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     func showAddIssuerError() {
         guard let progressAlert = progressAlert else { return }
         
-        DispatchQueue.main.async {
-            
-            let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
-            let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
-
-            progressAlert.type = .normal
-            progressAlert.set(title: title)
-            progressAlert.set(message: cannedMessage)
-            progressAlert.icon = .failure
-            
-            let okayButton = SecondaryButton(frame: .zero)
-            okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
-            okayButton.onTouchUpInside {
-                progressAlert.dismiss(animated: false, completion: nil)
-            }
-            progressAlert.set(buttons: [okayButton])
+        let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
+        let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
+        
+        progressAlert.type = .normal
+        progressAlert.set(title: title)
+        progressAlert.set(message: cannedMessage)
+        progressAlert.icon = .failure
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.onTouchUpInside {
+            progressAlert.dismiss(animated: false, completion: nil)
         }
+        progressAlert.set(buttons: [okayButton])
     }
     
     // MARK: - ManagedIssuerDelegate
@@ -219,7 +204,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         navigationController.navigationBar.barTintColor = Style.Color.C3
         webViewNavigationController = navigationController
         
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             self.progressAlert?.dismiss(animated: false, completion: {
                 self.present(navigationController, animated: true, completion: nil)
             })
@@ -227,7 +212,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     }
     
     func dismissWebView() {
-        OperationQueue.main.addOperation { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.webViewNavigationController?.dismiss(animated: true, completion: nil)
         }
     }

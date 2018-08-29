@@ -244,7 +244,7 @@ class IssuerCollectionViewController: UICollectionViewController {
 
     // MARK: Issuer handling
     func reloadCollectionView() {
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             self.collectionView?.reloadData()
             self.loadBackgroundView()
         }
@@ -277,26 +277,19 @@ class IssuerCollectionViewController: UICollectionViewController {
             
             self?.pendingNewManagedIssuer = ManagedIssuer()
             self?.pendingNewManagedIssuer!.delegate = self
-            self?.pendingNewManagedIssuer!.identify(from: url) { identifyError in
-                guard identifyError == nil else {
+            self?.pendingNewManagedIssuer!.add(from: url, nonce: nonce, completion: { error in
+                guard error == nil else {
                     self?.showAddIssuerError()
                     return
                 }
                 
-                self?.pendingNewManagedIssuer?.introduce(nonce: nonce) { introductionError in
-                    guard introductionError == nil else {
-                        self?.showAddIssuerError()
-                        return
-                    }
-                    
-                    self?.dismissWebView()
-                    self?.progressAlert?.dismiss(animated: false, completion: nil)
-                    
-                    if let pendingNewManagedIssuer = self?.pendingNewManagedIssuer {
-                        self?.add(managedIssuer: pendingNewManagedIssuer)
-                    }
+                self?.dismissWebView()
+                self?.progressAlert?.dismiss(animated: false, completion: nil)
+                
+                if let pendingNewManagedIssuer = self?.pendingNewManagedIssuer {
+                    self?.add(managedIssuer: pendingNewManagedIssuer)
                 }
-            }
+            })
         }
     }
     
@@ -327,25 +320,22 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func showAddIssuerError() {
-        Logger.main.info("Add issuer failed.")
         guard let progressAlert = progressAlert else { return }
         
-        DispatchQueue.main.async {
-            let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
-            let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
-            
-            progressAlert.type = .normal
-            progressAlert.set(title: title)
-            progressAlert.set(message: cannedMessage)
-            progressAlert.icon = .failure
-            
-            let okayButton = SecondaryButton(frame: .zero)
-            okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
-            okayButton.onTouchUpInside {
-                progressAlert.dismiss(animated: false, completion: nil)
-            }
-            progressAlert.set(buttons: [okayButton])
+        let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
+        let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
+        
+        progressAlert.type = .normal
+        progressAlert.set(title: title)
+        progressAlert.set(message: cannedMessage)
+        progressAlert.icon = .failure
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.onTouchUpInside {
+            progressAlert.dismiss(animated: false, completion: nil)
         }
+        progressAlert.set(buttons: [okayButton])
     }
 
     func saveIssuers() {
@@ -374,10 +364,8 @@ class IssuerCollectionViewController: UICollectionViewController {
         managedIssuers = otherIssuers
 
         saveIssuers()
-        OperationQueue.main.addOperation {
-            self.collectionView?.reloadData()
-            self.loadBackgroundView()
-        }
+        self.collectionView?.reloadData()
+        self.loadBackgroundView()
     }
 
     func remove(managedIssuer: ManagedIssuer) {
@@ -389,7 +377,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         managedIssuers.remove(at: index)
         saveIssuers()
 
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             self.collectionView?.reloadData()
         }
     }
@@ -577,7 +565,7 @@ extension IssuerCollectionViewController { //  : UICollectionViewDelegate
 extension IssuerCollectionViewController : ManagedIssuerDelegate {
     
     func updated(managedIssuer: ManagedIssuer) {
-        OperationQueue.main.addOperation { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.collectionView?.reloadData()
         }
     }
@@ -595,7 +583,7 @@ extension IssuerCollectionViewController : ManagedIssuerDelegate {
         navigationController.navigationBar.barTintColor = Style.Color.C3
         webViewNavigationController = navigationController
         
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             self.progressAlert?.dismiss(animated: false, completion: {
                 self.present(navigationController, animated: true, completion: nil)
             })
@@ -603,7 +591,7 @@ extension IssuerCollectionViewController : ManagedIssuerDelegate {
     }
     
     func dismissWebView() {
-        OperationQueue.main.addOperation { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.webViewNavigationController?.dismiss(animated: true, completion: nil)
         }
     }

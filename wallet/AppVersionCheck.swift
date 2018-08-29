@@ -17,7 +17,7 @@ class AppVersion {
         let task : URLSessionDataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             guard error == nil else { // JSON unreachable, assume no update needed
-                OperationQueue.main.addOperation {
+                DispatchQueue.main.async {
                     completion(false)
                 }
                 return
@@ -25,14 +25,14 @@ class AppVersion {
             
             if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
                 guard let appStoreVersion = jsonObj?["ios"] as? String else {
-                    OperationQueue.main.addOperation {
+                    DispatchQueue.main.async {
                         completion(false)
                     }
                     return
                 }
                 
                 let forceUpdate = appStoreVersion.compare(installedVersion, options: .numeric) == .orderedDescending
-                OperationQueue.main.addOperation {
+                DispatchQueue.main.async {
                     completion(forceUpdate)
                 }
             }
