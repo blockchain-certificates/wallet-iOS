@@ -117,13 +117,13 @@ class IssuerViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
             Logger.main.info("Add Credential from URL tapped in issuer view")
             let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
-            let controller = storyboard.instantiateViewController(withIdentifier: "addCredentialFromURL") as! SettingsAddCredentialURLViewController
+            let controller = storyboard.instantiateViewController(withIdentifier: "addCredentialFromURL") as! AddCredentialURLViewController
             
             let navigationController = UINavigationController(rootViewController: controller)
             navigationController.navigationBar.barTintColor = Style.Color.C3
             navigationController.navigationBar.isTranslucent = false
             
-            let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: controller, action: #selector(SettingsAddCredentialURLViewController.dismissModally))
+            let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: controller, action: #selector(AddCredentialURLViewController.dismissModally))
             controller.navigationItem.rightBarButtonItem = cancelBarButton
             
             controller.navigationItem.title = NSLocalizedString("Add Credential", comment: "View controller navigation bar title")

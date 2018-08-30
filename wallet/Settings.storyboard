@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Settings Add Credential View Controller-->
+        <!--Add Credential View Controller-->
         <scene sceneID="mLI-ud-q07">
             <objects>
-                <viewController storyboardIdentifier="addIssuer" id="zKg-vx-nna" customClass="SettingsAddCredentialViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addIssuer" id="zKg-vx-nna" customClass="AddCredentialViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GHF-L8-3LO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,10 +58,10 @@
             </objects>
             <point key="canvasLocation" x="-442.39999999999998" y="-35.532233883058474"/>
         </scene>
-        <!--Settings Add Credential URL View Controller-->
+        <!--Add Credential URL View Controller-->
         <scene sceneID="wkW-G8-r8z">
             <objects>
-                <viewController storyboardIdentifier="addCredentialFromURL" id="QjL-oU-RBK" customClass="SettingsAddCredentialURLViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addCredentialFromURL" id="QjL-oU-RBK" customClass="AddCredentialURLViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sjh-my-skp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

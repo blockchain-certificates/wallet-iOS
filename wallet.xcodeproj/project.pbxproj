@@ -118,6 +118,8 @@
 		EE651190212369A0009AC972 /* CertificateVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE65118F212369A0009AC972 /* CertificateVerifier.swift */; };
 		EE6511922126053E009AC972 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6511912126053E009AC972 /* Reachability.swift */; };
 		EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */; };
+		EEAF82B821384DC9008EC1FA /* MyPassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */; };
+		EEAF82BA21384E2C008EC1FA /* AddCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -264,6 +266,8 @@
 		EE65118F212369A0009AC972 /* CertificateVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerifier.swift; sourceTree = "<group>"; };
 		EE6511912126053E009AC972 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCheck.swift; sourceTree = "<group>"; };
+		EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPassphraseViewController.swift; sourceTree = "<group>"; };
+		EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCredentialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +361,7 @@
 			children = (
 				83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */,
 				838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */,
+				EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */,
 				A958CCD4202E4BD100CD35C6 /* Alert.storyboard */,
 				A92735592031E1C9002361FD /* AlertViewController.swift */,
 				83111B271DA4110C006B058D /* AppDelegate.swift */,
@@ -378,6 +383,7 @@
 				83111B301DA4110C006B058D /* LaunchScreen.storyboard */,
 				83111B2B1DA4110C006B058D /* Main.storyboard */,
 				838DE6C81F3A74B400185A49 /* Models */,
+				EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */,
 				83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */,
 				83ACB76F1EDE556500A1149E /* Onboarding.storyboard */,
 				83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */,
@@ -818,12 +824,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEAF82B821384DC9008EC1FA /* MyPassphraseViewController.swift in Sources */,
 				83A6EDDA1DAFFD5B00ABFB47 /* CertificateViewController.swift in Sources */,
 				832AE0161DF893A900A3CA4A /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
 				EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */,
 				838DE6CE1F3A772400185A49 /* ManagedIssuerList.swift in Sources */,
 				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
 				83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */,
+				EEAF82BA21384E2C008EC1FA /* AddCredentialViewController.swift in Sources */,
 				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,
 				838DE6D61F3B680500185A49 /* Constants.swift in Sources */,
 				831EDC141ED5F7DA004F135B /* Keychain.swift in Sources */,

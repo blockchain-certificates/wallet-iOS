@@ -39,7 +39,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     var managedIssuers = [ManagedIssuer]()
     var pendingNewManagedIssuer: ManagedIssuer?
     var certificates = [Certificate]()
-    var progressAlert: AlertViewController?
+    var alert: AlertViewController?
     var webViewNavigationController: UINavigationController?
     
     override func viewDidLoad() {
@@ -179,6 +179,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         switch autocompleteRequest {
         case .none:
             break
+            
         case .addIssuer(let identificationURL, let nonce):
             Logger.main.info("Processing autocomplete request to add issuer at \(identificationURL)")
 
@@ -266,8 +267,8 @@ class IssuerCollectionViewController: UICollectionViewController {
             return
         }
         
-        progressAlert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
-        present(progressAlert!, animated: false, completion: nil)
+        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
+        present(alert!, animated: false, completion: nil)
         
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
             guard !updateRequired else {
@@ -284,7 +285,7 @@ class IssuerCollectionViewController: UICollectionViewController {
                 }
                 
                 self?.dismissWebView()
-                self?.progressAlert?.dismiss(animated: false, completion: nil)
+                self?.alert?.dismiss(animated: false, completion: nil)
                 
                 if let pendingNewManagedIssuer = self?.pendingNewManagedIssuer {
                     self?.add(managedIssuer: pendingNewManagedIssuer)
@@ -295,47 +296,47 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     func showAppUpdateError() {
         Logger.main.info("App needs update.")
-        guard let progressAlert = progressAlert else { return }
+        guard let alert = alert else { return }
         
-        progressAlert.type = .normal
-        progressAlert.set(title: NSLocalizedString("[Old Version]", comment: "Force app update dialog title"))
-        progressAlert.set(message: NSLocalizedString("[Lorem ipsum latin for go to App Store]", comment: "Force app update dialog message"))
-        progressAlert.icon = .warning
+        alert.type = .normal
+        alert.set(title: NSLocalizedString("[Old Version]", comment: "Force app update dialog title"))
+        alert.set(message: NSLocalizedString("[Lorem ipsum latin for go to App Store]", comment: "Force app update dialog message"))
+        alert.icon = .warning
         
         let okayButton = SecondaryButton(frame: .zero)
         okayButton.setTitle(NSLocalizedString("Okay", comment: "Button copy"), for: .normal)
         okayButton.onTouchUpInside {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            progressAlert.dismiss(animated: false, completion: nil)
+            alert.dismiss(animated: false, completion: nil)
         }
         
         let cancelButton = SecondaryButton(frame: .zero)
         cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Dismiss action"), for: .normal)
         cancelButton.onTouchUpInside {
-            progressAlert.dismiss(animated: false, completion: nil)
+            alert.dismiss(animated: false, completion: nil)
         }
         
-        progressAlert.set(buttons: [okayButton, cancelButton])
+        alert.set(buttons: [okayButton, cancelButton])
     }
     
     func showAddIssuerError() {
-        guard let progressAlert = progressAlert else { return }
+        guard let alert = alert else { return }
         
         let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
         let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
         
-        progressAlert.type = .normal
-        progressAlert.set(title: title)
-        progressAlert.set(message: cannedMessage)
-        progressAlert.icon = .failure
+        alert.type = .normal
+        alert.set(title: title)
+        alert.set(message: cannedMessage)
+        alert.icon = .failure
         
         let okayButton = SecondaryButton(frame: .zero)
         okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
         okayButton.onTouchUpInside {
-            progressAlert.dismiss(animated: false, completion: nil)
+            alert.dismiss(animated: false, completion: nil)
         }
-        progressAlert.set(buttons: [okayButton])
+        alert.set(buttons: [okayButton])
     }
 
     func saveIssuers() {
@@ -445,9 +446,96 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func addCertificateFromUniversalLink(url: URL, silently: Bool = false, animated: Bool = true) {
+        if !Reachability.isNetworkReachable() {
+            let alert = AlertViewController.createNetworkWarning()
+            present(alert, animated: false, completion: nil)
+            return
+        }
+        
+        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Certificate", comment: "Title when adding certificate in progress"))
+        present(alert!, animated: false, completion: nil)
+        
+        AppVersion.checkUpdateRequired { [weak self] updateRequired in
+            guard !updateRequired else {
+                self?.showAppUpdateError()
+                return
+            }
+            
+            guard let data = self?.certificateDataFromURL(url), let certificate = try? CertificateParser.parse(data: data) else {
+                self?.showCertificateInvalid()
+                return
+            }
+            
+            guard let certificates = self?.certificates, !certificates.contains(where: { $0.assertion.uid == certificate.assertion.uid }) else {
+                if !silently {
+                    self?.showCertificateAlreadyAdded(certificate)
+                }
+                return
+            }
+            
+            self?.add(certificate: certificate)
+            self?.reloadCollectionView()
+            
+            if !silently {
+                self?.navigateTo(certificate: certificate, animated: animated)
+            }
+        }
+    }
+    
+    func showCertificateAlreadyAdded(_ certificate: Certificate) {
+        guard let alert = alert else { return }
+        
+        let title = NSLocalizedString("File already imported", comment: "Alert title when you re-import an existing certificate")
+        let message = NSLocalizedString("You've already imported that file. Want to view it?", comment: "Longer explanation about importing an existing file.")
+        let view = NSLocalizedString("View", comment: "Action prompt to view the imported certificate")
+        let cancel = NSLocalizedString("Cancel", comment: "Dismiss action")
+        
+        alert.type = .normal
+        alert.set(title: title)
+        alert.set(message: message)
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(view, for: .normal)
+        okayButton.onTouchUpInside { [weak self] in
+            alert.dismiss(animated: false, completion: nil)
+            self?.navigateTo(certificate: certificate, animated: true)
+        }
+        
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(cancel, for: .normal)
+        cancelButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: nil)
+        }
+        alert.set(buttons: [okayButton, cancelButton], clear: true)
+        
+        present(alert, animated: false, completion: nil)
+    }
+    
+    func showCertificateInvalid() {
+        guard let alert = alert else { return }
+        
+        let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
+        let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
+        let okay = NSLocalizedString("Okay", comment: "Button copy")
+        
+        alert.type = .normal
+        alert.set(title: title)
+        alert.set(message: message)
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(okay, for: .normal)
+        okayButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: nil)
+        }
+        alert.set(buttons: [okayButton], clear: true)
+        
+        present(alert, animated: false, completion: nil)
+    }
+
+    func certificateDataFromURL(_ url: URL) -> Data? {
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         let formatQueryItem = URLQueryItem(name: "format", value: "json")
-
+        
         if components?.queryItems == nil {
             components?.queryItems = [
                 formatQueryItem
@@ -455,59 +543,15 @@ class IssuerCollectionViewController: UICollectionViewController {
         } else {
             components?.queryItems?.append(formatQueryItem)
         }
-
+        
         var data: Data? = nil
         if let dataURL = components?.url {
             data = try? Data(contentsOf: dataURL)
         }
-
-        guard data != nil, let certificate = try? CertificateParser.parse(data: data!) else {
-            let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
-            let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
-            let okay = NSLocalizedString("Okay", comment: "Button copy")
-
-            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
-            present(alert, animated: false, completion: nil)
-            return
-        }
-
-        let assertionUid = certificate.assertion.uid;
-        guard !certificates.contains(where: { $0.assertion.uid == assertionUid }) else {
-            if !silently {
-                
-                let title = NSLocalizedString("File already imported", comment: "Alert title when you re-import an existing certificate")
-                let message = NSLocalizedString("You've already imported that file. Want to view it?", comment: "Longer explanation about importing an existing file.")
-                let view = NSLocalizedString("View", comment: "Action prompt to view the imported certificate")
-                let cancel = NSLocalizedString("Cancel", comment: "Dismiss action")
-                let alert = AlertViewController.create(title: title, message: message, icon: .warning)
-                
-                let okayButton = SecondaryButton(frame: .zero)
-                okayButton.setTitle(view, for: .normal)
-                okayButton.onTouchUpInside { [weak self] in
-                    alert.dismiss(animated: false, completion: nil)
-                    self?.navigateTo(certificate: certificate, animated: true)
-                }
-                
-                let cancelButton = SecondaryButton(frame: .zero)
-                cancelButton.setTitle(cancel, for: .normal)
-                cancelButton.onTouchUpInside {
-                    alert.dismiss(animated: false, completion: nil)
-                }
-                alert.set(buttons: [okayButton, cancelButton])
-                
-                present(alert, animated: false, completion: nil)
-            }
-            return
-        }
-
-        add(certificate: certificate)
-        reloadCollectionView()
-
-        if !silently {
-            navigateTo(certificate: certificate, animated: animated)
-        }
+        
+        return data
     }
-
+    
     func navigateTo(issuer managedIssuer: ManagedIssuer, animated: Bool = true) -> IssuerViewController {
         Logger.main.info("Navigating to issuer \(managedIssuer.issuer?.name ?? "unknown") with id: \(managedIssuer.issuer?.id.absoluteString ?? "unknown")")
         
@@ -584,7 +628,7 @@ extension IssuerCollectionViewController : ManagedIssuerDelegate {
         webViewNavigationController = navigationController
         
         DispatchQueue.main.async {
-            self.progressAlert?.dismiss(animated: false, completion: {
+            self.alert?.dismiss(animated: false, completion: {
                 self.present(navigationController, animated: true, completion: nil)
             })
         }
