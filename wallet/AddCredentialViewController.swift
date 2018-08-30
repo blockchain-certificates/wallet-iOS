@@ -11,6 +11,8 @@ import Blockcerts
 
 class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
     
+    var alert: AlertViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = NSLocalizedString("Add a Credential", comment: "Title in settings")
@@ -44,29 +46,45 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
     }
     
     func importCertificate(from data: Data?) {
-        guard let data = data else {
-            Logger.main.error("Failed to load a certificate from file. Data is nil.")
-            
-            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
-            alertError(localizedTitle: title, localizedMessage: message)
+        if !Reachability.isNetworkReachable() {
+            let alert = AlertViewController.createNetworkWarning()
+            present(alert, animated: false, completion: nil)
             return
         }
         
-        do {
-            let certificate = try CertificateParser.parse(data: data)
-            saveCertificateIfOwned(certificate: certificate)
+        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Credential", comment: "Title when adding issuer in progress"))
+        present(alert!, animated: false, completion: nil)
+        
+        AppVersion.checkUpdateRequired { [weak self] updateRequired in
+            guard !updateRequired else {
+                self?.alertAppUpdate()
+                return
+            }
             
-            alertSuccess(callback: { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
-            })
-        } catch {
-            Logger.main.error("Importing failed with error: \(error)")
+            guard let data = data else {
+                Logger.main.error("Failed to load a certificate from file. Data is nil.")
+                
+                let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
+                let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
+                self?.alertError(title: title, message: message)
+                return
+            }
             
-            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
-            alertError(localizedTitle: title, localizedMessage: message)
-            return
+            do {
+                let certificate = try CertificateParser.parse(data: data)
+                self?.saveCertificateIfOwned(certificate: certificate)
+                
+                self?.alertSuccess(callback: { [weak self] in
+                    self?.navigationController?.popViewController(animated: true)
+                })
+            } catch {
+                Logger.main.error("Importing failed with error: \(error)")
+                
+                let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
+                let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
+                self?.alertError(title: title, message: message)
+                return
+            }
         }
     }
     
@@ -81,46 +99,69 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
     // User tapped cancel in progress alert
     func cancelAddCredential() {
         userCancelledAction = true
-        hideActivityIndicator()
     }
     
-    func showActivityIndicator() {
-        userCancelledAction = false
+    func alertError(title: String, message: String) {
+        guard let alert = alert else { return }
         
-        let title = NSLocalizedString("Adding Credential", comment: "Progress alert title")
-        let message = NSLocalizedString("Please wait while your credential is added.", comment: "Progress alert message while adding a credential")
-        let cancel = NSLocalizedString("Cancel", comment: "Button copy")
+        alert.type = .normal
+        alert.set(title: title)
+        alert.set(message: message)
+        alert.icon = .warning
         
-        let alert = AlertViewController.create(title: title, message: message, icon: .verifying, buttonText: cancel)
-        
-        alert.buttons.first?.onTouchUpInside { [weak self] in
-            self?.cancelAddCredential()
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: nil)
         }
-        
-        present(alert, animated: false, completion: nil)
-    }
-    
-    func hideActivityIndicator() {
-        presentedViewController?.dismiss(animated: false, completion: nil)
-    }
-    
-    func alertError(localizedTitle: String, localizedMessage: String) {
-        hideActivityIndicator()
-        
-        let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
-        let alert = AlertViewController.create(title: localizedTitle, message: localizedMessage, icon: .warning, buttonText: okay)
-        present(alert, animated: false, completion: nil)
+        alert.set(buttons: [okayButton])
     }
     
     func alertSuccess(callback: (() -> Void)?) {
-        hideActivityIndicator()
+        guard let alert = alert else { return }
         
         let title = NSLocalizedString("Success!", comment: "Alert title")
         let message = NSLocalizedString("A credential was imported. Please check your credentials screen.", comment: "Successful credential import from URL in settings alert message")
-        let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
-        let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
-        alert.buttons.first?.onTouchUpInside { callback?() }
-        present(alert, animated: false, completion: nil)
+        
+        alert.type = .normal
+        alert.set(title: title)
+        alert.set(message: message)
+        alert.icon = .success
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: {
+                callback?()
+            })
+        }
+        alert.set(buttons: [okayButton])
+    }
+    
+    func alertAppUpdate() {
+        Logger.main.info("App needs update.")
+        guard let alert = alert else { return }
+        
+        alert.type = .normal
+        alert.set(title: NSLocalizedString("[Old Version]", comment: "Force app update dialog title"))
+        alert.set(message: NSLocalizedString("[Lorem ipsum latin for go to App Store]", comment: "Force app update dialog message"))
+        alert.icon = .warning
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button copy"), for: .normal)
+        okayButton.onTouchUpInside {
+            let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            alert.dismiss(animated: false, completion: nil)
+        }
+        
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Dismiss action"), for: .normal)
+        cancelButton.onTouchUpInside {
+            alert.dismiss(animated: false, completion: nil)
+        }
+        
+        alert.set(buttons: [okayButton, cancelButton])
     }
     
     // MARK: - UIDocumentPickerDelegate
@@ -146,14 +187,30 @@ class AddCredentialURLViewController: AddCredentialViewController, UITextViewDel
             let url = URL(string: urlString.trimmingCharacters(in: CharacterSet.whitespaces)) else {
                 return
         }
+        
+        if !Reachability.isNetworkReachable() {
+            let alert = AlertViewController.createNetworkWarning()
+            present(alert, animated: false, completion: nil)
+            return
+        }
+        
+        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Credential", comment: "Title when adding issuer in progress"))
+        present(alert!, animated: false, completion: nil)
+        
         Logger.main.info("User attempting to add a certificate from \(url).")
         
-        addCertificate(from: url)
+        AppVersion.checkUpdateRequired { [weak self] updateRequired in
+            guard !updateRequired else {
+                self?.alertAppUpdate()
+                return
+            }
+            
+            self?.addCertificate(from: url)
+        }
     }
     
     func addCertificate(from url: URL) {
         urlTextView.resignFirstResponder()
-        showActivityIndicator()
         
         DispatchQueue.global(qos: .background).async { [weak self] in
             
@@ -163,7 +220,7 @@ class AddCredentialURLViewController: AddCredentialViewController, UITextViewDel
                     
                     let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
                     let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
-                    self?.alertError(localizedTitle: title, localizedMessage: message)
+                    self?.alertError(title: title, message: message)
                 }
                 return
             }

@@ -452,7 +452,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             return
         }
         
-        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Certificate", comment: "Title when adding certificate in progress"))
+        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Credential", comment: "Title when adding certificate in progress"))
         present(alert!, animated: false, completion: nil)
         
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
