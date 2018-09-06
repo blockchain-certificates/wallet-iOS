@@ -121,6 +121,7 @@
 		EEAF82B821384DC9008EC1FA /* MyPassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */; };
 		EEAF82BA21384E2C008EC1FA /* AddCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */; };
 		EEAF82E3214067CC008EC1FA /* Localizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82E2214067CB008EC1FA /* Localizations.swift */; };
+		EEAF82E82141A08B008EC1FA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EEAF82E72141A08B008EC1FA /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,6 +272,7 @@
 		EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCredentialViewController.swift; sourceTree = "<group>"; };
 		EEAF82DA21405F90008EC1FA /* LaurineGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaurineGenerator.swift; path = Utils/LaurineGenerator.swift; sourceTree = "<group>"; };
 		EEAF82E2214067CB008EC1FA /* Localizations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizations.swift; sourceTree = "<group>"; };
+		EEAF82E72141A08B008EC1FA /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,6 +392,7 @@
 				838DE6C81F3A74B400185A49 /* Models */,
 				EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */,
 				83115A5B1E0847EE00EDC0A2 /* NoContentView.swift */,
+				EEAF82E72141A08B008EC1FA /* Localizable.strings */,
 				83ACB76F1EDE556500A1149E /* Onboarding.storyboard */,
 				83ACB76D1EDE30B700A1149E /* OnboardingViewControllers.swift */,
 				836031BC1E5651C9005B2D2E /* PrivacyViewController.swift */,
@@ -698,6 +701,7 @@
 				A970D00A2044AFC6004BC1AE /* introduction.mp4 in Resources */,
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
 				A9B997A1203F1CE000C05153 /* verifier.js in Resources */,
+				EEAF82E82141A08B008EC1FA /* Localizable.strings in Resources */,
 				A909528220449DD000F29CF5 /* C5T2BLabelCell.xib in Resources */,
 				831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
