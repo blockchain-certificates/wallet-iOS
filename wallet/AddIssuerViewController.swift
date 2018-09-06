@@ -26,7 +26,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("Add an Issuer", comment: "Navigation title for the 'Add Issuer' form.")
+        title = Localizations.AddIssuer
         
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.backgroundColor = Style.Color.C3
@@ -84,7 +84,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             return
         }
         
-        progressAlert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
+        progressAlert = AlertViewController.createProgress(title: Localizations.AddingIssuer)
         present(progressAlert!, animated: false, completion: nil)
         
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
@@ -116,16 +116,13 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     func showAddIssuerSuccess() {
         guard let progressAlert = self.progressAlert else { return }
         
-        let title = NSLocalizedString("Success!", comment: "Add issuers alert title")
-        let message = NSLocalizedString("An issuer was added. Please check your issuers screen.", comment: "Add issuer alert message")
-        
         progressAlert.type = .normal
-        progressAlert.set(title: title)
-        progressAlert.set(message: message)
+        progressAlert.set(title: Localizations.Success)
+        progressAlert.set(message: Localizations.AddIssuerSuccess)
         progressAlert.icon = .success
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             progressAlert.dismiss(animated: false, completion: nil)
             
@@ -147,12 +144,12 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         guard let progressAlert = progressAlert else { return }
         
         progressAlert.type = .normal
-        progressAlert.set(title: NSLocalizedString("[Old Version]", comment: "Force app update dialog title"))
-        progressAlert.set(message: NSLocalizedString("[Lorem ipsum latin for go to App Store]", comment: "Force app update dialog message"))
+        progressAlert.set(title: Localizations.AppUpdateAlertTitle)
+        progressAlert.set(message: Localizations.AppUpdateAlertMessage)
         progressAlert.icon = .warning
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button copy"), for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -160,7 +157,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         }
         
         let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Dismiss action"), for: .normal)
+        cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             progressAlert.dismiss(animated: false, completion: nil)
         }
@@ -171,16 +168,13 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     func showAddIssuerError() {
         guard let progressAlert = progressAlert else { return }
         
-        let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
-        let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
-        
         progressAlert.type = .normal
-        progressAlert.set(title: title)
-        progressAlert.set(message: cannedMessage)
+        progressAlert.set(title: Localizations.AddIssuerFailAlertTitle)
+        progressAlert.set(message: Localizations.AddIssuerFailMessage)
         progressAlert.icon = .failure
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             progressAlert.dismiss(animated: false, completion: nil)
         }

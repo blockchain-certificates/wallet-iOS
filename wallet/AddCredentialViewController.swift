@@ -15,7 +15,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = NSLocalizedString("Add a Credential", comment: "Title in settings")
+        navigationItem.title = Localizations.AddACredential
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
@@ -52,7 +52,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
             return
         }
         
-        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Credential", comment: "Title when adding issuer in progress"))
+        alert = AlertViewController.createProgress(title: Localizations.AddingCredential)
         present(alert!, animated: false, completion: nil)
         
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
@@ -63,10 +63,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
             
             guard let data = data else {
                 Logger.main.error("Failed to load a certificate from file. Data is nil.")
-                
-                let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
-                let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
-                self?.alertError(title: title, message: message)
+                self?.alertError(title: Localizations.InvalidCredential, message: Localizations.InvalidCredentialFile)
                 return
             }
             
@@ -79,10 +76,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
                 })
             } catch {
                 Logger.main.error("Importing failed with error: \(error)")
-                
-                let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
-                let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
-                self?.alertError(title: title, message: message)
+                self?.alertError(title: Localizations.InvalidCredential, message: Localizations.InvalidCredentialFile)
                 return
             }
         }
@@ -110,7 +104,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
         alert.icon = .warning
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
         }
@@ -120,16 +114,13 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
     func alertSuccess(callback: (() -> Void)?) {
         guard let alert = alert else { return }
         
-        let title = NSLocalizedString("Success!", comment: "Alert title")
-        let message = NSLocalizedString("A credential was imported. Please check your credentials screen.", comment: "Successful credential import from URL in settings alert message")
-        
         alert.type = .normal
-        alert.set(title: title)
-        alert.set(message: message)
+        alert.set(title: Localizations.Success)
+        alert.set(message: Localizations.CredentialImportSuccess)
         alert.icon = .success
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: {
                 callback?()
@@ -143,12 +134,12 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
         guard let alert = alert else { return }
         
         alert.type = .normal
-        alert.set(title: NSLocalizedString("[Old Version]", comment: "Force app update dialog title"))
-        alert.set(message: NSLocalizedString("[Lorem ipsum latin for go to App Store]", comment: "Force app update dialog message"))
+        alert.set(title: Localizations.AppUpdateAlertTitle)
+        alert.set(message: Localizations.AppUpdateAlertMessage)
         alert.icon = .warning
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button copy"), for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -156,7 +147,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
         }
         
         let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Dismiss action"), for: .normal)
+        cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
         }
@@ -194,7 +185,7 @@ class AddCredentialURLViewController: AddCredentialViewController, UITextViewDel
             return
         }
         
-        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Credential", comment: "Title when adding issuer in progress"))
+        alert = AlertViewController.createProgress(title: Localizations.AddingCredential)
         present(alert!, animated: false, completion: nil)
         
         Logger.main.info("User attempting to add a certificate from \(url).")
@@ -217,10 +208,7 @@ class AddCredentialURLViewController: AddCredentialViewController, UITextViewDel
             guard let certificate = CertificateManager().load(certificateAt: url) else {
                 DispatchQueue.main.async { [weak self] in
                     Logger.main.error("Failed to load certificate from \(url)")
-                    
-                    let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
-                    let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
-                    self?.alertError(title: title, message: message)
+                    self?.alertError(title: Localizations.InvalidCredential, message: Localizations.InvalidCredentialFile)
                 }
                 return
             }

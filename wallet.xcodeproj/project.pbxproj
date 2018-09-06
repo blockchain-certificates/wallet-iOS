@@ -120,6 +120,7 @@
 		EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */; };
 		EEAF82B821384DC9008EC1FA /* MyPassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */; };
 		EEAF82BA21384E2C008EC1FA /* AddCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */; };
+		EEAF82E3214067CC008EC1FA /* Localizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82E2214067CB008EC1FA /* Localizations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,6 +269,8 @@
 		EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCheck.swift; sourceTree = "<group>"; };
 		EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPassphraseViewController.swift; sourceTree = "<group>"; };
 		EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCredentialViewController.swift; sourceTree = "<group>"; };
+		EEAF82DA21405F90008EC1FA /* LaurineGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaurineGenerator.swift; path = Utils/LaurineGenerator.swift; sourceTree = "<group>"; };
+		EEAF82E2214067CB008EC1FA /* Localizations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +321,7 @@
 		830120331EF4481B008EC454 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				EEAF82DA21405F90008EC1FA /* LaurineGenerator.swift */,
 				838DE6D31F3B67B300185A49 /* Analytics.swift */,
 				830120341EF4483F008EC454 /* ArgumentParser.swift */,
 				8372F2F41FA12421007F0BC2 /* Logger.swift */,
@@ -380,6 +384,7 @@
 				83D6BE9D1DC2B7B100FE0241 /* IssuerTableViewController.swift */,
 				83115A5D1E087EA500EDC0A2 /* IssuerViewController.swift */,
 				831EDC121ED5F7DA004F135B /* Keychain.swift */,
+				EEAF82E2214067CB008EC1FA /* Localizations.swift */,
 				83111B301DA4110C006B058D /* LaunchScreen.storyboard */,
 				83111B2B1DA4110C006B058D /* Main.storyboard */,
 				838DE6C81F3A74B400185A49 /* Models */,
@@ -564,6 +569,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83111B4C1DA4110C006B058D /* Build configuration list for PBXNativeTarget "certificates" */;
 			buildPhases = (
+				EEAF82D121405E54008EC1FA /* ShellScript */,
 				C4F92AA0A7F6B12082D77826 /* [CP] Check Pods Manifest.lock */,
 				83111B201DA4110C006B058D /* Sources */,
 				83111B211DA4110C006B058D /* Frameworks */,
@@ -799,6 +805,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EEAF82D121405E54008EC1FA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -x\n\n# Get base path to project\nBASE_PATH=\"$PROJECT_DIR/$PROJECT_NAME\"\n\n#--------- START OF YOUR CONFIGURATION (change Path_To_.. to fit)\n\n# Get path to Laurine Generator script\nLAURINE_PATH=\"$BASE_PATH/Utils/LaurineGenerator.swift\"\n\n# Get path to main localization file (usually english).\nSOURCE_PATH=\"$BASE_PATH/Base.lproj/Localizable.strings\"\n\n# Get path to output. If you use ObjC version of output, set implementation file (.m), as header will be generated automatically\nOUTPUT_PATH=\"$BASE_PATH/Localizations.swift\"\n\n#--------- END OF YOUR CONFIGURATION\n\n# Add permission to generator for script execution\nchmod 755 \"$LAURINE_PATH\"\n\n# Actually generate output. -- CUSTOMIZE -- parameters to your needs (see documentation).\n# Will only re-generate script if something changed\nif [ \"$OUTPUT_PATH\" -ot \"$SOURCE_PATH\" ]; then\n\"$LAURINE_PATH\" -i \"$SOURCE_PATH\" -o \"$OUTPUT_PATH\"\nfi";
+		};
 		F65C77CEA313DD3106C499D5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -830,6 +849,7 @@
 				EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */,
 				838DE6CE1F3A772400185A49 /* ManagedIssuerList.swift in Sources */,
 				832AE0171DF893A900A3CA4A /* UITextField+fixCaretPosition.swift in Sources */,
+				EEAF82E3214067CC008EC1FA /* Localizations.swift in Sources */,
 				83D947991E01EA3C0038C4E2 /* CertificateTitleTableViewCell.swift in Sources */,
 				EEAF82BA21384E2C008EC1FA /* AddCredentialViewController.swift in Sources */,
 				8329A0521DDA825200863285 /* IssuerSummaryTableViewCell.swift in Sources */,

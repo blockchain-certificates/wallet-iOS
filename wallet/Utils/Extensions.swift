@@ -10,6 +10,18 @@ import UIKit
 import Foundation
 import Blockcerts
 
+extension UIViewController {
+    func presentAlert(_ alert: UIViewController, completion: (() -> Void)? = nil) {
+        if let modal = presentedViewController {
+            modal.dismiss(animated: false) {
+                self.present(alert, animated: false, completion: completion)
+            }
+        } else {
+            present(alert, animated: false, completion: completion)
+        }
+    }
+}
+
 extension UILabel {
     
     func isTruncated() -> Bool {

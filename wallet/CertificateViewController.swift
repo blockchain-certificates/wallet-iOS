@@ -60,11 +60,11 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
             Logger.main.info("User was trying to verify the sample certificate, so we showed them our usual dialog.")
             
             let alert = UIAlertController(
-                title: NSLocalizedString("Sample Certificate", comment: "Title for our specific warning about validating a sample certificate"),
-                message: NSLocalizedString("This is a sample certificate that cannot be verified. Real certificates will perform a live validation process.", comment: "Explanation for why you can't validate the sample certificate."),
+                title: Localizations.SampleCredential,
+                message: Localizations.SampleCredentialVerificationImpossible,
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm action"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: Localizations.OK, style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
@@ -76,9 +76,9 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
             return
         }
         
-        progressAlert = AlertViewController.createProgress(title: "[Initializing]")
+        progressAlert = AlertViewController.createProgress(title: "[Initializing]") //TODO: Localize
         let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
+        cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside { [weak self] in
             self?.verifier.cancel()
             self?.progressAlert!.dismiss(animated: false, completion: nil)
@@ -109,7 +109,7 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
     func finish(success: Bool, errorMessage: String?) {
         progressAlert?.type = .normal
         let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(NSLocalizedString("Close", comment: "Button to cancel user action"), for: .normal)
+        cancelButton.setTitle(Localizations.Close, for: .normal)
         cancelButton.onTouchUpInside { [weak self] in
             self?.verifier.cancel()
             self?.progressAlert!.dismiss(animated: false, completion: nil)
@@ -118,11 +118,11 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         
         if success {
             progressAlert?.icon = .success
-            progressAlert?.set(title: "Verified!")
-            progressAlert?.set(message: "Your credential has been successfully verified.")
+            progressAlert?.set(title: "Verified!") //TODO: Localize
+            progressAlert?.set(message: "Your credential has been successfully verified.") //TODO: Localize
         } else {
             progressAlert?.icon = .failure
-            progressAlert?.set(title: "Verification Fail")
+            progressAlert?.set(title: "Verification Fail") //TODO: Localize
             progressAlert?.set(message: errorMessage!)
         }
     }
@@ -145,15 +145,15 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         
         // TODO: Guard against sample cert
         let alertController = UIAlertController(title: nil, message: "Share this credential", preferredStyle: .actionSheet)
-        let shareFileAction = UIAlertAction(title: NSLocalizedString("Share File", comment: "Action to share certificate file, presented in an action sheet."), style: .default) { [weak self] _ in
+        let shareFileAction = UIAlertAction(title: Localizations.ShareFile, style: .default) { [weak self] _ in
             Logger.main.info("User chose to share certificate via file")
             self?.shareCertificateFile()
         }
-        let shareURLAction = UIAlertAction(title: NSLocalizedString("Share Link", comment: "Action to share the certificate's hosting URL, presented in an action sheet."), style: .default) { [weak self] _ in
+        let shareURLAction = UIAlertAction(title: Localizations.ShareLink, style: .default) { [weak self] _ in
             Logger.main.info("User chose to share the certificate via URL.")
             self?.shareCertificateURL()
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the action sheet."), style: .cancel, handler: { _ in
+        let cancelAction = UIAlertAction(title: Localizations.Cancel, style: .cancel, handler: { _ in
             Logger.main.info("Share dialog cancelled.")
         })
         
@@ -175,12 +175,8 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         } catch {
             Logger.main.error("Couldn't share certificate. Failed to write temporary URL. \(error)")
             
-            let title = NSLocalizedString("Couldn't share certificate.", comment: "Alert title when sharing a certificate fails.")
-            let message = NSLocalizedString("Something went wrong preparing that file for sharing. Try again later.", comment: "Alert message when sharing a certificate fails. Generic error.")
-            let okay = NSLocalizedString("OK", comment: "Confirm action")
-            
-            let errorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: okay, style: .default, handler: nil))
+            let errorAlert = UIAlertController(title: Localizations.ShareCredentialError, message: Localizations.ShareCredentialGenericError, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: Localizations.OK, style: .default, handler: nil))
             present(errorAlert, animated: true, completion: nil)
             return
         }

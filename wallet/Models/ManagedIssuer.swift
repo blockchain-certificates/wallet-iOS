@@ -257,6 +257,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
         inProgressRequest = identityRequest
     }
     
+    /*
     // This is currently unused. Moving to a function here for potential future use.
     func identifyErrorDisplayString(identifyError: ManagedIssuerError?) -> String {
         switch(identifyError!) {
@@ -304,6 +305,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
             return NSLocalizedString("Something went wrong adding this issuer. Try again later.", comment: "Generic error for failure to add an issuer")
         }
     }
+    */
     
     // MARK: Introduction step
     func introduce(nonce: String, completion: @escaping (ManagedIssuerError?) -> Void) {

@@ -45,7 +45,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("Blockcerts Wallet", comment: "Title of main interface")
+        title = Localizations.BlockcertsWallet
 
         // Register for notifications
         NotificationCenter.default.addObserver(self, selector: #selector(redirectRequested(notification:)), name: NotificationNames.redirectToCertificate, object: nil)
@@ -212,7 +212,7 @@ class IssuerCollectionViewController: UICollectionViewController {
 
         let managedIssuer = managedIssuers[indexPath.item]
         guard let issuer = managedIssuer.issuer else {
-            cell.issuerName = NSLocalizedString("Missing Issuer", comment: "Error state: missing issuer data in issuer cell")
+            cell.issuerName = Localizations.MissingIssuer
             return cell
         }
 
@@ -267,7 +267,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             return
         }
         
-        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Issuer", comment: "Title when adding issuer in progress"))
+        alert = AlertViewController.createProgress(title: Localizations.AddingIssuer)
         present(alert!, animated: false, completion: nil)
         
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
@@ -299,12 +299,12 @@ class IssuerCollectionViewController: UICollectionViewController {
         guard let alert = alert else { return }
         
         alert.type = .normal
-        alert.set(title: NSLocalizedString("[Old Version]", comment: "Force app update dialog title"))
-        alert.set(message: NSLocalizedString("[Lorem ipsum latin for go to App Store]", comment: "Force app update dialog message"))
+        alert.set(title: Localizations.AppUpdateAlertTitle)
+        alert.set(message: Localizations.AppUpdateAlertMessage)
         alert.icon = .warning
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button copy"), for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -312,7 +312,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         }
         
         let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Dismiss action"), for: .normal)
+        cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
         }
@@ -323,16 +323,13 @@ class IssuerCollectionViewController: UICollectionViewController {
     func showAddIssuerError() {
         guard let alert = alert else { return }
         
-        let title = NSLocalizedString("Add Issuer Failed", comment: "Alert title when adding an issuer fails for any reason.")
-        let cannedMessage = NSLocalizedString("There was an error adding this issuer. This can happen when a single-use invitation link is clicked more than once. Please check with the issuer and request a new invitation, if necessary.", comment: "Error message displayed when adding issuer failed")
-        
         alert.type = .normal
-        alert.set(title: title)
-        alert.set(message: cannedMessage)
+        alert.set(title: Localizations.AddIssuerFailAlertTitle)
+        alert.set(message: Localizations.AddIssuerFailMessage)
         alert.icon = .failure
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "OK dismiss action"), for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
         }
@@ -452,7 +449,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             return
         }
         
-        alert = AlertViewController.createProgress(title: NSLocalizedString("Adding Credential", comment: "Title when adding certificate in progress"))
+        alert = AlertViewController.createProgress(title: Localizations.AddingCredential)
         present(alert!, animated: false, completion: nil)
         
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
@@ -485,24 +482,19 @@ class IssuerCollectionViewController: UICollectionViewController {
     func showCertificateAlreadyAdded(_ certificate: Certificate) {
         guard let alert = alert else { return }
         
-        let title = NSLocalizedString("File already imported", comment: "Alert title when you re-import an existing certificate")
-        let message = NSLocalizedString("You've already imported that file. Want to view it?", comment: "Longer explanation about importing an existing file.")
-        let view = NSLocalizedString("View", comment: "Action prompt to view the imported certificate")
-        let cancel = NSLocalizedString("Cancel", comment: "Dismiss action")
-        
         alert.type = .normal
-        alert.set(title: title)
-        alert.set(message: message)
+        alert.set(title: Localizations.FileAlreadyImported)
+        alert.set(message: Localizations.FileAlreadyImported)
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(view, for: .normal)
+        okayButton.setTitle(Localizations.View, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             alert.dismiss(animated: false, completion: nil)
             self?.navigateTo(certificate: certificate, animated: true)
         }
         
         let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(cancel, for: .normal)
+        cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
         }
@@ -514,16 +506,12 @@ class IssuerCollectionViewController: UICollectionViewController {
     func showCertificateInvalid() {
         guard let alert = alert else { return }
         
-        let title = NSLocalizedString("Invalid Credential", comment: "Title for an alert when importing an invalid certificate")
-        let message = NSLocalizedString("That file doesn't appear to be a valid credential.", comment: "Message in an alert when importing an invalid certificate")
-        let okay = NSLocalizedString("Okay", comment: "Button copy")
-        
         alert.type = .normal
-        alert.set(title: title)
-        alert.set(message: message)
+        alert.set(title: Localizations.InvalidCredential)
+        alert.set(message: Localizations.InvalidCredentialFile)
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(okay, for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
         }
@@ -659,20 +647,16 @@ extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
 extension IssuerCollectionViewController {
     func importCertificate(from data: Data?) {
         guard let data = data else {
-            let title = NSLocalizedString("Couldn't read file", comment: "Title for an error message displayed when we can't read a certificate file the user tried to import.")
-            let message = NSLocalizedString("Something went wrong when trying to open the file.", comment: "A longer explanation of the error message displayed when we can't read a certificate file the user tried to import.")
-            let okay = NSLocalizedString("Okay", comment: "Button copy")
-            
-            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            let alert = AlertViewController.createWarning(title: Localizations.ReadFileError,
+                                                          message: Localizations.CredentialParseError,
+                                                          buttonText: Localizations.Okay)
             present(alert, animated: false, completion: nil)
             return
         }
         guard let certificate = try? CertificateParser.parse(data: data) else {
-            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
-            let okay = NSLocalizedString("Okay", comment: "Button copy")
-            
-            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            let alert = AlertViewController.createWarning(title: Localizations.InvalidCredential,
+                                                          message: Localizations.InvalidCredentialFile,
+                                                          buttonText: Localizations.Okay)
             present(alert, animated: false, completion: nil)
             return
         }

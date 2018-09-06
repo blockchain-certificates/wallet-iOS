@@ -21,14 +21,14 @@ class ReplacePassphraseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("Replace Passphrase", comment: "Title for replacing the passphrase")
+        title = Localizations.ReplacePassphrase
         errorLabel.text = nil
 
         let horizontalSpace : CGFloat = 15
         passphraseField.textContainerInset = UIEdgeInsets(top: 4, left: horizontalSpace, bottom: 20, right: horizontalSpace)
         
         // Do any additional setup after loading the view.
-        replaceButton = UIBarButtonItem(title: NSLocalizedString("Replace", comment: "Replace passphrase action button"),
+        replaceButton = UIBarButtonItem(title: Localizations.Replace,
                                         style: .done,
                                         target: self,
                                         action: #selector(saveNewPassphrase))
@@ -46,20 +46,20 @@ class ReplacePassphraseViewController: UIViewController {
         }
         
         guard Keychain.isValidPassphrase(requestedPassphrase) else {
-            failedToSave(NSLocalizedString("This isn't a valid passphrase. Check what you entered and try again.", comment: "Invalid replacement passphrase error"))
+            failedToSave(Localizations.InvalidPassphrase)
             return
         }
         
         authenticateUser { (success, error) in
             guard success else {
-                self.failedToSave(NSLocalizedString("Failed to authenticate. Try again.", comment: "Auth failure replacing passphrase"))
+                self.failedToSave(Localizations.AuthenticationError)
                 return
             }
             do {
                 try Keychain.updateShared(with: requestedPassphrase)
                 self.successfulSave()
             } catch {
-                self.failedToSave(NSLocalizedString("Unable to save this passphrase.", comment: "Failure saving replacement passphrase"))
+                self.failedToSave(Localizations.AuthenticationError)
             }
         }
     }
@@ -77,13 +77,12 @@ class ReplacePassphraseViewController: UIViewController {
     func authenticateUser(completionHandler: @escaping (Bool, Error?) -> Void) {
         let context = LAContext()
         var error : NSError? = nil
-        let reason = NSLocalizedString("Authenticate to replace your secure passphrase.", comment: "Explain that we need them to authenticate in order to replace their passphrase.")
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason, reply: completionHandler)
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: Localizations.AuthenticateReplacePassphrase, reply: completionHandler)
         } else if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             context.evaluatePolicy(
                 .deviceOwnerAuthentication,
-                localizedReason: reason,
+                localizedReason: Localizations.AuthenticateReplacePassphrase,
                 reply: completionHandler)
         } else {
             completionHandler(false, AuthErrors.noAuthMethodAllowed)

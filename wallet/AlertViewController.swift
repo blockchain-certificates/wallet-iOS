@@ -170,12 +170,8 @@ class AlertViewController : UIViewController {
         animateIconIfNeeded()
     }
 
-    static func create(title: String, message: String, icon: Icon, buttonText: String? = nil) -> AlertViewController {
-        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
-        vc.view.backgroundColor = .clear
-        vc.modalPresentationStyle = .custom
-        
+    static func create(title: String, message: String, icon: Icon, buttonText: String? = nil, buttonAction: (() -> Void)? = nil) -> AlertViewController {
+        let vc = createFromStoryboard()
         vc.type = .normal
         vc.set(title: title)
         vc.set(message: message)
@@ -186,6 +182,7 @@ class AlertViewController : UIViewController {
             let button = SecondaryButton(frame: .zero)
             button.setTitle(buttonText, for: .normal)
             button.onTouchUpInside {
+                buttonAction?()
                 vc.dismiss(animated: false, completion: nil)
             }
             vc.set(buttons: [button])
@@ -195,11 +192,7 @@ class AlertViewController : UIViewController {
     }
     
     static func createWarning(title: String, message: String, buttonText: String? = nil) -> AlertViewController {
-        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
-        vc.view.backgroundColor = .clear
-        vc.modalPresentationStyle = .custom
-        
+        let vc = createFromStoryboard()
         vc.type = .normal
         vc.set(title: title)
         vc.set(message: message)
@@ -207,7 +200,7 @@ class AlertViewController : UIViewController {
         
         // assume a simple, single button to dismiss the alert
         let button = DangerButton(frame: .zero)
-        let buttonCopy = buttonText ?? NSLocalizedString("Okay", comment: "Button label")
+        let buttonCopy = buttonText ?? Localizations.Okay
         button.setTitle(buttonCopy, for: .normal)
         button.onTouchUpInside {
             vc.dismiss(animated: false, completion: nil)
@@ -218,16 +211,12 @@ class AlertViewController : UIViewController {
     }
     
     static func createNetworkWarning() -> AlertViewController {
-        return createWarning(title: NSLocalizedString("No Network Connection", comment: "No network connection alert title"),
-                             message: NSLocalizedString("Please check your network connection and try again.", comment: "No network connection alert message"))
+        return createWarning(title: Localizations.ReachabilityAlertTitle,
+                             message: Localizations.ReachabilityAlertMessage)
     }
     
     static func createProgress(title: String) -> AlertViewController {
-        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
-        vc.view.backgroundColor = .clear
-        vc.modalPresentationStyle = .custom
-        
+        let vc = createFromStoryboard()
         vc.type = .progress
         vc.set(title: title)
         vc.icon = .verifying
@@ -236,11 +225,7 @@ class AlertViewController : UIViewController {
     }
     
     static func createVerification(header: String, title: String, message: String) -> AlertViewController {
-        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
-        vc.view.backgroundColor = .clear
-        vc.modalPresentationStyle = .custom
-        
+        let vc = createFromStoryboard()
         vc.type = .verification
         vc.set(header: header)
         vc.set(title: title)
@@ -250,4 +235,33 @@ class AlertViewController : UIViewController {
         return vc
     }
     
+    static func createAppUpdate() -> AlertViewController {
+        let vc = createWarning(title: Localizations.AppUpdateAlertTitle,
+                               message: Localizations.AppUpdateAlertMessage)
+        
+        let okayButton = SecondaryButton(frame: .zero)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
+        okayButton.onTouchUpInside {
+            let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            vc.dismiss(animated: false, completion: nil)
+        }
+        
+        let cancelButton = SecondaryButton(frame: .zero)
+        cancelButton.setTitle(Localizations.Cancel, for: .normal)
+        cancelButton.onTouchUpInside {
+            vc.dismiss(animated: false, completion: nil)
+        }
+        
+        vc.set(buttons: [okayButton, cancelButton])
+        return vc
+    }
+    
+    static func createFromStoryboard() -> AlertViewController {
+        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
+        vc.view.backgroundColor = .clear
+        vc.modalPresentationStyle = .custom
+        return vc
+    }
 }

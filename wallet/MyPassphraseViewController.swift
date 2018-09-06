@@ -31,19 +31,17 @@ class MyPassphraseViewController : ScrollingOnboardingControllerBase, UIActivity
     }
     
     @IBAction func backupCopy() {
-        let alert = AlertViewController.create(title: NSLocalizedString("Are you sure?", comment: "Confirmation before copying for backup"),
-                                               message: NSLocalizedString("This is a low-security backup method. Do you want to continue?", comment: "Scare tactic to warn user about insecurity of email"),
-                                               icon: .warning)
+        let alert = AlertViewController.create(title: Localizations.AreYouSure, message: Localizations.EmailBackupWarning, icon: .warning)
         
         let okayButton = SecondaryButton(frame: .zero)
-        okayButton.setTitle(NSLocalizedString("Okay", comment: "Button to confirm user action"), for: .normal)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             alert.dismiss(animated: false, completion: nil)
             self?.presentCopySheet()
         }
         
         let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: "Button to cancel user action"), for: .normal)
+        cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
         }
@@ -79,7 +77,7 @@ class MyPassphraseViewController : ScrollingOnboardingControllerBase, UIActivity
     
     func activityViewController(_ activityViewController: UIActivityViewController,
                                 subjectForActivityType activityType: UIActivityType?) -> String {
-        return NSLocalizedString("Blockcerts Backup", comment: "Email subject line when backing up passphrase")
+        return Localizations.BlockcertsBackup
     }
     
 }

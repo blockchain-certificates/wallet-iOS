@@ -55,7 +55,7 @@ class SettingsTableViewController: UITableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         clearsSelectionOnViewWillAppear = true
-        title = NSLocalizedString("Settings", comment: "Title of the Settings screen.")
+        title = Localizations.Settings
 
         navigationController?.navigationBar.barTintColor = Style.Color.C3
         navigationController?.navigationBar.isTranslucent = false
@@ -111,17 +111,17 @@ class SettingsTableViewController: UITableViewController {
         let text : String?
         switch indexPath.row {
         case 0:
-            text = NSLocalizedString("Add an Issuer", comment: "Action item in settings screen to add an Issuer manually.")
+            text = Localizations.AddIssuer
         case 1:
-            text = NSLocalizedString("Add a Credential", comment: "Action item in settings screen to add an Issuer manually.")
+            text = Localizations.AddACredential
         case 2:
-            text = NSLocalizedString("My Passphrase", comment: "Action item in settings screen.")
+            text = Localizations.MyPassphrase
         case 3:
-            text = NSLocalizedString("About Passphrases", comment: "Menu action item for sharing device logs.")
+            text = Localizations.AboutPassphrases
         case 4:
-            text = NSLocalizedString("Privacy Policy", comment: "Menu item in the settings screen that links to our privacy policy.")
+            text = Localizations.PrivacyPolicy
         case 5:
-            text = NSLocalizedString("Email Logs", comment: "Action item in settings screen.")
+            text = Localizations.EmailLogs
         // The following are only visible in DEBUG builds
         case 6:
             text = "Destroy passphrase & crash"
@@ -221,12 +221,8 @@ class SettingsTableViewController: UITableViewController {
     func shareLogs() {
         guard let shareURL = try? Logger.main.shareLogs() else {
             Logger.main.error("Sharing the logs failed. Not sure how we'll ever get this information back to you. ¯\\_(ツ)_/¯")
-
-            let title = NSLocalizedString("File not found", comment: "Title for the failed-to-share-your-logs alert")
-            let message = NSLocalizedString("We couldn't find the logs on the device.", comment: "Explanation for failing to share the log file")
-            let okay = NSLocalizedString("Okay", comment: "Button copy")
             
-            let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+            let alert = AlertViewController.createWarning(title: Localizations.FileNotFound, message: Localizations.DeviceMissingLogs, buttonText: Localizations.Okay)
             present(alert, animated: false, completion: { [weak self] in
                 self?.deselectRow()
             })
@@ -247,11 +243,7 @@ class SettingsTableViewController: UITableViewController {
     func clearLogs() {
         Logger.main.clearLogs()
         
-        let title = NSLocalizedString("Success!", comment: "action completed successfully")
-        let message = NSLocalizedString("Logs have been deleted from this device.", comment: "A message displayed after clearing the logs successfully.")
-        let okay = NSLocalizedString("Okay", comment: "Button copy")
-        
-        let alert = AlertViewController.create(title: title, message: message, icon: .success, buttonText: okay)
+        let alert = AlertViewController.create(title: Localizations.Success, message: Localizations.DeleteLogsSuccess, icon: .success, buttonText: Localizations.Okay)
         present(alert, animated: false, completion: { [weak self] in
             self?.deselectRow()
         })
@@ -293,10 +285,8 @@ class SettingsTableViewController: UITableViewController {
                 switch error {
                 case AuthErrors.noAuthMethodAllowed:
                     DispatchQueue.main.async { [weak self] in
-                        let title = NSLocalizedString("Protect Your Passphrase", comment: "Alert view title shown when unable to authenticate for My Passphrase")
-                        let message = NSLocalizedString("Please go to the Settings for Blockcerts Wallet and enable Touch ID, Face ID, or a passcode to secure your passphrase and try again.", comment: "Specific authentication error: The user's phone has local authentication disabled, so we can't show the passphrase.")
-                        let buttonText = NSLocalizedString("Okay", comment: "Button copy")
-                        let alert = AlertViewController.create(title: title, message: message, icon: .warning, buttonText: buttonText)
+                        let alert = AlertViewController.create(title: Localizations.ProtectYourPassphrase,
+                                                               message: Localizations.EnableAuthenticationPrompt, icon: .warning, buttonText: Localizations.Okay)
                         self?.present(alert, animated: false, completion: nil)
                     }
                 default:
@@ -321,14 +311,13 @@ class SettingsTableViewController: UITableViewController {
     func authenticateUser(completionHandler: @escaping (Bool, Error?) -> Void) {
         let context = LAContext()
         var error : NSError? = nil
-        let reason = NSLocalizedString("Authenticate to see your secure passphrase.", comment: "Prompt to authenticate in order to reveal their passphrase.")
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason, reply: completionHandler)
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: Localizations.AuthenticateSeePassphrase, reply: completionHandler)
         } else if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             context.evaluatePolicy(
                 .deviceOwnerAuthentication,
-                localizedReason: reason,
+                localizedReason: Localizations.AuthenticateSeePassphrase,
                 reply: completionHandler)
         } else {
             completionHandler(false, AuthErrors.noAuthMethodAllowed)

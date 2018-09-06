@@ -23,7 +23,7 @@ class PrivacyViewController: UIViewController {
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        title = NSLocalizedString("Privacy Policy", comment: "Title for the screen with our privacy policy on it.")
+        title = Localizations.PrivacyPolicy
 
         let privacyURL = URL(string: "http://www.learningmachine.com/mobile-privacy.html")!
         let request = URLRequest(url: privacyURL)
@@ -47,9 +47,9 @@ class AboutPassphraseViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        title = NSLocalizedString("About Passphrase", comment: "Title for the screen with about passphrase info on it.")
+        title = Localizations.AboutPassphrase
         
-        let url = URL(string: "http://www.learningmachine.com/about-passphrases/")!
+        let url = URL(string: "https://www.learningmachine.com/about-passphrases/")!
         let request = URLRequest(url: url)
         
         webView.load(request)
