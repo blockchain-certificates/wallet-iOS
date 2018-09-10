@@ -232,7 +232,7 @@ class TertiaryButton : SecondaryButton {
 class DangerButton : SecondaryButton {
     
     override var textColor : UIColor { return Style.Color.C9 }
-    override var textColorHighlighted : UIColor { return Style.Color.C1 }
+    override var textColorHighlighted : UIColor { return Style.Color.C9 }
     
     override var strokeColor : UIColor { return Style.Color.C8 }
     override var strokeColorHighlighted : UIColor { return Style.Color.C9 }
@@ -264,7 +264,23 @@ class CheckmarkButton : SecondaryButton {
         titleEdgeInsets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
 
     }
+}
 
+@IBDesignable
+class CredentialActionButton : ButtonBase {
+    
+    override var textColor : UIColor { return Style.Color.C3 }
+    override var textColorHighlighted : UIColor { return Style.Color.C3 }
+    
+    override var fillColor : UIColor { return .white }
+    override var fillColorHighlighted : UIColor { return Style.Color.C10 }
+    
+    override func commonInit() {
+        super.commonInit()
+        layer.cornerRadius = 5
+        clipsToBounds = true
+        
+    }
 }
 
 /// Sets the background of the image view to the top-left pixel of its image
@@ -303,5 +319,39 @@ extension UIControl {
 extension UIView {
     class func fromNib<T: UIView>() -> T {
         return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+    }
+}
+
+class NavigationController: UINavigationController {
+    
+}
+
+extension UINavigationController {
+    func styleDefault() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        navigationBar.titleTextAttributes =
+            [NSAttributedStringKey.font: Style.Font.T4B,
+             NSAttributedStringKey.foregroundColor: Style.Color.C1]
+        
+        navigationBar.tintColor = Style.Color.C1
+        navigationBar.barTintColor = Style.Color.C3
+        navigationBar.isTranslucent = false
+    }
+    
+    func styleAlternate() {
+        UIApplication.shared.statusBarStyle = .default
+        navigationBar.titleTextAttributes =
+            [NSAttributedStringKey.font: Style.Font.T4B,
+             NSAttributedStringKey.foregroundColor: Style.Color.C3]
+        
+        navigationBar.tintColor = Style.Color.C3
+        navigationBar.barTintColor = Style.Color.C1
+        navigationBar.isTranslucent = false
+    }
+    
+    func styleHidden() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationBar.shadowImage = UIImage()
     }
 }

@@ -12,9 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateViewController" customModule="certificates" customModuleProvider="target">
             <connections>
+                <outlet property="footerView" destination="X1h-nY-yXF" id="IeV-W8-uKT"/>
                 <outlet property="renderedCertificateView" destination="0Jh-Wq-q8h" id="aCa-RX-aLX"/>
                 <outlet property="shareButton" destination="YTQ-rO-N6E" id="dfh-IN-bk4"/>
-                <outlet property="verifyButton" destination="rHb-06-Fky" id="VjV-vR-wfv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,8 +23,85 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X1h-nY-yXF" userLabel="Footer">
+                    <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWC-rg-3XN" userLabel="Info Button" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="8" y="8" width="108.5" height="44"/>
+                            <state key="normal" title="_Info" image="icon_info">
+                                <color key="titleColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="Info"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="infoTapped:" destination="-1" eventType="touchUpInside" id="I9C-u9-5Xp"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diU-wL-WfV">
+                            <rect key="frame" x="124.5" y="13" width="1" height="33"/>
+                            <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="33" id="3fy-74-uOR"/>
+                                <constraint firstAttribute="width" constant="1" id="7Eo-2f-WrG"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-06-Fky" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="133.5" y="8" width="108" height="44"/>
+                            <state key="normal" title="_Verify" image="icon_verify">
+                                <color key="titleColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="Verify"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="verifyTapped:" destination="-1" eventType="touchUpInside" id="C3Q-PG-9AX"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BiC-kn-enq">
+                            <rect key="frame" x="249.5" y="13" width="1" height="33"/>
+                            <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="33" id="f2f-Sv-HAL"/>
+                                <constraint firstAttribute="width" constant="1" id="fVw-mh-VTj"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-rO-N6E" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="258.5" y="8" width="108.5" height="44"/>
+                            <state key="normal" title="_Share" image="icon_share">
+                                <color key="titleColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="Share"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="shareTapped:" destination="-1" eventType="touchUpInside" id="gla-Jz-T6K"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="YTQ-rO-N6E" firstAttribute="leading" secondItem="BiC-kn-enq" secondAttribute="trailing" constant="8" id="0PX-Lx-UhU"/>
+                        <constraint firstItem="BiC-kn-enq" firstAttribute="leading" secondItem="rHb-06-Fky" secondAttribute="trailing" constant="8" id="2JS-ya-qlO"/>
+                        <constraint firstAttribute="trailing" secondItem="YTQ-rO-N6E" secondAttribute="trailing" constant="8" id="2Sp-yu-PxB"/>
+                        <constraint firstItem="BiC-kn-enq" firstAttribute="centerY" secondItem="X1h-nY-yXF" secondAttribute="centerY" id="Afr-D3-H1J"/>
+                        <constraint firstItem="rWC-rg-3XN" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" constant="8" id="Bx3-cc-4Mp"/>
+                        <constraint firstItem="rHb-06-Fky" firstAttribute="leading" secondItem="diU-wL-WfV" secondAttribute="trailing" constant="8" id="JlH-vs-aPF"/>
+                        <constraint firstAttribute="bottom" secondItem="rHb-06-Fky" secondAttribute="bottom" constant="8" id="NIi-xc-1zn"/>
+                        <constraint firstAttribute="bottom" secondItem="YTQ-rO-N6E" secondAttribute="bottom" constant="8" id="Uoy-fc-GiG"/>
+                        <constraint firstItem="YTQ-rO-N6E" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" constant="8" id="adh-qT-8jc"/>
+                        <constraint firstAttribute="height" constant="60" id="bW4-AA-bWb"/>
+                        <constraint firstItem="rWC-rg-3XN" firstAttribute="leading" secondItem="X1h-nY-yXF" secondAttribute="leading" constant="8" id="cbP-dR-kVu"/>
+                        <constraint firstItem="diU-wL-WfV" firstAttribute="leading" secondItem="rWC-rg-3XN" secondAttribute="trailing" constant="8" id="e14-W4-oNF"/>
+                        <constraint firstAttribute="bottom" secondItem="rWC-rg-3XN" secondAttribute="bottom" constant="8" id="ijd-Y1-Dbm"/>
+                        <constraint firstItem="diU-wL-WfV" firstAttribute="centerY" secondItem="X1h-nY-yXF" secondAttribute="centerY" id="keb-MX-MLj"/>
+                        <constraint firstItem="rHb-06-Fky" firstAttribute="width" secondItem="YTQ-rO-N6E" secondAttribute="width" id="m2h-rg-zSO"/>
+                        <constraint firstItem="rHb-06-Fky" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" constant="8" id="q0M-X7-DUG"/>
+                        <constraint firstItem="rWC-rg-3XN" firstAttribute="width" secondItem="rHb-06-Fky" secondAttribute="width" id="y4H-g4-93k"/>
+                    </constraints>
+                </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gag-J3-nMn">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="565"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zt0-2q-H1n" userLabel="ContentView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
@@ -53,44 +130,11 @@
                         <constraint firstAttribute="trailing" secondItem="Zt0-2q-H1n" secondAttribute="trailing" id="zEW-Ri-lf9"/>
                     </constraints>
                 </scrollView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X1h-nY-yXF" userLabel="Footer">
-                    <rect key="frame" x="0.0" y="565" width="375" height="102"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-rO-N6E" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                            <rect key="frame" x="20" y="14" width="335" height="28"/>
-                            <state key="normal" title="Share" image="icon_share"/>
-                            <connections>
-                                <action selector="shareTapped:" destination="-1" eventType="touchUpInside" id="gla-Jz-T6K"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-06-Fky" customClass="TertiaryButton" customModule="certificates" customModuleProvider="target">
-                            <rect key="frame" x="117" y="50" width="141" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="m7M-SU-Nkt"/>
-                            </constraints>
-                            <state key="normal" title="Verify this credential"/>
-                            <connections>
-                                <action selector="verifyTapped:" destination="-1" eventType="touchUpInside" id="C3Q-PG-9AX"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.94901960780000005" green="0.96078431369999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="YTQ-rO-N6E" firstAttribute="leading" secondItem="X1h-nY-yXF" secondAttribute="leading" constant="20" id="Ajt-H6-CQs"/>
-                        <constraint firstItem="rHb-06-Fky" firstAttribute="centerX" secondItem="X1h-nY-yXF" secondAttribute="centerX" id="AuR-Cx-JCo"/>
-                        <constraint firstAttribute="trailing" secondItem="YTQ-rO-N6E" secondAttribute="trailing" constant="20" id="V8l-x8-745"/>
-                        <constraint firstItem="YTQ-rO-N6E" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" constant="14" id="k2h-V6-CLm"/>
-                        <constraint firstItem="rHb-06-Fky" firstAttribute="top" secondItem="YTQ-rO-N6E" secondAttribute="bottom" constant="8" id="tnO-QV-vz9"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="YTQ-rO-N6E" firstAttribute="leading" secondItem="GiI-79-T71" secondAttribute="leading" constant="20" id="IHq-8j-QYX"/>
                 <constraint firstItem="GiI-79-T71" firstAttribute="trailing" secondItem="X1h-nY-yXF" secondAttribute="trailing" id="MNA-EQ-B0N"/>
                 <constraint firstAttribute="bottom" secondItem="X1h-nY-yXF" secondAttribute="bottom" id="NBo-Oj-Y9O"/>
-                <constraint firstItem="GiI-79-T71" firstAttribute="trailing" secondItem="YTQ-rO-N6E" secondAttribute="trailing" constant="20" id="cNa-X0-QQN"/>
-                <constraint firstItem="GiI-79-T71" firstAttribute="bottom" secondItem="rHb-06-Fky" secondAttribute="bottom" constant="8" id="eXn-a3-jFu"/>
                 <constraint firstItem="X1h-nY-yXF" firstAttribute="top" secondItem="Gag-J3-nMn" secondAttribute="bottom" id="fJz-MJ-5pX"/>
                 <constraint firstItem="Zt0-2q-H1n" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="jYy-qK-YJe"/>
                 <constraint firstItem="X1h-nY-yXF" firstAttribute="leading" secondItem="GiI-79-T71" secondAttribute="leading" id="phh-64-KXX"/>
@@ -103,6 +147,8 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_share" width="28" height="28"/>
+        <image name="icon_info" width="22" height="22"/>
+        <image name="icon_share" width="22" height="22"/>
+        <image name="icon_verify" width="22" height="22"/>
     </resources>
 </document>

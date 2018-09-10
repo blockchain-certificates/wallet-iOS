@@ -23,7 +23,7 @@ class MyPassphraseViewController : ScrollingOnboardingControllerBase, UIActivity
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AppDelegate.instance.styleApplicationDefault()
+        navigationController?.styleDefault()
     }
     
     override var defaultScrollViewInset : UIEdgeInsets {
@@ -60,9 +60,9 @@ class MyPassphraseViewController : ScrollingOnboardingControllerBase, UIActivity
         self.passphrase = passphrase
         let activity = UIActivityViewController(activityItems: [self], applicationActivities: nil)
         
-        AppDelegate.instance.styleApplicationAlternate()
-        
-        present(activity, animated: true) {}
+        present(activity, animated: true) {
+            self.navigationController?.styleAlternate()
+        }
     }
     
     // MARK: - Activity Item Source

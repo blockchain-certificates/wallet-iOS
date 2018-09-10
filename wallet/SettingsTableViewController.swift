@@ -10,6 +10,10 @@ import UIKit
 import Blockcerts
 import LocalAuthentication
 
+enum AuthErrors : Error {
+    case noAuthMethodAllowed
+}
+
 class SettingsCell : UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -57,8 +61,6 @@ class SettingsTableViewController: UITableViewController {
         clearsSelectionOnViewWillAppear = true
         title = Localizations.Settings
 
-        navigationController?.navigationBar.barTintColor = Style.Color.C3
-        navigationController?.navigationBar.isTranslucent = false
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
@@ -73,7 +75,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AppDelegate.instance.styleApplicationDefault()
+        navigationController?.styleDefault()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -113,7 +115,7 @@ class SettingsTableViewController: UITableViewController {
         case 0:
             text = Localizations.AddIssuer
         case 1:
-            text = Localizations.AddACredential
+            text = Localizations.AddCredential
         case 2:
             text = Localizations.MyPassphrase
         case 3:
@@ -124,13 +126,13 @@ class SettingsTableViewController: UITableViewController {
             text = Localizations.EmailLogs
         // The following are only visible in DEBUG builds
         case 6:
-            text = "Destroy passphrase & crash"
+            text = "[DEBUG] Destroy passphrase & crash"
         case 7:
-            text = "Delete all issuers & certificates"
+            text = "[DEBUG] Delete issuers & certificates"
         case 8:
-            text = "Destroy all data & crash"
+            text = "[DEBUG] Destroy all data & crash"
         case 9:
-            text = "Show onboarding"
+            text = "[DEBUG] Show onboarding"
         default:
             text = nil
         }
@@ -236,7 +238,7 @@ class SettingsTableViewController: UITableViewController {
         
         present(shareController, animated: true, completion: { [weak self] in
             self?.deselectRow()
-            AppDelegate.instance.styleApplicationAlternate()
+            self?.navigationController?.styleAlternate()
         })
     }
     
@@ -282,7 +284,7 @@ class SettingsTableViewController: UITableViewController {
                     return
                 }
                 
-                switch error {
+                switch error { //TODO: Fix
                 case AuthErrors.noAuthMethodAllowed:
                     DispatchQueue.main.async { [weak self] in
                         let alert = AlertViewController.create(title: Localizations.ProtectYourPassphrase,

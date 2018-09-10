@@ -42,7 +42,6 @@ class IssuerTableViewController: UITableViewController {
         
         tableView.register(UINib(nibName: "IssuerHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: issuerHeaderCellReuseIdentifier)
         tableView.register(UINib(nibName: "IssuerSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: issuerSummaryCellReuseIdentifier)
-        tableView.register(UINib(nibName: "NoCertificatesTableViewCell", bundle: nil), forCellReuseIdentifier: noCertificatesCellReuseIdentififer)
         tableView.register(UINib(nibName: "CertificateTitleTableViewCell", bundle: nil), forCellReuseIdentifier: certificateCellReuseIdentifier)
         tableView.register(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: buttonCellReuseIdentifier)
         tableView.register(UINib(nibName: "IssuerEmptyTableViewCell", bundle: nil), forCellReuseIdentifier: emptyCellReuseIdentifier)
@@ -76,7 +75,7 @@ class IssuerTableViewController: UITableViewController {
             return cell
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: buttonCellReuseIdentifier) as! ButtonTableViewCell
-            cell.button.setTitle(Localizations.AddACredential, for: .normal)
+            cell.button.setTitle(Localizations.AddCredential, for: .normal)
             cell.button.onTouchUpInside { [weak self] in
                 self?.delegate?.addCertificateTapped()
             }

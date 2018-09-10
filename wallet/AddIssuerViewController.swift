@@ -27,9 +27,6 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         super.viewDidLoad()
         
         title = Localizations.AddIssuer
-        
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.backgroundColor = Style.Color.C3
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         issuerURLField.delegate = self
@@ -193,9 +190,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             self?.dismissWebView()
         }
         let navigationController = UINavigationController(rootViewController: webController)
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.backgroundColor = Style.Color.C3
-        navigationController.navigationBar.barTintColor = Style.Color.C3
+        navigationController.styleDefault()
         webViewNavigationController = navigationController
         
         DispatchQueue.main.async {

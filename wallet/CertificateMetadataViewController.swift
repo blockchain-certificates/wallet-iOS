@@ -150,7 +150,6 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     override func loadView() {
         let view = UIView()
         
-        navigationController?.navigationBar.isTranslucent = false
         
         let tableView : UITableView = UITableView(frame: .zero, style: .plain)
         view.addSubview(tableView)
@@ -176,9 +175,10 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = Localizations.CredentialInfo
+        
         let dismissButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissSelf))
         navigationItem.leftBarButtonItem = dismissButton
-        navigationController?.navigationBar.barTintColor = Style.Color.C3
 
         tableView.separatorStyle = .none
         view.backgroundColor = Style.Color.C1
@@ -299,7 +299,7 @@ class CertificateMetadataViewController: BaseMetadataViewController {
     func promptForCertificateDeletion() {
         Logger.main.info("User has tapped the delete button on this certificate.")
         let certificateToDelete = certificate
-        let alert = AlertViewController.create(title: Localizations.DeleteCredentialAlertTitle,
+        let alert = AlertViewController.create(title: Localizations.Caution,
                                                message: Localizations.DeleteCredentialExplanation, icon: .warning)
 
         let okayButton = DangerButton(frame: .zero)

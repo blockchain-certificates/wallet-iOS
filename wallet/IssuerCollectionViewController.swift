@@ -65,9 +65,6 @@ class IssuerCollectionViewController: UICollectionViewController {
         layout.itemSize = CGSize(width: collectionView!.bounds.width - 40, height: 136)
         layout.sectionInset = UIEdgeInsetsMake(12, 20, 8, 20)
 
-        navigationController?.navigationBar.barTintColor = Style.Color.C3
-        navigationController?.navigationBar.isTranslucent = false
-
         // Load any existing issuers.
         loadIssuers(shouldReloadCollection: false)
         loadCertificates(shouldReloadCollection: false)
@@ -83,7 +80,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         loadCertificates(shouldReloadCollection: false)
         loadBackgroundView()
         reloadCollectionView()
-        AppDelegate.instance.styleApplicationDefault()
+        navigationController?.styleDefault()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -136,6 +133,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         let settingsTable = SettingsTableViewController()
         let controller = UINavigationController(rootViewController: settingsTable)
+        controller.styleDefault()
         present(controller, animated: true, completion: nil)
     }
     
@@ -610,9 +608,7 @@ extension IssuerCollectionViewController : ManagedIssuerDelegate {
             self?.dismissWebView()
         }
         let navigationController = UINavigationController(rootViewController: webController)
-        navigationController.navigationBar.isTranslucent = false
-        navigationController.navigationBar.backgroundColor = Style.Color.C3
-        navigationController.navigationBar.barTintColor = Style.Color.C3
+        navigationController.styleDefault()
         webViewNavigationController = navigationController
         
         DispatchQueue.main.async {

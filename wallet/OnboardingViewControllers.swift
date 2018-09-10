@@ -75,10 +75,7 @@ class LandingScreenViewController : OnboardingControllerBase {
         super.viewDidLoad()
         title = ""
         view.backgroundColor = Style.Color.C3
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = Style.Color.C3
+        navigationController?.styleHidden()
         
         let animation = LOTAnimationView(name: "welcome_lottie.json")
         animation.loopAnimation = true
@@ -176,9 +173,9 @@ class OnboardingBackupMethods : ScrollingOnboardingControllerBase, UIActivityIte
     }
     
     @IBAction func backupCopy() {
-        let alert = AlertViewController.createWarning(title: Localizations.AreYouSure, message: Localizations.EmailBackupWarning)
+        let alert = AlertViewController.create(title: Localizations.AreYouSure, message: Localizations.EmailBackupWarning, icon: .warning)
 
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DangerButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             alert.dismiss(animated: false, completion: nil)
@@ -221,7 +218,7 @@ class OnboardingBackupMethods : ScrollingOnboardingControllerBase, UIActivityIte
         copyButton.checked = hasCopiedPasscode
         continueButton.isEnabled = hasWrittenPasscode || hasCopiedPasscode
 
-        let title = continueButton.isEnabled ? Localizations.Done : Localizations.SelectOne
+        let title = continueButton.isEnabled ? Localizations.Done : Localizations.SelectOneButton
         continueButton.setTitle(title, for: .normal)
         continueButton.setTitle(title, for: .highlighted)
         continueButton.setTitle(title, for: .disabled)
@@ -273,8 +270,6 @@ class OnboardingManualBackup : ScrollingOnboardingControllerBase {
     }
 }
 
-
-
 class OnboardingCurrentUser : ScrollingOnboardingControllerBase, UITextViewDelegate {
     @IBOutlet weak var textView : UITextView!
     @IBOutlet weak var submitButton : UIButton!
@@ -300,8 +295,8 @@ class OnboardingCurrentUser : ScrollingOnboardingControllerBase, UITextViewDeleg
     }
     
     func presentErrorAlert() {
-        let alert = AlertViewController.create(title: Localizations.PassphraseInvalid,
-                                               message: Localizations.CheckPassphrase,
+        let alert = AlertViewController.create(title: Localizations.InvalidPassphrase,
+                                               message: Localizations.CheckPassphraseTryAgain,
                                                icon: .failure)
         
         let okayButton = SecondaryButton(frame: .zero)

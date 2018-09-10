@@ -19,6 +19,7 @@ class IssuerViewController: UIViewController {
         super.viewDidLoad()
         view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
+        title = Localizations.Issuer
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(displayIssuerInfo))
 
@@ -35,7 +36,6 @@ class IssuerViewController: UIViewController {
         
         certificateTableController.didMove(toParentViewController: self)
         
-        
         let views : [String : UIView] = [
             "table": certificateTableController.view
         ]
@@ -46,22 +46,23 @@ class IssuerViewController: UIViewController {
         NSLayoutConstraint.activate(horizontalTableConstraints)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if let tableView = certificateTableController.tableView,
-            let selectedPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selectedPath, animated: true)
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AppDelegate.instance.styleApplicationDefault()
+        navigationController?.styleDefault()
+        
         guard let managedIssuer = managedIssuer else { return }
         certificates = CertificateManager().loadCertificates().filter { certificate in
             return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
         }
         certificateTableController.certificates = certificates
         certificateTableController.tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let tableView = certificateTableController.tableView,
+            let selectedPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedPath, animated: true)
+        }
     }
     
     var activityIndicator: UIActivityIndicatorView?
@@ -101,6 +102,7 @@ class IssuerViewController: UIViewController {
         let controller = IssuerMetadataViewController(issuer: managedIssuer)
         controller.delegate = self
         let navController = UINavigationController(rootViewController: controller);
+        navController.styleDefault()
         present(navController, animated: true, completion: nil)
     }
     
@@ -115,12 +117,9 @@ class IssuerViewController: UIViewController {
             let controller = storyboard.instantiateViewController(withIdentifier: "addCredentialFromURL") as! AddCredentialURLViewController
             
             let navigationController = UINavigationController(rootViewController: controller)
-            navigationController.navigationBar.barTintColor = Style.Color.C3
-            navigationController.navigationBar.isTranslucent = false
             
             let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: controller, action: #selector(AddCredentialURLViewController.dismissModally))
             controller.navigationItem.rightBarButtonItem = cancelBarButton
-            
             controller.navigationItem.title = Localizations.AddCredential
             controller.presentedModally = true
             controller.successCallback = { [weak self] (certificate) in
@@ -137,7 +136,9 @@ class IssuerViewController: UIViewController {
             controller.delegate = self
             controller.modalPresentationStyle = .formSheet
             
-            self?.present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
+            self?.present(controller, animated: true) {
+                self?.navigationController?.styleAlternate()
+            }
         }))
         
         alertController.addAction(UIAlertAction(title: Localizations.Cancel, style: .cancel, handler: nil))

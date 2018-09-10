@@ -45,3 +45,34 @@ extension Certificate {
         return id.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
     }
 }
+
+protocol Localizable {
+    var localized: String { get }
+}
+
+extension String: Localizable {
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+}
+
+protocol XibLocalizable {
+    var LocalizedText: String? { get set }
+}
+
+extension UILabel: XibLocalizable {
+    @IBInspectable var LocalizedText: String? {
+        get { return nil }
+        set(key) {
+            text = key?.localized
+        }
+    }
+}
+extension UIButton: XibLocalizable {
+    @IBInspectable var LocalizedText: String? {
+        get { return nil }
+        set(key) {
+            setTitle(key?.localized, for: .normal)
+        }
+    }
+}

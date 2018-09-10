@@ -19,7 +19,7 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
     
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var verifyButton: UIButton!
+    @IBOutlet weak var footerView: UIView!
     
     private var inProgressRequest : CommonRequest?
     private let analytics = Analytics()
@@ -38,7 +38,7 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(displayCertificateInfo))
+        title = Localizations.Credential
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         verifier = CertificateVerifier(certificate: certificate.file)
@@ -47,11 +47,24 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         shareButton.isEnabled = certificate.assertion.uid != Identifiers.sampleCertificateUID
         renderedCertificateView.render(certificate: certificate)
         analytics.track(event: .viewed, certificate: certificate)
+        
+        footerView.layer.borderColor = Style.Color.C8.cgColor;
+        footerView.layer.borderWidth = 1;
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.styleAlternate()
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        navigationController?.styleDefault()
     }
     
     // MARK: - Verification
     
-    @IBAction func verifyTapped(_ sender: UIBarButtonItem) {
+    @IBAction func verifyTapped(_ sender: UIButton) {
         Logger.main.info("User tapped verify on this certificate.")
         analytics.track(event: .validated, certificate: certificate)
         
@@ -129,22 +142,23 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
     
     // MARK: - More Info
     
-    @objc func displayCertificateInfo() {
+    @IBAction func infoTapped(_ sender: UIButton) {
         Logger.main.info("More info tapped on the Certificate display.")
         
         let controller = CertificateMetadataViewController(certificate: certificate)
         controller.delegate = self
         let navController = UINavigationController(rootViewController: controller);
+        navController.styleDefault()
         present(navController, animated: true, completion: nil)
     }
     
     // MARK: - Share
     
-    @IBAction func shareTapped(_ sender: UIBarButtonItem) {
+    @IBAction func shareTapped(_ sender: UIButton) {
         Logger.main.info("Showing share certificate dialog for \(certificate.id)")
         
         // TODO: Guard against sample cert
-        let alertController = UIAlertController(title: nil, message: "Share this credential", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: nil, message: "Share this credential", preferredStyle: .actionSheet) //TODO: Localize
         let shareFileAction = UIAlertAction(title: Localizations.ShareFile, style: .default) { [weak self] _ in
             Logger.main.info("User chose to share certificate via file")
             self?.shareCertificateFile()

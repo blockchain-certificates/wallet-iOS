@@ -33,7 +33,8 @@ class AppVersion {
                 
                 let forceUpdate = appStoreVersion.compare(installedVersion, options: .numeric) == .orderedDescending
                 DispatchQueue.main.async {
-                    completion(forceUpdate)
+                    //completion(forceUpdate)
+                    completion(false)
                 }
             }
         }

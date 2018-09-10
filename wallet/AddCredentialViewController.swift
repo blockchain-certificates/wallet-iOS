@@ -15,13 +15,13 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = Localizations.AddACredential
+        navigationItem.title = Localizations.AddCredential
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AppDelegate.instance.styleApplicationDefault()
+        navigationController?.styleDefault()
     }
     
     // MARK: - Add Credential
@@ -41,8 +41,9 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
         controller.delegate = self
         controller.modalPresentationStyle = .formSheet
         
-        AppDelegate.instance.styleApplicationAlternate()
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true) {
+            self.navigationController?.styleAlternate()
+        }
     }
     
     func importCertificate(from data: Data?) {
