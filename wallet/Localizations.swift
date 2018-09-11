@@ -112,6 +112,9 @@ public struct Localizations {
     /// Base translation: Something went wrong preparing that file for sharing. Try again later.
     public static var ShareCredentialGenericError : String = NSLocalizedString("ShareCredentialGenericError", comment: "")
 
+    /// Base translation: One-time code
+    public static var OneTimeCode : String = NSLocalizedString("OneTimeCode", comment: "")
+
     /// Base translation: Something went wrong adding this issuer. Try again later.
     public static var AddIssuerGenericError : String = NSLocalizedString("AddIssuerGenericError", comment: "")
 
@@ -210,6 +213,9 @@ public struct Localizations {
     /// Base translation: This is the passphrase to your wallet. There is a backup on this phone, but you must create an extra one in case you switch devices.
     public static var PassphraseDescription : String = NSLocalizedString("PassphraseDescription", comment: "")
 
+    /// Base translation: Credential URL
+    public static var CredentialURL : String = NSLocalizedString("CredentialURL", comment: "")
+
     /// Base translation: Please check it and try again.
     public static var CheckPassphraseTryAgain : String = NSLocalizedString("CheckPassphraseTryAgain", comment: "")
 
@@ -304,6 +310,9 @@ public struct Localizations {
     /// Base translation: Verify
     public static var Verify : String = NSLocalizedString("Verify", comment: "")
 
+    /// Base translation: Issuer URL
+    public static var IssuerURL : String = NSLocalizedString("IssuerURL", comment: "")
+
     /// Base translation: Add Credential
     public static var AddCredential : String = NSLocalizedString("AddCredential", comment: "")
 
@@ -375,6 +384,9 @@ public struct Localizations {
 
     /// Base translation: Shared Address
     public static var SharedAddress : String = NSLocalizedString("SharedAddress", comment: "")
+
+    /// Base translation: Verification
+    public static var Verification : String = NSLocalizedString("Verification", comment: "")
 
     /// Base translation: Adding Credential
     public static var AddingCredential : String = NSLocalizedString("AddingCredential", comment: "")

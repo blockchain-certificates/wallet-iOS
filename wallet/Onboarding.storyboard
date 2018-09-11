@@ -252,6 +252,7 @@
                     <connections>
                         <outlet property="containerView" destination="kZe-ki-NCg" id="AqV-D3-Odd"/>
                         <outlet property="scrollView" destination="CO2-bx-nC6" id="ULU-tu-BxI"/>
+                        <outlet property="videoPlayButton" destination="qsh-TP-saI" id="KUu-t0-anY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nkP-a7-glE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -509,11 +510,11 @@
                         <viewControllerLayoutGuide type="bottom" id="G2a-o9-fAF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CJM-tU-YMm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9L-es-UFv">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqY-ow-1Di" userLabel="Container">
                                         <rect key="frame" x="20" y="0.0" width="374" height="372.33333333333331"/>
@@ -540,7 +541,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFl-gf-qas" customClass="CheckmarkButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="234.33333333333331" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="234.33333333333334" width="374" height="30.000000000000028"/>
                                                 <state key="normal" title="_Manual Hardcopy"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="ManualHardCopy"/>
@@ -862,6 +863,6 @@
         <image name="returning_video_background" width="1630" height="912"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f6t-HF-4A9"/>
+        <segue reference="aCt-1w-xH5"/>
     </inferredMetricsTieBreakers>
 </document>

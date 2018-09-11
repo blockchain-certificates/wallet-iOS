@@ -113,6 +113,8 @@
 		EE651190212369A0009AC972 /* CertificateVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE65118F212369A0009AC972 /* CertificateVerifier.swift */; };
 		EE6511922126053E009AC972 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6511912126053E009AC972 /* Reachability.swift */; };
 		EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */; };
+		EE8DD6AA2148705500795B0D /* CertificateVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8DD6A82148705500795B0D /* CertificateVerificationViewController.swift */; };
+		EE8DD6AB2148705500795B0D /* CertificateVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE8DD6A92148705500795B0D /* CertificateVerificationViewController.xib */; };
 		EEAF82B821384DC9008EC1FA /* MyPassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */; };
 		EEAF82BA21384E2C008EC1FA /* AddCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */; };
 		EEAF834E21470885008EC1FA /* Localizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF834D21470884008EC1FA /* Localizations.swift */; };
@@ -258,6 +260,8 @@
 		EE65118F212369A0009AC972 /* CertificateVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerifier.swift; sourceTree = "<group>"; };
 		EE6511912126053E009AC972 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCheck.swift; sourceTree = "<group>"; };
+		EE8DD6A82148705500795B0D /* CertificateVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerificationViewController.swift; sourceTree = "<group>"; };
+		EE8DD6A92148705500795B0D /* CertificateVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateVerificationViewController.xib; sourceTree = "<group>"; };
 		EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPassphraseViewController.swift; sourceTree = "<group>"; };
 		EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCredentialViewController.swift; sourceTree = "<group>"; };
 		EEAF82DA21405F90008EC1FA /* LaurineGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaurineGenerator.swift; path = Utils/LaurineGenerator.swift; sourceTree = "<group>"; };
@@ -400,6 +404,8 @@
 				83111B5B1DA4144E006B058D /* walletUITests-Bridging-Header.h */,
 				8388B8A91EDE15BF00B28A57 /* WebLoginViewController.swift */,
 				A92E89682049A93B0035460B /* welcome_lottie.json */,
+				EE8DD6A82148705500795B0D /* CertificateVerificationViewController.swift */,
+				EE8DD6A92148705500795B0D /* CertificateVerificationViewController.xib */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -706,6 +712,7 @@
 				83111B2D1DA4110C006B058D /* Main.storyboard in Resources */,
 				A9B997A2203F1CE000C05153 /* verify.html in Resources */,
 				836031C31E5E5064005B2D2E /* SampleCertificate.json in Resources */,
+				EE8DD6AB2148705500795B0D /* CertificateVerificationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -856,6 +863,7 @@
 				A961EBC72028BE020016CD1E /* Style.swift in Sources */,
 				8388B8AA1EDE15BF00B28A57 /* WebLoginViewController.swift in Sources */,
 				836031BD1E5651C9005B2D2E /* PrivacyViewController.swift in Sources */,
+				EE8DD6AA2148705500795B0D /* CertificateVerificationViewController.swift in Sources */,
 				838DE6CD1F3A771D00185A49 /* ManagedIssuer.swift in Sources */,
 				8318FC511DAD5337006A8FD5 /* IssuerCollectionViewController.swift in Sources */,
 				831EDC131ED5F7DA004F135B /* CoreBitcoinManager.swift in Sources */,

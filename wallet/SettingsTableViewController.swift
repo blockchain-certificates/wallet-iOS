@@ -64,7 +64,7 @@ class SettingsTableViewController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
-        navigationItem.leftBarButtonItem = cancelBarButton
+        navigationItem.rightBarButtonItem = cancelBarButton
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.backgroundColor = Style.Color.C2

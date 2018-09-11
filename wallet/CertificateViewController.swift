@@ -68,6 +68,11 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         Logger.main.info("User tapped verify on this certificate.")
         analytics.track(event: .validated, certificate: certificate)
         
+        let navController = NavigationController(rootViewController: CertificateVerificationViewController())
+        navController.styleDefault()
+        present(navController, animated: true, completion: nil)
+        return
+        
         // Check for the Sample Certificate
         guard certificate.assertion.uid != Identifiers.sampleCertificateUID else {
             Logger.main.info("User was trying to verify the sample certificate, so we showed them our usual dialog.")
