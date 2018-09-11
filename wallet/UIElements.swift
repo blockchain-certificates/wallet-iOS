@@ -18,6 +18,7 @@ class LabelC3T3B : UILabel {
     func commonInit() {
         font = labelFont
         textColor = color
+        adjustsFontForContentSizeCategory = true
     }
     
     override init(frame: CGRect) {
@@ -125,6 +126,7 @@ class ButtonBase : UIButton {
         layer.borderColor = strokeColor.cgColor
         
         titleLabel?.font = Style.Font.T3S
+        titleLabel?.adjustsFontForContentSizeCategory = true
         setTitleColor(textColor, for: .normal)
         setTitleColor(textColorHighlighted, for: .highlighted)
         setTitleColor(textColorDisabled, for: .disabled)

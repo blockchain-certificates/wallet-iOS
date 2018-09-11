@@ -64,6 +64,9 @@ public struct Localizations {
     /// Base translation: Enter the one-time code
     public static var EnterIssuerCode : String = NSLocalizedString("EnterIssuerCode", comment: "")
 
+    /// Base translation: Play intro video.
+    public static var PlayIntroVideo : String = NSLocalizedString("PlayIntroVideo", comment: "")
+
     /// Base translation: Show Passphrase
     public static var ShowPassphrase : String = NSLocalizedString("ShowPassphrase", comment: "")
 

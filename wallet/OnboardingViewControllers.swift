@@ -91,11 +91,15 @@ class LandingScreenViewController : OnboardingControllerBase {
 }
 
 class WelcomeReturningUsersViewController : ScrollingOnboardingControllerBase {
+    
+    @IBOutlet weak var videoPlayButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Style.Color.C1
         title = Localizations.Welcome
         UserDefaults.standard.set(true, forKey: UserDefaultsKey.hasReenteredPassphrase)
+        videoPlayButton.accessibilityLabel = Localizations.PlayIntroVideo
     }
     
     override func viewDidLayoutSubviews() {
