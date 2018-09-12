@@ -11,12 +11,6 @@ import WebKit
 
 class CertificateVerifier: NSObject, WKScriptMessageHandler {
     
-    enum Status: String {
-        case success = "success"
-        case failure = "failure"
-        case inProgress = "starting"
-    }
-    
     struct VerifierMessageType {
         static let blockchain = "blockchain"
         static let allSteps = "allSteps"
@@ -24,46 +18,11 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
         static let result = "result"
     }
     
-    class VerifierStep {
-        var code: String!
-        var label: String!
-        var labelPending: String?
-        var parentStep: String?
-        var status: Status?
-        var errorMessage: String?
-        
-        func set(dictionary: [String: Any]) {
-            code = dictionary["code"] as! String
-            label = dictionary["label"] as! String
-            
-            if let labelPending = dictionary["labelPending"] as? String {
-                self.labelPending = labelPending
-            }
-            
-            if let parentStep = dictionary["parentStep"] as? String {
-                self.parentStep = parentStep
-            }
-            
-            if let errorMessage = dictionary["errorMessage"] as? String {
-                self.errorMessage = errorMessage
-            }
-            
-            if let statusStr = dictionary["status"] as? String {
-                status = Status(rawValue: statusStr)
-            }
-        }
-    }
-    
     let certificate: Data
     var webView: WKWebView?
     var delegate: CertificateVerifierDelegate?
-    var blockchainLabel: String?
-    var steps = [String: VerifierStep]()
-    var substeps = [String: VerifierStep]()
-    
-    var cachePath: String {
-        return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
-    }
+    var blockchain: String?
+    var steps: [ParentStep] = []
     
     init(certificate: Data) {
         self.certificate = certificate
@@ -89,6 +48,10 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
         try! certString?.write(to: certPath, atomically: true, encoding: .utf8)
     }
     
+    var cachePath: String {
+        return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
+    }
+    
     func verify() {
         setup()
         
@@ -102,12 +65,6 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
         webView.configuration.userContentController.add(self, name: VerifierMessageType.result)
         
         self.webView = webView
-        
-        do {
-            // TODO: See if this is still necessary
-        } catch {
-            Logger.main.info("JSON parsing error during verification: \(error)")
-        }
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -115,46 +72,36 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
         
         switch message.name {
         case VerifierMessageType.blockchain:
-            blockchainLabel = "Verifying \(message.body)"
-            delegate?.identifyBlockchain()
+            blockchain = message.body as? String
+            let message = Localizations.VerificationInProgress(blockchain!)
+            delegate?.updateStatus(message: message, status: .verifying)
             
-        case VerifierMessageType.allSteps: // TODO: Write non-shit code
-            let stepArr = message.body as! [Any]
-            for stepObj in stepArr {
-                let stepDict = stepObj as! [String: Any]
-                let step = VerifierStep()
-                step.set(dictionary: stepDict)
-                steps[step.code] = step
-                
-                let substepArr = stepDict["subSteps"] as! [Any]
-                for substepObj in substepArr {
-                    let substepDict = substepObj as! [String: Any]
-                    let substep = VerifierStep()
-                    substep.set(dictionary: substepDict)
-                    substeps[substep.code] = substep
-                }
+        case VerifierMessageType.allSteps:
+            let topArray = message.body as! [[String: Any?]]
+            for step in topArray {
+                steps.append(ParentStep(rawObject: step))
             }
+            delegate?.notifySteps(steps: steps)
             
-        case VerifierMessageType.substepUpdate: // TODO: Write non-shit code
-            let substepObj = message.body as! [String: Any]
-            let substepObjKey = substepObj["code"] as! String
-            let substep = substeps[substepObjKey]!
-            substep.set(dictionary: substepObj)
-            substeps[substepObjKey] = substep
-            let step = steps[substep.parentStep!]!
-            delegate?.startSubstep(stepLabel: step.label, substepLabel: substep.label)
+        case VerifierMessageType.substepUpdate:
+            let message = message.body as! [String: Any?]
+            let substep = Step(rawObject: message)
+            delegate?.updateSubstepStatus(substep: substep)
             
         case VerifierMessageType.result:
             let message = message.body as! [String: String]
             let status = message["status"]!
-            let success = status == Status.success.rawValue
-            let errorMessage = message["errorMessage"]
-            delegate?.finish(success: success, errorMessage: errorMessage)
+            let success = (status == VerificationStatus.success.rawValue)
             
+            if success {
+                delegate?.updateStatus(message: Localizations.VerificationSuccess(blockchain!), status: .success)
+            } else {
+                delegate?.updateStatus(message: Localizations.VerificationFail, status: .failure)
+            }
+
         default:
             return
         }
-        
     }
     
     func cleanup() {
@@ -166,10 +113,50 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
     }
 }
 
+enum VerificationStatus: String {
+    case success = "success"
+    case failure = "failure"
+    case verifying = "starting"
+}
+
+class ParentStep {
+    var code: String!
+    var label: String?
+    var substeps: [Step] = []
+    
+    init(rawObject: [String: Any?]) {
+        code = rawObject["code"] as! String
+        label = rawObject["label"] as? String
+        
+        let stepArray = rawObject["subSteps"] as! [[String: Any?]]
+        for step in stepArray {
+            substeps.append(Step(rawObject: step))
+        }
+    }
+}
+
+class Step {
+    var code: String!
+    var label: String?
+    var parentStep: String?
+    var errorMessage: String?
+    var status: VerificationStatus?
+    
+    init(rawObject: [String: Any?]) {
+        code = rawObject["code"] as! String
+        label = rawObject["label"] as? String
+        parentStep = rawObject["parentStep"] as? String
+        errorMessage = rawObject["errorMessage"] as? String
+        
+        if let rawStatus = rawObject["status"] as? String {
+            status = VerificationStatus(rawValue: rawStatus)
+        }
+    }
+}
+
 protocol CertificateVerifierDelegate: class {
-    func identifyBlockchain()
-    func startSubstep(stepLabel: String, substepLabel: String)
-    func finishSubstep(success: Bool, errorMessage: String?)
-    func finish(success: Bool, errorMessage: String?)
+    func updateStatus(message: String, status: VerificationStatus)
+    func notifySteps(steps: [ParentStep])
+    func updateSubstepStatus(substep: Step)
 }
 

@@ -73,14 +73,14 @@
                                     <segue destination="BDX-GA-efs" kind="show" id="vkf-IZ-y29"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="blockcerts_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rU6-4J-hvL">
-                                <rect key="frame" x="87" y="35" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blockcerts_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rU6-4J-hvL">
+                                <rect key="frame" x="82" y="20" width="250" height="52"/>
                             </imageView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="58a-hx-ELF">
-                                <rect key="frame" x="145" y="128" width="124" height="512"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58a-hx-ELF">
+                                <rect key="frame" x="0.0" y="72" width="414" height="576"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEb-1p-Syt" userLabel="Play button">
-                                        <rect key="frame" x="20" y="20" width="84" height="84"/>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEb-1p-Syt" userLabel="Play button">
+                                        <rect key="frame" x="147" y="228" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="fsO-cp-LR3"/>
                                             <constraint firstAttribute="height" constant="120" id="kRU-Gt-UT1"/>
@@ -510,11 +510,11 @@
                         <viewControllerLayoutGuide type="bottom" id="G2a-o9-fAF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CJM-tU-YMm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9L-es-UFv">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqY-ow-1Di" userLabel="Container">
                                         <rect key="frame" x="20" y="0.0" width="374" height="372.33333333333331"/>
@@ -541,7 +541,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFl-gf-qas" customClass="CheckmarkButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="234.33333333333334" width="374" height="30.000000000000028"/>
+                                                <rect key="frame" x="0.0" y="234.33333333333331" width="374" height="30"/>
                                                 <state key="normal" title="_Manual Hardcopy"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="ManualHardCopy"/>
@@ -863,6 +863,6 @@
         <image name="returning_video_background" width="1630" height="912"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aCt-1w-xH5"/>
+        <segue reference="f6t-HF-4A9"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,21 +10,15 @@ import UIKit
 import Blockcerts
 import JSONLD
 
-class CertificateViewController: UIViewController, CertificateVerifierDelegate {
-    
-    var delegate : CertificateViewControllerDelegate?
-    
-    public let certificate: Certificate
-    private let bitcoinManager = CoreBitcoinManager()
+class CertificateViewController: UIViewController {
     
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var footerView: UIView!
     
-    private var inProgressRequest : CommonRequest?
-    private let analytics = Analytics()
-    var progressAlert: AlertViewController?
-    var verifier: CertificateVerifier!
+    let certificate: Certificate
+    let analytics = Analytics()
+    var delegate : CertificateViewControllerDelegate?
     
     init(certificate: Certificate) {
         self.certificate = certificate
@@ -40,9 +34,6 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         
         title = Localizations.Credential
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        verifier = CertificateVerifier(certificate: certificate.file)
-        verifier.delegate = self
         
         shareButton.isEnabled = certificate.assertion.uid != Identifiers.sampleCertificateUID
         renderedCertificateView.render(certificate: certificate)
@@ -62,87 +53,14 @@ class CertificateViewController: UIViewController, CertificateVerifierDelegate {
         navigationController?.styleDefault()
     }
     
-    // MARK: - Verification
-    
     @IBAction func verifyTapped(_ sender: UIButton) {
         Logger.main.info("User tapped verify on this certificate.")
         analytics.track(event: .validated, certificate: certificate)
         
-        let navController = NavigationController(rootViewController: CertificateVerificationViewController())
+        let verificationController = CertificateVerificationViewController(certificate: certificate)
+        let navController = NavigationController(rootViewController: verificationController)
         navController.styleDefault()
         present(navController, animated: true, completion: nil)
-        return
-        
-        // Check for the Sample Certificate
-        guard certificate.assertion.uid != Identifiers.sampleCertificateUID else {
-            Logger.main.info("User was trying to verify the sample certificate, so we showed them our usual dialog.")
-            
-            let alert = UIAlertController(
-                title: Localizations.SampleCredential,
-                message: Localizations.SampleCredentialVerificationImpossible,
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: Localizations.OK, style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-            return
-        }
-
-        // Check for connectivity
-        if !Reachability.isNetworkReachable() {
-            let alert = AlertViewController.createNetworkWarning()
-            present(alert, animated: false, completion: nil)
-            return
-        }
-        
-        progressAlert = AlertViewController.createProgress(title: "[Initializing]") //TODO: Localize
-        let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(Localizations.Cancel, for: .normal)
-        cancelButton.onTouchUpInside { [weak self] in
-            self?.verifier.cancel()
-            self?.progressAlert!.dismiss(animated: false, completion: nil)
-        }
-        progressAlert!.set(verificationButtons: [cancelButton])
-        present(progressAlert!, animated: false, completion: nil)
-
-        verifier.verify()
-    }
-    
-    // MARK: - CertificateVerifierDelegate
-    
-    func identifyBlockchain() {
-        progressAlert?.set(title: verifier.blockchainLabel!)
-    }
-    
-    func startSubstep(stepLabel: String, substepLabel: String) {
-        progressAlert?.type = .verification
-        progressAlert?.set(header: verifier.blockchainLabel!)
-        progressAlert?.set(title: stepLabel)
-        progressAlert?.set(message: substepLabel)
-    }
-    
-    func finishSubstep(success: Bool, errorMessage: String?) {
-        //
-    }
-    
-    func finish(success: Bool, errorMessage: String?) {
-        progressAlert?.type = .normal
-        let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(Localizations.Close, for: .normal)
-        cancelButton.onTouchUpInside { [weak self] in
-            self?.verifier.cancel()
-            self?.progressAlert!.dismiss(animated: false, completion: nil)
-        }
-        progressAlert!.set(buttons: [cancelButton])
-        
-        if success {
-            progressAlert?.icon = .success
-            progressAlert?.set(title: "Verified!") //TODO: Localize
-            progressAlert?.set(message: "Your credential has been successfully verified.") //TODO: Localize
-        } else {
-            progressAlert?.icon = .failure
-            progressAlert?.set(title: "Verification Fail") //TODO: Localize
-            progressAlert?.set(message: errorMessage!)
-        }
     }
     
     // MARK: - More Info

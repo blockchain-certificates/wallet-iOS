@@ -51,6 +51,9 @@ struct Style {
         
         /// C14: button disabled text
         static let C14 = UIColor(hexString: "#7CE4B4")
+        
+        /// C15: Verification status bar failed state
+        static let C15 = UIColor(hexString: "#FDE6E6")
     }
 
     struct Font {

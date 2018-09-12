@@ -130,14 +130,17 @@ public struct Localizations {
     /// Base translation: Missing Issuer
     public static var MissingIssuer : String = NSLocalizedString("MissingIssuer", comment: "")
 
+    /// Base translation: This credential is not verified. Please contact the issuer.
+    public static var VerificationFail : String = NSLocalizedString("VerificationFail", comment: "")
+
     /// Base translation: New User
     public static var NewUser : String = NSLocalizedString("NewUser", comment: "")
 
-    /// Base translation: Continue
-    public static var Continue : String = NSLocalizedString("Continue", comment: "")
-
     /// Base translation: Passphrase
     public static var Passphrase : String = NSLocalizedString("Passphrase", comment: "")
+
+    /// Base translation: Continue
+    public static var Continue : String = NSLocalizedString("Continue", comment: "")
 
     /// Base translation: In order to add this issuer, you must have the latest version of Blockerts Wallet.
     public static var AppUpdateAlertMessage : String = NSLocalizedString("AppUpdateAlertMessage", comment: "")
@@ -219,6 +222,9 @@ public struct Localizations {
     /// Base translation: Please check it and try again.
     public static var CheckPassphraseTryAgain : String = NSLocalizedString("CheckPassphraseTryAgain", comment: "")
 
+    /// Base translation: You've already imported that file. Want to view it?
+    public static var FileAlreadyImportedExplanation : String = NSLocalizedString("FileAlreadyImportedExplanation", comment: "")
+
     /// Base translation: Couldn't delete file
     public static var DeleteFileError : String = NSLocalizedString("DeleteFileError", comment: "")
 
@@ -284,7 +290,7 @@ public struct Localizations {
     /// Base translation: Issuer
     public static var Issuer : String = NSLocalizedString("Issuer", comment: "")
 
-    /// Base translation: You've already imported that file. Want to view it?
+    /// Base translation: File already imported
     public static var FileAlreadyImported : String = NSLocalizedString("FileAlreadyImported", comment: "")
 
     /// Base translation: Passphrase Generated!
@@ -343,6 +349,11 @@ public struct Localizations {
     /// Base translation: Done
     public static var Done : String = NSLocalizedString("Done", comment: "")
 
+    /// Base translation: This is a valid %@ credential.
+    public static func VerificationSuccess(_ value1 : String) -> String {
+        return String(format: NSLocalizedString("VerificationSuccess", comment: ""), value1)
+    }
+
     /// Base translation: You may add an issuer manually by visiting Settings and tapping Add an Issuer.
     public static var ReturningUserFooter : String = NSLocalizedString("ReturningUserFooter", comment: "")
 
@@ -390,6 +401,11 @@ public struct Localizations {
 
     /// Base translation: Adding Credential
     public static var AddingCredential : String = NSLocalizedString("AddingCredential", comment: "")
+
+    /// Base translation: Verifying %@ Credential... 
+    public static func VerificationInProgress(_ value1 : String) -> String {
+        return String(format: NSLocalizedString("VerificationInProgress", comment: ""), value1)
+    }
 
     /// Base translation: Info
     public static var Info : String = NSLocalizedString("Info", comment: "")

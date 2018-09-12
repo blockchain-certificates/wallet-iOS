@@ -482,7 +482,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         alert.type = .normal
         alert.set(title: Localizations.FileAlreadyImported)
-        alert.set(message: Localizations.FileAlreadyImported)
+        alert.set(message: Localizations.FileAlreadyImportedExplanation)
         
         let okayButton = SecondaryButton(frame: .zero)
         okayButton.setTitle(Localizations.View, for: .normal)
