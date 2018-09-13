@@ -286,8 +286,8 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="EnterPassphrase"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="_Please type or paste your passphrase here:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3k-Qr-aZc" customClass="LabelC6T3R" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="166" y="53" width="42" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Please type or paste your passphrase here:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3k-Qr-aZc" customClass="LabelC6T3R" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="49" width="374" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -767,8 +767,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxr-dN-nYu" userLabel="Container">
                                         <rect key="frame" x="20" y="0.0" width="374" height="200"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G2Y-qF-nOc" userLabel="Passphrase container">
-                                                <rect key="frame" x="8" y="69" width="374" height="44.333333333333343"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2Y-qF-nOc" userLabel="Passphrase container">
+                                                <rect key="frame" x="0.0" y="57" width="374" height="85"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pass phrase generate electricity dynamo femur shake fries joystick corgi jingle wall sticker sandwich soup pencil coffee" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztA-az-KD6" customClass="LabelC1T4S" customModule="certificates" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="12" width="342" height="61"/>

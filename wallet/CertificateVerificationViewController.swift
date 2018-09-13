@@ -12,6 +12,8 @@ import Blockcerts
 class CertificateVerificationViewController: UIViewController, CertificateVerifierDelegate {
 
     @IBOutlet weak var bannerView: UILabel!
+    @IBOutlet weak var verificationView: CertificateVerificationView!
+    @IBOutlet weak var doneButton: SecondaryButton!
     
     let certificate: Certificate
     var verifier: CertificateVerifier!
@@ -37,6 +39,7 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
         verifier.delegate = self
         
         bannerView.isHidden = true
+        doneButton.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +48,10 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
     }
     
     @objc func closeVerification(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func doneTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -85,20 +92,22 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
             bannerView.backgroundColor = Style.Color.C5
             
         case .success:
+            //doneButton.isHidden = false
             bannerView.textColor = Style.Color.C3
             bannerView.backgroundColor = Style.Color.C14
             
         case .failure:
+            //doneButton.isHidden = false
             bannerView.textColor = Style.Color.C9
             bannerView.backgroundColor = Style.Color.C15
         }
     }
     
-    func notifySteps(steps: [ParentStep]) {
-        //
+    func notifySteps(steps: [VerificationStep]) {
+        verificationView.setSteps(steps: steps)
     }
     
-    func updateSubstepStatus(substep: Step) {
-        //
+    func updateSubstepStatus(substep: VerificationSubstep) {
+        verificationView.setSubstepComplete(substep: substep)
     }
 }

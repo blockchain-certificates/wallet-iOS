@@ -22,7 +22,6 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
     var webView: WKWebView?
     var delegate: CertificateVerifierDelegate?
     var blockchain: String?
-    var steps: [ParentStep] = []
     
     init(certificate: Data) {
         self.certificate = certificate
@@ -78,15 +77,19 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
             
         case VerifierMessageType.allSteps:
             let topArray = message.body as! [[String: Any?]]
+            var allSteps: [VerificationStep] = []
             for step in topArray {
-                steps.append(ParentStep(rawObject: step))
+                allSteps.append(VerificationStep(rawObject: step))
             }
-            delegate?.notifySteps(steps: steps)
+            delegate?.notifySteps(steps: allSteps)
             
         case VerifierMessageType.substepUpdate:
             let message = message.body as! [String: Any?]
-            let substep = Step(rawObject: message)
-            delegate?.updateSubstepStatus(substep: substep)
+            let substep = VerificationSubstep(rawObject: message)
+            
+            if substep.status! != .verifying {
+                delegate?.updateSubstepStatus(substep: substep)
+            }
             
         case VerifierMessageType.result:
             let message = message.body as! [String: String]
@@ -119,10 +122,10 @@ enum VerificationStatus: String {
     case verifying = "starting"
 }
 
-class ParentStep {
+class VerificationStep {
     var code: String!
     var label: String?
-    var substeps: [Step] = []
+    var substeps: [VerificationSubstep] = []
     
     init(rawObject: [String: Any?]) {
         code = rawObject["code"] as! String
@@ -130,12 +133,12 @@ class ParentStep {
         
         let stepArray = rawObject["subSteps"] as! [[String: Any?]]
         for step in stepArray {
-            substeps.append(Step(rawObject: step))
+            substeps.append(VerificationSubstep(rawObject: step))
         }
     }
 }
 
-class Step {
+class VerificationSubstep {
     var code: String!
     var label: String?
     var parentStep: String?
@@ -156,7 +159,7 @@ class Step {
 
 protocol CertificateVerifierDelegate: class {
     func updateStatus(message: String, status: VerificationStatus)
-    func notifySteps(steps: [ParentStep])
-    func updateSubstepStatus(substep: Step)
+    func notifySteps(steps: [VerificationStep])
+    func updateSubstepStatus(substep: VerificationSubstep)
 }
 

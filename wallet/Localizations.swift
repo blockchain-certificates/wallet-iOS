@@ -381,6 +381,9 @@ public struct Localizations {
     /// Base translation: Issuer Name
     public static var IssuerName : String = NSLocalizedString("IssuerName", comment: "")
 
+    /// Base translation: Verified
+    public static var Verified : String = NSLocalizedString("Verified", comment: "")
+
     /// Base translation: Authenticate to replace your secure passphrase.
     public static var AuthenticateReplacePassphrase : String = NSLocalizedString("AuthenticateReplacePassphrase", comment: "")
 
