@@ -86,10 +86,7 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
         case VerifierMessageType.substepUpdate:
             let message = message.body as! [String: Any?]
             let substep = VerificationSubstep(rawObject: message)
-            
-            if substep.status! != .verifying {
-                delegate?.updateSubstepStatus(substep: substep)
-            }
+            delegate?.updateSubstepStatus(substep: substep)
             
         case VerifierMessageType.result:
             let message = message.body as! [String: String]

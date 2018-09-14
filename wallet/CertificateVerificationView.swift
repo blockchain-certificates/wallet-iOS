@@ -10,6 +10,8 @@ import UIKit
 
 class CertificateVerificationView: UIView {
     
+    let animationKey = "rotationAnimation"
+    
     let labelLeftMargin: CGFloat = 53.0
     let stepLabelVerticalMargin: CGFloat = 14.0
     let substepLabelVerticalMargin: CGFloat = 7.0
@@ -44,7 +46,6 @@ class CertificateVerificationView: UIView {
             let stepLabel = LabelC7T3S()
             stepLabel.text = step.label
             stepLabel.numberOfLines = 0
-            stepLabel.sizeToFit()
             addSubview(stepLabel)
             stepLabels[step.code] = stepLabel
             
@@ -52,7 +53,6 @@ class CertificateVerificationView: UIView {
                 let substepLabel = LabelC7T2R()
                 substepLabel.text = substep.label
                 substepLabel.numberOfLines = 0
-                substepLabel.sizeToFit()
                 addSubview(substepLabel)
                 substepLabels[substep.code] = substepLabel
                 parentStepCodes[substep.code] = substep.parentStep
@@ -61,55 +61,79 @@ class CertificateVerificationView: UIView {
         setNeedsDisplay()
     }
     
-    func setSubstepComplete(substep: VerificationSubstep) {
-        currentSubstepCode = substep.code
+    func updateSubstepStatus(substep: VerificationSubstep) {
         
         let stepCode = parentStepCodes[substep.code]!
         let stepLabel = stepLabels[stepCode]!
-        stepLabel.font = Style.Font.T3B
-        stepLabel.textColor = Style.Color.C6
-        
         let substepLabel = substepLabels[substep.code]!
-        substepLabel.font = Style.Font.T2S
+        let stepIcon = stepIcons[stepCode]!
         
-        if substep.status == .success {
-            substepLabel.textColor = Style.Color.C6
+        if substep.status == .verifying {
+            
+            stepLabel.font = Style.Font.T3B
+            stepLabel.textColor = Style.Color.C6
+            stepIcon.image = UIImage(named: "verify_step_inprogress")
+            animateStepIcon(stepIcon)
+            
         } else {
-            substepLabel.textColor = Style.Color.C9
+            currentSubstepCode = substep.code
             
-            substepFailCode = substep.code
-            substepFailIcon = UIImageView(image: UIImage(named: "verify_substep_fail"))
-            addSubview(substepFailIcon!)
-            
-            substepFailLabel = LabelC9T2B()
-            substepFailLabel!.text = substep.errorMessage
-            substepFailLabel!.sizeToFit()
-            addSubview(substepFailLabel!)
-        }
-        
-        if isLastSubstep(stepCode: stepCode, substepCode: substep.code) {
-            let stepIcon = stepIcons[stepCode]!
+            substepLabel.font = Style.Font.T2S
             
             if substep.status == .success {
-                stepIcon.image = UIImage(named: "verify_step_success")
+                substepLabel.textColor = Style.Color.C6
             } else {
+                substepLabel.textColor = Style.Color.C9
+                
+                substepFailCode = substep.code
+                substepFailIcon = UIImageView(image: UIImage(named: "verify_substep_fail"))
+                addSubview(substepFailIcon!)
+                
+                substepFailLabel = LabelC9T2B()
+                substepFailLabel!.numberOfLines = 0
+                substepFailLabel!.text = substep.errorMessage
+                addSubview(substepFailLabel!)
+                
+                stepIcon.layer.removeAllAnimations()
                 stepIcon.image = UIImage(named: "verify_step_fail")
             }
             
-            // Credential is successfully verified
-            if substep.status == .success, stepCode == allSteps![allSteps!.count - 1].code {
-                successIcon = UIImageView(image: UIImage(named: "verify_success"))
-                addSubview(successIcon!)
+            if isLastSubstepInStep(stepCode: stepCode, substepCode: substep.code) {
+                if substep.status == .success {
+                    stepIcon.layer.removeAllAnimations()
+                    stepIcon.image = UIImage(named: "verify_step_success")
+                }
                 
-                successLabel = LabelC6T3B()
-                successLabel!.text = Localizations.Verified
-                successLabel!.sizeToFit()
-                addSubview(successLabel!)
+                // Credential is successfully verified
+                if substep.status == .success, stepCode == allSteps![allSteps!.count - 1].code {
+                    successIcon = UIImageView(image: UIImage(named: "verify_success"))
+                    addSubview(successIcon!)
+                    
+                    successLabel = LabelC6T3B()
+                    successLabel!.text = Localizations.Verified
+                    addSubview(successLabel!)
+                }
             }
+        }
+        setNeedsLayout()
+        //layoutIfNeeded()
+        setNeedsDisplay()
+    }
+    
+    func animateStepIcon(_ stepIcon: UIImageView) {
+        let animationKey = "rotationAnimation"
+        
+        if stepIcon.layer.animation(forKey: animationKey) == nil {
+            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+            rotationAnimation.toValue = NSNumber(value: .pi * 2.0)
+            rotationAnimation.duration = 1.2
+            rotationAnimation.isCumulative = true
+            rotationAnimation.repeatCount = .infinity
+            stepIcon.layer.add(rotationAnimation, forKey: animationKey)
         }
     }
     
-    func isLastSubstep(stepCode: String, substepCode: String) -> Bool {
+    func isLastSubstepInStep(stepCode: String, substepCode: String) -> Bool {
         for step in allSteps! {
             if step.code == stepCode {
                 for (i, substep) in step.substeps.enumerated() {
@@ -165,6 +189,7 @@ class CertificateVerificationView: UIView {
         
         var y: CGFloat = 0.0
         var substepLabelsIndex = 0
+        let labelWidth = frame.size.width - labelLeftMargin
         
         for (i, step) in allSteps.enumerated() {
             
@@ -174,10 +199,10 @@ class CertificateVerificationView: UIView {
             
             // Position step label
             let stepLabel = stepLabels[step.code]!
-            stepLabel.frame = CGRect.init(x: labelLeftMargin,
-                                          y: y,
-                                          width: frame.size.width - labelLeftMargin,
-                                          height: stepLabel.frame.size.height)
+            stepLabel.frame = CGRect(x: labelLeftMargin,
+                                     y: y,
+                                     width: labelWidth,
+                                     height: stepLabel.text!.height(withConstrainedWidth: labelWidth, font: stepLabel.font))
             y += stepLabel.frame.size.height + stepLabelVerticalMargin
             
             // Position step icons
@@ -185,16 +210,16 @@ class CertificateVerificationView: UIView {
             stepIcon.center = CGPoint(x: trackCenterX,
                                       y: stepLabel.center.y)
             
-            
             // Position substep labels
             for (j, substep) in step.substeps.enumerated() {
+                
                 let substepLabel = substepLabels[substep.code]!
                 substepLabelsIndex += 1
                 
-                substepLabel.frame = CGRect.init(x: labelLeftMargin,
-                                                 y: y,
-                                                 width: frame.size.width - labelLeftMargin,
-                                                 height: substepLabel.frame.size.height)
+                substepLabel.frame = CGRect(x: labelLeftMargin,
+                                            y: y,
+                                            width: labelWidth,
+                                            height: substepLabel.text!.height(withConstrainedWidth: labelWidth, font: substepLabel.font))
                 
                 y += substepLabel.frame.size.height
                 
@@ -204,17 +229,20 @@ class CertificateVerificationView: UIView {
                 
                 // Position substep fail icon and label
                 if let substepFailCode = substepFailCode, substepFailCode == substep.code {
+                    trackProgressHeight = substepLabel.center.y
+                    
                     if let substepFailIcon = substepFailIcon {
-                        substepFailIcon.center = CGPoint(x: trackCenterX, y: stepLabel.center.y)
+                        substepFailIcon.center = CGPoint(x: trackCenterX, y: substepLabel.center.y)
                     }
                     
                     if let errorLabel = substepFailLabel {
                         y += substepLabelVerticalMargin
                         
-                        errorLabel.frame = CGRect.init(x: labelLeftMargin,
-                                                       y: y,
-                                                       width: frame.size.width - labelLeftMargin,
-                                                       height: errorLabel.frame.size.height)
+                        errorLabel.frame = CGRect(x: labelLeftMargin,
+                                                  y: y,
+                                                  width: labelWidth,
+                                                  height: errorLabel.text!.height(withConstrainedWidth: labelWidth, font: errorLabel.font))
+                        y += errorLabel.frame.size.height
                     }
                 }
                 
@@ -230,10 +258,10 @@ class CertificateVerificationView: UIView {
                 if let successIcon = successIcon, let successLabel = successLabel {
                     y += stepLabelVerticalMargin
                     
-                    successLabel.frame = CGRect.init(x: labelLeftMargin,
-                                                     y: y,
-                                                     width: frame.size.width - labelLeftMargin,
-                                                     height: successLabel.frame.size.height)
+                    successLabel.frame = CGRect(x: labelLeftMargin,
+                                                y: y,
+                                                width: labelWidth,
+                                                height: successLabel.text!.height(withConstrainedWidth: labelWidth, font: successLabel.font))
                     
                     successIcon.center = CGPoint(x: trackCenterX, y: successLabel.center.y)
                     y += successIcon.frame.size.height

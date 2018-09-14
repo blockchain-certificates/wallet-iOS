@@ -11,7 +11,8 @@ import Blockcerts
 
 class CertificateVerificationViewController: UIViewController, CertificateVerifierDelegate {
 
-    @IBOutlet weak var bannerView: UILabel!
+    @IBOutlet weak var bannerView: UIView!
+    @IBOutlet weak var bannerLabel: UILabel!
     @IBOutlet weak var verificationView: CertificateVerificationView!
     @IBOutlet weak var doneButton: SecondaryButton!
     
@@ -39,6 +40,7 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
         verifier.delegate = self
         
         bannerView.isHidden = true
+        bannerLabel.isHidden = true
         doneButton.isHidden = true
     }
     
@@ -84,21 +86,22 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
     
     func updateStatus(message: String, status: VerificationStatus) {
         bannerView.isHidden = false
-        bannerView.text = message
+        bannerLabel.isHidden = false
+        bannerLabel.text = message
         
         switch status {
         case .verifying:
-            bannerView.textColor = Style.Color.C1
+            bannerLabel.textColor = Style.Color.C1
             bannerView.backgroundColor = Style.Color.C5
             
         case .success:
             //doneButton.isHidden = false
-            bannerView.textColor = Style.Color.C3
+            bannerLabel.textColor = Style.Color.C3
             bannerView.backgroundColor = Style.Color.C14
             
         case .failure:
             //doneButton.isHidden = false
-            bannerView.textColor = Style.Color.C9
+            bannerLabel.textColor = Style.Color.C9
             bannerView.backgroundColor = Style.Color.C15
         }
     }
@@ -108,6 +111,6 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
     }
     
     func updateSubstepStatus(substep: VerificationSubstep) {
-        verificationView.setSubstepComplete(substep: substep)
+        verificationView.updateSubstepStatus(substep: substep)
     }
 }
