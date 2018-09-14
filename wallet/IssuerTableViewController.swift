@@ -101,7 +101,7 @@ class IssuerTableViewController: UITableViewController {
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
         let label = LabelC6T2B()
-        label.text = certificates.count == 1 ? Localizations.OneCredential :  Localizations.MultipleCredentials(String(certificates.count))
+        label.text = certificates.count == 1 ? Localizations.YouHaveOneCredential :  Localizations.YouHaveMultipleCredentials(String(certificates.count))
         label.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.addSubview(label)
