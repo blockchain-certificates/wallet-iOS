@@ -81,7 +81,7 @@ class CertificateViewController: UIViewController {
         Logger.main.info("Showing share certificate dialog for \(certificate.id)")
         
         // TODO: Guard against sample cert
-        let alertController = UIAlertController(title: nil, message: "Share this credential", preferredStyle: .actionSheet) //TODO: Localize
+        let alertController = UIAlertController(title: Localizations.ShareCredential, message: nil, preferredStyle: .actionSheet)
         let shareFileAction = UIAlertAction(title: Localizations.ShareFile, style: .default) { [weak self] _ in
             Logger.main.info("User chose to share certificate via file")
             self?.shareCertificateFile()

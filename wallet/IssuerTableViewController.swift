@@ -100,10 +100,8 @@ class IssuerTableViewController: UITableViewController {
         let containerView = UIView()
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
-        let credentialsCount = certificates.count == 1 ? "1 credential" : "\(certificates.count) credentials"
-        
         let label = LabelC6T2B()
-        label.text = "You have \(credentialsCount)"
+        label.text = certificates.count == 1 ? Localizations.OneCredential :  Localizations.MultipleCredentials(String(certificates.count))
         label.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.addSubview(label)

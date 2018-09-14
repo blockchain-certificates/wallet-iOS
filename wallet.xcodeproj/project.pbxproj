@@ -264,6 +264,7 @@
 		EE8DD6A82148705500795B0D /* CertificateVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerificationViewController.swift; sourceTree = "<group>"; };
 		EE8DD6A92148705500795B0D /* CertificateVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateVerificationViewController.xib; sourceTree = "<group>"; };
 		EE8DD6AC21497C1600795B0D /* CertificateVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerificationView.swift; sourceTree = "<group>"; };
+		EE8DD6AE214C531B00795B0D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EEAF82B721384DC9008EC1FA /* MyPassphraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPassphraseViewController.swift; sourceTree = "<group>"; };
 		EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCredentialViewController.swift; sourceTree = "<group>"; };
 		EEAF82DA21405F90008EC1FA /* LaurineGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaurineGenerator.swift; path = Utils/LaurineGenerator.swift; sourceTree = "<group>"; };
@@ -672,6 +673,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				es,
 			);
 			mainGroup = 83111B1B1DA4110C006B058D;
 			productRefGroup = 83111B251DA4110C006B058D /* Products */;
@@ -974,6 +976,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				EEAF835A21471542008EC1FA /* Base */,
+				EE8DD6AE214C531B00795B0D /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

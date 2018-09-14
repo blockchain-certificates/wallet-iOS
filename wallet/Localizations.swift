@@ -160,6 +160,9 @@ public struct Localizations {
     /// Base translation: Unable to save this passphrase.
     public static var PassphraseSaveFail : String = NSLocalizedString("PassphraseSaveFail", comment: "")
 
+    /// Base translation: Share This Credential
+    public static var ShareCredential : String = NSLocalizedString("ShareCredential", comment: "")
+
     /// Base translation: Issuer responded, but didn't include the "%@" property
     public static func IssuerMissingProperty(_ value1 : String) -> String {
         return String(format: NSLocalizedString("IssuerMissingProperty", comment: ""), value1)
@@ -266,6 +269,9 @@ public struct Localizations {
     /// Base translation: You will receive an email when an issuer is ready to be added. Follow the link in the email to complete the process.
     public static var NewUserBody : String = NSLocalizedString("NewUserBody", comment: "")
 
+    /// Base translation: You have 1 credential
+    public static var YouHaveOneCredential : String = NSLocalizedString("YouHaveOneCredential", comment: "")
+
     /// Base translation: This is a low-security backup method. Do you want to continue?
     public static var EmailBackupWarning : String = NSLocalizedString("EmailBackupWarning", comment: "")
 
@@ -290,6 +296,9 @@ public struct Localizations {
     /// Base translation: Issuer
     public static var Issuer : String = NSLocalizedString("Issuer", comment: "")
 
+    /// Base translation: Please type or paste the credential URL:
+    public static var CopyCredentialURL : String = NSLocalizedString("CopyCredentialURL", comment: "")
+
     /// Base translation: File already imported
     public static var FileAlreadyImported : String = NSLocalizedString("FileAlreadyImported", comment: "")
 
@@ -312,6 +321,11 @@ public struct Localizations {
 
     /// Base translation: Delete
     public static var Delete : String = NSLocalizedString("Delete", comment: "")
+
+    /// Base translation: You have %@ credentials
+    public static func YouHaveMultipleCredentials(_ value1 : String) -> String {
+        return String(format: NSLocalizedString("YouHaveMultipleCredentials", comment: ""), value1)
+    }
 
     /// Base translation: Verify
     public static var Verify : String = NSLocalizedString("Verify", comment: "")
@@ -348,6 +362,9 @@ public struct Localizations {
 
     /// Base translation: Done
     public static var Done : String = NSLocalizedString("Done", comment: "")
+
+    /// Base translation: Choose a method:
+    public static var ChooseMethod : String = NSLocalizedString("ChooseMethod", comment: "")
 
     /// Base translation: This is a valid %@ credential.
     public static func VerificationSuccess(_ value1 : String) -> String {
@@ -389,6 +406,9 @@ public struct Localizations {
 
     /// Base translation: Import from URL
     public static var ImportFromURL : String = NSLocalizedString("ImportFromURL", comment: "")
+
+    /// Base translation: Import
+    public static var Import : String = NSLocalizedString("Import", comment: "")
 
     /// Base translation: We've improved the experience, but you'll be able to receive and manage your credentials as before.
     public static var UpdateUserBody : String = NSLocalizedString("UpdateUserBody", comment: "")

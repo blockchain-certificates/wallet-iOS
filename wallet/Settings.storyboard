@@ -23,10 +23,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="ChooseMethod"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRt-yX-u7H" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="81" width="335" height="30"/>
                                 <state key="normal" title="Import from URL"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="ImportFromURL"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="importFromURL" destination="zKg-vx-nna" eventType="touchUpInside" id="DG6-Qf-SLt"/>
                                 </connections>
@@ -34,6 +40,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvw-zt-Ulb" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="119" width="335" height="30"/>
                                 <state key="normal" title="Import from File"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="ImportFromFile"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="importFromFile" destination="zKg-vx-nna" eventType="touchUpInside" id="Dsa-06-OPH"/>
                                 </connections>
@@ -71,6 +80,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="CopyCredentialURL"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1y-BS-XQd" userLabel="Container">
                                 <rect key="frame" x="20" y="77" width="335" height="104"/>
@@ -103,6 +115,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwB-R1-Lad" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="197" width="335" height="30"/>
                                 <state key="normal" title="Import"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="Import"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="importURL" destination="QjL-oU-RBK" eventType="touchUpInside" id="cEc-QQ-kPN"/>
                                 </connections>
