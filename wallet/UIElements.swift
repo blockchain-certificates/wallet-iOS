@@ -112,6 +112,10 @@ class LabelC9T2B : LabelC7T2S {
     override var color: UIColor { return Style.Color.C9 }
 }
 
+class LabelC6T2B : LabelC5T2B {
+    override var color: UIColor { return Style.Color.C6 }
+}
+
 // MARK: - Buttons
 
 protocol Button {

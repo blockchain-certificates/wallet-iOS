@@ -102,7 +102,7 @@ class IssuerTableViewController: UITableViewController {
 
         let credentialsCount = certificates.count == 1 ? "1 credential" : "\(certificates.count) credentials"
         
-        let label = LabelC5T2B()
+        let label = LabelC6T2B()
         label.text = "You have \(credentialsCount)"
         label.translatesAutoresizingMaskIntoConstraints = false
         
