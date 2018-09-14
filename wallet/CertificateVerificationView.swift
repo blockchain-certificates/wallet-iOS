@@ -35,6 +35,8 @@ class CertificateVerificationView: UIView {
     var trackProgressHeight: CGFloat = 0.0
     var currentSubstepCode: String?
     
+    var delegate: CertificateVerificationViewDelegate?
+    
     func setSteps(steps: [VerificationStep]) {
         allSteps = steps
         
@@ -153,30 +155,36 @@ class CertificateVerificationView: UIView {
         }
         
         // Draw track
-        context.setStrokeColor(Style.Color.C8.cgColor)
-        context.setLineWidth(trackWidth)
-        context.setLineCap(.round)
-        context.beginPath()
-        context.move(to: CGPoint(x: trackCenterX, y: 0))
-        context.addLine(to: CGPoint(x: trackCenterX, y: trackHeight))
-        context.strokePath()
+        if allSteps != nil {
+            context.setStrokeColor(Style.Color.C8.cgColor)
+            context.setLineWidth(trackWidth)
+            context.setLineCap(.round)
+            context.beginPath()
+            context.move(to: CGPoint(x: trackCenterX, y: 0))
+            context.addLine(to: CGPoint(x: trackCenterX, y: trackHeight))
+            context.strokePath()
+        }
         
         // Draw progress on track
-        context.setStrokeColor(Style.Color.C4.cgColor)
-        context.setLineWidth(trackWidth)
-        context.setLineCap(.round)
-        context.beginPath()
-        context.move(to: CGPoint(x: trackCenterX, y: 0))
-        context.addLine(to: CGPoint(x: trackCenterX, y: trackProgressHeight))
-        context.strokePath()
+        if currentSubstepCode != nil {
+            context.setStrokeColor(Style.Color.C4.cgColor)
+            context.setLineWidth(trackWidth)
+            context.setLineCap(.round)
+            context.beginPath()
+            context.move(to: CGPoint(x: trackCenterX, y: 0))
+            context.addLine(to: CGPoint(x: trackCenterX, y: trackProgressHeight))
+            context.strokePath()
+        }
         
         // Draw substep dots
-        for substepLabels in substepLabels.values {
-            context.setFillColor(Style.Color.C1.cgColor)
-            context.fillEllipse(in: CGRect(x: trackCenterX - substepDotDiameter / 2,
-                                           y: substepLabels.center.y - substepDotDiameter / 2,
-                                           width: substepDotDiameter,
-                                           height: substepDotDiameter))
+        if allSteps != nil {
+            for substepLabels in substepLabels.values {
+                context.setFillColor(Style.Color.C1.cgColor)
+                context.fillEllipse(in: CGRect(x: trackCenterX - substepDotDiameter / 2,
+                                               y: substepLabels.center.y - substepDotDiameter / 2,
+                                               width: substepDotDiameter,
+                                               height: substepDotDiameter))
+            }
         }
     }
     
@@ -225,6 +233,7 @@ class CertificateVerificationView: UIView {
                 
                 if let currentSubstepCode = currentSubstepCode, currentSubstepCode == substep.code {
                     trackProgressHeight = substepLabel.center.y + trackSubstepPadding
+                    delegate?.trackProgressChanged(y: trackProgressHeight)
                 }
                 
                 // Position substep fail icon and label
@@ -267,6 +276,7 @@ class CertificateVerificationView: UIView {
                     y += successIcon.frame.size.height
                     
                     trackProgressHeight = trackHeight
+                    delegate?.trackProgressChanged(y: trackProgressHeight)
                 }
             }
         }
@@ -277,4 +287,8 @@ class CertificateVerificationView: UIView {
         frame = newFrame
         setNeedsDisplay()
     }
+}
+
+protocol CertificateVerificationViewDelegate {
+    func trackProgressChanged(y: CGFloat)
 }

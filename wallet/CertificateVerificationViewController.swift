@@ -9,10 +9,11 @@
 import UIKit
 import Blockcerts
 
-class CertificateVerificationViewController: UIViewController, CertificateVerifierDelegate {
+class CertificateVerificationViewController: UIViewController, CertificateVerifierDelegate, CertificateVerificationViewDelegate {
 
     @IBOutlet weak var bannerView: UIView!
     @IBOutlet weak var bannerLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var verificationView: CertificateVerificationView!
     @IBOutlet weak var doneButton: SecondaryButton!
     
@@ -42,6 +43,9 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
         bannerView.isHidden = true
         bannerLabel.isHidden = true
         doneButton.isHidden = true
+        
+        verificationView.translatesAutoresizingMaskIntoConstraints = true
+        verificationView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,12 +99,12 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
             bannerView.backgroundColor = Style.Color.C5
             
         case .success:
-            //doneButton.isHidden = false
+            doneButton.isHidden = false
             bannerLabel.textColor = Style.Color.C3
             bannerView.backgroundColor = Style.Color.C14
             
         case .failure:
-            //doneButton.isHidden = false
+            doneButton.isHidden = false
             bannerLabel.textColor = Style.Color.C9
             bannerView.backgroundColor = Style.Color.C15
         }
@@ -112,5 +116,11 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
     
     func updateSubstepStatus(substep: VerificationSubstep) {
         verificationView.updateSubstepStatus(substep: substep)
+    }
+    
+    // MARK: - CertificateVerificationViewDelegate
+    
+    func trackProgressChanged(y: CGFloat) {
+        // TODO: center end of green progress bar
     }
 }

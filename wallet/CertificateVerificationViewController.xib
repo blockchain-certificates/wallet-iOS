@@ -15,6 +15,7 @@
                 <outlet property="bannerLabel" destination="D0B-U6-jaT" id="t8I-ME-sj6"/>
                 <outlet property="bannerView" destination="K1O-0i-h7s" id="up3-xk-fyi"/>
                 <outlet property="doneButton" destination="1hJ-op-Fro" id="s7a-Zy-fbz"/>
+                <outlet property="scrollView" destination="wHZ-2o-AM2" id="env-6P-3qH"/>
                 <outlet property="verificationView" destination="pGj-g1-F9L" id="PSS-dw-krz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -48,7 +49,7 @@
                     <rect key="frame" x="0.0" y="90" width="375" height="577"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgw-Fu-1bM" userLabel="Container">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="520"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGj-g1-F9L" userLabel="Subway" customClass="CertificateVerificationView" customModule="certificates" customModuleProvider="target">
                                     <rect key="frame" x="40" y="30" width="295" height="400"/>
@@ -58,7 +59,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hJ-op-Fro" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="130.5" y="460" width="113" height="30"/>
+                                    <rect key="frame" x="130.5" y="474" width="113" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="113" id="ikI-a9-6SE"/>
                                     </constraints>
@@ -74,9 +75,9 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="1hJ-op-Fro" firstAttribute="centerX" secondItem="Dgw-Fu-1bM" secondAttribute="centerX" id="0Cj-Xs-bQN"/>
-                                <constraint firstAttribute="bottom" secondItem="1hJ-op-Fro" secondAttribute="bottom" constant="30" id="GzV-Rg-Kqn"/>
+                                <constraint firstAttribute="bottom" secondItem="1hJ-op-Fro" secondAttribute="bottom" constant="50" id="GzV-Rg-Kqn"/>
                                 <constraint firstItem="pGj-g1-F9L" firstAttribute="leading" secondItem="Dgw-Fu-1bM" secondAttribute="leading" constant="40" id="NQv-i4-uas"/>
-                                <constraint firstItem="1hJ-op-Fro" firstAttribute="top" secondItem="pGj-g1-F9L" secondAttribute="bottom" constant="30" id="Sr8-YQ-d3E"/>
+                                <constraint firstItem="1hJ-op-Fro" firstAttribute="top" secondItem="pGj-g1-F9L" secondAttribute="bottom" constant="44" id="Sr8-YQ-d3E"/>
                                 <constraint firstItem="pGj-g1-F9L" firstAttribute="top" secondItem="Dgw-Fu-1bM" secondAttribute="top" constant="30" id="iGF-lp-jcH"/>
                                 <constraint firstAttribute="trailing" secondItem="pGj-g1-F9L" secondAttribute="trailing" constant="40" id="wCv-P2-ONH"/>
                             </constraints>
