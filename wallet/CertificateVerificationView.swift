@@ -17,7 +17,7 @@ class CertificateVerificationView: UIView {
     let substepLabelVerticalMargin: CGFloat = 7.0
     let trackWidth: CGFloat = 12.0
     let trackCenterX: CGFloat = 14.0
-    let trackSubstepPadding: CGFloat = 12.0
+    let trackSubstepPadding: CGFloat = 10.0
     let trackEndPadding: CGFloat = 17.0
     let substepDotDiameter: CGFloat = 6.0
     

@@ -109,7 +109,7 @@ class IssuerViewController: UIViewController {
     @objc func addCertificateTapped() {
         Logger.main.info("Add certificate button tapped")
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: Localizations.AddCredential, message: nil, preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(title: Localizations.ImportFromURL, style: .default, handler: { [weak self] _ in
             Logger.main.info("Add Credential from URL tapped in issuer view")
