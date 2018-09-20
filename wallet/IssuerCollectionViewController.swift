@@ -315,7 +315,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             alert.dismiss(animated: false, completion: nil)
         }
         
-        alert.set(buttons: [okayButton, cancelButton])
+        alert.set(buttons: [cancelButton, okayButton])
     }
     
     func showAddIssuerError() {

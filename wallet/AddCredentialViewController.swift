@@ -153,7 +153,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
             alert.dismiss(animated: false, completion: nil)
         }
         
-        alert.set(buttons: [okayButton, cancelButton])
+        alert.set(buttons: [cancelButton, okayButton])
     }
     
     // MARK: - UIDocumentPickerDelegate

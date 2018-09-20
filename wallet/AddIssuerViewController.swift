@@ -159,7 +159,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             progressAlert.dismiss(animated: false, completion: nil)
         }
         
-        progressAlert.set(buttons: [okayButton, cancelButton])
+        progressAlert.set(buttons: [cancelButton, okayButton])
     }
     
     func showAddIssuerError() {
