@@ -236,10 +236,14 @@ class AlertViewController : UIViewController {
     }
     
     static func createAppUpdate() -> AlertViewController {
-        let vc = createWarning(title: Localizations.AppUpdateAlertTitle,
-                               message: Localizations.AppUpdateAlertMessage)
+
+        let vc = createFromStoryboard()
+        vc.type = .normal
+        vc.set(title: Localizations.AppUpdateAlertTitle)
+        vc.set(message: Localizations.AppUpdateAlertMessage)
+        vc.icon = .warning
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = PrimaryButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
@@ -247,13 +251,13 @@ class AlertViewController : UIViewController {
             vc.dismiss(animated: false, completion: nil)
         }
         
-        let cancelButton = SecondaryButton(frame: .zero)
+        let cancelButton = DangerButton(frame: .zero)
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             vc.dismiss(animated: false, completion: nil)
         }
         
-        vc.set(buttons: [okayButton, cancelButton])
+        vc.set(buttons: [cancelButton, okayButton])
         return vc
     }
     
