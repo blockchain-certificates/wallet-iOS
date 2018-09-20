@@ -44,6 +44,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>This app doesn't need access to the camera. You should decline this.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>FaceID is used to authenticate the user before the 'My Passphrase' option can be accessed</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
