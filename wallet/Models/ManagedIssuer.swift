@@ -165,7 +165,8 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     
     // MARK: Add (Identify and introduce)
     func add(from url: URL, nonce: String, completion: @escaping (ManagedIssuerError?) -> Void) {
-        identify { [weak self] identificationError in
+        identify(from: url) { [weak self] identificationError in
+//        identify { [weak self] identificationError in
             guard identificationError == nil else {
                 DispatchQueue.main.async {
                     completion(identificationError)
