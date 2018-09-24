@@ -116,6 +116,15 @@ class LabelC6T2B : LabelC5T2B {
     override var color: UIColor { return Style.Color.C6 }
 }
 
+class LabelC3T2B : LabelC3T3B {
+    override var labelFont: UIFont { return Style.Font.T2B }
+}
+
+class LabelC12T1R : LabelC3T3B {
+    override var labelFont: UIFont { return Style.Font.T1R }
+    override var color: UIColor { return Style.Color.C12 }
+}
+
 // MARK: - Buttons
 
 protocol Button {

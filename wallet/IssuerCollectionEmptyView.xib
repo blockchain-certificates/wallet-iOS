@@ -43,10 +43,21 @@
                                 <constraint firstAttribute="height" constant="237" id="ZD4-Bw-nF1"/>
                             </constraints>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Issuer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKK-OJ-CN8" customClass="LabelC3T2B" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="176" y="61" width="87" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="IssuerName"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="jzP-lF-GAk" firstAttribute="centerY" secondItem="BLa-Hv-leI" secondAttribute="centerY" id="C0G-ii-mIN"/>
+                        <constraint firstItem="XKK-OJ-CN8" firstAttribute="top" secondItem="jzP-lF-GAk" secondAttribute="top" constant="36" id="Iky-b5-0x4"/>
+                        <constraint firstItem="XKK-OJ-CN8" firstAttribute="leading" secondItem="jzP-lF-GAk" secondAttribute="leading" constant="156" id="K1a-8d-QBg"/>
                         <constraint firstItem="jzP-lF-GAk" firstAttribute="top" secondItem="BLa-Hv-leI" secondAttribute="top" constant="25" id="TE2-Il-jZ3"/>
                         <constraint firstAttribute="bottom" secondItem="jzP-lF-GAk" secondAttribute="bottom" constant="25" id="UkB-D5-6U1"/>
                         <constraint firstItem="jzP-lF-GAk" firstAttribute="centerX" secondItem="BLa-Hv-leI" secondAttribute="centerX" id="ty5-dQ-uAA"/>
