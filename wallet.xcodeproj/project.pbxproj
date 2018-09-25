@@ -239,6 +239,7 @@
 		83D947981E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTitleTableViewCell.xib; sourceTree = "<group>"; };
 		83FF5DE61ECBA4100063397C /* Blockcerts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Blockcerts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FF5DE91ECBAC7A0063397C /* CertificateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateView.swift; sourceTree = "<group>"; };
+		A378A929215ACD870049CF28 /* mt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mt; path = mt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A909528120449DD000F29CF5 /* C5T2BLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = C5T2BLabelCell.xib; sourceTree = "<group>"; };
 		A92735592031E1C9002361FD /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A92E89672049A63D0035460B /* liblottie-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblottie-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -634,7 +635,7 @@
 				TargetAttributes = {
 					83111B231DA4110C006B058D = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = CYEWR6MU44;
+						DevelopmentTeam = 4WR66L3TZA;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -674,6 +675,7 @@
 			knownRegions = (
 				Base,
 				es,
+				mt,
 			);
 			mainGroup = 83111B1B1DA4110C006B058D;
 			productRefGroup = 83111B251DA4110C006B058D /* Products */;
@@ -977,6 +979,7 @@
 			children = (
 				EEAF835A21471542008EC1FA /* Base */,
 				EE8DD6AE214C531B00795B0D /* es */,
+				A378A929215ACD870049CF28 /* mt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1105,7 +1108,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 112;
-				DEVELOPMENT_TEAM = CYEWR6MU44;
+				DEVELOPMENT_TEAM = 4WR66L3TZA;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
@@ -1129,7 +1132,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 112;
-				DEVELOPMENT_TEAM = CYEWR6MU44;
+				DEVELOPMENT_TEAM = 4WR66L3TZA;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
