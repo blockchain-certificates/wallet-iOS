@@ -63,14 +63,26 @@ struct Style {
         case bold
         }
         static func create(_ weight: Weight, size: CGFloat) -> UIFont {
+            var font: UIFont
+            
             switch weight {
             case .regular:
-                return UIFont.openSansFont(ofSize: size)
+                font = UIFont.openSansFont(ofSize: size)
             case .semiBold:
-                return UIFont.openSansSemiBoldFont(ofSize: size)
+                font = UIFont.openSansSemiBoldFont(ofSize: size)
             case .bold:
-                return UIFont.openSansBoldFont(ofSize: size)
+                font = UIFont.openSansBoldFont(ofSize: size)
             }
+            
+            if #available(iOS 11.0, *) {
+                return UIFontMetrics.default.scaledFont(for: font)
+            } else {
+                return font.withSize(scaler * font.pointSize)
+            }
+        }
+        
+        static var scaler: CGFloat {
+            return UIFont.preferredFont(forTextStyle: .body).pointSize / 17.0
         }
         
         static let T1R = create(.regular, size: 12)
