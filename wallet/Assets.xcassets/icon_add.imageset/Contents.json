@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "icon_add.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "unassigned" : true,
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

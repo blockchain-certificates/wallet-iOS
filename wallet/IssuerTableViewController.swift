@@ -76,6 +76,12 @@ class IssuerTableViewController: UITableViewController {
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: buttonCellReuseIdentifier) as! ButtonTableViewCell
             cell.button.setTitle(Localizations.AddCredential, for: .normal)
+            
+            cell.button.imageView?.contentMode = .scaleAspectFill
+            cell.button.titleLabel?.font = Style.Font.T2S
+            cell.button.imageEdgeInsets = UIEdgeInsetsMake(14, -8, 14, 10)
+            cell.button.contentEdgeInsets = UIEdgeInsetsMake(20, 28, 20, 20)
+            
             cell.button.onTouchUpInside { [weak self] in
                 self?.delegate?.addCertificateTapped()
             }
@@ -99,7 +105,7 @@ class IssuerTableViewController: UITableViewController {
         }
         let containerView = UIView()
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-
+        
         let label = LabelC6T2B()
         label.text = certificates.count == 1 ? Localizations.YouHaveOneCredential :  Localizations.YouHaveMultipleCredentials(String(certificates.count))
         label.translatesAutoresizingMaskIntoConstraints = false
