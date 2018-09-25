@@ -19,6 +19,7 @@ class SettingsCell : UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         accessoryView  = UIImageView(image: #imageLiteral(resourceName: "icon_disclosure"))
+        isAccessibilityElement = true
         textLabel?.font = Style.Font.T3S
         textLabel?.textColor = Style.Color.C6
     }
@@ -138,6 +139,7 @@ class SettingsTableViewController: UITableViewController {
         }
         
         cell.textLabel?.text = text
+        cell.accessibilityLabel = text
 
         return cell
     }
