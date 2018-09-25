@@ -106,7 +106,7 @@ class IssuerTableViewController: UITableViewController {
         let containerView = UIView()
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         
-        let label = LabelC6T2B()
+        let label = LabelC5T2B()
         label.text = certificates.count == 1 ? Localizations.YouHaveOneCredential :  Localizations.YouHaveMultipleCredentials(String(certificates.count))
         label.translatesAutoresizingMaskIntoConstraints = false
         
