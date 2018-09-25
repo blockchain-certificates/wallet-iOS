@@ -61,11 +61,10 @@ class SettingsTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         clearsSelectionOnViewWillAppear = true
         title = Localizations.Settings
-
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
-        let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
-        navigationItem.rightBarButtonItem = cancelBarButton
+        
+        let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
+        cancelButton.accessibilityLabel = Localizations.Close
+        navigationItem.rightBarButtonItem = cancelButton
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.backgroundColor = Style.Color.C2

@@ -19,7 +19,11 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     var presentedModally = false
     
     @IBOutlet weak var scrollView : UIScrollView!
+    @IBOutlet weak var issuerURLContainer: UIView!
+    @IBOutlet weak var issuerURLLabel: UILabel!
     @IBOutlet weak var issuerURLField: UITextView!
+    @IBOutlet weak var nonceContainer: UIView!
+    @IBOutlet weak var nonceLabel: UILabel!
     @IBOutlet weak var nonceField : UITextView!
     @IBOutlet weak var submitButton : UIButton!
 
@@ -41,6 +45,19 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        
+        issuerURLContainer.isAccessibilityElement = true
+        issuerURLContainer.accessibilityTraits = issuerURLField.accessibilityTraits
+        issuerURLContainer.accessibilityHint = issuerURLLabel.text
+        issuerURLLabel.isAccessibilityElement = false
+        issuerURLField.isAccessibilityElement = false
+        
+        nonceContainer.isAccessibilityElement = true
+        nonceContainer.accessibilityTraits = nonceField
+            .accessibilityTraits
+        nonceContainer.accessibilityHint = nonceLabel.text
+        nonceLabel.isAccessibilityElement = false
+        nonceField.isAccessibilityElement = false
     }
 
     @IBAction func addIssuerTapped(_ sender: Any) {

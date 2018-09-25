@@ -118,8 +118,9 @@ class IssuerViewController: UIViewController {
             
             let navigationController = UINavigationController(rootViewController: controller)
             
-            let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: controller, action: #selector(AddCredentialURLViewController.dismissModally))
-            controller.navigationItem.rightBarButtonItem = cancelBarButton
+            let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: controller, action: #selector(AddCredentialURLViewController.dismissModally))
+            cancelButton.accessibilityLabel = Localizations.Close
+            controller.navigationItem.rightBarButtonItem = cancelButton
             controller.navigationItem.title = Localizations.AddCredential
             controller.presentedModally = true
             controller.successCallback = { [weak self] (certificate) in

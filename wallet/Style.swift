@@ -50,7 +50,7 @@ struct Style {
         static let C13 = UIColor(hexString: "#0000000C")
         
         /// C14: button disabled text
-        static let C14 = UIColor(hexString: "#7CE4B4")
+        static let C14 = UIColor(hexString: "#6FE2AC")
         
         /// C15: Verification status bar failed state
         static let C15 = UIColor(hexString: "#FDE6E6")
@@ -63,14 +63,26 @@ struct Style {
         case bold
         }
         static func create(_ weight: Weight, size: CGFloat) -> UIFont {
+            var font: UIFont
+            
             switch weight {
             case .regular:
-                return UIFont.openSansFont(ofSize: size)
+                font = UIFont.openSansFont(ofSize: size)
             case .semiBold:
-                return UIFont.openSansSemiBoldFont(ofSize: size)
+                font = UIFont.openSansSemiBoldFont(ofSize: size)
             case .bold:
-                return UIFont.openSansBoldFont(ofSize: size)
+                font = UIFont.openSansBoldFont(ofSize: size)
             }
+            
+            if #available(iOS 11.0, *) {
+                return UIFontMetrics.default.scaledFont(for: font)
+            } else {
+                return font.withSize(scaler * font.pointSize)
+            }
+        }
+        
+        static var scaler: CGFloat {
+            return UIFont.preferredFont(forTextStyle: .body).pointSize / 17.0
         }
         
         static let T1R = create(.regular, size: 12)
