@@ -167,6 +167,8 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
 
 class AddCredentialURLViewController: AddCredentialViewController, UITextViewDelegate {
     
+    @IBOutlet weak var urlContainer: UIView!
+    @IBOutlet weak var urlLabel: UILabel!
     @IBOutlet weak var urlTextView: UITextView!
     @IBOutlet weak var submitButton: UIButton!
     
@@ -239,6 +241,13 @@ class AddCredentialURLViewController: AddCredentialViewController, UITextViewDel
         urlTextView.font = Style.Font.T3S
         urlTextView.textColor = Style.Color.C3
         submitButton.isEnabled = false
+        
+        urlContainer.isAccessibilityElement = true
+        urlContainer.accessibilityTraits = urlTextView
+            .accessibilityTraits
+        urlContainer.accessibilityHint = urlLabel.text
+        urlLabel.isAccessibilityElement = false
+        urlTextView.isAccessibilityElement = false
     }
     
     @objc func dismissModally() {
