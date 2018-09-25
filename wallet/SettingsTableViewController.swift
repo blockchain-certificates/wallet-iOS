@@ -65,6 +65,7 @@ class SettingsTableViewController: UITableViewController {
         let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
         cancelButton.accessibilityLabel = Localizations.Close
         navigationItem.rightBarButtonItem = cancelButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         tableView.register(SettingsCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.backgroundColor = Style.Color.C2
