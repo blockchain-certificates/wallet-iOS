@@ -104,7 +104,6 @@
 		A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */; };
 		A9B1784F203727AD00B76375 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B1784E203727AD00B76375 /* ButtonTableViewCell.swift */; };
 		A9B17851203746E300B76375 /* IssuerCollectionEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */; };
-		A9B997A1203F1CE000C05153 /* verifier.js in Resources */ = {isa = PBXBuildFile; fileRef = A9B9979F203F1CE000C05153 /* verifier.js */; };
 		A9B997A2203F1CE000C05153 /* verify.html in Resources */ = {isa = PBXBuildFile; fileRef = A9B997A0203F1CE000C05153 /* verify.html */; };
 		A9B997A62040611D00C05153 /* IssuerCollectionReturningUserEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */; };
 		A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2B049202B5893002015F0 /* UIElements.swift */; };
@@ -113,6 +112,7 @@
 		EE651190212369A0009AC972 /* CertificateVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE65118F212369A0009AC972 /* CertificateVerifier.swift */; };
 		EE6511922126053E009AC972 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6511912126053E009AC972 /* Reachability.swift */; };
 		EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */; };
+		EE821EC8215C100000713C47 /* verifier.js in Resources */ = {isa = PBXBuildFile; fileRef = EE821EC7215C0FFF00713C47 /* verifier.js */; };
 		EE8DD6AA2148705500795B0D /* CertificateVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8DD6A82148705500795B0D /* CertificateVerificationViewController.swift */; };
 		EE8DD6AB2148705500795B0D /* CertificateVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE8DD6A92148705500795B0D /* CertificateVerificationViewController.xib */; };
 		EE8DD6AD21497C1600795B0D /* CertificateVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8DD6AC21497C1600795B0D /* CertificateVerificationView.swift */; };
@@ -254,7 +254,6 @@
 		A9B1784C2037279D00B76375 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
 		A9B1784E203727AD00B76375 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerCollectionEmptyView.xib; sourceTree = "<group>"; };
-		A9B9979F203F1CE000C05153 /* verifier.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = verifier.js; sourceTree = "<group>"; };
 		A9B997A0203F1CE000C05153 /* verify.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = verify.html; sourceTree = "<group>"; };
 		A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionReturningUserEmptyView.xib; sourceTree = "<group>"; };
 		A9D2B049202B5893002015F0 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
@@ -262,6 +261,7 @@
 		EE65118F212369A0009AC972 /* CertificateVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerifier.swift; sourceTree = "<group>"; };
 		EE6511912126053E009AC972 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCheck.swift; sourceTree = "<group>"; };
+		EE821EC7215C0FFF00713C47 /* verifier.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = verifier.js; sourceTree = "<group>"; };
 		EE8DD6A82148705500795B0D /* CertificateVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerificationViewController.swift; sourceTree = "<group>"; };
 		EE8DD6A92148705500795B0D /* CertificateVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateVerificationViewController.xib; sourceTree = "<group>"; };
 		EE8DD6AC21497C1600795B0D /* CertificateVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerificationView.swift; sourceTree = "<group>"; };
@@ -554,7 +554,7 @@
 		A9B9979E203F1CE000C05153 /* Verification */ = {
 			isa = PBXGroup;
 			children = (
-				A9B9979F203F1CE000C05153 /* verifier.js */,
+				EE821EC7215C0FFF00713C47 /* verifier.js */,
 				A9B997A0203F1CE000C05153 /* verify.html */,
 				EE65118F212369A0009AC972 /* CertificateVerifier.swift */,
 			);
@@ -696,8 +696,8 @@
 			files = (
 				A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */,
 				A970D00A2044AFC6004BC1AE /* introduction.mp4 in Resources */,
+				EE821EC8215C100000713C47 /* verifier.js in Resources */,
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
-				A9B997A1203F1CE000C05153 /* verifier.js in Resources */,
 				A909528220449DD000F29CF5 /* C5T2BLabelCell.xib in Resources */,
 				831EDC101ED3A20E004F135B /* RenderedCertificateView.xib in Resources */,
 				83111B321DA4110C006B058D /* LaunchScreen.storyboard in Resources */,
@@ -816,7 +816,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -x\n\n# Get base path to project\nBASE_PATH=\"$PROJECT_DIR/$PROJECT_NAME\"\n\n#--------- START OF YOUR CONFIGURATION (change Path_To_.. to fit)\n\n# Get path to Laurine Generator script\nLAURINE_PATH=\"$BASE_PATH/Utils/LaurineGenerator.swift\"\n\n# Get path to main localization file (usually english).\nSOURCE_PATH=\"$BASE_PATH/Base.lproj/Localizable.strings\"\n\n# Get path to output. If you use ObjC version of output, set implementation file (.m), as header will be generated automatically\nOUTPUT_PATH=\"$BASE_PATH/Localizations.swift\"\n\n#--------- END OF YOUR CONFIGURATION\n\n# Add permission to generator for script execution\nchmod 755 \"$LAURINE_PATH\"\n\n# Actually generate output. -- CUSTOMIZE -- parameters to your needs (see documentation).\n# Will only re-generate script if something changed\nif [ \"$OUTPUT_PATH\" -ot \"$SOURCE_PATH\" ]; then\n\"$LAURINE_PATH\" -i \"$SOURCE_PATH\" -o \"$OUTPUT_PATH\"\nfi";
+			shellScript = "set -x\n\n# Get base path to project\nBASE_PATH=\"$PROJECT_DIR/$PROJECT_NAME\"\n\n#--------- START OF YOUR CONFIGURATION (change Path_To_.. to fit)\n\n# Get path to Laurine Generator script\nLAURINE_PATH=\"$BASE_PATH/Utils/LaurineGenerator.swift\"\n\n# Get path to main localization file (usually english).\nSOURCE_PATH=\"$BASE_PATH/Base.lproj/Localizable.strings\"\n\n# Get path to output. If you use ObjC version of output, set implementation file (.m), as header will be generated automatically\nOUTPUT_PATH=\"$BASE_PATH/Localizations.swift\"\n\n#--------- END OF YOUR CONFIGURATION\n\n# Add permission to generator for script execution\nchmod 755 \"$LAURINE_PATH\"\n\n# Actually generate output. -- CUSTOMIZE -- parameters to your needs (see documentation).\n# Will only re-generate script if something changed\nif [ \"$OUTPUT_PATH\" -ot \"$SOURCE_PATH\" ]; then\n\"$LAURINE_PATH\" -i \"$SOURCE_PATH\" -o \"$OUTPUT_PATH\"\nfi\n";
 		};
 		F65C77CEA313DD3106C499D5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
