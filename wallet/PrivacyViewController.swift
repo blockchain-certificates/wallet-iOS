@@ -24,10 +24,20 @@ class PrivacyViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         title = Localizations.PrivacyPolicy
-
-        let privacyURL = URL(string: "http://www.learningmachine.com/mobile-privacy.html")!
-        let request = URLRequest(url: privacyURL)
         
+        let locale = NSLocale.current.languageCode
+        var privacyURL: URL
+        
+        switch locale {
+        case "es":
+            privacyURL = URL(string: "https://www.blockcerts.org/es/mobile-privacy")!
+        case "mt":
+            privacyURL = URL(string: "https://www.blockcerts.org/mt/mobile-privacy")!
+        default:
+            privacyURL = URL(string: "https://www.blockcerts.org/mobile-privacy")!
+        }
+        
+        let request = URLRequest(url: privacyURL)
         webView.load(request)
     }
 
@@ -49,15 +59,20 @@ class AboutPassphraseViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         title = Localizations.AboutPassphrase
         
-        let url = URL(string: "https://www.learningmachine.com/about-passphrases/")!
-        let request = URLRequest(url: url)
+        let locale = NSLocale.current.languageCode
+        var url: URL
         
+        switch locale {
+        case "es":
+            url = URL(string: "https://www.blockcerts.org/es/about-passphrase")!
+        case "mt":
+            url = URL(string: "https://www.blockcerts.org/mt/about-passphrase")!
+        default:
+            url = URL(string: "https://www.blockcerts.org/about-passphrase")!
+        }
+        
+        let request = URLRequest(url: url)
         webView.load(request)
     }
     
 }
-
-
-
-
-
