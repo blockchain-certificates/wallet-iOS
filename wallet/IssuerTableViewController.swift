@@ -79,12 +79,14 @@ class IssuerTableViewController: UITableViewController {
             
             cell.button.imageView?.contentMode = .scaleAspectFill
             cell.button.titleLabel?.font = Style.Font.T2S
+            cell.button.titleLabel?.textColor = Style.Color.C3
             cell.button.imageEdgeInsets = UIEdgeInsetsMake(14, -8, 14, 10)
             cell.button.contentEdgeInsets = UIEdgeInsetsMake(20, 28, 20, 20)
             
             cell.button.onTouchUpInside { [weak self] in
                 self?.delegate?.addCertificateTapped()
             }
+            
             return cell
         } else {
             if hasCertificates {

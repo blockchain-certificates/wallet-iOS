@@ -45,6 +45,9 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
         bannerLabel.isHidden = true
         doneButton.isHidden = true
         
+        doneButton.titleLabel?.font = Style.Font.T2S
+        doneButton.titleLabel?.textColor = Style.Color.C3
+    
         verificationView.translatesAutoresizingMaskIntoConstraints = true
         verificationView.delegate = self
     }
@@ -66,7 +69,7 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
         // Check for the Sample Certificate
         guard certificate.assertion.uid != Identifiers.sampleCertificateUID else {
             Logger.main.info("User was trying to verify the sample certificate, so we showed them our usual dialog.")
-            
+
             let alert = UIAlertController(
                 title: Localizations.SampleCredential,
                 message: Localizations.SampleCredentialVerificationImpossible,
@@ -76,7 +79,7 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
             present(alert, animated: true, completion: nil)
             return
         }
-        
+
         // Check for connectivity
         if !Reachability.isNetworkReachable() {
             let alert = AlertViewController.createNetworkWarning()
