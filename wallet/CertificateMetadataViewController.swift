@@ -177,8 +177,9 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
         
         title = Localizations.CredentialInfo
         
-        let dismissButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissSelf))
-        navigationItem.rightBarButtonItem = dismissButton
+        let closeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_close"), style: .done, target: self, action: #selector(dismissSelf))
+        closeButton.accessibilityLabel = Localizations.Close
+        navigationItem.rightBarButtonItem = closeButton
 
         tableView.separatorStyle = .none
         view.backgroundColor = Style.Color.C1

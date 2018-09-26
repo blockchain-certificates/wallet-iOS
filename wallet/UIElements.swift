@@ -361,6 +361,8 @@ extension UINavigationController {
             [NSAttributedStringKey.font: Style.Font.T4B,
              NSAttributedStringKey.foregroundColor: Style.Color.C1]
         
+        navigationBar.backIndicatorImage = UIImage(named: "icon_back")
+        navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "icon_back")
         navigationBar.tintColor = Style.Color.C1
         navigationBar.barTintColor = Style.Color.C3
         navigationBar.isTranslucent = false
@@ -372,6 +374,8 @@ extension UINavigationController {
             [NSAttributedStringKey.font: Style.Font.T4B,
              NSAttributedStringKey.foregroundColor: Style.Color.C3]
         
+        navigationBar.backIndicatorImage = UIImage(named: "icon_back")
+        navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "icon_back")
         navigationBar.tintColor = Style.Color.C3
         navigationBar.barTintColor = Style.Color.C1
         navigationBar.isTranslucent = false
