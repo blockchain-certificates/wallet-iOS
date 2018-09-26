@@ -62,7 +62,7 @@ class SettingsTableViewController: UITableViewController {
         clearsSelectionOnViewWillAppear = true
         title = Localizations.Settings
         
-        let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(dismissSettings))
+        let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_close"), style: .done, target: self, action: #selector(dismissSettings))
         cancelButton.accessibilityLabel = Localizations.Close
         navigationItem.rightBarButtonItem = cancelButton
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

@@ -118,7 +118,7 @@ class IssuerViewController: UIViewController {
             
             let navigationController = UINavigationController(rootViewController: controller)
             
-            let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: controller, action: #selector(AddCredentialURLViewController.dismissModally))
+            let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_close"), style: .done, target: controller, action: #selector(AddCredentialURLViewController.dismissModally))
             cancelButton.accessibilityLabel = Localizations.Close
             controller.navigationItem.rightBarButtonItem = cancelButton
             controller.navigationItem.title = Localizations.AddCredential

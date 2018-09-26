@@ -34,7 +34,7 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
         super.viewDidLoad()
         
         title = Localizations.Verification
-        let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: self, action: #selector(closeVerification))
+        let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_close"), style: .done, target: self, action: #selector(closeVerification))
         cancelButton.accessibilityLabel = Localizations.Close
         navigationItem.rightBarButtonItem = cancelButton
         

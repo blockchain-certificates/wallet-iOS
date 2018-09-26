@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DM0-2w-Aba">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DM0-2w-Aba">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -39,7 +39,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="3aE-tM-Qbn">
-                        <barButtonItem key="rightBarButtonItem" image="SettingsIcon" id="fxI-yi-2W3">
+                        <barButtonItem key="rightBarButtonItem" image="icon_settings" id="fxI-yi-2W3">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Settings"/>
                             </userDefinedRuntimeAttributes>
@@ -76,6 +76,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SettingsIcon" width="22" height="23"/>
+        <image name="icon_settings" width="22" height="23"/>
     </resources>
 </document>
