@@ -307,7 +307,7 @@ class CredentialActionButton : ButtonBase {
         super.commonInit()
         layer.cornerRadius = 5
         clipsToBounds = true
-        
+        titleLabel?.font = Style.Font.T2S
     }
 }
 
