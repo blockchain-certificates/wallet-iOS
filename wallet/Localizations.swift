@@ -46,8 +46,8 @@ public struct Localizations {
     /// Base translation: No Network Connection
     public static var ReachabilityAlertTitle : String = NSLocalizedString("ReachabilityAlertTitle", comment: "")
 
-    /// Base translation: Blockcerts Backup
-    public static var BlockcertsBackup : String = NSLocalizedString("BlockcertsBackup", comment: "")
+    /// Base translation: Log In To Issuer
+    public static var LoginToIssuer : String = NSLocalizedString("LoginToIssuer", comment: "")
 
     /// Base translation: Enter the URL provided by the issuer
     public static var EnterIssuerURL : String = NSLocalizedString("EnterIssuerURL", comment: "")
@@ -60,6 +60,9 @@ public struct Localizations {
 
     /// Base translation: Select Backup Methods
     public static var SelectBackupMethods : String = NSLocalizedString("SelectBackupMethods", comment: "")
+
+    /// Base translation: Blockcerts Backup
+    public static var BlockcertsBackup : String = NSLocalizedString("BlockcertsBackup", comment: "")
 
     /// Base translation: Enter the one-time code
     public static var EnterIssuerCode : String = NSLocalizedString("EnterIssuerCode", comment: "")

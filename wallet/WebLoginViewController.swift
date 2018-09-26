@@ -44,7 +44,7 @@ class WebLoginViewController: UIViewController {
         webView.load(request)
 
         // Add some chrome when presented in a nav controller
-        title = "Log In To Issuer"
+        title = Localizations.LoginToIssuer
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.cancelWebLogin))
     }
     
