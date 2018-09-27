@@ -59,7 +59,6 @@ class CertificateViewController: UIViewController {
         
         let verificationController = CertificateVerificationViewController(certificate: certificate)
         let navController = NavigationController(rootViewController: verificationController)
-        navController.styleDefault()
         present(navController, animated: true, completion: nil)
     }
     
@@ -70,8 +69,7 @@ class CertificateViewController: UIViewController {
         
         let controller = CertificateMetadataViewController(certificate: certificate)
         controller.delegate = self
-        let navController = UINavigationController(rootViewController: controller);
-        navController.styleDefault()
+        let navController = NavigationController(rootViewController: controller);
         present(navController, animated: true, completion: nil)
     }
     

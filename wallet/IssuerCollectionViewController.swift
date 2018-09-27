@@ -40,7 +40,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     var pendingNewManagedIssuer: ManagedIssuer?
     var certificates = [Certificate]()
     var alert: AlertViewController?
-    var webViewNavigationController: UINavigationController?
+    var webViewNavigationController: NavigationController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,8 +132,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         Logger.main.info("Settings button tapped")
         
         let settingsTable = SettingsTableViewController()
-        let controller = UINavigationController(rootViewController: settingsTable)
-        controller.styleDefault()
+        let controller = NavigationController(rootViewController: settingsTable)
         present(controller, animated: true, completion: nil)
     }
     
@@ -607,8 +606,7 @@ extension IssuerCollectionViewController : ManagedIssuerDelegate {
             self?.cancelWebLogin()
             self?.dismissWebView()
         }
-        let navigationController = UINavigationController(rootViewController: webController)
-        navigationController.styleDefault()
+        let navigationController = NavigationController(rootViewController: webController)
         webViewNavigationController = navigationController
         
         DispatchQueue.main.async {

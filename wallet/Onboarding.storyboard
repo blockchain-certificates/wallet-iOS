@@ -17,7 +17,7 @@
         <!--Navigation Controller-->
         <scene sceneID="JHV-Fb-ny0">
             <objects>
-                <navigationController storyboardIdentifier="onboarding" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gKt-0J-INy" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="onboarding" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gKt-0J-INy" customClass="NavigationController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="QbR-4T-K5s">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -51,7 +51,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWO-Mc-lvh" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="20" y="648" width="374" height="30"/>
+                                <rect key="frame" x="20" y="644" width="374" height="34"/>
                                 <state key="normal" title="_New User"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="NewUser"/>
@@ -74,10 +74,10 @@
                                 <rect key="frame" x="82" y="20" width="250" height="52"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58a-hx-ELF">
-                                <rect key="frame" x="0.0" y="72" width="414" height="576"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="572"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEb-1p-Syt" userLabel="Play button">
-                                        <rect key="frame" x="147" y="228" width="120" height="120"/>
+                                        <rect key="frame" x="147" y="226" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="fsO-cp-LR3"/>
                                             <constraint firstAttribute="height" constant="120" id="kRU-Gt-UT1"/>
@@ -135,7 +135,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZe-ki-NCg" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="549.66666666666663"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="553.66666666666663"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="returning_video_background" translatesAutoresizingMaskIntoConstraints="NO" id="CWt-dI-oKE">
                                                 <rect key="frame" x="-20" y="0.0" width="414" height="233"/>
@@ -182,7 +182,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffR-78-xzB" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="495.66666666666663" width="334" height="30"/>
+                                                <rect key="frame" x="20" y="495.66666666666663" width="334" height="34"/>
                                                 <state key="normal" title="_Continue"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="Continue"/>
@@ -272,7 +272,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUC-ws-ppc" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="291.33333333333331"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="295.33333333333331"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Enter your passphrase" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tl7-ac-PeD" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="16" width="374" height="21"/>
@@ -307,7 +307,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BkJ-EG-3bX" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="245.33333333333326" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="245.33333333333331" width="374" height="34"/>
                                                 <state key="normal" title="_Enter"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="Enter"/>
@@ -378,7 +378,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RyP-ht-mHB" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="437.33333333333331"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="441.33333333333331"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Passphrase Generated!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQM-Bm-Iw4" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="137" width="374" height="20"/>
@@ -431,7 +431,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEY-4S-zBG" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="391.33333333333326" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="391.33333333333331" width="374" height="34"/>
                                                 <state key="normal" title="_Create a Backup"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="CreateBackup"/>
@@ -514,7 +514,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqY-ow-1Di" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="376.66666666666669"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="384.66666666666669"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_backup" translatesAutoresizingMaskIntoConstraints="NO" id="P5q-5d-qXN">
                                                 <rect key="frame" x="129" y="16" width="116" height="105"/>
@@ -548,7 +548,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGc-Ah-B2Q" customClass="CheckmarkButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="276.66666666666669" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="276.66666666666669" width="374" height="34"/>
                                                 <state key="normal" title="_Copy to E-mail or Clipboard"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="CopyEmailClipboard"/>
@@ -558,7 +558,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iB4-IF-EY4" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="330.66666666666669" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="334.66666666666669" width="374" height="34"/>
                                                 <state key="normal" title="_Select At Least One to Continue"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="SelectOneButton"/>
@@ -638,7 +638,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-7Y-4vX" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="344.66666666666669"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="348.66666666666669"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_writtenbackup" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-2e-aVj">
                                                 <rect key="frame" x="134.66666666666666" y="0.0" width="104.66666666666666" height="104.66666666666667"/>
@@ -688,7 +688,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ImO-LW-82b" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="314.66666666666669" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="314.66666666666669" width="374" height="34"/>
                                                 <state key="normal" title="_Done"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="Done"/>
@@ -762,7 +762,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vxr-dN-nYu" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="200"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="204"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2Y-qF-nOc" userLabel="Passphrase container">
                                                 <rect key="frame" x="0.0" y="57" width="374" height="85"/>
@@ -788,7 +788,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iX-rK-XlR" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="166" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="166" width="374" height="34"/>
                                                 <state key="normal" title="_Copy to E-mail or Clipboard"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="CopyEmailClipboard"/>

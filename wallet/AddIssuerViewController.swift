@@ -197,7 +197,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     
     // MARK: - ManagedIssuerDelegate
     
-    var webViewNavigationController: UINavigationController?
+    var webViewNavigationController: NavigationController?
     
     func presentWebView(at url: URL, with navigationDelegate: WKNavigationDelegate) throws {
         Logger.main.info("Presenting the web view in the Add Issuer screen.")
@@ -206,8 +206,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             self?.cancelWebLogin()
             self?.dismissWebView()
         }
-        let navigationController = UINavigationController(rootViewController: webController)
-        navigationController.styleDefault()
+        let navigationController = NavigationController(rootViewController: webController)
         webViewNavigationController = navigationController
         
         DispatchQueue.main.async {
