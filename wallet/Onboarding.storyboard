@@ -514,13 +514,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqY-ow-1Di" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="384.66666666666669"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="384"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_backup" translatesAutoresizingMaskIntoConstraints="NO" id="P5q-5d-qXN">
                                                 <rect key="frame" x="129" y="16" width="116" height="105"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Select Backup Methods" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRC-qm-tMU" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="137" width="374" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Select Backup Methods" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRC-qm-tMU" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="137" width="374" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -529,7 +529,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Please select at least one option from the choices below:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCG-WK-gg0" customClass="LabelC6T3R" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="170" width="374" height="40.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="169.33333333333334" width="374" height="40.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -538,7 +538,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFl-gf-qas" customClass="CheckmarkButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="234.66666666666669" width="374" height="34"/>
+                                                <rect key="frame" x="0.0" y="234" width="374" height="34"/>
                                                 <state key="normal" title="_Manual Hardcopy"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="ManualHardCopy"/>
@@ -548,7 +548,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGc-Ah-B2Q" customClass="CheckmarkButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="276.66666666666669" width="374" height="34"/>
+                                                <rect key="frame" x="0.0" y="276" width="374" height="34"/>
                                                 <state key="normal" title="_Copy to E-mail or Clipboard"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="CopyEmailClipboard"/>
@@ -558,7 +558,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iB4-IF-EY4" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="334.66666666666669" width="374" height="34"/>
+                                                <rect key="frame" x="0.0" y="334" width="374" height="34"/>
                                                 <state key="normal" title="_Select At Least One to Continue"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="SelectOneButton"/>
@@ -798,7 +798,7 @@
                                                     <action selector="backupCopy" destination="i5s-AP-Aeo" eventType="touchUpInside" id="r2B-id-lO6"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_My Passphrase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHu-At-8Ka" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_My Passphrase" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHu-At-8Ka" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="24" width="374" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
