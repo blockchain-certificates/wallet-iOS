@@ -153,6 +153,7 @@ class ButtonBase : UIButton {
         
         titleLabel?.font = Style.Font.T3S
         titleLabel?.adjustsFontForContentSizeCategory = true
+        titleLabel?.adjustsFontSizeToFitWidth = true
         setTitleColor(textColor, for: .normal)
         setTitleColor(textColorHighlighted, for: .highlighted)
         setTitleColor(textColorDisabled, for: .disabled)
@@ -167,8 +168,6 @@ class ButtonBase : UIButton {
         
         isHighlighted = false
         isEnabled = true
-        
-        titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     override init(frame: CGRect) {
@@ -308,11 +307,15 @@ class CredentialActionButton : ButtonBase {
         layer.cornerRadius = 5
         clipsToBounds = true
         titleLabel?.font = Style.Font.T2S
+        
+        imageEdgeInsets = UIEdgeInsets(top: 0.0, left: -2.0, bottom: 0.0, right: 0.0)
+        titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: -2.0)
+        contentEdgeInsets = UIEdgeInsets.zero
     }
 }
 
 /// Sets the background of the image view to the top-left pixel of its image
-@IBDesignable
+//@IBDesignable
 class FullBleedImageView : UIImageView {
     override var image: UIImage? {
         didSet {
