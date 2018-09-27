@@ -76,12 +76,11 @@ class IssuerTableViewController: UITableViewController {
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: buttonCellReuseIdentifier) as! ButtonTableViewCell
             cell.button.setTitle(Localizations.AddCredential, for: .normal)
-            
-            cell.button.imageView?.contentMode = .scaleAspectFill
             cell.button.titleLabel?.font = Style.Font.T2S
             cell.button.titleLabel?.textColor = Style.Color.C3
-            cell.button.imageEdgeInsets = UIEdgeInsetsMake(14, -8, 14, 10)
-            cell.button.contentEdgeInsets = UIEdgeInsetsMake(20, 28, 20, 20)
+            cell.button.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: -2.0, bottom: 0.0, right: 0.0)
+            cell.button.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: -2.0)
+            cell.button.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
             
             cell.button.onTouchUpInside { [weak self] in
                 self?.delegate?.addCertificateTapped()

@@ -75,9 +75,10 @@ struct Style {
             }
             
             if #available(iOS 11.0, *) {
-                return UIFontMetrics.default.scaledFont(for: font)
+                return UIFontMetrics.default.scaledFont(for: font, maximumPointSize: font.pointSize * 1.5)
             } else {
-                return font.withSize(scaler * font.pointSize)
+                let size = min(scaler * font.pointSize, font.pointSize * 1.5)
+                return font.withSize(size)
             }
         }
         
