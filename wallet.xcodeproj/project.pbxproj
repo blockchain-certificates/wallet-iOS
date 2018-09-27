@@ -109,6 +109,7 @@
 		A9D2B04A202B5893002015F0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2B049202B5893002015F0 /* UIElements.swift */; };
 		ABC6BB21B68837562003AED2 /* libPods-certificates.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8F8F788045077CB0389D73 /* libPods-certificates.a */; };
 		D8A5012E533E2F30F5231695 /* libPods-certificatesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */; };
+		E5353D11215D656500B0FE1E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5353D13215D656500B0FE1E /* InfoPlist.strings */; };
 		EE651190212369A0009AC972 /* CertificateVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE65118F212369A0009AC972 /* CertificateVerifier.swift */; };
 		EE6511922126053E009AC972 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6511912126053E009AC972 /* Reachability.swift */; };
 		EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */; };
@@ -258,6 +259,8 @@
 		A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssuerCollectionReturningUserEmptyView.xib; sourceTree = "<group>"; };
 		A9D2B049202B5893002015F0 /* UIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
 		C2F8BC2D27986317037BFD9D /* libPods-certificatesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5353D12215D656500B0FE1E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E5353D14215D656900B0FE1E /* mt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mt; path = mt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EE65118F212369A0009AC972 /* CertificateVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerifier.swift; sourceTree = "<group>"; };
 		EE6511912126053E009AC972 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCheck.swift; sourceTree = "<group>"; };
@@ -366,6 +369,7 @@
 			children = (
 				EEAF835921471542008EC1FA /* Localizable.strings */,
 				83A6EDD21DAFFAC200ABFB47 /* AddIssuerViewController.swift */,
+				E5353D13215D656500B0FE1E /* InfoPlist.strings */,
 				838DC1371E43F0D300533AEB /* AddIssuerViewController.xib */,
 				EEAF82B921384E2C008EC1FA /* AddCredentialViewController.swift */,
 				A958CCD4202E4BD100CD35C6 /* Alert.storyboard */,
@@ -710,6 +714,7 @@
 				A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */,
 				A92E89692049A93C0035460B /* welcome_lottie.json in Resources */,
 				836031C51E5E513A005B2D2E /* Settings.bundle in Resources */,
+				E5353D11215D656500B0FE1E /* InfoPlist.strings in Resources */,
 				A9B17851203746E300B76375 /* IssuerCollectionEmptyView.xib in Resources */,
 				838DC13C1E43F0F700533AEB /* CertificateViewController.xib in Resources */,
 				834B94CA1DC1618900543E4F /* IssuerCollectionViewCell.xib in Resources */,
@@ -972,6 +977,15 @@
 				838DC13B1E43F0F700533AEB /* Base */,
 			);
 			name = CertificateViewController.xib;
+			sourceTree = "<group>";
+		};
+		E5353D13215D656500B0FE1E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5353D12215D656500B0FE1E /* es */,
+				E5353D14215D656900B0FE1E /* mt */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		EEAF835921471542008EC1FA /* Localizable.strings */ = {

@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  wallet
+
+  Created by Michael Dimore on 9/27/18.
+  Copyright © 2018 Learning Machine, Inc. All rights reserved.
+*/
+"NSFaceIDUsageDescription" = "FaceID is used to secure your passphrase.";
+"kCFBundleDevelopmentRegionKey" = "mt";
