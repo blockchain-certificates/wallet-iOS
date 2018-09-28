@@ -179,14 +179,14 @@ class OnboardingBackupMethods : ScrollingOnboardingControllerBase, UIActivityIte
     @IBAction func backupCopy() {
         let alert = AlertViewController.create(title: Localizations.AreYouSure, message: Localizations.EmailBackupWarning, icon: .warning)
 
-        let okayButton = DangerButton(frame: .zero)
+        let okayButton = SecondaryButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             alert.dismiss(animated: false, completion: nil)
             self?.presentCopySheet()
         }
 
-        let cancelButton = SecondaryButton(frame: .zero)
+        let cancelButton = PrimaryButton(frame: .zero)
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
