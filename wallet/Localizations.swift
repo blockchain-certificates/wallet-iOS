@@ -46,7 +46,7 @@ public struct Localizations {
     /// Base translation: No Network Connection
     public static var ReachabilityAlertTitle : String = NSLocalizedString("ReachabilityAlertTitle", comment: "")
 
-    /// Base translation: Log In To Issuer
+    /// Base translation: Log out and Reset
     public static var LoginToIssuer : String = NSLocalizedString("LoginToIssuer", comment: "")
 
     /// Base translation: Enter the URL provided by the issuer
@@ -115,7 +115,7 @@ public struct Localizations {
     /// Base translation: Something went wrong preparing that file for sharing. Try again later.
     public static var ShareCredentialGenericError : String = NSLocalizedString("ShareCredentialGenericError", comment: "")
 
-    /// Base translation: One-time code
+    /// Base translation: Parse issuer keys
     public static var OneTimeCode : String = NSLocalizedString("OneTimeCode", comment: "")
 
     /// Base translation: Something went wrong adding this issuer. Try again later.
@@ -180,13 +180,13 @@ public struct Localizations {
     /// Base translation: Invalid Credential
     public static var InvalidCredential : String = NSLocalizedString("InvalidCredential", comment: "")
 
-    /// Base translation: OK
+    /// Base translation: Okay
     public static var OK : String = NSLocalizedString("OK", comment: "")
 
     /// Base translation: Issuer Contact Email
     public static var IssuerContactEmail : String = NSLocalizedString("IssuerContactEmail", comment: "")
 
-    /// Base translation: This doesn't appear to be a valid credential file. Please check it and try again.
+    /// Base translation: This doesn't appear to be a valid credential URL. Please check it and try again.
     public static var InvalidCredentialFile : String = NSLocalizedString("InvalidCredentialFile", comment: "")
 
     /// Base translation: Blockcerts Wallet
@@ -234,7 +234,7 @@ public struct Localizations {
     /// Base translation: Couldn't delete file
     public static var DeleteFileError : String = NSLocalizedString("DeleteFileError", comment: "")
 
-    /// Base translation: Success!
+    /// Base translation: Take ownership of your digital records
     public static var Success : String = NSLocalizedString("Success", comment: "")
 
     /// Base translation: Something went wrong when deleting that certificate.
@@ -255,7 +255,7 @@ public struct Localizations {
     /// Base translation: Please note that you are now required to back up your passphrase, but you can do so easily in the app.
     public static var UpdateUserBody2 : String = NSLocalizedString("UpdateUserBody2", comment: "")
 
-    /// Base translation: %@ Credentials
+    /// Base translation: You have %@ credentials
     public static func MultipleCredentials(_ value1 : String) -> String {
         return String(format: NSLocalizedString("MultipleCredentials", comment: ""), value1)
     }
@@ -401,7 +401,7 @@ public struct Localizations {
     /// Base translation: Issuer Name
     public static var IssuerName : String = NSLocalizedString("IssuerName", comment: "")
 
-    /// Base translation: Verified
+    /// Base translation: Verified!
     public static var Verified : String = NSLocalizedString("Verified", comment: "")
 
     /// Base translation: Authenticate to replace your secure passphrase.
@@ -413,7 +413,7 @@ public struct Localizations {
     /// Base translation: Import
     public static var Import : String = NSLocalizedString("Import", comment: "")
 
-    /// Base translation: We've improved the experience, but you'll be able to receive and manage your credentials as before.
+    /// Base translation: We've improved the experience, but you'll be able to receive and manage your credentials as before. Please note that you are now required to back up your passphrase, but you can do so easily in the app. Tap continue to begin.
     public static var UpdateUserBody : String = NSLocalizedString("UpdateUserBody", comment: "")
 
     /// Base translation: Verification
@@ -428,7 +428,7 @@ public struct Localizations {
     /// Base translation: Adding Credential
     public static var AddingCredential : String = NSLocalizedString("AddingCredential", comment: "")
 
-    /// Base translation: Verifying %@ Credential... 
+    /// Base translation: Verifying %@ Credential...
     public static func VerificationInProgress(_ value1 : String) -> String {
         return String(format: NSLocalizedString("VerificationInProgress", comment: ""), value1)
     }
