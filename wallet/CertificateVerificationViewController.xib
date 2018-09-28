@@ -58,10 +58,9 @@
                                         <constraint firstAttribute="height" constant="400" placeholder="YES" id="4YB-qq-Xtn"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hJ-op-Fro" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="131" y="474" width="113" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hJ-op-Fro" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="131" y="474" width="113" height="30"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="VM6-q8-sRM"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="113" id="ikI-a9-6SE"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
