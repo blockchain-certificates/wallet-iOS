@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina3_5" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Ready!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9j9-s2-uov" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                    <rect key="frame" x="16" y="331" width="288" height="20.5"/>
+                    <rect key="frame" x="16" y="306.66666666666669" width="288" height="20.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -26,7 +26,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_You will receive an email when an issuer is ready to be added. Follow the link in the email to complete the process." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-L3-LXy" customClass="LabelC6T3R" customModule="certificates" customModuleProvider="target">
-                    <rect key="frame" x="16" y="372.5" width="288" height="81.5"/>
+                    <rect key="frame" x="16" y="348" width="288" height="81.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -35,16 +35,16 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLa-Hv-leI">
-                    <rect key="frame" x="0.0" y="20" width="320" height="287"/>
+                    <rect key="frame" x="0.0" y="43.999999999999986" width="320" height="238.66666666666663"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_empty_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="jzP-lF-GAk">
-                            <rect key="frame" x="20" y="25" width="280" height="237"/>
+                            <rect key="frame" x="82.666666666666671" y="52.333333333333329" width="154.66666666666663" height="133.66666666666669"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="237" id="ZD4-Bw-nF1"/>
+                                <constraint firstAttribute="width" secondItem="jzP-lF-GAk" secondAttribute="height" multiplier="52:45" id="xcw-2o-3gZ"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Issuer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKK-OJ-CN8" customClass="LabelC3T2B" customModule="certificates" customModuleProvider="target">
-                            <rect key="frame" x="176" y="61" width="87" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Issuer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKK-OJ-CN8" customClass="LabelC3T2BNoScale" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="166.66666666666666" y="56.333333333333321" width="66.666666666666657" height="29.666666666666664"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -56,15 +56,16 @@
                     <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="jzP-lF-GAk" firstAttribute="centerY" secondItem="BLa-Hv-leI" secondAttribute="centerY" id="C0G-ii-mIN"/>
-                        <constraint firstItem="XKK-OJ-CN8" firstAttribute="top" secondItem="jzP-lF-GAk" secondAttribute="top" constant="36" id="Iky-b5-0x4"/>
-                        <constraint firstItem="XKK-OJ-CN8" firstAttribute="leading" secondItem="jzP-lF-GAk" secondAttribute="leading" constant="156" id="K1a-8d-QBg"/>
-                        <constraint firstItem="jzP-lF-GAk" firstAttribute="top" secondItem="BLa-Hv-leI" secondAttribute="top" constant="25" id="TE2-Il-jZ3"/>
-                        <constraint firstAttribute="bottom" secondItem="jzP-lF-GAk" secondAttribute="bottom" constant="25" id="UkB-D5-6U1"/>
+                        <constraint firstItem="XKK-OJ-CN8" firstAttribute="top" secondItem="jzP-lF-GAk" secondAttribute="top" constant="4" id="Iky-b5-0x4"/>
+                        <constraint firstItem="jzP-lF-GAk" firstAttribute="trailing" secondItem="XKK-OJ-CN8" secondAttribute="trailing" constant="4" id="K1a-8d-QBg"/>
+                        <constraint firstItem="XKK-OJ-CN8" firstAttribute="width" secondItem="jzP-lF-GAk" secondAttribute="width" multiplier="0.43" id="Mjc-m1-N63"/>
+                        <constraint firstItem="XKK-OJ-CN8" firstAttribute="height" secondItem="jzP-lF-GAk" secondAttribute="height" multiplier="0.22" id="UCz-3p-h37"/>
+                        <constraint firstItem="jzP-lF-GAk" firstAttribute="height" secondItem="BLa-Hv-leI" secondAttribute="height" multiplier="0.56" id="nh5-db-XGJ"/>
                         <constraint firstItem="jzP-lF-GAk" firstAttribute="centerX" secondItem="BLa-Hv-leI" secondAttribute="centerX" id="ty5-dQ-uAA"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_You may add an issuer manually by visiting Settings and tapping Add an Issuer." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lfp-o6-NXW" customClass="LabelC7T1R" customModule="certificates" customModuleProvider="target">
-                    <rect key="frame" x="16" y="487" width="288" height="61"/>
+                    <rect key="frame" x="16" y="453" width="288" height="61"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -87,16 +88,14 @@
                 <constraint firstItem="Lfp-o6-NXW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="qMN-FN-eU0"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Lfp-o6-NXW" secondAttribute="bottom" constant="20" id="vD9-1C-sUy"/>
                 <constraint firstItem="BLa-Hv-leI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xRB-CD-B4J"/>
+                <constraint firstItem="BLa-Hv-leI" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.42" id="xzT-9D-MIP"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <connections>
-                <outlet property="imageHeightConstraint" destination="ZD4-Bw-nF1" id="sZ9-SM-8h6"/>
-            </connections>
             <point key="canvasLocation" x="173" y="117"/>
         </view>
     </objects>
     <resources>
-        <image name="illo_empty_wallet" width="280" height="245"/>
+        <image name="illo_empty_wallet" width="260" height="225"/>
     </resources>
 </document>

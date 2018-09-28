@@ -62,7 +62,7 @@ struct Style {
         case semiBold
         case bold
         }
-        static func create(_ weight: Weight, size: CGFloat) -> UIFont {
+        static func create(_ weight: Weight, size: CGFloat, isDynamic: Bool = true) -> UIFont {
             var font: UIFont
             
             switch weight {
@@ -74,11 +74,15 @@ struct Style {
                 font = UIFont.openSansBoldFont(ofSize: size)
             }
             
-            if #available(iOS 11.0, *) {
-                return UIFontMetrics.default.scaledFont(for: font, maximumPointSize: font.pointSize * 1.5)
+            if isDynamic {
+                if #available(iOS 11.0, *) {
+                    return UIFontMetrics.default.scaledFont(for: font, maximumPointSize: font.pointSize * 1.5)
+                } else {
+                    let size = min(scaler * font.pointSize, font.pointSize * 1.5)
+                    return font.withSize(size)
+                }
             } else {
-                let size = min(scaler * font.pointSize, font.pointSize * 1.5)
-                return font.withSize(size)
+                return font
             }
         }
         
@@ -87,6 +91,8 @@ struct Style {
         }
         
         static let T1R = create(.regular, size: 12)
+        
+        static let T1R_NoScale = create(.regular, size: 12, isDynamic: false)
 
         static let T1B = create(.bold, size: 12)
         
@@ -95,6 +101,8 @@ struct Style {
         static let T2S = create(.semiBold, size: 14)
         
         static let T2B = create(.bold, size: 14)
+        
+        static let T2B_NoScale = create(.bold, size: 14, isDynamic: false)
         
         static let T3R = create(.regular, size: 16)
         
