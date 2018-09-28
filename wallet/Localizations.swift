@@ -383,11 +383,11 @@ public struct Localizations {
     /// Base translation: Credential Info
     public static var CredentialInfo : String = NSLocalizedString("CredentialInfo", comment: "")
 
-    /// Base translation: Please select at least one option below:
-    public static var SelectOne : String = NSLocalizedString("SelectOne", comment: "")
-
     /// Base translation: Play intro video.
     public static var PlayButtonAccessibility : String = NSLocalizedString("PlayButtonAccessibility", comment: "")
+
+    /// Base translation: Please select at least one option below:
+    public static var SelectOne : String = NSLocalizedString("SelectOne", comment: "")
 
     /// Base translation: Adding this issuer failed. Please try again
     public static var AddIssuerFailAlertMessage : String = NSLocalizedString("AddIssuerFailAlertMessage", comment: "")
@@ -416,14 +416,14 @@ public struct Localizations {
     /// Base translation: We've improved the experience, but you'll be able to receive and manage your credentials as before.
     public static var UpdateUserBody : String = NSLocalizedString("UpdateUserBody", comment: "")
 
-    /// Base translation: Welcome
-    public static var Welcome : String = NSLocalizedString("Welcome", comment: "")
+    /// Base translation: Verification
+    public static var Verification : String = NSLocalizedString("Verification", comment: "")
 
     /// Base translation: Shared Address
     public static var SharedAddress : String = NSLocalizedString("SharedAddress", comment: "")
 
-    /// Base translation: Verification
-    public static var Verification : String = NSLocalizedString("Verification", comment: "")
+    /// Base translation: Welcome
+    public static var Welcome : String = NSLocalizedString("Welcome", comment: "")
 
     /// Base translation: Adding Credential
     public static var AddingCredential : String = NSLocalizedString("AddingCredential", comment: "")
