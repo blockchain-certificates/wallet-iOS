@@ -101,8 +101,7 @@ class IssuerViewController: UIViewController {
         Logger.main.info("More info tapped on the Issuer display.")
         let controller = IssuerMetadataViewController(issuer: managedIssuer)
         controller.delegate = self
-        let navController = UINavigationController(rootViewController: controller);
-        navController.styleDefault()
+        let navController = NavigationController(rootViewController: controller);
         present(navController, animated: true, completion: nil)
     }
     
@@ -115,8 +114,7 @@ class IssuerViewController: UIViewController {
             Logger.main.info("Add Credential from URL tapped in issuer view")
             let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
             let controller = storyboard.instantiateViewController(withIdentifier: "addCredentialFromURL") as! AddCredentialURLViewController
-            
-            let navigationController = UINavigationController(rootViewController: controller)
+            let navigationController = NavigationController(rootViewController: controller)
             
             let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_close"), style: .done, target: controller, action: #selector(AddCredentialURLViewController.dismissModally))
             cancelButton.accessibilityLabel = Localizations.Close

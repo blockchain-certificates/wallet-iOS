@@ -125,6 +125,21 @@ class LabelC12T1R : LabelC3T3B {
     override var color: UIColor { return Style.Color.C12 }
 }
 
+class LabelC3T2BNoScale : LabelC3T2B {
+    override var labelFont: UIFont { return Style.Font.T2B_NoScale }
+    override var color: UIColor { return Style.Color.C3 }
+    override func commonInit() {
+        super.commonInit()
+        adjustsFontForContentSizeCategory = false
+        adjustsFontSizeToFitWidth = true
+    }
+}
+
+class LabelC7T1RNoScale : LabelC3T2BNoScale {
+    override var labelFont: UIFont { return Style.Font.T1R_NoScale }
+    override var color: UIColor { return Style.Color.C7 }
+}
+
 // MARK: - Buttons
 
 protocol Button {
@@ -354,7 +369,26 @@ extension UIView {
 }
 
 class NavigationController: UINavigationController {
+    override init(rootViewController: UIViewController) {
+        super.init(rootViewController: rootViewController)
+        commonInit()
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    func commonInit() {
+        //navigationBar.backIndicatorImage = UIImage(named: "icon_back")
+        //navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "icon_back")
+        styleDefault()
+    }
 }
 
 extension UINavigationController {
@@ -364,8 +398,6 @@ extension UINavigationController {
             [NSAttributedStringKey.font: Style.Font.T4B,
              NSAttributedStringKey.foregroundColor: Style.Color.C1]
         
-        navigationBar.backIndicatorImage = UIImage(named: "icon_back")
-        navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "icon_back")
         navigationBar.tintColor = Style.Color.C1
         navigationBar.barTintColor = Style.Color.C3
         navigationBar.isTranslucent = false
@@ -377,8 +409,6 @@ extension UINavigationController {
             [NSAttributedStringKey.font: Style.Font.T4B,
              NSAttributedStringKey.foregroundColor: Style.Color.C3]
         
-        navigationBar.backIndicatorImage = UIImage(named: "icon_back")
-        navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "icon_back")
         navigationBar.tintColor = Style.Color.C3
         navigationBar.barTintColor = Style.Color.C1
         navigationBar.isTranslucent = false

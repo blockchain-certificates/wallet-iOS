@@ -114,6 +114,8 @@
 		EE6511922126053E009AC972 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6511912126053E009AC972 /* Reachability.swift */; };
 		EE74255E212F479C00B2DAF7 /* AppVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */; };
 		EE821EC8215C100000713C47 /* verifier.js in Resources */ = {isa = PBXBuildFile; fileRef = EE821EC7215C0FFF00713C47 /* verifier.js */; };
+		EE821ECE215E798700713C47 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE821ECC215E798700713C47 /* SettingsTableViewCell.swift */; };
+		EE821ECF215E798700713C47 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE821ECD215E798700713C47 /* SettingsTableViewCell.xib */; };
 		EE8DD6AA2148705500795B0D /* CertificateVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8DD6A82148705500795B0D /* CertificateVerificationViewController.swift */; };
 		EE8DD6AB2148705500795B0D /* CertificateVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE8DD6A92148705500795B0D /* CertificateVerificationViewController.xib */; };
 		EE8DD6AD21497C1600795B0D /* CertificateVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8DD6AC21497C1600795B0D /* CertificateVerificationView.swift */; };
@@ -265,6 +267,8 @@
 		EE6511912126053E009AC972 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		EE74255D212F479C00B2DAF7 /* AppVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCheck.swift; sourceTree = "<group>"; };
 		EE821EC7215C0FFF00713C47 /* verifier.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = verifier.js; sourceTree = "<group>"; };
+		EE821ECC215E798700713C47 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		EE821ECD215E798700713C47 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		EE8DD6A82148705500795B0D /* CertificateVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerificationViewController.swift; sourceTree = "<group>"; };
 		EE8DD6A92148705500795B0D /* CertificateVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateVerificationViewController.xib; sourceTree = "<group>"; };
 		EE8DD6AC21497C1600795B0D /* CertificateVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateVerificationView.swift; sourceTree = "<group>"; };
@@ -506,6 +510,8 @@
 				8329A0501DDA825200863285 /* IssuerSummaryTableViewCell.swift */,
 				8329A0511DDA825200863285 /* IssuerSummaryTableViewCell.xib */,
 				8337CFD11E1D78110080E876 /* LabeledTableViewCell.swift */,
+				EE821ECC215E798700713C47 /* SettingsTableViewCell.swift */,
+				EE821ECD215E798700713C47 /* SettingsTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -710,6 +716,7 @@
 				EEAF835B21471542008EC1FA /* Localizable.strings in Resources */,
 				A9B997A62040611D00C05153 /* IssuerCollectionReturningUserEmptyView.xib in Resources */,
 				A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */,
+				EE821ECF215E798700713C47 /* SettingsTableViewCell.xib in Resources */,
 				83D9479A1E01EA3C0038C4E2 /* CertificateTitleTableViewCell.xib in Resources */,
 				A9B1784D2037279D00B76375 /* ButtonTableViewCell.xib in Resources */,
 				A92E89692049A93C0035460B /* welcome_lottie.json in Resources */,
@@ -868,6 +875,7 @@
 				EE6511922126053E009AC972 /* Reachability.swift in Sources */,
 				838DE6D21F3B665C00185A49 /* CertificateManager.swift in Sources */,
 				A9B1784F203727AD00B76375 /* ButtonTableViewCell.swift in Sources */,
+				EE821ECE215E798700713C47 /* SettingsTableViewCell.swift in Sources */,
 				83D6BE9F1DC2B7B100FE0241 /* IssuerTableViewController.swift in Sources */,
 				838DE6DA1F3B684600185A49 /* Analytics.swift in Sources */,
 				EE8DD6AD21497C1600795B0D /* CertificateVerificationView.swift in Sources */,

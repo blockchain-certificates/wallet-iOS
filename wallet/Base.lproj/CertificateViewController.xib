@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateViewController" customModule="certificates" customModuleProvider="target">
             <connections>
-                <outlet property="footerView" destination="X1h-nY-yXF" id="IeV-W8-uKT"/>
                 <outlet property="renderedCertificateView" destination="0Jh-Wq-q8h" id="aCa-RX-aLX"/>
                 <outlet property="shareButton" destination="YTQ-rO-N6E" id="dfh-IN-bk4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -56,8 +55,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X1h-nY-yXF" userLabel="Footer">
                     <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWC-rg-3XN" userLabel="Info Button" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
-                            <rect key="frame" x="8" y="8" width="108.5" height="44"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h28-uf-yI0" userLabel="Top Divider">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="yej-T1-PRB"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWC-rg-3XN" userLabel="Info Button" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="8" y="9" width="108.5" height="44"/>
                             <state key="normal" title="_Info" image="icon_info">
                                 <color key="titleColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -68,16 +74,16 @@
                                 <action selector="infoTapped:" destination="-1" eventType="touchUpInside" id="I9C-u9-5Xp"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diU-wL-WfV">
-                            <rect key="frame" x="124.5" y="13.5" width="1" height="33"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diU-wL-WfV">
+                            <rect key="frame" x="124.5" y="14.5" width="1" height="33"/>
                             <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="33" id="3fy-74-uOR"/>
                                 <constraint firstAttribute="width" constant="1" id="7Eo-2f-WrG"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-06-Fky" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
-                            <rect key="frame" x="133.5" y="8" width="108" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-06-Fky" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="133.5" y="9" width="108" height="44"/>
                             <state key="normal" title="_Verify" image="icon_verify">
                                 <color key="titleColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -88,16 +94,16 @@
                                 <action selector="verifyTapped:" destination="-1" eventType="touchUpInside" id="C3Q-PG-9AX"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BiC-kn-enq">
-                            <rect key="frame" x="249.5" y="13.5" width="1" height="33"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BiC-kn-enq">
+                            <rect key="frame" x="249.5" y="14.5" width="1" height="33"/>
                             <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="33" id="f2f-Sv-HAL"/>
                                 <constraint firstAttribute="width" constant="1" id="fVw-mh-VTj"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-rO-N6E" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
-                            <rect key="frame" x="258.5" y="8" width="108.5" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-rO-N6E" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
+                            <rect key="frame" x="258.5" y="9" width="108.5" height="44"/>
                             <state key="normal" title="_Share" image="icon_share">
                                 <color key="titleColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -115,18 +121,21 @@
                         <constraint firstItem="BiC-kn-enq" firstAttribute="leading" secondItem="rHb-06-Fky" secondAttribute="trailing" constant="8" id="2JS-ya-qlO"/>
                         <constraint firstAttribute="trailing" secondItem="YTQ-rO-N6E" secondAttribute="trailing" constant="8" id="2Sp-yu-PxB"/>
                         <constraint firstItem="BiC-kn-enq" firstAttribute="centerY" secondItem="X1h-nY-yXF" secondAttribute="centerY" id="Afr-D3-H1J"/>
-                        <constraint firstItem="rWC-rg-3XN" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" constant="8" id="Bx3-cc-4Mp"/>
                         <constraint firstItem="rHb-06-Fky" firstAttribute="leading" secondItem="diU-wL-WfV" secondAttribute="trailing" constant="8" id="JlH-vs-aPF"/>
                         <constraint firstAttribute="bottom" secondItem="rHb-06-Fky" secondAttribute="bottom" constant="8" id="NIi-xc-1zn"/>
+                        <constraint firstItem="h28-uf-yI0" firstAttribute="leading" secondItem="X1h-nY-yXF" secondAttribute="leading" id="T9O-b1-JWg"/>
                         <constraint firstAttribute="bottom" secondItem="YTQ-rO-N6E" secondAttribute="bottom" constant="8" id="Uoy-fc-GiG"/>
-                        <constraint firstItem="YTQ-rO-N6E" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" constant="8" id="adh-qT-8jc"/>
+                        <constraint firstItem="rWC-rg-3XN" firstAttribute="top" secondItem="h28-uf-yI0" secondAttribute="bottom" constant="8" id="W1c-6a-5g7"/>
+                        <constraint firstItem="rHb-06-Fky" firstAttribute="top" secondItem="h28-uf-yI0" secondAttribute="bottom" constant="8" id="YYb-MH-arS"/>
                         <constraint firstAttribute="height" constant="60" id="bW4-AA-bWb"/>
                         <constraint firstItem="rWC-rg-3XN" firstAttribute="leading" secondItem="X1h-nY-yXF" secondAttribute="leading" constant="8" id="cbP-dR-kVu"/>
                         <constraint firstItem="diU-wL-WfV" firstAttribute="leading" secondItem="rWC-rg-3XN" secondAttribute="trailing" constant="8" id="e14-W4-oNF"/>
+                        <constraint firstAttribute="trailing" secondItem="h28-uf-yI0" secondAttribute="trailing" id="gvs-sN-ml2"/>
                         <constraint firstAttribute="bottom" secondItem="rWC-rg-3XN" secondAttribute="bottom" constant="8" id="ijd-Y1-Dbm"/>
+                        <constraint firstItem="h28-uf-yI0" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" id="jhG-X9-dC5"/>
                         <constraint firstItem="diU-wL-WfV" firstAttribute="centerY" secondItem="X1h-nY-yXF" secondAttribute="centerY" id="keb-MX-MLj"/>
                         <constraint firstItem="rHb-06-Fky" firstAttribute="width" secondItem="YTQ-rO-N6E" secondAttribute="width" id="m2h-rg-zSO"/>
-                        <constraint firstItem="rHb-06-Fky" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" constant="8" id="q0M-X7-DUG"/>
+                        <constraint firstItem="YTQ-rO-N6E" firstAttribute="top" secondItem="h28-uf-yI0" secondAttribute="bottom" constant="8" id="umA-ba-BD2"/>
                         <constraint firstItem="rWC-rg-3XN" firstAttribute="width" secondItem="rHb-06-Fky" secondAttribute="width" id="y4H-g4-93k"/>
                     </constraints>
                 </view>

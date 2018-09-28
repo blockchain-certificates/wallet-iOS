@@ -14,7 +14,6 @@ class CertificateViewController: UIViewController {
     
     @IBOutlet weak var renderedCertificateView: RenderedCertificateView!
     @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var footerView: UIView!
     
     let certificate: Certificate
     let analytics = Analytics()
@@ -38,9 +37,6 @@ class CertificateViewController: UIViewController {
         shareButton.isEnabled = certificate.assertion.uid != Identifiers.sampleCertificateUID
         renderedCertificateView.render(certificate: certificate)
         analytics.track(event: .viewed, certificate: certificate)
-        
-        footerView.layer.borderColor = Style.Color.C8.cgColor;
-        footerView.layer.borderWidth = 1;
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +55,6 @@ class CertificateViewController: UIViewController {
         
         let verificationController = CertificateVerificationViewController(certificate: certificate)
         let navController = NavigationController(rootViewController: verificationController)
-        navController.styleDefault()
         present(navController, animated: true, completion: nil)
     }
     
@@ -70,8 +65,7 @@ class CertificateViewController: UIViewController {
         
         let controller = CertificateMetadataViewController(certificate: certificate)
         controller.delegate = self
-        let navController = UINavigationController(rootViewController: controller);
-        navController.styleDefault()
+        let navController = NavigationController(rootViewController: controller);
         present(navController, animated: true, completion: nil)
     }
     
