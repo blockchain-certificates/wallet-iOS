@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gKt-0J-INy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gKt-0J-INy">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -42,10 +43,6 @@
         <scene sceneID="i6h-4D-YvS">
             <objects>
                 <viewController id="C6e-aU-jG4" customClass="LandingScreenViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VKn-4x-CYk"/>
-                        <viewControllerLayoutGuide type="bottom" id="mOR-uu-ojF"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5m7-RT-iLO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -100,17 +97,18 @@
                             <constraint firstAttribute="trailingMargin" secondItem="qKJ-hu-YmP" secondAttribute="trailing" id="BFh-mC-Y9j"/>
                             <constraint firstItem="uWO-Mc-lvh" firstAttribute="top" secondItem="58a-hx-ELF" secondAttribute="bottom" id="DpN-z0-Y8n"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="Kuj-oZ-T7k"/>
-                            <constraint firstItem="mOR-uu-ojF" firstAttribute="top" secondItem="qKJ-hu-YmP" secondAttribute="bottom" constant="20" id="Oyh-Ns-D2r"/>
+                            <constraint firstItem="an8-p7-2zd" firstAttribute="bottom" secondItem="qKJ-hu-YmP" secondAttribute="bottom" constant="20" id="Oyh-Ns-D2r"/>
                             <constraint firstItem="58a-hx-ELF" firstAttribute="width" secondItem="5m7-RT-iLO" secondAttribute="width" id="QnQ-g2-xcW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uWO-Mc-lvh" secondAttribute="trailing" id="RZU-MA-7gM"/>
                             <constraint firstItem="uWO-Mc-lvh" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="Yqg-aR-7nW"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="leading" secondItem="5m7-RT-iLO" secondAttribute="leadingMargin" id="eKv-uB-s0z"/>
-                            <constraint firstItem="58a-hx-ELF" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="hNc-BH-uV8"/>
-                            <constraint firstItem="rU6-4J-hvL" firstAttribute="centerX" secondItem="5m7-RT-iLO" secondAttribute="centerX" id="huW-XS-Cbl"/>
+                            <constraint firstItem="58a-hx-ELF" firstAttribute="centerX" secondItem="an8-p7-2zd" secondAttribute="centerX" id="hNc-BH-uV8"/>
+                            <constraint firstItem="rU6-4J-hvL" firstAttribute="centerX" secondItem="an8-p7-2zd" secondAttribute="centerX" id="huW-XS-Cbl"/>
                             <constraint firstItem="58a-hx-ELF" firstAttribute="top" secondItem="rU6-4J-hvL" secondAttribute="bottom" id="k7y-CF-1Wx"/>
-                            <constraint firstItem="rU6-4J-hvL" firstAttribute="top" secondItem="VKn-4x-CYk" secondAttribute="bottom" id="lqN-0Q-3Ao"/>
+                            <constraint firstItem="rU6-4J-hvL" firstAttribute="top" secondItem="an8-p7-2zd" secondAttribute="top" id="lqN-0Q-3Ao"/>
                             <constraint firstItem="qKJ-hu-YmP" firstAttribute="top" secondItem="uWO-Mc-lvh" secondAttribute="bottom" constant="8" id="vhZ-Ij-9SM"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="an8-p7-2zd"/>
                     </view>
                     <navigationItem key="navigationItem" id="ima-vz-6aP"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -123,10 +121,6 @@
         <scene sceneID="a3e-su-2Kq">
             <objects>
                 <viewController storyboardIdentifier="WelcomeReturningUsers" id="g39-vY-4w6" customClass="WelcomeReturningUsersViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ab0-sK-zLW"/>
-                        <viewControllerLayoutGuide type="bottom" id="Lmu-Wc-t3J"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="viy-wW-g0f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -236,15 +230,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="CO2-bx-nC6" firstAttribute="leading" secondItem="viy-wW-g0f" secondAttribute="leading" id="2Hj-xC-xkw"/>
-                            <constraint firstAttribute="trailing" secondItem="CO2-bx-nC6" secondAttribute="trailing" id="80O-nc-bJX"/>
-                            <constraint firstAttribute="trailing" secondItem="CWt-dI-oKE" secondAttribute="trailing" id="97n-ab-k2Q"/>
-                            <constraint firstAttribute="trailing" secondItem="kZe-ki-NCg" secondAttribute="trailing" constant="20" id="H1X-Lx-6bT"/>
-                            <constraint firstItem="CO2-bx-nC6" firstAttribute="top" secondItem="ab0-sK-zLW" secondAttribute="bottom" id="HEE-RN-ie6"/>
-                            <constraint firstItem="kZe-ki-NCg" firstAttribute="leading" secondItem="viy-wW-g0f" secondAttribute="leading" constant="20" id="QAi-VR-KnQ"/>
-                            <constraint firstItem="Lmu-Wc-t3J" firstAttribute="top" secondItem="CO2-bx-nC6" secondAttribute="bottom" id="W4w-JN-XFD"/>
-                            <constraint firstItem="CWt-dI-oKE" firstAttribute="leading" secondItem="viy-wW-g0f" secondAttribute="leading" id="po8-6b-2PD"/>
+                            <constraint firstItem="CO2-bx-nC6" firstAttribute="leading" secondItem="wtU-C7-rD6" secondAttribute="leading" id="2Hj-xC-xkw"/>
+                            <constraint firstItem="wtU-C7-rD6" firstAttribute="trailing" secondItem="CO2-bx-nC6" secondAttribute="trailing" id="80O-nc-bJX"/>
+                            <constraint firstItem="wtU-C7-rD6" firstAttribute="trailing" secondItem="CWt-dI-oKE" secondAttribute="trailing" id="97n-ab-k2Q"/>
+                            <constraint firstItem="wtU-C7-rD6" firstAttribute="trailing" secondItem="kZe-ki-NCg" secondAttribute="trailing" constant="20" id="H1X-Lx-6bT"/>
+                            <constraint firstItem="CO2-bx-nC6" firstAttribute="top" secondItem="wtU-C7-rD6" secondAttribute="top" id="HEE-RN-ie6"/>
+                            <constraint firstItem="kZe-ki-NCg" firstAttribute="leading" secondItem="wtU-C7-rD6" secondAttribute="leading" constant="20" id="QAi-VR-KnQ"/>
+                            <constraint firstItem="wtU-C7-rD6" firstAttribute="bottom" secondItem="CO2-bx-nC6" secondAttribute="bottom" id="W4w-JN-XFD"/>
+                            <constraint firstItem="CWt-dI-oKE" firstAttribute="leading" secondItem="wtU-C7-rD6" secondAttribute="leading" id="po8-6b-2PD"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="wtU-C7-rD6"/>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="kZe-ki-NCg" id="AqV-D3-Odd"/>
@@ -260,10 +255,6 @@
         <scene sceneID="0Aa-Fw-X41">
             <objects>
                 <viewController id="BDX-GA-efs" customClass="OnboardingCurrentUser" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="iqX-IH-2n2"/>
-                        <viewControllerLayoutGuide type="bottom" id="Thg-TG-wwh"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Lkj-ps-MRg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -343,13 +334,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vY5-pE-shK" firstAttribute="top" secondItem="iqX-IH-2n2" secondAttribute="bottom" id="4FJ-Rh-Pg0"/>
-                            <constraint firstItem="aUC-ws-ppc" firstAttribute="leading" secondItem="Lkj-ps-MRg" secondAttribute="leading" constant="20" id="6gt-7d-7bM"/>
-                            <constraint firstItem="Thg-TG-wwh" firstAttribute="top" secondItem="vY5-pE-shK" secondAttribute="bottom" id="VcJ-uQ-Cma"/>
-                            <constraint firstAttribute="trailing" secondItem="aUC-ws-ppc" secondAttribute="trailing" constant="20" id="bkE-JG-GhE"/>
-                            <constraint firstItem="vY5-pE-shK" firstAttribute="leading" secondItem="Lkj-ps-MRg" secondAttribute="leading" id="cgk-Jz-H3p"/>
-                            <constraint firstAttribute="trailing" secondItem="vY5-pE-shK" secondAttribute="trailing" id="ssg-of-xsF"/>
+                            <constraint firstItem="vY5-pE-shK" firstAttribute="top" secondItem="Hhw-oT-cp2" secondAttribute="top" id="4FJ-Rh-Pg0"/>
+                            <constraint firstItem="aUC-ws-ppc" firstAttribute="leading" secondItem="Hhw-oT-cp2" secondAttribute="leading" constant="20" id="6gt-7d-7bM"/>
+                            <constraint firstItem="Hhw-oT-cp2" firstAttribute="bottom" secondItem="vY5-pE-shK" secondAttribute="bottom" id="VcJ-uQ-Cma"/>
+                            <constraint firstItem="Hhw-oT-cp2" firstAttribute="trailing" secondItem="aUC-ws-ppc" secondAttribute="trailing" constant="20" id="bkE-JG-GhE"/>
+                            <constraint firstItem="vY5-pE-shK" firstAttribute="leading" secondItem="Hhw-oT-cp2" secondAttribute="leading" id="cgk-Jz-H3p"/>
+                            <constraint firstItem="Hhw-oT-cp2" firstAttribute="trailing" secondItem="vY5-pE-shK" secondAttribute="trailing" id="ssg-of-xsF"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hhw-oT-cp2"/>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="aUC-ws-ppc" id="1hj-Ll-MGD"/>
@@ -366,10 +358,6 @@
         <scene sceneID="35f-qu-Nzo">
             <objects>
                 <viewController title="New User" id="T7K-XY-0w3" customClass="NewUserViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fTF-sV-48q"/>
-                        <viewControllerLayoutGuide type="bottom" id="TkE-ae-Q2Z"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Dxu-0f-vEN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -378,10 +366,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RyP-ht-mHB" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="441.33333333333331"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="441.66666666666669"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Passphrase Generated!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQM-Bm-Iw4" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="137" width="374" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Passphrase Generated!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQM-Bm-Iw4" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="137" width="374" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -390,7 +378,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_There's a backup on this phone. You must create an extra backup in case you lose or switch devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6G-c0-sOB" customClass="LabelC6T3R" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="169" width="374" height="61"/>
+                                                <rect key="frame" x="0.0" y="169.33333333333334" width="374" height="61"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -399,7 +387,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Passphrase" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8z5-Yg-UUa" customClass="LabelC3T3B" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="254.00000000000003" width="374" height="20.333333333333343"/>
+                                                <rect key="frame" x="0.0" y="254.33333333333334" width="374" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -408,7 +396,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sPd-ZI-ehX" userLabel="Passphrase container">
-                                                <rect key="frame" x="0.0" y="282.33333333333331" width="374" height="85"/>
+                                                <rect key="frame" x="0.0" y="282.66666666666669" width="374" height="85"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="pass phrase generate electricity dynamo femur shake fries joystick corgi jingle wall sticker sandwich soup pencil coffee" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDS-eb-6Ul" customClass="LabelC3T3S" customModule="certificates" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="12" width="342" height="61"/>
@@ -431,7 +419,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEY-4S-zBG" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="391.33333333333331" width="374" height="34"/>
+                                                <rect key="frame" x="0.0" y="391.66666666666669" width="374" height="34"/>
                                                 <state key="normal" title="_Create a Backup"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="CreateBackup"/>
@@ -475,13 +463,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="pHt-mR-CiN" firstAttribute="leading" secondItem="Dxu-0f-vEN" secondAttribute="leading" id="EnU-D6-2Ik"/>
-                            <constraint firstItem="RyP-ht-mHB" firstAttribute="leading" secondItem="Dxu-0f-vEN" secondAttribute="leading" constant="20" id="KYW-20-hly"/>
-                            <constraint firstAttribute="trailing" secondItem="pHt-mR-CiN" secondAttribute="trailing" id="bPY-pb-7o9"/>
-                            <constraint firstItem="TkE-ae-Q2Z" firstAttribute="top" secondItem="pHt-mR-CiN" secondAttribute="bottom" id="hdp-bt-hg5"/>
-                            <constraint firstItem="pHt-mR-CiN" firstAttribute="top" secondItem="fTF-sV-48q" secondAttribute="bottom" id="nR9-Cu-p8N"/>
-                            <constraint firstAttribute="trailing" secondItem="RyP-ht-mHB" secondAttribute="trailing" constant="20" id="uL3-uH-eo9"/>
+                            <constraint firstItem="pHt-mR-CiN" firstAttribute="leading" secondItem="MDz-Qu-2bE" secondAttribute="leading" id="EnU-D6-2Ik"/>
+                            <constraint firstItem="RyP-ht-mHB" firstAttribute="leading" secondItem="MDz-Qu-2bE" secondAttribute="leading" constant="20" id="KYW-20-hly"/>
+                            <constraint firstItem="MDz-Qu-2bE" firstAttribute="trailing" secondItem="pHt-mR-CiN" secondAttribute="trailing" id="bPY-pb-7o9"/>
+                            <constraint firstItem="MDz-Qu-2bE" firstAttribute="bottom" secondItem="pHt-mR-CiN" secondAttribute="bottom" id="hdp-bt-hg5"/>
+                            <constraint firstItem="pHt-mR-CiN" firstAttribute="top" secondItem="MDz-Qu-2bE" secondAttribute="top" id="nR9-Cu-p8N"/>
+                            <constraint firstItem="MDz-Qu-2bE" firstAttribute="trailing" secondItem="RyP-ht-mHB" secondAttribute="trailing" constant="20" id="uL3-uH-eo9"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="MDz-Qu-2bE"/>
                     </view>
                     <navigationItem key="navigationItem" id="bQl-QP-8rb"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -502,10 +491,6 @@
         <scene sceneID="HDx-wo-1Xq">
             <objects>
                 <viewController id="i5s-AP-Aeo" customClass="OnboardingBackupMethods" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="X9f-Kk-Bbm"/>
-                        <viewControllerLayoutGuide type="bottom" id="G2a-o9-fAF"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CJM-tU-YMm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -516,7 +501,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqY-ow-1Di" userLabel="Container">
                                         <rect key="frame" x="20" y="0.0" width="374" height="384"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_backup" translatesAutoresizingMaskIntoConstraints="NO" id="P5q-5d-qXN">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_backup" translatesAutoresizingMaskIntoConstraints="NO" id="P5q-5d-qXN">
                                                 <rect key="frame" x="129" y="16" width="116" height="105"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Select Backup Methods" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRC-qm-tMU" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
@@ -601,14 +586,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="G2a-o9-fAF" firstAttribute="top" secondItem="S9L-es-UFv" secondAttribute="bottom" id="4cO-I6-b1G"/>
+                            <constraint firstItem="dKG-8E-gdh" firstAttribute="bottom" secondItem="S9L-es-UFv" secondAttribute="bottom" id="4cO-I6-b1G"/>
                             <constraint firstItem="P5q-5d-qXN" firstAttribute="width" secondItem="CJM-tU-YMm" secondAttribute="width" multiplier="0.28" id="Ki4-FV-Ffb"/>
-                            <constraint firstAttribute="trailing" secondItem="S9L-es-UFv" secondAttribute="trailing" id="PHi-8u-0wj"/>
-                            <constraint firstItem="S9L-es-UFv" firstAttribute="leading" secondItem="CJM-tU-YMm" secondAttribute="leading" id="TSS-yf-y6z"/>
-                            <constraint firstItem="WqY-ow-1Di" firstAttribute="leading" secondItem="CJM-tU-YMm" secondAttribute="leading" constant="20" id="aXR-qg-src"/>
-                            <constraint firstAttribute="trailing" secondItem="WqY-ow-1Di" secondAttribute="trailing" constant="20" id="eOT-CI-Vtw"/>
-                            <constraint firstItem="S9L-es-UFv" firstAttribute="top" secondItem="X9f-Kk-Bbm" secondAttribute="bottom" id="ybX-wB-LB7"/>
+                            <constraint firstItem="dKG-8E-gdh" firstAttribute="trailing" secondItem="S9L-es-UFv" secondAttribute="trailing" id="PHi-8u-0wj"/>
+                            <constraint firstItem="S9L-es-UFv" firstAttribute="leading" secondItem="dKG-8E-gdh" secondAttribute="leading" id="TSS-yf-y6z"/>
+                            <constraint firstItem="WqY-ow-1Di" firstAttribute="leading" secondItem="dKG-8E-gdh" secondAttribute="leading" constant="20" id="aXR-qg-src"/>
+                            <constraint firstItem="dKG-8E-gdh" firstAttribute="trailing" secondItem="WqY-ow-1Di" secondAttribute="trailing" constant="20" id="eOT-CI-Vtw"/>
+                            <constraint firstItem="S9L-es-UFv" firstAttribute="top" secondItem="dKG-8E-gdh" secondAttribute="top" id="ybX-wB-LB7"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="dKG-8E-gdh"/>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="WqY-ow-1Di" id="wWD-a3-RLQ"/>
@@ -626,10 +612,6 @@
         <scene sceneID="Hgm-kK-cQi">
             <objects>
                 <viewController storyboardIdentifier="manualBackup" title="Manual Backup" id="CdH-oJ-v0k" customClass="OnboardingManualBackup" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="208-Ud-Tmj"/>
-                        <viewControllerLayoutGuide type="bottom" id="6yH-oq-bb6"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9pM-qE-SXt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -638,16 +620,16 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-7Y-4vX" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="348.66666666666669"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="364.66666666666669"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illo_writtenbackup" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-2e-aVj">
-                                                <rect key="frame" x="134.66666666666666" y="0.0" width="104.66666666666666" height="104.66666666666667"/>
+                                                <rect key="frame" x="134.66666666666666" y="16.000000000000007" width="104.66666666666666" height="104.66666666666669"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="j3U-2e-aVj" secondAttribute="height" multiplier="1:1" id="dQJ-VD-IHL"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Manual Hardcopy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PE0-wT-KoM" customClass="LabelC3T5S" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="120.66666666666664" width="374" height="20.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="136.66666666666666" width="374" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -656,7 +638,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Write your passphrase by hand on a piece of paper and store it in a secure location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vj-p9-n0G" customClass="LabelC6T3R" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="153" width="374" height="40.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="169" width="374" height="40.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -665,7 +647,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlN-eo-GeR" userLabel="Passphrase container">
-                                                <rect key="frame" x="0.0" y="205.66666666666666" width="374" height="84.999999999999972"/>
+                                                <rect key="frame" x="0.0" y="221.66666666666663" width="374" height="85"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pass phrase generate electricity dynamo femur shake fries joystick corgi jingle wall sticker sandwich soup pencil coffee" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Sq-he-eXT" customClass="LabelC1T4S" customModule="certificates" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="12" width="342" height="61"/>
@@ -688,7 +670,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ImO-LW-82b" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="314.66666666666669" width="374" height="34"/>
+                                                <rect key="frame" x="0.0" y="330.66666666666669" width="374" height="34"/>
                                                 <state key="normal" title="_Done"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="Done"/>
@@ -715,7 +697,7 @@
                                             <constraint firstAttribute="trailing" secondItem="4vj-p9-n0G" secondAttribute="trailing" id="cte-ik-yJT"/>
                                             <constraint firstItem="4vj-p9-n0G" firstAttribute="leading" secondItem="MI6-7Y-4vX" secondAttribute="leading" id="mkb-H7-neV"/>
                                             <constraint firstAttribute="bottom" secondItem="ImO-LW-82b" secondAttribute="bottom" id="nvQ-hC-86K"/>
-                                            <constraint firstItem="j3U-2e-aVj" firstAttribute="top" secondItem="MI6-7Y-4vX" secondAttribute="top" id="oUY-gU-zN9"/>
+                                            <constraint firstItem="j3U-2e-aVj" firstAttribute="top" secondItem="MI6-7Y-4vX" secondAttribute="top" constant="16" id="oUY-gU-zN9"/>
                                             <constraint firstItem="qlN-eo-GeR" firstAttribute="top" secondItem="4vj-p9-n0G" secondAttribute="bottom" constant="12" id="qay-wk-wJS"/>
                                         </constraints>
                                     </view>
@@ -728,13 +710,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="pC5-bs-3BH" firstAttribute="top" secondItem="208-Ud-Tmj" secondAttribute="bottom" id="5Xa-Vt-ddJ"/>
-                            <constraint firstItem="pC5-bs-3BH" firstAttribute="leading" secondItem="9pM-qE-SXt" secondAttribute="leading" id="BN5-a6-sc3"/>
-                            <constraint firstItem="6yH-oq-bb6" firstAttribute="top" secondItem="pC5-bs-3BH" secondAttribute="bottom" id="bLQ-Fa-Zk9"/>
-                            <constraint firstAttribute="trailing" secondItem="pC5-bs-3BH" secondAttribute="trailing" id="gQT-eF-r23"/>
-                            <constraint firstItem="MI6-7Y-4vX" firstAttribute="leading" secondItem="9pM-qE-SXt" secondAttribute="leading" constant="20" id="iLU-ha-8DB"/>
-                            <constraint firstAttribute="trailing" secondItem="MI6-7Y-4vX" secondAttribute="trailing" constant="20" id="osT-kk-el4"/>
+                            <constraint firstItem="pC5-bs-3BH" firstAttribute="top" secondItem="h5x-Uy-Rvu" secondAttribute="top" id="5Xa-Vt-ddJ"/>
+                            <constraint firstItem="pC5-bs-3BH" firstAttribute="leading" secondItem="h5x-Uy-Rvu" secondAttribute="leading" id="BN5-a6-sc3"/>
+                            <constraint firstItem="h5x-Uy-Rvu" firstAttribute="bottom" secondItem="pC5-bs-3BH" secondAttribute="bottom" id="bLQ-Fa-Zk9"/>
+                            <constraint firstItem="h5x-Uy-Rvu" firstAttribute="trailing" secondItem="pC5-bs-3BH" secondAttribute="trailing" id="gQT-eF-r23"/>
+                            <constraint firstItem="MI6-7Y-4vX" firstAttribute="leading" secondItem="h5x-Uy-Rvu" secondAttribute="leading" constant="20" id="iLU-ha-8DB"/>
+                            <constraint firstItem="h5x-Uy-Rvu" firstAttribute="trailing" secondItem="MI6-7Y-4vX" secondAttribute="trailing" constant="20" id="osT-kk-el4"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="h5x-Uy-Rvu"/>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="MI6-7Y-4vX" id="Uu1-aI-xpF"/>
@@ -750,10 +733,6 @@
         <scene sceneID="oLD-cs-gSj">
             <objects>
                 <viewController storyboardIdentifier="MyPassphrase" title="My Passphrase" id="hEE-aO-pVh" customClass="MyPassphraseViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="092-KR-KQP"/>
-                        <viewControllerLayoutGuide type="bottom" id="13m-J0-c7F"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iNm-qL-fPo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -762,10 +741,10 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vxr-dN-nYu" userLabel="Container">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="204"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="203.33333333333334"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2Y-qF-nOc" userLabel="Passphrase container">
-                                                <rect key="frame" x="0.0" y="57" width="374" height="85"/>
+                                                <rect key="frame" x="0.0" y="56.333333333333329" width="374" height="84.999999999999986"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pass phrase generate electricity dynamo femur shake fries joystick corgi jingle wall sticker sandwich soup pencil coffee" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztA-az-KD6" customClass="LabelC1T4S" customModule="certificates" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="12" width="342" height="61"/>
@@ -788,7 +767,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iX-rK-XlR" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="166" width="374" height="34"/>
+                                                <rect key="frame" x="0.0" y="165.33333333333334" width="374" height="34"/>
                                                 <state key="normal" title="_Copy to E-mail or Clipboard"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="CopyEmailClipboard"/>
@@ -799,7 +778,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_My Passphrase" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHu-At-8Ka" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24" width="374" height="21"/>
+                                                <rect key="frame" x="0.0" y="24" width="374" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -831,13 +810,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="JFd-9l-iht" firstAttribute="top" secondItem="092-KR-KQP" secondAttribute="bottom" id="17P-0U-ebm"/>
-                            <constraint firstItem="JFd-9l-iht" firstAttribute="leading" secondItem="iNm-qL-fPo" secondAttribute="leading" id="Bk0-lU-JlH"/>
-                            <constraint firstItem="13m-J0-c7F" firstAttribute="top" secondItem="JFd-9l-iht" secondAttribute="bottom" id="Bkl-iV-CLB"/>
-                            <constraint firstAttribute="trailing" secondItem="Vxr-dN-nYu" secondAttribute="trailing" constant="20" id="G0M-mU-3GF"/>
-                            <constraint firstAttribute="trailing" secondItem="JFd-9l-iht" secondAttribute="trailing" id="S8U-dU-5WI"/>
-                            <constraint firstItem="Vxr-dN-nYu" firstAttribute="leading" secondItem="iNm-qL-fPo" secondAttribute="leading" constant="20" id="rpu-7N-ICu"/>
+                            <constraint firstItem="JFd-9l-iht" firstAttribute="top" secondItem="Gap-WT-z7g" secondAttribute="top" id="17P-0U-ebm"/>
+                            <constraint firstItem="JFd-9l-iht" firstAttribute="leading" secondItem="Gap-WT-z7g" secondAttribute="leading" id="Bk0-lU-JlH"/>
+                            <constraint firstItem="Gap-WT-z7g" firstAttribute="bottom" secondItem="JFd-9l-iht" secondAttribute="bottom" id="Bkl-iV-CLB"/>
+                            <constraint firstItem="Gap-WT-z7g" firstAttribute="trailing" secondItem="Vxr-dN-nYu" secondAttribute="trailing" constant="20" id="G0M-mU-3GF"/>
+                            <constraint firstItem="Gap-WT-z7g" firstAttribute="trailing" secondItem="JFd-9l-iht" secondAttribute="trailing" id="S8U-dU-5WI"/>
+                            <constraint firstItem="Vxr-dN-nYu" firstAttribute="leading" secondItem="Gap-WT-z7g" secondAttribute="leading" constant="20" id="rpu-7N-ICu"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Gap-WT-z7g"/>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="Vxr-dN-nYu" id="faj-RF-jmP"/>

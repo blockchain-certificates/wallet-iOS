@@ -14,26 +14,10 @@ enum AuthErrors : Error {
     case noAuthMethodAllowed
 }
 
-class SettingsCell : UITableViewCell {
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        accessoryView  = UIImageView(image: #imageLiteral(resourceName: "icon_disclosure"))
-        isAccessibilityElement = true
-        textLabel?.font = Style.Font.T3S
-        textLabel?.textColor = Style.Color.C6
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
 class SettingsTableViewController: UITableViewController {
     private var oldBarStyle : UIBarStyle?
 
-    private let cellReuseIdentifier = "UITableViewCell"
+    private let cellReuseIdentifier = "SettingsTableViewCell"
     
     #if DEBUG
         private let isDebugBuild = true
@@ -66,8 +50,7 @@ class SettingsTableViewController: UITableViewController {
         cancelButton.accessibilityLabel = Localizations.Close
         navigationItem.rightBarButtonItem = cancelButton
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        tableView.register(SettingsCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(UINib(nibName: String(describing: SettingsTableViewCell.self), bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         tableView.backgroundColor = Style.Color.C2
         tableView.rowHeight = 56
         tableView.tableFooterView = UIView()
@@ -109,7 +92,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! SettingsTableViewCell
         
         let text : String?
         switch indexPath.row {
@@ -138,7 +121,7 @@ class SettingsTableViewController: UITableViewController {
             text = nil
         }
         
-        cell.textLabel?.text = text
+        cell.label.text = text
         cell.accessibilityLabel = text
 
         return cell

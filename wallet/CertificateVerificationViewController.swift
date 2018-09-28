@@ -43,6 +43,7 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
         
         bannerView.isHidden = true
         bannerLabel.isHidden = true
+        bannerLabel.adjustsFontSizeToFitWidth = true
         doneButton.isHidden = true
         
         doneButton.titleLabel?.font = Style.Font.T2S

@@ -118,7 +118,6 @@ class CertificateVerificationView: UIView {
             }
         }
         setNeedsLayout()
-        //layoutIfNeeded()
         setNeedsDisplay()
     }
     
@@ -160,7 +159,7 @@ class CertificateVerificationView: UIView {
             context.setLineWidth(trackWidth)
             context.setLineCap(.round)
             context.beginPath()
-            context.move(to: CGPoint(x: trackCenterX, y: 0))
+            context.move(to: CGPoint(x: trackCenterX, y: trackWidth / 2))
             context.addLine(to: CGPoint(x: trackCenterX, y: trackHeight))
             context.strokePath()
         }
@@ -171,7 +170,7 @@ class CertificateVerificationView: UIView {
             context.setLineWidth(trackWidth)
             context.setLineCap(.round)
             context.beginPath()
-            context.move(to: CGPoint(x: trackCenterX, y: 0))
+            context.move(to: CGPoint(x: trackCenterX, y: trackWidth / 2))
             context.addLine(to: CGPoint(x: trackCenterX, y: trackProgressHeight))
             context.strokePath()
         }

@@ -125,6 +125,21 @@ class LabelC12T1R : LabelC3T3B {
     override var color: UIColor { return Style.Color.C12 }
 }
 
+class LabelC3T2BNoScale : LabelC3T2B {
+    override var labelFont: UIFont { return Style.Font.T2B_NoScale }
+    override var color: UIColor { return Style.Color.C3 }
+    override func commonInit() {
+        super.commonInit()
+        adjustsFontForContentSizeCategory = false
+        adjustsFontSizeToFitWidth = true
+    }
+}
+
+class LabelC7T1RNoScale : LabelC3T2BNoScale {
+    override var labelFont: UIFont { return Style.Font.T1R_NoScale }
+    override var color: UIColor { return Style.Color.C7 }
+}
+
 // MARK: - Buttons
 
 protocol Button {
