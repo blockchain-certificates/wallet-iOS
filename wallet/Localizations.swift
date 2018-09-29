@@ -89,7 +89,7 @@ public struct Localizations {
     public static var AuthenticateSeePassphrase : String = NSLocalizedString("AuthenticateSeePassphrase", comment: "")
 
     /// Base translation: The server encountered an error. Please try again.
-    public static var ServorError : String = NSLocalizedString("ServorError", comment: "")
+    public static var ServerError : String = NSLocalizedString("ServerError", comment: "")
 
     /// Base translation: Share Link
     public static var ShareLink : String = NSLocalizedString("ShareLink", comment: "")
@@ -454,7 +454,7 @@ public struct Localizations {
     /// Base translation: File not found
     public static var FileNotFound : String = NSLocalizedString("FileNotFound", comment: "")
 
-    /// Base translation: If you delete this credential and don't have a backup, you'll have to ask the issuer to send it again if you want to recover it. Are you sure you want to delete this credential?
+    /// Base translation: If you delete this credential and don't have a backup, you'll have to ask the issuer to send it again if you want to recover it.   Are you sure you want to delete this credential?
     public static var DeleteCredentialExplanation : String = NSLocalizedString("DeleteCredentialExplanation", comment: "")
 
     /// Base translation: It looks like local authentication is disabled for this app. Without it, showing your passphrase is insecure. Please enable local authentication for this app in Settings.

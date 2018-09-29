@@ -19,6 +19,8 @@ class MyPassphraseViewController : ScrollingOnboardingControllerBase, UIActivity
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         passphraseLabel.text = Keychain.loadSeedPhrase()
+        
+        self.title = Localizations.MyPassphrase
     }
     
     override func viewWillAppear(_ animated: Bool) {
