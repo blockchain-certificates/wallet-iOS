@@ -46,7 +46,7 @@ public struct Localizations {
     /// Base translation: No Network Connection
     public static var ReachabilityAlertTitle : String = NSLocalizedString("ReachabilityAlertTitle", comment: "")
 
-    /// Base translation: Log out and Reset
+    /// Base translation: Log In To Issuer
     public static var LoginToIssuer : String = NSLocalizedString("LoginToIssuer", comment: "")
 
     /// Base translation: Enter the URL provided by the issuer
@@ -154,9 +154,6 @@ public struct Localizations {
     /// Base translation: URL
     public static var URL : String = NSLocalizedString("URL", comment: "")
 
-    /// Base translation: Information
-    public static var Information : String = NSLocalizedString("Information", comment: "")
-
     /// Base translation: Unable to save this passphrase.
     public static var PassphraseSaveFail : String = NSLocalizedString("PassphraseSaveFail", comment: "")
 
@@ -201,7 +198,7 @@ public struct Localizations {
     /// Base translation: No Credentials
     public static var NoCredentials : String = NSLocalizedString("NoCredentials", comment: "")
 
-    /// Base translation: Introduced on
+    /// Base translation: Introduced
     public static var IntroducedOn : String = NSLocalizedString("IntroducedOn", comment: "")
 
     /// Base translation: We couldn't find the logs on the device.
@@ -380,9 +377,6 @@ public struct Localizations {
     /// Base translation: Credential Info
     public static var CredentialInfo : String = NSLocalizedString("CredentialInfo", comment: "")
 
-    /// Base translation: Play intro video.
-    public static var PlayButtonAccessibility : String = NSLocalizedString("PlayButtonAccessibility", comment: "")
-
     /// Base translation: Please select at least one option below:
     public static var SelectOne : String = NSLocalizedString("SelectOne", comment: "")
 
@@ -448,7 +442,7 @@ public struct Localizations {
     /// Base translation: File not found
     public static var FileNotFound : String = NSLocalizedString("FileNotFound", comment: "")
 
-    /// Base translation: If you delete this credential and don't have a backup, you'll have to ask the issuer to send it again if you want to recover it.   Are you sure you want to delete this credential?
+    /// Base translation: If you delete this credential and don't have a backup, you'll have to ask the issuer to send it again if you want to recover it.  Are you sure you want to delete this credential?
     public static var DeleteCredentialExplanation : String = NSLocalizedString("DeleteCredentialExplanation", comment: "")
 
     /// Base translation: It looks like local authentication is disabled for this app. Without it, showing your passphrase is insecure. Please enable local authentication for this app in Settings.
