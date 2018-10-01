@@ -89,6 +89,10 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
         }
         
         verifier.verify()
+        
+        // WebView cannot just be created. It must also be added as a subview or weird behavior occurs.
+        verifier.webView?.isHidden = true
+        view.addSubview(verifier.webView!)
     }
     
     // MARK: - CertificateVerifierDelegate

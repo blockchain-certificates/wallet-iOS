@@ -228,7 +228,7 @@ public struct Localizations {
     /// Base translation: Couldn't delete file
     public static var DeleteFileError : String = NSLocalizedString("DeleteFileError", comment: "")
 
-    /// Base translation: Take ownership of your digital records
+    /// Base translation: Success!
     public static var Success : String = NSLocalizedString("Success", comment: "")
 
     /// Base translation: Something went wrong when deleting that certificate.

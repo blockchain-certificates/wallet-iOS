@@ -125,7 +125,7 @@ class VerificationStep {
     var substeps: [VerificationSubstep] = []
     
     init(rawObject: [String: Any?]) {
-        code = rawObject["code"] as! String
+        code = rawObject["code"] as? String
         label = rawObject["label"] as? String
         
         let stepArray = rawObject["subSteps"] as! [[String: Any?]]
@@ -143,7 +143,7 @@ class VerificationSubstep {
     var status: VerificationStatus?
     
     init(rawObject: [String: Any?]) {
-        code = rawObject["code"] as! String
+        code = rawObject["code"] as? String
         label = rawObject["label"] as? String
         parentStep = rawObject["parentStep"] as? String
         errorMessage = rawObject["errorMessage"] as? String
