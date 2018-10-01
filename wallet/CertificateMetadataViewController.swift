@@ -313,6 +313,7 @@ class CertificateMetadataViewController: BaseMetadataViewController {
         }
         
         let cancelButton = PrimaryButton(frame: .zero)
+        cancelButton.titleLabel?.font = Style.Font.T2S
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             Logger.main.info("User canceled the deletion of the certificate.")
