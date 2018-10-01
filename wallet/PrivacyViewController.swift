@@ -57,7 +57,7 @@ class AboutPassphraseViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        title = Localizations.AboutPassphrase
+        title = Localizations.AboutPassphrases
         
         let locale = NSLocale.current.languageCode
         var url: URL

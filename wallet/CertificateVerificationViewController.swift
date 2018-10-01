@@ -76,7 +76,7 @@ class CertificateVerificationViewController: UIViewController, CertificateVerifi
                 message: Localizations.SampleCredentialVerificationImpossible,
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: Localizations.OK, style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: Localizations.Okay, style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }

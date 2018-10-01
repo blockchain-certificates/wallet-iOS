@@ -107,7 +107,7 @@ class CertificateViewController: UIViewController {
             Logger.main.error("Couldn't share certificate. Failed to write temporary URL. \(error)")
             
             let errorAlert = UIAlertController(title: Localizations.ShareCredentialError, message: Localizations.ShareCredentialGenericError, preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: Localizations.OK, style: .default, handler: nil))
+            errorAlert.addAction(UIAlertAction(title: Localizations.Okay, style: .default, handler: nil))
             present(errorAlert, animated: true, completion: nil)
             return
         }

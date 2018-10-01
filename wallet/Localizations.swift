@@ -88,9 +88,6 @@ public struct Localizations {
     /// Base translation: Authenticate to see your secure passphrase.
     public static var AuthenticateSeePassphrase : String = NSLocalizedString("AuthenticateSeePassphrase", comment: "")
 
-    /// Base translation: The server encountered an error. Please try again.
-    public static var ServerError : String = NSLocalizedString("ServerError", comment: "")
-
     /// Base translation: Share Link
     public static var ShareLink : String = NSLocalizedString("ShareLink", comment: "")
 
@@ -180,9 +177,6 @@ public struct Localizations {
     /// Base translation: Invalid Credential
     public static var InvalidCredential : String = NSLocalizedString("InvalidCredential", comment: "")
 
-    /// Base translation: Okay
-    public static var OK : String = NSLocalizedString("OK", comment: "")
-
     /// Base translation: Issuer Contact Email
     public static var IssuerContactEmail : String = NSLocalizedString("IssuerContactEmail", comment: "")
 
@@ -221,6 +215,9 @@ public struct Localizations {
 
     /// Base translation: This is the passphrase to your wallet. There is a backup on this phone, but you must create an extra one in case you switch devices.
     public static var PassphraseDescription : String = NSLocalizedString("PassphraseDescription", comment: "")
+
+    /// Base translation: The server encountered an error. Please try again.
+    public static var ServerError : String = NSLocalizedString("ServerError", comment: "")
 
     /// Base translation: Credential URL
     public static var CredentialURL : String = NSLocalizedString("CredentialURL", comment: "")
@@ -441,9 +438,6 @@ public struct Localizations {
 
     /// Base translation: This is a sample certificate that cannot be verified. Real certificates will perform a live validation process.
     public static var SampleCredentialVerificationImpossible : String = NSLocalizedString("SampleCredentialVerificationImpossible", comment: "")
-
-    /// Base translation: About Passphrase
-    public static var AboutPassphrase : String = NSLocalizedString("AboutPassphrase", comment: "")
 
     /// Base translation: Add Issuer
     public static var AddIssuer : String = NSLocalizedString("AddIssuer", comment: "")
