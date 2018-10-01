@@ -112,7 +112,7 @@ public struct Localizations {
     /// Base translation: Something went wrong preparing that file for sharing. Try again later.
     public static var ShareCredentialGenericError : String = NSLocalizedString("ShareCredentialGenericError", comment: "")
 
-    /// Base translation: Parse issuer keys
+    /// Base translation: One-time code
     public static var OneTimeCode : String = NSLocalizedString("OneTimeCode", comment: "")
 
     /// Base translation: Something went wrong adding this issuer. Try again later.
