@@ -135,7 +135,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         progressAlert.set(message: Localizations.AddIssuerSuccess)
         progressAlert.icon = .success
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             progressAlert.dismiss(animated: false, completion: nil)
@@ -162,7 +162,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         progressAlert.set(message: Localizations.AppUpdateAlertMessage)
         progressAlert.icon = .warning
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
@@ -170,7 +170,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             progressAlert.dismiss(animated: false, completion: nil)
         }
         
-        let cancelButton = SecondaryButton(frame: .zero)
+        let cancelButton = DialogButton(frame: .zero)
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             progressAlert.dismiss(animated: false, completion: nil)
@@ -187,7 +187,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         progressAlert.set(message: Localizations.AddIssuerFailMessage)
         progressAlert.icon = .failure
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             progressAlert.dismiss(animated: false, completion: nil)
