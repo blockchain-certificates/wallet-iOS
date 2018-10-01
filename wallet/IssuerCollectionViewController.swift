@@ -300,7 +300,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         alert.set(message: Localizations.AppUpdateAlertMessage)
         alert.icon = .warning
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
@@ -308,7 +308,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             alert.dismiss(animated: false, completion: nil)
         }
         
-        let cancelButton = SecondaryButton(frame: .zero)
+        let cancelButton = DialogButton(frame: .zero)
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
@@ -325,7 +325,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         alert.set(message: Localizations.AddIssuerFailMessage)
         alert.icon = .failure
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
@@ -483,14 +483,14 @@ class IssuerCollectionViewController: UICollectionViewController {
         alert.set(title: Localizations.FileAlreadyImported)
         alert.set(message: Localizations.FileAlreadyImportedExplanation)
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.View, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             alert.dismiss(animated: false, completion: nil)
             self?.navigateTo(certificate: certificate, animated: true)
         }
         
-        let cancelButton = SecondaryButton(frame: .zero)
+        let cancelButton = DialogButton(frame: .zero)
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)

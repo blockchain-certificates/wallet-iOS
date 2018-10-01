@@ -35,14 +35,14 @@ class MyPassphraseViewController : ScrollingOnboardingControllerBase, UIActivity
     @IBAction func backupCopy() {
         let alert = AlertViewController.create(title: Localizations.AreYouSure, message: Localizations.EmailBackupWarning, icon: .warning)
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             alert.dismiss(animated: false, completion: nil)
             self?.presentCopySheet()
         }
         
-        let cancelButton = SecondaryButton(frame: .zero)
+        let cancelButton = DialogButton(frame: .zero)
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)

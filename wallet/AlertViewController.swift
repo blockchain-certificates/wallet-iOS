@@ -179,7 +179,7 @@ class AlertViewController : UIViewController {
 
         if let buttonText = buttonText {
             // assume a simple, single button to dismiss the alert
-            let button = SecondaryButton(frame: .zero)
+            let button = DialogButton(frame: .zero)
             button.setTitle(buttonText, for: .normal)
             button.onTouchUpInside {
                 buttonAction?()

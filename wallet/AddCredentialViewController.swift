@@ -104,7 +104,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
         alert.set(message: message)
         alert.icon = .warning
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
@@ -120,7 +120,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
         alert.set(message: Localizations.CredentialImportSuccess)
         alert.icon = .success
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: {
@@ -139,7 +139,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
         alert.set(message: Localizations.AppUpdateAlertMessage)
         alert.icon = .warning
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
@@ -147,7 +147,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
             alert.dismiss(animated: false, completion: nil)
         }
         
-        let cancelButton = SecondaryButton(frame: .zero)
+        let cancelButton = DialogButton(frame: .zero)
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)

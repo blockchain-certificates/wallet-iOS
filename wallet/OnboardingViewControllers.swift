@@ -179,7 +179,7 @@ class OnboardingBackupMethods : ScrollingOnboardingControllerBase, UIActivityIte
     @IBAction func backupCopy() {
         let alert = AlertViewController.create(title: Localizations.AreYouSure, message: Localizations.EmailBackupWarning, icon: .warning)
 
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             alert.dismiss(animated: false, completion: nil)
@@ -187,6 +187,7 @@ class OnboardingBackupMethods : ScrollingOnboardingControllerBase, UIActivityIte
         }
 
         let cancelButton = PrimaryButton(frame: .zero)
+        cancelButton.titleLabel?.font = Style.Font.T2S
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
@@ -303,7 +304,7 @@ class OnboardingCurrentUser : ScrollingOnboardingControllerBase, UITextViewDeleg
                                                message: Localizations.CheckPassphraseTryAgain,
                                                icon: .failure)
         
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)

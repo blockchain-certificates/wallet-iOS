@@ -157,6 +157,7 @@ class ButtonBase : UIButton {
     var fillColor : UIColor { return .white }
     var fillColorHighlighted : UIColor { return .white }
     var fillColorDisabled : UIColor { return .clear }
+    var titleFont : UIFont { return Style.Font.T3S }
 
     func commonInit() {
         let edgeInsets : CGFloat = 20
@@ -166,7 +167,7 @@ class ButtonBase : UIButton {
         layer.cornerRadius = Style.Measure.cornerRadius
         layer.borderColor = strokeColor.cgColor
         
-        titleLabel?.font = Style.Font.T3S
+        titleLabel?.font = titleFont
         titleLabel?.adjustsFontForContentSizeCategory = true
         titleLabel?.adjustsFontSizeToFitWidth = true
         setTitleColor(textColor, for: .normal)
@@ -256,7 +257,21 @@ class SecondaryButton : ButtonBase {
     
     override var fillColor : UIColor { return .clear }
     override var fillColorHighlighted : UIColor { return Style.Color.C4 }
+}
+
+@IBDesignable
+class DialogButton : SecondaryButton {
     
+    override var textColor : UIColor { return Style.Color.C3 }
+    override var textColorHighlighted : UIColor { return Style.Color.C3 }
+    
+    override var strokeColor : UIColor { return Style.Color.C14 }
+    override var strokeColorHighlighted : UIColor { return Style.Color.C4 }
+    
+    override var fillColor : UIColor { return .clear }
+    override var fillColorHighlighted : UIColor { return Style.Color.C4 }
+    
+    override var titleFont : UIFont { return Style.Font.T2S }
 }
 
 @IBDesignable

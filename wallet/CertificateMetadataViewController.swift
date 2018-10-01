@@ -303,7 +303,7 @@ class CertificateMetadataViewController: BaseMetadataViewController {
         let alert = AlertViewController.create(title: Localizations.Caution,
                                                message: Localizations.DeleteCredentialExplanation, icon: .warning)
 
-        let okayButton = SecondaryButton(frame: .zero)
+        let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Delete, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             Logger.main.info("User has deleted certificate \(certificateToDelete.title) with id \(certificateToDelete.id)")
