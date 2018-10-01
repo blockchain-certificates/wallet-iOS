@@ -58,10 +58,11 @@
                                         <constraint firstAttribute="height" constant="400" placeholder="YES" id="4YB-qq-Xtn"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hJ-op-Fro" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="131" y="474" width="113" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hJ-op-Fro" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="131" y="474" width="113" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="113" id="ikI-a9-6SE"/>
+                                        <constraint firstAttribute="height" constant="44" id="rKv-Ly-m24"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
                                     <userDefinedRuntimeAttributes>
@@ -75,10 +76,10 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="1hJ-op-Fro" firstAttribute="centerX" secondItem="Dgw-Fu-1bM" secondAttribute="centerX" id="0Cj-Xs-bQN"/>
-                                <constraint firstAttribute="bottom" secondItem="1hJ-op-Fro" secondAttribute="bottom" constant="50" id="GzV-Rg-Kqn"/>
                                 <constraint firstItem="pGj-g1-F9L" firstAttribute="leading" secondItem="Dgw-Fu-1bM" secondAttribute="leading" constant="40" id="NQv-i4-uas"/>
                                 <constraint firstItem="1hJ-op-Fro" firstAttribute="top" secondItem="pGj-g1-F9L" secondAttribute="bottom" constant="44" id="Sr8-YQ-d3E"/>
                                 <constraint firstItem="pGj-g1-F9L" firstAttribute="top" secondItem="Dgw-Fu-1bM" secondAttribute="top" constant="30" id="iGF-lp-jcH"/>
+                                <constraint firstAttribute="bottom" secondItem="1hJ-op-Fro" secondAttribute="bottom" constant="36" id="ot8-pL-NFb"/>
                                 <constraint firstAttribute="trailing" secondItem="pGj-g1-F9L" secondAttribute="trailing" constant="40" id="wCv-P2-ONH"/>
                             </constraints>
                         </view>
