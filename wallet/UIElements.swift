@@ -274,7 +274,7 @@ class TertiaryButton : SecondaryButton {
 class DangerButton : SecondaryButton {
     
     override var textColor : UIColor { return Style.Color.C9 }
-    override var textColorHighlighted : UIColor { return Style.Color.C9 }
+    override var textColorHighlighted : UIColor { return Style.Color.C3 }
     
     override var strokeColor : UIColor { return Style.Color.C8 }
     override var strokeColorHighlighted : UIColor { return Style.Color.C9 }
