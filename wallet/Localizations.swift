@@ -142,7 +142,7 @@ public struct Localizations {
     /// Base translation: Continue
     public static var Continue : String = NSLocalizedString("Continue", comment: "")
 
-    /// Base translation: In order to add this issuer, you must have the latest version of Blockerts Wallet.
+    /// Base translation: In order to add this issuer, you must have the latest version of Blockcerts Wallet.
     public static var AppUpdateAlertMessage : String = NSLocalizedString("AppUpdateAlertMessage", comment: "")
 
     /// Base translation: This credential was successfully imported. It can be found in the issuer view.
