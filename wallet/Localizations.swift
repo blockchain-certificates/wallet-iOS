@@ -404,7 +404,7 @@ public struct Localizations {
     /// Base translation: Import
     public static var Import : String = NSLocalizedString("Import", comment: "")
 
-    /// Base translation: We've improved the experience, but you'll be able to receive and manage your credentials as before. Please note that you are now required to back up your passphrase, but you can do so easily in the app. Tap continue to begin.
+    /// Base translation: We've improved the experience, but you'll be able to receive and manage your credentials as before.
     public static var UpdateUserBody : String = NSLocalizedString("UpdateUserBody", comment: "")
 
     /// Base translation: Verification
