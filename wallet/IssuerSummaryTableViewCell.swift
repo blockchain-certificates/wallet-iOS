@@ -28,7 +28,7 @@ class IssuerSummaryTableViewCell: UITableViewCell {
         if let description = issuerDescription {
             descriptionLabel.text = description
         } else {
-            descriptionLabel.text = NSLocalizedString("No description provided.", comment: "Missing description text for issuer.")
+            descriptionLabel.text = Localizations.IssuerMissingDescription
         }
     }
 }

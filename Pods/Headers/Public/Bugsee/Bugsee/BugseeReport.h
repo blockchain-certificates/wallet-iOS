@@ -1,0 +1,1 @@
+../../../../Bugsee/Bugsee.framework/Versions/A/Headers/BugseeReport.h

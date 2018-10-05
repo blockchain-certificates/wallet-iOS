@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Settings Add Credential View Controller-->
+        <!--Add Credential View Controller-->
         <scene sceneID="mLI-ud-q07">
             <objects>
-                <viewController storyboardIdentifier="addIssuer" id="zKg-vx-nna" customClass="SettingsAddCredentialViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addIssuer" id="zKg-vx-nna" customClass="AddCredentialViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SyU-vr-CF9"/>
+                        <viewControllerLayoutGuide type="bottom" id="DPZ-2r-UEq"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GHF-L8-3LO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your method:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cmi-6p-YUh" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a method:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cmi-6p-YUh" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="44" width="335" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="ChooseMethod"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRt-yX-u7H" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRt-yX-u7H" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="81" width="335" height="30"/>
                                 <state key="normal" title="Import from URL"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="ImportFromURL"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="importFromURL" destination="zKg-vx-nna" eventType="touchUpInside" id="DG6-Qf-SLt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvw-zt-Ulb" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvw-zt-Ulb" customClass="SecondaryButton" customModule="certificates" customModuleProvider="target">
                                 <rect key="frame" x="20" y="119" width="335" height="30"/>
                                 <state key="normal" title="Import from File"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="ImportFromFile"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="importFromFile" destination="zKg-vx-nna" eventType="touchUpInside" id="Dsa-06-OPH"/>
                                 </connections>
@@ -41,68 +54,79 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KlT-W9-Avl" firstAttribute="trailing" secondItem="Cmi-6p-YUh" secondAttribute="trailing" constant="20" id="CDZ-Lo-ZUQ"/>
-                            <constraint firstItem="Cmi-6p-YUh" firstAttribute="leading" secondItem="KlT-W9-Avl" secondAttribute="leading" constant="20" id="HEv-9e-FjR"/>
-                            <constraint firstItem="CRt-yX-u7H" firstAttribute="leading" secondItem="KlT-W9-Avl" secondAttribute="leading" constant="20" id="Img-qr-k4G"/>
+                            <constraint firstAttribute="trailing" secondItem="Cmi-6p-YUh" secondAttribute="trailing" constant="20" id="CDZ-Lo-ZUQ"/>
+                            <constraint firstItem="Cmi-6p-YUh" firstAttribute="leading" secondItem="GHF-L8-3LO" secondAttribute="leading" constant="20" id="HEv-9e-FjR"/>
+                            <constraint firstItem="CRt-yX-u7H" firstAttribute="leading" secondItem="GHF-L8-3LO" secondAttribute="leading" constant="20" id="Img-qr-k4G"/>
                             <constraint firstItem="CRt-yX-u7H" firstAttribute="top" secondItem="Cmi-6p-YUh" secondAttribute="bottom" constant="16" id="KoK-n8-IV6"/>
-                            <constraint firstItem="KlT-W9-Avl" firstAttribute="trailing" secondItem="CRt-yX-u7H" secondAttribute="trailing" constant="20" id="SWK-8j-gpm"/>
-                            <constraint firstItem="KlT-W9-Avl" firstAttribute="trailing" secondItem="Uvw-zt-Ulb" secondAttribute="trailing" constant="20" id="X7o-EK-dLr"/>
-                            <constraint firstItem="Cmi-6p-YUh" firstAttribute="top" secondItem="KlT-W9-Avl" secondAttribute="top" constant="24" id="ZAf-42-BB4"/>
-                            <constraint firstItem="Uvw-zt-Ulb" firstAttribute="leading" secondItem="KlT-W9-Avl" secondAttribute="leading" constant="20" id="eaq-hY-Q7g"/>
+                            <constraint firstAttribute="trailing" secondItem="CRt-yX-u7H" secondAttribute="trailing" constant="20" id="SWK-8j-gpm"/>
+                            <constraint firstAttribute="trailing" secondItem="Uvw-zt-Ulb" secondAttribute="trailing" constant="20" id="X7o-EK-dLr"/>
+                            <constraint firstItem="Cmi-6p-YUh" firstAttribute="top" secondItem="SyU-vr-CF9" secondAttribute="bottom" constant="24" id="ZAf-42-BB4"/>
+                            <constraint firstItem="Uvw-zt-Ulb" firstAttribute="leading" secondItem="GHF-L8-3LO" secondAttribute="leading" constant="20" id="eaq-hY-Q7g"/>
                             <constraint firstItem="Uvw-zt-Ulb" firstAttribute="top" secondItem="CRt-yX-u7H" secondAttribute="bottom" constant="8" id="rG2-M5-4LF"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="KlT-W9-Avl"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cr0-i5-FSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-442.39999999999998" y="-35.532233883058474"/>
         </scene>
-        <!--Settings Add Credential URL View Controller-->
+        <!--Add Credential URL View Controller-->
         <scene sceneID="wkW-G8-r8z">
             <objects>
-                <viewController storyboardIdentifier="addCredentialFromURL" id="QjL-oU-RBK" customClass="SettingsAddCredentialURLViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addCredentialFromURL" id="QjL-oU-RBK" customClass="AddCredentialURLViewController" customModule="certificates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sfp-Ax-nil"/>
+                        <viewControllerLayoutGuide type="bottom" id="w7K-f6-YK8"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Sjh-my-skp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy and paste the credential URL:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuG-pc-4Tk" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="20" y="44" width="335" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1y-BS-XQd" userLabel="Container">
-                                <rect key="frame" x="20" y="77" width="335" height="104"/>
+                                <rect key="frame" x="20" y="40" width="335" height="116.5"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy and paste the credential URL:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuG-pc-4Tk" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="CopyCredentialURL"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nen-0i-pkh">
-                                        <rect key="frame" x="12" y="12" width="311" height="80"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="36.5" width="335" height="80"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="AYG-wT-JHt"/>
                                         </constraints>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="url"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="7"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.92549019610000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="c7h-6g-o2i" firstAttribute="trailing" secondItem="nen-0i-pkh" secondAttribute="trailing" constant="12" id="Hdo-ld-UYN"/>
-                                    <constraint firstItem="nen-0i-pkh" firstAttribute="top" secondItem="c7h-6g-o2i" secondAttribute="top" constant="12" id="arW-Zi-uL1"/>
-                                    <constraint firstItem="c7h-6g-o2i" firstAttribute="bottom" secondItem="nen-0i-pkh" secondAttribute="bottom" constant="12" id="icH-j6-2hl"/>
-                                    <constraint firstItem="nen-0i-pkh" firstAttribute="leading" secondItem="c7h-6g-o2i" secondAttribute="leading" constant="12" id="yoP-aB-6f8"/>
+                                    <constraint firstItem="VuG-pc-4Tk" firstAttribute="top" secondItem="c1y-BS-XQd" secondAttribute="top" id="6MP-IR-6zW"/>
+                                    <constraint firstItem="VuG-pc-4Tk" firstAttribute="leading" secondItem="c1y-BS-XQd" secondAttribute="leading" id="AE8-g3-h8U"/>
+                                    <constraint firstAttribute="trailing" secondItem="nen-0i-pkh" secondAttribute="trailing" id="Hdo-ld-UYN"/>
+                                    <constraint firstItem="nen-0i-pkh" firstAttribute="top" secondItem="VuG-pc-4Tk" secondAttribute="bottom" constant="16" id="UGN-55-7lf"/>
+                                    <constraint firstAttribute="trailing" secondItem="VuG-pc-4Tk" secondAttribute="trailing" id="am2-ME-Q37"/>
+                                    <constraint firstAttribute="bottom" secondItem="nen-0i-pkh" secondAttribute="bottom" id="icH-j6-2hl"/>
+                                    <constraint firstItem="nen-0i-pkh" firstAttribute="leading" secondItem="c1y-BS-XQd" secondAttribute="leading" id="yoP-aB-6f8"/>
                                 </constraints>
-                                <viewLayoutGuide key="safeArea" id="c7h-6g-o2i"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="7"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwB-R1-Lad" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                <rect key="frame" x="20" y="197" width="335" height="30"/>
+                                <rect key="frame" x="20" y="180.5" width="335" height="30"/>
                                 <state key="normal" title="Import"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="Import"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="importURL" destination="QjL-oU-RBK" eventType="touchUpInside" id="cEc-QQ-kPN"/>
                                 </connections>
@@ -110,20 +134,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="c1y-BS-XQd" firstAttribute="leading" secondItem="a4k-Yl-GI9" secondAttribute="leading" constant="20" id="5qI-ZI-3Os"/>
-                            <constraint firstItem="VuG-pc-4Tk" firstAttribute="top" secondItem="a4k-Yl-GI9" secondAttribute="top" constant="24" id="7ba-5d-kI6"/>
-                            <constraint firstItem="c1y-BS-XQd" firstAttribute="top" secondItem="VuG-pc-4Tk" secondAttribute="bottom" constant="12" id="FHX-ae-IFX"/>
-                            <constraint firstItem="a4k-Yl-GI9" firstAttribute="trailing" secondItem="c1y-BS-XQd" secondAttribute="trailing" constant="20" id="Gn4-w3-xSz"/>
-                            <constraint firstItem="bwB-R1-Lad" firstAttribute="top" secondItem="c1y-BS-XQd" secondAttribute="bottom" constant="16" id="acJ-MF-oqP"/>
-                            <constraint firstItem="bwB-R1-Lad" firstAttribute="leading" secondItem="a4k-Yl-GI9" secondAttribute="leading" constant="20" id="dvc-qY-EHq"/>
-                            <constraint firstItem="a4k-Yl-GI9" firstAttribute="trailing" secondItem="VuG-pc-4Tk" secondAttribute="trailing" constant="20" id="gLO-be-EMm"/>
-                            <constraint firstItem="a4k-Yl-GI9" firstAttribute="trailing" secondItem="bwB-R1-Lad" secondAttribute="trailing" constant="20" id="reG-kJ-v9F"/>
-                            <constraint firstItem="VuG-pc-4Tk" firstAttribute="leading" secondItem="a4k-Yl-GI9" secondAttribute="leading" constant="20" id="ulM-I6-ILB"/>
+                            <constraint firstItem="c1y-BS-XQd" firstAttribute="leading" secondItem="Sjh-my-skp" secondAttribute="leading" constant="20" id="5qI-ZI-3Os"/>
+                            <constraint firstAttribute="trailing" secondItem="c1y-BS-XQd" secondAttribute="trailing" constant="20" id="Gn4-w3-xSz"/>
+                            <constraint firstItem="c1y-BS-XQd" firstAttribute="top" secondItem="sfp-Ax-nil" secondAttribute="bottom" constant="20" id="Q9D-Zy-rBx"/>
+                            <constraint firstItem="bwB-R1-Lad" firstAttribute="top" secondItem="c1y-BS-XQd" secondAttribute="bottom" constant="24" id="acJ-MF-oqP"/>
+                            <constraint firstItem="bwB-R1-Lad" firstAttribute="leading" secondItem="Sjh-my-skp" secondAttribute="leading" constant="20" id="dvc-qY-EHq"/>
+                            <constraint firstAttribute="trailing" secondItem="bwB-R1-Lad" secondAttribute="trailing" constant="20" id="reG-kJ-v9F"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="a4k-Yl-GI9"/>
                     </view>
                     <connections>
                         <outlet property="submitButton" destination="bwB-R1-Lad" id="1A5-od-tfe"/>
+                        <outlet property="urlContainer" destination="c1y-BS-XQd" id="1oZ-5M-xgw"/>
+                        <outlet property="urlLabel" destination="VuG-pc-4Tk" id="wHu-Zp-nhD"/>
                         <outlet property="urlTextView" destination="nen-0i-pkh" id="gg6-xE-OTx"/>
                     </connections>
                 </viewController>

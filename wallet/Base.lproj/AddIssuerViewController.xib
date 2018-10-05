@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,8 +17,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddIssuerViewController" customModule="certificates" customModuleProvider="target">
             <connections>
+                <outlet property="issuerURLContainer" destination="D5D-Ee-p9l" id="qa9-wU-p3y"/>
                 <outlet property="issuerURLField" destination="zSZ-UY-k6C" id="BMf-Bh-qTk"/>
+                <outlet property="issuerURLLabel" destination="SVg-Ue-m8l" id="QMT-Qn-FQu"/>
+                <outlet property="nonceContainer" destination="hXf-GP-Ook" id="xLT-My-16e"/>
                 <outlet property="nonceField" destination="Yob-Sd-s4n" id="nhT-8T-i6v"/>
+                <outlet property="nonceLabel" destination="krB-iU-XOc" id="Ots-wI-MZf"/>
                 <outlet property="scrollView" destination="BJT-za-OkO" id="ez4-Mt-eA3"/>
                 <outlet property="submitButton" destination="YfE-OO-122" id="p4o-5c-y8p"/>
                 <outlet property="view" destination="HUU-c9-L9F" id="et7-50-x3v"/>
@@ -33,82 +37,106 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kaw-NP-DqR" userLabel="Content">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="370"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="333"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add the URL given by your issuer" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Ue-m8l" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="20" width="335" height="19.5"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zSZ-UY-k6C" userLabel="Issuer URL Text Field">
-                                    <rect key="frame" x="20" y="55.5" width="335" height="100"/>
-                                    <color key="backgroundColor" red="0.92549019610000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5D-Ee-p9l" userLabel="Issuer Container">
+                                    <rect key="frame" x="20" y="20" width="335" height="135.5"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Add the URL given by your issuer" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Ue-m8l" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="19.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="EnterIssuerURL"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zSZ-UY-k6C" userLabel="Issuer URL Text Field">
+                                            <rect key="frame" x="0.0" y="35.5" width="335" height="100"/>
+                                            <color key="backgroundColor" red="0.92549019610000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="Mlz-6M-8dk"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="url"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="7"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="Mlz-6M-8dk"/>
+                                        <constraint firstItem="zSZ-UY-k6C" firstAttribute="top" secondItem="SVg-Ue-m8l" secondAttribute="bottom" constant="16" id="2tc-eY-D9U"/>
+                                        <constraint firstAttribute="trailing" secondItem="zSZ-UY-k6C" secondAttribute="trailing" id="9rk-GF-xDA"/>
+                                        <constraint firstItem="SVg-Ue-m8l" firstAttribute="top" secondItem="D5D-Ee-p9l" secondAttribute="top" id="AjW-bP-geM"/>
+                                        <constraint firstAttribute="trailing" secondItem="SVg-Ue-m8l" secondAttribute="trailing" id="HqC-2R-qei"/>
+                                        <constraint firstItem="SVg-Ue-m8l" firstAttribute="leading" secondItem="D5D-Ee-p9l" secondAttribute="leading" id="PyI-Vo-fUh"/>
+                                        <constraint firstAttribute="bottom" secondItem="zSZ-UY-k6C" secondAttribute="bottom" id="aLO-6o-Nta"/>
+                                        <constraint firstItem="zSZ-UY-k6C" firstAttribute="leading" secondItem="D5D-Ee-p9l" secondAttribute="leading" id="tWV-Ax-RwF"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="url"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="7"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </textView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add your one-time code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krB-iU-XOc" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="179.5" width="335" height="19.5"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yob-Sd-s4n" userLabel="Nonce Text View">
-                                    <rect key="frame" x="20" y="215" width="335" height="64"/>
-                                    <color key="backgroundColor" red="0.92549019610000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXf-GP-Ook" userLabel="Nonce Container">
+                                    <rect key="frame" x="20" y="179.5" width="335" height="99.5"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yob-Sd-s4n" userLabel="Nonce Text View">
+                                            <rect key="frame" x="0.0" y="35.5" width="335" height="64"/>
+                                            <color key="backgroundColor" red="0.92549019610000005" green="0.96078431369999995" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="64" id="KgH-hu-ZET"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="7"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </textView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Add your one-time code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krB-iU-XOc" customClass="LabelC5T2B" customModule="certificates" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="19.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="EnterIssuerCode"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="64" id="KgH-hu-ZET"/>
+                                        <constraint firstItem="Yob-Sd-s4n" firstAttribute="top" secondItem="krB-iU-XOc" secondAttribute="bottom" constant="16" id="28L-NR-c2b"/>
+                                        <constraint firstItem="krB-iU-XOc" firstAttribute="top" secondItem="hXf-GP-Ook" secondAttribute="top" id="7GU-pZ-F7m"/>
+                                        <constraint firstItem="krB-iU-XOc" firstAttribute="leading" secondItem="hXf-GP-Ook" secondAttribute="leading" id="EOl-hb-qoQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="krB-iU-XOc" secondAttribute="trailing" id="OCa-gk-pfT"/>
+                                        <constraint firstItem="Yob-Sd-s4n" firstAttribute="leading" secondItem="hXf-GP-Ook" secondAttribute="leading" id="Vlo-S8-RAo"/>
+                                        <constraint firstAttribute="trailing" secondItem="Yob-Sd-s4n" secondAttribute="trailing" id="ZbJ-kS-90B"/>
+                                        <constraint firstAttribute="bottom" secondItem="Yob-Sd-s4n" secondAttribute="bottom" id="wFl-NS-S9h"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YfE-OO-122" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="303" width="335" height="30"/>
+                                    <state key="normal" title="_Add an Issuer"/>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="7"/>
-                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="LocalizedText" value="AddIssuer"/>
                                     </userDefinedRuntimeAttributes>
-                                </textView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you've added an issuer from email, please don't tap on the Add an Issuer button." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVq-9y-QK2" customClass="LabelC6T3R" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="303" width="335" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YfE-OO-122" customClass="PrimaryButton" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="51" y="86" width="272.5" height="30"/>
-                                    <state key="normal" title="Add an Issuer"/>
                                     <connections>
                                         <action selector="addIssuerTapped:" destination="-1" eventType="touchUpInside" id="Nbv-Wk-9yE"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="D5D-Ee-p9l" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" constant="20" id="1HO-cE-DWF"/>
                                 <constraint firstItem="YfE-OO-122" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="2lN-YC-brt"/>
-                                <constraint firstItem="zSZ-UY-k6C" firstAttribute="top" secondItem="SVg-Ue-m8l" secondAttribute="bottom" constant="16" id="3YX-bE-ReN"/>
-                                <constraint firstItem="zSZ-UY-k6C" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="3kj-8i-CpV"/>
-                                <constraint firstAttribute="trailing" secondItem="krB-iU-XOc" secondAttribute="trailing" constant="20" id="AQO-kf-mno"/>
-                                <constraint firstItem="krB-iU-XOc" firstAttribute="top" secondItem="zSZ-UY-k6C" secondAttribute="bottom" constant="24" id="BDI-o4-SLd"/>
-                                <constraint firstAttribute="trailing" secondItem="aVq-9y-QK2" secondAttribute="trailing" constant="20" id="Byq-xp-O3V"/>
-                                <constraint firstAttribute="trailing" secondItem="zSZ-UY-k6C" secondAttribute="trailing" constant="20" id="OeV-gh-m0q"/>
-                                <constraint firstItem="aVq-9y-QK2" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="UQK-WG-6EK"/>
-                                <constraint firstItem="SVg-Ue-m8l" firstAttribute="top" secondItem="Kaw-NP-DqR" secondAttribute="top" constant="20" id="abx-xg-9Iv"/>
-                                <constraint firstItem="aVq-9y-QK2" firstAttribute="top" secondItem="Yob-Sd-s4n" secondAttribute="bottom" constant="24" id="dyC-x8-283"/>
+                                <constraint firstItem="hXf-GP-Ook" firstAttribute="top" secondItem="D5D-Ee-p9l" secondAttribute="bottom" constant="24" id="K6l-i5-Y9E"/>
+                                <constraint firstItem="hXf-GP-Ook" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="YOJ-F6-9K4"/>
+                                <constraint firstItem="YfE-OO-122" firstAttribute="top" secondItem="hXf-GP-Ook" secondAttribute="bottom" constant="24" id="c3C-a1-cK0"/>
+                                <constraint firstAttribute="trailing" secondItem="D5D-Ee-p9l" secondAttribute="trailing" constant="20" id="gBG-nB-gkS"/>
+                                <constraint firstItem="D5D-Ee-p9l" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="hN6-ls-Bli"/>
                                 <constraint firstAttribute="bottom" secondItem="YfE-OO-122" secondAttribute="bottom" id="iBE-Wq-JyF"/>
                                 <constraint firstAttribute="trailing" secondItem="YfE-OO-122" secondAttribute="trailing" constant="20" id="mXb-eD-JoJ"/>
-                                <constraint firstItem="SVg-Ue-m8l" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="mvQ-qV-3hf"/>
-                                <constraint firstItem="Yob-Sd-s4n" firstAttribute="top" secondItem="krB-iU-XOc" secondAttribute="bottom" constant="16" id="nIf-bP-5Ot"/>
-                                <constraint firstItem="Yob-Sd-s4n" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="qrY-rA-mKM"/>
-                                <constraint firstItem="krB-iU-XOc" firstAttribute="leading" secondItem="Kaw-NP-DqR" secondAttribute="leading" constant="20" id="sj8-h7-2yy"/>
-                                <constraint firstItem="YfE-OO-122" firstAttribute="top" secondItem="aVq-9y-QK2" secondAttribute="bottom" constant="16" id="vu2-28-7vR"/>
-                                <constraint firstAttribute="trailing" secondItem="SVg-Ue-m8l" secondAttribute="trailing" constant="20" id="wqO-LE-mFY"/>
-                                <constraint firstAttribute="trailing" secondItem="Yob-Sd-s4n" secondAttribute="trailing" constant="20" id="zIe-bo-LHa"/>
+                                <constraint firstAttribute="trailing" secondItem="hXf-GP-Ook" secondAttribute="trailing" constant="20" id="pgA-oA-qzo"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -129,7 +157,7 @@
                 <constraint firstItem="BJT-za-OkO" firstAttribute="top" secondItem="bQa-6Y-O70" secondAttribute="top" id="cfe-5D-4XI"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="bQa-6Y-O70"/>
-            <point key="canvasLocation" x="465.5" y="53.5"/>
+            <point key="canvasLocation" x="466" y="61"/>
         </view>
     </objects>
 </document>

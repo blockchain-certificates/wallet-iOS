@@ -42,7 +42,6 @@ class IssuerTableViewController: UITableViewController {
         
         tableView.register(UINib(nibName: "IssuerHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: issuerHeaderCellReuseIdentifier)
         tableView.register(UINib(nibName: "IssuerSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: issuerSummaryCellReuseIdentifier)
-        tableView.register(UINib(nibName: "NoCertificatesTableViewCell", bundle: nil), forCellReuseIdentifier: noCertificatesCellReuseIdentififer)
         tableView.register(UINib(nibName: "CertificateTitleTableViewCell", bundle: nil), forCellReuseIdentifier: certificateCellReuseIdentifier)
         tableView.register(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: buttonCellReuseIdentifier)
         tableView.register(UINib(nibName: "IssuerEmptyTableViewCell", bundle: nil), forCellReuseIdentifier: emptyCellReuseIdentifier)
@@ -76,10 +75,17 @@ class IssuerTableViewController: UITableViewController {
             return cell
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: buttonCellReuseIdentifier) as! ButtonTableViewCell
-            cell.button.setTitle(NSLocalizedString("Add a Credential", comment: "Add credential in issuer detail"), for: .normal)
+            cell.button.setTitle(Localizations.AddCredential, for: .normal)
+            cell.button.titleLabel?.font = Style.Font.T2S
+            cell.button.titleLabel?.textColor = Style.Color.C3
+            cell.button.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: -2.0, bottom: 0.0, right: 0.0)
+            cell.button.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: -2.0)
+            cell.button.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
+            
             cell.button.onTouchUpInside { [weak self] in
                 self?.delegate?.addCertificateTapped()
             }
+            
             return cell
         } else {
             if hasCertificates {
@@ -100,11 +106,9 @@ class IssuerTableViewController: UITableViewController {
         }
         let containerView = UIView()
         containerView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-
-        let credentialsCount = certificates.count == 1 ? "1 credential" : "\(certificates.count) credentials"
         
         let label = LabelC5T2B()
-        label.text = "You have \(credentialsCount)"
+        label.text = certificates.count == 1 ? Localizations.YouHaveOneCredential :  Localizations.YouHaveMultipleCredentials(String(certificates.count))
         label.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.addSubview(label)
@@ -163,11 +167,9 @@ extension IssuerTableViewController : CertificateViewControllerDelegate {
             } catch {
                 Logger.main.error("Deleting certificate \(certificate.id) failed with \(error)")
                 
-                let deleteTitle = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
-                let deleteMessage = NSLocalizedString("Something went wrong when deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
-                let okay = NSLocalizedString("Okay", comment: "Button copy")
-                
-                let alert = AlertViewController.createWarning(title: deleteTitle, message: deleteMessage, buttonText: okay)
+                let alert = AlertViewController.createWarning(title: Localizations.DeleteFileError,
+                                                              message: Localizations.DeleteCredentialGenericError,
+                                                              buttonText: Localizations.Okay)
                 self?.present(alert, animated: false, completion: nil)
             }
         })

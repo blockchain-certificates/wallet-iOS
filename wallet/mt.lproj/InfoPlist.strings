@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  wallet
+
+  Created by Michael Dimore on 9/27/18.
+  Copyright © 2018 Learning Machine, Inc. All rights reserved.
+*/
+"NSFaceIDUsageDescription" = "FaceID tintuża biex tkun assigurata l-passphrase tiegħek";
+"kCFBundleDevelopmentRegionKey" = "mt";

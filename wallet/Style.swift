@@ -23,16 +23,16 @@ struct Style {
         static let C4 = UIColor(hexString: "#2AB27B")
 
         /// C5: Headlines
-        static let C5 = UIColor(hexString: "#207BD3")
+        static let C5 = UIColor(hexString: "#156DCB")
         
         /// C6: Primary text
         static let C6 = UIColor(hexString: "#333333")
 
         /// C7: Secondary text
-        static let C7 = UIColor(hexString: "#919396")
+        static let C7 = UIColor(hexString: "#666666")
         
         /// C8: Strokes
-        static let C8 = UIColor(hexString: "#D8D8D8")
+        static let C8 = UIColor(hexString: "#E3E3E3")
         
         /// C9: Error states
         static let C9 = UIColor(hexString: "#D0021B")
@@ -41,16 +41,19 @@ struct Style {
         static let C10 = UIColor(hexString: "#ECF5FE")
         
         /// C11: Selected primary button background
-        static let C11 = UIColor(hexString: "#97CEB8")
+        static let C11 = UIColor(hexString: "#006239")
         
-        /// C12: highlighted button fill/outline
-        static let C12 = UIColor(hexString: "#11493E")
+        /// C12: Dsiabled/Pending
+        static let C12 = UIColor(hexString: "#9F9F9F")
         
         /// C13: drop shadow, 5% black
         static let C13 = UIColor(hexString: "#0000000C")
         
         /// C14: button disabled text
-        static let C14 = UIColor(hexString: "#888888")
+        static let C14 = UIColor(hexString: "#6FE2AC")
+        
+        /// C15: Verification status bar failed state
+        static let C15 = UIColor(hexString: "#FDE6E6")
     }
 
     struct Font {
@@ -59,18 +62,37 @@ struct Style {
         case semiBold
         case bold
         }
-        static func create(_ weight: Weight, size: CGFloat) -> UIFont {
+        static func create(_ weight: Weight, size: CGFloat, isDynamic: Bool = true) -> UIFont {
+            var font: UIFont
+            
             switch weight {
             case .regular:
-                return UIFont.openSansFont(ofSize: size)
+                font = UIFont.openSansFont(ofSize: size)
             case .semiBold:
-                return UIFont.openSansSemiBoldFont(ofSize: size)
+                font = UIFont.openSansSemiBoldFont(ofSize: size)
             case .bold:
-                return UIFont.openSansBoldFont(ofSize: size)
+                font = UIFont.openSansBoldFont(ofSize: size)
+            }
+            
+            if isDynamic {
+                if #available(iOS 11.0, *) {
+                    return UIFontMetrics.default.scaledFont(for: font, maximumPointSize: font.pointSize * 1.5)
+                } else {
+                    let size = min(scaler * font.pointSize, font.pointSize * 1.5)
+                    return font.withSize(size)
+                }
+            } else {
+                return font
             }
         }
         
+        static var scaler: CGFloat {
+            return UIFont.preferredFont(forTextStyle: .body).pointSize / 17.0
+        }
+        
         static let T1R = create(.regular, size: 12)
+        
+        static let T1R_NoScale = create(.regular, size: 12, isDynamic: false)
 
         static let T1B = create(.bold, size: 12)
         
@@ -79,6 +101,8 @@ struct Style {
         static let T2S = create(.semiBold, size: 14)
         
         static let T2B = create(.bold, size: 14)
+        
+        static let T2B_NoScale = create(.bold, size: 14, isDynamic: false)
         
         static let T3R = create(.regular, size: 16)
         

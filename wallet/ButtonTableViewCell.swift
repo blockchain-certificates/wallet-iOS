@@ -7,5 +7,5 @@
 //
 
 class ButtonTableViewCell : UITableViewCell {
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var button: SecondaryButton!
 }

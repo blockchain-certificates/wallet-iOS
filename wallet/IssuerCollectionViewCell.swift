@@ -46,7 +46,7 @@ class IssuerCollectionViewCell: UICollectionViewCell {
         titleLabel.backgroundColor = .clear
         
         isAccessibilityElement = true
-        accessibilityLabel = NSLocalizedString("Issuer", comment: "This describes the issuer cell in the collection view. It's an accessibility label read aloud for users with VoiceOver.")
+        accessibilityLabel = Localizations.Issuer
         accessibilityTraits |= UIAccessibilityTraitButton
         
     }
@@ -54,11 +54,11 @@ class IssuerCollectionViewCell: UICollectionViewCell {
     var certificateCount = 0 {
         didSet {
             if certificateCount == 0 {
-                certificateCountLabel.text = "No credentials"
+                certificateCountLabel.text = Localizations.NoCredentials
             } else if certificateCount == 1 {
-                certificateCountLabel.text = "1 credential"
+                certificateCountLabel.text = Localizations.OneCredential
             } else {
-                certificateCountLabel.text = "\(certificateCount) credentials"
+                certificateCountLabel.text = Localizations.MultipleCredentials(String(certificateCount))
             }
         }
     }
