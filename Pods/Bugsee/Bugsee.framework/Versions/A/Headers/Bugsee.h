@@ -93,6 +93,9 @@ if (!condition) {[Bugsee logAssert:description withLocation:[NSString stringWith
 + (nullable Bugsee *)launchWithToken:(nonnull NSString* )appToken NS_SWIFT_NAME(launch(token:));
 + (nullable Bugsee *)launchWithToken:(nonnull NSString*)appToken andOptions:( NSDictionary * _Nullable) options NS_SWIFT_NAME(launch(token:options:));
 + (nullable Bugsee *)launchWithToken:(nonnull NSString*)appToken options:(BugseeOptions * _Nullable) options NS_SWIFT_NAME(launch(token:options:));
++ (nullable Bugsee *)launchWithToken:(nonnull NSString*)appToken
+                             options:(BugseeOptions * _Nullable) options
+                             started:(nullable BugseeStartedBlock) started NS_SWIFT_NAME(launch(token:options:started:));
 
 + (void) showReportController;
 + (void) showReportControllerWithSummary:(nonnull NSString *)summ description:(nonnull NSString*)descr severity:(BugseeSeverityLevel)level NS_SWIFT_NAME(showReportController(summary:description:severity:));
@@ -115,10 +118,13 @@ if (!condition) {[Bugsee logAssert:description withLocation:[NSString stringWith
  *  new token and options will be applied
  *  @param completion bugsee is stopped completion block, can be nil
  */
+
 + (void) stop:(void (^_Nullable)(void))completion;
 
 + (void)relaunchWithDictionaryOptions:(NSDictionary * _Nullable) options NS_SWIFT_NAME(relaunch(options:));
 + (void)relaunchWithOptions:(BugseeOptions * _Nullable) options NS_SWIFT_NAME(relaunch(options:));
++ (void)relaunchWithOptions:(BugseeOptions * _Nullable) options
+                    started:(nullable BugseeStartedBlock) started NS_SWIFT_NAME(relaunch(options:started:));
 
 + (void) traceKey:(nonnull NSString*)traceKey withValue:(nonnull id)value NS_SWIFT_NAME(trace(key:value:));
 
@@ -163,8 +169,7 @@ if (!condition) {[Bugsee logAssert:description withLocation:[NSString stringWith
 /**
  *  Use this method to send info about your network event with bugsee report
  *
- *  @param event BugseeNetworkEvent
- *  @param event event will go trough filter block if YES
+ *  @param event BugseeNetworkEvent - event will go trough filter block if YES
  *  @see BugseeNetworkEvent
  */
 + (void) registerNetworkEvent:(nonnull BugseeNetworkEvent *)event
@@ -298,6 +303,7 @@ if (!condition) {[Bugsee logAssert:description withLocation:[NSString stringWith
  *  @param synchronous do it in main thread
  */
 + (void) logException:(nonnull NSString *)name reason:(nonnull NSString*)reason frames:(nonnull NSArray*)frames type:(nonnull NSString*)type handled:(BOOL)handled synchronous:(BOOL)synchronous;
++ (void) logException:(nonnull NSString *)name reason:(nonnull NSString*)reason frames:(nonnull NSArray*)frames type:(nonnull NSString*)type handled:(BOOL)handled synchronous:(BOOL)synchronous completion:(nullable BugseeEmptyBlock)completionBlock;
 
 /**
  *  Log managed excetpions.

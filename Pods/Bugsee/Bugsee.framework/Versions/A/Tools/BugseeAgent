@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
-# Copyright 2016 Bugsee, Inc. All rights reserved.
+# Copyright 2019 Bugsee, Inc. All rights reserved.
 #
 # Usage:
-#   * In the project editor, select your target.
-#   * Click "Build Phases" at the top of the project editor.
-#   * Click "+" button in the top left corner.
-#   * Choose "New Run Script Phase."
-#   * Uncomment and paste the following script.
+#   * Start editing your scheme by going to Product -> Scheme -> Edit Scheme
+#   * Add an extra "Run Script" build phase to "Post-actions" stage of your scheme
+#   * Click "+" button in the bottom left corner.
+#   * Uncomment and paste the following script. Don't forget to replace <APP_TOKEN> with your actual application token
 #
 # --- INVOCATION SCRIPT BEGIN ---
 # SCRIPT_SRC=$(find "$PROJECT_DIR" -name 'BugseeAgent' | head -1)
@@ -29,6 +28,7 @@ import json
 import hashlib
 import shutil
 from optparse import OptionParser
+import fnmatch
 
 def isInUploadedList(images, imageList):
     for image in images:
@@ -79,7 +79,7 @@ def getIcon():
         # TODO: Get it from fastlane if we run after build?
         return None
     try:
-        info_file_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['INFOPLIST_PATH'])
+        info_file_path = os.path.join(options.build_dir, os.environ['INFOPLIST_PATH'])
         info_file_dir = os.path.dirname(info_file_path)
         # p = subprocess.Popen('/usr/libexec/PlistBuddy -c "Print :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles" %s' % info_file_path,
         #                  stdout=subprocess.PIPE, shell=True)
@@ -121,7 +121,7 @@ def getVersionAndBuild(zipFile):
             build = searchObj.group(2)
     else:
         try:
-            info_file_path = os.path.join(os.environ['TARGET_BUILD_DIR'], os.environ['INFOPLIST_PATH'])
+            info_file_path = os.path.join(options.build_dir, os.environ['INFOPLIST_PATH'])
             p = subprocess.Popen('/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" -c "Print :CFBundleVersion" "%s"' % info_file_path,
                              stdout=subprocess.PIPE, shell=True)
 
@@ -273,36 +273,12 @@ if __name__ == "__main__":
                   help="Set the version of the application dSYM corresponds to")
     parser.add_option("-b", "--build", dest="build",
                   help="Set the version of the application dSYM corresponds to")
+    parser.add_option("-d", "--build_dir", dest="build_dir",
+                  help="Use for custom TARGET_BUILD_DIR", default=os.environ.get('TARGET_BUILD_DIR'))
     (options, args) = parser.parse_args()
 
-    if (len(args) < 1):
-        print "Bugsee:  Not initialized with app token. Must be passed as a parameter"
-        exit(1)
-
-
-    APP_TOKEN = args[0]
-
-    if options.dsym_list:
-        dsym_list = args[1:]
-        if len(dsym_list) < 1:
-            print "Bugsee:  --list option is provided, but no dSYM files can be found in the command line"
-            exit(1)
-    else:
-        if not options.dsym_folder:
-            print "Bugsee:  Can not find dSYM folder (expecting either a -f option or DWARF_DSYM_FOLDER_PATH)"
-            exit(1)
-
     if options.from_xcode:
-        if os.environ.get('DEBUG_INFORMATION_FORMAT') != 'dwarf-with-dsym':
-            print "Bugsee:  DEBUG_INFORMATION_FORMAT is not set. Have you enabled debug symbols in your build? See: https://docs.bugsee.com/sdk/ios/symbolication/"
-            exit(0)
-
-        if os.environ.get('EFFECTIVE_PLATFORM_NAME') == '-iphonesimulator':
-            print "Bugsee:  Bugsee is not supoorted in iOS simulator. Will not upload debug symbols for i386!"
-            exit(0)
-
-
-        # do the UNIX double-fork magic, see Stevens' "Advanced 
+        # do the UNIX double-fork magic, see Stevens' "Advanced
         # Programming in the UNIX Environment" for details (ISBN 0201563177)
         try: 
             pid = os.fork() 
@@ -331,6 +307,7 @@ if __name__ == "__main__":
 
         # redirect standard file descriptors
         outputFile = os.path.join(os.environ['PROJECT_TEMP_DIR'], "BugseeAgent.log")
+        # this log will not show since xcode 10
         print "Detaching STDOUT, logs can be found in %s" % (outputFile)
         sys.stdout.flush()
         sys.stderr.flush()
@@ -340,6 +317,35 @@ if __name__ == "__main__":
         os.dup2(si.fileno(), sys.stdin.fileno())
         os.dup2(so.fileno(), sys.stdout.fileno())
         os.dup2(se.fileno(), sys.stderr.fileno())
+
+        if os.environ.get('DEBUG_INFORMATION_FORMAT') != 'dwarf-with-dsym':
+            print "Bugsee:  DEBUG_INFORMATION_FORMAT is not set. Have you enabled debug symbols in your build? See: https://docs.bugsee.com/sdk/ios/symbolication/"
+            exit(0)
+
+        if os.environ.get('EFFECTIVE_PLATFORM_NAME') == '-iphonesimulator':
+            print "Bugsee:  Bugsee is not supoorted in iOS simulator. Will not upload debug symbols for i386!"
+            exit(0)
+
+
+    if (len(args) < 1):
+        print "Bugsee:  Not initialized with app token. Must be passed as a parameter"
+        exit(1)
+
+    APP_TOKEN = args[0]
+
+    if not options.build_dir:
+        print('Target build directory was not specified. Either provide it with the "-d" option or set "TARGET_BUILD_DIR" environment variable')
+        exit(1)
+
+    if options.dsym_list:
+        dsym_list = args[1:]
+        if len(dsym_list) < 1:
+            print "Bugsee:  --list option is provided, but no dSYM files can be found in the command line"
+            exit(1)
+    else:
+        if not options.dsym_folder:
+            print "Bugsee:  Can not find dSYM folder (expecting either a -f option or DWARF_DSYM_FOLDER_PATH)"
+            exit(1)
 
     # start the daemon main loop
     main() 
