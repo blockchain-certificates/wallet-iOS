@@ -105,7 +105,7 @@ class DeleteTableViewCell : UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         button = DangerButton(frame: .zero)
-        button.setTitle(NSLocalizedString("Delete Credential", comment: "Action to delete a credential in the metadata view."), for: .normal)
+        button.setTitle(Localizations.DeleteCredential, for: .normal)
 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -150,7 +150,6 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     override func loadView() {
         let view = UIView()
         
-        navigationController?.navigationBar.isTranslucent = false
         
         let tableView : UITableView = UITableView(frame: .zero, style: .plain)
         view.addSubview(tableView)
@@ -176,9 +175,11 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dismissButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(dismissSelf))
-        navigationItem.leftBarButtonItem = dismissButton
-        navigationController?.navigationBar.barTintColor = Style.Color.C3
+        title = Localizations.CredentialInfo
+        
+        let closeButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_close"), style: .done, target: self, action: #selector(dismissSelf))
+        closeButton.accessibilityLabel = Localizations.Close
+        navigationItem.rightBarButtonItem = closeButton
 
         tableView.separatorStyle = .none
         view.backgroundColor = Style.Color.C1
@@ -250,12 +251,12 @@ class CertificateMetadataViewController: BaseMetadataViewController {
         
         let issuedOn = dateFormatter.string(from: certificate.assertion.issuedOn)
         let expirationDate = certificate.issuer.publicKeys.first?.expires
-        let expiresOn = expirationDate.map { dateFormatter.string(from: $0) } ?? NSLocalizedString("Never", comment: "Credential info screen description of credential that never expires")
+        let expiresOn = expirationDate.map { dateFormatter.string(from: $0) } ?? Localizations.Never
         
-        data.append(InfoCell(title: NSLocalizedString("Credential Name", comment: "Credential info screen field label"), detail: certificate.title, url: nil))
-        data.append(InfoCell(title: NSLocalizedString("Date Issued", comment: "Credential info screen field label"), detail: issuedOn, url: nil))
-        data.append(InfoCell(title: NSLocalizedString("Credential Expiration", comment: "Credential info screen field label"), detail: expiresOn, url: nil))
-        data.append(InfoCell(title: NSLocalizedString("Description", comment: "Credential info screen field label"), detail: certificate.description, url: nil))
+        data.append(InfoCell(title: Localizations.CredentialName, detail: certificate.title, url: nil))
+        data.append(InfoCell(title: Localizations.DateIssued, detail: issuedOn, url: nil))
+        data.append(InfoCell(title: Localizations.CredentialExpiration, detail: expiresOn, url: nil))
+        data.append(InfoCell(title: Localizations.Description, detail: certificate.description, url: nil))
         
         let metadata : [TableCellModel] = certificate.metadata.visibleMetadata.map { metadata in
             let url : URL?
@@ -283,7 +284,7 @@ class CertificateMetadataViewController: BaseMetadataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = NSLocalizedString("Credential Info", comment: "Title of credential information screen")
+        navigationItem.title = Localizations.CredentialInfo
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -299,16 +300,11 @@ class CertificateMetadataViewController: BaseMetadataViewController {
     func promptForCertificateDeletion() {
         Logger.main.info("User has tapped the delete button on this certificate.")
         let certificateToDelete = certificate
-        
-        let title = NSLocalizedString("Be careful", comment: "Caution title presented when attempting to delete a certificate.")
-        let message = NSLocalizedString("If you delete this certificate and don't have a backup, then you'll have to ask the issuer to send it to you again if you want to recover it. Are you sure you want to delete this certificate?", comment: "Explanation of the effects of deleting a certificate.")
-        let delete = NSLocalizedString("Delete", comment: "Confirm delete action")
-        let cancel = NSLocalizedString("Cancel", comment: "Cancel action")
+        let alert = AlertViewController.create(title: Localizations.Caution,
+                                               message: Localizations.DeleteCredentialExplanation, icon: .warning)
 
-        let alert = AlertViewController.create(title: title, message: message, icon: .warning)
-
-        let okayButton = DangerButton(frame: .zero)
-        okayButton.setTitle(delete, for: .normal)
+        let okayButton = DialogButton(frame: .zero)
+        okayButton.setTitle(Localizations.Delete, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             Logger.main.info("User has deleted certificate \(certificateToDelete.title) with id \(certificateToDelete.id)")
             self?.delegate?.delete(certificate: certificateToDelete)
@@ -316,8 +312,9 @@ class CertificateMetadataViewController: BaseMetadataViewController {
             self?.dismissSelfAfterDeletion()
         }
         
-        let cancelButton = SecondaryButton(frame: .zero)
-        cancelButton.setTitle(cancel, for: .normal)
+        let cancelButton = PrimaryButton(frame: .zero)
+        cancelButton.titleLabel?.font = Style.Font.T2S
+        cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             Logger.main.info("User canceled the deletion of the certificate.")
             alert.dismiss(animated: false, completion: nil)
@@ -339,18 +336,17 @@ class IssuerMetadataViewController : BaseMetadataViewController {
         super.init()
         
         if let name = issuer.issuer?.name {
-            data.append(InfoCell(title: NSLocalizedString("Issuer Name", comment: "Issuer info screen field label"), detail: name, url: nil))
+            data.append(InfoCell(title: Localizations.IssuerName, detail: name, url: nil))
         }
         if let introducedOn = issuer.introducedOn {
-            data.append(InfoCell(title: NSLocalizedString("Introduced on", comment: "Issuer info screen field label"), detail: dateFormatter.string(from: introducedOn), url: nil))
+            data.append(InfoCell(title: Localizations.IntroducedOn, detail: dateFormatter.string(from: introducedOn), url: nil))
         }
         if let address = issuer.introducedWithAddress {
-            data.append(InfoCell(title: NSLocalizedString("Shared Address", comment: "Issuer info screen field label"), detail: address.scopedValue, url: nil))
+            data.append(InfoCell(title: Localizations.SharedAddress, detail: address.scopedValue, url: nil))
         }
         if let email = issuer.issuer?.email {
-            data.append(InfoCell(title: NSLocalizedString("Issuer Contact Email", comment: "Issuer info screen field label"), detail: email, url: URL(string: "mailto:\(email)")))
+            data.append(InfoCell(title: Localizations.IssuerContactEmail, detail: email, url: URL(string: "mailto:\(email)")))
         }
-//        data.append(InfoCell(title: NSLocalizedString("URL", comment: "Issuer info screen field label"), detail: issuer.url  // issuer.id.absoluteString, url: issuer.id))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -360,7 +356,7 @@ class IssuerMetadataViewController : BaseMetadataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = NSLocalizedString("Issuer Info", comment: "Title of credential information screen")
+        navigationItem.title = Localizations.IssuerInfo
     }
 
 }

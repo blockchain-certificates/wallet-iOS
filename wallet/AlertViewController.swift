@@ -31,25 +31,76 @@ class AlertViewController : UIViewController {
         }
     }
     
+    enum AlertType {
+        case normal
+        case progress
+        case verification
+    }
+    
+    // Normal Alert
+    @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var buttonStack: UIStackView!
-    var buttons = [UIButton]()
+    
+    // Progress Alert
+    @IBOutlet weak var progressAlertView: UIView!
+    @IBOutlet weak var progressIconView: UIImageView!
+    @IBOutlet weak var progressTitleLabel: UILabel!
+    
+    // Certificate Verification Alert
+    @IBOutlet weak var verificationAlertView: UIView!
+    @IBOutlet weak var verificationIconView: UIImageView!
+    @IBOutlet weak var verificationHeaderLabel: UILabel!
+    @IBOutlet weak var verificationTitleLabel: UILabel!
+    @IBOutlet weak var verificationMessageLabel: UILabel!
+    @IBOutlet weak var verificationButtonStack: UIStackView!
     
     var icon = Icon.success {
         didSet {
             iconView.image = icon.image
+            progressIconView.image = icon.image
+            verificationIconView.image = icon.image
             animateIconIfNeeded()
         }
     }
-
+    
+    var type = AlertType.normal {
+        didSet {
+            alertView.isHidden = true
+            progressAlertView.isHidden = true
+            verificationAlertView.isHidden = true
+            
+            switch type {
+            case .normal:
+                alertView.isHidden = false
+                
+            case .progress:
+                progressAlertView.isHidden = false
+                
+            case .verification:
+                verificationAlertView.isHidden = false
+            }
+        }
+    }
+    
+    var buttons = [UIButton]()
+    var verificationButtons =  [UIButton]()
+    
+    func set(header: String) {
+        verificationHeaderLabel.text = header
+    }
+    
     func set(title: String) {
         titleLabel.text = title
+        progressTitleLabel.text = title
+        verificationTitleLabel.text = title
     }
     
     func set(message: String) {
         messageLabel.text = message
+        verificationMessageLabel.text = message
     }
     
     func set(buttons: [UIButton], clear: Bool = false) {
@@ -58,6 +109,7 @@ class AlertViewController : UIViewController {
                 buttonStack.removeArrangedSubview($0)
             }
         }
+        
         buttons.forEach { button in
             button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
             button.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -68,6 +120,24 @@ class AlertViewController : UIViewController {
         }
         self.buttons = buttons
     }
+    
+    func set(verificationButtons: [UIButton], clear: Bool = false) {
+        if clear {
+            verificationButtonStack.arrangedSubviews.forEach {
+                verificationButtonStack.removeArrangedSubview($0)
+            }
+        }
+        
+        verificationButtons.forEach { button in
+            button.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+            button.setContentHuggingPriority(.defaultLow, for: .horizontal)
+            verificationButtonStack.addArrangedSubview(button)
+            // 0.304 multiplier is 40% of 0.76 x screen width
+            button.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.304).isActive = true
+            button.heightAnchor.constraint(equalToConstant: Style.Measure.heightButtonSmall).isActive = true
+        }
+        self.verificationButtons = verificationButtons
+    }
 
     func animateIconIfNeeded() {
         let animationKey = "rotationAnimation"
@@ -77,9 +147,21 @@ class AlertViewController : UIViewController {
             rotationAnimation.duration = 1.2
             rotationAnimation.isCumulative = true
             rotationAnimation.repeatCount = .infinity
-            iconView.layer.add(rotationAnimation, forKey: animationKey)
+            
+            switch type {
+            case .normal:
+                iconView.layer.add(rotationAnimation, forKey: animationKey)
+                
+            case .progress:
+                progressIconView.layer.add(rotationAnimation, forKey: animationKey)
+                
+            case .verification:
+                verificationIconView.layer.add(rotationAnimation, forKey: animationKey)
+            }
         } else {
             iconView.layer.removeAllAnimations()
+            progressIconView.layer.removeAllAnimations()
+            verificationIconView.layer.removeAllAnimations()
         }
     }
     
@@ -88,21 +170,19 @@ class AlertViewController : UIViewController {
         animateIconIfNeeded()
     }
 
-    static func create(title: String, message: String, icon: Icon, buttonText: String? = nil) -> AlertViewController {
-        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
-        vc.view.backgroundColor = .clear
-        vc.modalPresentationStyle = .custom
-        
+    static func create(title: String, message: String, icon: Icon, buttonText: String? = nil, buttonAction: (() -> Void)? = nil) -> AlertViewController {
+        let vc = createFromStoryboard()
+        vc.type = .normal
         vc.set(title: title)
         vc.set(message: message)
         vc.icon = icon
 
         if let buttonText = buttonText {
             // assume a simple, single button to dismiss the alert
-            let button = SecondaryButton(frame: .zero)
+            let button = DialogButton(frame: .zero)
             button.setTitle(buttonText, for: .normal)
             button.onTouchUpInside {
+                buttonAction?()
                 vc.dismiss(animated: false, completion: nil)
             }
             vc.set(buttons: [button])
@@ -112,18 +192,15 @@ class AlertViewController : UIViewController {
     }
     
     static func createWarning(title: String, message: String, buttonText: String? = nil) -> AlertViewController {
-        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
-        vc.view.backgroundColor = .clear
-        vc.modalPresentationStyle = .custom
-        
+        let vc = createFromStoryboard()
+        vc.type = .normal
         vc.set(title: title)
         vc.set(message: message)
         vc.icon = .warning
         
         // assume a simple, single button to dismiss the alert
         let button = DangerButton(frame: .zero)
-        let buttonCopy = buttonText ?? NSLocalizedString("Okay", comment: "Button label")
+        let buttonCopy = buttonText ?? Localizations.Okay
         button.setTitle(buttonCopy, for: .normal)
         button.onTouchUpInside {
             vc.dismiss(animated: false, completion: nil)
@@ -133,4 +210,62 @@ class AlertViewController : UIViewController {
         return vc
     }
     
+    static func createNetworkWarning() -> AlertViewController {
+        return createWarning(title: Localizations.ReachabilityAlertTitle,
+                             message: Localizations.ReachabilityAlertMessage)
+    }
+    
+    static func createProgress(title: String) -> AlertViewController {
+        let vc = createFromStoryboard()
+        vc.type = .progress
+        vc.set(title: title)
+        vc.icon = .verifying
+        
+        return vc
+    }
+    
+    static func createVerification(header: String, title: String, message: String) -> AlertViewController {
+        let vc = createFromStoryboard()
+        vc.type = .verification
+        vc.set(header: header)
+        vc.set(title: title)
+        vc.set(message: message)
+        vc.icon = .verifying
+        
+        return vc
+    }
+    
+    static func createAppUpdate() -> AlertViewController {
+
+        let vc = createFromStoryboard()
+        vc.type = .normal
+        vc.set(title: Localizations.AppUpdateAlertTitle)
+        vc.set(message: Localizations.AppUpdateAlertMessage)
+        vc.icon = .warning
+        
+        let okayButton = PrimaryButton(frame: .zero)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
+        okayButton.onTouchUpInside {
+            let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            vc.dismiss(animated: false, completion: nil)
+        }
+        
+        let cancelButton = DangerButton(frame: .zero)
+        cancelButton.setTitle(Localizations.Cancel, for: .normal)
+        cancelButton.onTouchUpInside {
+            vc.dismiss(animated: false, completion: nil)
+        }
+        
+        vc.set(buttons: [cancelButton, okayButton])
+        return vc
+    }
+    
+    static func createFromStoryboard() -> AlertViewController {
+        let storyboard = UIStoryboard(name: "Alert", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "alert") as! AlertViewController
+        vc.view.backgroundColor = .clear
+        vc.modalPresentationStyle = .custom
+        return vc
+    }
 }

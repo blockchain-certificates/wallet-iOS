@@ -9,6 +9,10 @@
 import UIKit
 import JSONLD
 
+#if DEBUG
+import Bugsee
+#endif
+
 private let sampleCertificateResetKey = "resetSampleCertificate"
 private let enforceStrongOwnershipKey = "enforceStrongOwnership"
 
@@ -24,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Logger.main.info("Application was launched!")
+        
+        #if DEBUG
+        Bugsee.launch(token :"ef62e737-3645-43fa-ba0b-062afb7743af")
+        #endif
         
         let configuration = ArgumentParser().parse(arguments: ProcessInfo.processInfo.arguments)
         do {
@@ -84,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupApplication() {
         self.window?.addSubview(JSONLD.shared.webView)
 
-        styleApplicationDefault()
+        UIApplication.shared.statusBarStyle = .lightContent
 
         UserDefaults.standard.register(defaults: [
             sampleCertificateResetKey : false
@@ -92,26 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Reset state if needed
         resetSampleCertificateIfNeeded()
-    }
-    
-    // Styling changes for a brand color (dark) status/navigation bar
-    func styleApplicationDefault() {
-        UINavigationBar.appearance().titleTextAttributes =
-            [NSAttributedStringKey.font: Style.Font.T4B,
-             NSAttributedStringKey.foregroundColor: Style.Color.C1]
-
-        UINavigationBar.appearance().tintColor = Style.Color.C1
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
-    /// Styling changes for a light status/navigation bar
-    func styleApplicationAlternate() {
-        UINavigationBar.appearance().titleTextAttributes =
-            [NSAttributedStringKey.font: Style.Font.T4B,
-             NSAttributedStringKey.foregroundColor: Style.Color.C6]
-        
-        UINavigationBar.appearance().tintColor = Style.Color.C6
-        UIApplication.shared.statusBarStyle = .default
     }
     
     @objc func settingsDidChange() {

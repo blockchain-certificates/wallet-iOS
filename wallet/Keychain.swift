@@ -21,7 +21,7 @@ public enum KeychainErrors : Error {
 
 class Keychain {
     public var seedPhrase : String {
-        return mnemonic.words.flatMap({ $0 as? String}).joined(separator: " ")
+        return mnemonic.words.compactMap({ $0 as? String}).joined(separator: " ")
     }
     private var unusedKeyIndex : UInt32 {
         didSet {
@@ -81,7 +81,7 @@ extension Keychain {
     static func generateSeedPhrase(withRandomData randomData: Data) -> String {
         let mn = BTCMnemonic(entropy: randomData, password: "", wordListType: .english)
         
-        return mn?.words.flatMap({ $0 as? String }).joined(separator: " ") ?? ""
+        return mn?.words.compactMap({ $0 as? String }).joined(separator: " ") ?? ""
     }
 }
 

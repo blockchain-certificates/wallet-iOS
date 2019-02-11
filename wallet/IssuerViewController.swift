@@ -19,6 +19,7 @@ class IssuerViewController: UIViewController {
         super.viewDidLoad()
         view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
+        title = Localizations.Issuer
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_info"), style: .plain, target: self, action: #selector(displayIssuerInfo))
 
@@ -35,7 +36,6 @@ class IssuerViewController: UIViewController {
         
         certificateTableController.didMove(toParentViewController: self)
         
-        
         let views : [String : UIView] = [
             "table": certificateTableController.view
         ]
@@ -46,22 +46,23 @@ class IssuerViewController: UIViewController {
         NSLayoutConstraint.activate(horizontalTableConstraints)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if let tableView = certificateTableController.tableView,
-            let selectedPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selectedPath, animated: true)
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AppDelegate.instance.styleApplicationDefault()
+        navigationController?.styleDefault()
+        
         guard let managedIssuer = managedIssuer else { return }
         certificates = CertificateManager().loadCertificates().filter { certificate in
             return managedIssuer.issuer != nil && certificate.issuer.id == managedIssuer.issuer!.id
         }
         certificateTableController.certificates = certificates
         certificateTableController.tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let tableView = certificateTableController.tableView,
+            let selectedPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedPath, animated: true)
+        }
     }
     
     var activityIndicator: UIActivityIndicatorView?
@@ -100,33 +101,25 @@ class IssuerViewController: UIViewController {
         Logger.main.info("More info tapped on the Issuer display.")
         let controller = IssuerMetadataViewController(issuer: managedIssuer)
         controller.delegate = self
-        let navController = UINavigationController(rootViewController: controller);
+        let navController = NavigationController(rootViewController: controller);
         present(navController, animated: true, completion: nil)
     }
     
     @objc func addCertificateTapped() {
         Logger.main.info("Add certificate button tapped")
         
-        let addCertificateFromFile = NSLocalizedString("Import Credential from File", comment: "Contextual action. Tapping this prompts the user to add a file from a document provider.")
-        let addCertificateFromURL = NSLocalizedString("Import Credential from URL", comment: "Contextual action. Tapping this prompts the user for a URL to pull the certificate from.")
-        let cancelAction = NSLocalizedString("Cancel", comment: "Cancel action")
+        let alertController = UIAlertController(title: Localizations.AddCredential, message: nil, preferredStyle: .actionSheet)
         
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        alertController.addAction(UIAlertAction(title: addCertificateFromURL, style: .default, handler: { [weak self] _ in
+        alertController.addAction(UIAlertAction(title: Localizations.ImportFromURL, style: .default, handler: { [weak self] _ in
             Logger.main.info("Add Credential from URL tapped in issuer view")
             let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
-            let controller = storyboard.instantiateViewController(withIdentifier: "addCredentialFromURL") as! SettingsAddCredentialURLViewController
+            let controller = storyboard.instantiateViewController(withIdentifier: "addCredentialFromURL") as! AddCredentialURLViewController
+            let navigationController = NavigationController(rootViewController: controller)
             
-            let navigationController = UINavigationController(rootViewController: controller)
-            navigationController.navigationBar.barTintColor = Style.Color.C3
-            navigationController.navigationBar.isTranslucent = false
-            
-            let cancelBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelIcon"), landscapeImagePhone: #imageLiteral(resourceName: "CancelIcon"), style: .done, target: controller, action: #selector(SettingsAddCredentialURLViewController.dismissModally))
-            controller.navigationItem.rightBarButtonItem = cancelBarButton
-            
-            controller.navigationItem.title = NSLocalizedString("Add Credential", comment: "View controller navigation bar title")
+            let cancelButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_close"), style: .done, target: controller, action: #selector(AddCredentialURLViewController.dismissModally))
+            cancelButton.accessibilityLabel = Localizations.Close
+            controller.navigationItem.rightBarButtonItem = cancelButton
+            controller.navigationItem.title = Localizations.AddCredential
             controller.presentedModally = true
             controller.successCallback = { [weak self] (certificate) in
                 self?.navigateAfterAdding(certificate: certificate)
@@ -135,17 +128,19 @@ class IssuerViewController: UIViewController {
             self?.present(navigationController, animated: true, completion: nil)
         }))
         
-        alertController.addAction(UIAlertAction(title: addCertificateFromFile, style: .default, handler: { [weak self] _ in
+        alertController.addAction(UIAlertAction(title: Localizations.ImportFromFile, style: .default, handler: { [weak self] _ in
             Logger.main.info("User has chosen to add a certificate from file")
             
             let controller = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
             controller.delegate = self
             controller.modalPresentationStyle = .formSheet
             
-            self?.present(controller, animated: true, completion: { AppDelegate.instance.styleApplicationAlternate() })
+            self?.present(controller, animated: true) {
+                self?.navigationController?.styleAlternate()
+            }
         }))
         
-        alertController.addAction(UIAlertAction(title: cancelAction, style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: Localizations.Cancel, style: .cancel, handler: nil))
         
         present(alertController, animated: true, completion: nil)
     }
@@ -163,7 +158,7 @@ class IssuerViewController: UIViewController {
         let data = [
             "certificate": certificate
         ]
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
             NotificationCenter.default.post(name: NotificationNames.redirectToCertificate, object: self, userInfo: data)
         }
@@ -179,10 +174,8 @@ class IssuerViewController: UIViewController {
         }
         guard let data = data else {
             Logger.main.error("Failed to load a certificate from file. Data is nil.")
-            
-            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
-            alertError(localizedTitle: title, localizedMessage: message)
+            let alert = AlertViewController.createWarning(title: Localizations.InvalidCredential, message: Localizations.InvalidCredentialFile)
+            present(alert, animated: false, completion: nil)
             return
         }
         
@@ -192,10 +185,8 @@ class IssuerViewController: UIViewController {
             saveCertificateIfOwned(certificate: certificate)
         } catch {
             Logger.main.error("Importing failed with error: \(error)")
-            
-            let title = NSLocalizedString("Invalid Credential", comment: "Imported certificate didn't parse title")
-            let message = NSLocalizedString("That doesn't appear to be a valid credential file.", comment: "Imported title didn't parse message")
-            alertError(localizedTitle: title, localizedMessage: message)
+            let alert = AlertViewController.createWarning(title: Localizations.InvalidCredential, message: Localizations.InvalidCredentialFile)
+            present(alert, animated: false, completion: nil)
             return
         }
     }
@@ -214,18 +205,12 @@ class IssuerViewController: UIViewController {
         if certificate.issuer.id == managedIssuer?.issuer?.id {
             navigateTo(certificate: certificate)
             
-            OperationQueue.main.addOperation { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.certificateTableController.tableView.reloadData()
             }
         } else {
             redirect(to: certificate)
         }
-    }
-    
-    func alertError(localizedTitle: String, localizedMessage: String) {
-        let okay = NSLocalizedString("Okay", comment: "OK dismiss action")
-        let alert = AlertViewController.createWarning(title: localizedTitle, message: localizedMessage, buttonText: okay)
-        present(alert, animated: false, completion: nil)
     }
 }
 
@@ -266,12 +251,7 @@ extension IssuerViewController : CertificateViewControllerDelegate {
                 }
             } catch {
                 Logger.main.error("Failed to delete certificate: \(certificate.id) with error: \(error)")
-                
-                let title = NSLocalizedString("Couldn't delete file", comment: "Generic error title. We couldn't delete a certificate.")
-                let message = NSLocalizedString("Something went wrong when deleting that certificate.", comment: "Generic error description. We couldn't delete a certificate.")
-                let okay = NSLocalizedString("Okay", comment: "Button copy")
-                
-                let alert = AlertViewController.createWarning(title: title, message: message, buttonText: okay)
+                let alert = AlertViewController.createWarning(title: Localizations.DeleteFileError, message: Localizations.DeleteCredentialGenericError)
                 self?.present(alert, animated: false, completion: nil)
             }
         })

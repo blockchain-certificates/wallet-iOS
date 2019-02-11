@@ -51,7 +51,7 @@ class ExistingDownieIssuerTests: XCTestCase {
         XCTAssertFalse(app.collectionViews.cells["Greendale College"].exists)
         
         // We add a second
-        app.navigationBars["Issuers"].buttons["AddIcon"].tap()
+        app.navigationBars["Issuers"].buttons["add_icon"].tap()
 
         let elementsQuery = app.scrollViews.otherElements
         let issuerUrlTextField = elementsQuery.textFields["Issuer URL"]
@@ -72,7 +72,7 @@ class ExistingDownieIssuerTests: XCTestCase {
     func testAddingMismatchedCertificate() {
         let app = XCUIApplication()
         app.collectionViews.cells["Downie Test Org"].tap()
-        app.navigationBars["Downie Test Org"].buttons["AddIcon"].tap()
+        app.navigationBars["Downie Test Org"].buttons["add_icon"].tap()
         app.sheets.buttons["Import Certificate from URL"].tap()
         
         let alertsQuery = app.alerts
@@ -124,7 +124,7 @@ class ExistingAcceptingIssuerTests : XCTestCase {
         app.collectionViews.cells["Greendale College"].tap()
         XCTAssertFalse(app.tables.staticTexts["Welcome to Greendale!"].exists)
         
-        app.navigationBars["Greendale College"].buttons["AddIcon"].tap()
+        app.navigationBars["Greendale College"].buttons["add_icon"].tap()
         app.sheets.buttons["Import Certificate from URL"].tap()
         
         let alertsQuery = app.alerts
