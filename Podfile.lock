@@ -1,5 +1,5 @@
 PODS:
-  - Bugsee (1.18.11)
+  - Bugsee (1.20.1)
   - CoreBitcoin (0.6.8.1):
     - ISO8601DateFormatter
     - OpenSSL-Universal (= 1.0.1.16)
@@ -15,7 +15,7 @@ DEPENDENCIES:
   - OpenSans
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Bugsee
     - ISO8601DateFormatter
     - lottie-ios
@@ -27,7 +27,7 @@ EXTERNAL SOURCES:
     :podspec: https://raw.github.com/oleganza/CoreBitcoin/master/CoreBitcoin.podspec
 
 SPEC CHECKSUMS:
-  Bugsee: bd37d3593ebb2beb419beb8e0483aa11c22573de
+  Bugsee: e47a04c77552c3880d724b17b31cef138f398d89
   CoreBitcoin: 4ac6f6a61e543f08399c2fe57496d4fdcbaf74f9
   ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
   lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
@@ -36,4 +36,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ea5e78e94c3abc89924174e447d4d144028c114a
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.6.0

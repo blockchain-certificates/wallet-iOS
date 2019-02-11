@@ -14,6 +14,7 @@ framework module Bugsee {
     link framework "QuartzCore"
     link framework "CoreImage"
     link framework "CoreGraphics"
-
+    link framework "Metal"
+    
     link "c++"
 }

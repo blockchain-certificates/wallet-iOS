@@ -35,6 +35,8 @@ typedef enum : NSUInteger {
 
 @class BugseeNetworkEvent;
 @class BugseeLogEvent;
+typedef void (^BugseeEmptyBlock)(void);
+typedef void (^BugseeStartedBlock)(BOOL success);
 typedef void (^BugseeLogFilterDecisionBlock)(BugseeLogEvent * _Nullable event );
 typedef void (^BugseeNetworkFilterDecisionBlock)(BugseeNetworkEvent * _Nullable event );
 typedef void (^BugseeAttachmentsDecisionBlock)(NSArray<BugseeAttachment*>* _Nullable attachments);

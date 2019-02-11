@@ -645,7 +645,7 @@
 				TargetAttributes = {
 					83111B231DA4110C006B058D = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = CYEWR6MU44;
+						DevelopmentTeam = 4WR66L3TZA;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -836,7 +836,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-certificates/Pods-certificates-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-certificates/Pods-certificates-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/OpenSans/OpenSans.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -845,7 +845,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-certificates/Pods-certificates-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-certificates/Pods-certificates-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1130,12 +1130,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 112;
-				DEVELOPMENT_TEAM = CYEWR6MU44;
+				DEVELOPMENT_TEAM = 4WR66L3TZA;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.blockcerts.cert-wallet";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smallplanet.blockcerts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wallet/wallet-Bridging-Header.h";
@@ -1154,12 +1154,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 112;
-				DEVELOPMENT_TEAM = CYEWR6MU44;
+				DEVELOPMENT_TEAM = 4WR66L3TZA;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.blockcerts.cert-wallet";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smallplanet.blockcerts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "wallet/wallet-Bridging-Header.h";
