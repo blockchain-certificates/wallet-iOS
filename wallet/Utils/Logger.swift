@@ -45,7 +45,7 @@ class Logger {
     private let decoder : JSONDecoder
     
     
-    init(manager: FileManager = FileManager.default,
+    private init(manager: FileManager = FileManager.default,
          logFile: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("debug_log"),
          encoder: JSONEncoder? = nil, decoder: JSONDecoder? = nil) {
         self.manager = manager
