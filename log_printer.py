@@ -37,22 +37,22 @@ class LogLevels:
 
 def switch_log_level(level):
     return {
-        LogLevels.INFO: lambda log_message: info_string(log_message),
-        LogLevels.DEBUG: lambda log_message: debug_string(log_message),
-        LogLevels.WARNING: lambda log_message: warning_string(log_message),
-        LogLevels.ERROR: lambda log_message: error_string(log_message),
+        LogLevels.INFO: (lambda log_message: info_string(log_message), 'I'),
+        LogLevels.DEBUG: (lambda log_message: debug_string(log_message), 'D'),
+        LogLevels.WARNING: (lambda log_message: warning_string(log_message), 'W'),
+        LogLevels.ERROR: (lambda log_message: error_string(log_message), 'E'),
     }[level]
 
-# def check_search(search_terms, color, message):
-#     message_copy = message
-#     search_terms = {
-#         search: TColors.build(TColors.BLACK, TColors.BACKGROUND_GREEN) + search + TColors.build(TColors.NONE)
-#     }
+def check_search(search_terms, color, message):
+    message_copy = message
 
-#     for key in search_terms:
-#         message_copy = message_copy.replace(key, value + color)
+    if search_terms == None:
+        return message
 
-    #return message_copy
+    for search in search_terms:
+        message_copy = message_copy.replace(search, TColors.build(TColors.BLACK, TColors.BACKGROUND_GREEN) + search + TColors.build(TColors.NONE) + color)
+
+    return message_copy
 
 def check_replacements(color, message):
     message_copy = message
@@ -83,10 +83,11 @@ def main():
             if log_message['message'] == KeyActions.APP_LAUNCHED:
                 print(StaticText.APP_STARTED_HEADER)
 
-            color = switch_log_level(log_message['level'])(log_message['message'])
+            color, level = switch_log_level(log_message['level'])
+            color = color(log_message['message'])
             message = check_replacements(color, log_message['message'])
-            #message = check_search(search, color, message)
-            print_log(color + message + TColors.build(TColors.NONE), log_message['date'])
+            message = check_search(search, color, message)
+            print_log(color + message + TColors.build(TColors.NONE), log_message['date'], level)
 
 def info_string(message):
     return TColors.build(TColors.NONE)
@@ -100,7 +101,7 @@ def warning_string(message):
 def error_string(message):
     return TColors.build(TColors.RED)
 
-def print_log(message, date):
-    print(TColors.build(TColors.DIMMED) + '<<', '[' + date + ']' + TColors.build(TColors.NONE), message)
+def print_log(message, date, level):
+    print(TColors.build(TColors.DIMMED) + '<<', '[' + date + '] ' + level + ': ' + TColors.build(TColors.NONE), message)
 
 main()
