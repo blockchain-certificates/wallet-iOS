@@ -3,5 +3,5 @@
 	url = git@github.com:Skyscanner/SkyFloatingLabelTextField.git
 [submodule "External/BlockcertsFramework-iOS"]
 	path = External/BlockcertsFramework-iOS
-	url = git@github.com:blockchain-certificates/BlockcertsFramework-iOS.git
+	url = git@github.com:SmallPlanetiOS/BlockcertsFramework-iOS.git
 	branch = master
