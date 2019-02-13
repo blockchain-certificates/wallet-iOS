@@ -87,7 +87,7 @@ def main():
             color = color(log_message['message'])
             message = check_replacements(color, log_message['message'])
             message = check_search(search, color, message)
-            print_log(color + message + TColors.build(TColors.NONE), log_message['date'], level)
+            print_log(color + message + TColors.build(TColors.NONE), log_message['date'], log_message['tag'], level)
 
 def info_string(message):
     return TColors.build(TColors.NONE)
@@ -101,7 +101,7 @@ def warning_string(message):
 def error_string(message):
     return TColors.build(TColors.RED)
 
-def print_log(message, date, level):
-    print(TColors.build(TColors.DIMMED) + '<<', '[' + date + '] ' + level + ': ' + TColors.build(TColors.NONE), message)
+def print_log(message, date, tag, level):
+    print(TColors.build(TColors.DIMMED) + '<<', '[' + date + '] ' + level + ("" if len(tag) == 0 else "/" + tag) + ': ' + TColors.build(TColors.NONE) + message)
 
 main()

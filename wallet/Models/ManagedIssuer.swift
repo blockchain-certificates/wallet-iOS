@@ -31,6 +31,8 @@ enum ManagedIssuerError {
 }
 
 class ManagedIssuer : NSObject, NSCoding, Codable {
+    private let tag = String(describing: ManagedIssuer.self)
+    
     var delegate : ManagedIssuerDelegate?
     var issuerDescription : String?
     
@@ -48,8 +50,10 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     public var issuer : Issuer? {
         if let sourceIssuer = sourceIssuer {
             if let hostedIssuer = hostedIssuer, hostedIssuer.id == sourceIssuer.id {
+                Logger.main.tag(tag).info("returned hosted_issuer")
                 return hostedIssuer
             } else {
+                Logger.main.tag(tag).info("returned source_issuer")
                 return sourceIssuer
             }
         } else {
@@ -165,10 +169,14 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     
     // MARK: Add (Identify and introduce)
     func add(from url: URL, nonce: String, completion: @escaping (ManagedIssuerError?) -> Void) {
+        let tag = self.tag
+        
+        Logger.main.tag(tag).debug("add called with url: \(url)")
         identify(from: url) { [weak self] identificationError in
 //        identify { [weak self] identificationError in
             guard identificationError == nil else {
                 DispatchQueue.main.async {
+                    Logger.main.tag(tag).error("identification error in add")
                     completion(identificationError)
                 }
                 return
@@ -176,6 +184,9 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
             
             self?.introduce(nonce: nonce, completion: { introductionError in
                 DispatchQueue.main.async {
+                    if (introductionError != nil) {
+                        Logger.main.tag(tag).error("introduction error in add")
+                    }
                     completion(introductionError)
                 }
             })
@@ -184,7 +195,9 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     
     // MARK: Identification step
     func manage(issuer: Issuer, completion: @escaping (ManagedIssuerError?) -> Void) {
+        Logger.main.tag(tag).info("manage call")
         guard self.issuer == nil else {
+            Logger.main.tag(tag).error("invalid state: this manager is called for -- it already has an issuer it's managing.")
             completion(.invalidState(reason: "This manager is called for -- it already has an issuer it's managing."))
             return
         }
@@ -195,7 +208,9 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     }
     
     func identify(completion: @escaping (ManagedIssuerError?) -> Void) {
+        Logger.main.tag(tag).info("identify_1 call")
         guard let issuer = self.issuer else {
+            Logger.main.tag(tag).error("invalid state: Can't call \(#function) when Issuer isn't set. Use manage(issuer:completion:) instead.")
             completion(.invalidState(reason: "Can't call \(#function) when Issuer isn't set. Use manage(issuer:completion:) instead."))
             return
         }
@@ -204,10 +219,13 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     }
     
     func identify(from url: URL, completion: @escaping (ManagedIssuerError?) -> Void) {
-        Logger.main.info("Starting process to identify and introduce issuer at \(url)")
+        let tag = self.tag
+        Logger.main.tag(tag).debug("identify_2 \(url)")
         
+        Logger.main.tag(tag).debug("calling IssuerIdentificationRequest")
         let identityRequest = IssuerIdentificationRequest(id: url) { [weak self] (possibleIssuer, error) in
             var returnError : ManagedIssuerError? = nil
+            Logger.main.tag(tag).debug("IssuerIdentificationRequest response for url: \(url)")
             
             self?.inProgressRequest = nil
             self?.issuerConfirmedOn = Date()
@@ -215,6 +233,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
             self?.isIssuerConfirmed = (error == nil)
             
             if possibleIssuer != nil && self?.issuer?.id != possibleIssuer?.id {
+                Logger.main.tag(tag).error("untrustworthyIssuer: the issuer we're managing has a different ID in the issuer's JSON. This means the issuer's hosting JSON has changed ownership.")
                 returnError = .untrustworthyIssuer(reason:"The issuer we're managing has a different ID in the issuer's JSON. This means the issuer's hosting JSON has changed ownership.")
             }
             
@@ -223,27 +242,35 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                 
                 switch (error) {
                 case .aborted:
+                    Logger.main.tag(tag).error("IssuerIdentificationRequest response: aborted. abortedIdentificationStep")
                     returnError = .abortedIdentificationStep
                 case .missingJSONData:
+                    Logger.main.tag(tag).error("IssuerIdentificationRequest response: missingJSONData. issuerInvalid. reason: missing, scope: json")
                     returnError = .issuerInvalid(reason: .missing, scope: .json)
                 case .jsonSerializationFailure:
+                    Logger.main.tag(tag).error("IssuerIdentificationRequest response: jsonSerializationFailure. issuerInvalid. reason: missing, scope: json")
                     returnError = .issuerInvalid(reason: .invalid, scope: .json)
                 case .issuerMissing(let property):
+                    Logger.main.tag(tag).error("IssuerIdentificationRequest response: issuerMissing. issuerInvalid. reason: missing, scope: \(property)")
                     returnError = .issuerInvalid(reason: .missing, scope: .property(named: property))
                 case .issuerInvalid(let property):
+                    Logger.main.tag(tag).error("IssuerIdentificationRequest response: issuerInvalid. issuerInvalid. reason: invalid, scope: \(property)")
                     returnError = .issuerInvalid(reason: .invalid, scope: .property(named: property))
                 case .httpFailure(let status, let response):
+                    Logger.main.tag(tag).error("IssuerIdentificationRequest response: httpFailure. serverErrorDuringIdentification. code: \(status), message: \(response.description)")
                     returnError = .serverErrorDuringIdentification(code: status, message: response.description)
                     
                 case .unknownResponse:
+                    Logger.main.tag(tag).error("IssuerIdentificationRequest response: unknownResponse")
                     fallthrough
                 default:
+                    Logger.main.tag(tag).error("IssuerIdentificationRequest response: unknownResponse. genericError")
                     returnError = .genericError(error: nil, data: nil)
                 }
             }
             
             if returnError != nil {
-                Logger.main.info("Issuer identification at \(url) succeeded. Beginning introduction step.")
+                Logger.main.tag(tag).error("issuer identification at \(url) error.")
             }
 
             // Call the completion handler, and the delegate as the last thing we do.
@@ -310,7 +337,11 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     
     // MARK: Introduction step
     func introduce(nonce: String, completion: @escaping (ManagedIssuerError?) -> Void) {
+        let tag = self.tag
+        
+        Logger.main.tag(tag).debug("introduce call with nonce: \(nonce)")
         guard let issuer = issuer else {
+            Logger.main.tag(tag).error("can't introduce until we have a valid Issuer.")
             completion(.invalidState(reason: "Can't introduce until we have a valid Issuer."))
             return
         }
@@ -324,7 +355,9 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                                   revocationAddress: nil)
         
         self.nonce = nonce
+        Logger.main.tag(tag).info("calling IssuerIntroductionRequest")
         let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer) { [weak self] (error) in
+            Logger.main.tag(tag).info("IssuerIntroductionRequest response")
             self?.introducedOn = Date()
             self?.inProgressRequest = nil
             
@@ -335,24 +368,35 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                 
                 switch (error) {
                 case .aborted:
+                    Logger.main.tag(tag).error("IssuerIntroductionRequest response: aborted. abortedIntroductionStep")
                     reportError = .abortedIntroductionStep
                 case .issuerMissingIntroductionURL:
+                    Logger.main.tag(tag).error("IssuerIntroductionRequest response: issuerMissingIntroductionURL. issuerInvalid. reason: missing, scope: introductionURL")
                     reportError = .issuerInvalid(reason: .missing, scope: .property(named: "introductionURL"))
                 case .cannotSerializePostData:
+                    Logger.main.tag(tag).error("IssuerIntroductionRequest response: cannotSerializePostData. issuerInvalid. reason: invalid, scope: json")
                     reportError = .issuerInvalid(reason: .invalid, scope: .json)
                 case .errorResponseFromServer(let response, let data):
                     var dataString : String? = nil
                     if data != nil {
                         dataString = String(data: data!, encoding: .utf8)
                     }
+                    Logger.main.tag(tag).error("IssuerIntroductionRequest response: errorResponseFromServer. serverErrorDuringIntroduction. code: \(response.statusCode), message: \(response.description) \(dataString ?? "")")
                     reportError = .serverErrorDuringIntroduction(code: response.statusCode, message: "\(response.description)\n\n\(dataString ?? "") ")
                 case .webAuthenticationFailed:
+                    Logger.main.tag(tag).error("IssuerIntroductionRequest response: webAuthenticationFailed.")
                     fallthrough
                 case .authenticationFailed:
+                    Logger.main.tag(tag).error("IssuerIntroductionRequest response: authenticationFailed. authenticationFailure")
                     reportError = .authenticationFailure
                 case .genericErrorFromServer(let error, let data):
                     reportError = .genericError(error: error, data: data)
+                    if let e = error, let d = data {
+                        Logger.main.tag(tag).error("IssuerIntroductionRequest response: genericErrorFromServer. genericError error: \(e), data: \(d)")
+                    }
+                    
                 default:
+                    Logger.main.tag(tag).error("IssuerIntroductionRequest response: error. genericError")
                     reportError = .genericError(error: nil, data: nil)
                 }
             } else {
@@ -373,6 +417,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     }
     
     func abortRequests() {
+        Logger.main.tag(tag).info("abort_requests")
         inProgressRequest?.abort()
         dismissWebView()
     }
@@ -389,10 +434,12 @@ extension ManagedIssuer : IssuerIntroductionRequestDelegate {
     }
     
     func presentWebView(at url:URL, with navigationDelegate:WKNavigationDelegate) throws {
+        Logger.main.tag(tag).info("present_web_view")
         try delegate?.presentWebView(at: url, with: navigationDelegate)
     }
     
     func dismissWebView() {
+        Logger.main.tag(tag).info("dismiss_web_view")
         delegate?.dismissWebView()
     }
 }

@@ -14,16 +14,18 @@ private enum LogLevel : String, Codable {
 
 private struct LogEntry : Codable, CustomStringConvertible {
     var description: String {
-        return "\(date)[\(level)]: \(message)"
+        return "\(date)[\(level)]" + (tag.isEmpty ? "" : "/\(tag)") + ": \(message)"
     }
     
     let date : Date
     let level : LogLevel
     let message : String
+    let tag : String
     
-    init(level: LogLevel, message: String) {
+    init(level: LogLevel, message: String, tag: String = "") {
         self.level = level
         self.message = message
+        self.tag = tag
         date = Date()
     }
 }
@@ -38,11 +40,13 @@ class Logger {
     private let logFile : URL
     private var recentLogs : [LogEntry]
     private var workItem : DispatchWorkItem? = nil
+    private var currentTang: String = ""
     
     // Dependencies injected
     private let manager : FileManager
     private let encoder : JSONEncoder
     private let decoder : JSONDecoder
+    
     
     
     private init(manager: FileManager = FileManager.default,
@@ -73,6 +77,11 @@ class Logger {
     
     deinit {
         flushLogs()
+    }
+    
+    public func tag(_ tag: String?) -> Logger {
+        self.currentTang = tag ?? ""
+        return self
     }
     
     // Log methods that correspond to the log levels
@@ -109,7 +118,7 @@ class Logger {
     
     // Mark - private helper functions
     private func log(level: LogLevel, message: String) {
-        let entry = LogEntry(level: level, message: message)
+        let entry = LogEntry(level: level, message: message, tag: currentTang)
         if printEverything {
             print(entry)
         }
@@ -126,6 +135,8 @@ class Logger {
             let dispatchTime = DispatchTime.now() + .seconds(10)
             DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: work)
         }
+        
+        currentTang = ""
     }
     
     private func prune(logs: [LogEntry]) -> [LogEntry] {

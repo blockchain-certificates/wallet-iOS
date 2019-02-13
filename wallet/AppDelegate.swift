@@ -19,6 +19,9 @@ private let enforceStrongOwnershipKey = "enforceStrongOwnership"
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    //logger tag
+    private let tag = String(describing: AppDelegate.self)
+    
     static var instance = UIApplication.shared.delegate as! AppDelegate
 
     var window: UIWindow?
@@ -27,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Logger.main.info("Application was launched!")
+        Logger.main.tag(tag).info("Application was launched!")
         
         #if DEBUG
         Bugsee.launch(token :"ef62e737-3645-43fa-ba0b-062afb7743af")
@@ -42,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Attempted to launch from command line with unknown error: \(error)")
         }
 
-        Logger.main.debug("Managed issuers list url: \(Paths.managedIssuersListURL)")
+        Logger.main.tag(tag).debug("Managed issuers list url: \(Paths.managedIssuersListURL)")
         
         setupApplication()
         
@@ -53,13 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // The app has launched from a universal link
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        Logger.main.info("Application was launched from a user activity.")
+        Logger.main.tag(tag).info("Application was launched from a user activity.")
         
         setupApplication()
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let url = userActivity.webpageURL {
-            Logger.main.info("Application was launched with this url: \(url)")
+            Logger.main.tag(tag).info("Application was launched with this url: \(url)")
             return importState(from: url)
         }
 
@@ -68,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // The app is launching with a document
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        Logger.main.info("Application was launched with a document at \(url)")
+        Logger.main.tag(tag).info("Application was launched with a document at \(url)")
         
         setupApplication()
         launchAddCertificate(at: url, showCertificate: true, animated: false)
@@ -80,11 +83,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        Logger.main.info("Application entered the background.")
+        Logger.main.tag(tag).info("Application entered the background.")
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        Logger.main.info("Application will terminate.")
+        Logger.main.tag(tag).info("Application will terminate.")
     }
     
     // MARK: - Application specific
@@ -116,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         guard let sampleCertURL = Bundle.main.url(forResource: "SampleCertificate.json", withExtension: nil) else {
-            Logger.main.warning("Unable to load the sample certificate.")
+            Logger.main.tag(tag).warning("Unable to load the sample certificate.")
             return
         }
 
