@@ -223,7 +223,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
         Logger.main.tag(tag).debug("identify_2 \(url)")
         
         Logger.main.tag(tag).debug("calling IssuerIdentificationRequest")
-        let identityRequest = IssuerIdentificationRequest(id: url) { [weak self] (possibleIssuer, error) in
+        let identityRequest = IssuerIdentificationRequest(id: url, logger: Logger.main.toLoggerProtocol()) { [weak self] (possibleIssuer, error) in
             var returnError : ManagedIssuerError? = nil
             Logger.main.tag(tag).debug("IssuerIdentificationRequest response for url: \(url)")
             
@@ -356,7 +356,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
         
         self.nonce = nonce
         Logger.main.tag(tag).info("calling IssuerIntroductionRequest")
-        let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer) { [weak self] (error) in
+        let introductionRequest = IssuerIntroductionRequest(introduce: recipient, to: issuer, loggingTo: Logger.main.toLoggerProtocol()) { [weak self] (error) in
             Logger.main.tag(tag).info("IssuerIntroductionRequest response")
             self?.introducedOn = Date()
             self?.inProgressRequest = nil
@@ -393,8 +393,9 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                     reportError = .genericError(error: error, data: data)
                     if let e = error, let d = data {
                         Logger.main.tag(tag).error("IssuerIntroductionRequest response: genericErrorFromServer. genericError error: \(e), data: \(d)")
+                    } else {
+                        Logger.main.tag(tag).error("IssuerIntroductionRequest response: genericErrorFromServer.")
                     }
-                    
                 default:
                     Logger.main.tag(tag).error("IssuerIntroductionRequest response: error. genericError")
                     reportError = .genericError(error: nil, data: nil)
