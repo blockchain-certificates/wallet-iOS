@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let url = userActivity.webpageURL {
-            Logger.main.tag(tag).info("Application was launched with this url: \(url)")
+            Logger.main.tag(tag).info("launched with this url: \(url)")
             return importState(from: url)
         }
 
@@ -72,6 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // The app is launching with a document
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         Logger.main.tag(tag).info("Application was launched with a document at \(url)")
+        InformationLogger.logInfo()
         
         setupApplication()
         launchAddCertificate(at: url, showCertificate: true, animated: false)
@@ -137,6 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func importState(from url: URL) -> Bool {
+        Logger.main.tag(tag).debug("checking import state with url: \(url)")
         guard let fragment = url.fragment else {
             return false
         }
@@ -151,33 +153,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if commandName == "" && pathComponents.count >= 1 {
             commandName = pathComponents.removeFirst()
         }
-        
+
+        Logger.main.tag(tag).debug("command name for import: \(commandName)")
         switch commandName {
         case "import-certificate":
             guard pathComponents.count >= 1 else {
+                Logger.main.tag(tag).warning("false import")
                 return false
             }
             let encodedCertificateURL = pathComponents.removeFirst()
+            Logger.main.tag(tag).debug("encoded certificate url: \(encodedCertificateURL)")
             if let decodedCertificateString = encodedCertificateURL.removingPercentEncoding,
                 let certificateURL = URL(string: decodedCertificateString) {
+                Logger.main.tag(tag).debug("decoded certificate url: \(certificateURL)")
                 launchAddCertificate(at: certificateURL, showCertificate: true, animated: false)
                 return true
             } else {
+                Logger.main.tag(tag).warning("failed to decode url")
                 return false
             }
             
         case "introduce-recipient":
             guard pathComponents.count >= 2 else {
+                Logger.main.tag(tag).debug("false import")
                 return false
             }
             let encodedIdentificationURL = pathComponents.removeFirst()
+            Logger.main.tag(tag).debug("encoded identification url: \(encodedIdentificationURL)")
             let encodedNonce = pathComponents.removeFirst()
+            Logger.main.tag(tag).debug("encoded nonce url: \(encodedNonce)")
             if let decodedIdentificationString = encodedIdentificationURL.removingPercentEncoding,
                 let identificationURL = URL(string: decodedIdentificationString),
                 let nonce = encodedNonce.removingPercentEncoding {
+                Logger.main.tag(tag).debug("decoded identification url: \(identificationURL)")
+                Logger.main.tag(tag).debug("decoded nonce: \(nonce)")
                 launchAddIssuer(at: identificationURL, with: nonce)
                 return true
             } else {
+                Logger.main.tag(tag).warning("failed to decode url")
                 return false
             }
 
@@ -187,6 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func launchAddIssuer(at introductionURL: URL, with nonce: String) {
+        Logger.main.tag(tag).debug("launching add issuer with url: \(introductionURL) and nonce: \(nonce)")
         let rootController = window?.rootViewController as? UINavigationController
         let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
         
@@ -194,6 +208,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func launchAddCertificate(at url: URL, showCertificate: Bool = false, animated: Bool = true) {
+        Logger.main.tag(tag).debug("launching add certificate with url: \(url)")
         let rootController = window?.rootViewController as? UINavigationController
         let issuerCollection = rootController?.viewControllers.first as? IssuerCollectionViewController
 

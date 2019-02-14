@@ -22,6 +22,7 @@ public enum AutocompleteRequest {
 }
  
 class IssuerCollectionViewController: UICollectionViewController {
+    private let tag = String(describing: IssuerCollectionViewController.self)
     
     private let managedIssuersArchiveURL = Paths.managedIssuersListURL
     private let issuersArchiveURL = Paths.issuersNSCodingArchiveURL
@@ -44,6 +45,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        Logger.main.tag(tag).info("view_did_load")
         
         title = Localizations.BlockcertsWallet
 
@@ -76,6 +79,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        Logger.main.tag(tag).info("view_will_appear")
         loadIssuers(shouldReloadCollection: false)
         loadCertificates(shouldReloadCollection: false)
         loadBackgroundView()
@@ -84,6 +88,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        Logger.main.tag(tag).info("view_did_appear")
         if let certificate = shouldRedirectToCertificate {
             navigateTo(certificate: certificate)
             shouldRedirectToCertificate = nil
@@ -117,9 +122,11 @@ class IssuerCollectionViewController: UICollectionViewController {
     func loadOnboardingIfNeeded() {
         let hasPerformedBackup = OnboardingBackupMethods.hasPerformedBackup
         if !Keychain.hasPassphrase() || !hasPerformedBackup {
+            Logger.main.tag(tag).info("loading onboarding")
             let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
             let vc = storyboard.instantiateInitialViewController()! as! UINavigationController
             if Keychain.hasPassphrase() && !hasPerformedBackup {
+                Logger.main.tag(tag).info("returning user")
                 let welcome = storyboard.instantiateViewController(withIdentifier: "WelcomeReturningUsers")
                 vc.viewControllers = [welcome]
             }
@@ -129,7 +136,7 @@ class IssuerCollectionViewController: UICollectionViewController {
 
     // MARK: - Actions
     @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
-        Logger.main.info("Settings button tapped")
+        Logger.main.tag(tag).info("Settings button tapped")
         
         let settingsTable = SettingsTableViewController()
         let controller = NavigationController(rootViewController: settingsTable)
@@ -139,15 +146,15 @@ class IssuerCollectionViewController: UICollectionViewController {
     // Mark: Notifications
     @objc func redirectRequested(notification: Notification) {
         guard let info = notification.userInfo as? [String: Certificate] else {
-            Logger.main.warning("Redirect requested without a certificate. Ignoring.")
+            Logger.main.tag(tag).warning("Redirect requested without a certificate. Ignoring.")
             return
         }
         guard let certificate = info["certificate"] else {
-            Logger.main.warning("We don't have a certificate in the user info. whoops.")
+            Logger.main.tag(tag).warning("We don't have a certificate in the user info. whoops.")
             return
         }
         
-        Logger.main.info("Redirecting from the Issuer Collection to a certificate: \(certificate.id)")
+        Logger.main.tag(tag).info("Redirecting from the Issuer Collection to a certificate: \(certificate.id)")
         
         shouldRedirectToCertificate = certificate
     }
@@ -178,14 +185,14 @@ class IssuerCollectionViewController: UICollectionViewController {
             break
             
         case .addIssuer(let identificationURL, let nonce):
-            Logger.main.info("Processing autocomplete request to add issuer at \(identificationURL)")
+            Logger.main.tag(tag).info("Processing autocomplete request to add issuer at \(identificationURL)")
 
             makeViewControllerVisible() {
                 self.addIssuerFromUniversalLink(url: identificationURL, nonce: nonce)
             }
             
         case .addCertificate(let certificateURL, let silently, let animated):
-            Logger.main.info("Processing autocomplete request to add certificate at \(certificateURL)")
+            Logger.main.tag(tag).info("Processing autocomplete request to add certificate at \(certificateURL)")
             
             makeViewControllerVisible() {
                 self.addCertificateFromUniversalLink(url: certificateURL, silently: silently, animated: animated)
@@ -257,30 +264,39 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func addIssuerFromUniversalLink(url: URL, nonce: String) {
-        
+        let tag = self.tag
+        Logger.main.tag(tag).debug("add issuer form universal link with url: \(url) and nonce: \(nonce)")
+
+        Logger.main.tag(tag).info("checking network")
         if !Reachability.isNetworkReachable() {
+            Logger.main.tag(tag).error("network unreachable")
             let alert = AlertViewController.createNetworkWarning()
             present(alert, animated: false, completion: nil)
             return
         }
+        Logger.main.tag(tag).info("network reachable")
         
         alert = AlertViewController.createProgress(title: Localizations.AddingIssuer)
         present(alert!, animated: false, completion: nil)
-        
+
+        Logger.main.tag(tag).info("checking update required")
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
             guard !updateRequired else {
+                Logger.main.tag(self?.tag).error("app update required")
                 self?.showAppUpdateError()
                 return
             }
+            Logger.main.tag(self?.tag).info("no update required")
             
             self?.pendingNewManagedIssuer = ManagedIssuer()
             self?.pendingNewManagedIssuer!.delegate = self
             self?.pendingNewManagedIssuer!.add(from: url, nonce: nonce, completion: { error in
                 guard error == nil else {
+                    Logger.main.tag(tag).error("Error adding issuer \(error)")
                     self?.showAddIssuerError()
                     return
                 }
-                
+
                 self?.dismissWebView()
                 self?.alert?.dismiss(animated: false, completion: nil)
                 
@@ -292,7 +308,8 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func showAppUpdateError() {
-        Logger.main.info("App needs update.")
+        let tag = self.tag
+        Logger.main.tag(tag).info("App needs update.")
         guard let alert = alert else { return }
         
         alert.type = .normal
@@ -305,6 +322,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         okayButton.onTouchUpInside {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            Logger.main.tag(tag).debug("tapped update_app with link: \(url)")
             alert.dismiss(animated: false, completion: nil)
         }
         
@@ -312,12 +330,15 @@ class IssuerCollectionViewController: UICollectionViewController {
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             alert.dismiss(animated: false, completion: nil)
+            Logger.main.tag(tag).warning("tapped update_dismiss")
         }
         
         alert.set(buttons: [cancelButton, okayButton])
     }
     
     func showAddIssuerError() {
+        let tag = self.tag
+        Logger.main.tag(tag).info("showing add_issuer_error_dismiss")
         guard let alert = alert else { return }
         
         alert.type = .normal
@@ -328,22 +349,24 @@ class IssuerCollectionViewController: UICollectionViewController {
         let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
+            Logger.main.tag(tag).info("tapped add_issuer_error_dismiss")
             alert.dismiss(animated: false, completion: nil)
         }
         alert.set(buttons: [okayButton])
     }
 
     func saveIssuers() {
+        Logger.main.tag(tag).info("saving issuer")
         let list = ManagedIssuerList(managedIssuers: managedIssuers)
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(list)
             let success = FileManager.default.createFile(atPath: managedIssuersArchiveURL.path, contents: data, attributes: nil)
             if !success {
-                Logger.main.warning("Something went wrong saving the managed issuers list")
+                Logger.main.tag(tag).warning("Something went wrong saving the managed issuers list at path: \(managedIssuersArchiveURL.path)")
             }
         } catch {
-            Logger.main.error("An exception was thrown saving the managed issuers list: \(error)")
+            Logger.main.tag(tag).error("An exception was thrown saving the managed issuers list: \(error)")
         }
     }
 
@@ -380,15 +403,19 @@ class IssuerCollectionViewController: UICollectionViewController {
 
     // MARK: Certificate handling
     func loadCertificates(shouldReloadCollection : Bool = true) {
+        Logger.main.tag(tag).info("loading certificates")
         certificates = []
 
         let existingFiles = try? FileManager.default.contentsOfDirectory(at: certificatesDirectory, includingPropertiesForKeys: nil, options: [])
         let files = existingFiles ?? []
 
+        Logger.main.tag(tag).debug("existing file certificates: \(existingFiles)")
         let loadedCertificates : [Certificate] = files.compactMap { fileURL in
             guard let data = try? Data(contentsOf: fileURL) else {
+                Logger.main.tag(tag).error("nil data")
                 return nil
             }
+            Logger.main.tag(tag).info("trying to parse certificate")
             return try? CertificateParser.parse(data: data)
         }
 
@@ -402,19 +429,20 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func saveCertificates() {
+        Logger.main.tag(tag).info("saving certificates")
         // Make sure the `certificatesDirectory` exists by trying to create it every time.
         try? FileManager.default.createDirectory(at: certificatesDirectory, withIntermediateDirectories: false, attributes: nil)
 
         for certificate in certificates {
             guard let fileName = certificate.filename else {
-                Logger.main.error("Couldn't convert \(certificate.title) to character encoding.")
+                Logger.main.tag(tag).error("Couldn't convert \(certificate.title) to character encoding.")
                 continue
             }
             let fileURL = certificatesDirectory.appendingPathComponent(fileName)
             do {
                 try certificate.file.write(to: fileURL)
             } catch {
-                Logger.main.error("Couldn't save \(certificate.title) to \(fileURL): \(error)")
+                Logger.main.tag(tag).error("Couldn't save \(certificate.title) to \(fileURL): \(error)")
             }
         }
     }
@@ -429,7 +457,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             managedIssuer.manage(issuer: certificate.issuer) { [weak self] success in
                 self?.reloadCollectionView()
                 self?.saveIssuers()
-                Logger.main.info("Got identity from raw issuer \(String(describing: success))")
+                Logger.main.tag(self?.tag).info("Got identity from raw issuer \(String(describing: success))")
             }
             
             add(managedIssuer: managedIssuer)
@@ -440,6 +468,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func addCertificateFromUniversalLink(url: URL, silently: Bool = false, animated: Bool = true) {
+        Logger.main.debug("add certificate from universal link: \(url)")
         if !Reachability.isNetworkReachable() {
             let alert = AlertViewController.createNetworkWarning()
             present(alert, animated: false, completion: nil)
@@ -448,19 +477,24 @@ class IssuerCollectionViewController: UICollectionViewController {
         
         alert = AlertViewController.createProgress(title: Localizations.AddingCredential)
         present(alert!, animated: false, completion: nil)
-        
+
+        Logger.main.tag(tag).info("checking update required")
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
             guard !updateRequired else {
+                Logger.main.tag(self?.tag).error("app update required")
                 self?.showAppUpdateError()
                 return
             }
+            Logger.main.tag(self?.tag).info("no update required")
             
             guard let data = self?.certificateDataFromURL(url), let certificate = try? CertificateParser.parse(data: data) else {
+                Logger.main.tag(self?.tag).error("certificate invalid with url: \(url)")
                 self?.showCertificateInvalid()
                 return
             }
             
             guard let certificates = self?.certificates, !certificates.contains(where: { $0.assertion.uid == certificate.assertion.uid }) else {
+                Logger.main.tag(self?.tag).error("certificate with url: \(url) already added")
                 if !silently {
                     self?.showCertificateAlreadyAdded(certificate)
                 }
@@ -518,6 +552,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func certificateDataFromURL(_ url: URL) -> Data? {
+        Logger.main.tag(tag).debug("certificate data from url: \(url)")
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         let formatQueryItem = URLQueryItem(name: "format", value: "json")
         
@@ -538,7 +573,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func navigateTo(issuer managedIssuer: ManagedIssuer, animated: Bool = true) -> IssuerViewController {
-        Logger.main.info("Navigating to issuer \(managedIssuer.issuer?.name ?? "unknown") with id: \(managedIssuer.issuer?.id.absoluteString ?? "unknown")")
+        Logger.main.tag(tag).info("Navigating to issuer \(managedIssuer.issuer?.name ?? "unknown") with id: \(managedIssuer.issuer?.id.absoluteString ?? "unknown")")
         
         if navigationController?.topViewController != self {
             navigationController?.popToViewController(self, animated: animated)
@@ -558,7 +593,7 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
 
     func navigateTo(certificate: Certificate, animated: Bool = true) {
-        Logger.main.info("Navigating to certificate \(certificate.title)")
+        Logger.main.tag(tag).info("Navigating to certificate \(certificate.title)")
         
         // dismiss a modal view, if present
         presentedViewController?.dismiss(animated: false, completion: nil)
@@ -640,11 +675,13 @@ extension IssuerCollectionViewController : AddIssuerViewControllerDelegate {
 // MARK: Functions from the open source.
 extension IssuerCollectionViewController {
     func importCertificate(from data: Data?) {
+        Logger.main.tag(tag).info("import certificate")
         guard let data = data else {
             let alert = AlertViewController.createWarning(title: Localizations.ReadFileError,
                                                           message: Localizations.CredentialParseError,
                                                           buttonText: Localizations.Okay)
             present(alert, animated: false, completion: nil)
+            Logger.main.tag(tag).info("credential parse error data was nil")
             return
         }
         guard let certificate = try? CertificateParser.parse(data: data) else {
@@ -652,6 +689,7 @@ extension IssuerCollectionViewController {
                                                           message: Localizations.InvalidCredentialFile,
                                                           buttonText: Localizations.Okay)
             present(alert, animated: false, completion: nil)
+            Logger.main.tag(tag).info("invalid credential file while parsing data")
             return
         }
 
@@ -662,6 +700,7 @@ extension IssuerCollectionViewController {
 
 extension IssuerCollectionViewController : UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        Logger.main.tag(tag).info("document picker at: \(url)")
         let data = try? Data(contentsOf: url)
 
         importCertificate(from: data)

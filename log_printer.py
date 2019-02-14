@@ -80,7 +80,7 @@ def main():
         json_object = json.load(json_file)
 
         for log_message in json_object:
-            if log_message['message'] == KeyActions.APP_LAUNCHED:
+            if KeyActions.APP_LAUNCHED in log_message['message']:
                 print(StaticText.APP_STARTED_HEADER)
 
             color, level = switch_log_level(log_message['level'])
