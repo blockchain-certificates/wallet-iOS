@@ -50,10 +50,8 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
     public var issuer : Issuer? {
         if let sourceIssuer = sourceIssuer {
             if let hostedIssuer = hostedIssuer, hostedIssuer.id == sourceIssuer.id {
-                Logger.main.tag(tag).info("returned hosted_issuer")
                 return hostedIssuer
             } else {
-                Logger.main.tag(tag).info("returned source_issuer")
                 return sourceIssuer
             }
         } else {

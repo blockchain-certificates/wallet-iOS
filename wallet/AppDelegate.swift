@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // The app has launched normally
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Logger.main.tag(tag).info("Application was launched!")
+        InformationLogger.logInfo()
         
         #if DEBUG
         Bugsee.launch(token :"ef62e737-3645-43fa-ba0b-062afb7743af")
@@ -55,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // The app has launched from a universal link
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         Logger.main.tag(tag).info("Application was launched from a user activity.")
+        InformationLogger.logInfo()
         
         setupApplication()
         
