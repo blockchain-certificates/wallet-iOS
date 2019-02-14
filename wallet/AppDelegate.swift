@@ -18,8 +18,6 @@ private let enforceStrongOwnershipKey = "enforceStrongOwnership"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    //logger tag
     private let tag = String(describing: AppDelegate.self)
     
     static var instance = UIApplication.shared.delegate as! AppDelegate

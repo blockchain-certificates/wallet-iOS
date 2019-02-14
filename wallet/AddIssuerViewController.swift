@@ -118,7 +118,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         Logger.main.tag(tag).info("checking update required")
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
             guard !updateRequired else {
-                Logger.main.tag(self?.tag).warning("app update needed")
+                Logger.main.tag(self?.tag).error("app update required")
                 self?.showAppUpdateError()
                 return
             }

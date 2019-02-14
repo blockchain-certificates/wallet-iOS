@@ -401,6 +401,7 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
                     reportError = .genericError(error: nil, data: nil)
                 }
             } else {
+                Logger.main.tag(tag).debug("recipient: \(recipient)")
                 self?.introducedWithAddress = recipient.publicAddress
             }
             
