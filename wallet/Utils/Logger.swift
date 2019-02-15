@@ -141,9 +141,9 @@ class Logger {
     }
 
     private func prune(logs: [LogEntry]) -> [LogEntry] {
-        let twentyFourHoursAgo = Date().addingTimeInterval(-1 * 60 * 60 * 24)
+        let weekAgo = Date().addingTimeInterval(-1 * 60 * 60 * 24 * 7)
         let prunedLogs = logs.filter { (entry) -> Bool in
-            entry.date > twentyFourHoursAgo
+            entry.date > weekAgo
         }
         return prunedLogs
     }
