@@ -99,7 +99,11 @@ struct CertificateManager {
             let certificate = try CertificateParser.parse(data: certificateData)
             return certificate
         } catch {
-            Logger.main.tag(tag).warning("Certificate failed to parse with \(error)")
+            if let dataString = String(data: certificateData, encoding: String.Encoding.utf8) {
+                Logger.main.tag(tag).error("certificate parse error: \(error) with data: \(dataString)")
+            } else {
+                Logger.main.tag(tag).error("certificate parse error: \(error). Could not decode the data with utf8!")
+            }
         }
 
         return nil
