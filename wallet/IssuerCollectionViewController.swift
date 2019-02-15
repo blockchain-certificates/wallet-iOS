@@ -496,7 +496,9 @@ class IssuerCollectionViewController: UICollectionViewController {
             guard let certificates = self?.certificates, !certificates.contains(where: { $0.assertion.uid == certificate.assertion.uid }) else {
                 Logger.main.tag(self?.tag).error("certificate with url: \(url) already added")
                 if !silently {
-                    self?.showCertificateAlreadyAdded(certificate)
+                    self?.alert?.dismiss(animated: false, completion: {
+                        self?.showCertificateAlreadyAdded(certificate)
+                    })
                 }
                 return
             }
@@ -511,14 +513,11 @@ class IssuerCollectionViewController: UICollectionViewController {
     }
     
     func showCertificateAlreadyAdded(_ certificate: Certificate) {
-        guard let alert = alert else { return }
-        
+        let alert = AlertViewController.createWarning(title: Localizations.FileAlreadyImported, message: Localizations.FileAlreadyImportedExplanation)
+
         alert.type = .normal
-        alert.set(title: Localizations.FileAlreadyImported)
-        alert.set(message: Localizations.FileAlreadyImportedExplanation)
         
         let okayButton = DialogButton(frame: .zero)
-        okayButton.setTitle(Localizations.View, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             alert.dismiss(animated: false, completion: nil)
             self?.navigateTo(certificate: certificate, animated: true)
@@ -530,7 +529,7 @@ class IssuerCollectionViewController: UICollectionViewController {
             alert.dismiss(animated: false, completion: nil)
         }
         alert.set(buttons: [okayButton, cancelButton], clear: true)
-        
+
         present(alert, animated: false, completion: nil)
     }
     
