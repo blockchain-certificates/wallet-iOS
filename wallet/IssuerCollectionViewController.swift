@@ -516,8 +516,13 @@ class IssuerCollectionViewController: UICollectionViewController {
         let alert = AlertViewController.createWarning(title: Localizations.FileAlreadyImported, message: Localizations.FileAlreadyImportedExplanation)
 
         alert.type = .normal
-        
+
+        if (alert.buttons.count > 0) {
+            alert.buttons[0].removeFromSuperview()
+        }
+
         let okayButton = DialogButton(frame: .zero)
+        okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside { [weak self] in
             alert.dismiss(animated: false, completion: nil)
             self?.navigateTo(certificate: certificate, animated: true)
