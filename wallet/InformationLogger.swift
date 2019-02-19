@@ -14,6 +14,12 @@ struct InformationLogger {
     static func logInfo() {
         Logger.main.tag(tag).debug("INFO START---------------")
 
+        if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
+            Logger.main.tag(tag).debug("appVersion: \(appVersion)")
+        } else {
+            Logger.main.tag(tag).debug("appVersion: N/A")
+        }
+
         let systemVersion = UIDevice.current.systemVersion
         Logger.main.tag(tag).debug("systemVersion: \(systemVersion)")
 
