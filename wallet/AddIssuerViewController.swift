@@ -12,6 +12,9 @@ import Blockcerts
 
 class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     
+    //logger tag
+    private let tag = String(describing: AddIssuerViewController.self)
+
     private var inProgressRequest: CommonRequest?
     var delegate: AddIssuerViewControllerDelegate?
     var managedIssuer: ManagedIssuer?
@@ -29,6 +32,8 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Logger.main.tag(tag).info("view_did_load")
         
         title = Localizations.AddIssuer
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -61,16 +66,17 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     }
 
     @IBAction func addIssuerTapped(_ sender: Any) {
-        Logger.main.info("Save issuer tapped")
+        Logger.main.tag(tag).info("add_issuer tapped")
         identifyAndIntroduceIssuer()
     }
 
     @objc func cancelTapped(_ sender: UIBarButtonItem) {
-        Logger.main.info("Cancel Add Issuer tapped")
+        Logger.main.tag(tag).info("cancel_add_issuer tapped")
         dismiss(animated: true, completion: nil)
     }
     
     @objc func keyboardDidShow(notification: NSNotification) {
+        Logger.main.tag(tag).info("keyboard show")
         guard let info = notification.userInfo,
             let keyboardRect = info[UIKeyboardFrameBeginUserInfoKey] as? CGRect else {
             return
@@ -83,36 +89,49 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     }
     
     @objc func keyboardDidHide(notification: NSNotification) {
+        Logger.main.tag(tag).info("keyboard hide")
         scrollView.contentInset = .zero
         scrollView.scrollIndicatorInsets = .zero
     }
     
     func identifyAndIntroduceIssuer() {
+        Logger.main.tag(tag).info("identify_and_introduce_user")
         guard let urlString = issuerURLField.text, let url = URL(string: urlString), let nonce = nonceField.text else {
+            Logger.main.tag(tag).error("url and one_time_code fields validation failed")
             return
         }
         
+        Logger.main.tag(tag).debug("identify_and_introduce_user url: \(urlString) one_time_code: \(nonce)")
+        
+        Logger.main.tag(tag).info("checking network")
         if !Reachability.isNetworkReachable() {
             let alert = AlertViewController.createNetworkWarning()
             present(alert, animated: false, completion: nil)
+            Logger.main.tag(tag).error("network unreachable")
             return
         }
+        Logger.main.tag(tag).info("network reachable")
         
         progressAlert = AlertViewController.createProgress(title: Localizations.AddingIssuer)
         present(progressAlert!, animated: false, completion: nil)
         
+        Logger.main.tag(tag).info("checking update required")
         AppVersion.checkUpdateRequired { [weak self] updateRequired in
             guard !updateRequired else {
+                Logger.main.tag(self?.tag).error("app update required")
                 self?.showAppUpdateError()
                 return
             }
+            Logger.main.tag(self?.tag).info("no update required")
             
             self?.cancelWebLogin()
-            
+        
+            Logger.main.tag(self?.tag).info("creating managed_issuer")
             self?.managedIssuer = ManagedIssuer()
             self?.managedIssuer!.delegate = self
             self?.managedIssuer!.add(from: url, nonce: nonce, completion: { error in
                 guard error == nil else {
+                    Logger.main.tag(self?.tag).error("managed_issuer.add completion with error")
                     self?.showAddIssuerError()
                     return
                 }
@@ -121,6 +140,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
                     self?.delegate?.added(managedIssuer: managedIssuer)
                 }
                 
+                Logger.main.tag(self?.tag).info("managed_issuer.add completion with success")
                 self?.dismissWebView()
                 self?.showAddIssuerSuccess()
             })
@@ -128,6 +148,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     }
     
     func showAddIssuerSuccess() {
+        Logger.main.tag(tag).info("show add_issuer_success")
         guard let progressAlert = self.progressAlert else { return }
         
         progressAlert.type = .normal
@@ -145,16 +166,20 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             } else {
                 self?.navigationController?.popViewController(animated: true)
             }
+            
+            Logger.main.tag(self?.tag).info("dismiss add_issuer_success")
         }
         progressAlert.set(buttons: [okayButton])
         
         if self.presentedViewController != progressAlert {
+            Logger.main.tag(tag).info("presenting add_issuer_success")
             self.present(progressAlert, animated: false, completion: nil)
         }
     }
     
     func showAppUpdateError() {
-        Logger.main.info("App needs update.")
+        let tag = self.tag
+        Logger.main.tag(tag).info("show app_update_error")
         guard let progressAlert = progressAlert else { return }
         
         progressAlert.type = .normal
@@ -168,18 +193,25 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
             let url = URL(string: "itms://itunes.apple.com/us/app/blockcerts-wallet/id1146921514")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
             progressAlert.dismiss(animated: false, completion: nil)
+            
+            Logger.main.tag(tag).debug("tapped update_app with link: \(url)")
         }
         
         let cancelButton = DialogButton(frame: .zero)
         cancelButton.setTitle(Localizations.Cancel, for: .normal)
         cancelButton.onTouchUpInside {
             progressAlert.dismiss(animated: false, completion: nil)
+            
+            Logger.main.tag(tag).warning("tapped update_dismiss")
         }
         
         progressAlert.set(buttons: [cancelButton, okayButton])
     }
     
     func showAddIssuerError() {
+        let tag = self.tag
+
+        Logger.main.tag(tag).info("show add_issuer_error")
         guard let progressAlert = progressAlert else { return }
         
         progressAlert.type = .normal
@@ -190,6 +222,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
         let okayButton = DialogButton(frame: .zero)
         okayButton.setTitle(Localizations.Okay, for: .normal)
         okayButton.onTouchUpInside {
+            Logger.main.tag(tag).info("dismiss add_issuer_error")
             progressAlert.dismiss(animated: false, completion: nil)
         }
         progressAlert.set(buttons: [okayButton])
@@ -200,7 +233,7 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     var webViewNavigationController: NavigationController?
     
     func presentWebView(at url: URL, with navigationDelegate: WKNavigationDelegate) throws {
-        Logger.main.info("Presenting the web view in the Add Issuer screen.")
+        Logger.main.tag(tag).debug("present web view with url: \(url)")
         
         let webController = WebLoginViewController(requesting: url, navigationDelegate: navigationDelegate) { [weak self] in
             self?.cancelWebLogin()
@@ -217,12 +250,14 @@ class AddIssuerViewController: UIViewController, ManagedIssuerDelegate {
     }
     
     func dismissWebView() {
+        Logger.main.tag(tag).debug("dismiss web_view")
         DispatchQueue.main.async { [weak self] in
             self?.webViewNavigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
     func cancelWebLogin() {
+        Logger.main.tag(tag).debug("cancel web_login")
         managedIssuer?.abortRequests()
     }
 }

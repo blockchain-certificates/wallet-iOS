@@ -88,7 +88,7 @@ class SettingsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isDebugBuild ? 10 : 6
+        return isDebugBuild ? 11 : 6
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,6 +117,8 @@ class SettingsTableViewController: UITableViewController {
             text = "[DEBUG] Destroy all data & crash"
         case 9:
             text = "[DEBUG] Show onboarding"
+        case 10:
+            text = "[DEBUG] Clear Logs"
         default:
             text = nil
         }
@@ -169,6 +171,8 @@ class SettingsTableViewController: UITableViewController {
         case 9:
             let storyboard = UIStoryboard(name: "Onboarding", bundle: Bundle.main)
             present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
+        case 10:
+            Logger.main.clearLogs()
         default:
             controller = nil
         }

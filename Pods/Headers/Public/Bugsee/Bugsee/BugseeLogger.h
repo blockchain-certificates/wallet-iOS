@@ -1,1 +1,0 @@
-../../../../Bugsee/Bugsee.framework/Versions/A/Headers/BugseeLogger.h
