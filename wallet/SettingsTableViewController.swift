@@ -173,6 +173,7 @@ class SettingsTableViewController: UITableViewController {
             present(storyboard.instantiateInitialViewController()!, animated: false, completion: nil)
         case 10:
             Logger.main.clearLogs()
+            self.deselectRow()
         default:
             controller = nil
         }
