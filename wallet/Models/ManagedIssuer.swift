@@ -136,10 +136,10 @@ class ManagedIssuer : NSObject, NSCoding, Codable {
         let confirmedDate = decoder.decodeObject(forKey: CodingKeys.issuerConfirmedOn.rawValue) as? Date
         
         if let issuerDictionary = decoder.decodeObject(forKey: CodingKeys.sourceIssuer.rawValue) as? [String: Any] {
-            issuer = IssuerParser.parse(dictionary: issuerDictionary, logger: Logger.main.toLoggerProtocol())
+            issuer = IssuerParser.parse(dictionary: issuerDictionary)
         }
         if let hostedIssuerDictionary = decoder.decodeObject(forKey: CodingKeys.hostedIssuer.rawValue) as? [String: Any] {
-            hostedIssuer = IssuerParser.parse(dictionary: hostedIssuerDictionary, logger: Logger.main.toLoggerProtocol())
+            hostedIssuer = IssuerParser.parse(dictionary: hostedIssuerDictionary)
         }
         
         if issuer == nil && hostedIssuer == nil {

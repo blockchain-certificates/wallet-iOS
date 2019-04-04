@@ -58,7 +58,7 @@ class Analytics {
                     return
             }
             
-            guard let issuer = IssuerParser.parse(dictionary: json, logger: Logger.main.toLoggerProtocol()) else {
+            guard let issuer = IssuerParser.parse(dictionary: json) else {
                 Logger.main.error("Couldn't parse JSON as an issuer from \(certificate.issuer.id)")
                 return
             }
