@@ -167,6 +167,8 @@
 		3C15AEB86836CEA4E704911A /* Pods-certificatesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificatesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificatesTests/Pods-certificatesTests.release.xcconfig"; sourceTree = "<group>"; };
 		4088D4A52B1AC1D4960CD4ED /* libPods-certificatesUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-certificatesUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED0BB2EA5F0AA019AF2C10A /* InformationLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationLogger.swift; sourceTree = "<group>"; };
+		5932798D2326899700FA37B7 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5932798E232689AF00FA37B7 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5AB11E45F387B18A58FCF2A4 /* Pods-certificates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificates.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificates/Pods-certificates.release.xcconfig"; sourceTree = "<group>"; };
 		7A35288CE0EE9C6B8329C464 /* Pods-certificatesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-certificatesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-certificatesUITests/Pods-certificatesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		830120341EF4483F008EC454 /* ArgumentParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgumentParser.swift; path = Utils/ArgumentParser.swift; sourceTree = "<group>"; };
@@ -689,9 +691,11 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				Base,
 				es,
 				mt,
+				it,
 			);
 			mainGroup = 83111B1B1DA4110C006B058D;
 			productRefGroup = 83111B251DA4110C006B058D /* Products */;
@@ -999,6 +1003,7 @@
 			children = (
 				E5353D12215D656500B0FE1E /* es */,
 				E5353D14215D656900B0FE1E /* mt */,
+				5932798E232689AF00FA37B7 /* it */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1009,6 +1014,7 @@
 				EEAF835A21471542008EC1FA /* Base */,
 				EE8DD6AE214C531B00795B0D /* es */,
 				A378A929215ACD870049CF28 /* mt */,
+				5932798D2326899700FA37B7 /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
