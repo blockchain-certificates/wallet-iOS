@@ -30,7 +30,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.1.3</string>
+	<string>3.1.4</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -45,7 +45,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app doesn't need access to the camera. You should decline this.</string>
+	<string>This app doesn&apos;t need access to the camera. You should decline this.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>FaceID is used to secure your passphrase.</string>
 	<key>UILaunchStoryboardName</key>
