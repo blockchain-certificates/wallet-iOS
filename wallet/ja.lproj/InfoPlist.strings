@@ -1,0 +1,6 @@
+/* 
+  InfoPlist.strings
+  wallet
+*/
+"NSFaceIDUsageDescription" = "Face IDはパスフレーズを安全に保管するために使用されています";
+"kCFBundleDevelopmentRegionKey" = "ja";

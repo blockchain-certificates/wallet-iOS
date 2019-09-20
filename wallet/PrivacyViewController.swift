@@ -33,6 +33,10 @@ class PrivacyViewController: UIViewController {
             privacyURL = URL(string: "https://www.blockcerts.org/es/mobile-privacy")!
         case "mt":
             privacyURL = URL(string: "https://www.blockcerts.org/mt/mobile-privacy")!
+        case "it":
+            privacyURL = URL(string: "https://www.blockcerts.org/it/mobile-privacy")!
+        case "ja":
+            privacyURL = URL(string: "https://www.blockcerts.org/ja/mobile-privacy")!
         default:
             privacyURL = URL(string: "https://www.blockcerts.org/mobile-privacy")!
         }
@@ -67,6 +71,10 @@ class AboutPassphraseViewController: UIViewController {
             url = URL(string: "https://www.blockcerts.org/es/about-passphrase")!
         case "mt":
             url = URL(string: "https://www.blockcerts.org/mt/about-passphrase")!
+        case "it":
+            url = URL(string: "https://www.blockcerts.org/it/about-passphrase")!
+        case "ja":
+            url = URL(string: "https://www.blockcerts.org/ja/about-passphrase")!
         default:
             url = URL(string: "https://www.blockcerts.org/about-passphrase")!
         }

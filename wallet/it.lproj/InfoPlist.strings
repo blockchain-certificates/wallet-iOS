@@ -1,0 +1,9 @@
+/*
+  InfoPlist.strings
+  wallet
+
+  Created by Dariomas@Cineca on 7/23/18.
+*/
+
+"NSFaceIDUsageDescription" = "FaceID viene utilizzato per proteggere la tua Frase di Accesso";
+"kCFBundleDevelopmentRegionKey" = "it";
