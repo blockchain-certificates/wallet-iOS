@@ -174,6 +174,7 @@ class OnboardingBackupMethods : ScrollingOnboardingControllerBase, UIActivityIte
         present(storyboard.instantiateViewController(withIdentifier: "manualBackup"), animated: true, completion: nil)
 
         hasWrittenPasscode = true
+        self.updateStates()
     }
     
     @IBAction func backupCopy() {
