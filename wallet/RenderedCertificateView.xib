@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RenderedCertificateView" customModule="cert_wallet" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RenderedCertificateView" customModule="certificates" customModuleProvider="target">
             <connections>
                 <outlet property="certificateIcon" destination="Bsm-eO-oQu" id="ruv-G9-M2x"/>
                 <outlet property="descriptionLabel" destination="E31-VE-tZS" id="gqA-mt-Wkd"/>
@@ -36,13 +35,13 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Johnny Appleseed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNx-h0-VU1">
-                            <rect key="frame" x="9.5" y="155" width="533" height="25.5"/>
+                            <rect key="frame" x="10" y="155" width="533" height="25.5"/>
                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="23"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="o3u-9w-6AQ">
-                            <rect key="frame" x="9.5" y="190.5" width="533" height="18"/>
+                            <rect key="frame" x="10" y="190.5" width="533" height="18"/>
                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -54,7 +53,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E31-VE-tZS">
-                            <rect key="frame" x="9.5" y="262" width="533" height="110"/>
+                            <rect key="frame" x="10" y="262" width="533" height="110"/>
                             <attributedString key="attributedText">
                                 <fragment>
                                     <string key="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor sapien finibus turpis tristique tincidunt. In augue tortor, tincidunt et arcu non, lobortis interdum dolor. Proin bibendum leo at nibh feugiat, ac bibendum lorem tempus. Praesent in urna nisi. Suspendisse at risus quis nunc aliquet ultricies. Etiam a dapibus lorem. Fusce dolor nisi, tristique quis condimentum id, porta ac elit. Maecenas non metus dignissim, tristique ligula ut, sollicitudin elit. Cras vestibulum ac magna eu varius. Vivamus purus urna, porta at imperdiet nec, venenatis et dui. Fusce sem dui, commodo at massa vel, ultrices maximus enim. Duis ultricies aliquet nunc.</string>
@@ -70,7 +69,7 @@
                             <rect key="frame" x="10" y="402" width="533" height="350"/>
                         </stackView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p4p-P2-ZPu" userLabel="Seal Image">
-                            <rect key="frame" x="-0.5" y="782" width="553" height="85"/>
+                            <rect key="frame" x="0.0" y="782" width="553" height="85"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="85" id="8qm-4j-mtk"/>
                             </constraints>
