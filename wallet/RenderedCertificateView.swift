@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import Blockcerts
 
-class RenderedCertificateView: UIView/*, UIScrollViewDelegate*/, WKNavigationDelegate {
+class RenderedCertificateView: UIView {
 
     @IBOutlet var view: UIView!
     
@@ -28,7 +28,6 @@ class RenderedCertificateView: UIView/*, UIScrollViewDelegate*/, WKNavigationDel
     @IBOutlet weak var sealIcon: UIImageView!
 
     weak var webView: WKWebView!
-    var webViewHeightConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,22 +53,13 @@ class RenderedCertificateView: UIView/*, UIScrollViewDelegate*/, WKNavigationDel
         
         loadWebView()
     }
-    deinit {
-        //webView.removeObserver(self, forKeyPath: "scrollView.contentSize")
-    }
     
     private func loadWebView() {
         let preferences = WKPreferences()
         preferences.javaScriptEnabled = true
         
-        let jScript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
-        let wkUScript = WKUserScript(source: jScript, injectionTime: WKUserScriptInjectionTime.atDocumentEnd, forMainFrameOnly: true)
-        let wkUController = WKUserContentController()
-        //wkUController.addUserScript(wkUScript)
-        
         let configuration = WKWebViewConfiguration()
         configuration.preferences = preferences
-        configuration.userContentController = wkUController
 
         let frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         let renderer = WKWebView(frame: frame, configuration: configuration)
@@ -81,24 +71,10 @@ class RenderedCertificateView: UIView/*, UIScrollViewDelegate*/, WKNavigationDel
         view.addConstraint(NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: renderer, attribute: .leading, multiplier: 1.0, constant: 0.0))
         view.addConstraint(NSLayoutConstraint(item: view, attribute: .right, relatedBy: .equal, toItem: renderer, attribute: .right, multiplier: 1.0, constant: 0.0))
         view.addConstraint(NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: renderer, attribute: .bottom, multiplier: 1.0, constant: 0.0))
-        /*var constraints = NSLayoutConstraint.constraints(withVisualFormat: "|[view]|", options: .alignAllCenterX, metrics: nil, views: ["view": renderer])
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: .alignAllCenterY, metrics: nil, views: ["view":renderer]))
-        NSLayoutConstraint.activate(constraints)*/
         
         renderer.isHidden = false
         
         webView = renderer
-        webView.navigationDelegate = self;
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.scrollViewContentHeightChanged()
-        }
-        
-        //webView.addObserver(self, forKeyPath: "scrollView.contentSize", options: .new, context: nil)
-        
-        
-        //webViewHeightConstraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: webView.scrollView.contentSize.height)
-
     }
     
     func render(certificate: Certificate) {
@@ -106,24 +82,18 @@ class RenderedCertificateView: UIView/*, UIScrollViewDelegate*/, WKNavigationDel
         if let html = certificate.htmlDisplay {
             let normalizeCss = "/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}/*# sourceMappingURL=normalize.min.css.map */"
             
-            /*let normalizeCss = "/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html {line-height: 1.15;-webkit-text-size-adjust: 100%;}body {margin: 0;}main {display: block;}h1 {font-size: 2em;margin: 0.67em 0;}hr {box-sizing: content-box;height: 0;overflow: visible;}pre {font-family: monospace, monospace;font-size: 1em;}a {background-color: transparent;}abbr[title] {border-bottom: none;text-decoration: underline;text-decoration: underline dotted;}b,strong {font-weight: bolder;}code,kbd,samp {font-family: monospace, monospace;font-size: 1em;}small {font-size: 80%;}sub,sup {font-size: 75%;line-height: 0;position: relative;vertical-align: baseline;}sub {bottom: -0.25em;}sup {top: -0.5em;}img {border-style: none;}button,input,optgroup,select,textarea {font-family: inherit;font-size: 100%;line-height: 1.15;margin: 0;}button,input {overflow: visible;}button,select {text-transform: none;}button,[type=button],[type=reset],[type=submit] {-webkit-appearance: button;}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner {border-style: none;padding: 0;}button:-moz-focusring,[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring {outline: 1px dotted ButtonText;}fieldset {padding: 0.35em 0.75em 0.625em;}legend {box-sizing: border-box;color: inherit;display: table;max-width: 100%;padding: 0;white-space: normal;}progress {vertical-align: baseline;}textarea {overflow: auto;}[type=checkbox],[type=radio] {box-sizing: border-box;padding: 0;}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button {height: auto;}[type=search] {-webkit-appearance: textfield;outline-offset: -2px;}[type=search]::-webkit-search-decoration {-webkit-appearance: none;}::-webkit-file-upload-button {-webkit-appearance: button;font: inherit;}details {display: block;}summary {display: list-item;}template {display: none;}[hidden] {display: none;}"*/
-            
-            /*let normalizeCss = "/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}/*# sourceMappingURL=normalize.min.css.map */"*/
-            /*let customCss = "body {padding: 20px; font-size: 12px; line-height: 1.5;} body > section { padding: 0;} body section { max-width: 100%; overflow-wrap: break-word; } body img { max-width: 100%; height: auto; width: inherit; }"*/
             let customCss = "body { font-size: 12px; line-height: 1.5;} body > section { padding: 0;} body section { max-width: 100%; } body img { max-width: 100%; height: auto; width: inherit; }"
-            let wrappedHtml = "<!doctype html><html class=\"no-js\" lang=\"\"><head><meta charset=\"utf-8\"><meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\"><meta name=\"viewport\" content=\"width=device-width\" /><title></title><style type=\"text/css\">\(normalizeCss)</style><style type=\"text/css\">\(customCss)</style></head><body>\(html)<script>function codeAddress() { let body = document.querySelector('body'); let div = document.querySelector('div'); body.style.minHeight = (div.clientWidth / (window.innerWidth / window.innerHeight)) + \"px\"} window.onload = codeAddress;</script></body></html>"
+            let minHeightScript = "<script>function codeAddress() { let body = document.querySelector('body'); let div = document.querySelector('div'); body.style.minHeight = (div.clientWidth / (window.innerWidth / window.innerHeight)) + \"px\"} window.onload = codeAddress;</script>"
             
-            /*String wrappedHtml = String.format("<!doctype html><html class=\"no-js\" lang=\"\"><head><meta charset=\"utf-8\"><meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\"><title></title><meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\" /><meta name="viewport" content="width=device-width" /><style type=\"text/css\">%s</style><style type=\"text/css\">%s</style></head><body>%s</body></html>", normalizeCss, customCss, displayHTML)*/
+            let wrappedHtml = "<!doctype html><html class=\"no-js\" lang=\"\"><head><meta charset=\"utf-8\"><meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\"><meta name=\"viewport\" content=\"width=device-width\" /><title></title><style type=\"text/css\">\(normalizeCss)</style><style type=\"text/css\">\(customCss)</style></head><body>\(html)\(minHeightScript)</body></html>"
             
             webView.isHidden = false
             webView.loadHTMLString(wrappedHtml, baseURL: nil)
-            //webViewHeightConstraint.isActive = true
             paperView.alpha = 0;
             
         } else {
             paperView.alpha = 1;
             webView.isHidden = true
-            //webViewHeightConstraint.isActive = false
             
             certificateIcon.image = UIImage(data:certificate.issuer.image)
             nameLabel.text = "\(certificate.recipient.givenName) \(certificate.recipient.familyName)"
@@ -140,17 +110,6 @@ class RenderedCertificateView: UIView/*, UIScrollViewDelegate*/, WKNavigationDel
             }
         }
     }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("Done loading html!")
-        scrollViewContentHeightChanged()
-    }
-    
-    /*func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        print("Zooming")
-        return nil
-    }*/
-    
     
     func clearSignatures() {
         signatureStack.subviews.forEach { (view) in
@@ -210,17 +169,6 @@ class RenderedCertificateView: UIView/*, UIScrollViewDelegate*/, WKNavigationDel
         NSLayoutConstraint.activate(centerConstraints)
         
         return view
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        /*if keyPath == "scrollView.contentSize" && webView == object as? WKWebView {
-            print("Height changed!")
-            //scrollViewContentHeightChanged()
-        }*/
-    }
-    
-    func scrollViewContentHeightChanged() {
-        //webViewHeightConstraint.constant = webView.scrollView.contentSize.height
     }
 }
 
