@@ -53,6 +53,7 @@ class IssuerCollectionViewController: UICollectionViewController {
         // Register for notifications
         NotificationCenter.default.addObserver(self, selector: #selector(redirectRequested(notification:)), name: NotificationNames.redirectToCertificate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onboardingCompleted(notification:)), name: NotificationNames.onboardingComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCertificates(notification:)), name: NotificationNames.reloadCertificates, object: nil)
 
         // Set up the Collection View
         let cellNib = UINib(nibName: "IssuerCollectionViewCell", bundle: nil)
@@ -162,6 +163,10 @@ class IssuerCollectionViewController: UICollectionViewController {
     @objc func onboardingCompleted(notification: Notification) {
         precondition(Keychain.hasPassphrase(), "OnboardingCompleted notification shouldn't fire until they keychain has a passphrase.")
         processAutocompleteRequest()
+    }
+    
+    @objc func reloadCertificates(notification: Notification) {
+        loadCertificates(shouldReloadCollection: true)
     }
     
     func makeViewControllerVisible(action: @escaping () -> Void) {

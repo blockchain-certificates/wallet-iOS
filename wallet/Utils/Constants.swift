@@ -23,6 +23,7 @@ struct Identifiers {
 struct NotificationNames {
     static let redirectToCertificate = Notification.Name("RedirectToCertificate")
     static let onboardingComplete = Notification.Name("OnboardingComplete")
+    static let reloadCertificates = Notification.Name("ReloadCertificates")
 }
 
 struct UserDefaultsKey {

@@ -109,6 +109,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
         let manager = CertificateManager()
         Logger.main.tag(tag).info("calling save in CertificateManager")
         manager.save(certificate: certificate)
+        NotificationCenter.default.post(name: NotificationNames.reloadCertificates, object: self, userInfo: nil)
     }
     
     var userCancelledAction = false
