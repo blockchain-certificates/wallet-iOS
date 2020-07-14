@@ -36,16 +36,19 @@ struct InfoCell : TableCellModel {
         guard let cell = cell as? InformationTableViewCell else { return }
         cell.textLabel?.text = title
         cell.detailTextLabel?.text = detail
-        cell.isTappable = url != nil || cell.detailTextLabel?.text?.hasPrefix("http") ?? false
-        if (cell.isTappable) {
-            let linkText = NSMutableAttributedString(string: detail)
-//            let attributes : [NSAttributedStringKey : Any?] = [NSAttributedStringKey: ]
-//            linkText.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle, range: NSRange(detail) ?? NSRange(location: 0, length: 0))
+        cell.isTappable = url != nil || detail.contains("http")
+        if (url != nil || detail.contains("http")) {
+            let attributes: [NSAttributedStringKey : Any] = [
+                NSAttributedStringKey.underlineStyle: 1,
+                NSAttributedStringKey.underlineColor: UIColor.blue,
+                NSAttributedStringKey.foregroundColor: UIColor.blue
+            ]
+            let linkText = NSAttributedString(string: detail, attributes: attributes)
             cell.detailTextLabel?.attributedText = linkText
         }
         cell.selectionStyle = cell.isTappable ? .default : .none
         cell.textLabel?.lineBreakMode = .byWordWrapping
-        cell.textLabel?.numberOfLines = 3
+        cell.textLabel?.numberOfLines = 0
     }
 }
 
@@ -74,8 +77,6 @@ class InformationTableViewCell : UITableViewCell {
             return
         }
 
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-
         textLabel.font = Style.Font.T2B
         textLabel.textColor = Style.Color.C5
         textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -99,6 +100,11 @@ class InformationTableViewCell : UITableViewCell {
         contentView.topAnchor.constraint(equalTo: topAnchor)
         contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
         
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        detailTextLabel?.attributedText = nil
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -331,7 +337,7 @@ class CertificateMetadataViewController: BaseMetadataViewController {
             }
             var metadataVal = metadata.value;
             if (metadataVal == "<null>") {
-                metadataVal = ""
+                metadataVal = " "
             }
             return InfoCell(title: metadata.label, detail: metadataVal, url: url)
         }
