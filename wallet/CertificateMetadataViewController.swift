@@ -36,8 +36,16 @@ struct InfoCell : TableCellModel {
         guard let cell = cell as? InformationTableViewCell else { return }
         cell.textLabel?.text = title
         cell.detailTextLabel?.text = detail
-        cell.isTappable = url != nil
+        cell.isTappable = url != nil || cell.detailTextLabel?.text?.hasPrefix("http") ?? false
+        if (cell.isTappable) {
+            let linkText = NSMutableAttributedString(string: detail)
+//            let attributes : [NSAttributedStringKey : Any?] = [NSAttributedStringKey: ]
+//            linkText.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle, range: NSRange(detail) ?? NSRange(location: 0, length: 0))
+            cell.detailTextLabel?.attributedText = linkText
+        }
         cell.selectionStyle = cell.isTappable ? .default : .none
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        cell.textLabel?.numberOfLines = 3
     }
 }
 
@@ -225,6 +233,9 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        if tableView.cellForRow(at: indexPath)?.detailTextLabel?.text?.contains("http") ?? false {
+            return true;
+        }
         guard let cellData = data[indexPath.row] as? InfoCell,
             let url = cellData.url,
             UIApplication.shared.canOpenURL(url) else { return false }
@@ -232,10 +243,58 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cellData = data[indexPath.row] as? InfoCell,
+        
+        if let cellData = data[indexPath.row] as? InfoCell,
             let url = cellData.url,
-            UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            tableView.deselectRow(at: indexPath, animated: false)
+            return
+        }
+        if let cellData = data[indexPath.row] as? InfoCell {
+            let urls = getURLsFromString(text: cellData.detail)
+            if urls.count == 1 && UIApplication.shared.canOpenURL(urls[0]) {
+                UIApplication.shared.open(urls[0], options: [:], completionHandler: nil)
+            } else if urls.count > 1 {
+                presentMultipleURLs(urls: urls)
+            }
+        }
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    private func getURLsFromString(text: String) -> [URL] {
+        var urls: [URL] = []
+        let types: NSTextCheckingResult.CheckingType = .link
+        let detector = try? NSDataDetector(types: types.rawValue)
+        guard let detect = detector else {
+           return urls
+        }
+        let matches = detect.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.count))
+        for match in matches {
+            guard let range = Range(match.range, in: text) else { continue }
+            let urlString = String(text[range])
+            if let url = URL(string: urlString) {
+                urls.append(url)
+            }
+        }
+        return urls
+    }
+    
+    private func presentMultipleURLs(urls: [URL]) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        for url in urls {
+            let action = UIAlertAction(title: url.absoluteString, style: .default) { _ in
+                if (UIApplication.shared.canOpenURL(url)) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+            alertController.addAction(action)
+        }
+        let cancelAction = UIAlertAction(title: Localizations.Cancel, style: UIAlertActionStyle.cancel) { (_) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     
 }
@@ -270,7 +329,11 @@ class CertificateMetadataViewController: BaseMetadataViewController {
             default:
                 url = nil
             }
-            return InfoCell(title: metadata.label, detail: metadata.value, url: url)
+            var metadataVal = metadata.value;
+            if (metadataVal == "<null>") {
+                metadataVal = ""
+            }
+            return InfoCell(title: metadata.label, detail: metadataVal, url: url)
         }
         data += metadata
 
@@ -295,6 +358,14 @@ class CertificateMetadataViewController: BaseMetadataViewController {
             }
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        super.tableView(tableView, shouldHighlightRowAt: indexPath)
     }
 
     func promptForCertificateDeletion() {

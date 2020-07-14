@@ -88,7 +88,7 @@ class CertificateViewController: UIViewController {
             Logger.main.info("Share dialog cancelled.")
         })
         
-        if certificate.shareUrl != nil {
+        if certificate.shareUrl != nil  && certificate.id.hasPrefix("http") {
             alertController.addAction(shareURLAction)
         }
         alertController.addAction(shareFileAction)
