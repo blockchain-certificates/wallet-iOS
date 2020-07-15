@@ -36,8 +36,10 @@ struct InfoCell : TableCellModel {
         guard let cell = cell as? InformationTableViewCell else { return }
         cell.textLabel?.text = title
         cell.detailTextLabel?.text = detail
+        // LKP: detect if the cell has content that could be tappable
         cell.isTappable = url != nil || detail.contains("http")
-        if (url != nil || detail.contains("http")) {
+        if (cell.isTappable) {
+            // LKP: style the content of the cell to look like a link
             let attributes: [NSAttributedStringKey : Any] = [
                 NSAttributedStringKey.underlineStyle: 1,
                 NSAttributedStringKey.underlineColor: UIColor.blue,
@@ -47,6 +49,7 @@ struct InfoCell : TableCellModel {
             cell.detailTextLabel?.attributedText = linkText
         }
         cell.selectionStyle = cell.isTappable ? .default : .none
+        // LKP: fixes content that was cut off by wrapping text
         cell.textLabel?.lineBreakMode = .byWordWrapping
         cell.textLabel?.numberOfLines = 0
     }
@@ -102,6 +105,7 @@ class InformationTableViewCell : UITableViewCell {
         
     }
     
+    // LKP: reusable cells need to have their content reset for when they are reused
     override func prepareForReuse() {
         super.prepareForReuse()
         detailTextLabel?.attributedText = nil
@@ -239,6 +243,7 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        // LKP: if it contains a link we want to be able to tap on it
         if tableView.cellForRow(at: indexPath)?.detailTextLabel?.text?.contains("http") ?? false {
             return true;
         }
@@ -254,11 +259,13 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
             let url = cellData.url,
                 UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            // LKP: clear the cell highlighting after it has been tapped
             tableView.deselectRow(at: indexPath, animated: false)
             return
         }
         if let cellData = data[indexPath.row] as? InfoCell {
             let urls = getURLsFromString(text: cellData.detail)
+            // if there's only one url just launch that one
             if urls.count == 1 && UIApplication.shared.canOpenURL(urls[0]) {
                 UIApplication.shared.open(urls[0], options: [:], completionHandler: nil)
             } else if urls.count > 1 {
@@ -268,6 +275,7 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
+    // LKP: This function is used to parse a cell's content to grab all the url options
     private func getURLsFromString(text: String) -> [URL] {
         var urls: [URL] = []
         let types: NSTextCheckingResult.CheckingType = .link
@@ -286,6 +294,8 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
         return urls
     }
     
+    // LKP: in the rare case that there are multiple urls in a cell we should
+    //      ask the user which url they would like to navigate to
     private func presentMultipleURLs(urls: [URL]) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         for url in urls {
@@ -335,8 +345,11 @@ class CertificateMetadataViewController: BaseMetadataViewController {
             default:
                 url = nil
             }
+            
+            // LKP: assign a whitespace to empty (<null>) values
             var metadataVal = metadata.value;
             if (metadataVal == "<null>") {
+                // LKP: cannot be an empty string so we can avoid layout constraint issues
                 metadataVal = " "
             }
             return InfoCell(title: metadata.label, detail: metadataVal, url: url)
