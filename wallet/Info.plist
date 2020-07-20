@@ -48,6 +48,8 @@
 	<string>This app doesn&apos;t need access to the camera. You should decline this.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>FaceID is used to secure your passphrase.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This app doesn&apos;t need access to bluetooth. You should decline this.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
