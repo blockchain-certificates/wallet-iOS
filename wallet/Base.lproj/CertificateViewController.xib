@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,14 +24,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zt0-2q-H1n" userLabel="ContentView">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jh-Wq-q8h" customClass="RenderedCertificateView" customModule="certificates" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="500" placeholder="YES" id="dSh-el-VBf"/>
-                                    </constraints>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -46,8 +41,8 @@
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="Zt0-2q-H1n" firstAttribute="top" secondItem="Gag-J3-nMn" secondAttribute="top" id="Jtr-iT-BDb"/>
-                        <constraint firstAttribute="bottom" secondItem="Zt0-2q-H1n" secondAttribute="bottom" id="KJz-NB-6s0"/>
+                        <constraint firstAttribute="bottom" secondItem="Zt0-2q-H1n" secondAttribute="bottom" id="8Vd-ly-K5i"/>
+                        <constraint firstItem="Zt0-2q-H1n" firstAttribute="top" secondItem="Gag-J3-nMn" secondAttribute="top" id="KJM-GR-Wyg"/>
                         <constraint firstItem="Zt0-2q-H1n" firstAttribute="leading" secondItem="Gag-J3-nMn" secondAttribute="leading" id="UQi-Tr-hPS"/>
                         <constraint firstAttribute="trailing" secondItem="Zt0-2q-H1n" secondAttribute="trailing" id="zEW-Ri-lf9"/>
                     </constraints>
@@ -62,7 +57,7 @@
                                 <constraint firstAttribute="height" constant="1" id="yej-T1-PRB"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWC-rg-3XN" userLabel="Info Button" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWC-rg-3XN" userLabel="Info Button" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
                             <rect key="frame" x="8" y="9" width="108.5" height="44"/>
                             <state key="normal" title="_Info" image="icon_info">
                                 <color key="titleColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,7 +69,7 @@
                                 <action selector="infoTapped:" destination="-1" eventType="touchUpInside" id="I9C-u9-5Xp"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diU-wL-WfV">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diU-wL-WfV">
                             <rect key="frame" x="124.5" y="14.5" width="1" height="33"/>
                             <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -82,7 +77,7 @@
                                 <constraint firstAttribute="width" constant="1" id="7Eo-2f-WrG"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-06-Fky" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHb-06-Fky" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
                             <rect key="frame" x="133.5" y="9" width="108" height="44"/>
                             <state key="normal" title="_Verify" image="icon_verify">
                                 <color key="titleColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -94,7 +89,7 @@
                                 <action selector="verifyTapped:" destination="-1" eventType="touchUpInside" id="C3Q-PG-9AX"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BiC-kn-enq">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BiC-kn-enq">
                             <rect key="frame" x="249.5" y="14.5" width="1" height="33"/>
                             <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -102,7 +97,7 @@
                                 <constraint firstAttribute="width" constant="1" id="fVw-mh-VTj"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-rO-N6E" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-rO-N6E" customClass="CredentialActionButton" customModule="certificates" customModuleProvider="target">
                             <rect key="frame" x="258.5" y="9" width="108.5" height="44"/>
                             <state key="normal" title="_Share" image="icon_share">
                                 <color key="titleColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -120,20 +115,20 @@
                         <constraint firstItem="YTQ-rO-N6E" firstAttribute="leading" secondItem="BiC-kn-enq" secondAttribute="trailing" constant="8" id="0PX-Lx-UhU"/>
                         <constraint firstItem="BiC-kn-enq" firstAttribute="leading" secondItem="rHb-06-Fky" secondAttribute="trailing" constant="8" id="2JS-ya-qlO"/>
                         <constraint firstAttribute="trailing" secondItem="YTQ-rO-N6E" secondAttribute="trailing" constant="8" id="2Sp-yu-PxB"/>
-                        <constraint firstItem="BiC-kn-enq" firstAttribute="centerY" secondItem="X1h-nY-yXF" secondAttribute="centerY" id="Afr-D3-H1J"/>
+                        <constraint firstItem="BiC-kn-enq" firstAttribute="centerY" secondItem="X1h-nY-yXF" secondAttribute="centerY" constant="1" id="Afr-D3-H1J"/>
                         <constraint firstItem="rHb-06-Fky" firstAttribute="leading" secondItem="diU-wL-WfV" secondAttribute="trailing" constant="8" id="JlH-vs-aPF"/>
-                        <constraint firstAttribute="bottom" secondItem="rHb-06-Fky" secondAttribute="bottom" constant="8" id="NIi-xc-1zn"/>
+                        <constraint firstAttribute="bottom" secondItem="rHb-06-Fky" secondAttribute="bottom" constant="7" id="NIi-xc-1zn"/>
                         <constraint firstItem="h28-uf-yI0" firstAttribute="leading" secondItem="X1h-nY-yXF" secondAttribute="leading" id="T9O-b1-JWg"/>
-                        <constraint firstAttribute="bottom" secondItem="YTQ-rO-N6E" secondAttribute="bottom" constant="8" id="Uoy-fc-GiG"/>
+                        <constraint firstAttribute="bottom" secondItem="YTQ-rO-N6E" secondAttribute="bottom" constant="7" id="Uoy-fc-GiG"/>
                         <constraint firstItem="rWC-rg-3XN" firstAttribute="top" secondItem="h28-uf-yI0" secondAttribute="bottom" constant="8" id="W1c-6a-5g7"/>
                         <constraint firstItem="rHb-06-Fky" firstAttribute="top" secondItem="h28-uf-yI0" secondAttribute="bottom" constant="8" id="YYb-MH-arS"/>
                         <constraint firstAttribute="height" constant="60" id="bW4-AA-bWb"/>
                         <constraint firstItem="rWC-rg-3XN" firstAttribute="leading" secondItem="X1h-nY-yXF" secondAttribute="leading" constant="8" id="cbP-dR-kVu"/>
                         <constraint firstItem="diU-wL-WfV" firstAttribute="leading" secondItem="rWC-rg-3XN" secondAttribute="trailing" constant="8" id="e14-W4-oNF"/>
                         <constraint firstAttribute="trailing" secondItem="h28-uf-yI0" secondAttribute="trailing" id="gvs-sN-ml2"/>
-                        <constraint firstAttribute="bottom" secondItem="rWC-rg-3XN" secondAttribute="bottom" constant="8" id="ijd-Y1-Dbm"/>
+                        <constraint firstAttribute="bottom" secondItem="rWC-rg-3XN" secondAttribute="bottom" constant="7" id="ijd-Y1-Dbm"/>
                         <constraint firstItem="h28-uf-yI0" firstAttribute="top" secondItem="X1h-nY-yXF" secondAttribute="top" id="jhG-X9-dC5"/>
-                        <constraint firstItem="diU-wL-WfV" firstAttribute="centerY" secondItem="X1h-nY-yXF" secondAttribute="centerY" id="keb-MX-MLj"/>
+                        <constraint firstItem="diU-wL-WfV" firstAttribute="centerY" secondItem="X1h-nY-yXF" secondAttribute="centerY" constant="1" id="keb-MX-MLj"/>
                         <constraint firstItem="rHb-06-Fky" firstAttribute="width" secondItem="YTQ-rO-N6E" secondAttribute="width" id="m2h-rg-zSO"/>
                         <constraint firstItem="YTQ-rO-N6E" firstAttribute="top" secondItem="h28-uf-yI0" secondAttribute="bottom" constant="8" id="umA-ba-BD2"/>
                         <constraint firstItem="rWC-rg-3XN" firstAttribute="width" secondItem="rHb-06-Fky" secondAttribute="width" id="y4H-g4-93k"/>
@@ -142,6 +137,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Zt0-2q-H1n" firstAttribute="bottom" secondItem="X1h-nY-yXF" secondAttribute="top" id="DiJ-Sc-vsV"/>
                 <constraint firstItem="GiI-79-T71" firstAttribute="trailing" secondItem="X1h-nY-yXF" secondAttribute="trailing" id="MNA-EQ-B0N"/>
                 <constraint firstItem="GiI-79-T71" firstAttribute="bottom" secondItem="X1h-nY-yXF" secondAttribute="bottom" id="NBo-Oj-Y9O"/>
                 <constraint firstItem="X1h-nY-yXF" firstAttribute="top" secondItem="Gag-J3-nMn" secondAttribute="bottom" id="fJz-MJ-5pX"/>
