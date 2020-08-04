@@ -36,8 +36,22 @@ struct InfoCell : TableCellModel {
         guard let cell = cell as? InformationTableViewCell else { return }
         cell.textLabel?.text = title
         cell.detailTextLabel?.text = detail
-        cell.isTappable = url != nil
+        // LKP: detect if the cell has content that could be tappable
+        cell.isTappable = url != nil || detail.contains("http")
+        if (cell.isTappable) {
+            // LKP: style the content of the cell to look like a link
+            let attributes: [NSAttributedStringKey : Any] = [
+                NSAttributedStringKey.underlineStyle: 1,
+                NSAttributedStringKey.underlineColor: UIColor.blue,
+                NSAttributedStringKey.foregroundColor: UIColor.blue
+            ]
+            let linkText = NSAttributedString(string: detail, attributes: attributes)
+            cell.detailTextLabel?.attributedText = linkText
+        }
         cell.selectionStyle = cell.isTappable ? .default : .none
+        // LKP: fixes content that was cut off by wrapping text
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        cell.textLabel?.numberOfLines = 0
     }
 }
 
@@ -66,8 +80,6 @@ class InformationTableViewCell : UITableViewCell {
             return
         }
 
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-
         textLabel.font = Style.Font.T2B
         textLabel.textColor = Style.Color.C5
         textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +103,12 @@ class InformationTableViewCell : UITableViewCell {
         contentView.topAnchor.constraint(equalTo: topAnchor)
         contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
         
+    }
+    
+    // LKP: reusable cells need to have their content reset for when they are reused
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        detailTextLabel?.attributedText = nil
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -225,6 +243,10 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        // LKP: if it contains a link we want to be able to tap on it
+        if tableView.cellForRow(at: indexPath)?.detailTextLabel?.text?.contains("http") ?? false {
+            return true;
+        }
         guard let cellData = data[indexPath.row] as? InfoCell,
             let url = cellData.url,
             UIApplication.shared.canOpenURL(url) else { return false }
@@ -232,10 +254,63 @@ class BaseMetadataViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cellData = data[indexPath.row] as? InfoCell,
+        
+        if let cellData = data[indexPath.row] as? InfoCell,
             let url = cellData.url,
-            UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            // LKP: clear the cell highlighting after it has been tapped
+            tableView.deselectRow(at: indexPath, animated: false)
+            return
+        }
+        if let cellData = data[indexPath.row] as? InfoCell {
+            let urls = getURLsFromString(text: cellData.detail)
+            // if there's only one url just launch that one
+            if urls.count == 1 && UIApplication.shared.canOpenURL(urls[0]) {
+                UIApplication.shared.open(urls[0], options: [:], completionHandler: nil)
+            } else if urls.count > 1 {
+                presentMultipleURLs(urls: urls)
+            }
+        }
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    // LKP: This function is used to parse a cell's content to grab all the url options
+    private func getURLsFromString(text: String) -> [URL] {
+        var urls: [URL] = []
+        let types: NSTextCheckingResult.CheckingType = .link
+        let detector = try? NSDataDetector(types: types.rawValue)
+        guard let detect = detector else {
+           return urls
+        }
+        let matches = detect.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.count))
+        for match in matches {
+            guard let range = Range(match.range, in: text) else { continue }
+            let urlString = String(text[range])
+            if let url = URL(string: urlString) {
+                urls.append(url)
+            }
+        }
+        return urls
+    }
+    
+    // LKP: in the rare case that there are multiple urls in a cell we should
+    //      ask the user which url they would like to navigate to
+    private func presentMultipleURLs(urls: [URL]) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        for url in urls {
+            let action = UIAlertAction(title: url.absoluteString, style: .default) { _ in
+                if (UIApplication.shared.canOpenURL(url)) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+            alertController.addAction(action)
+        }
+        let cancelAction = UIAlertAction(title: Localizations.Cancel, style: UIAlertActionStyle.cancel) { (_) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     
 }
@@ -270,7 +345,14 @@ class CertificateMetadataViewController: BaseMetadataViewController {
             default:
                 url = nil
             }
-            return InfoCell(title: metadata.label, detail: metadata.value, url: url)
+            
+            // LKP: assign a whitespace to empty (<null>) values
+            var metadataVal = metadata.value;
+            if (metadataVal == "<null>") {
+                // LKP: cannot be an empty string so we can avoid layout constraint issues
+                metadataVal = " "
+            }
+            return InfoCell(title: metadata.label, detail: metadataVal, url: url)
         }
         data += metadata
 
@@ -295,6 +377,14 @@ class CertificateMetadataViewController: BaseMetadataViewController {
             }
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        super.tableView(tableView, shouldHighlightRowAt: indexPath)
     }
 
     func promptForCertificateDeletion() {

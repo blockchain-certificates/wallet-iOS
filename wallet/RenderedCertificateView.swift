@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import Blockcerts
 
-class RenderedCertificateView: UIView {
+class RenderedCertificateView: UIView, WKNavigationDelegate {
 
     @IBOutlet var view: UIView!
     
@@ -59,6 +59,8 @@ class RenderedCertificateView: UIView {
         preferences.javaScriptEnabled = true
         
         let configuration = WKWebViewConfiguration()
+        // LKP: allow urls to be detected and tappable
+        configuration.dataDetectorTypes = WKDataDetectorTypes.link
         configuration.preferences = preferences
 
         let frame = CGRect(x: 0, y: 0, width: 50, height: 50)
@@ -71,25 +73,33 @@ class RenderedCertificateView: UIView {
         view.addConstraint(NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: renderer, attribute: .leading, multiplier: 1.0, constant: 0.0))
         view.addConstraint(NSLayoutConstraint(item: view, attribute: .right, relatedBy: .equal, toItem: renderer, attribute: .right, multiplier: 1.0, constant: 0.0))
         view.addConstraint(NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: renderer, attribute: .bottom, multiplier: 1.0, constant: 0.0))
-        
+        renderer.navigationDelegate = self
         renderer.isHidden = false
         
         webView = renderer
     }
     
     func render(certificate: Certificate) {
-        
+
         if let html = certificate.htmlDisplay {
             let normalizeCss = "/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}/*# sourceMappingURL=normalize.min.css.map */"
             
             
+            // LKP: anchor tag styling to show links as tappable
+            var customCss = "body {padding: 20px; font-size: 12px; line-height: 1.5;} body > section { padding: 0;} body section { max-width: 100%; overflow-wrap: break-word; } body img { max-width: 100%; height: auto; width: inherit; } a { color: blue !important; }"
+            var wrappedHtml = "<!doctype html><html class=\"no-js\" lang=\"\"><head><meta charset=\"utf-8\"><meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\"><title></title><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" name=\"viewport\" /><meta name=”viewport” content=”width=device-width” /><style type=\"text/css\">\(normalizeCss)</style><style type=\"text/css\">\(customCss)</style></head><body>\(html)</body></html>"
+
+
             //There is a sizing issue with diplomas that are wide but not tall, so we adjust the min height for the html based on the ratio between the cert width and the aspect ratio of the window. This keeps it so it will properly scale to fit the cert to the width of the view.
             //We need to add + 40 to div.clientWidth because we have a margin of 20px around the entire page
             let minHeightScript = "<script>function codeAddress() { let body = document.querySelector('body'); let div = document.querySelector('div'); body.style.minHeight = ((div.clientWidth + 40) / (window.innerWidth / window.innerHeight)) + \"px\"} window.onload = codeAddress;</script>"
             
-            let customCss = "body {font-size: 12px; line-height: 1.5; margin:20px; display: inline-block; } body > section { padding:0;} body section { max-width: 100%; } body img { max-width: 100%; height: auto; width: inherit; }"
-            
-            let wrappedHtml = "<!doctype html><html class=\"no-js\" lang=\"\"><head><meta charset=\"utf-8\"><meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\"><meta name=\"viewport\" content=\"width=device-width\" /><title></title><style type=\"text/css\">\(normalizeCss)</style><style type=\"text/css\">\(customCss)</style></head><body>\(html)\(minHeightScript)</body></html>"
+            // LKP: full width for width-defined credentials only
+            if (certificate.htmlDisplay!.hasPrefix("<div")) {
+                customCss = "body {font-size: 12px; line-height: 1.5; margin:20px; display: inline-block; } body > section { padding:0;} body section { max-width: 100%; } body img { max-width: 100%; height: auto; width: inherit; } a { color: blue !important; }"
+                
+                wrappedHtml = "<!doctype html><html class=\"no-js\" lang=\"\"><head><meta charset=\"utf-8\"><meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\"><meta name=\"viewport\" content=\"width=device-width\" /><title></title><style type=\"text/css\">\(normalizeCss)</style><style type=\"text/css\">\(customCss)</style></head><body>\(html)\(minHeightScript)</body></html>"
+            }
             
             webView.isHidden = false
             webView.loadHTMLString(wrappedHtml, baseURL: nil)
@@ -174,6 +184,23 @@ class RenderedCertificateView: UIView {
         
         return view
     }
+    
+    // LKP: this function handles when urls are tapped. We navigate to the url in safari instead of
+    //      directly within the webview.
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .linkActivated  {
+            if let url = navigationAction.request.url,
+                UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+                decisionHandler(.cancel)
+            } else {
+                decisionHandler(.allow)
+            }
+        } else {
+            decisionHandler(.allow)
+        }
+    }
+
 }
 
 

@@ -13,10 +13,10 @@
 			<array/>
 			<key>CFBundleTypeName</key>
 			<string>JSON Files</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSHandlerRank</key>
-			<string>Default</string>
+            <key>CFBundleTypeRole</key>
+            <string>Viewer</string>
+            <key>LSHandlerRank</key>
+            <string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.json</string>
@@ -49,7 +49,7 @@
 		<true/>
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>The app doesn't need access to bluetooth. You should decline this.</string>
+	<string>This app doesn't need access to bluetooth. You should decline this.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app doesn't need access to the camera. You should decline this.</string>
 	<key>NSFaceIDUsageDescription</key>

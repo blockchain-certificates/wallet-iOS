@@ -15,33 +15,6 @@ class OnboardingControllerBase : UIViewController {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
-    
-    @IBAction func playWelcomeVideo() {
-        guard let path = Bundle.main.path(forResource: "introduction", ofType:"mp4") else {
-            print("Video file not found")
-            return
-        }
-        let player = AVPlayer(url: URL(fileURLWithPath: path))
-        let playerController = AVPlayerViewController()
-        playerController.player = player
-        playerController.showsPlaybackControls = true
-        if #available(iOS 11.0, *) {
-            playerController.exitsFullScreenWhenPlaybackEnds = true
-        } else {
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(didEndPlaying),
-                                                   name: .AVPlayerItemDidPlayToEndTime,
-                                                   object: nil)
-        }
-        present(playerController, animated: true) {
-            player.play()
-        }
-    }
-    
-    @objc func didEndPlaying(_ notification: Notification) {
-        presentedViewController?.dismiss(animated: true, completion: nil)
-    }
-    
 }
 
 class ScrollingOnboardingControllerBase : OnboardingControllerBase {
@@ -92,14 +65,11 @@ class LandingScreenViewController : OnboardingControllerBase {
 
 class WelcomeReturningUsersViewController : ScrollingOnboardingControllerBase {
     
-    @IBOutlet weak var videoPlayButton: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Style.Color.C1
         title = Localizations.Welcome
         UserDefaults.standard.set(true, forKey: UserDefaultsKey.hasReenteredPassphrase)
-        videoPlayButton.accessibilityLabel = Localizations.PlayIntroVideo
     }
     
     override func viewDidLayoutSubviews() {

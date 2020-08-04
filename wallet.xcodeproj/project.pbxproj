@@ -98,7 +98,6 @@
 		A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */; };
 		A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A958CCD4202E4BD100CD35C6 /* Alert.storyboard */; };
 		A961EBC72028BE020016CD1E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A961EBC62028BE020016CD1E /* Style.swift */; };
-		A970D00A2044AFC6004BC1AE /* introduction.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A970D0092044AFC6004BC1AE /* introduction.mp4 */; };
 		A98911D3204711E300E4E722 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A98911D2204711E300E4E722 /* Settings.storyboard */; };
 		A9B178492036145900B76375 /* IssuerHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */; };
 		A9B1784B203615D000B76375 /* IssuerHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */; };
@@ -256,7 +255,6 @@
 		A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		A958CCD4202E4BD100CD35C6 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		A961EBC62028BE020016CD1E /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		A970D0092044AFC6004BC1AE /* introduction.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = introduction.mp4; path = Assets/introduction.mp4; sourceTree = "<group>"; };
 		A98911D2204711E300E4E722 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		A9B178482036145900B76375 /* IssuerHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssuerHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		A9B1784A203615D000B76375 /* IssuerHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuerHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -394,7 +392,6 @@
 				838DC13A1E43F0F700533AEB /* CertificateViewController.xib */,
 				831EDC111ED5F7DA004F135B /* CoreBitcoinManager.swift */,
 				83111B331DA4110C006B058D /* Info.plist */,
-				A970D0092044AFC6004BC1AE /* introduction.mp4 */,
 				A9B17850203746E300B76375 /* IssuerCollectionEmptyView.xib */,
 				A9B997A52040611C00C05153 /* IssuerCollectionReturningUserEmptyView.xib */,
 				8318FC501DAD5337006A8FD5 /* IssuerCollectionViewController.swift */,
@@ -718,7 +715,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */,
-				A970D00A2044AFC6004BC1AE /* introduction.mp4 in Resources */,
 				EE821EC8215C100000713C47 /* verifier.js in Resources */,
 				838DC1391E43F0D300533AEB /* AddIssuerViewController.xib in Resources */,
 				A909528220449DD000F29CF5 /* C5T2BLabelCell.xib in Resources */,
@@ -1147,14 +1143,12 @@
 				CODE_SIGN_ENTITLEMENTS = wallet/wallet.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 112;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.blockcerts.cert-wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1173,14 +1167,12 @@
 				CODE_SIGN_ENTITLEMENTS = wallet/wallet.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 112;
 				DEVELOPMENT_TEAM = CYEWR6MU44;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.blockcerts.cert-wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -1,7 +1,7 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Bugsee"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Bugsee" "$(PODS_ROOT)/Bugsee/"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CoreBitcoin" "${PODS_ROOT}/Headers/Public/ISO8601DateFormatter" "${PODS_ROOT}/Headers/Public/OpenSSL-Universal" "${PODS_ROOT}/Headers/Public/OpenSans" "${PODS_ROOT}/Headers/Public/lottie-ios"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"c++" -l"crypto" -l"ssl" -framework "AVFoundation" -framework "Bugsee" -framework "CoreGraphics" -framework "CoreMedia" -framework "CoreMotion" -framework "CoreTelephony" -framework "CoreText" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit"
+OTHER_LDFLAGS = $(inherited) -l"c++" -l"crypto" -l"ssl" -framework "AVFoundation" -framework "Bugsee" -framework "CoreGraphics" -framework "CoreMedia" -framework "CoreMotion" -framework "CoreTelephony" -framework "CoreText" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
