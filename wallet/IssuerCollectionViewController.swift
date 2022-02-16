@@ -646,16 +646,16 @@ extension IssuerCollectionViewController : ManagedIssuerDelegate {
     func presentWebView(at url: URL, with navigationDelegate: WKNavigationDelegate) throws {
         Logger.main.info("Presenting the web view in the Add Issuer screen.")
         
-        let webController = WebLoginViewController(requesting: url, navigationDelegate: navigationDelegate) { [weak self] in
-            self?.cancelWebLogin()
-            self?.dismissWebView()
-        }
-        let navigationController = NavigationController(rootViewController: webController)
-        webViewNavigationController = navigationController
-        
-        DispatchQueue.main.async {
-            self.alert?.dismiss(animated: false, completion: {
-                self.present(navigationController, animated: true, completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            let webController = WebLoginViewController(requesting: url, navigationDelegate: navigationDelegate) { [weak self] in
+                self?.cancelWebLogin()
+                self?.dismissWebView()
+            }
+            let navigationController = NavigationController(rootViewController: webController)
+            self?.webViewNavigationController = navigationController
+            
+            self?.alert?.dismiss(animated: false, completion: { [weak self] in
+                self?.present(navigationController, animated: true, completion: nil)
             })
         }
     }
