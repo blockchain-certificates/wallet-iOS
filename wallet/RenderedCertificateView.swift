@@ -116,7 +116,7 @@ class RenderedCertificateView: UIView, WKNavigationDelegate {
             descriptionLabel.text = certificate.description
             sealIcon.image = UIImage(data: certificate.image)
             
-            certificate.assertion.signatureImages.forEach { (signatureImage) in
+            certificate.assertion.signatureImages?.forEach { (signatureImage) in
                 guard let image = UIImage(data: signatureImage.image) else {
                     return
                 }
