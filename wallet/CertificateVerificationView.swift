@@ -14,6 +14,8 @@ class CertificateVerificationView: UIView {
     
     let labelLeftMargin: CGFloat = 53.0
     let stepLabelVerticalMargin: CGFloat = 14.0
+    let suiteLabelVerticalTopMargin: CGFloat = 12.0
+    let suiteLabelVerticalBottomMargin: CGFloat = 8.0
     let substepLabelVerticalMargin: CGFloat = 7.0
     let trackWidth: CGFloat = 12.0
     let trackCenterX: CGFloat = 14.0
@@ -23,9 +25,11 @@ class CertificateVerificationView: UIView {
     
     var allSteps: [VerificationStep]?
     var stepLabels: [String: UILabel] = [:]
+    var suitesLabels: [String: UILabel] = [:]
     var substepLabels: [String: UILabel] = [:]
     var stepIcons: [String: UIImageView] = [:]
     var parentStepCodes: [String: String] = [:]
+    var flatSubstepsCodesByParentStep: [String: [String]] = [:]
     var substepFailIcon: UIImageView?
     var substepFailCode: String?
     var substepFailLabel: UILabel?
@@ -51,23 +55,52 @@ class CertificateVerificationView: UIView {
             addSubview(stepLabel)
             stepLabels[step.code] = stepLabel
             
-            for substep in step.substeps {
-                let substepLabel = LabelC7T2R()
-                substepLabel.text = substep.label
-                substepLabel.numberOfLines = 0
-                addSubview(substepLabel)
-                substepLabels[substep.code] = substepLabel
-                parentStepCodes[substep.code] = substep.parentStep
+            setSubSteps(group: &substepLabels, parentStep: step.code, subSteps: step.substeps)
+            
+            for suite in step.suites {
+                if suite.substeps.count > 0 && step.suites.count > 1 {
+                    setSubStepSuiteTitle(parentStep: step.code, suite: suite)
+                }
+                setSubSteps(group: &substepLabels, parentStep: step.code, subSteps: suite.substeps)
             }
         }
+        
         setNeedsDisplay()
     }
     
+    func setSubStepSuiteTitle (parentStep: String, suite: VerificationSuite) {
+        let suiteLabel = LabelC7T3S()
+        let proofType : String = suite.proofType
+        let parentStepSuiteCode : String = parentStep + suite.proofType
+        suiteLabel.text = proofType
+        suiteLabel.textColor = Style.Color.C12
+        suiteLabel.numberOfLines = 0
+        addSubview(suiteLabel)
+        suitesLabels[parentStepSuiteCode] = suiteLabel
+        parentStepCodes[proofType] = suite.substeps[0].parentStep
+    }
+    
+    func setSubSteps (group: inout [String: UILabel], parentStep: String, subSteps: [VerificationSubstep], suiteProofType: String? = "") {
+        for substep in subSteps {
+            let substepLabel = LabelC7T2R()
+            substepLabel.text = substep.label
+            substepLabel.numberOfLines = 0
+            addSubview(substepLabel)
+            group[parentStep + substep.code] = substepLabel
+            parentStepCodes[substep.code] = substep.parentStep
+            
+            if flatSubstepsCodesByParentStep[parentStep] == nil {
+                flatSubstepsCodesByParentStep[parentStep] = []
+            }
+            flatSubstepsCodesByParentStep[parentStep]!.append(suiteProofType! + substep.code)
+        }
+    }
+    
     func updateSubstepStatus(substep: VerificationSubstep) {
-        
         let stepCode = parentStepCodes[substep.code]!
         let stepLabel = stepLabels[stepCode]!
-        let substepLabel = substepLabels[substep.code]!
+        let substepLabel = substepLabels[substep.parentStep! + substep.code]!
+        
         let stepIcon = stepIcons[stepCode]!
         
         if substep.status == .verifying {
@@ -135,17 +168,8 @@ class CertificateVerificationView: UIView {
     }
     
     func isLastSubstepInStep(stepCode: String, substepCode: String) -> Bool {
-        for step in allSteps! {
-            if step.code == stepCode {
-                for (i, substep) in step.substeps.enumerated() {
-                    if substep.code == substepCode {
-                        return i == (step.substeps.count - 1)
-                    }
-                }
-                break
-            }
-        }
-        return false
+        let parentFlatSubsteps = flatSubstepsCodesByParentStep[stepCode]
+        return parentFlatSubsteps?.firstIndex(where: {$0 == substepCode}) == parentFlatSubsteps!.count - 1
     }
     
     override func draw(_ rect: CGRect) {
@@ -187,6 +211,50 @@ class CertificateVerificationView: UIView {
         }
     }
     
+    func layoutSubsteps (substeps: [VerificationSubstep], y: inout CGFloat, labelWidth: CGFloat, substepLabelsIndex: inout Int) {
+        // Position substep labels
+        for (j, substep) in substeps.enumerated() {
+            
+            let substepLabel = substepLabels[substep.parentStep! + substep.code]!
+            substepLabelsIndex += 1
+            
+            substepLabel.frame = CGRect(x: labelLeftMargin,
+                                        y: y,
+                                        width: labelWidth,
+                                        height: substepLabel.text!.height(withConstrainedWidth: labelWidth, font: substepLabel.font))
+            
+            y += substepLabel.frame.size.height
+            
+            if let currentSubstepCode = currentSubstepCode, currentSubstepCode == substep.code {
+                trackProgressHeight = substepLabel.center.y + trackSubstepPadding
+                delegate?.trackProgressChanged(y: trackProgressHeight)
+            }
+            
+            // Position substep fail icon and label
+            if let substepFailCode = substepFailCode, substepFailCode == substep.code {
+                trackProgressHeight = substepLabel.center.y
+                
+                if let substepFailIcon = substepFailIcon {
+                    substepFailIcon.center = CGPoint(x: trackCenterX, y: substepLabel.center.y)
+                }
+                
+                if let errorLabel = substepFailLabel {
+                    y += substepLabelVerticalMargin
+                    
+                    errorLabel.frame = CGRect(x: labelLeftMargin,
+                                              y: y,
+                                              width: labelWidth,
+                                              height: errorLabel.text!.height(withConstrainedWidth: labelWidth, font: errorLabel.font))
+                    y += errorLabel.frame.size.height
+                }
+            }
+            
+            if j != (substeps.count - 1) {
+                y += substepLabelVerticalMargin
+            }
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -218,44 +286,28 @@ class CertificateVerificationView: UIView {
                                       y: stepLabel.center.y)
             
             // Position substep labels
-            for (j, substep) in step.substeps.enumerated() {
-                
-                let substepLabel = substepLabels[substep.code]!
-                substepLabelsIndex += 1
-                
-                substepLabel.frame = CGRect(x: labelLeftMargin,
-                                            y: y,
-                                            width: labelWidth,
-                                            height: substepLabel.text!.height(withConstrainedWidth: labelWidth, font: substepLabel.font))
-                
-                y += substepLabel.frame.size.height
-                
-                if let currentSubstepCode = currentSubstepCode, currentSubstepCode == substep.code {
-                    trackProgressHeight = substepLabel.center.y + trackSubstepPadding
-                    delegate?.trackProgressChanged(y: trackProgressHeight)
-                }
-                
-                // Position substep fail icon and label
-                if let substepFailCode = substepFailCode, substepFailCode == substep.code {
-                    trackProgressHeight = substepLabel.center.y
-                    
-                    if let substepFailIcon = substepFailIcon {
-                        substepFailIcon.center = CGPoint(x: trackCenterX, y: substepLabel.center.y)
-                    }
-                    
-                    if let errorLabel = substepFailLabel {
-                        y += substepLabelVerticalMargin
+            layoutSubsteps(substeps: step.substeps, y: &y, labelWidth: labelWidth, substepLabelsIndex: &substepLabelsIndex)
+            
+            // Position suite labels
+            if step.suites.count > 0 {
+                for (_, suite) in step.suites.enumerated() {
+                    if suite.substeps.count > 0 {
+                        if step.suites.count > 1 {
+                            y += suiteLabelVerticalTopMargin
+                            
+                            let parentStepSuiteCode : String = step.code + suite.proofType;
+                            
+                            let suiteLabel = suitesLabels[parentStepSuiteCode]!
+                            suiteLabel.frame = CGRect(x: labelLeftMargin,
+                                                     y: y,
+                                                     width: labelWidth,
+                                                     height: stepLabel.text!.height(withConstrainedWidth: labelWidth, font: suiteLabel.font))
+                            y += suiteLabel.frame.size.height + suiteLabelVerticalBottomMargin
+                        }
                         
-                        errorLabel.frame = CGRect(x: labelLeftMargin,
-                                                  y: y,
-                                                  width: labelWidth,
-                                                  height: errorLabel.text!.height(withConstrainedWidth: labelWidth, font: errorLabel.font))
-                        y += errorLabel.frame.size.height
+                        // Position substep labels
+                        layoutSubsteps(substeps: suite.substeps, y: &y, labelWidth: labelWidth, substepLabelsIndex: &substepLabelsIndex)
                     }
-                }
-                
-                if j != (step.substeps.count - 1) {
-                    y += substepLabelVerticalMargin
                 }
             }
             
@@ -280,7 +332,7 @@ class CertificateVerificationView: UIView {
             }
         }
         
-        //Re-draw track
+        // Re-draw track
         var newFrame = frame
         newFrame.size.height = trackHeight + 8.0
         frame = newFrame
