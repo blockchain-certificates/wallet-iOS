@@ -47,7 +47,7 @@ class AddCredentialViewController: UIViewController, UIDocumentPickerDelegate {
 
         Logger.main.tag(tag).info("showing document picker view controller")
         present(controller, animated: true) {
-            self.navigationController?.styleAlternate()
+            self.navigationController?.styleDefault() // styleAlternate()
         }
     }
     

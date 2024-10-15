@@ -325,9 +325,12 @@ class CertificateMetadataViewController: BaseMetadataViewController {
         super.init()
         
         let issuedOn = dateFormatter.string(from: certificate.assertion.issuedOn)
-        let expirationDate = certificate.issuer.publicKeys.first?.expires
-        let expiresOn = expirationDate.map { dateFormatter.string(from: $0) } ?? Localizations.Never
-        
+    
+        var expiresOn: String = Localizations.Never
+        if let expirationDate = certificate.assertion.expirationDate {
+            expiresOn = dateFormatter.string(from: expirationDate)
+        }
+    
         data.append(InfoCell(title: Localizations.CredentialName, detail: certificate.title, url: nil))
         data.append(InfoCell(title: Localizations.DateIssued, detail: issuedOn, url: nil))
         data.append(InfoCell(title: Localizations.CredentialExpiration, detail: expiresOn, url: nil))

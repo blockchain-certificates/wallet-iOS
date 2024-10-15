@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import Lottie
 
 class OnboardingControllerBase : UIViewController {
 
@@ -50,8 +51,8 @@ class LandingScreenViewController : OnboardingControllerBase {
         view.backgroundColor = Style.Color.C3
         navigationController?.styleHidden()
         
-        let animation = LOTAnimationView(name: "welcome_lottie.json")
-        animation.loopAnimation = true
+        let animation = Lottie.AnimationView(name: "welcome_lottie.json")
+        animation.loopMode = .playOnce
         animation.contentMode = .scaleAspectFill
         animation.translatesAutoresizingMaskIntoConstraints = false
         view.insertSubview(animation, at: 0)

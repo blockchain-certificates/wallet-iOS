@@ -67,7 +67,7 @@ class CertificateVerifier: NSObject, WKScriptMessageHandler {
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("message: \(message.body)")
+        print("message: \(message.name) : \(message.body as? String)")
         
         switch message.name {
         case VerifierMessageType.blockchain:
@@ -119,10 +119,25 @@ enum VerificationStatus: String {
     case verifying = "starting"
 }
 
+class VerificationSuite {
+    var proofType: String = ""
+    var substeps: [VerificationSubstep] = []
+    
+    init(rawObject: [String: Any?]) {
+        proofType = rawObject["proofType"] as! String
+        
+        let stepArray = rawObject["subSteps"] as! [[String: Any?]]
+        for step in stepArray {
+            substeps.append(VerificationSubstep(rawObject: step))
+        }
+    }
+}
+
 class VerificationStep {
     var code: String!
     var label: String?
     var substeps: [VerificationSubstep] = []
+    var suites: [VerificationSuite] = []
     
     init(rawObject: [String: Any?]) {
         code = rawObject["code"] as? String
@@ -131,6 +146,12 @@ class VerificationStep {
         let stepArray = rawObject["subSteps"] as! [[String: Any?]]
         for step in stepArray {
             substeps.append(VerificationSubstep(rawObject: step))
+        }
+        
+        if let stepSuites = rawObject["suites"] as? [[String: Any?]] {
+            for suite in stepSuites {
+                suites.append(VerificationSuite(rawObject: suite))
+            }
         }
     }
 }

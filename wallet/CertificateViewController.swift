@@ -41,7 +41,7 @@ class CertificateViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.styleAlternate()
+//        navigationController?.styleAlternate()
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {

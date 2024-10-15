@@ -1,0 +1,6 @@
+module Pods_certificates {
+  umbrella header "Pods-certificates-umbrella.h"
+
+  export *
+  module * { export * }
+}

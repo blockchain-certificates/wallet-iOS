@@ -84,13 +84,13 @@ class CertificateView: UIView {
         renderedCertificateView.descriptionLabel.text = certificate.description
         renderedCertificateView.sealIcon.image = UIImage(data: certificate.image)
         
-        certificate.assertion.signatureImages.forEach { (signatureImage) in
+        certificate.assertion.signatureImages?.forEach { (signatureImage) in
             guard let image = UIImage(data: signatureImage.image) else {
                 return
             }
             renderedCertificateView.addSignature(image: image, title: signatureImage.title)
         }
-        
+
         renderedView = renderedCertificateView
     }
     
