@@ -136,7 +136,7 @@ class IssuerViewController: UIViewController {
             controller.modalPresentationStyle = .formSheet
             
             self?.present(controller, animated: true) {
-                self?.navigationController?.styleAlternate()
+                self?.navigationController?.styleDefault() // styleAlternate()
             }
         }))
         
