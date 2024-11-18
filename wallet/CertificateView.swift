@@ -77,7 +77,9 @@ class CertificateView: UIView {
         renderedCertificateView.topAnchor.constraint(equalTo: topAnchor)
         renderedCertificateView.bottomAnchor.constraint(equalTo: bottomAnchor)
         
-        renderedCertificateView.certificateIcon.image = UIImage(data:certificate.issuer.image)
+        if let certificateIssuerImage = certificate.issuer.image {
+            renderedCertificateView.certificateIcon.image = UIImage(data:certificateIssuerImage)
+        }
         renderedCertificateView.nameLabel.text = "\(certificate.recipient.givenName) \(certificate.recipient.familyName)"
         renderedCertificateView.titleLabel.text = certificate.title
         renderedCertificateView.subtitleLabel.text = certificate.subtitle

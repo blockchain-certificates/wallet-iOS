@@ -52,7 +52,7 @@ class LandingScreenViewController : OnboardingControllerBase {
         navigationController?.styleHidden()
         
         let animation = Lottie.AnimationView(name: "welcome_lottie.json")
-        animation.loopMode = .playOnce
+        animation.loopMode = .loop
         animation.contentMode = .scaleAspectFill
         animation.translatesAutoresizingMaskIntoConstraints = false
         view.insertSubview(animation, at: 0)

@@ -2,8 +2,6 @@
 //  ManagedIssuerManager.swift
 //  wallet
 //
-//  So sorry for that name, by the way. That's definitely a bit unfortunate. sigh.
-//
 //  Created by Chris Downie on 8/9/17.
 //  Copyright © 2017 Learning Machine, Inc. All rights reserved.
 //
@@ -28,12 +26,29 @@ struct ManagedIssuerManager {
         var loadedIssuers : [ManagedIssuer]? = nil
         // First, load from the new Codable path. If that fails, then try loading from the old NSCoding path.
         if FileManager.default.fileExists(atPath: issuerReadURL.path) {
-            if let jsonData = FileManager.default.contents(atPath: issuerReadURL.path) {
+            if var jsonData = FileManager.default.contents(atPath: issuerReadURL.path) {
+//                if let str = String(data: jsonData, encoding: .utf8) {
+//                    Logger.main.info("Start check of optional\n")
+//                    if str.contains(";base64,Optional") {
+//                        Logger.main.info("string has ;base64,Optional\n")
+//                        Logger.main.info(str)
+//                        
+//                        let noOptionalStr = removeIssuerImageOptionalWrapper(str: str)
+//                        if let updatedJsonData = noOptionalStr.data(using: .utf8) {
+//                            Logger.main.info(noOptionalStr)
+//                            Logger.main.info("string has been cleaned, saving now\n")
+//                            jsonData = updatedJsonData
+//                            let success = saveIssuersDataToFile(updatedJsonData)
+//                        }
+//                    }
+//                }
+                
                 let decoder = JSONDecoder()
                 do {
                     let issuerList = try decoder.decode(ManagedIssuerList.self, from: jsonData)
                     loadedIssuers = issuerList.managedIssuers
                 } catch {
+                    Logger.main.info(String(data: jsonData, encoding: .utf8)!)
                     Logger.main.error("Failed to decode file at \(issuerReadURL)")
                 }
             } else {
@@ -44,6 +59,17 @@ struct ManagedIssuerManager {
         }
         
         return loadedIssuers ?? []
+    }
+    
+    private func removeIssuerImageOptionalWrapper(str: String) -> String {
+        let expr = #"(data:image\\\/)([a-z]+);base64,Optional\(\\"([^"]*)\\"\)\""#
+        let repl = "$1$2;base64,$3\""
+        
+        return str.replacingOccurrences(
+            of: expr,
+            with: repl,
+            options: .regularExpression
+        )
     }
     
     public func save(_ managedIssuers: [ManagedIssuer]) -> Bool {
@@ -59,6 +85,12 @@ struct ManagedIssuerManager {
             Logger.main.error("An exception was thrown saving the managed issuers list: \(error)")
             return false
         }
+    }
+    
+    private func saveIssuersDataToFile(_ issuersData: Data) -> Bool {
+        let success = FileManager.default.createFile(atPath: issuerWriteURL.path, contents: issuersData, attributes: nil)
+        Logger.main.debug("\(success ? "Issuers data saved" : "Failed to save issuers data")")
+        return success
     }
 }
 

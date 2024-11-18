@@ -109,7 +109,9 @@ class RenderedCertificateView: UIView, WKNavigationDelegate {
             paperView.alpha = 1;
             webView.isHidden = true
             
-            certificateIcon.image = UIImage(data:certificate.issuer.image)
+            if let certificateIssuerImage = certificate.issuer.image {
+                certificateIcon.image = UIImage(data:certificateIssuerImage)
+            }
             nameLabel.text = "\(certificate.recipient.givenName) \(certificate.recipient.familyName)"
             titleLabel.text = certificate.title
             subtitleLabel.text = certificate.subtitle

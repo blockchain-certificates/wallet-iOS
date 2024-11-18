@@ -224,8 +224,11 @@ class IssuerCollectionViewController: UICollectionViewController {
             cell.issuerName = Localizations.MissingIssuer
             return cell
         }
-
-        cell.imageView.image = UIImage(data: issuer.image)
+        
+        if let issuerImage = issuer.image {
+            cell.imageView.image = UIImage(data: issuerImage)
+        }
+    
         cell.issuerName = issuer.name
         cell.certificateCount = certificates.reduce(0, { (count, certificate) -> Int in
             if certificate.issuer.id == issuer.id {
