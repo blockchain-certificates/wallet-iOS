@@ -10,7 +10,7 @@ import UIKit
 import JSONLD
 
 #if DEBUG
-import Bugsee
+//import Bugsee
 #endif
 
 private let sampleCertificateResetKey = "resetSampleCertificate"
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InformationLogger.logInfo()
         
         #if DEBUG
-        Bugsee.launch(token :"ef62e737-3645-43fa-ba0b-062afb7743af")
+//        Bugsee.launch(token :"ef62e737-3645-43fa-ba0b-062afb7743af")
         #endif
         
         let configuration = ArgumentParser().parse(arguments: ProcessInfo.processInfo.arguments)

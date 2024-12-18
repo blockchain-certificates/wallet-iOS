@@ -70,7 +70,9 @@ class IssuerTableViewController: UITableViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: issuerHeaderCellReuseIdentifier) as! IssuerHeaderTableViewCell
             guard let issuer = managedIssuer?.issuer else { return cell }
-            cell.logoImage.image = UIImage(data: issuer.image)
+            if let issuerImage = issuer.image {
+                cell.logoImage.image = UIImage(data: issuerImage)
+            }
             cell.nameLabel.text = issuer.name
             return cell
         } else if indexPath.section == 2 {

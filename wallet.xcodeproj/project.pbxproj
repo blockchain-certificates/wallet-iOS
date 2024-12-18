@@ -93,7 +93,6 @@
 		83FF5DEA1ECBAC7A0063397C /* CertificateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF5DE91ECBAC7A0063397C /* CertificateView.swift */; };
 		A909528220449DD000F29CF5 /* C5T2BLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A909528120449DD000F29CF5 /* C5T2BLabelCell.xib */; };
 		A927355A2031E1C9002361FD /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92735592031E1C9002361FD /* AlertViewController.swift */; };
-		A92E89662049A63D0035460B /* liblottie-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A92E89672049A63D0035460B /* liblottie-ios.a */; };
 		A92E89692049A93C0035460B /* welcome_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = A92E89682049A93B0035460B /* welcome_lottie.json */; };
 		A93C04022037760D0021B9D1 /* IssuerEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93C04012037760D0021B9D1 /* IssuerEmptyTableViewCell.xib */; };
 		A958CCD5202E4BD100CD35C6 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A958CCD4202E4BD100CD35C6 /* Alert.storyboard */; };
@@ -289,7 +288,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A92E89662049A63D0035460B /* liblottie-ios.a in Frameworks */,
 				83FF5DE71ECBA4100063397C /* Blockcerts.framework in Frameworks */,
 				830AB9EF1DA6BC4B00185E19 /* CommonCrypto.framework in Frameworks */,
 				83111B771DA414EB006B058D /* JSONLD.framework in Frameworks */,
@@ -1149,7 +1147,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.1.10;
+				MARKETING_VERSION = 3.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.blockcerts.cert-wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1174,7 +1172,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = wallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.1.10;
+				MARKETING_VERSION = 3.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.blockcerts.cert-wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
