@@ -5,6 +5,7 @@ HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/H
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/CoreBitcoin" "${PODS_CONFIGURATION_BUILD_DIR}/ISO8601DateFormatter" "${PODS_CONFIGURATION_BUILD_DIR}/OpenSans" "${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios" "${PODS_ROOT}/OpenSSL-Universal/lib-ios" "${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}" /usr/lib/swift
 OTHER_CFLAGS = $(inherited) -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios/Lottie.modulemap" -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CoreBitcoin" -isystem "${PODS_ROOT}/Headers/Public/ISO8601DateFormatter" -isystem "${PODS_ROOT}/Headers/Public/OpenSSL-Universal"
 OTHER_LDFLAGS = $(inherited) -ObjC -l"CoreBitcoin" -l"ISO8601DateFormatter" -l"OpenSans" -l"crypto" -l"lottie-ios" -l"ssl" -framework "CoreGraphics" -framework "CoreText" -framework "Foundation" -framework "QuartzCore" -framework "UIKit"
+OTHER_MODULE_VERIFIER_FLAGS = $(inherited) "-F${PODS_CONFIGURATION_BUILD_DIR}/CoreBitcoin" "-F${PODS_CONFIGURATION_BUILD_DIR}/ISO8601DateFormatter" "-F${PODS_CONFIGURATION_BUILD_DIR}/OpenSSL-Universal" "-F${PODS_CONFIGURATION_BUILD_DIR}/OpenSans" "-F${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -Xcc -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios/Lottie.modulemap"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
